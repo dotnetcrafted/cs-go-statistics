@@ -10,25 +10,34 @@ namespace CSStat.CsLogsApi
 {
     public class CsLogsApi : ICsLogsApi
     {
-        private const string Path = @"D:\Logs\CS\qconsole.log";
+        private const string ExamplePath = @"D:\Logs\CS\qconsole.log";
+        private string _path;
+        private List<LogModel> _logs;
 
-        public List<LogModel> GetLogs()
+        public CsLogsApi(string path)
         {
-            return GetLogs(Path);
+            _path = path;
+
+            if (string.IsNullOrEmpty(_path))
+            {
+                _path = ExamplePath;
+            }
+
+            _logs = GetLogs(_path);
         }
 
-        public List<LogModel> GetLogs(string path)
+        private static List<LogModel> GetLogs(string path)
         {
-            List<string> logs;
+            List<string> stringLogs;
 
             using (var streamReader = new StreamReader(path))
             {
-                logs = streamReader.ReadToEnd().Split('\n').Skip(4).ToList().Filter("Server cvar");
+                stringLogs = streamReader.ReadToEnd().Split('\n').Skip(4).ToList().Filter("Server cvar");
             }
 
             var result = new List<LogModel>();
 
-            foreach (var log in logs)
+            foreach (var log in stringLogs)
             {
                 if (log.ToCharArray().Count(x => x == ':') < 4)
                 {
@@ -64,19 +73,49 @@ namespace CSStat.CsLogsApi
             return result;
         }
 
-        public List<PlayerModel> GetPlayers(List<LogModel> logs)
+        public List<PlayerModel> GetPlayers()
         {
-            var logsWithPlayers = logs.Where(x => x.Message.Contains("entered"));
+            var logsWithPlayers = _logs.Where(x => x.Message.Contains("entered"));
 
-            var players = logsWithPlayers.Select(logsWithPlayer => new PlayerModel
+            var players = logsWithPlayers.Select(log => new PlayerModel {NickName = GetNickName(log.Message)}).ToList().DistinctBy(x=>x.NickName).ToList();
+
+            if (!players.Any())
             {
-                Death = 0,
-                Kills = 0,
-                NickName = logsWithPlayer.Message.Substring(2, Array.IndexOf(logsWithPlayer.Message.ToCharArray(), '<') - 2)
-            }).ToList();
+                return null;
+            }
 
-            return players.DistinctBy(x => x.NickName).ToList();
+            foreach (var player in players)
+            {
+                player.Stat = GetPlayerStat(player.NickName);
+            }
+
+            return players;
+        }
+
+        private string GetNickName(string logString)
+        {
+            return logString.Substring(2, Array.IndexOf(logString.ToCharArray(), '<') - 2);
+        }
+
+        private PlayerStat GetPlayerStat(string nickName)
+        {
+            var logsForPlayer = _logs.Where(x => x.Message.Contains(nickName)).ToList().Where(x=>x.Message.Contains("killed")).ToList();
+
+            var stat = new PlayerStat();
+
+            foreach (var log in logsForPlayer)
+            {
+                if (GetNickName(log.Message) == nickName)
+                {
+                    stat.Kills++;
+                }
+                else
+                {
+                    stat.Death++;
+                }
+            }
+
+            return stat;
         }
     }
-}
 }
