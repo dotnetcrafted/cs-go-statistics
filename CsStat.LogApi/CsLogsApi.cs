@@ -29,7 +29,7 @@ namespace CsStat.LogApi
                     Action = action,
                     VictimName = GetClearName(splitLine[3]),
                     IsHeadShot = logLine.Contains("headshot"),
-                    Gun = Guns.Ak
+                    Gun = Guns.Ak //TODO: add get gun logic
                 };
         }
 
