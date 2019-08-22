@@ -42,15 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CsLogsApi.cs" />
-    <Compile Include="Enums\ActionEnum.cs" />
-    <Compile Include="Enums\GunsEnum.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Interfaces\ICsLogsApi.cs" />
-    <Compile Include="Models\LogModel.cs" />
-    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CsStat.Domain\CsStat.Domain.csproj">
+      <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
+      <Name>CsStat.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
