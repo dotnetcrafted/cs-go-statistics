@@ -11,5 +11,6 @@
     {
         public int Kills { get; set; }
         public int Death { get; set; }
+        public int Assist { get; set; }
     }
 }
