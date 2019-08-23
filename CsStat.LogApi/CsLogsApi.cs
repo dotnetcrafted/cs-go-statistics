@@ -1,5 +1,9 @@
-﻿using CSStat.CsLogsApi.Interfaces;
+﻿using System;
+using System.Linq;
+using CSStat.CsLogsApi.Extensions;
+using CSStat.CsLogsApi.Interfaces;
 using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Definitions;
 using CsStat.LogApi.Enums;
 
 namespace CsStat.LogApi
@@ -10,15 +14,17 @@ namespace CsStat.LogApi
         {
             var splitLine = logLine.Split('"');
 
-            var action = GetAction(splitLine[2]);
+            var action = GetAction(logLine);
 
-            return action == Actions.Assist
+            var result = action == Actions.Assist
                 ? new LogModel
                 {
                     DateTime = GetClearDateTime(splitLine[0]),
                     PlayerName = GetClearName(splitLine[1]),
+                    PlayerTeam = GetTeam(splitLine[1]),
                     Action = action,
                     VictimName = string.Empty,
+                    VictimTeam = Teams.Null,
                     IsHeadShot = logLine.Contains("headshot"),
                     Gun = Guns.Null
                 }
@@ -26,16 +32,32 @@ namespace CsStat.LogApi
                 {
                     DateTime = GetClearDateTime(splitLine[0]),
                     PlayerName = GetClearName(splitLine[1]),
+                    PlayerTeam = GetTeam(splitLine[1]),
                     Action = action,
                     VictimName = GetClearName(splitLine[3]),
+                    VictimTeam = GetTeam(splitLine[3]),
                     IsHeadShot = logLine.Contains("headshot"),
-                    Gun = Guns.Ak //TODO: add get gun logic
+                    Gun = GetGun(splitLine[5])
                 };
+
+            if (result.PlayerTeam == result.VictimTeam)
+            {
+                result.Action = Actions.FriendlyKill;
+            }
+
+            return result;
         }
 
         private static string GetClearName(string name)
         {
             return name.Split('<')[0];
+        }
+
+        private static Teams GetTeam(string line)
+        {
+            return line.Contains("CT")
+                ? Teams.Ct
+                : Teams.T;
         }
 
         private static string GetClearDateTime(string dateTime)
@@ -55,9 +77,14 @@ namespace CsStat.LogApi
                 return Actions.Assist;
             }
 
-            //TODO: Friendly kill logic
-
             return Actions.Unknown;
+        }
+
+        private static Guns GetGun(string gun)
+        {
+            var attributeList = Guns.Null.GetAttributeList();
+            var gunIndex = attributeList.FirstOrDefault(x => x.Value == gun)?.Key ?? 0;
+            return (Guns) gunIndex;
         }
 
     }

@@ -41,11 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\TeamsEnum.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\GunsEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsStat.SystemFacade\CsStat.SystemFacade.csproj">
+      <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
+      <Name>CsStat.SystemFacade</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

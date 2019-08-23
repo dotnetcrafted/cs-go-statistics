@@ -1,0 +1,1384 @@
+L 08/20/2019 - 11:56:44: Log file started (file "logs\L192_168_100_241_27015_201908201156_000.log") (game "D:\Games\CS_GO_DS\server\csgo") (version "7508")
+L 08/20/2019 - 11:56:44: server_cvar: "mp_autoteambalance" "0"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_c4timer" "35"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_freezetime" "3"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_maxrounds" "30"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_roundtime" "2"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_timelimit" "30"
+L 08/20/2019 - 11:56:44: server_cvar: "sv_deadtalk" "1"
+L 08/20/2019 - 11:56:44: server_cvar: "sv_steamgroup" "0"
+L 08/20/2019 - 11:56:44: server_cvar: "sv_tags" "csgo,public"
+L 08/20/2019 - 11:56:44: server_cvar: "tv_relaypassword" "***PROTECTED***"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_player_interact_with_hostage" "300"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_elimination_hostage_map_t" "3000"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_elimination_hostage_map_ct" "3000"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_hostage_interaction" "600"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_rescued_hostage" "600"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_win_by_defusing_bomb" "3500"
+L 08/20/2019 - 11:56:44: server_cvar: "cash_team_win_by_hostage_rescue" "2900"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_freezetime" "15"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_friendlyfire" "1"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_roundtime" "1.92"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_roundtime_hostage" "1.92"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_roundtime_defuse" "1.92"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_timelimit" "0"
+L 08/20/2019 - 11:56:44: server_cvar: "mp_freezetime" "10"
+L 08/20/2019 - 11:56:53: server_cvar: "sv_tags" "*grp:0i,csgo,public"
+L 08/20/2019 - 12:08:59: "dexploizer<2><STEAM_1:1:193292204><>" connected, address ""
+L 08/20/2019 - 12:08:59: World triggered "Round_Start"
+L 08/20/2019 - 12:08:59: "dexploizer<2><STEAM_1:1:193292204><>" STEAM USERID validated
+L 08/20/2019 - 12:09:14: "dexploizer<2><STEAM_1:1:193292204><>" entered the game
+L 08/20/2019 - 12:09:24: "dexploizer<2><STEAM_1:1:193292204>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:09:25: World triggered "Game_Commencing"
+L 08/20/2019 - 12:09:25: Starting Freeze period
+L 08/20/2019 - 12:09:25: World triggered "Match_Start" on "de_dust2"
+L 08/20/2019 - 12:09:27: World triggered "Round_Start"
+L 08/20/2019 - 12:10:04: Starting Freeze period
+L 08/20/2019 - 12:10:04: World triggered "Match_Start" on "de_dust2"
+L 08/20/2019 - 12:10:04: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:10:14: World triggered "Round_Start"
+L 08/20/2019 - 12:10:29: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:12:09: Team "CT" triggered "SFUI_Notice_Target_Saved" (CT "1") (T "0")
+L 08/20/2019 - 12:12:09: Team "CT" scored "1" with "0" players
+L 08/20/2019 - 12:12:09: Team "TERRORIST" scored "0" with "1" players
+L 08/20/2019 - 12:12:09: World triggered "Round_End"
+L 08/20/2019 - 12:12:16: Starting Freeze period
+L 08/20/2019 - 12:12:16: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:12:26: World triggered "Round_Start"
+L 08/20/2019 - 12:14:21: Team "CT" triggered "SFUI_Notice_Target_Saved" (CT "2") (T "0")
+L 08/20/2019 - 12:14:21: Team "CT" scored "2" with "0" players
+L 08/20/2019 - 12:14:21: Team "TERRORIST" scored "0" with "1" players
+L 08/20/2019 - 12:14:21: World triggered "Round_End"
+L 08/20/2019 - 12:14:28: Starting Freeze period
+L 08/20/2019 - 12:14:28: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:14:35: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "p250"
+L 08/20/2019 - 12:14:38: World triggered "Round_Start"
+L 08/20/2019 - 12:15:50: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:16:26: Team "TERRORIST" triggered "SFUI_Notice_Target_Bombed" (CT "2") (T "1")
+L 08/20/2019 - 12:16:26: Team "CT" scored "2" with "0" players
+L 08/20/2019 - 12:16:26: Team "TERRORIST" scored "1" with "1" players
+L 08/20/2019 - 12:16:26: World triggered "Round_End"
+L 08/20/2019 - 12:16:33: Starting Freeze period
+L 08/20/2019 - 12:16:33: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:16:41: "Medved<3><STEAM_1:0:29480860><>" connected, address ""
+L 08/20/2019 - 12:16:41: "Medved<3><STEAM_1:0:29480860><>" STEAM USERID validated
+L 08/20/2019 - 12:16:43: World triggered "Round_Start"
+L 08/20/2019 - 12:16:54: "Medved<3><STEAM_1:0:29480860><>" entered the game
+L 08/20/2019 - 12:16:58: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:17:02: "Medved<3><STEAM_1:0:29480860>" switched from team <Unassigned> to <CT>
+L 08/20/2019 - 12:17:27: "Radik F.<4><STEAM_1:0:34907433><>" connected, address ""
+L 08/20/2019 - 12:17:28: "Radik F.<4><STEAM_1:0:34907433><>" STEAM USERID validated
+L 08/20/2019 - 12:17:29: "Medved<3><STEAM_1:0:29480860><CT>" [319 -403 1] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-533 -754 181] with "hkp2000" (headshot)
+L 08/20/2019 - 12:17:29: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "3") (T "1")
+L 08/20/2019 - 12:17:29: Team "CT" scored "3" with "1" players
+L 08/20/2019 - 12:17:29: Team "TERRORIST" scored "1" with "1" players
+L 08/20/2019 - 12:17:29: World triggered "Round_End"
+L 08/20/2019 - 12:17:36: Starting Freeze period
+L 08/20/2019 - 12:17:36: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:17:38: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:17:39: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:17:41: "Radik F.<4><STEAM_1:0:34907433><>" entered the game
+L 08/20/2019 - 12:17:46: World triggered "Round_Start"
+L 08/20/2019 - 12:18:01: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:18:02: "Radik F.<4><STEAM_1:0:34907433>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:18:07: "Medved<3><STEAM_1:0:29480860><CT>" [552 -252 -2] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-332 -754 143] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:18:09: "Medved<3><STEAM_1:0:29480860><CT>" [556 -260 -1] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-697 -807 181] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:18:09: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "4") (T "1")
+L 08/20/2019 - 12:18:09: Team "CT" scored "4" with "1" players
+L 08/20/2019 - 12:18:09: Team "TERRORIST" scored "1" with "2" players
+L 08/20/2019 - 12:18:09: World triggered "Round_End"
+L 08/20/2019 - 12:18:16: Starting Freeze period
+L 08/20/2019 - 12:18:16: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:18:21: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:18:21: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:18:22: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:18:22: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:18:26: World triggered "Round_Start"
+L 08/20/2019 - 12:18:26: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:18:28: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:19:14: "Medved<3><STEAM_1:0:29480860><CT>" [1576 1768 0] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [1324 1124 62] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:19:23: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:19:23: "Medved<3><STEAM_1:0:29480860><CT>" [1623 1884 1] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [701 2508 160] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:19:23: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "5") (T "1")
+L 08/20/2019 - 12:19:23: Team "CT" scored "5" with "1" players
+L 08/20/2019 - 12:19:23: Team "TERRORIST" scored "1" with "2" players
+L 08/20/2019 - 12:19:23: World triggered "Round_End"
+L 08/20/2019 - 12:19:30: Starting Freeze period
+L 08/20/2019 - 12:19:30: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:19:32: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:19:33: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:19:33: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:19:34: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:19:36: rcon from "192.168.100.133:51614": command "mp_restartgame 1"
+L 08/20/2019 - 12:19:36: World triggered "Restart_Round_(1_second)"
+L 08/20/2019 - 12:19:36: Team "CT" scored "5" with "1" players
+L 08/20/2019 - 12:19:36: Team "TERRORIST" scored "1" with "2" players
+L 08/20/2019 - 12:19:37: Starting Freeze period
+L 08/20/2019 - 12:19:37: World triggered "Match_Start" on "de_dust2"
+L 08/20/2019 - 12:19:37: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:19:43: "laViper<5><STEAM_1:0:56767661><>" connected, address ""
+L 08/20/2019 - 12:19:43: "laViper<5><STEAM_1:0:56767661><>" STEAM USERID validated
+L 08/20/2019 - 12:19:47: World triggered "Round_Start"
+L 08/20/2019 - 12:19:52: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:19:56: "laViper<5><STEAM_1:0:56767661><>" entered the game
+L 08/20/2019 - 12:20:05: "laViper<5><STEAM_1:0:56767661>" switched from team <Unassigned> to <CT>
+L 08/20/2019 - 12:20:13: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" say "only a"
+L 08/20/2019 - 12:20:17: "Medved<3><STEAM_1:0:29480860><CT>" say "вф"
+L 08/20/2019 - 12:20:19: "Medved<3><STEAM_1:0:29480860><CT>" say "да"
+L 08/20/2019 - 12:20:25: "Medved<3><STEAM_1:0:29480860><CT>" say "пока да"
+L 08/20/2019 - 12:20:32: "Medved<3><STEAM_1:0:29480860><CT>" [1414 2959 120] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [1246 1046 64] with "hkp2000" (headshot)
+L 08/20/2019 - 12:20:46: "Yakut74Rus<6><STEAM_1:0:35654179><>" connected, address ""
+L 08/20/2019 - 12:20:46: "Yakut74Rus<6><STEAM_1:0:35654179><>" STEAM USERID validated
+L 08/20/2019 - 12:20:52: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:20:52: "laViper<5><STEAM_1:0:56767661><CT>" [1788 1812 2] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1653 1808 64] with "usp_silencer"
+L 08/20/2019 - 12:20:52: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "0")
+L 08/20/2019 - 12:20:52: Team "CT" scored "1" with "2" players
+L 08/20/2019 - 12:20:52: Team "TERRORIST" scored "0" with "2" players
+L 08/20/2019 - 12:20:52: World triggered "Round_End"
+L 08/20/2019 - 12:20:59: Starting Freeze period
+L 08/20/2019 - 12:20:59: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:21:01: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:21:04: "laViper<5><STEAM_1:0:56767661><CT>" purchased "m4a1"
+L 08/20/2019 - 12:21:07: "laViper<5><STEAM_1:0:56767661><CT>" purchased "decoy"
+L 08/20/2019 - 12:21:07: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:21:09: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:21:09: World triggered "Round_Start"
+L 08/20/2019 - 12:21:13: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:21:15: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:21:23: "Yakut74Rus<6><STEAM_1:0:35654179><>" entered the game
+L 08/20/2019 - 12:21:39: "laViper<5><STEAM_1:0:56767661><CT>" threw decoy [744 450 5]
+L 08/20/2019 - 12:21:46: "Yakut74Rus<6><STEAM_1:0:35654179>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:22:05: "Yakut74Rus<6><STEAM_1:0:35654179><TERRORIST>" disconnected (reason "Disconnect")
+L 08/20/2019 - 12:22:05: "Yakut74Rus<6><STEAM_1:0:35654179>" switched from team <TERRORIST> to <Unassigned>
+L 08/20/2019 - 12:22:06: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:22:06: "Medved<3><STEAM_1:0:29480860><CT>" [522 2367 127] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [270 1419 64] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:22:08: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:22:10: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:22:10: "Medved<3><STEAM_1:0:29480860><CT>" [421 2633 96] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [326 1730 139] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:22:10: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "2") (T "0")
+L 08/20/2019 - 12:22:10: Team "CT" scored "2" with "2" players
+L 08/20/2019 - 12:22:10: Team "TERRORIST" scored "0" with "2" players
+L 08/20/2019 - 12:22:10: World triggered "Round_End"
+L 08/20/2019 - 12:22:11: "Yakut74Rus<7><STEAM_1:0:35654179><>" connected, address ""
+L 08/20/2019 - 12:22:11: "Yakut74Rus<7><STEAM_1:0:35654179><>" STEAM USERID validated
+L 08/20/2019 - 12:22:17: Starting Freeze period
+L 08/20/2019 - 12:22:17: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:22:17: "Yakut74Rus<7><STEAM_1:0:35654179><>" entered the game
+L 08/20/2019 - 12:22:20: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:22:20: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:22:21: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:22:21: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:22:21: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:22:22: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:22:24: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:22:24: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:22:25: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:22:25: "Yakut74Rus<7><STEAM_1:0:35654179>" switched from team <Unassigned> to <CT>
+L 08/20/2019 - 12:22:25: "Medved<3><STEAM_1:0:29480860><CT>" purchased "decoy"
+L 08/20/2019 - 12:22:27: World triggered "Round_Start"
+L 08/20/2019 - 12:22:30: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "elite"
+L 08/20/2019 - 12:22:31: "Medved<3><STEAM_1:0:29480860><CT>" say "обе точки"
+L 08/20/2019 - 12:22:31: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:22:52: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-1591 2429 1]
+L 08/20/2019 - 12:22:54: "laViper<5><STEAM_1:0:56767661><CT>" threw hegrenade [-2149 2202 64]
+L 08/20/2019 - 12:22:56: Molotov projectile spawned at -1279.881470 2622.000244 184.975830, velocity -669.220886 -238.440903 -23.641731
+L 08/20/2019 - 12:22:58: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [-961 2499 -24]
+L 08/20/2019 - 12:22:59: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:23:00: "laViper<5><STEAM_1:0:56767661><CT>" [-1358 2671 130] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-1430 2662 124] with "m4a1" (headshot)
+L 08/20/2019 - 12:23:04: "Medved<3><STEAM_1:0:29480860><CT>" [-1429 2169 0] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-1735 1862 64] with "m4a1_silencer"
+L 08/20/2019 - 12:23:08: "laViper<5><STEAM_1:0:56767661><CT>" triggered "Begin_Bomb_Defuse_Without_Kit"
+L 08/20/2019 - 12:23:08: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Begin_Bomb_Defuse_With_Kit"
+L 08/20/2019 - 12:23:13: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Defused_The_Bomb"
+L 08/20/2019 - 12:23:13: Team "CT" triggered "SFUI_Notice_Bomb_Defused" (CT "3") (T "0")
+L 08/20/2019 - 12:23:13: Team "CT" scored "3" with "3" players
+L 08/20/2019 - 12:23:13: Team "TERRORIST" scored "0" with "2" players
+L 08/20/2019 - 12:23:13: World triggered "Round_End"
+L 08/20/2019 - 12:23:20: Starting Freeze period
+L 08/20/2019 - 12:23:20: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:23:23: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:23:24: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "aug"
+L 08/20/2019 - 12:23:24: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:23:25: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:23:26: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:23:27: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:23:28: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:23:30: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:23:30: World triggered "Round_Start"
+L 08/20/2019 - 12:23:31: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:23:34: "Maksim.S<8><STEAM_1:1:196168001><>" connected, address ""
+L 08/20/2019 - 12:23:34: "Maksim.S<8><STEAM_1:1:196168001><>" STEAM USERID validated
+L 08/20/2019 - 12:23:37: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:23:59: "Maksim.S<8><STEAM_1:1:196168001><>" entered the game
+L 08/20/2019 - 12:24:01: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1716 1205 33]
+L 08/20/2019 - 12:24:10: "Maksim.S<8><STEAM_1:1:196168001>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:24:18: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-185 983 1] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-673 2308 -52] with "ak47"
+L 08/20/2019 - 12:24:18: Molotov projectile spawned at 239.868362 1446.351196 71.516754, velocity 201.208450 553.721802 329.442444
+L 08/20/2019 - 12:24:20: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw molotov [638 2541 98]
+L 08/20/2019 - 12:24:26: "laViper<5><STEAM_1:0:56767661><CT>" threw hegrenade [172 1381 3]
+L 08/20/2019 - 12:24:27: Molotov projectile spawned at 464.001190 2037.111816 162.084625, velocity -229.784958 -628.744507 86.626778
+L 08/20/2019 - 12:24:28: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [171 1403 2]
+L 08/20/2019 - 12:24:43: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:24:52: "Medved<3><STEAM_1:0:29480860><CT>" [-1388 2140 1] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-1649 1665 66] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:24:52: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" assisted killing "dexploizer<2><STEAM_1:1:193292204><TERRORIST>"
+L 08/20/2019 - 12:24:54: "Medved<3><STEAM_1:0:29480860><CT>" [-1448 2253 0] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-1510 2759 72] with "m4a1_silencer"
+L 08/20/2019 - 12:24:59: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Begin_Bomb_Defuse_With_Kit"
+L 08/20/2019 - 12:25:04: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Defused_The_Bomb"
+L 08/20/2019 - 12:25:04: Team "CT" triggered "SFUI_Notice_Bomb_Defused" (CT "4") (T "0")
+L 08/20/2019 - 12:25:04: Team "CT" scored "4" with "3" players
+L 08/20/2019 - 12:25:04: Team "TERRORIST" scored "0" with "3" players
+L 08/20/2019 - 12:25:04: World triggered "Round_End"
+L 08/20/2019 - 12:25:11: Starting Freeze period
+L 08/20/2019 - 12:25:11: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:25:13: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "aug"
+L 08/20/2019 - 12:25:14: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:25:14: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:25:14: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:25:15: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:25:16: "laViper<5><STEAM_1:0:56767661><CT>" purchased "flashbang"
+L 08/20/2019 - 12:25:16: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:25:16: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:25:16: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:25:17: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:25:17: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:25:17: "laViper<5><STEAM_1:0:56767661><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:25:17: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:25:17: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:25:18: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:25:18: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:25:18: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:25:19: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:25:19: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:25:21: World triggered "Round_Start"
+L 08/20/2019 - 12:25:26: "anton.knelts<9><STEAM_1:0:493786726><>" connected, address ""
+L 08/20/2019 - 12:25:27: "anton.knelts<9><STEAM_1:0:493786726><>" STEAM USERID validated
+L 08/20/2019 - 12:25:32: Molotov projectile spawned at -1345.281006 2671.455566 198.411880, velocity -377.867188 -527.908447 184.808334
+L 08/20/2019 - 12:25:34: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [-2004 1751 34]
+L 08/20/2019 - 12:25:44: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1789 1097 35]
+L 08/20/2019 - 12:25:49: "Medved<3><STEAM_1:0:29480860><CT>" threw hegrenade [-1937 1836 170]
+L 08/20/2019 - 12:25:53: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-1660 772 31]
+L 08/20/2019 - 12:25:53: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw flashbang [-1875 1933 20] flashbang entindex 356)
+L 08/20/2019 - 12:25:53: "Medved<3><STEAM_1:0:29480860><CT>" blinded for 3.67 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 356 
+L 08/20/2019 - 12:25:53: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 0.73 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 356 
+L 08/20/2019 - 12:25:55: "anton.knelts<9><STEAM_1:0:493786726><>" entered the game
+L 08/20/2019 - 12:25:57: "Medved<3><STEAM_1:0:29480860><CT>" [-1317 2679 130] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1998 1707 96] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:26:01: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:26:01: "Medved<3><STEAM_1:0:29480860><CT>" [-1308 2676 130] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-2017 1727 97] with "m4a1_silencer"
+L 08/20/2019 - 12:26:02: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [-1796 2738 156] flashbang entindex 325)
+L 08/20/2019 - 12:26:02: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" blinded for 0.50 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:26:02: "Medved<3><STEAM_1:0:29480860><CT>" blinded for 3.14 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:26:02: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" blinded for 3.51 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:26:02: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 0.50 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:26:10: Molotov projectile spawned at -1475.958374 2183.562500 69.803230, velocity -729.307373 -585.274231 245.269073
+L 08/20/2019 - 12:26:11: "Medved<3><STEAM_1:0:29480860><CT>" [-1359 2683 130] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-2026 1680 97] with "m4a1_silencer"
+L 08/20/2019 - 12:26:11: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "5") (T "0")
+L 08/20/2019 - 12:26:11: Team "CT" scored "5" with "3" players
+L 08/20/2019 - 12:26:11: Team "TERRORIST" scored "0" with "3" players
+L 08/20/2019 - 12:26:11: World triggered "Round_End"
+L 08/20/2019 - 12:26:12: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [-2021 1547 34]
+L 08/20/2019 - 12:26:12: "Medved<3><STEAM_1:0:29480860><CT>" threw decoy [-2035 1908 3]
+L 08/20/2019 - 12:26:12: "anton.knelts<9><STEAM_1:0:493786726>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:26:18: Starting Freeze period
+L 08/20/2019 - 12:26:18: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:26:20: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:26:20: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:26:20: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:26:20: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:26:20: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:26:21: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:26:21: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:26:22: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:26:23: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:26:23: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:26:23: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:26:23: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "flashbang"
+L 08/20/2019 - 12:26:24: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:26:24: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:26:24: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:26:27: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:26:27: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:26:28: World triggered "Round_Start"
+L 08/20/2019 - 12:26:29: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:26:31: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:26:40: Molotov projectile spawned at -1336.718994 2656.741943 199.015350, velocity -463.518555 -518.450439 210.266525
+L 08/20/2019 - 12:26:42: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [-2168 1875 36]
+L 08/20/2019 - 12:26:44: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-179 1056 3]
+L 08/20/2019 - 12:26:51: "3ch.hk<10><STEAM_1:1:105037477><>" connected, address ""
+L 08/20/2019 - 12:26:51: "3ch.hk<10><STEAM_1:1:105037477><>" STEAM USERID validated
+L 08/20/2019 - 12:26:55: "laViper<5><STEAM_1:0:56767661><CT>" threw hegrenade [331 1988 195]
+L 08/20/2019 - 12:26:57: "laViper<5><STEAM_1:0:56767661><CT>" threw flashbang [352 1978 130] flashbang entindex 329)
+L 08/20/2019 - 12:26:57: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 4.91 by "laViper<5><STEAM_1:0:56767661><CT>" from flashbang entindex 329 
+L 08/20/2019 - 12:26:57: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 5.09 by "laViper<5><STEAM_1:0:56767661><CT>" from flashbang entindex 329 
+L 08/20/2019 - 12:26:58: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1757 1252 35]
+L 08/20/2019 - 12:26:58: Molotov projectile spawned at 1376.188354 2450.640625 111.089844, velocity -822.634827 -282.456787 348.787720
+L 08/20/2019 - 12:26:59: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" threw hegrenade [87 1408 93]
+L 08/20/2019 - 12:27:00: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [491 1995 210]
+L 08/20/2019 - 12:27:07: "Medved<3><STEAM_1:0:29480860><CT>" [-847 1415 -112] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-49 1425 63] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:27:11: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-146 1438 -0] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-191 942 64] with "ak47" (headshot)
+L 08/20/2019 - 12:27:13: "laViper<5><STEAM_1:0:56767661><CT>" threw smokegrenade [441 1665 5]
+L 08/20/2019 - 12:27:17: "Medved<3><STEAM_1:0:29480860><CT>" [-416 987 -50] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-142 1314 48] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:27:17: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" assisted killing "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>"
+L 08/20/2019 - 12:27:17: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw decoy [1064 2705 96]
+L 08/20/2019 - 12:27:23: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw flashbang [617 2125 293] flashbang entindex 311)
+L 08/20/2019 - 12:27:23: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" blinded for 0.71 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 311 
+L 08/20/2019 - 12:27:23: "laViper<5><STEAM_1:0:56767661><CT>" blinded for 4.70 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 311 
+L 08/20/2019 - 12:27:25: "3ch.hk<10><STEAM_1:1:105037477><>" entered the game
+L 08/20/2019 - 12:27:25: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [381 1989 96] killed "laViper<5><STEAM_1:0:56767661><CT>" [792 2695 160] with "ak47"
+L 08/20/2019 - 12:27:28: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:27:28: "Medved<3><STEAM_1:0:29480860><CT>" [288 1542 3] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [334 2286 161] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:27:30: "Medved<3><STEAM_1:0:29480860><CT>" [298 1736 79] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [551 2481 160] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:27:30: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "6") (T "0")
+L 08/20/2019 - 12:27:30: Team "CT" scored "6" with "3" players
+L 08/20/2019 - 12:27:30: Team "TERRORIST" scored "0" with "4" players
+L 08/20/2019 - 12:27:30: World triggered "Round_End"
+L 08/20/2019 - 12:27:37: Starting Freeze period
+L 08/20/2019 - 12:27:38: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:27:38: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:27:40: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:27:40: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:27:40: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:27:41: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:27:42: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "aug"
+L 08/20/2019 - 12:27:42: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:27:42: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:27:42: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:27:43: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:27:43: "laViper<5><STEAM_1:0:56767661><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:27:43: "laViper<5><STEAM_1:0:56767661><CT>" purchased "flashbang"
+L 08/20/2019 - 12:27:44: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:27:44: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:27:45: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:27:46: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:27:46: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:27:47: World triggered "Round_Start"
+L 08/20/2019 - 12:27:48: "laViper<5><STEAM_1:0:56767661><CT>" purchased "m4a1"
+L 08/20/2019 - 12:27:51: "3ch.hk<10><STEAM_1:1:105037477>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:27:52: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:27:53: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:27:54: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:27:57: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:27:59: "Medved<3><STEAM_1:0:29480860><CT>" threw flashbang [-1956 1806 79] flashbang entindex 346)
+L 08/20/2019 - 12:28:05: "Medved<3><STEAM_1:0:29480860><CT>" threw flashbang [-1959 1820 94] flashbang entindex 325)
+L 08/20/2019 - 12:28:09: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-615 2328 -113] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-275 1120 -12] with "aug" (penetrated)
+L 08/20/2019 - 12:28:16: "Radik F.<4><STEAM_1:0:34907433>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:28:17: Molotov projectile spawned at 1140.651489 2768.611572 193.072998, velocity 227.770172 -907.388672 244.170410
+L 08/20/2019 - 12:28:19: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [1607 911 23]
+L 08/20/2019 - 12:28:21: "Radik F.<4><STEAM_1:0:34907433><CT>" threw decoy [-565 1383 -112]
+L 08/20/2019 - 12:28:27: "laViper<5><STEAM_1:0:56767661><CT>" threw hegrenade [1540 1151 14]
+L 08/20/2019 - 12:28:30: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1330 995 -8] killed "laViper<5><STEAM_1:0:56767661><CT>" [1260 2709 191] with "ak47"
+L 08/20/2019 - 12:28:30: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" assisted killing "laViper<5><STEAM_1:0:56767661><CT>"
+L 08/20/2019 - 12:28:42: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw decoy [1211 2370 99]
+L 08/20/2019 - 12:28:44: "Medved<3><STEAM_1:0:29480860><CT>" [359 1939 96] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [1493 2938 186] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:28:45: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1330 2075 -2] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [1088 2116 65] with "ak47" (headshot)
+L 08/20/2019 - 12:28:45: "Radik F.<4><STEAM_1:0:34907433><CT>" assisted killing "Yakut74Rus<7><STEAM_1:0:35654179><CT>"
+L 08/20/2019 - 12:28:49: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:28:51: "Medved<3><STEAM_1:0:29480860><CT>" [396 1972 96] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1183 2856 191] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:28:54: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw smokegrenade [720 2634 96]
+L 08/20/2019 - 12:28:54: "Medved<3><STEAM_1:0:29480860><CT>" [389 1997 96] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [1005 2380 73] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:29:01: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1116 2427 96] killed "Medved<3><STEAM_1:0:29480860><CT>" [463 2346 160] with "ak47"
+L 08/20/2019 - 12:29:01: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "1")
+L 08/20/2019 - 12:29:01: Team "CT" scored "6" with "4" players
+L 08/20/2019 - 12:29:01: Team "TERRORIST" scored "1" with "4" players
+L 08/20/2019 - 12:29:01: World triggered "Round_End"
+L 08/20/2019 - 12:29:08: Starting Freeze period
+L 08/20/2019 - 12:29:08: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:29:10: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:29:11: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:29:11: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:11: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:11: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:29:12: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:29:12: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:13: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:29:14: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:29:14: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:29:14: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:15: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:29:16: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:29:16: "laViper<5><STEAM_1:0:56767661><CT>" purchased "aug"
+L 08/20/2019 - 12:29:17: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:29:18: World triggered "Round_Start"
+L 08/20/2019 - 12:29:19: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:20: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:29:20: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "p90"
+L 08/20/2019 - 12:29:21: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:29:22: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "ump45"
+L 08/20/2019 - 12:29:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:29:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:29:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:29:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:29:30: Molotov projectile spawned at -1379.044067 2666.422119 194.707397, velocity -426.926392 -648.450684 145.700562
+L 08/20/2019 - 12:29:32: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [-2042 1659 35]
+L 08/20/2019 - 12:29:38: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-2046 1613 32]
+L 08/20/2019 - 12:29:38: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw hegrenade [-1183 2642 89]
+L 08/20/2019 - 12:29:48: "Medved<3><STEAM_1:0:29480860><CT>" [-1203 2140 7] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-1426 2287 54] with "m4a1_silencer"
+L 08/20/2019 - 12:29:52: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw hegrenade [-1316 2182 4]
+L 08/20/2019 - 12:29:52: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1578 1997 -1] killed "Medved<3><STEAM_1:0:29480860><CT>" [-1294 2132 70] with "hegrenade"
+L 08/20/2019 - 12:29:52: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" assisted killing "Medved<3><STEAM_1:0:29480860><CT>"
+L 08/20/2019 - 12:29:53: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:30:01: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1463 1992 3] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-1660 1979 59] with "glock" (headshot)
+L 08/20/2019 - 12:30:05: "laViper<5><STEAM_1:0:56767661><CT>" [-1458 2123 1] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1625 1778 65] with "aug"
+L 08/20/2019 - 12:30:05: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" assisted killing "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>"
+L 08/20/2019 - 12:30:07: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-1507 2772 8] killed "laViper<5><STEAM_1:0:56767661><CT>" [-1570 2095 42] with "ak47"
+L 08/20/2019 - 12:30:17: "Radik F.<4><STEAM_1:0:34907433><CT>" [-1732 1888 -0] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-1708 1680 67] with "m4a1_silencer"
+L 08/20/2019 - 12:30:19: "Radik F.<4><STEAM_1:0:34907433><CT>" [-1687 1808 2] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-1737 2093 59] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:30:29: Team "TERRORIST" triggered "SFUI_Notice_Target_Bombed" (CT "6") (T "2")
+L 08/20/2019 - 12:30:29: Team "CT" scored "6" with "4" players
+L 08/20/2019 - 12:30:29: Team "TERRORIST" scored "2" with "4" players
+L 08/20/2019 - 12:30:29: World triggered "Round_End"
+L 08/20/2019 - 12:30:36: Starting Freeze period
+L 08/20/2019 - 12:30:36: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:30:37: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:30:38: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:30:38: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:39: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:30:39: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:39: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:39: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:30:40: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:30:40: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:40: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:30:40: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:30:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:30:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:30:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:30:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:30:42: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:30:42: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:30:42: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:30:43: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:30:43: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:43: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:30:43: "laViper<5><STEAM_1:0:56767661><CT>" purchased "aug"
+L 08/20/2019 - 12:30:43: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:30:43: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "decoy"
+L 08/20/2019 - 12:30:45: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "p90"
+L 08/20/2019 - 12:30:45: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:30:46: World triggered "Round_Start"
+L 08/20/2019 - 12:30:47: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:30:48: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:30:49: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:30:53: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw smokegrenade [-451 1640 -124]
+L 08/20/2019 - 12:30:53: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "elite"
+L 08/20/2019 - 12:30:59: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw hegrenade [-562 2094 -90]
+L 08/20/2019 - 12:31:00: "Medved<3><STEAM_1:0:29480860><CT>" [-1316 2683 130] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-1890 1827 69] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:31:09: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [267 1413 0] killed "laViper<5><STEAM_1:0:56767661><CT>" [454 1770 149] with "ak47"
+L 08/20/2019 - 12:31:11: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-557 1678 -116] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-530 2152 -59] with "ak47" (headshot)
+L 08/20/2019 - 12:31:16: "Medved<3><STEAM_1:0:29480860><CT>" [-704 2353 -108] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-497 1982 -76] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:31:16: "Radik F.<4><STEAM_1:0:34907433><CT>" threw hegrenade [310 1970 107]
+L 08/20/2019 - 12:31:18: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-428 1927 -127] killed "Medved<3><STEAM_1:0:29480860><CT>" [-661 2317 -69] with "ak47" (headshot)
+L 08/20/2019 - 12:31:29: "Radik F.<4><STEAM_1:0:34907433><CT>" [574 2150 -105] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-338 2033 -63] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:31:29: "laViper<5><STEAM_1:0:56767661><CT>" assisted killing "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>"
+L 08/20/2019 - 12:31:51: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:32:01: "Eefrit<11><STEAM_1:0:17521809><>" connected, address ""
+L 08/20/2019 - 12:32:02: "Eefrit<11><STEAM_1:0:17521809><>" STEAM USERID validated
+L 08/20/2019 - 12:32:10: "Radik F.<4><STEAM_1:0:34907433><CT>" [1404 2586 71] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [278 2748 185] with "m4a1_silencer"
+L 08/20/2019 - 12:32:10: "Medved<3><STEAM_1:0:29480860><CT>" assisted killing "dexploizer<2><STEAM_1:1:193292204><TERRORIST>"
+L 08/20/2019 - 12:32:10: "Eefrit<11><STEAM_1:0:17521809><>" entered the game
+L 08/20/2019 - 12:32:13: "Radik F.<4><STEAM_1:0:34907433><CT>" triggered "Begin_Bomb_Defuse_With_Kit"
+L 08/20/2019 - 12:32:16: "Kontrobas<12><STEAM_1:1:63580642><>" connected, address ""
+L 08/20/2019 - 12:32:17: "Kontrobas<12><STEAM_1:1:63580642><>" STEAM USERID validated
+L 08/20/2019 - 12:32:18: "Radik F.<4><STEAM_1:0:34907433><CT>" triggered "Defused_The_Bomb"
+L 08/20/2019 - 12:32:18: Team "CT" triggered "SFUI_Notice_Bomb_Defused" (CT "7") (T "2")
+L 08/20/2019 - 12:32:18: Team "CT" scored "7" with "4" players
+L 08/20/2019 - 12:32:18: Team "TERRORIST" scored "2" with "4" players
+L 08/20/2019 - 12:32:18: World triggered "Round_End"
+L 08/20/2019 - 12:32:21: "Eefrit<11><STEAM_1:0:17521809>" switched from team <Unassigned> to <Spectator>
+L 08/20/2019 - 12:32:25: Starting Freeze period
+L 08/20/2019 - 12:32:25: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:32:27: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:32:27: "Eefrit<11><STEAM_1:0:17521809>" switched from team <Spectator> to <TERRORIST>
+L 08/20/2019 - 12:32:27: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:32:27: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:32:27: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:32:28: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:32:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "sg556"
+L 08/20/2019 - 12:32:28: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:32:29: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:32:29: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:32:29: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:32:30: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:32:30: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:32:30: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "m4a1"
+L 08/20/2019 - 12:32:31: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:32:31: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:32:31: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:32:31: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:32:31: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:32:31: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:32:32: "laViper<5><STEAM_1:0:56767661><CT>" purchased "aug"
+L 08/20/2019 - 12:32:32: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:32:32: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:32:32: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:32:32: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:32:32: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:32:32: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:32:33: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:32:33: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:32:34: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:32:34: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:32:35: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:32:35: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:32:35: World triggered "Round_Start"
+L 08/20/2019 - 12:32:41: "Kontrobas<12><STEAM_1:1:63580642><>" entered the game
+L 08/20/2019 - 12:32:43: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw smokegrenade [-414 2117 -127]
+L 08/20/2019 - 12:32:44: Molotov projectile spawned at -1362.060059 2671.012207 197.578201, velocity -366.690582 -546.600220 149.637054
+L 08/20/2019 - 12:32:45: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [-1950 1817 26]
+L 08/20/2019 - 12:32:46: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-178 1051 3]
+L 08/20/2019 - 12:32:51: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:32:51: "laViper<5><STEAM_1:0:56767661><CT>" [1104 2883 128] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [383 1861 141] with "aug"
+L 08/20/2019 - 12:32:51: Molotov projectile spawned at 1187.247437 2133.039795 71.099060, velocity -776.547241 -57.471622 259.012604
+L 08/20/2019 - 12:32:52: "Kontrobas<12><STEAM_1:1:63580642>" switched from team <Unassigned> to <CT>
+L 08/20/2019 - 12:32:53: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw smokegrenade [1076 2661 97]
+L 08/20/2019 - 12:32:53: "Radik F.<4><STEAM_1:0:34907433><CT>" threw molotov [465 2054 98]
+L 08/20/2019 - 12:32:54: Molotov projectile spawned at 1081.318604 2824.807861 196.188171, velocity -581.573120 -704.760986 217.557663
+L 08/20/2019 - 12:32:56: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [408 1627 58]
+L 08/20/2019 - 12:32:57: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [732 2525 121] flashbang entindex 342)
+L 08/20/2019 - 12:32:57: "laViper<5><STEAM_1:0:56767661><CT>" blinded for 4.05 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 342 
+L 08/20/2019 - 12:32:58: "Radik F.<4><STEAM_1:0:34907433><CT>" threw hegrenade [391 1983 102]
+L 08/20/2019 - 12:33:01: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw flashbang [483 2380 130] flashbang entindex 304)
+L 08/20/2019 - 12:33:01: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 3.90 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:33:01: "laViper<5><STEAM_1:0:56767661><CT>" blinded for 3.16 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:33:01: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 4.31 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:33:01: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" blinded for 4.31 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:33:07: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:33:09: "Kontrobas<12><STEAM_1:1:63580642><CT>" [-396 2105 -129] killed "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [-444 1104 -14] with "usp_silencer"
+L 08/20/2019 - 12:33:19: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-199 1242 0] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [-404 968 19] with "ak47"
+L 08/20/2019 - 12:33:22: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw flashbang [267 2357 269] flashbang entindex 301)
+L 08/20/2019 - 12:33:22: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 2.31 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 301 
+L 08/20/2019 - 12:33:22: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 0.87 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 301 
+L 08/20/2019 - 12:33:24: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-1062 1338 -112] killed "Medved<3><STEAM_1:0:29480860><CT>" [-1125 1174 4] with "ak47"
+L 08/20/2019 - 12:33:33: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-2016 1730 32] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-1308 2684 176] with "ak47"
+L 08/20/2019 - 12:33:33: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" assisted killing "Yakut74Rus<7><STEAM_1:0:35654179><CT>"
+L 08/20/2019 - 12:33:37: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-203 2049 -125] killed "Radik F.<4><STEAM_1:0:34907433><CT>" [800 2197 22] with "sg556"
+L 08/20/2019 - 12:33:44: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:33:44: "laViper<5><STEAM_1:0:56767661><CT>" [-480 1722 -123] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-337 2403 -41] with "aug"
+L 08/20/2019 - 12:34:01: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-1535 2725 7] killed "laViper<5><STEAM_1:0:56767661><CT>" [-1543 2575 50] with "ak47" (headshot)
+L 08/20/2019 - 12:34:01: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" assisted killing "laViper<5><STEAM_1:0:56767661><CT>"
+L 08/20/2019 - 12:34:01: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "7") (T "3")
+L 08/20/2019 - 12:34:01: Team "CT" scored "7" with "5" players
+L 08/20/2019 - 12:34:01: Team "TERRORIST" scored "3" with "5" players
+L 08/20/2019 - 12:34:01: World triggered "Round_End"
+L 08/20/2019 - 12:34:08: Starting Freeze period
+L 08/20/2019 - 12:34:08: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:34:11: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:11: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:34:11: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:11: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:12: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:12: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:12: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "m4a1"
+L 08/20/2019 - 12:34:12: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "sg556"
+L 08/20/2019 - 12:34:12: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:13: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:34:13: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:34:13: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:34:14: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:34:14: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:34:14: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:34:14: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:34:14: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:34:14: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:34:15: "laViper<5><STEAM_1:0:56767661><CT>" purchased "mag7"
+L 08/20/2019 - 12:34:15: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:34:15: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "fiveseven"
+L 08/20/2019 - 12:34:16: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:34:17: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:34:17: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:34:17: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "m4a1"
+L 08/20/2019 - 12:34:17: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:34:18: World triggered "Round_Start"
+L 08/20/2019 - 12:34:19: "laViper<5><STEAM_1:0:56767661><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:34:19: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:20: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:34:20: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:34:20: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:34:21: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "elite"
+L 08/20/2019 - 12:34:22: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:34:23: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:34:26: "laViper<5><STEAM_1:0:56767661><CT>" threw smokegrenade [-370 1384 -124]
+L 08/20/2019 - 12:34:28: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw hegrenade [664 547 13]
+L 08/20/2019 - 12:34:28: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:34:30: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-323 795 -5]
+L 08/20/2019 - 12:34:32: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw smokegrenade [783 841 2]
+L 08/20/2019 - 12:34:33: "Medved<3><STEAM_1:0:29480860><CT>" [-1315 2684 130] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-1977 1747 96] with "m4a1" (headshot)
+L 08/20/2019 - 12:34:46: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw smokegrenade [-370 1558 -125]
+L 08/20/2019 - 12:34:53: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw flashbang [908 810 25] flashbang entindex 295)
+L 08/20/2019 - 12:34:53: "Kontrobas<12><STEAM_1:1:63580642><CT>" blinded for 4.02 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 295 
+L 08/20/2019 - 12:34:56: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [1088 1109 160] flashbang entindex 295)
+L 08/20/2019 - 12:34:56: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 4.70 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 295 
+L 08/20/2019 - 12:34:58: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw hegrenade [1354 1558 11]
+L 08/20/2019 - 12:34:58: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [649 821 1] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [1509 1385 58] with "ak47"
+L 08/20/2019 - 12:34:58: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" flash-assisted killing "Kontrobas<12><STEAM_1:1:63580642><CT>"
+L 08/20/2019 - 12:35:01: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw flashbang [1308 2930 182] flashbang entindex 313)
+L 08/20/2019 - 12:35:01: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 1.01 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 313 
+L 08/20/2019 - 12:35:01: "Kontrobas<12><STEAM_1:1:63580642><CT>" blinded for 0.51 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 313 
+L 08/20/2019 - 12:35:04: "laViper<5><STEAM_1:0:56767661><CT>" [346 1708 61] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [318 1921 162] with "mag7"
+L 08/20/2019 - 12:35:10: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1491 601 -66] killed "Radik F.<4><STEAM_1:0:34907433><CT>" [1211 2982 192] with "sg556"
+L 08/20/2019 - 12:35:14: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1572 784 -8] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [1233 2184 49] with "sg556" (headshot)
+L 08/20/2019 - 12:35:18: "laViper<5><STEAM_1:0:56767661><CT>" [988 2335 21] killed "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [1394 2012 56] with "ak47" (penetrated)
+L 08/20/2019 - 12:35:18: "Radik F.<4><STEAM_1:0:34907433><CT>" assisted killing "Eefrit<11><STEAM_1:0:17521809><TERRORIST>"
+L 08/20/2019 - 12:35:19: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw smokegrenade [1137 2095 3]
+L 08/20/2019 - 12:35:22: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [1248 2242 33] flashbang entindex 300)
+L 08/20/2019 - 12:35:22: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" blinded for 0.70 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "Medved<3><STEAM_1:0:29480860><CT>" blinded for 3.80 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" blinded for 3.79 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 0.57 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 0.57 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" blinded for 0.57 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" blinded for 0.57 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:22: "Kontrobas<12><STEAM_1:1:63580642><CT>" blinded for 3.80 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 300 
+L 08/20/2019 - 12:35:28: "laViper<5><STEAM_1:0:56767661><CT>" [952 2342 7] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1354 1941 58] with "ak47"
+L 08/20/2019 - 12:35:28: "Kontrobas<12><STEAM_1:1:63580642><CT>" assisted killing "dexploizer<2><STEAM_1:1:193292204><TERRORIST>"
+L 08/20/2019 - 12:35:31: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:35:31: "Medved<3><STEAM_1:0:29480860><CT>" [1170 2890 128] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1772 1983 48] with "m4a1"
+L 08/20/2019 - 12:35:31: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "8") (T "3")
+L 08/20/2019 - 12:35:31: Team "CT" scored "8" with "5" players
+L 08/20/2019 - 12:35:31: Team "TERRORIST" scored "3" with "5" players
+L 08/20/2019 - 12:35:31: World triggered "Round_End"
+L 08/20/2019 - 12:35:38: Starting Freeze period
+L 08/20/2019 - 12:35:38: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:35:41: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "m4a1"
+L 08/20/2019 - 12:35:41: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:35:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:35:41: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:41: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:35:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:35:42: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:35:42: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:35:42: "Medved<3><STEAM_1:0:29480860><CT>" purchased "flashbang"
+L 08/20/2019 - 12:35:42: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "aug"
+L 08/20/2019 - 12:35:42: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:42: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:35:42: "laViper<5><STEAM_1:0:56767661><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:35:43: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:43: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:43: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:43: "laViper<5><STEAM_1:0:56767661><CT>" purchased "flashbang"
+L 08/20/2019 - 12:35:43: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:35:43: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:35:44: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "mp5sd"
+L 08/20/2019 - 12:35:44: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:35:44: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:35:44: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:35:45: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:35:45: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:35:45: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:35:45: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:35:45: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:35:45: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:35:45: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:35:46: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:35:46: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:35:46: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:35:47: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "decoy"
+L 08/20/2019 - 12:35:48: World triggered "Round_Start"
+L 08/20/2019 - 12:35:49: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:35:56: Molotov projectile spawned at -478.099457 719.954834 66.403976, velocity 66.843887 974.588196 76.701942
+L 08/20/2019 - 12:35:57: Molotov projectile spawned at -1355.401123 2671.114258 197.801620, velocity -369.111847 -542.291931 159.062622
+L 08/20/2019 - 12:35:58: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw molotov [-387 2049 -126]
+L 08/20/2019 - 12:35:59: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [-1955 1790 34]
+L 08/20/2019 - 12:36:02: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-179 1099 2]
+L 08/20/2019 - 12:36:07: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-140 1323 0] killed "laViper<5><STEAM_1:0:56767661><CT>" [273 1535 49] with "ak47" (headshot)
+L 08/20/2019 - 12:36:14: "Radik F.<4><STEAM_1:0:34907433><CT>" [-699 2387 -103] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-540 1993 -55] with "m4a1" (headshot)
+L 08/20/2019 - 12:36:15: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-315 1357 -69] killed "Radik F.<4><STEAM_1:0:34907433><CT>" [-645 2365 -43] with "galilar"
+L 08/20/2019 - 12:36:15: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" assisted killing "Radik F.<4><STEAM_1:0:34907433><CT>"
+L 08/20/2019 - 12:36:16: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-768 2536 -82] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-315 1357 -5] with "aug" (headshot penetrated)
+L 08/20/2019 - 12:36:16: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw smokegrenade [415 1925 98]
+L 08/20/2019 - 12:36:22: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [1152 2876 188] flashbang entindex 328)
+L 08/20/2019 - 12:36:22: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 0.93 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 328 
+L 08/20/2019 - 12:36:22: "Kontrobas<12><STEAM_1:1:63580642><CT>" blinded for 0.93 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 328 
+L 08/20/2019 - 12:36:27: "Medved<3><STEAM_1:0:29480860><CT>" [-972 1393 -112] killed "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [-202 1499 65] with "m4a1"
+L 08/20/2019 - 12:36:29: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [1191 594 8] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [1439 2800 177] with "ak47" (headshot)
+L 08/20/2019 - 12:36:48: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:36:48: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1087 2825 127] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [273 1761 140] with "ak47"
+L 08/20/2019 - 12:36:56: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [1314 2880 127] killed "Medved<3><STEAM_1:0:29480860><CT>" [1296 1928 65] with "ak47" (headshot)
+L 08/20/2019 - 12:36:56: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "8") (T "4")
+L 08/20/2019 - 12:36:56: Team "CT" scored "8" with "5" players
+L 08/20/2019 - 12:36:56: Team "TERRORIST" scored "4" with "5" players
+L 08/20/2019 - 12:36:56: World triggered "Round_End"
+L 08/20/2019 - 12:37:03: Starting Freeze period
+L 08/20/2019 - 12:37:03: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:37:06: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:37:07: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:37:08: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:37:08: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:37:09: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:37:09: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:37:09: "laViper<5><STEAM_1:0:56767661><CT>" purchased "cz75a"
+L 08/20/2019 - 12:37:10: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:37:10: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:37:10: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:37:10: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:37:12: "laViper<5><STEAM_1:0:56767661><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:37:12: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:37:12: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:37:13: World triggered "Round_Start"
+L 08/20/2019 - 12:37:13: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "sg556"
+L 08/20/2019 - 12:37:15: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:37:17: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:37:20: "laViper<5><STEAM_1:0:56767661><CT>" threw smokegrenade [-373 1394 -124]
+L 08/20/2019 - 12:37:22: "Medved<3><STEAM_1:0:29480860><CT>" threw hegrenade [694 502 15]
+L 08/20/2019 - 12:37:23: "Radik F.<4><STEAM_1:0:34907433><CT>" threw hegrenade [589 594 5]
+L 08/20/2019 - 12:37:25: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw smokegrenade [-158 1302 2]
+L 08/20/2019 - 12:37:25: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw hegrenade [627 548 45]
+L 08/20/2019 - 12:37:27: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-461 792 -6]
+L 08/20/2019 - 12:37:29: "Radik F.<4><STEAM_1:0:34907433><CT>" [716 344 4] killed "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [241 -225 72] with "hkp2000" (headshot)
+L 08/20/2019 - 12:37:29: "Medved<3><STEAM_1:0:29480860><CT>" assisted killing "Eefrit<11><STEAM_1:0:17521809><TERRORIST>"
+L 08/20/2019 - 12:37:32: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [201 392 -0] killed "Radik F.<4><STEAM_1:0:34907433><CT>" [615 152 63] with "ak47"
+L 08/20/2019 - 12:37:32: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" assisted killing "Radik F.<4><STEAM_1:0:34907433><CT>"
+L 08/20/2019 - 12:37:33: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [409 140 -3] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [590 235 64] with "sg556" (headshot)
+L 08/20/2019 - 12:37:33: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" threw smokegrenade [828 -280 16]
+L 08/20/2019 - 12:37:34: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [457 59 -4] killed "Medved<3><STEAM_1:0:29480860><CT>" [668 317 65] with "sg556"
+L 08/20/2019 - 12:37:37: Molotov projectile spawned at 276.169495 205.200485 67.377670, velocity 664.145203 117.647026 26.369642
+L 08/20/2019 - 12:37:38: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw molotov [707 329 3]
+L 08/20/2019 - 12:37:46: "laViper<5><STEAM_1:0:56767661><CT>" [311 -397 0] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [643 -5 116] with "cz75a"
+L 08/20/2019 - 12:37:55: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:37:55: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-375 725 0] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-149 937 65] with "hkp2000" (headshot)
+L 08/20/2019 - 12:38:20: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-163 1375 -0] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-157 814 66] with "ak47"
+L 08/20/2019 - 12:38:20: "laViper<5><STEAM_1:0:56767661><CT>" assisted killing "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>"
+L 08/20/2019 - 12:38:20: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-210 309 2] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-163 1375 46] with "galilar" (headshot)
+L 08/20/2019 - 12:38:30: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-448 -427 -0] killed "laViper<5><STEAM_1:0:56767661><CT>" [-492 -277 50] with "galilar"
+L 08/20/2019 - 12:38:30: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" assisted killing "laViper<5><STEAM_1:0:56767661><CT>"
+L 08/20/2019 - 12:38:30: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "8") (T "5")
+L 08/20/2019 - 12:38:30: Team "CT" scored "8" with "5" players
+L 08/20/2019 - 12:38:30: Team "TERRORIST" scored "5" with "5" players
+L 08/20/2019 - 12:38:30: World triggered "Round_End"
+L 08/20/2019 - 12:38:37: Starting Freeze period
+L 08/20/2019 - 12:38:37: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:38:39: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:38:39: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:38:39: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:40: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:38:40: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:40: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:40: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:38:40: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "m4a1"
+L 08/20/2019 - 12:38:40: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:38:41: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:38:41: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:41: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:38:42: "laViper<5><STEAM_1:0:56767661><CT>" purchased "m4a1"
+L 08/20/2019 - 12:38:42: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:42: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:43: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:43: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:43: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:38:43: "Medved<3><STEAM_1:0:29480860><CT>" purchased "decoy"
+L 08/20/2019 - 12:38:43: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:38:43: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "mp5sd"
+L 08/20/2019 - 12:38:43: "Medved<3><STEAM_1:0:29480860><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:38:43: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "ump45"
+L 08/20/2019 - 12:38:43: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:38:44: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:44: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:44: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:38:44: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "m4a1"
+L 08/20/2019 - 12:38:44: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:44: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:38:44: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:38:44: "Medved<3><STEAM_1:0:29480860><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:38:44: "laViper<5><STEAM_1:0:56767661><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:38:45: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:38:45: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:38:46: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:38:46: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:38:46: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:38:47: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:47: World triggered "Round_Start"
+L 08/20/2019 - 12:38:47: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:38:49: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:38:55: Molotov projectile spawned at -421.212708 562.162842 64.586464, velocity 7.756814 968.314453 131.348541
+L 08/20/2019 - 12:38:56: Molotov projectile spawned at 1359.004761 1289.588013 58.814640, velocity -750.716919 -581.591187 204.123550
+L 08/20/2019 - 12:38:57: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw molotov [-409 2092 -127]
+L 08/20/2019 - 12:38:57: "Medved<3><STEAM_1:0:29480860><CT>" threw molotov [697 493 2]
+L 08/20/2019 - 12:38:58: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" threw flashbang [-2001 1730 57] flashbang entindex 410)
+L 08/20/2019 - 12:38:58: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 4.51 by "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" from flashbang entindex 410 
+L 08/20/2019 - 12:39:01: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw hegrenade [-535 2125 -110]
+L 08/20/2019 - 12:39:01: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [-1887 1968 -0]
+L 08/20/2019 - 12:39:04: "laViper<5><STEAM_1:0:56767661><CT>" threw hegrenade [-1952 1717 35]
+L 08/20/2019 - 12:39:04: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [-1975 2661 52] flashbang entindex 401)
+L 08/20/2019 - 12:39:04: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 1.56 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 401 
+L 08/20/2019 - 12:39:04: "laViper<5><STEAM_1:0:56767661><CT>" blinded for 1.54 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 401 
+L 08/20/2019 - 12:39:05: Molotov projectile spawned at -1823.282593 1855.444702 194.460388, velocity -592.175476 -317.114105 -66.271156
+L 08/20/2019 - 12:39:06: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw smokegrenade [483 1628 4]
+L 08/20/2019 - 12:39:06: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [-1955 1652 34]
+L 08/20/2019 - 12:39:13: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw flashbang [403 1832 199] flashbang entindex 298)
+L 08/20/2019 - 12:39:15: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-450 1658 -125] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-434 1764 -62] with "galilar"
+L 08/20/2019 - 12:39:17: "Medved<3><STEAM_1:0:29480860><CT>" [-252 450 -2] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [-414 1550 -62] with "m4a1_silencer"
+L 08/20/2019 - 12:39:17: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" assisted killing "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>"
+L 08/20/2019 - 12:39:22: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [-2026 1133 35] killed "laViper<5><STEAM_1:0:56767661><CT>" [-1992 1977 62] with "ump45"
+L 08/20/2019 - 12:39:23: "Medved<3><STEAM_1:0:29480860><CT>" threw hegrenade [-489 1861 -114]
+L 08/20/2019 - 12:39:23: "Medved<3><STEAM_1:0:29480860><CT>" [-18 410 -1] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-357 1828 -59] with "hegrenade"
+L 08/20/2019 - 12:39:25: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" threw decoy [-2024 1947 2]
+L 08/20/2019 - 12:39:32: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-548 1718 -116] killed "Medved<3><STEAM_1:0:29480860><CT>" [-404 1603 -75] with "ak47"
+L 08/20/2019 - 12:39:35: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1808 2560 33] killed "Radik F.<4><STEAM_1:0:34907433><CT>" [-1362 2755 82] with "ak47"
+L 08/20/2019 - 12:39:39: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [-1127 2715 102] flashbang entindex 325)
+L 08/20/2019 - 12:39:39: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 4.70 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:39:39: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 4.70 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 325 
+L 08/20/2019 - 12:39:40: "Kontrobas<12><STEAM_1:1:63580642><CT>" [77 2057 -123] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [-1020 2450 58] with "mp5sd"
+L 08/20/2019 - 12:39:44: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:39:59: "Kontrobas<12><STEAM_1:1:63580642><CT>" [-426 2022 -127] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [-1379 2691 189] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:39:59: "Radik F.<4><STEAM_1:0:34907433><CT>" assisted killing "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>"
+L 08/20/2019 - 12:40:09: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [-1743 1884 -0] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [-1346 2239 65] with "ump45" (headshot)
+L 08/20/2019 - 12:40:09: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" assisted killing "Kontrobas<12><STEAM_1:1:63580642><CT>"
+L 08/20/2019 - 12:40:09: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "8") (T "6")
+L 08/20/2019 - 12:40:09: Team "CT" scored "8" with "5" players
+L 08/20/2019 - 12:40:09: Team "TERRORIST" scored "6" with "5" players
+L 08/20/2019 - 12:40:09: World triggered "Round_End"
+L 08/20/2019 - 12:40:16: Starting Freeze period
+L 08/20/2019 - 12:40:16: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:40:18: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:40:18: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:40:19: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:19: "laViper<5><STEAM_1:0:56767661><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:19: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:19: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:19: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:20: "Medved<3><STEAM_1:0:29480860><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:40:21: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:40:21: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:21: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "fiveseven"
+L 08/20/2019 - 12:40:21: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:40:21: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:40:22: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:40:22: "Medved<3><STEAM_1:0:29480860><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:40:22: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:40:22: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:23: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:40:23: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:40:23: "laViper<5><STEAM_1:0:56767661><CT>" purchased "famas"
+L 08/20/2019 - 12:40:23: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:40:23: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:40:23: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:40:23: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:40:24: "Medved<3><STEAM_1:0:29480860><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:40:24: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:40:24: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "flashbang"
+L 08/20/2019 - 12:40:24: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:40:24: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:40:24: "laViper<5><STEAM_1:0:56767661><CT>" purchased "incgrenade"
+L 08/20/2019 - 12:40:24: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:40:25: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:26: World triggered "Round_Start"
+L 08/20/2019 - 12:40:26: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "ump45"
+L 08/20/2019 - 12:40:26: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" purchased "tec9"
+L 08/20/2019 - 12:40:26: "Kontrobas<12><STEAM_1:1:63580642><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:40:28: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:40:30: "Radik F.<4><STEAM_1:0:34907433><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:40:36: Molotov projectile spawned at 668.763306 772.769348 66.501793, velocity 710.466064 635.770386 83.678009
+L 08/20/2019 - 12:40:36: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" purchased "ump45"
+L 08/20/2019 - 12:40:37: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw molotov [1291 1096 -3]
+L 08/20/2019 - 12:40:37: "Medved<3><STEAM_1:0:29480860><CT>" threw hegrenade [675 498 5]
+L 08/20/2019 - 12:40:39: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw smokegrenade [-1939 1719 35]
+L 08/20/2019 - 12:40:42: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw smokegrenade [1114 1178 2]
+L 08/20/2019 - 12:40:43: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw hegrenade [1521 1071 -0]
+L 08/20/2019 - 12:40:46: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" threw flashbang [-1946 2266 109] flashbang entindex 310)
+L 08/20/2019 - 12:40:46: "Radik F.<4><STEAM_1:0:34907433><CT>" blinded for 4.00 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 310 
+L 08/20/2019 - 12:40:46: "laViper<5><STEAM_1:0:56767661><CT>" blinded for 4.49 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 310 
+L 08/20/2019 - 12:40:46: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" blinded for 3.68 by "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" from flashbang entindex 310 
+L 08/20/2019 - 12:40:48: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw smokegrenade [1423 1712 -6]
+L 08/20/2019 - 12:40:49: "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" threw flashbang [1533 2330 94] flashbang entindex 314)
+L 08/20/2019 - 12:40:49: "Medved<3><STEAM_1:0:29480860><CT>" blinded for 0.36 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 314 
+L 08/20/2019 - 12:40:49: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" blinded for 2.21 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 314 
+L 08/20/2019 - 12:40:49: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" blinded for 2.35 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 314 
+L 08/20/2019 - 12:40:49: "Kontrobas<12><STEAM_1:1:63580642><CT>" blinded for 4.16 by "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" from flashbang entindex 314 
+L 08/20/2019 - 12:40:52: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" threw smokegrenade [1499 835 -11]
+L 08/20/2019 - 12:40:52: Molotov projectile spawned at -1821.881104 1840.171509 196.972076, velocity -639.080627 -213.601456 39.691261
+L 08/20/2019 - 12:40:53: "laViper<5><STEAM_1:0:56767661><CT>" threw molotov [-2012 1702 34]
+L 08/20/2019 - 12:40:55: "Kontrobas<12><STEAM_1:1:63580642><CT>" threw hegrenade [1449 1201 100]
+L 08/20/2019 - 12:40:56: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" threw decoy [1369 1656 -5]
+L 08/20/2019 - 12:41:06: "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:41:06: "Medved<3><STEAM_1:0:29480860><CT>" [432 2283 96] killed "3ch.hk<10><STEAM_1:1:105037477><TERRORIST>" [1775 2134 65] with "m4a1_silencer"
+L 08/20/2019 - 12:41:07: "Medved<3><STEAM_1:0:29480860><CT>" [432 2379 96] killed "dexploizer<2><STEAM_1:1:193292204><TERRORIST>" [1737 1849 65] with "m4a1_silencer"
+L 08/20/2019 - 12:41:08: "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [-311 662 1] killed "Yakut74Rus<7><STEAM_1:0:35654179><CT>" [-302 892 45] with "ak47" (headshot)
+L 08/20/2019 - 12:41:09: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1461 1844 -9] killed "Kontrobas<12><STEAM_1:1:63580642><CT>" [893 2478 160] with "galilar"
+L 08/20/2019 - 12:41:12: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:41:13: "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:41:13: "laViper<5><STEAM_1:0:56767661><CT>" [-24 2104 -127] killed "Maksim.S<8><STEAM_1:1:196168001><TERRORIST>" [1463 2279 61] with "famas" (headshot)
+L 08/20/2019 - 12:41:17: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:41:19: "Medved<3><STEAM_1:0:29480860><CT>" [564 2747 97] killed "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>" [301 1779 160] with "m4a1_silencer"
+L 08/20/2019 - 12:41:19: "Yakut74Rus<7><STEAM_1:0:35654179><CT>" assisted killing "anton.knelts<9><STEAM_1:0:493786726><TERRORIST>"
+L 08/20/2019 - 12:41:20: "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:41:20: "laViper<5><STEAM_1:0:56767661><CT>" [714 2124 -65] killed "Eefrit<11><STEAM_1:0:17521809><TERRORIST>" [1344 2294 74] with "famas"
+L 08/20/2019 - 12:41:20: "Kontrobas<12><STEAM_1:1:63580642><CT>" assisted killing "Eefrit<11><STEAM_1:0:17521809><TERRORIST>"
+L 08/20/2019 - 12:41:20: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "9") (T "6")
+L 08/20/2019 - 12:41:20: Team "CT" scored "9" with "5" players
+L 08/20/2019 - 12:41:20: Team "TERRORIST" scored "6" with "5" players
+L 08/20/2019 - 12:41:20: World triggered "Round_End"
+L 08/20/2019 - 12:41:35: "dexploizer<2><STEAM_1:1:193292204>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:41:35: "Medved<3><STEAM_1:0:29480860>" switched from team <CT> to <TERRORIST>
+L 08/20/2019 - 12:41:35: "Radik F.<4><STEAM_1:0:34907433>" switched from team <CT> to <TERRORIST>
+L 08/20/2019 - 12:41:35: "laViper<5><STEAM_1:0:56767661>" switched from team <CT> to <TERRORIST>
+L 08/20/2019 - 12:41:35: "Yakut74Rus<7><STEAM_1:0:35654179>" switched from team <CT> to <TERRORIST>
+L 08/20/2019 - 12:41:35: "Maksim.S<8><STEAM_1:1:196168001>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:41:35: "anton.knelts<9><STEAM_1:0:493786726>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:41:35: "3ch.hk<10><STEAM_1:1:105037477>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:41:35: "Eefrit<11><STEAM_1:0:17521809>" switched from team <TERRORIST> to <CT>
+L 08/20/2019 - 12:41:35: "Kontrobas<12><STEAM_1:1:63580642>" switched from team <CT> to <TERRORIST>
+L 08/20/2019 - 12:41:35: Starting Freeze period
+L 08/20/2019 - 12:41:35: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:41:37: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:41:38: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "elite"
+L 08/20/2019 - 12:41:38: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "p250"
+L 08/20/2019 - 12:41:38: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:41:39: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:41:39: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:41:40: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "fiveseven"
+L 08/20/2019 - 12:41:41: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:41:42: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:41:42: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:41:43: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:41:43: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:41:43: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "decoy"
+L 08/20/2019 - 12:41:44: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "flashbang"
+L 08/20/2019 - 12:41:45: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:41:45: World triggered "Round_Start"
+L 08/20/2019 - 12:42:03: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw smokegrenade [-333 1021 -60]
+L 08/20/2019 - 12:42:09: "anton.knelts<9><STEAM_1:0:493786726><CT>" [-715 2436 -92] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-169 891 65] with "hkp2000"
+L 08/20/2019 - 12:42:09: "Maksim.S<8><STEAM_1:1:196168001><CT>" assisted killing "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>"
+L 08/20/2019 - 12:42:10: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw smokegrenade [684 48 2]
+L 08/20/2019 - 12:42:13: "3ch.hk<10><STEAM_1:1:105037477><CT>" threw decoy [-2030 1509 35]
+L 08/20/2019 - 12:42:17: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-299 1160 -86] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [-688 2494 -16] with "glock" (headshot)
+L 08/20/2019 - 12:42:28: "laViper<5><STEAM_1:0:56767661><TERRORIST>" [-186 905 1] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-138 507 46] with "glock" (headshot)
+L 08/20/2019 - 12:42:29: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw decoy [689 864 2]
+L 08/20/2019 - 12:42:31: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1534 1707 1] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [1425 2204 56] with "glock" (headshot)
+L 08/20/2019 - 12:42:38: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" threw hegrenade [836 2263 -16]
+L 08/20/2019 - 12:42:46: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:42:46: "Maksim.S<8><STEAM_1:1:196168001><CT>" [423 2101 -127] killed "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1298 2199 67] with "fiveseven"
+L 08/20/2019 - 12:42:46: "Eefrit<11><STEAM_1:0:17521809><CT>" assisted killing "Medved<3><STEAM_1:0:29480860><TERRORIST>"
+L 08/20/2019 - 12:42:47: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [384 2323 96] killed "Eefrit<11><STEAM_1:0:17521809><CT>" [1102 2604 160] with "usp_silencer" (penetrated)
+L 08/20/2019 - 12:42:47: "Medved<3><STEAM_1:0:29480860><TERRORIST>" assisted killing "Eefrit<11><STEAM_1:0:17521809><CT>"
+L 08/20/2019 - 12:42:54: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [1428 2260 -3] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [1201 2193 68] with "usp_silencer"
+L 08/20/2019 - 12:42:54: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "10")
+L 08/20/2019 - 12:42:54: Team "CT" scored "6" with "5" players
+L 08/20/2019 - 12:42:54: Team "TERRORIST" scored "10" with "5" players
+L 08/20/2019 - 12:42:54: World triggered "Round_End"
+L 08/20/2019 - 12:42:56: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:43:01: Starting Freeze period
+L 08/20/2019 - 12:43:01: "laViper<5><STEAM_1:0:56767661><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:43:02: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:03: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:03: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "mp7"
+L 08/20/2019 - 12:43:03: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:43:04: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:43:04: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:05: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "sg556"
+L 08/20/2019 - 12:43:05: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:43:05: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "cz75a"
+L 08/20/2019 - 12:43:05: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:43:05: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:06: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:06: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:43:07: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:43:07: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "mp7"
+L 08/20/2019 - 12:43:07: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "galilar"
+L 08/20/2019 - 12:43:07: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:07: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "ump45"
+L 08/20/2019 - 12:43:08: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "flashbang"
+L 08/20/2019 - 12:43:08: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:43:09: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:43:09: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:09: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:43:11: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "decoy"
+L 08/20/2019 - 12:43:11: World triggered "Round_Start"
+L 08/20/2019 - 12:43:11: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "flashbang"
+L 08/20/2019 - 12:43:11: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:43:11: "laViper<5><STEAM_1:0:56767661><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:43:12: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:43:12: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:43:12: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "ump45"
+L 08/20/2019 - 12:43:12: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:43:12: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:43:13: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:43:21: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw smokegrenade [-316 1174 -94]
+L 08/20/2019 - 12:43:21: "3ch.hk<10><STEAM_1:1:105037477><CT>" threw flashbang [-1988 1487 93] flashbang entindex 331)
+L 08/20/2019 - 12:43:21: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 4.68 by "3ch.hk<10><STEAM_1:1:105037477><CT>" from flashbang entindex 331 
+L 08/20/2019 - 12:43:23: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw smokegrenade [-1800 2178 0]
+L 08/20/2019 - 12:43:33: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw smokegrenade [-348 1047 -67]
+L 08/20/2019 - 12:43:34: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-1971 1159 32] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-1990 1886 65] with "mp7" (headshot)
+L 08/20/2019 - 12:43:37: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1715 867 35]
+L 08/20/2019 - 12:43:41: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw flashbang [-1947 1714 36] flashbang entindex 330)
+L 08/20/2019 - 12:43:41: "anton.knelts<9><STEAM_1:0:493786726><CT>" blinded for 0.65 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 330 
+L 08/20/2019 - 12:43:42: "Eefrit<11><STEAM_1:0:17521809><CT>" threw decoy [204 1373 139]
+L 08/20/2019 - 12:43:45: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [1077 830 1] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [1757 2024 47] with "ak47" (headshot)
+L 08/20/2019 - 12:43:53: "Maksim.S<8><STEAM_1:1:196168001><CT>" [1140 2178 4] killed "laViper<5><STEAM_1:0:56767661><TERRORIST>" [1415 1769 38] with "ump45" (headshot)
+L 08/20/2019 - 12:43:55: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1568 1365 1] killed "Eefrit<11><STEAM_1:0:17521809><CT>" [1151 2490 159] with "ak47" (headshot)
+L 08/20/2019 - 12:43:55: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw hegrenade [1189 2242 13]
+L 08/20/2019 - 12:43:56: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-1521 2402 -1] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [-1236 2134 72] with "mp7" (headshot)
+L 08/20/2019 - 12:44:10: "Maksim.S<8><STEAM_1:1:196168001><CT>" [381 2456 -120] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [69 2205 -16] with "ump45"
+L 08/20/2019 - 12:44:10: "3ch.hk<10><STEAM_1:1:105037477><CT>" assisted killing "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>"
+L 08/20/2019 - 12:44:11: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:44:16: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1342 2298 12] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [67 2176 -65] with "ak47"
+L 08/20/2019 - 12:44:16: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" assisted killing "Maksim.S<8><STEAM_1:1:196168001><CT>"
+L 08/20/2019 - 12:44:16: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "11")
+L 08/20/2019 - 12:44:16: Team "CT" scored "6" with "5" players
+L 08/20/2019 - 12:44:16: Team "TERRORIST" scored "11" with "5" players
+L 08/20/2019 - 12:44:16: World triggered "Round_End"
+L 08/20/2019 - 12:44:21: "DJoony<13><STEAM_1:1:33105260><>" connected, address ""
+L 08/20/2019 - 12:44:21: "DJoony<13><STEAM_1:1:33105260><>" STEAM USERID validated
+L 08/20/2019 - 12:44:23: Starting Freeze period
+L 08/20/2019 - 12:44:23: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:44:26: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:26: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:44:26: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:44:26: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "famas"
+L 08/20/2019 - 12:44:26: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:26: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:44:27: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:44:27: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:28: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:44:28: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:28: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:44:28: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:44:28: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "mp7"
+L 08/20/2019 - 12:44:29: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:44:29: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:44:29: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "famas"
+L 08/20/2019 - 12:44:30: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "ump45"
+L 08/20/2019 - 12:44:30: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:44:30: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:44:30: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:32: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:44:32: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:44:32: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "decoy"
+L 08/20/2019 - 12:44:32: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:44:33: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "mp7"
+L 08/20/2019 - 12:44:33: World triggered "Round_Start"
+L 08/20/2019 - 12:44:34: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:44:34: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:44:34: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "bizon"
+L 08/20/2019 - 12:44:34: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:44:34: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:44:35: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:44:35: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "flashbang"
+L 08/20/2019 - 12:44:35: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:44:35: "DJoony<13><STEAM_1:1:33105260><>" entered the game
+L 08/20/2019 - 12:44:36: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "ssg08"
+L 08/20/2019 - 12:44:37: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:44:44: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw smokegrenade [-305 1148 -86]
+L 08/20/2019 - 12:44:45: "DJoony<13><STEAM_1:1:33105260>" switched from team <Unassigned> to <CT>
+L 08/20/2019 - 12:44:49: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "cz75a"
+L 08/20/2019 - 12:44:55: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw hegrenade [-472 1936 -113]
+L 08/20/2019 - 12:44:56: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1677 989 31]
+L 08/20/2019 - 12:45:00: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [272 1443 -0] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [450 1760 149] with "mp7"
+L 08/20/2019 - 12:45:03: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw smokegrenade [641 975 2]
+L 08/20/2019 - 12:45:04: "Maksim.S<8><STEAM_1:1:196168001><CT>" threw hegrenade [423 2159 119]
+L 08/20/2019 - 12:45:06: "Eefrit<11><STEAM_1:0:17521809><CT>" threw decoy [933 950 2]
+L 08/20/2019 - 12:45:09: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [982 711 9] killed "DJoony<13><STEAM_1:1:33105260><CT>" [974 567 74] with "ak47"
+L 08/20/2019 - 12:45:09: "anton.knelts<9><STEAM_1:0:493786726><CT>" threw flashbang [383 1870 296] flashbang entindex 316)
+L 08/20/2019 - 12:45:09: "anton.knelts<9><STEAM_1:0:493786726><CT>" blinded for 3.19 by "anton.knelts<9><STEAM_1:0:493786726><CT>" from flashbang entindex 316 
+L 08/20/2019 - 12:45:09: "Eefrit<11><STEAM_1:0:17521809><CT>" blinded for 0.69 by "anton.knelts<9><STEAM_1:0:493786726><CT>" from flashbang entindex 316 
+L 08/20/2019 - 12:45:09: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 3.54 by "anton.knelts<9><STEAM_1:0:493786726><CT>" from flashbang entindex 316 
+L 08/20/2019 - 12:45:16: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" [1645 871 -10] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [1099 2585 160] with "sg556" (headshot)
+L 08/20/2019 - 12:45:17: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [316 1845 97] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [995 2697 142] with "mp7"
+L 08/20/2019 - 12:45:19: "Host<14><STEAM_1:0:73435701><>" connected, address ""
+L 08/20/2019 - 12:45:19: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1455 1151 -9] killed "Eefrit<11><STEAM_1:0:17521809><CT>" [1231 2266 76] with "ak47"
+L 08/20/2019 - 12:45:19: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" assisted killing "Eefrit<11><STEAM_1:0:17521809><CT>"
+L 08/20/2019 - 12:45:20: "Host<14><STEAM_1:0:73435701><>" STEAM USERID validated
+L 08/20/2019 - 12:45:20: "3ch.hk<10><STEAM_1:1:105037477><CT>" [298 1564 3] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [364 1828 161] with "bizon"
+L 08/20/2019 - 12:45:29: "Host<14><STEAM_1:0:73435701><>" entered the game
+L 08/20/2019 - 12:45:31: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:45:33: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" [1209 2755 106] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [322 1853 143] with "sg556" (headshot penetrated)
+L 08/20/2019 - 12:45:33: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "12")
+L 08/20/2019 - 12:45:33: Team "CT" scored "6" with "6" players
+L 08/20/2019 - 12:45:33: Team "TERRORIST" scored "12" with "5" players
+L 08/20/2019 - 12:45:33: World triggered "Round_End"
+L 08/20/2019 - 12:45:35: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw smokegrenade [-118 2209 -126]
+L 08/20/2019 - 12:45:40: Starting Freeze period
+L 08/20/2019 - 12:45:40: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:45:42: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:45:42: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:45:43: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "famas"
+L 08/20/2019 - 12:45:43: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "mp7"
+L 08/20/2019 - 12:45:44: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "p90"
+L 08/20/2019 - 12:45:44: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "famas"
+L 08/20/2019 - 12:45:45: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:45:45: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "flashbang"
+L 08/20/2019 - 12:45:45: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:45:45: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "decoy"
+L 08/20/2019 - 12:45:46: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:45:46: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:45:46: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:45:46: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:45:47: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:45:47: "Host<14><STEAM_1:0:73435701>" switched from team <Unassigned> to <TERRORIST>
+L 08/20/2019 - 12:45:47: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:45:47: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:45:48: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "p250"
+L 08/20/2019 - 12:45:49: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:45:49: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:45:50: World triggered "Round_Start"
+L 08/20/2019 - 12:45:50: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "mp9"
+L 08/20/2019 - 12:45:52: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:45:53: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:45:54: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:45:55: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:45:55: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:45:55: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:45:56: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:45:56: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "decoy"
+L 08/20/2019 - 12:46:05: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw smokegrenade [627 640 3]
+L 08/20/2019 - 12:46:05: "dexploizer<2><STEAM_1:1:193292204><CT>" threw smokegrenade [784 865 2]
+L 08/20/2019 - 12:46:08: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw hegrenade [-414 1641 -111]
+L 08/20/2019 - 12:46:12: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [-216 465 -2] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-379 1332 -61] with "ak47" (headshot)
+L 08/20/2019 - 12:46:16: "DJoony<13><STEAM_1:1:33105260><CT>" threw decoy [974 238 13]
+L 08/20/2019 - 12:46:20: "Maksim.S<8><STEAM_1:1:196168001><CT>" [694 1092 1] killed "laViper<5><STEAM_1:0:56767661><TERRORIST>" [567 1026 66] with "famas"
+L 08/20/2019 - 12:46:21: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw smokegrenade [-469 2109 -126]
+L 08/20/2019 - 12:46:26: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw smokegrenade [-282 1276 -118]
+L 08/20/2019 - 12:46:30: "Eefrit<11><STEAM_1:0:17521809><CT>" threw decoy [-2027 1374 31]
+L 08/20/2019 - 12:46:41: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" threw hegrenade [639 775 23]
+L 08/20/2019 - 12:46:44: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1283 2956 128] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [1384 1455 56] with "ak47" (headshot)
+L 08/20/2019 - 12:46:44: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:46:44: "dexploizer<2><STEAM_1:1:193292204><CT>" [995 2233 59] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [988 2522 142] with "famas"
+L 08/20/2019 - 12:46:47: "Host<14><STEAM_1:0:73435701><TERRORIST>" [431 2154 96] killed "DJoony<13><STEAM_1:1:33105260><CT>" [1249 2179 67] with "glock" (headshot)
+L 08/20/2019 - 12:46:49: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:46:52: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [988 2428 127] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [726 2190 -13] with "ak47" (headshot)
+L 08/20/2019 - 12:46:59: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:47:09: "Eefrit<11><STEAM_1:0:17521809><CT>" [323 1615 4] killed "Host<14><STEAM_1:0:73435701><TERRORIST>" [483 1896 161] with "mp9" (headshot)
+L 08/20/2019 - 12:47:12: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" [1781 2015 2] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [1220 963 64] with "sg556" (headshot)
+L 08/20/2019 - 12:47:27: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw hegrenade [299 1764 132]
+L 08/20/2019 - 12:47:27: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" threw hegrenade [579 2124 158]
+L 08/20/2019 - 12:47:29: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw flashbang [397 2159 270] flashbang entindex 309)
+L 08/20/2019 - 12:47:29: "Medved<3><STEAM_1:0:29480860><TERRORIST>" blinded for 1.55 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 309 
+L 08/20/2019 - 12:47:29: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" blinded for 1.55 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 309 
+L 08/20/2019 - 12:47:29: "laViper<5><STEAM_1:0:56767661><TERRORIST>" blinded for 3.37 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 309 
+L 08/20/2019 - 12:47:29: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" blinded for 3.37 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 309 
+L 08/20/2019 - 12:47:33: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw flashbang [735 2144 -32] flashbang entindex 321)
+L 08/20/2019 - 12:47:33: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 0.93 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 321 
+L 08/20/2019 - 12:47:33: "Host<14><STEAM_1:0:73435701><TERRORIST>" blinded for 0.93 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 321 
+L 08/20/2019 - 12:47:35: Team "TERRORIST" triggered "SFUI_Notice_Target_Bombed" (CT "6") (T "13")
+L 08/20/2019 - 12:47:35: Team "CT" scored "6" with "6" players
+L 08/20/2019 - 12:47:35: Team "TERRORIST" scored "13" with "6" players
+L 08/20/2019 - 12:47:35: World triggered "Round_End"
+L 08/20/2019 - 12:47:42: Starting Freeze period
+L 08/20/2019 - 12:47:42: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:47:43: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:47:43: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:47:44: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:47:44: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:47:44: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:47:44: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:47:45: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:47:45: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:47:45: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:47:46: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "p90"
+L 08/20/2019 - 12:47:46: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:47:46: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:47:46: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:47:47: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:47:47: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "flashbang"
+L 08/20/2019 - 12:47:47: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:47:47: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:47:47: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "flashbang"
+L 08/20/2019 - 12:47:48: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:47:48: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:47:48: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "m4a1"
+L 08/20/2019 - 12:47:48: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:47:48: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:47:48: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:47:48: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:47:48: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:47:48: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:47:49: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "famas"
+L 08/20/2019 - 12:47:49: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:47:49: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "flashbang"
+L 08/20/2019 - 12:47:50: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:47:50: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:47:50: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "decoy"
+L 08/20/2019 - 12:47:50: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:47:51: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:47:51: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:47:51: "Eefrit<11><STEAM_1:0:17521809><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:47:51: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:47:52: World triggered "Round_Start"
+L 08/20/2019 - 12:47:52: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:47:53: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:47:55: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:47:58: "DJoony<13><STEAM_1:1:33105260><CT>" threw flashbang [-415 720 262] flashbang entindex 347)
+L 08/20/2019 - 12:47:58: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 4.58 by "DJoony<13><STEAM_1:1:33105260><CT>" from flashbang entindex 347 
+L 08/20/2019 - 12:47:58: "DJoony<13><STEAM_1:1:33105260><CT>" blinded for 0.58 by "DJoony<13><STEAM_1:1:33105260><CT>" from flashbang entindex 347 
+L 08/20/2019 - 12:47:59: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw hegrenade [-423 1759 -100]
+L 08/20/2019 - 12:48:06: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw flashbang [-387 1412 -99] flashbang entindex 319)
+L 08/20/2019 - 12:48:06: "Medved<3><STEAM_1:0:29480860><TERRORIST>" blinded for 3.56 by "Medved<3><STEAM_1:0:29480860><TERRORIST>" from flashbang entindex 319 
+L 08/20/2019 - 12:48:06: "anton.knelts<9><STEAM_1:0:493786726><CT>" blinded for 0.54 by "Medved<3><STEAM_1:0:29480860><TERRORIST>" from flashbang entindex 319 
+L 08/20/2019 - 12:48:06: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 4.45 by "Medved<3><STEAM_1:0:29480860><TERRORIST>" from flashbang entindex 319 
+L 08/20/2019 - 12:48:06: "DJoony<13><STEAM_1:1:33105260><CT>" blinded for 4.74 by "Medved<3><STEAM_1:0:29480860><TERRORIST>" from flashbang entindex 319 
+L 08/20/2019 - 12:48:12: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw smokegrenade [-470 2025 -123]
+L 08/20/2019 - 12:48:15: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1712 958 35]
+L 08/20/2019 - 12:48:18: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-275 1355 -69] killed "DJoony<13><STEAM_1:1:33105260><CT>" [-759 1397 -48] with "ak47" (headshot)
+L 08/20/2019 - 12:48:20: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw smokegrenade [659 764 2]
+L 08/20/2019 - 12:48:23: "3ch.hk<10><STEAM_1:1:105037477><CT>" [-487 -673 121] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-310 1243 -43] with "p90" (headshot)
+L 08/20/2019 - 12:48:23: "DJoony<13><STEAM_1:1:33105260><CT>" assisted killing "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>"
+L 08/20/2019 - 12:48:23: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:48:25: "Maksim.S<8><STEAM_1:1:196168001><CT>" threw hegrenade [656 788 3]
+L 08/20/2019 - 12:48:26: Molotov projectile spawned at -204.069489 987.124451 65.849716, velocity -401.577881 542.304932 16.295568
+L 08/20/2019 - 12:48:27: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw molotov [-642 1489 -111]
+L 08/20/2019 - 12:48:29: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [366 1722 83] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [287 2764 185] with "ak47" (headshot)
+L 08/20/2019 - 12:48:29: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:48:31: "3ch.hk<10><STEAM_1:1:105037477><CT>" threw flashbang [377 -521 3] flashbang entindex 355)
+L 08/20/2019 - 12:48:31: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" blinded for 1.03 by "3ch.hk<10><STEAM_1:1:105037477><CT>" from flashbang entindex 355 
+L 08/20/2019 - 12:48:31: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 0.97 by "3ch.hk<10><STEAM_1:1:105037477><CT>" from flashbang entindex 355 
+L 08/20/2019 - 12:48:31: "Host<14><STEAM_1:0:73435701><TERRORIST>" blinded for 0.97 by "3ch.hk<10><STEAM_1:1:105037477><CT>" from flashbang entindex 355 
+L 08/20/2019 - 12:48:33: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw hegrenade [-501 -523 20]
+L 08/20/2019 - 12:48:35: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-113 1581 2] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-492 49 65] with "ak47"
+L 08/20/2019 - 12:48:40: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-181 351 -1] killed "Eefrit<11><STEAM_1:0:17521809><CT>" [-158 840 65] with "ak47" (headshot)
+L 08/20/2019 - 12:48:44: "Eefrit<11><STEAM_1:0:17521809><CT>" disconnected (reason "Disconnect")
+L 08/20/2019 - 12:48:44: "Eefrit<11><STEAM_1:0:17521809>" switched from team <CT> to <Unassigned>
+L 08/20/2019 - 12:49:00: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-235 1414 32] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [-154 1007 48] with "ak47" (headshot)
+L 08/20/2019 - 12:49:05: "laViper<5><STEAM_1:0:56767661><TERRORIST>" [1430 1723 -8] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [1172 2527 142] with "ak47" (headshot)
+L 08/20/2019 - 12:49:05: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "14")
+L 08/20/2019 - 12:49:05: Team "CT" scored "6" with "5" players
+L 08/20/2019 - 12:49:05: Team "TERRORIST" scored "14" with "6" players
+L 08/20/2019 - 12:49:05: World triggered "Round_End"
+L 08/20/2019 - 12:49:10: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Planted_The_Bomb"
+L 08/20/2019 - 12:49:12: Starting Freeze period
+L 08/20/2019 - 12:49:12: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:49:14: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:49:14: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:49:15: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:49:15: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:49:16: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "item_kevlar"
+L 08/20/2019 - 12:49:16: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:16: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "p90"
+L 08/20/2019 - 12:49:16: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "item_defuser"
+L 08/20/2019 - 12:49:17: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:17: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:49:18: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "awp"
+L 08/20/2019 - 12:49:18: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:18: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:18: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:49:18: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:49:18: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:49:19: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:19: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:49:19: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:49:19: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:49:20: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:49:20: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "mp7"
+L 08/20/2019 - 12:49:20: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:49:21: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "decoy"
+L 08/20/2019 - 12:49:21: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:49:21: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "p90"
+L 08/20/2019 - 12:49:21: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "p250"
+L 08/20/2019 - 12:49:22: World triggered "Round_Start"
+L 08/20/2019 - 12:49:23: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:49:34: "3ch.hk<10><STEAM_1:1:105037477><CT>" threw smokegrenade [715 509 3]
+L 08/20/2019 - 12:49:40: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" threw hegrenade [651 318 17]
+L 08/20/2019 - 12:49:40: Molotov projectile spawned at 376.891174 -221.602264 65.934799, velocity 295.030579 584.728088 163.324921
+L 08/20/2019 - 12:49:42: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw molotov [766 549 3]
+L 08/20/2019 - 12:49:46: Molotov projectile spawned at 641.149780 -192.916077 65.786858, velocity -7.229021 661.872437 132.278244
+L 08/20/2019 - 12:49:46: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1637 375 2]
+L 08/20/2019 - 12:49:47: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw molotov [703 346 3]
+L 08/20/2019 - 12:49:47: "DJoony<13><STEAM_1:1:33105260><CT>" threw decoy [-601 593 10]
+L 08/20/2019 - 12:50:06: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-130 451 -1] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-179 1256 64] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:50:10: "dexploizer<2><STEAM_1:1:193292204><CT>" threw smokegrenade [-99 1360 2]
+L 08/20/2019 - 12:50:10: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw smokegrenade [631 599 2]
+L 08/20/2019 - 12:50:10: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw flashbang [642 764 2] flashbang entindex 340)
+L 08/20/2019 - 12:50:10: "Medved<3><STEAM_1:0:29480860><TERRORIST>" blinded for 4.74 by "laViper<5><STEAM_1:0:56767661><TERRORIST>" from flashbang entindex 340 
+L 08/20/2019 - 12:50:14: "laViper<5><STEAM_1:0:56767661><TERRORIST>" [776 957 0] killed "DJoony<13><STEAM_1:1:33105260><CT>" [1182 618 72] with "ak47"
+L 08/20/2019 - 12:50:18: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw hegrenade [-430 1447 -68]
+L 08/20/2019 - 12:50:20: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [-1713 1029 32] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [-1928 1344 95] with "ak47" (headshot)
+L 08/20/2019 - 12:50:20: "Host<14><STEAM_1:0:73435701><TERRORIST>" threw smokegrenade [-184 1165 1]
+L 08/20/2019 - 12:50:26: "Maksim.S<8><STEAM_1:1:196168001><CT>" [699 2075 -69] killed "laViper<5><STEAM_1:0:56767661><TERRORIST>" [1395 2277 67] with "p90"
+L 08/20/2019 - 12:50:27: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:50:27: "dexploizer<2><STEAM_1:1:193292204><CT>" [1221 2711 97] killed "Medved<3><STEAM_1:0:29480860><TERRORIST>" [1735 2107 64] with "m4a1_silencer"
+L 08/20/2019 - 12:50:30: "dexploizer<2><STEAM_1:1:193292204><CT>" [1118 2461 96] killed "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" [1489 1562 37] with "m4a1_silencer"
+L 08/20/2019 - 12:50:30: "3ch.hk<10><STEAM_1:1:105037477><CT>" assisted killing "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>"
+L 08/20/2019 - 12:50:36: "Host<14><STEAM_1:0:73435701><TERRORIST>" [358 1950 96] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [1141 2743 163] with "m4a1_silencer" (headshot)
+L 08/20/2019 - 12:50:36: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" assisted killing "dexploizer<2><STEAM_1:1:193292204><CT>"
+L 08/20/2019 - 12:50:47: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw smokegrenade [618 2183 -101]
+L 08/20/2019 - 12:50:48: "Host<14><STEAM_1:0:73435701><TERRORIST>" threw flashbang [1177 2668 182] flashbang entindex 318)
+L 08/20/2019 - 12:50:48: "dexploizer<2><STEAM_1:1:193292204><CT>" blinded for 1.95 by "Host<14><STEAM_1:0:73435701><TERRORIST>" from flashbang entindex 318 
+L 08/20/2019 - 12:50:48: "Maksim.S<8><STEAM_1:1:196168001><CT>" blinded for 1.95 by "Host<14><STEAM_1:0:73435701><TERRORIST>" from flashbang entindex 318 
+L 08/20/2019 - 12:50:48: "anton.knelts<9><STEAM_1:0:493786726><CT>" blinded for 1.95 by "Host<14><STEAM_1:0:73435701><TERRORIST>" from flashbang entindex 318 
+L 08/20/2019 - 12:50:48: "3ch.hk<10><STEAM_1:1:105037477><CT>" blinded for 1.95 by "Host<14><STEAM_1:0:73435701><TERRORIST>" from flashbang entindex 318 
+L 08/20/2019 - 12:50:48: "DJoony<13><STEAM_1:1:33105260><CT>" blinded for 1.95 by "Host<14><STEAM_1:0:73435701><TERRORIST>" from flashbang entindex 318 
+L 08/20/2019 - 12:50:51: "Maksim.S<8><STEAM_1:1:196168001><CT>" [1483 2380 19] killed "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" [1262 2146 63] with "p90" (headshot)
+L 08/20/2019 - 12:50:52: "Maksim.S<8><STEAM_1:1:196168001><CT>" [1488 2307 2] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [1236 2204 69] with "p90"
+L 08/20/2019 - 12:50:55: "Host<14><STEAM_1:0:73435701><TERRORIST>" [1073 2144 2] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [1433 2322 70] with "m4a1_silencer"
+L 08/20/2019 - 12:50:55: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "15")
+L 08/20/2019 - 12:50:55: Team "CT" scored "6" with "5" players
+L 08/20/2019 - 12:50:55: Team "TERRORIST" scored "15" with "6" players
+L 08/20/2019 - 12:50:55: World triggered "Round_End"
+L 08/20/2019 - 12:51:00: "Host<14><STEAM_1:0:73435701><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:51:02: Starting Freeze period
+L 08/20/2019 - 12:51:02: "laViper<5><STEAM_1:0:56767661><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:51:03: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:51:03: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "sg556"
+L 08/20/2019 - 12:51:04: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "mp7"
+L 08/20/2019 - 12:51:04: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:04: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:04: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:51:04: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:04: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:51:04: "Host<14><STEAM_1:0:73435701><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:51:05: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:05: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:05: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:51:06: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:06: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:51:06: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:51:06: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:06: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:51:06: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "item_kevlar"
+L 08/20/2019 - 12:51:06: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:06: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:06: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:51:06: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "m4a1"
+L 08/20/2019 - 12:51:07: "Medved<3><STEAM_1:0:29480860><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:51:07: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:07: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "m4a1_silencer"
+L 08/20/2019 - 12:51:07: "DJoony<13><STEAM_1:1:33105260><CT>" purchased "flashbang"
+L 08/20/2019 - 12:51:07: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "ak47"
+L 08/20/2019 - 12:51:07: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:07: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:51:08: "3ch.hk<10><STEAM_1:1:105037477><CT>" purchased "p90"
+L 08/20/2019 - 12:51:08: "dexploizer<2><STEAM_1:1:193292204><CT>" purchased "flashbang"
+L 08/20/2019 - 12:51:09: "anton.knelts<9><STEAM_1:0:493786726><CT>" purchased "item_assaultsuit"
+L 08/20/2019 - 12:51:09: "Maksim.S<8><STEAM_1:1:196168001><CT>" purchased "hegrenade"
+L 08/20/2019 - 12:51:09: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:51:09: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "molotov"
+L 08/20/2019 - 12:51:10: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:10: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "decoy"
+L 08/20/2019 - 12:51:10: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:51:10: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" purchased "flashbang"
+L 08/20/2019 - 12:51:10: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "hegrenade"
+L 08/20/2019 - 12:51:10: "laViper<5><STEAM_1:0:56767661><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:51:11: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" purchased "smokegrenade"
+L 08/20/2019 - 12:51:12: World triggered "Round_Start"
+L 08/20/2019 - 12:51:17: "DJoony<13><STEAM_1:1:33105260><CT>" threw flashbang [-456 736 307] flashbang entindex 416)
+L 08/20/2019 - 12:51:17: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" blinded for 4.23 by "DJoony<13><STEAM_1:1:33105260><CT>" from flashbang entindex 416 
+L 08/20/2019 - 12:51:17: "Host<14><STEAM_1:0:73435701><TERRORIST>" blinded for 2.60 by "DJoony<13><STEAM_1:1:33105260><CT>" from flashbang entindex 416 
+L 08/20/2019 - 12:51:21: "laViper<5><STEAM_1:0:56767661><TERRORIST>" triggered "Dropped_The_Bomb"
+L 08/20/2019 - 12:51:22: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" triggered "Got_The_Bomb"
+L 08/20/2019 - 12:51:24: "Maksim.S<8><STEAM_1:1:196168001><CT>" threw hegrenade [656 501 3]
+L 08/20/2019 - 12:51:36: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw hegrenade [-1672 1126 45]
+L 08/20/2019 - 12:51:38: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw hegrenade [-1564 1155 60]
+L 08/20/2019 - 12:51:40: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-1057 1195 -73] killed "3ch.hk<10><STEAM_1:1:105037477><CT>" [-1069 1163 26] with "glock"
+L 08/20/2019 - 12:51:43: Molotov projectile spawned at -1729.514282 621.318604 96.874535, velocity 190.582367 644.861572 58.795521
+L 08/20/2019 - 12:51:44: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw molotov [-1571 1158 35]
+L 08/20/2019 - 12:51:48: Molotov projectile spawned at -1511.030518 363.712982 69.703278, velocity -264.190796 858.593018 183.255920
+L 08/20/2019 - 12:51:50: "Medved<3><STEAM_1:0:29480860><TERRORIST>" threw molotov [-1851 1345 38]
+L 08/20/2019 - 12:51:52: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [-1599 390 0] killed "DJoony<13><STEAM_1:1:33105260><CT>" [-1686 1387 89] with "ak47"
+L 08/20/2019 - 12:51:52: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" threw flashbang [-1731 1355 53] flashbang entindex 304)
+L 08/20/2019 - 12:51:52: "Medved<3><STEAM_1:0:29480860><TERRORIST>" blinded for 3.62 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:51:52: "DJoony<13><STEAM_1:1:33105260><CT>" blinded for 3.65 by "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" from flashbang entindex 304 
+L 08/20/2019 - 12:51:56: "dexploizer<2><STEAM_1:1:193292204><CT>" [-770 1403 -112] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-981 1429 -49] with "m4a1_silencer"
+L 08/20/2019 - 12:51:59: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw flashbang [-1484 1071 56] flashbang entindex 322)
+L 08/20/2019 - 12:52:03: "laViper<5><STEAM_1:0:56767661><TERRORIST>" [-1533 1117 35] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [-1231 1079 88] with "ak47" (headshot)
+L 08/20/2019 - 12:52:14: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw decoy [-1527 1044 38]
+L 08/20/2019 - 12:52:15: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" threw hegrenade [1041 2875 133]
+L 08/20/2019 - 12:52:18: Molotov projectile spawned at -1112.676758 1103.173584 35.624310, velocity -641.355347 97.000366 186.759781
+L 08/20/2019 - 12:52:20: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" threw molotov [-1867 1217 34]
+L 08/20/2019 - 12:52:25: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-338 2056 -128] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [-1443 2234 64] with "awp"
+L 08/20/2019 - 12:52:27: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-356 2040 -127] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [-944 2346 1] with "awp"
+L 08/20/2019 - 12:52:27: "Radik F.<4><STEAM_1:0:34907433><TERRORIST>" assisted killing "anton.knelts<9><STEAM_1:0:493786726><CT>"
+L 08/20/2019 - 12:52:27: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "6") (T "16")
+L 08/20/2019 - 12:52:27: Team "CT" scored "6" with "5" players
+L 08/20/2019 - 12:52:27: Team "TERRORIST" scored "16" with "6" players
+L 08/20/2019 - 12:52:27: World triggered "Round_End"
+L 08/20/2019 - 12:52:27: Game Over: competitive  de_dust2 score 6:16 after 33 min
+L 08/20/2019 - 12:52:28: World triggered "Round_Start"
+L 08/20/2019 - 12:52:29: "laViper<5><STEAM_1:0:56767661><TERRORIST>" threw smokegrenade [-558 2192 -121]
+L 08/20/2019 - 12:52:43: Log file closed
