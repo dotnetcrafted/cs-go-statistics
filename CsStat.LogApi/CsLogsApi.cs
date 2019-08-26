@@ -25,7 +25,7 @@ namespace CsStat.LogApi
                     Action = action,
                     VictimName = string.Empty,
                     VictimTeam = Teams.Null,
-                    IsHeadShot = logLine.Contains("headshot"),
+                    IsHeadShot = false,
                     Gun = Guns.Null
                 }
                 : new LogModel
@@ -62,7 +62,7 @@ namespace CsStat.LogApi
 
         private static string GetClearDateTime(string dateTime)
         {
-            return dateTime.Substring(2, dateTime.Length - 4);
+            return dateTime.Substring(2, dateTime.Length - 3);
         }
 
         private static Actions GetAction(string action)
