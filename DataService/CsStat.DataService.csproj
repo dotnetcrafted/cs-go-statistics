@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionStringFactory.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
+    <Compile Include="Interfaces\IConnectionStringFactory.cs" />
     <Compile Include="Interfaces\IMongoRepositoryFactory.cs" />
     <Compile Include="MongoReference.cs" />
     <Compile Include="MongoRepositoryFactory.cs" />
@@ -60,6 +62,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsStat.SystemFacade\CsStat.SystemFacade.csproj">
+      <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
+      <Name>CsStat.SystemFacade</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStat.SystemFacade", "CsSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStat.DataService", "DataService\CsStat.DataService.csproj", "{69E21364-5F32-4814-B8F8-A4A36F207070}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessFacade", "BusinessFacade\BusinessFacade.csproj", "{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{69E21364-5F32-4814-B8F8-A4A36F207070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69E21364-5F32-4814-B8F8-A4A36F207070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69E21364-5F32-4814-B8F8-A4A36F207070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F} = {2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}
 		{487EA211-0EDA-4168-B0E8-045767475D40} = {2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}
 		{69E21364-5F32-4814-B8F8-A4A36F207070} = {2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}
+		{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA} = {2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16C667A3-A12A-4CF8-9EB8-7E1F99081720}

@@ -191,9 +191,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessFacade\BusinessFacade.csproj">
+      <Project>{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}</Project>
+      <Name>BusinessFacade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CsStat.LogApi\CsStat.LogApi.csproj">
       <Project>{C5122D50-78CD-4D75-BD81-90C564251F15}</Project>
       <Name>CsStat.LogApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataService\CsStat.DataService.csproj">
+      <Project>{69E21364-5F32-4814-B8F8-A4A36F207070}</Project>
+      <Name>CsStat.DataService</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

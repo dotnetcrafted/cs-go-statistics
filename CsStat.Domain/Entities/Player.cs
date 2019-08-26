@@ -1,13 +1,15 @@
-﻿namespace CSStat.CsLogsApi.Models
+﻿using DataService;
+using MongoRepository;
+
+namespace CSStat.CsLogsApi.Models
 {
-    public class PlayerModel
+    public class PlayerModel : Entity
     {
         public string NickName { get; set; }
-
-        public PlayerStat Stat { get; set; }
+        public MongoReference<PlayerStat> Stat { get; set; }
     }
 
-    public class PlayerStat
+    public class PlayerStat : Entity
     {
         public int Kills { get; set; }
         public int Death { get; set; }

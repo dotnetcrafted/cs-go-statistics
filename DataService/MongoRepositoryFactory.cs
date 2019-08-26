@@ -6,9 +6,14 @@ namespace DataService
 {
     public class MongoRepositoryFactory : IMongoRepositoryFactory
     {
+        private readonly IConnectionStringFactory _connectionStringFactory;
         private readonly string _connectionString;
-        public MongoRepositoryFactory(string connectionString)
+        public MongoRepositoryFactory(IConnectionStringFactory connectionStringFactory)
         {
+            _connectionStringFactory = connectionStringFactory;
+
+            var connectionString = _connectionStringFactory.GetConnectionString();
+
             if (string.IsNullOrEmpty(connectionString) || string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new ArgumentException("Connection string cannot be null or empty", "connectionString");

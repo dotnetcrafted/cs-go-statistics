@@ -67,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessFacade\BusinessFacade.csproj">
+      <Project>{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}</Project>
+      <Name>BusinessFacade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsStat.Domain\CsStat.Domain.csproj">
       <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
       <Name>CsStat.Domain</Name>

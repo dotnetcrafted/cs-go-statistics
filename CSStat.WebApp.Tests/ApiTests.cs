@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using CSStat.CsLogsApi.Extensions;
+using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
 using NUnit.Framework;
 
@@ -15,7 +16,7 @@ namespace CSStat.WebApp.Tests
     {
         [Test]
         [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testString.txt")]
-        public static void Test(string file)
+        public static LogModel Test(string file)
         {
             var logLine = string.Empty;
 
@@ -37,6 +38,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(
                 $"PlayerName: {a.PlayerName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {a.Action.GetDescription()},VictimName: {a.VictimName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
                     .Replace(',', '\n'));
+            return a;
         }
 
         [Test]

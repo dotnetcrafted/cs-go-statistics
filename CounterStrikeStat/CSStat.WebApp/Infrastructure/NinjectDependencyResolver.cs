@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using BusinessFacade.Repositories;
+using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Interfaces;
+using DataService;
+using DataService.Interfaces;
 using Ninject;
 
 namespace CSStat.WebApp.Infrastructure
@@ -29,6 +33,10 @@ namespace CSStat.WebApp.Infrastructure
         private void AddBindings()
         {
             _kernel.Bind<ICsLogsApi>().To<CsStat.LogApi.CsLogsApi>();
+            _kernel.Bind<IMongoRepositoryFactory>().To<MongoRepositoryFactory>();
+            _kernel.Bind<IConnectionStringFactory>().To<ConnectionStringFactory>();
+            _kernel.Bind<ILogsRepository>().To<LogsRepository>();
+            
         }
     }
 }
