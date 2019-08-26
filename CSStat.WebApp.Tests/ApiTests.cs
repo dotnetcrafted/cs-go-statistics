@@ -35,7 +35,7 @@ namespace CSStat.WebApp.Tests
             splitLine.ForEach(Console.WriteLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(
-                $"PlayerName: {a.PlayerName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {a.Action},VictimName: {a.VictimName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
+                $"PlayerName: {a.PlayerName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {a.Action.GetDescription()},VictimName: {a.VictimName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
                     .Replace(',', '\n'));
         }
 

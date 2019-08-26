@@ -14,14 +14,14 @@ namespace CsStat.LogApi
         {
             var splitLine = logLine.Split('"');
 
-            var action = GetAction(logLine);
+            var action = GetAction(splitLine[2].Trim());
 
-            var result = action == Actions.Assist
+            var result = action != Actions.Kill
                 ? new LogModel
                 {
-                    DateTime = GetClearDateTime(splitLine[0]),
-                    PlayerName = GetClearName(splitLine[1]),
-                    PlayerTeam = GetTeam(splitLine[1]),
+                    DateTime = GetClearDateTime(splitLine[0].Trim()),
+                    PlayerName = GetClearName(splitLine[1].Trim()),
+                    PlayerTeam = GetTeam(splitLine[1].Trim()),
                     Action = action,
                     VictimName = string.Empty,
                     VictimTeam = Teams.Null,
@@ -30,14 +30,14 @@ namespace CsStat.LogApi
                 }
                 : new LogModel
                 {
-                    DateTime = GetClearDateTime(splitLine[0]),
-                    PlayerName = GetClearName(splitLine[1]),
-                    PlayerTeam = GetTeam(splitLine[1]),
+                    DateTime = GetClearDateTime(splitLine[0].Trim()),
+                    PlayerName = GetClearName(splitLine[1].Trim()),
+                    PlayerTeam = GetTeam(splitLine[1].Trim()),
                     Action = action,
-                    VictimName = GetClearName(splitLine[3]),
-                    VictimTeam = GetTeam(splitLine[3]),
+                    VictimName = GetClearName(splitLine[3].Trim()),
+                    VictimTeam = GetTeam(splitLine[3].Trim()),
                     IsHeadShot = logLine.Contains("headshot"),
-                    Gun = GetGun(splitLine[5])
+                    Gun = GetGun(splitLine[5].Trim())
                 };
 
             if (result.PlayerTeam == result.VictimTeam)
@@ -67,23 +67,18 @@ namespace CsStat.LogApi
 
         private static Actions GetAction(string action)
         {
-            if (action.Contains("killed"))
-            {
-                return Actions.Kill;
-            }
+            var attributeList = Actions.Unknown.GetAttributeList().Where(x=>!string.IsNullOrEmpty(x.Value));
 
-            if (action.Contains("assisted"))
-            {
-                return Actions.Assist;
-            }
-
-            return Actions.Unknown;
+            return (from attribute in attributeList
+                    where action.Contains(attribute.Value)
+                    select attribute.Key into actionIndex
+                        select (Actions) actionIndex).FirstOrDefault();
         }
 
         private static Guns GetGun(string gun)
         {
             var attributeList = Guns.Null.GetAttributeList();
-            var gunIndex = attributeList.FirstOrDefault(x => x.Value == gun)?.Key ?? 0;
+            var gunIndex = attributeList.FirstOrDefault(x => x.Value.Contains(gun))?.Key ?? 0;
             return (Guns) gunIndex;
         }
 
