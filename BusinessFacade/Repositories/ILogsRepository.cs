@@ -7,6 +7,7 @@ namespace BusinessFacade.Repositories
     public interface ILogsRepository
     {
         void InsertLog(LogModel log);
+        void InsertBatch(List<LogModel> logs);
         IEnumerable<LogModel> GetAllLogs();
     }
 }

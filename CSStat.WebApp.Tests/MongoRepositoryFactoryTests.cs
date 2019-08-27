@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
+using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Entities;
 using CSStat.WebApp.Tests.Entity;
 using DataService;
 using DataService.Interfaces;
@@ -17,56 +20,82 @@ namespace CSStat.WebApp.Tests
     public class MongoRepositoryFactoryTests
     {
 
-        private IMongoRepositoryFactory _mongoRepositoryFactory;
-        private IConnectionStringFactory _connectionStringFactory;
-        private ILogsRepository _logRepository;
+        private readonly IMongoRepositoryFactory _mongoRepository;
+        private readonly IConnectionStringFactory _connectionString;
+        private readonly ILogsRepository _logRepository;
+        private readonly IPlayersRepository _playerRepository;
         public  MongoRepositoryFactoryTests()
         {
-            _connectionStringFactory = new ConnectionStringFactory();
-            _mongoRepositoryFactory = new MongoRepositoryFactory(_connectionStringFactory);
-            _logRepository = new LogsRepository(_mongoRepositoryFactory);
+            _connectionString = new ConnectionStringFactory();
+            _mongoRepository = new MongoRepositoryFactory(_connectionString);
+            _logRepository = new LogsRepository(_mongoRepository);
+            _playerRepository = new PlayersRepository(_mongoRepository);
         }
         [Test]
         public void ReturnRepositoryOfType()
         {
-            var repository = _mongoRepositoryFactory.GetRepository<TestEntity>();
+            var repository = _mongoRepository.GetRepository<TestEntity>();
             Assert.True(repository.GetType() == typeof(MongoRepository<TestEntity>));
         }
 
         [Test]
         public void ConnectToDataBase()
         {
-            var connectionString = _connectionStringFactory.GetConnectionString();
+            var connectionString = _connectionString.GetConnectionString();
             var client = new MongoClient(connectionString);
             var server = client.GetServer();
             server.GetDatabaseNames().ToList().ForEach(Console.WriteLine);
         }
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testString.txt")]
+        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testLogs.txt")]
         public void SaveLog(string file)
         {
-            var logLine = string.Empty;
+            var logs = string.Empty;
 
             using (var sr = new StreamReader(file))
             {
-                logLine = sr.ReadToEnd();
+                logs = sr.ReadToEnd();
             }
 
-            var splitLine = logLine.Split('"').ToList();
+            var splitLogs = logs.Split('\n').ToList();
 
             var api = new CsStat.LogApi.CsLogsApi();
+            var logsToInsert = new List<LogModel>();
 
-            var log = api.ParseLine(logLine);
+            foreach (var logLine in splitLogs)
+            {
+                logsToInsert.Add(api.ParseLine(logLine));
+            }
 
-            _logRepository.InsertLog(log);
+            _logRepository.InsertBatch(logsToInsert);
+
 
         }
 
+
         [Test]
-        public void GetLog()
+        public void GetPlayers()
         {
-            Console.WriteLine(_logRepository.GetAllLogs().Count());
+            var players = _playerRepository.GetAllPlayers();
+
+            foreach (var player in players)
+            {
+                PrintLog(player);
+                Console.WriteLine(Environment.NewLine);
+            }
+        }
+
+        private static void PrintLog(PlayerModel log)
+        {
+            var gun = string.IsNullOrEmpty(log.FavoriteGun.GetDescription())
+                ? log.FavoriteGun.ToString()
+                : log.FavoriteGun.GetDescription();
+
+            Console.WriteLine(
+                ($"PlayerName: {log.PlayerName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
+                $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse}").Replace(',', '\n'));
         }
     }
 }

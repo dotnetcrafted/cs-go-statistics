@@ -36,7 +36,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IMongoRepositoryFactory>().To<MongoRepositoryFactory>();
             _kernel.Bind<IConnectionStringFactory>().To<ConnectionStringFactory>();
             _kernel.Bind<ILogsRepository>().To<LogsRepository>();
-            
+            _kernel.Bind<IPlayersRepository>().To<PlayersRepository>();
         }
     }
 }

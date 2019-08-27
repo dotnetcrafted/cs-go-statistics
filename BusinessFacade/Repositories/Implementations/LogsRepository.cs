@@ -18,6 +18,11 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository.GetRepository<LogModel>().Collection.Insert(log);
         }
 
+        public void InsertBatch(List<LogModel> logs)
+        {
+            _mongoRepository.GetRepository<LogModel>().Collection.InsertBatch(logs);
+        }
+
         public IEnumerable<LogModel> GetAllLogs()
         {
             return _mongoRepository.GetRepository<LogModel>().Collection.FindAll();

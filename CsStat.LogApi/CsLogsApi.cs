@@ -14,8 +14,10 @@ namespace CsStat.LogApi
         {
             var splitLine = logLine.Split('"');
 
-            var action = GetAction(splitLine[2].Trim());
-
+            var action = string.Equals(splitLine[2].Trim(), "triggered")
+                ? GetAction(splitLine[3].Trim())
+                : GetAction(splitLine[2].Trim());
+            
             var result = action != Actions.Kill
                 ? new LogModel
                 {

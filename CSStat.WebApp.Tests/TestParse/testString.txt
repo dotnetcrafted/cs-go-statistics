@@ -1,1 +1,1 @@
-L 08/20/2019 - 12:52:25: "Host<14><STEAM_1:0:73435701><TERRORIST>" [-338 2056 -128] killed "Maksim.S<8><STEAM_1:1:196168001><CT>" [-1443 2234 64] with "awp"
+L 08/20/2019 - 12:25:04: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Defused_The_Bomb"

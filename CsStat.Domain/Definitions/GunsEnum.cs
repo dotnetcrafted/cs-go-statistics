@@ -5,7 +5,10 @@ namespace CsStat.Domain.Definitions
 {
     public enum Guns
     {
+        Unknown,
+
         Null,
+
         [LogValue("hkp2000")]
         Hkp,
 

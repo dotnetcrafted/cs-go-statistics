@@ -16,7 +16,7 @@ namespace CSStat.WebApp.Tests
     {
         [Test]
         [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testString.txt")]
-        public static LogModel Test(string file)
+        public static void Test(string file)
         {
             var logLine = string.Empty;
 
@@ -38,7 +38,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(
                 $"PlayerName: {a.PlayerName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {a.Action.GetDescription()},VictimName: {a.VictimName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
                     .Replace(',', '\n'));
-            return a;
+
         }
 
         [Test]

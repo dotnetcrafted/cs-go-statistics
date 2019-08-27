@@ -17,6 +17,14 @@ namespace CsStat.LogApi.Enums
         Assist,
 
         [Description("Friendly kill")]
-        FriendlyKill
+        FriendlyKill,
+
+        [LogValue("Defused_The_Bomb")]
+        [Description("Defuse the bomb")]
+        Defuse,
+
+        [LogValue("Planted_The_Bomb")]
+        [Description("Explode bomb")]
+        Explode
     }
 }
