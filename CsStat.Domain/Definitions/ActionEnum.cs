@@ -25,6 +25,10 @@ namespace CsStat.LogApi.Enums
 
         [LogValue("Planted_The_Bomb")]
         [Description("Explode bomb")]
-        Explode
+        Plant,
+
+        [LogValue("SFUI_Notice_Target_Bombed")]
+        TargetBombed
+
     }
 }

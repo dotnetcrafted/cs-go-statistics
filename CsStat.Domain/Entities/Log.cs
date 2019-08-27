@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 using CsStat.Domain.Definitions;
 using CsStat.LogApi.Enums;
 using MongoRepository;
@@ -7,7 +8,7 @@ namespace CSStat.CsLogsApi.Models
 {
     public class LogModel : Entity
     {
-        public string DateTime { get; set; }
+        public DateTime DateTime { get; set; }
         public string PlayerName { get; set; }
         public Teams PlayerTeam { get; set; }
         public string VictimName { get; set; }

@@ -120,6 +120,7 @@ L 08/20/2019 - 12:46:47: "Host<14><STEAM_1:0:73435701><TERRORIST>" [431 2154 96]
 L 08/20/2019 - 12:46:52: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [988 2428 127] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [726 2190 -13] with "ak47" (headshot)
 L 08/20/2019 - 12:47:09: "Eefrit<11><STEAM_1:0:17521809><CT>" [323 1615 4] killed "Host<14><STEAM_1:0:73435701><TERRORIST>" [483 1896 161] with "mp9" (headshot)
 L 08/20/2019 - 12:47:12: "Yakut74Rus<7><STEAM_1:0:35654179><TERRORIST>" [1781 2015 2] killed "anton.knelts<9><STEAM_1:0:493786726><CT>" [1220 963 64] with "sg556" (headshot)
+L 08/20/2019 - 12:47:35: Team "TERRORIST" triggered "SFUI_Notice_Target_Bombed" (CT "6") (T "13")
 L 08/20/2019 - 12:48:18: "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-275 1355 -69] killed "DJoony<13><STEAM_1:1:33105260><CT>" [-759 1397 -48] with "ak47" (headshot)
 L 08/20/2019 - 12:48:23: "3ch.hk<10><STEAM_1:1:105037477><CT>" [-487 -673 121] killed "Kontrobas<12><STEAM_1:1:63580642><TERRORIST>" [-310 1243 -43] with "p90" (headshot)
 L 08/20/2019 - 12:48:29: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [366 1722 83] killed "dexploizer<2><STEAM_1:1:193292204><CT>" [287 2764 185] with "ak47" (headshot)

@@ -46,8 +46,7 @@ namespace BusinessFacade.Repositories.Implementations
                            Gun = r.Key,
                            Count = r.Count()
                        }).ToList()
-                      .FirstOrDefault()?.Gun 
-                    ?? Guns.Unknown;
+                      .FirstOrDefault()?.Gun ?? Guns.Unknown;
         }
     }
 }

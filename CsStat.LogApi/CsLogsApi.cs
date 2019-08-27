@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.Linq;
 using CSStat.CsLogsApi.Extensions;
 using CSStat.CsLogsApi.Interfaces;
@@ -17,30 +19,51 @@ namespace CsStat.LogApi
             var action = string.Equals(splitLine[2].Trim(), "triggered")
                 ? GetAction(splitLine[3].Trim())
                 : GetAction(splitLine[2].Trim());
-            
-            var result = action != Actions.Kill
-                ? new LogModel
-                {
-                    DateTime = GetClearDateTime(splitLine[0].Trim()),
-                    PlayerName = GetClearName(splitLine[1].Trim()),
-                    PlayerTeam = GetTeam(splitLine[1].Trim()),
-                    Action = action,
-                    VictimName = string.Empty,
-                    VictimTeam = Teams.Null,
-                    IsHeadShot = false,
-                    Gun = Guns.Null
-                }
-                : new LogModel
-                {
-                    DateTime = GetClearDateTime(splitLine[0].Trim()),
-                    PlayerName = GetClearName(splitLine[1].Trim()),
-                    PlayerTeam = GetTeam(splitLine[1].Trim()),
-                    Action = action,
-                    VictimName = GetClearName(splitLine[3].Trim()),
-                    VictimTeam = GetTeam(splitLine[3].Trim()),
-                    IsHeadShot = logLine.Contains("headshot"),
-                    Gun = GetGun(splitLine[5].Trim())
-                };
+
+            LogModel result;
+
+            switch (action)
+            {
+                case Actions.Kill:
+                    result = new LogModel
+                    {
+                        DateTime = GetDateTime(splitLine[0].Trim()),
+                        PlayerName = GetClearName(splitLine[1].Trim()),
+                        PlayerTeam = GetTeam(splitLine[1].Trim()),
+                        Action = action,
+                        VictimName = GetClearName(splitLine[3].Trim()),
+                        VictimTeam = GetTeam(splitLine[3].Trim()),
+                        IsHeadShot = logLine.Contains("headshot"),
+                        Gun = GetGun(splitLine[5].Trim())
+                    };
+                    break;
+                case Actions.TargetBombed:
+                    result = new LogModel
+                    {
+                        DateTime = GetDateTime(splitLine[0].Trim()),
+                        PlayerName = string.Empty,
+                        PlayerTeam = Teams.T,
+                        Action = action,
+                        VictimName = string.Empty,
+                        VictimTeam = Teams.Null,
+                        IsHeadShot = false,
+                        Gun = Guns.Null
+                    };
+                    break;
+                default:
+                    result = new LogModel
+                    {
+                        DateTime = GetDateTime(splitLine[0].Trim()),
+                        PlayerName = GetClearName(splitLine[1].Trim()),
+                        PlayerTeam = GetTeam(splitLine[1].Trim()),
+                        Action = action,
+                        VictimName = string.Empty,
+                        VictimTeam = Teams.Null,
+                        IsHeadShot = false,
+                        Gun = Guns.Null
+                    };
+                    break;
+            }
 
             if (result.PlayerTeam == result.VictimTeam)
             {
@@ -62,9 +85,9 @@ namespace CsStat.LogApi
                 : Teams.T;
         }
 
-        private static string GetClearDateTime(string dateTime)
+        private static DateTime GetDateTime(string dateTime)
         {
-            return dateTime.Substring(2, dateTime.Length - 3);
+            return DateTime.ParseExact(dateTime.Substring(2, 21), "MM/dd/yyyy - HH:mm:ss",CultureInfo.InvariantCulture);
         }
 
         private static Actions GetAction(string action)

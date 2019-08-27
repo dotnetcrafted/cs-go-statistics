@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
@@ -73,6 +74,17 @@ namespace CSStat.WebApp.Tests
 
         }
 
+        [Test]
+        public void GetLogsForPeriod()
+        {
+            var startDate = DateTime.ParseExact(@"08/20/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(@"08/20/2019 - 12:20:32", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            var logs =_logRepository.GetLogsForPeriod(startDate, endDate);
+            foreach (var logModel in logs)
+            {
+                Console.WriteLine(logModel.DateTime);
+            }
+        }
 
         [Test]
         public void GetPlayers()

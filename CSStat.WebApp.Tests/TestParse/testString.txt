@@ -1,1 +1,1 @@
-L 08/20/2019 - 12:25:04: "Medved<3><STEAM_1:0:29480860><CT>" triggered "Defused_The_Bomb"
+L 08/20/2019 - 12:47:35: Team "TERRORIST" triggered "SFUI_Notice_Target_Bombed" (CT "6") (T "13")
