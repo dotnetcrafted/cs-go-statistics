@@ -107,7 +107,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(
                 ($"PlayerName: {log.PlayerName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
                 $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},ExplodeBombs: {log.Explode}").Replace(',', '\n'));
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
     }
 }

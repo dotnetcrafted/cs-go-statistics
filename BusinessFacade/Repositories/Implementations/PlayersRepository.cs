@@ -57,11 +57,10 @@ namespace BusinessFacade.Repositories.Implementations
 
         private static int GetExplodeBombs(IReadOnlyCollection<LogModel> logs)
         {
-            var enumerable = logs.Select(bomb => _logsRepository.GetLogsForPeriod(bomb.DateTime, bomb.DateTime.AddMinutes(1)).ToList());
-            var explodeBombs = enumerable.Count(intervalLogs => intervalLogs.Count(x => x.Action == Actions.TargetBombed) > 0);
             return !logs.Any()
                 ? 0
-                : explodeBombs;
+                : logs.Select(bomb => _logsRepository.GetLogsForPeriod(bomb.DateTime, bomb.DateTime.AddMinutes(1)).ToList())
+                    .Count(intervalLogs => intervalLogs.Count(x => x.Action == Actions.TargetBombed) > 0);
         }
     }
 }
