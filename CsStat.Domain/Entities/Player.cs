@@ -14,6 +14,7 @@ namespace CsStat.Domain.Entities
         public double HeadShot { get; set; }
         public int TotalGames { get; set; }
         public int Defuse { get; set; }
+        public int Explode { get; set; }
         public Guns FavoriteGun { get; set; }
         public double KdRatio
         {

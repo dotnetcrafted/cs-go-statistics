@@ -12,28 +12,34 @@ namespace BusinessFacade.Repositories.Implementations
 {
     public class PlayersRepository : IPlayersRepository
     {
-        private readonly IEnumerable<LogModel> _logs;
+        private static ILogsRepository _logsRepository;
 
-        public PlayersRepository(IMongoRepositoryFactory mongoRepository)
+        public PlayersRepository(ILogsRepository logsRepository)
         {
-            _logs = mongoRepository.GetRepository<LogModel>().Collection.FindAll().SetSortOrder("PlayerName");
+            _logsRepository = logsRepository;
         }
         public IEnumerable<PlayerModel> GetAllPlayers()
         {
-            var playersNameList = _logs.DistinctBy(x => x.PlayerName).Select(x => x.PlayerName);
+            var logs = _logsRepository.GetAllLogs().ToList();
+            if (!logs.Any())
+            {
+                return null;
+            }
+            var playersNameList = logs.DistinctBy(x => x.PlayerName).Select(x => x.PlayerName);
 
             return (from playerName in playersNameList
-                    let kills = _logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill)
+                    let kills = logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill)
                     select new PlayerModel
                     {
                         PlayerName = playerName,
                         Kills = kills,
-                        Death = _logs.Count(x => string.Equals(x.VictimName, playerName)),
-                        Assists = _logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Assist),
+                        Death = logs.Count(x => string.Equals(x.VictimName, playerName)),
+                        Assists = logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Assist),
                         TotalGames = 1,
-                        HeadShot = Math.Round(_logs.Count(x => string.Equals(x.PlayerName, playerName) && x.IsHeadShot) / (double) kills * 100,2),
-                        FavoriteGun = GetFavoriteGun(_logs.Where(x => x.PlayerName == playerName && x.Action == Actions.Kill).ToList()),
-                        Defuse = _logs.Count(x=>string.Equals(x.PlayerName, playerName) && x.Action == Actions.Defuse)
+                        HeadShot = Math.Round(logs.Count(x => string.Equals(x.PlayerName, playerName) && x.IsHeadShot) / (double) kills * 100,2),
+                        FavoriteGun = GetFavoriteGun(logs.Where(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill).ToList()),
+                        Defuse = logs.Count(x=>string.Equals(x.PlayerName, playerName) && x.Action == Actions.Defuse),
+                        Explode = GetExplodeBombs(logs.Where(x=>string.Equals(x.PlayerName, playerName) && x.Action == Actions.Plant).ToList())
                     }).ToList();
         }
 
@@ -45,8 +51,17 @@ namespace BusinessFacade.Repositories.Implementations
                        {
                            Gun = r.Key,
                            Count = r.Count()
-                       }).ToList()
+                       }).ToList().OrderByDescending(x=>x.Count)
                       .FirstOrDefault()?.Gun ?? Guns.Unknown;
+        }
+
+        private static int GetExplodeBombs(IReadOnlyCollection<LogModel> logs)
+        {
+            var enumerable = logs.Select(bomb => _logsRepository.GetLogsForPeriod(bomb.DateTime, bomb.DateTime.AddMinutes(1)).ToList());
+            var explodeBombs = enumerable.Count(intervalLogs => intervalLogs.Count(x => x.Action == Actions.TargetBombed) > 0);
+            return !logs.Any()
+                ? 0
+                : explodeBombs;
         }
     }
 }

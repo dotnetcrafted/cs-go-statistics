@@ -30,7 +30,7 @@ namespace CSStat.WebApp.Tests
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
             _logRepository = new LogsRepository(_mongoRepository);
-            _playerRepository = new PlayersRepository(_mongoRepository);
+            _playerRepository = new PlayersRepository(_logRepository);
         }
         [Test]
         public void ReturnRepositoryOfType()
@@ -107,7 +107,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(
                 ($"PlayerName: {log.PlayerName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
                 $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse}").Replace(',', '\n'));
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},ExplodeBombs: {log.Explode}").Replace(',', '\n'));
         }
     }
 }
