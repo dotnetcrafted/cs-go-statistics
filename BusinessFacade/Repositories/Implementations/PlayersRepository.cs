@@ -21,11 +21,13 @@ namespace BusinessFacade.Repositories.Implementations
         public IEnumerable<PlayerModel> GetAllPlayers()
         {
             var logs = _logsRepository.GetAllLogs().ToList();
+
             if (!logs.Any())
             {
                 return null;
             }
-            var playersNameList = logs.DistinctBy(x => x.PlayerName).Select(x => x.PlayerName);
+
+            var playersNameList = logs.Where(x=>!string.IsNullOrEmpty(x.PlayerName)).DistinctBy(x => x.PlayerName).Select(x => x.PlayerName);
 
             return (from playerName in playersNameList
                     let kills = logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill)

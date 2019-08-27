@@ -169,8 +169,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +192,10 @@
     <ProjectReference Include="..\..\BusinessFacade\BusinessFacade.csproj">
       <Project>{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}</Project>
       <Name>BusinessFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CsStat.Domain\CsStat.Domain.csproj">
+      <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
+      <Name>CsStat.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CsStat.LogApi\CsStat.LogApi.csproj">
       <Project>{C5122D50-78CD-4D75-BD81-90C564251F15}</Project>

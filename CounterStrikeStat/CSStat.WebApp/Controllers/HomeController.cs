@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessFacade.Repositories;
+using BusinessFacade.Repositories.Implementations;
+using DataService;
+using DataService.Interfaces;
 
 namespace CSStat.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private static IPlayersRepository _playerRepository;
+
+        public HomeController(IPlayersRepository playerRepository)
+        {
+            _playerRepository = playerRepository;
+        }
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var playersStat = _playerRepository.GetAllPlayers();
+            return View(playersStat);
         }
     }
 }
