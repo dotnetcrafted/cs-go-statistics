@@ -19,7 +19,7 @@ namespace ReadFile.Reader
 
             var parser = new CsLogsApi();
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
-            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), parser, logRepository);
+            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), parser, logRepository, logFileRepository);
 
             timer.Start();
 

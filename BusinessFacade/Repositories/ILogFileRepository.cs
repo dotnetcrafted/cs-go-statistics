@@ -1,17 +1,32 @@
 ﻿using System.Collections.Generic;
+using CsStat.Domain.Entities;
+using DataService.Interfaces;
 
 namespace BusinessFacade.Repositories
 {
     public interface ILogFileRepository
     {
-        IEnumerable<string> GetFiles();
+        IEnumerable<LogFile> GetFiles();
+        void AddFile(LogFile logFile);
     }
 
     class LogFileRepository : ILogFileRepository
     {
-        public IEnumerable<string> GetFiles()
+        private static IMongoRepositoryFactory _mongoRepository;
+
+        public LogFileRepository(IMongoRepositoryFactory mongoRepository)
         {
-            throw new System.NotImplementedException();
+            _mongoRepository = mongoRepository;
+        }
+
+        public IEnumerable<LogFile> GetFiles()
+        {
+            return _mongoRepository.GetRepository<LogFile>().Collection.FindAll();
+        }
+
+        public void AddFile(LogFile logFile)
+        {
+            _mongoRepository.GetRepository<LogFile>().Collection.Insert(logFile);
         }
     }
 }

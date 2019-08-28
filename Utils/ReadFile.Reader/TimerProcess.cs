@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BusinessFacade.Repositories;
+using CsStat.Domain.Entities;
 using CSStat.CsLogsApi.Interfaces;
 
 namespace ReadFile.Reader
@@ -14,9 +14,9 @@ namespace ReadFile.Reader
         /*просматриваемая директория и файл для мониторинга*/
         private readonly ICsLogsApi parsers;
         private readonly IBaseRepository logRepository;
+        private readonly ILogFileRepository logFileRepository;
 
         private readonly string logsDirectory;
-        private readonly TmpFiles tmpFiles = new TmpFiles();
         private static string lastLogFileName = "";
 
 
@@ -38,11 +38,12 @@ namespace ReadFile.Reader
         private static Timer _timer;
         private static readonly object _locker = new object();
 
-        public TimerProcess(string logsDirectory, ICsLogsApi parsers, IBaseRepository logRepository)
+        public TimerProcess(string logsDirectory, ICsLogsApi parsers, IBaseRepository logRepository, ILogFileRepository logFileRepository)
         {
             this.logsDirectory = logsDirectory;
             this.parsers = parsers;
             this.logRepository = logRepository;
+            this.logFileRepository = logFileRepository;
         }
 
         public void Start()
@@ -85,7 +86,8 @@ namespace ReadFile.Reader
             Console.WriteLine("Watch directory");
 
             var logFiles = Directory.GetFiles(logsDirectory);
-            var newFiles = logFiles.Except(tmpFiles.Files).ToArray();
+            // взять только те файлы, которых нет в базе(все файлы которые есть в базе - уже обработаны)
+            var newFiles = logFiles.Except(logFileRepository.GetFiles().Select(x => x.Name)).ToArray();
 
             if (!newFiles.Any() && !_isThereFilesInQueue)
                 return;
@@ -102,7 +104,9 @@ namespace ReadFile.Reader
                     logRepository.InsertLog(log);
                     Console.WriteLine(line);
                 }
-                tmpFiles.Files.Add(file);
+
+                // запомнить файл в базе, чтобы повторно его не обрабатывать
+                logFileRepository.AddFile(new LogFile { Name = file});
                 _isThereFilesInQueue = true; // запоминаем файл в очереди на обработку
             }
 
@@ -160,15 +164,5 @@ namespace ReadFile.Reader
                 }
             }
         }
-    }
-
-    public class TmpFiles
-    {
-        public TmpFiles()
-        {
-            Files = new List<string>();
-        }
-
-        public List<string> Files { get; set; }
     }
 }
