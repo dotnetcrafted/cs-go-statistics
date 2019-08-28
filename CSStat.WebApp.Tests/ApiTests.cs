@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
-using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
 using DataService;
 using DataService.Interfaces;

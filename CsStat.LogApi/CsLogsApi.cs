@@ -5,8 +5,8 @@ using System.Globalization;
 using System.Linq;
 using CSStat.CsLogsApi.Extensions;
 using CSStat.CsLogsApi.Interfaces;
-using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
+using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 
 namespace CsStat.LogApi

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Entities;
 
 namespace BusinessFacade.Repositories
 {

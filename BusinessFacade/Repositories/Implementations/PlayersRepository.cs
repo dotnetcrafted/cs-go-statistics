@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSStat.CsLogsApi.Extensions;
-using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
-using DataService.Interfaces;
 
 namespace BusinessFacade.Repositories.Implementations
 {

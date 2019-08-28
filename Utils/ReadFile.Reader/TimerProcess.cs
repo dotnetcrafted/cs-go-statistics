@@ -4,12 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BusinessFacade.Repositories;
+using CSStat.CsLogsApi.Interfaces;
 
 namespace ReadFile.Reader
 {
     public class TimerProcess
     {
         /*просматриваемая директория и файл для мониторинга*/
+        private readonly ICsLogsApi parsers;
+        private readonly IBaseRepository logRepository;
+
         private readonly string logsDirectory;
         private readonly TmpFiles tmpFiles = new TmpFiles();
         private static string lastLogFileName = "";
@@ -33,9 +38,11 @@ namespace ReadFile.Reader
         private static Timer _timer;
         private static readonly object _locker = new object();
 
-        public TimerProcess(string logsDirectory, object parsers)
+        public TimerProcess(string logsDirectory, ICsLogsApi parsers, IBaseRepository logRepository)
         {
             this.logsDirectory = logsDirectory;
+            this.parsers = parsers;
+            this.logRepository = logRepository;
         }
 
         public void Start()
@@ -91,6 +98,8 @@ namespace ReadFile.Reader
                 foreach (var line in lines)
                 {
                     // "скормить" все парсеру
+                    var log = parsers.ParseLine(line);
+                    logRepository.InsertLog(log);
                     Console.WriteLine(line);
                 }
                 tmpFiles.Files.Add(file);
@@ -139,6 +148,8 @@ namespace ReadFile.Reader
                                 foreach (var line in lines)
                                 {
                                     // "скормить" все парсеру
+                                    var log = parsers.ParseLine(line);
+                                    logRepository.InsertLog(log);
                                     Console.WriteLine(line);
                                 }
                             }

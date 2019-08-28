@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Entities;
 using DataService.Interfaces;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations

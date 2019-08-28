@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Entities;
 
 namespace CSStat.CsLogsApi.Interfaces
 {

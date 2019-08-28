@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using BusinessFacade.Repositories.Implementations;
+using CsStat.LogApi;
+using DataService;
 
 namespace ReadFile.Reader
 {
@@ -14,7 +17,9 @@ namespace ReadFile.Reader
             var currentDirectory = Environment.CurrentDirectory;
             var logsDirectory = ConfigurationManager.AppSettings["logsDirectory"];
 
-            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), null);
+            var parser = new CsLogsApi();
+            var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), parser, logRepository);
 
             timer.Start();
 

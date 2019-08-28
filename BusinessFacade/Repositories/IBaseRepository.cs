@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CsStat.Domain.Entities;
 using MongoRepository;
 
 namespace BusinessFacade.Repositories

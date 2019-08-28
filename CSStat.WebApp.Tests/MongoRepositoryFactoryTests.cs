@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
-using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
-using CsStat.LogApi.Enums;
 using CSStat.WebApp.Tests.Entity;
 using DataService;
 using DataService.Interfaces;
 using MongoDB.Driver;
 using MongoRepository;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace CSStat.WebApp.Tests
 {
