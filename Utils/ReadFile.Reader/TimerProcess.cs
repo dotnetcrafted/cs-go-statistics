@@ -9,25 +9,31 @@ namespace ReadFile.Reader
 {
     public class TimerProcess
     {
+        /*просматриваемая директория и файл для мониторинга*/
         private readonly string logsDirectory;
         private readonly TmpFiles tmpFiles = new TmpFiles();
         private static string lastLogFileName = "";
 
-        private static int skip = 0;
-        private static int take = 10;
+
+        /*чтение строк из файла*/
+        private static int _skip = 0;
+        private static int _take = 10;
+        private static int fileReadNewLinesInterval = 1000;
 
 
-        private static bool isNewFileInQueue = false;
-        private static bool isTaskFinish = true;
-        private static CancellationTokenSource cts = new CancellationTokenSource();
-        private static CancellationToken ct = cts.Token;
+        /*услоия для отмены или выполения задачи*/
+        private static bool _isThereFilesInQueue = false;
+        private static bool _isTaskFinish = true;
+        private static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private static CancellationToken _cancellationToken = _cancellationTokenSource.Token;
 
 
+        /*общзие настройки таймера. По таймеру выполянется проверка наличия новых файлов в папке*/
         private const long TimerInterval = 5000;
         private static Timer _timer;
-        private static object _locker = new object();
+        private static readonly object _locker = new object();
 
-        public TimerProcess(string logsDirectory)
+        public TimerProcess(string logsDirectory, object parsers)
         {
             this.logsDirectory = logsDirectory;
         }
@@ -37,7 +43,7 @@ namespace ReadFile.Reader
             _timer = new Timer(Callback, null, 0, TimerInterval);
         }
 
-        public void Stop()
+        public static void Stop()
         {
             _timer.Dispose();
         }
@@ -69,68 +75,77 @@ namespace ReadFile.Reader
 
         private void WatchDirectory()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-
             Console.WriteLine("Watch directory");
 
             var logFiles = Directory.GetFiles(logsDirectory);
             var newFiles = logFiles.Except(tmpFiles.Files).ToArray();
 
-            if (!newFiles.Any() && !isNewFileInQueue)
+            if (!newFiles.Any() && !_isThereFilesInQueue)
                 return;
 
-            Console.WriteLine("New files:");
+            Console.WriteLine("There are new files or there is file in queue:");
             foreach (var file in newFiles)
             {
-                // "скормить" все парсеру
-                Console.WriteLine(file);
+                var lines = File.ReadAllLines(file);
+                _skip = lines.Length; // на данном шаге мы прочитаем все строки из файла и дальше нужно читать только новые строки
+                foreach (var line in lines)
+                {
+                    // "скормить" все парсеру
+                    Console.WriteLine(line);
+                }
                 tmpFiles.Files.Add(file);
-                isNewFileInQueue = true;
+                _isThereFilesInQueue = true; // запоминаем файл в очереди на обработку
             }
 
-            if (newFiles.Length != 0 && lastLogFileName != newFiles.Last() || isNewFileInQueue)
+            // есть новые файлы, либо есть файла, которые находится в очереди на обработку
+            if (newFiles.Length != 0 && lastLogFileName != newFiles.Last() || _isThereFilesInQueue)
             {
                 lastLogFileName = newFiles.Length > 0 ? newFiles.Last() : lastLogFileName;
+                
+                //отменить предыдущую задачу. (задача будет отменена, но иссключение будет выброшено, когда файл прочитан до конца)
+                _cancellationTokenSource.Cancel();
 
-                cts.Cancel();
-
-                if (isTaskFinish)
+                if (_isTaskFinish)
                 {
-                    cts = new CancellationTokenSource();
-                    ct = cts.Token;
-                    Task.Factory.StartNew((x) =>
+                    _cancellationTokenSource = new CancellationTokenSource();
+                    _cancellationToken = _cancellationTokenSource.Token;
+
+                    Task.Factory.StartNew(x =>
                     {
-                        isNewFileInQueue = false; // очистили очередь
-                        isTaskFinish = false;
+                        _isThereFilesInQueue = false; // очистили очередь
+                        _isTaskFinish = false; // началась новая задача
+
                         var logFileName = (string) x;
 
                         while (true)
                         {
                             var fileStream = File.Open(logFileName, FileMode.Open);
-                            if (ct.IsCancellationRequested && FileHelper.CountLinesMaybe(fileStream) == skip)
-                            {
-                                fileStream.Close();
-                                isTaskFinish = true;
-                                skip = 0;
-                                ct.ThrowIfCancellationRequested();
-                            }
-
+                            var totalLines = FileHelper.CountLinesMaybe(fileStream);
                             fileStream.Close();
 
-                            var lines = File.ReadLines(logFileName).Skip(skip).Take(take).ToList();
+                            //задача была отменена, но надо убедиться, что файл прочитан до конца
+                            if (_cancellationToken.IsCancellationRequested && totalLines == _skip/*дочитали файл до конца*/)
+                            {
+                                _skip = 0; // обнуляем, чтобы новый файл начать читать с нуля
+                                _isTaskFinish = true; // текущая задача закончилась
+                                _cancellationToken.ThrowIfCancellationRequested(); // прерываем выполнение текущей задачи
+                            }
+
+                            // читаем из файла по n-строк
+                            var lines = File.ReadLines(logFileName).Skip(_skip).Take(_take).ToList();
                             if (lines.Count > 0)
                             {
-                                skip += lines.Count;
+                                _skip += lines.Count;
+                                foreach (var line in lines)
+                                {
+                                    // "скормить" все парсеру
+                                    Console.WriteLine(line);
+                                }
                             }
 
-                            foreach (var line in lines)
-                            {
-                                Console.WriteLine(line);
-                            }
-
-                            Thread.Sleep(1000);
+                            Thread.Sleep(fileReadNewLinesInterval); // немного подождаем пока появятся новые записи в логе
                         }
-                    }, lastLogFileName, ct);
+                    }, lastLogFileName, _cancellationToken);
                 }
             }
         }

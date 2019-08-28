@@ -14,13 +14,13 @@ namespace ReadFile.Reader
             var currentDirectory = Environment.CurrentDirectory;
             var logsDirectory = ConfigurationManager.AppSettings["logsDirectory"];
 
-            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory));
+            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), null);
 
             timer.Start();
 
             while (Console.ReadKey().Key != ConsoleKey.Escape) {}
 
-            timer.Stop();
+            TimerProcess.Stop();
 
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Finish");
