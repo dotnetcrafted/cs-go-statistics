@@ -8,13 +8,16 @@ using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CSStat.CsLogsApi.Models;
+using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
+using CsStat.LogApi.Enums;
 using CSStat.WebApp.Tests.Entity;
 using DataService;
 using DataService.Interfaces;
 using MongoDB.Driver;
 using MongoRepository;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace CSStat.WebApp.Tests
 {
@@ -25,12 +28,14 @@ namespace CSStat.WebApp.Tests
         private readonly IConnectionStringFactory _connectionString;
         private readonly ILogsRepository _logRepository;
         private readonly IPlayersRepository _playerRepository;
+        private readonly IBaseRepository _baseRepository;
         public  MongoRepositoryFactoryTests()
         {
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
             _logRepository = new LogsRepository(_mongoRepository);
             _playerRepository = new PlayersRepository(_logRepository);
+            _baseRepository = new BaseRepository(_mongoRepository);
         }
         [Test]
         public void ReturnRepositoryOfType()
@@ -69,7 +74,7 @@ namespace CSStat.WebApp.Tests
                 logsToInsert.Add(api.ParseLine(logLine));
             }
 
-            _logRepository.InsertBatch(logsToInsert);
+            _baseRepository.InsertBatch(logsToInsert);
 
 
         }
@@ -89,16 +94,23 @@ namespace CSStat.WebApp.Tests
         [Test]
         public void GetPlayers()
         {
-            var players = _playerRepository.GetAllPlayers();
+            var players = _playerRepository.GetStatsForAllPlayers();
 
             foreach (var player in players)
             {
-                PrintLog(player);
+                PrintPlayer(player);
                 Console.WriteLine(Environment.NewLine);
             }
         }
 
-        private static void PrintLog(PlayerModel log)
+        [Test]
+        public void GetLogs()
+        {
+            var logs = _logRepository.GetAllLogs().Where(x => x.Gun == Guns.Unknown).ToList();
+            logs.ForEach(PrintLog);
+        }
+
+        private static void PrintPlayer(PlayerStatsModel log)
         {
             var gun = string.IsNullOrEmpty(log.FavoriteGun.GetDescription())
                 ? log.FavoriteGun.ToString()
@@ -108,6 +120,19 @@ namespace CSStat.WebApp.Tests
                 ($"PlayerName: {log.PlayerName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
                 $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
                 $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
+        }
+
+        private static void PrintLog(LogModel log)
+        {
+            var action = string.IsNullOrEmpty(log.Action.GetDescription())
+                ? log.Action.ToString()
+                : log.Action.GetDescription();
+
+            Console.WriteLine(
+                ($"PlayerName: {log.PlayerName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.VictimName},VictimTeam: {log.VictimTeam.GetDescription()}," +
+                $"Gun: {log.Gun.GetDescription()},IsHeadshot: {log.IsHeadShot},DateTime: {log.DateTime.ToString(new CultureInfo("ru-RU", false).DateTimeFormat)}")
+                    .Replace(',', '\n'));
+            Console.WriteLine(Environment.NewLine);
         }
     }
 }

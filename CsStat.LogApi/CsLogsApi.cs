@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
@@ -12,6 +13,17 @@ namespace CsStat.LogApi
 {
     public class CsLogsApi : ICsLogsApi
     {
+        private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
+        public CsLogsApi()
+        {
+            _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
+        }
+        public List<LogModel> ParseLogs(string logs)
+        {
+            return string.IsNullOrWhiteSpace(logs) 
+                ? null 
+                : (from logLine in logs.Split('\n') from attribute in _attributeList where logLine.Contains(attribute.Value) select ParseLine(logLine)).ToList();
+        }
         public LogModel ParseLine(string logLine)
         {
             var splitLine = logLine.Split('"');
@@ -48,6 +60,19 @@ namespace CsStat.LogApi
                         VictimTeam = Teams.Null,
                         IsHeadShot = false,
                         Gun = Guns.Null
+                    };
+                    break;
+                case Actions.KilledByBomb:
+                    result = new LogModel
+                    {
+                        DateTime = GetDateTime(splitLine[0].Trim()),
+                        PlayerName = string.Empty,
+                        PlayerTeam = Teams.Null,
+                        Action = action,
+                        VictimName = GetClearName(splitLine[1].Trim()),
+                        VictimTeam = GetTeam(splitLine[1].Trim()),
+                        IsHeadShot = false,
+                        Gun = Guns.Bomb
                     };
                     break;
                 default:
@@ -87,14 +112,12 @@ namespace CsStat.LogApi
 
         private static DateTime GetDateTime(string dateTime)
         {
-            return DateTime.ParseExact(dateTime.Substring(2, 21), "MM/dd/yyyy - HH:mm:ss",CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(dateTime.Substring(2, 21), "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static Actions GetAction(string action)
         {
-            var attributeList = Actions.Unknown.GetAttributeList().Where(x=>!string.IsNullOrEmpty(x.Value));
-
-            return (from attribute in attributeList
+            return (from attribute in _attributeList
                     where action.Contains(attribute.Value)
                     select attribute.Key into actionIndex
                         select (Actions) actionIndex).FirstOrDefault();

@@ -18,7 +18,7 @@ namespace BusinessFacade.Repositories.Implementations
         {
             _logsRepository = logsRepository;
         }
-        public IEnumerable<PlayerModel> GetAllPlayers()
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers()
         {
             var logs = _logsRepository.GetAllLogs().ToList();
 
@@ -31,13 +31,13 @@ namespace BusinessFacade.Repositories.Implementations
 
             return (from playerName in playersNameList
                     let kills = logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill)
-                    select new PlayerModel
+                    select new PlayerStatsModel
                     {
                         PlayerName = playerName,
                         Kills = kills,
                         Death = logs.Count(x => string.Equals(x.VictimName, playerName)),
                         Assists = logs.Count(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Assist),
-                        TotalGames = 1,
+                        TotalGames = logs.Count(x=>string.Equals(x.PlayerName, playerName) && x.Action == Actions.EnteredTheGame),
                         HeadShot = Math.Round(logs.Count(x => string.Equals(x.PlayerName, playerName) && x.IsHeadShot) / (double) kills * 100,2),
                         FavoriteGun = GetFavoriteGun(logs.Where(x => string.Equals(x.PlayerName, playerName) && x.Action == Actions.Kill).ToList()),
                         Defuse = logs.Count(x=>string.Equals(x.PlayerName, playerName) && x.Action == Actions.Defuse),

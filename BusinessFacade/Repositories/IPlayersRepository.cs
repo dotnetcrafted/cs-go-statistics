@@ -5,6 +5,6 @@ namespace BusinessFacade.Repositories
 {
     public interface IPlayersRepository
     {
-        IEnumerable<PlayerModel> GetAllPlayers();
+        IEnumerable<PlayerStatsModel> GetStatsForAllPlayers();
     }
 }

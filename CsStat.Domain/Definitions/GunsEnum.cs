@@ -9,6 +9,8 @@ namespace CsStat.Domain.Definitions
 
         Null,
 
+        Bomb,
+
         [LogValue("hkp2000")]
         Hkp,
 
@@ -80,6 +82,46 @@ namespace CsStat.Domain.Definitions
 
         [LogValue("awp")]
         [Description("Слон")]
-        Awp
+        Awp, 
+
+        [LogValue("ssg08")]
+        Ssg,
+
+        [LogValue("deagle")]
+        Deagle,
+
+        [LogValue("tec9")]
+        Tec,
+
+        [LogValue("revolver")]
+        Revolver,
+
+        [LogValue("nova")]
+        Nova,
+
+        [LogValue("g3sg1")]
+        G3sg1,
+
+        [LogValue("xm1014")]
+        xm1014,
+
+        [LogValue("p250")]
+        P250,
+
+        [LogValue("knife_t")]
+        Knife,
+
+        [LogValue("inferno")]
+        Inferno,
+
+        [LogValue("elite")]
+        Elite,
+
+        [LogValue("negev")]
+        Negev,
+
+        [LogValue("sawedoff")]
+        Sawedoff,
     }
 }
+

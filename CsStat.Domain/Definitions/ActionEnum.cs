@@ -8,6 +8,9 @@ namespace CsStat.LogApi.Enums
         [Description("Unknown")]
         Unknown,
 
+        [LogValue("killed by the bomb")]
+        KilledByBomb,
+
         [LogValue("killed")]
         [Description("Kill")]
         Kill,
@@ -28,7 +31,10 @@ namespace CsStat.LogApi.Enums
         Plant,
 
         [LogValue("SFUI_Notice_Target_Bombed")]
-        TargetBombed
+        TargetBombed,
+
+        [LogValue("entered the game")]
+        EnteredTheGame
 
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Xml;
 using CsStat.Domain.Definitions;
+using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using MongoRepository;
 
 namespace CSStat.CsLogsApi.Models
 {
-    public class LogModel : Entity
+    public class LogModel : Entity, IBaseEntity
     {
         public DateTime DateTime { get; set; }
         public string PlayerName { get; set; }

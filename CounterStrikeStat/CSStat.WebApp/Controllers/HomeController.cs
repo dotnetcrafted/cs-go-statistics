@@ -20,7 +20,7 @@ namespace CSStat.WebApp.Controllers
         }
         public ActionResult Index()
         {
-            var playersStat = _playerRepository.GetAllPlayers();
+            var playersStat = _playerRepository.GetStatsForAllPlayers();
             return View(playersStat);
         }
     }

@@ -5,7 +5,7 @@ using MongoRepository;
 
 namespace CsStat.Domain.Entities
 {
-    public class PlayerModel : Entity
+    public class PlayerStatsModel : Entity, IBaseEntity
     {
         public string PlayerName { get; set; }
         public int Kills { get; set; }

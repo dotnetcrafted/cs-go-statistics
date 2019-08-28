@@ -5,18 +5,25 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessFacade.Repositories;
+using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CSStat.CsLogsApi.Models;
 using CsStat.Domain.Definitions;
+using DataService;
+using DataService.Interfaces;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace CSStat.WebApp.Tests
 {
     public static class ApiTests
     {
+        private static readonly CsStat.LogApi.CsLogsApi _api = new CsStat.LogApi.CsLogsApi();
+
         [Test]
         [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testString.txt")]
-        public static void Test(string file)
+        public static void ParseLine(string file)
         {
             var logLine = string.Empty;
 
@@ -27,9 +34,7 @@ namespace CSStat.WebApp.Tests
 
             var splitLine = logLine.Split('"').ToList();
 
-            var api = new CsStat.LogApi.CsLogsApi();
-
-            var a = api.ParseLine(logLine);
+            var a = _api.ParseLine(logLine);
 
             Console.WriteLine($"Incoming text: {logLine}");
             Console.WriteLine(Environment.NewLine);
@@ -46,6 +51,22 @@ namespace CSStat.WebApp.Tests
 
         }
 
+        [Test]
+        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\logs.txt")]
+        public static void ParseLogs(string file)
+        {
+            var logs = string.Empty;
+
+            using (var sr = new StreamReader(file))
+            {
+                logs = sr.ReadToEnd();
+            }
+
+            var parsedLogs = _api.ParseLogs(logs);
+            var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            logRepository.InsertBatch(parsedLogs);
+
+        }
         [Test]
         [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\logs.txt")]
         public static void GetWeapons(string file)
