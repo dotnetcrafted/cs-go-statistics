@@ -23,14 +23,14 @@ namespace CSStat.WebApp.Tests
         private readonly IMongoRepositoryFactory _mongoRepository;
         private readonly IConnectionStringFactory _connectionString;
         private readonly ILogsRepository _logRepository;
-        private readonly IPlayersRepository _playerRepository;
+        private readonly IPlayerRepository _playerRepository;
         private readonly IBaseRepository _baseRepository;
         public  MongoRepositoryFactoryTests()
         {
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
             _logRepository = new LogsRepository(_mongoRepository);
-            _playerRepository = new PlayersRepository(_logRepository);
+            _playerRepository = new PlayerRepository(_mongoRepository);
             _baseRepository = new BaseRepository(_mongoRepository);
         }
         [Test]
@@ -63,7 +63,7 @@ namespace CSStat.WebApp.Tests
             var splitLogs = logs.Split('\n').ToList();
 
             var api = new CsStat.LogApi.CsLogsApi();
-            var logsToInsert = new List<LogModel>();
+            var logsToInsert = new List<Log>();
 
             foreach (var logLine in splitLogs)
             {
@@ -94,9 +94,21 @@ namespace CSStat.WebApp.Tests
 
             foreach (var player in players)
             {
-                PrintPlayer(player);
+                PrintPlayerStat(player);
                 Console.WriteLine(Environment.NewLine);
             }
+        }
+        [Test]
+        [TestCase(@"\Images\test1.jpg")]
+        public void UpdatePlayer(string imagePath)
+        {
+            var player = _playerRepository.GetPlayerByNickName("Radik F.");
+            _playerRepository.UpdatePlayer(player.Id, "Radik", "Faiskhanov", imagePath);
+        }
+        [Test]
+        public void GetPlayer()
+        {
+            PrintPlayer(_playerRepository.GetPlayerByNickName("Radik F."));
         }
 
         [Test]
@@ -106,26 +118,43 @@ namespace CSStat.WebApp.Tests
             logs.ForEach(PrintLog);
         }
 
-        private static void PrintPlayer(PlayerStatsModel log)
+        private static byte[] ReadImage(string path)
+        {
+          using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+          {
+              using (var br = new BinaryReader(fs))
+              {
+                  var fInfo = new FileInfo(path);
+                  return br.ReadBytes((int) fInfo.Length);
+              }
+          }
+        }
+
+        private static void PrintPlayer(Player player)
+        {
+            Console.WriteLine($"First Name: {player.FirstName},Second Name: {player.SecondName},Nick Name: {player.NickName},Image: {player.ImagePath}".Replace(',', '\n'));
+        }
+
+        private static void PrintPlayerStat(PlayerStatsModel log)
         {
             var gun = string.IsNullOrEmpty(log.FavoriteGun.GetDescription())
                 ? log.FavoriteGun.ToString()
                 : log.FavoriteGun.GetDescription();
 
             Console.WriteLine(
-                ($"PlayerName: {log.PlayerName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
+                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
                 $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
                 $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 
-        private static void PrintLog(LogModel log)
+        private static void PrintLog(Log log)
         {
             var action = string.IsNullOrEmpty(log.Action.GetDescription())
                 ? log.Action.ToString()
                 : log.Action.GetDescription();
 
             Console.WriteLine(
-                ($"PlayerName: {log.PlayerName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.VictimName},VictimTeam: {log.VictimTeam.GetDescription()}," +
+                ($"PlayerName: {log.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.Victim.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
                 $"Gun: {log.Gun.GetDescription()},IsHeadshot: {log.IsHeadShot},DateTime: {log.DateTime.ToString(new CultureInfo("ru-RU", false).DateTimeFormat)}")
                     .Replace(',', '\n'));
             Console.WriteLine(Environment.NewLine);

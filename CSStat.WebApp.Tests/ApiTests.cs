@@ -1,18 +1,14 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using DataService;
-using DataService.Interfaces;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace CSStat.WebApp.Tests
 {
@@ -45,7 +41,7 @@ namespace CSStat.WebApp.Tests
                 : a.Action.GetDescription();
 
             Console.WriteLine(
-                $"PlayerName: {a.PlayerName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {action},VictimName: {a.VictimName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
+                $"PlayerName: {a.Player.NickName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {action},VictimName: {a.Victim.NickName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
                     .Replace(',', '\n'));
 
         }

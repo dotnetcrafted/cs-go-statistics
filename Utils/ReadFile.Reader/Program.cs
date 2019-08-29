@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
+using CSStat.CsLogsApi;
 using CsStat.LogApi;
 using DataService;
 
@@ -19,6 +21,7 @@ namespace ReadFile.Reader
 
             var parser = new CsLogsApi();
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            var logFileRepository = new LogFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), parser, logRepository, logFileRepository);
 
             timer.Start();
