@@ -22,7 +22,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><img src='@Url.Content(@"~/Files"+@item.Player.ImagePath)' width="80" height="100" alt="image"></td>
+                    <td><img src='@Url.Content(@"~/Files"+item.Player.ImagePath)' width="80" height="100" alt="image"></td>
                     <td>@item.Player.NickName</td>
                     <td>@item.TotalGames</td>
                     <td>@item.KdRatio</td>
