@@ -3,7 +3,6 @@ using System.Configuration;
 using System.IO;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CSStat.CsLogsApi;
 using CsStat.LogApi;
 using DataService;
 

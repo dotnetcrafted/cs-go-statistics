@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BusinessFacade.Repositories;
 using CsStat.Domain.Entities;
-using CSStat.CsLogsApi.Interfaces;
+using CsStat.LogApi.Interfaces;
 
 namespace ReadFile.Reader
 {
@@ -97,13 +97,9 @@ namespace ReadFile.Reader
             {
                 var lines = File.ReadAllLines(file);
                 _skip = lines.Length; // на данном шаге мы прочитаем все строки из файла и дальше нужно читать только новые строки
-                foreach (var line in lines)
-                {
-                    // "скормить" все парсеру
-                    var log = parsers.ParseLine(line);
-                    logRepository.InsertLog(log);
-                    Console.WriteLine(line);
-                }
+
+                var logs = parsers.ParseLogs(lines.ToList());
+                logRepository.InsertBatch(logs);
 
                 // запомнить файл в базе, чтобы повторно его не обрабатывать
                 logFileRepository.AddFile(new LogFile { Name = file});
@@ -149,13 +145,8 @@ namespace ReadFile.Reader
                             if (lines.Count > 0)
                             {
                                 _skip += lines.Count;
-                                foreach (var line in lines)
-                                {
-                                    // "скормить" все парсеру
-                                    var log = parsers.ParseLine(line);
-                                    logRepository.InsertLog(log);
-                                    Console.WriteLine(line);
-                                }
+                                var logs = parsers.ParseLogs(lines);
+                                logRepository.InsertBatch(logs);
                             }
 
                             Thread.Sleep(fileReadNewLinesInterval); // немного подождаем пока появятся новые записи в логе

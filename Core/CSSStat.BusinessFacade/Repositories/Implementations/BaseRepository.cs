@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataService.Interfaces;
 using MongoRepository;
 
@@ -20,7 +21,8 @@ namespace BusinessFacade.Repositories.Implementations
 
         public void InsertBatch<T>(IEnumerable<T> entities) where T: Entity
         {
-            _mongoRepository.GetRepository<T>().Collection.InsertBatch(entities);
+            if(entities.Any())
+                _mongoRepository.GetRepository<T>().Collection.InsertBatch(entities);
         }
     }
 }
