@@ -20,6 +20,7 @@ L 08/26/2019 - 12:20:33: server_cvar: "mp_roundtime_hostage" "1.92"
 L 08/26/2019 - 12:20:33: server_cvar: "mp_roundtime_defuse" "1.92"
 L 08/26/2019 - 12:20:33: server_cvar: "mp_timelimit" "0"
 L 08/26/2019 - 12:20:33: server_cvar: "mp_freezetime" "10"
+L asdasdasdasd: "Johnnie<13><STEAM_1:1:35063322><>" entered the game
 L 08/26/2019 - 12:20:35: World triggered "Round_Start"
 L 08/26/2019 - 12:20:46: "skvigl<17><STEAM_1:0:43061951><>" entered the game
 L 08/26/2019 - 12:20:46: "Radik F.<16><STEAM_1:0:34907433><>" entered the game

@@ -19,6 +19,7 @@ namespace CsStat.LogApi
     {
         private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
         private static IPlayerRepository _playerRepository;
+        private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
         public CsLogsApi()
         {
             var connectionString = new ConnectionStringFactory();
@@ -140,7 +141,12 @@ namespace CsStat.LogApi
 
         private static DateTime GetDateTime(string dateTime)
         {
-            return DateTime.ParseExact(dateTime.Substring(2, 21), "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            return dateTime.Length < _dateTimeTemplate.Length
+                ? DateTime.MinValue
+                : DateTime.TryParseExact(dateTime.Substring(2, 21), _dateTimeTemplate, CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out var result)
+                    ? result
+                    : DateTime.MinValue;
         }
 
         private static Actions GetAction(string action)
