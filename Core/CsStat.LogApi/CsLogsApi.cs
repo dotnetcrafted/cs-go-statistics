@@ -6,10 +6,10 @@ using System.Linq;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
-using CSStat.CsLogsApi.Interfaces;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
+using CsStat.LogApi.Interfaces;
 using DataService;
 using DataService.Interfaces;
 
@@ -25,13 +25,13 @@ namespace CsStat.LogApi
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
             _playerRepository = new PlayerRepository(new MongoRepositoryFactory(connectionString));
         }
-        public List<Log> ParseLogs(string logs)
+        public List<Log> ParseLogs(List<string> logs)
         {
-            return string.IsNullOrWhiteSpace(logs) 
+            return !logs.Any()
                 ? null 
-                : (from logLine in logs.Split('\n') from attribute in _attributeList where logLine.Contains(attribute.Value) select ParseLine(logLine)).ToList();
+                : (from logLine in logs from attribute in _attributeList where logLine.Contains(attribute.Value) select ParseLine(logLine)).ToList();
         }
-        public Log ParseLine(string logLine)
+        private Log ParseLine(string logLine)
         {
             var splitLine = logLine.Split('"');
 

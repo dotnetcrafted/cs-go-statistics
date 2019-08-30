@@ -50,32 +50,6 @@ namespace CSStat.WebApp.Tests
         }
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testLogs.txt")]
-        public void SaveLog(string file)
-        {
-            var logs = string.Empty;
-
-            using (var sr = new StreamReader(file))
-            {
-                logs = sr.ReadToEnd();
-            }
-
-            var splitLogs = logs.Split('\n').ToList();
-
-            var api = new CsStat.LogApi.CsLogsApi();
-            var logsToInsert = new List<Log>();
-
-            foreach (var logLine in splitLogs)
-            {
-                logsToInsert.Add(api.ParseLine(logLine));
-            }
-
-            _baseRepository.InsertBatch(logsToInsert);
-
-
-        }
-
-        [Test]
         public void GetLogsForPeriod()
         {
             var startDate = DateTime.ParseExact(@"08/20/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);

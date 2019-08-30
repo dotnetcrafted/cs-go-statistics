@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
 
-namespace CSStat.CsLogsApi.Interfaces
+namespace CsStat.LogApi.Interfaces
 {
     public interface ICsLogsApi
     {
-        Log ParseLine(string logLine);
-        List<Log> ParseLogs(string logs);
+        List<Log> ParseLogs(List<string> logs);
     }
 }

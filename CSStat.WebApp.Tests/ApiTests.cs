@@ -17,36 +17,6 @@ namespace CSStat.WebApp.Tests
         private static readonly CsStat.LogApi.CsLogsApi _api = new CsStat.LogApi.CsLogsApi();
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testString.txt")]
-        public static void ParseLine(string file)
-        {
-            var logLine = string.Empty;
-
-            using (var sr = new StreamReader(file))
-            {
-                logLine = sr.ReadToEnd();
-            }
-
-            var splitLine = logLine.Split('"').ToList();
-
-            var a = _api.ParseLine(logLine);
-
-            Console.WriteLine($"Incoming text: {logLine}");
-            Console.WriteLine(Environment.NewLine);
-            splitLine.ForEach(Console.WriteLine);
-            Console.WriteLine(Environment.NewLine);
-
-            var action = string.IsNullOrEmpty(a.Action.GetDescription())
-                ? a.Action.ToString()
-                : a.Action.GetDescription();
-
-            Console.WriteLine(
-                $"PlayerName: {a.Player.NickName},PlayerTeam: {a.PlayerTeam.GetDescription()},Action: {action},VictimName: {a.Victim.NickName},VictimTeam: {a.VictimTeam.GetDescription()},Gun: {a.Gun.GetDescription()},IsHeadshot: {a.IsHeadShot},DateTime: {a.DateTime}"
-                    .Replace(',', '\n'));
-
-        }
-
-        [Test]
         [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\logs.txt")]
         public static void ParseLogs(string file)
         {
@@ -57,7 +27,7 @@ namespace CSStat.WebApp.Tests
                 logs = sr.ReadToEnd();
             }
 
-            var parsedLogs = _api.ParseLogs(logs);
+            var parsedLogs = _api.ParseLogs(logs.Split('\n').ToList());
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             logRepository.InsertBatch(parsedLogs);
 
