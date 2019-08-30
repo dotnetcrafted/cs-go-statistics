@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CsStat.LogApi.Interfaces;
+using CSStat.CsLogsApi.Interfaces;
 using DataService;
 using DataService.Interfaces;
 using Ninject;

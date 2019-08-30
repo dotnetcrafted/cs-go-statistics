@@ -1,22 +1,13 @@
 ﻿@model List<CsStat.Web.Models.PlayerModelDto>
 
-<div class="table">
-    <table class="table table-striped">
-        <tr>
-            <th />
-            <th>Player Nick Name</th>
-            <th>Player First Name</th>
-            <th>Player Last Name</th>
-        </tr>
+<div>
         @foreach (var item in Model)
         {
-            <tr>
-                <td><img src='@Url.Content(@"~/Files"+item.ImagePath)' width="80" height="100" alt="image"></td>
-                <td>@item.NickName</td>
-                <td>@item.FirstName</td>
-                <td>@item.SecondName</td>
-            </tr>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink(item.NickName, "ModifyPlayerPartial", new {userName = item.NickName})
+                </li>
+            </ul>
         }
-    </table>
 </div>
 

@@ -1,0 +1,8 @@
+﻿@model CsStat.Web.Models.PlayerModelDto
+
+<div class="form-group">
+    @Html.EditorFor(model=>model.FirstName)
+    @Html.EditorFor(model=>model.SecondName)
+    @Html.EditorFor(model=>model.ImagePath)
+    <input type="submit" class="btn-primary" value="Save">
+</div>

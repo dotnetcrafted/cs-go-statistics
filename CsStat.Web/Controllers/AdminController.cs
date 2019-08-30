@@ -16,7 +16,7 @@ namespace CsStat.Web.Controllers
         {
             _playerRepository = playerRepository;
         }
-        // GET: Admin
+
         public ActionResult Index()
         {
             if (Session["UserName"] == null)
@@ -25,6 +25,12 @@ namespace CsStat.Web.Controllers
             var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers());
             return View(player);
 
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult ModifyPlayerPartial(string nickName)
+        {
+            return PartialView(Mapper.Map<PlayerModelDto>(_playerRepository.GetPlayerByNickName(nickName)));
         }
     }
 }

@@ -193,7 +193,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Admin\_ModifyPlayerPrtial.cshtml" />
+    <Content Include="Views\Admin\ModifyPlayerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
