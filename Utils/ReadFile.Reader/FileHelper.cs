@@ -2,13 +2,14 @@
 
 namespace ReadFile.Reader
 {
+    // read more here: https://www.nimaara.com/counting-lines-of-a-text-file/
     public static class FileHelper
     {
         private const char CR = '\r';
         private const char LF = '\n';
         private const char NULL = (char)0;
 
-        public static long CountLinesMaybe(Stream stream)
+        public static long CountLines(Stream stream)
         {
             var lineCount = 0L;
 

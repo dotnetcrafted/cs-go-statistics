@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Configuration;
-using System.IO;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CsStat.LogApi;
@@ -12,24 +10,20 @@ namespace ReadFile.Reader
     {
         private static void Main()
         {
-            var defaultForegroundColor = Console.ForegroundColor;
             Console.WriteLine("Start");
-
-            var currentDirectory = Environment.CurrentDirectory;
-            var logsDirectory = ConfigurationManager.AppSettings["logsDirectory"];
 
             var parser = new CsLogsApi();
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
-            var logFileRepository = new LogFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
-            var timer = new TimerProcess(Path.Combine(currentDirectory, logsDirectory), parser, logRepository, logFileRepository);
+            var fileRepository = new LogFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
 
-            timer.Start();
+            var watcher = new Watcher(Settings.LogsPath, parser, logRepository, fileRepository);
+            
+            watcher.Start();
 
-            while (Console.ReadKey().Key != ConsoleKey.Escape) {}
+            while (Console.ReadKey().Key != ConsoleKey.Escape) { }
 
-            TimerProcess.Stop();
+            watcher.Stop();
 
-            Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("Finish");
             Console.ReadLine();
         }
