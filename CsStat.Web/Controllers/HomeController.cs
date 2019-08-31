@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using BusinessFacade.Repositories;
-using BusinessFacade.Repositories.Implementations;
-using DataService;
-using DataService.Interfaces;
+using Newtonsoft.Json;
 
 namespace CSStat.WebApp.Controllers
 {
@@ -20,8 +15,20 @@ namespace CSStat.WebApp.Controllers
         }
         public ActionResult Index()
         {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult GetReposutory()
+        {
+
             var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio);
-            return View(playersStat);
+            var json = JsonConvert.SerializeObject(playersStat);
+            var result = new JsonResult
+            {
+                Data = playersStat,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+            return result;
         }
     }
 }

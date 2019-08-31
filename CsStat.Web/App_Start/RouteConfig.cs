@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace CsStat.Web
@@ -12,6 +8,13 @@ namespace CsStat.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute
+            (
+                name: "getrepository",
+                url: "api/playersdata",
+                defaults: new { controller = "Home", action = "GetReposutory", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
