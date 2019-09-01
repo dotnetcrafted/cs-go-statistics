@@ -15,7 +15,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
-
+import TableBodySkeleton from './table-body-skeleton';
 export default class PlayersData extends React.Component {
 
     constructor(props) {
@@ -35,18 +35,22 @@ export default class PlayersData extends React.Component {
           });
 
         this.state = {
-            playersData: []
+            playersData: [],
+            isLoading: false
         }
     }
     componentDidMount() {        
         this.getPlayersData();
     }
     getPlayersData = () => {
+        this.setState({isLoading: true})
         axios.get(this.playersDataUrl).then((response) => {
+            this.setState({isLoading: false})
             this.setState({
                 playersData: response.data
             });
         }, (error) => {
+            this.setState({isLoading: false})
             console.error(error);
         });
     }
@@ -58,11 +62,12 @@ export default class PlayersData extends React.Component {
         }
     }
     render() {
+        const {isLoading} = this.state;
         return (
             <ThemeProvider theme={this.theme}>
                 <Container maxWidth="xl">
                     <Paper>
-                        <Table>
+                        <Table size="small">
                             <TableHead>
                                 <TableRow>
                                     <TableCell></TableCell>
@@ -81,26 +86,30 @@ export default class PlayersData extends React.Component {
                                     <TableCell>Favorite Gun</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
-                                {this.state.playersData.map(item => (
-                                    <TableRow key={item.Player.Id || shortid.generate()}>
-                                        <TableCell>{this.getAvatar(item.Player)}</TableCell>
-                                        <TableCell>{item.Player.NickName}</TableCell>
-                                        <TableCell>{item.TotalGames}</TableCell>
-                                        <TableCell>{item.KdRatio}</TableCell>
-                                        <TableCell>{item.Kills}</TableCell>
-                                        <TableCell>{item.Death}</TableCell>
-                                        <TableCell>{item.Assists}</TableCell>
-                                        <TableCell>{item.HeadShot}</TableCell>
-                                        <TableCell>{item.Defuse}</TableCell>
-                                        <TableCell>{item.Explode}</TableCell>
-                                        <TableCell>{item.KillsPerGame}</TableCell>
-                                        <TableCell>{item.DeathPerGame}</TableCell>
-                                        <TableCell>{item.AssistsPerGame}</TableCell>
-                                        <TableCell>{item.FavoriteGun}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
+                            {isLoading ? (
+                                <TableBodySkeleton/>
+                            ) : (
+                                <TableBody>
+                                    {this.state.playersData.map(item => (
+                                        <TableRow key={item.Player.Id || shortid.generate()}>
+                                            <TableCell>{this.getAvatar(item.Player)}</TableCell>
+                                            <TableCell>{item.Player.NickName}</TableCell>
+                                            <TableCell>{item.TotalGames}</TableCell>
+                                            <TableCell>{item.KdRatio}</TableCell>
+                                            <TableCell>{item.Kills}</TableCell>
+                                            <TableCell>{item.Death}</TableCell>
+                                            <TableCell>{item.Assists}</TableCell>
+                                            <TableCell>{item.HeadShot}</TableCell>
+                                            <TableCell>{item.Defuse}</TableCell>
+                                            <TableCell>{item.Explode}</TableCell>
+                                            <TableCell>{item.KillsPerGame}</TableCell>
+                                            <TableCell>{item.DeathPerGame}</TableCell>
+                                            <TableCell>{item.AssistsPerGame}</TableCell>
+                                            <TableCell>{item.FavoriteGun}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            )}
                         </Table>
                     </Paper>
                 </Container>
