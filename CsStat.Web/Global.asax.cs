@@ -13,7 +13,6 @@ namespace CsStat.Web
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
