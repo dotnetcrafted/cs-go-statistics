@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import shortid from 'shortid';
 import randomMC from 'random-material-color';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles  } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,30 +16,25 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import TableBodySkeleton from './table-body-skeleton';
-export default class PlayersData extends React.Component {
 
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        overflowX: 'auto',
+    }
+});
+
+class PlayersData extends React.Component {
     constructor(props) {
         super(props);
-
         this.playersDataUrl = this.props.playersDataUrl;
-        this.classes = makeStyles({
-            avatar: {
-                backgroundColor: randomMC.getColor()
-            }
-        });
-
-        this.theme = createMuiTheme({
-            palette: {
-              type: 'dark',
-            },
-          });
-
         this.state = {
             playersData: [],
             isLoading: false
         }
     }
-    componentDidMount() {        
+    componentDidMount() {
         this.getPlayersData();
     }
     getPlayersData = () => {
@@ -55,18 +50,20 @@ export default class PlayersData extends React.Component {
         });
     }
     getAvatar(player) {
+        const {avatar} = this.props.classes;
         if(player.ImagePath) {
             return <Avatar alt="player.NickName" src={player.ImagePath} />
         } else { 
-            return <Avatar className={this.classes.avatar}><PersonIcon/></Avatar>
+            return <Avatar><PersonIcon/></Avatar>
         }
     }
     render() {
+        const {classes, theme} = this.props;
         const {isLoading} = this.state;
         return (
-            <ThemeProvider theme={this.theme}>
+            <ThemeProvider theme={theme}>
                 <Container maxWidth="xl">
-                    <Paper>
+                    <Paper className={classes.root}>
                         <Table size="small">
                             <TableHead>
                                 <TableRow>
@@ -121,3 +118,4 @@ export default class PlayersData extends React.Component {
 PlayersData.propTypes = {
     playersDataUrl: PropTypes.string.isRequired
 };
+export default withStyles(styles, { withTheme: true })(PlayersData);
