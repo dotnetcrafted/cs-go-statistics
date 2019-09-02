@@ -1,13 +1,1 @@
-@using System.Globalization
-
-<div id="filters" style="margin-left: 2%; margin-top: 1%;">
-    <label style="color: white;">Date From:
-        <input type="date" name ="dateFrom" value="@DateTime.Today.ToString(CultureInfo.CurrentCulture)">
-    </label>
-    <label style="color: white;">Date To:
-        <input type="date" name ="dateTo" value="@DateTime.Today.ToString(CultureInfo.CurrentCulture)">
-    </label>
-    <input type="submit" value="Apply">
-</div>
-
-<div data-dc-component-players-data data-dc-players-data-options='{"playersDataUrl": "api/playersdata"}'></div>
+<div data-dc-component-home-page data-dc-home-page-options='{"playersDataUrl": "api/playersdata"}'></div>

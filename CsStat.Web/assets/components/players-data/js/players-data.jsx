@@ -1,35 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import shortid from 'shortid';
-import randomMC from 'random-material-color';
-import { withStyles  } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-import PersonIcon from '@material-ui/icons/Person';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import Container from '@material-ui/core/Container';
-import TableBodySkeleton from './table-body-skeleton';
-
-const styles = theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing(3),
-        overflowX: 'auto',
-    }
-});
+import { Table, Avatar } from 'antd';
 
 class PlayersData extends React.Component {
     constructor(props) {
         super(props);
         this.playersDataUrl = this.props.playersDataUrl;
         this.state = {
+            columns: [
+                {
+                    dataIndex: 'avatar',
+                    render: (link, record) => this.getAvatar(record),
+                    width: '5%',
+                },
+                {
+                    title: 'Player Name',
+                    dataIndex: 'NickName',
+                },
+                {
+                    title: 'K/D Ratio',
+                    dataIndex: 'KdRatio',
+                },
+                {
+                    title: 'Kills',
+                    dataIndex: 'Kills',
+                },
+                {
+                    title: 'Death',
+                    dataIndex: 'Death',
+                }
+            ],
             playersData: [],
             isLoading: false
         }
@@ -41,76 +42,44 @@ class PlayersData extends React.Component {
         this.setState({isLoading: true})
         axios.get(this.playersDataUrl).then((response) => {
             this.setState({isLoading: false})
-            this.setState({
-                playersData: response.data
-            });
+            this.setViewModel(response.data);
         }, (error) => {
             this.setState({isLoading: false})
             console.error(error);
         });
     }
-    getAvatar(player) {
-        const {avatar} = this.props.classes;
-        if(player.ImagePath) {
-            return <Avatar alt="player.NickName" src={player.ImagePath} />
-        } else { 
-            return <Avatar><PersonIcon/></Avatar>
+    getAvatar(record) {
+        if(record.avatar) {
+            return <Avatar src={link} />
+        } else {
+            return <Avatar icon="user" />
         }
     }
+
+    setViewModel(data) {
+        const playersData = data.map((item, i) => ({
+            key: i,
+            avatar: item.Player.ImagePath,
+            NickName: item.Player.NickName,
+            KdRatio: item.KdRatio,
+            Kills: item.Kills,
+            Death: item.Death
+        }));
+        this.setState({playersData})
+    }
     render() {
-        const {classes, theme} = this.props;
-        const {isLoading} = this.state;
+        const {isLoading, columns, playersData} = this.state;
         return (
-            <ThemeProvider theme={theme}>
-                <Container maxWidth="xl">
-                    <Paper className={classes.root}>
-                        <Table size="small">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell></TableCell>
-                                    <TableCell>Player Name</TableCell>
-                                    <TableCell>Total Games</TableCell>
-                                    <TableCell>K/D Ratio</TableCell>
-                                    <TableCell>Kills</TableCell>
-                                    <TableCell>DeaTableCells</TableCell>
-                                    <TableCell>Assists</TableCell>
-                                    <TableCell>Head Shot</TableCell>
-                                    <TableCell>Defused Bombs</TableCell>
-                                    <TableCell>Exploded Bombs</TableCell>
-                                    <TableCell>Kills Per Game</TableCell>
-                                    <TableCell>Deaths Per Game</TableCell>
-                                    <TableCell>Assists Per Game</TableCell>
-                                    <TableCell>Favorite Gun</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            {isLoading ? (
-                                <TableBodySkeleton/>
-                            ) : (
-                                <TableBody>
-                                    {this.state.playersData.map(item => (
-                                        <TableRow key={item.Player.Id || shortid.generate()}>
-                                            <TableCell>{this.getAvatar(item.Player)}</TableCell>
-                                            <TableCell>{item.Player.NickName}</TableCell>
-                                            <TableCell>{item.TotalGames}</TableCell>
-                                            <TableCell>{item.KdRatio}</TableCell>
-                                            <TableCell>{item.Kills}</TableCell>
-                                            <TableCell>{item.Death}</TableCell>
-                                            <TableCell>{item.Assists}</TableCell>
-                                            <TableCell>{item.HeadShot}</TableCell>
-                                            <TableCell>{item.Defuse}</TableCell>
-                                            <TableCell>{item.Explode}</TableCell>
-                                            <TableCell>{item.KillsPerGame}</TableCell>
-                                            <TableCell>{item.DeathPerGame}</TableCell>
-                                            <TableCell>{item.AssistsPerGame}</TableCell>
-                                            <TableCell>{item.FavoriteGun}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            )}
-                        </Table>
-                    </Paper>
-                </Container>
-            </ThemeProvider>
+            <Table 
+                className="players-data"
+                rowClassName="players-data__row"
+                columns={columns}
+                dataSource={playersData}
+                pagination={false}
+                loading={isLoading}
+                size="middle"
+                bordered={true}
+            />
         );
     }
 }
@@ -118,4 +87,5 @@ class PlayersData extends React.Component {
 PlayersData.propTypes = {
     playersDataUrl: PropTypes.string.isRequired
 };
-export default withStyles(styles, { withTheme: true })(PlayersData);
+
+export default PlayersData;

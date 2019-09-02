@@ -6,6 +6,7 @@ import './general/scss/index.scss';
 import './general/js/lazysizes';
 
 import './components/players-data';
+import './components/home-page';
 
 /* init app */
 import app from './general/js/app';
