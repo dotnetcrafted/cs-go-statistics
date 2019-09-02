@@ -27,7 +27,7 @@ namespace CSStat.WebApp.Controllers
         public ActionResult GetReposutory()
         {
 
-            var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio);
+            var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio); // = GetStat(dateGromm dateTo).OrderByDescending(x => x.KdRatio)
             var json = JsonConvert.SerializeObject(playersStat);
             var result = new JsonResult
             {
@@ -37,9 +37,9 @@ namespace CSStat.WebApp.Controllers
             return result;
         }
 
-        private IEnumerable<PlayerStatsModel> GetStat(DateTime dateFrom, DateTime dateTo)
+        private IEnumerable<PlayerStatsModel> GetStat(string dateFrom, string dateTo)
         {
-            return _playerRepository.GetStatsForAllPlayers(dateFrom.ToString(CultureInfo.InvariantCulture), dateTo.ToString(CultureInfo.InvariantCulture));
+            return _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo);
         }
     }
 }
