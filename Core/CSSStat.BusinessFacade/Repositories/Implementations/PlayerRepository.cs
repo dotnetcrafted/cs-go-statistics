@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
@@ -19,9 +20,36 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository = mongoRepository;
             _logsRepository = new LogsRepository(_mongoRepository);
         }
-        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers()
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom = "", string dateTo = "")
         {
-            var logs = _logsRepository.GetAllLogs().ToList();
+            var logs = new List<Log>();
+
+            if (!string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
+            {
+                if (DateTime.TryParse(dateFrom, CultureInfo.InvariantCulture, DateTimeStyles.None, out var from))
+                {
+                    logs = _logsRepository.GetLogsForPeriod(from, DateTime.Today).ToList();
+                }
+            }
+            else if (!string.IsNullOrEmpty(dateTo) && string.IsNullOrEmpty(dateFrom))
+            {
+                if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to))
+                {
+                    logs = _logsRepository.GetLogsForPeriod(DateTime.Today, to).ToList();
+                }
+            }
+            else if (!string.IsNullOrEmpty(dateTo) && !string.IsNullOrEmpty(dateFrom))
+            {
+                if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to) 
+                    && DateTime.TryParse(dateFrom, CultureInfo.InvariantCulture, DateTimeStyles.None, out var from))
+                {
+                    logs = _logsRepository.GetLogsForPeriod(from, to).ToList();
+                }
+            }
+            else
+            {
+                logs = _logsRepository.GetAllLogs().ToList();
+            }
 
             if (!logs.Any())
             {

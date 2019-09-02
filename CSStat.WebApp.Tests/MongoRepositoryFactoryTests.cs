@@ -50,14 +50,18 @@ namespace CSStat.WebApp.Tests
         }
 
         [Test]
-        public void GetLogsForPeriod()
+        public void GetPLayersLogsForPeriod()
         {
-            var startDate = DateTime.ParseExact(@"08/20/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
-            var endDate = DateTime.ParseExact(@"08/20/2019 - 12:20:32", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
-            var logs =_logRepository.GetLogsForPeriod(startDate, endDate);
-            foreach (var logModel in logs)
+            var startDate = DateTime.ParseExact(@"08/26/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(@"08/26/2019 - 23:59:32", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            var logs =_playerRepository.GetStatsForAllPlayers(startDate.ToString(CultureInfo.InvariantCulture), endDate.ToString(CultureInfo.InvariantCulture));
+
+            if (logs.Any())
             {
-                Console.WriteLine(logModel.DateTime);
+                foreach (var logModel in logs)
+                {
+                    PrintPlayerStat(logModel);
+                }
             }
         }
 
@@ -115,6 +119,8 @@ namespace CSStat.WebApp.Tests
                 ? log.FavoriteGun.ToString()
                 : log.FavoriteGun.GetDescription();
 
+            Console.WriteLine(Environment.NewLine);
+
             Console.WriteLine(
                 ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
                 $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
@@ -126,6 +132,8 @@ namespace CSStat.WebApp.Tests
             var action = string.IsNullOrEmpty(log.Action.GetDescription())
                 ? log.Action.ToString()
                 : log.Action.GetDescription();
+
+            Console.WriteLine(Environment.NewLine);
 
             Console.WriteLine(
                 ($"PlayerName: {log.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.Victim.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
