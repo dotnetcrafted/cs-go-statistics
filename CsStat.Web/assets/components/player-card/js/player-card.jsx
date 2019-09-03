@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import {
     Card, Descriptions, Avatar, Empty, Divider
 } from 'antd';
@@ -12,17 +11,17 @@ const PlayerCard = (props) => {
         const model = _getPlayerViewModel(props.selectedPlayer, props.playersData);
         return (
             <Card
-                cover={getCover(model.ImagePath)}
+                className='player-card'
+                cover={getCover(model)}
             >
                 <Meta
                     avatar={getAvatar(model.ImagePath)}
-                    title={model.NickName}
-                    description={model.FullName}
+                    title={model.Name}
                 />
                 <Divider orientation="left">Player's Statistics</Divider>
                 <Descriptions>
                     <Descriptions.Item label="Kills">{model.Kills}</Descriptions.Item>
-                    <Descriptions.Item label="Death">{model.Death}</Descriptions.Item>
+                    <Descriptions.Item label="Deaths">{model.Deaths}</Descriptions.Item>
                     <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
                     <Descriptions.Item label="HeadShot">{model.HeadShot}</Descriptions.Item>
                     <Descriptions.Item label="Total Games">{model.TotalGames}</Descriptions.Item>
@@ -42,28 +41,27 @@ const PlayerCard = (props) => {
 };
 
 
-const getCover = (src) => {
-    if (src) {
-        return <img alt={model.NickName} src={model.ImagePath}/>;
+const getCover = (model) => {
+    if (model.ImagePath) {
+        return <img alt={model.Name} src='https://i.imgur.com/69Ig9Mi.jpg'/>;
     }
     return false;
 };
 
 const getAvatar = (src) => {
     if (src) {
-        return <Avatar src={src} />;
+        return <Avatar className='player-card__avatar' src='https://i.imgur.com/69Ig9Mi.jpg' />;
     }
     return <Avatar icon="user" />;
 };
 
 const _getPlayerViewModel = (id, data) => {
-    const playersRow = data.filter((item) => item.Player.Id === id)[0];
+    const playersRow = data.filter((item) => item.Id === id)[0];
     return {
-        NickName: playersRow.Player.NickName,
-        FullName: playersRow.Player.FullName,
-        ImagePath: playersRow.Player.ImagePath,
+        Name: playersRow.Name,
+        ImagePath: playersRow.ImagePath,
         Kills: playersRow.Kills,
-        Death: playersRow.Death,
+        Deaths: playersRow.Deaths,
         Assists: playersRow.Assists,
         HeadShot: playersRow.HeadShot,
         TotalGames: playersRow.TotalGames,

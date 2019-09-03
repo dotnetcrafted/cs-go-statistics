@@ -2,4 +2,8 @@
     &__row {
         background-color: $color-white;
     }
+
+    &__avatar {
+        @include object-fit-image-parent();
+    }
 }

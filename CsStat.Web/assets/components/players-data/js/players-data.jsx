@@ -19,7 +19,7 @@ class PlayersData extends React.Component {
                 },
                 {
                     title: 'Player Name',
-                    dataIndex: 'NickName',
+                    dataIndex: 'Name',
                 },
                 {
                     title: 'K/D Ratio',
@@ -30,8 +30,8 @@ class PlayersData extends React.Component {
                     dataIndex: 'Kills',
                 },
                 {
-                    title: 'Death',
-                    dataIndex: 'Death',
+                    title: 'Deaths',
+                    dataIndex: 'Deaths',
                 },
                 {
                     title: 'Detailed Info',
@@ -66,7 +66,7 @@ class PlayersData extends React.Component {
 
     getAvatar(link, record) {
         if (record.avatar) {
-            return <Avatar src={link} />;
+            return <Avatar className='players-data__avatar' src='https://i.imgur.com/69Ig9Mi.jpg' />;
         }
         return <Avatar icon="user" />;
     }
@@ -74,12 +74,12 @@ class PlayersData extends React.Component {
     setViewModel() {
         const playersData = this.props.playersData.map((item, i) => ({
             key: i,
-            avatar: item.Player.ImagePath,
-            NickName: item.Player.NickName,
+            avatar: item.ImagePath,
+            Name: item.Name,
             KdRatio: item.KdRatio,
             Kills: item.Kills,
-            Death: item.Death,
-            Button: item.Player.Id
+            Deaths: item.Deaths,
+            Button: item.Id
         }));
         return playersData;
     }

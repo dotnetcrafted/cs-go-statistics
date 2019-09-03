@@ -4,6 +4,7 @@ const fetchPlayers = () => (dispatch) => {
     fetch('api/playersdata')
         .then((res) => res.json())
         .then((players) => {
+            players = typeof players === 'string' ? JSON.parse(players) : players;
             dispatch({
                 type: FETCH_PLAYERS_DATA,
                 payload: players

@@ -1,5 +1,5 @@
-.players-data {
-    &__row {
-        background-color: $color-white;
+.player-card {
+    &__avatar {
+        @include object-fit-image-parent();
     }
 }
