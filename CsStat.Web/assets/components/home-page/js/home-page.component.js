@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import DcBaseComponent from '../../../general/js/dc/dc-base-component';
 import HomePage from './home-page';
 import PlayersData from '../../players-data/js/players-data';
+import PlayerCard from '../../player-card/js/player-card';
 
 export default class HomePageComponent extends DcBaseComponent {
     static getNamespace() {
@@ -15,10 +16,11 @@ export default class HomePageComponent extends DcBaseComponent {
         } = this.options;
 
         ReactDOM.render(
-            <HomePage>
-                <PlayersData
-                    playersDataUrl={playersDataUrl}
-                />
+            <HomePage
+                playersData={<PlayersData playersDataUrl={playersDataUrl} />}
+                playerCard={<PlayerCard/>}
+            >
+
             </HomePage>,
             this.element
         );

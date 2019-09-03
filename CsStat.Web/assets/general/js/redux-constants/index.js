@@ -1,0 +1,2 @@
+export const SELECT_PLAYER = 'SELECT_PLAYER';
+export const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
