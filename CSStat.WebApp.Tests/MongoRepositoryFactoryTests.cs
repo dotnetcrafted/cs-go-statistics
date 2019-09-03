@@ -77,11 +77,11 @@ namespace CSStat.WebApp.Tests
             }
         }
         [Test]
-        [TestCase(@"\Images\test1.jpg")]
+        [TestCase(@"\Files\Images\test.jpg")]
         public void UpdatePlayer(string imagePath)
         {
-            var player = _playerRepository.GetPlayerByNickName("Radik F.");
-            _playerRepository.UpdatePlayer(player.Id, "Radik", "Faiskhanov", imagePath);
+            var player = _playerRepository.GetPlayerByNickName("Host");
+            _playerRepository.UpdatePlayer(player.Id, "Danil", "Shilov", imagePath);
         }
         [Test]
         public void GetPlayer()

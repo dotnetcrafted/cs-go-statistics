@@ -20,7 +20,7 @@ namespace CSStat.WebApp.Controllers
         {
             _playerRepository = playerRepository;
 
-    }
+        }
         public ActionResult Index()
         {
             return View();

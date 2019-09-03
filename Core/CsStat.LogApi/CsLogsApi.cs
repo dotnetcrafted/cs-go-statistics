@@ -134,7 +134,7 @@ namespace CsStat.LogApi
 
         private static Teams GetTeam(string line)
         {
-            return line.Contains("CT")
+            return line.Contains("<CT>")
                 ? Teams.Ct
                 : Teams.T;
         }
