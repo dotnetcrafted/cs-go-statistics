@@ -1,0 +1,17 @@
+.guns-chart {
+    &__text {
+        font-size: 12px;
+        font-weight: bold;
+        background-color: $color-white;
+        color: $color-grey;
+        padding: 10px 50px 10px 20px;
+        border: 1px solid $color-light-grey;
+        border-radius: 3px;
+    }
+
+    &__container {
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,7 +1,7 @@
 import { FETCH_PLAYERS_DATA, SELECT_PLAYER } from '../redux-constants';
 
-const fetchPlayers = () => (dispatch) => {
-    fetch('api/playersdata')
+const fetchPlayers = (playersDataUrl) => (dispatch) => {
+    fetch(playersDataUrl)
         .then((res) => res.json())
         .then((players) => {
             players = typeof players === 'string' ? JSON.parse(players) : players;

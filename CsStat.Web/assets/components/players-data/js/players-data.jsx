@@ -47,7 +47,7 @@ class PlayersData extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchPlayers();
+        this.props.fetchPlayers(this.props.playersDataUrl);
     }
 
     renderButton = (data) => {

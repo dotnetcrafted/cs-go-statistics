@@ -4,6 +4,7 @@ import {
     Card, Descriptions, Avatar, Empty, Divider
 } from 'antd';
 import { connect } from 'react-redux';
+import GunsChart from './guns-chart';
 
 const { Meta } = Card;
 const PlayerCard = (props) => {
@@ -12,10 +13,10 @@ const PlayerCard = (props) => {
         return (
             <Card
                 className='player-card'
-                cover={getCover(model)}
+                cover={renderCover(model)}
             >
                 <Meta
-                    avatar={getAvatar(model.ImagePath)}
+                    avatar={renderAvatar(model.ImagePath)}
                     title={model.Name}
                 />
                 <Divider orientation="left">Player's Statistics</Divider>
@@ -33,22 +34,21 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Assists Per Game">{model.AssistsPerGame}</Descriptions.Item>
                     <Descriptions.Item label="Death Per Game">{model.DeathPerGame}</Descriptions.Item>
                 </Descriptions>
-
+                <Divider orientation="left">Guns usage chart</Divider>
+                { model.Guns && <GunsChart guns={model.Guns} />}
             </Card>
         );
     }
     return <Empty/>;
 };
-
-
-const getCover = (model) => {
+const renderCover = (model) => {
     if (model.ImagePath) {
-        return <img alt={model.Name} src='https://i.imgur.com/69Ig9Mi.jpg'/>;
+        return <div className='player-card__cover-wrapper'><img alt={model.Name} src='https://i.imgur.com/69Ig9Mi.jpg'/></div>;
     }
     return false;
 };
 
-const getAvatar = (src) => {
+const renderAvatar = (src) => {
     if (src) {
         return <Avatar className='player-card__avatar' src='https://i.imgur.com/69Ig9Mi.jpg' />;
     }
@@ -71,7 +71,8 @@ const _getPlayerViewModel = (id, data) => {
         KdRatio: playersRow.KdRatio,
         KillsPerGame: playersRow.KillsPerGame,
         AssistsPerGame: playersRow.AssistsPerGame,
-        DeathPerGame: playersRow.DeathPerGame
+        DeathPerGame: playersRow.DeathPerGame,
+        Guns: playersRow.Guns
     };
 };
 

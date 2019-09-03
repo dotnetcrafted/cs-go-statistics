@@ -18,7 +18,7 @@ export default class HomePageComponent extends DcBaseComponent {
         ReactDOM.render(
             <HomePage
                 playersData={<PlayersData playersDataUrl={playersDataUrl} />}
-                playerCard={<PlayerCard/>}
+                playerCard={<PlayerCard />}
             >
 
             </HomePage>,

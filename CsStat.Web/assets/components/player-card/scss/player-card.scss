@@ -1,4 +1,12 @@
 .player-card {
+    &__cover-wrapper {
+        @include object-fit-image-parent();
+
+        position: relative;
+        width: 100%;
+        height: 400px;
+    }
+
     &__avatar {
         @include object-fit-image-parent();
     }
