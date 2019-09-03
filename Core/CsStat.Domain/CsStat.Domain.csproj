@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\Log.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Entities\PlayerStats.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\GunsEnum.cs" />
+    <Compile Include="Models\AchieveModel.cs" />
+    <Compile Include="Models\GunModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

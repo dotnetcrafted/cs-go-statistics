@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.Domain.Entities;
+using CsStat.Web.Models;
 using Newtonsoft.Json;
 
 namespace CSStat.WebApp.Controllers
@@ -19,7 +21,7 @@ namespace CSStat.WebApp.Controllers
             _playerRepository = playerRepository;
 
     }
-        public ActionResult Index(string dateFrom, string dateTo)
+        public ActionResult Index()
         {
             return View();
         }
@@ -27,7 +29,7 @@ namespace CSStat.WebApp.Controllers
         public ActionResult GetReposutory()
         {
 
-            var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio); // = GetStat(dateGromm dateTo).OrderByDescending(x => x.KdRatio)
+            var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio); // =  GetStat(string dateFrom, string dateTo).OrderByDescending(x=>x.Points).ThenByDescending(x=>x.KdRatio);
             var json = JsonConvert.SerializeObject(playersStat);
             var result = new JsonResult
             {
@@ -37,9 +39,9 @@ namespace CSStat.WebApp.Controllers
             return result;
         }
 
-        private IEnumerable<PlayerStatsModel> GetStat(string dateFrom, string dateTo)
+        private List<PlayerStatsViewModel> GetStat(string dateFrom="", string dateTo="")
         {
-            return _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo);
+            return Mapper.Map<List<PlayerStatsViewModel>>(_playerRepository.GetStatsForAllPlayers(dateFrom, dateTo));
         }
     }
 }

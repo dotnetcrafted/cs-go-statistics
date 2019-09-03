@@ -52,9 +52,9 @@ namespace CSStat.WebApp.Tests
         [Test]
         public void GetPLayersLogsForPeriod()
         {
-            var startDate = DateTime.ParseExact(@"08/26/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
-            var endDate = DateTime.ParseExact(@"08/26/2019 - 23:59:32", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
-            var logs =_playerRepository.GetStatsForAllPlayers(startDate.ToString(CultureInfo.InvariantCulture), endDate.ToString(CultureInfo.InvariantCulture));
+            //var startDate = DateTime.ParseExact(@"08/26/2019 - 12:17:29", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            //var endDate = DateTime.ParseExact(@"08/26/2019 - 23:59:32", "MM/dd/yyyy - HH:mm:ss", CultureInfo.InvariantCulture);
+            var logs =_playerRepository.GetStatsForAllPlayers();
 
             if (logs.Any())
             {
@@ -115,15 +115,16 @@ namespace CSStat.WebApp.Tests
 
         private static void PrintPlayerStat(PlayerStatsModel log)
         {
-            var gun = string.IsNullOrEmpty(log.FavoriteGun.GetDescription())
-                ? log.FavoriteGun.ToString()
-                : log.FavoriteGun.GetDescription();
+            var gun = string.IsNullOrEmpty(log.Guns.FirstOrDefault()?.Gun.GetDescription())
+                ? log.Guns.FirstOrDefault()?.Gun.ToString()
+                : log.Guns.FirstOrDefault()?.Gun.GetDescription();
 
             Console.WriteLine(Environment.NewLine);
 
             Console.WriteLine(
                 ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
-                $"K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
+                $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
+                $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.Achieve.GetDescription()).ToList())}," +
                 $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 

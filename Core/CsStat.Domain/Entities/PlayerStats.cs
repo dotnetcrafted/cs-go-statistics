@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
-using CsStat.Domain.Definitions;
+using System.Collections.Generic;
+using CsStat.Domain.Models;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities
@@ -15,7 +15,11 @@ namespace CsStat.Domain.Entities
         public int TotalGames { get; set; }
         public int Defuse { get; set; }
         public int Explode { get; set; }
-        public Guns FavoriteGun { get; set; }
+        public int Points { get; set; }
+        public int FriendlyKills { get; set; }
+        public int SniperRifleKills { get; set; }
+        public List<AchieveModel> Achievements { get; set; }
+        public List<GunModel>Guns { get; set; }
         public double KdRatio
         {
             get

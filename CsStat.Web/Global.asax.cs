@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using CSStat.WebApp.Controllers;
 using CSStat.WebApp.Infrastructure;
 
 namespace CsStat.Web
@@ -13,6 +14,7 @@ namespace CsStat.Web
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Mapper.Initialize(cfg => cfg.AddProfiles(typeof(HomeController)));
         }
     }
 }
