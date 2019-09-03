@@ -6,6 +6,7 @@ namespace CsStat.Web.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string ImagePath { get; set; }
         public int Points { get; set; }
         public int Kills { get; set; }
         public int Deaths { get; set; }

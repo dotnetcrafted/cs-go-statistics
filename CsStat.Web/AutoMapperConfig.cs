@@ -25,6 +25,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.ExplodedBombs, opts => opts.MapFrom(src => src.Explode))
                     .ForMember(dest => dest.FriendlyKills, opts => opts.MapFrom(src => src.FriendlyKills))
                     .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
+                    .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.Player.ImagePath))
                     .ForMember(dest => dest.KdRatio, opts => opts.MapFrom(src => src.KdRatio))
                     .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills))
                     .ForMember(dest => dest.KillsPerGame, opts => opts.MapFrom(src => src.KillsPerGame))
