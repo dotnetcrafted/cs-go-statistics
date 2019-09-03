@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Avatar } from 'antd';
+import {
+    Table, Avatar, Button, Icon
+} from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../../general/js/redux-actions';
+import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
 
 class PlayersData extends React.Component {
     constructor(props) {
@@ -30,6 +32,13 @@ class PlayersData extends React.Component {
                 {
                     title: 'Death',
                     dataIndex: 'Death',
+                },
+                {
+                    title: 'Detailed Info',
+                    key: 'Button',
+                    fixed: 'right',
+                    width: 100,
+                    render: (data) => this.renderButton(data),
                 }
             ],
             playersData: [],
@@ -41,6 +50,19 @@ class PlayersData extends React.Component {
         this.props.fetchPlayers();
     }
 
+    renderButton = (data) => {
+        return (
+            <Button type="dashed" onClick={()=>this.onRowButtonClick(data.Button)}>
+                Show more
+                <Icon type='right' />
+            </Button>
+        )
+    }
+
+    onRowButtonClick =(id)=> {
+        this.props.selectPlayer(id);
+    }
+
 
     getAvatar(link, record) {
         if (record.avatar) {
@@ -49,21 +71,22 @@ class PlayersData extends React.Component {
         return <Avatar icon="user" />;
     }
 
-    setViewModel(data) {
-        const playersData = data.map((item, i) => ({
+    setViewModel() {
+        const playersData = this.props.playersData.map((item, i) => ({
             key: i,
             avatar: item.Player.ImagePath,
             NickName: item.Player.NickName,
             KdRatio: item.KdRatio,
             Kills: item.Kills,
-            Death: item.Death
+            Death: item.Death,
+            Button: item.Player.Id
         }));
         return playersData;
     }
 
     render() {
         const { isLoading, columns } = this.state;
-        const playersData = this.setViewModel(this.props.playersData);
+        const playersData = this.setViewModel();
         return (
             <Table
                 className="players-data"
@@ -74,6 +97,7 @@ class PlayersData extends React.Component {
                 loading={isLoading}
                 size="middle"
                 bordered={true}
+                scroll={{ x: true }}
             />
         );
     }
@@ -82,10 +106,13 @@ class PlayersData extends React.Component {
 PlayersData.propTypes = {
     playersDataUrl: PropTypes.string.isRequired,
     playersData: PropTypes.object.isRequired,
-    fetchPlayers: PropTypes.func.isRequired
+    fetchPlayers: PropTypes.func.isRequired,
+    selectedPlayer: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-    playersData: state.items.items
-});
-export default connect(mapStateToProps, { fetchPlayers })(PlayersData);
+const mapStateToProps = (state) => {
+    const playersData = state.players.allPlayers;
+    const selectedPlayer = state.players.selectedPlayer;
+    return { playersData, selectedPlayer }
+};
+export default connect(mapStateToProps, { fetchPlayers, selectPlayer })(PlayersData);

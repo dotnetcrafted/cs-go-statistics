@@ -24,7 +24,7 @@ const HomePage = (props) => (
                     <Col xs={24} lg={12}>
                         {props.playersData}
                     </Col>
-                    <Col xs={24} lg={12}>
+                    <Col xs={24} lg={{ span: 10, offset: 1 }}>
                         {props.playerCard}
                     </Col>
                 </Row>
