@@ -16,6 +16,7 @@ namespace CsStat.Web.Models
         public int DeathsPerGame { get; set; }
         public int DefusedBombs { get; set; }
         public int ExplodedBombs { get; set; }
+        public int TotalGames { get; set; }
         public double HeadShot { get; set; }
         public double KdRatio { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }

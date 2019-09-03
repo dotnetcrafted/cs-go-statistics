@@ -29,11 +29,11 @@ namespace CSStat.WebApp.Controllers
         public ActionResult GetReposutory()
         {
 
-            var playersStat = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x => x.KdRatio); // =  GetStat(string dateFrom, string dateTo).OrderByDescending(x=>x.Points).ThenByDescending(x=>x.KdRatio);
+            var playersStat =  GetStat().OrderByDescending(x=>x.Points).ThenByDescending(x=>x.KdRatio);
             var json = JsonConvert.SerializeObject(playersStat);
             var result = new JsonResult
             {
-                Data = playersStat,
+                Data = json,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
             return result;
