@@ -19,12 +19,13 @@ export default class GunsChart extends React.Component {
 
     componentWillMount() {
         const {guns} = this.props;
-        
-        const colors = this._getColors(guns);
-        const data = this._getData(guns, colors);
-        const legendItems = this._getLegend(guns, colors);
-        this.setState({colors, data, legendItems});
+        this._updateState(guns);
     }
+    componentWillReceiveProps(nextProps) {
+        const {guns} = nextProps;
+        this._updateState(guns);
+    }
+    
     render() {
         const { data, legendItems, hoveredChartSection } = this.state;
         return (
@@ -56,6 +57,13 @@ export default class GunsChart extends React.Component {
                 </RadialChart>
             </div>
         );
+    }
+
+    _updateState(guns) {
+        const colors = this._getColors(guns);
+        const data = this._getData(guns, colors);
+        const legendItems = this._getLegend(guns, colors);
+        this.setState({colors, data, legendItems});
     }
     _getData = (guns, colors) => ( guns.map((g) => ({
         theta: g.Kills,
