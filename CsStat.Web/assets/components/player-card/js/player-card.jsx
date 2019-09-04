@@ -7,9 +7,12 @@ import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 
 const { Meta } = Card;
+const VISIBLE_GUNS = 5;
+
 const PlayerCard = (props) => {
     if (props.selectedPlayer) {
         const model = _getPlayerViewModel(props.selectedPlayer, props.playersData);
+        const gunsToShow = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
             <Card
                 className='player-card'
@@ -34,8 +37,8 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Assists Per Game">{model.AssistsPerGame}</Descriptions.Item>
                     <Descriptions.Item label="Death Per Game">{model.DeathPerGame}</Descriptions.Item>
                 </Descriptions>
-                <Divider orientation="left">Guns usage chart</Divider>
-                { model.Guns && <GunsChart guns={model.Guns} />}
+                <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
+                {gunsToShow && <GunsChart guns={gunsToShow} />}
             </Card>
         );
     }
@@ -54,6 +57,7 @@ const renderAvatar = (src) => {
     }
     return <Avatar icon="user" />;
 };
+
 
 const _getPlayerViewModel = (id, data) => {
     const playersRow = data.filter((item) => item.Id === id)[0];

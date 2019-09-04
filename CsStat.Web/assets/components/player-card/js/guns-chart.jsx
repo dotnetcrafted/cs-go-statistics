@@ -13,27 +13,25 @@ export default class GunsChart extends React.Component {
             data: [],
             colors: [],
             legendItems: [],
-            hoveredChartSection: false,
-            hoveredLegendItem: false
+            hoveredChartSection: false
         };
     }
 
     componentWillMount() {
         const {guns} = this.props;
+        
         const colors = this._getColors(guns);
         const data = this._getData(guns, colors);
         const legendItems = this._getLegend(guns, colors);
         this.setState({colors, data, legendItems});
     }
     render() {
-        const { data, legendItems, value, hoveredChartSection, hoveredLegendItem } = this.state;
+        const { data, legendItems, hoveredChartSection } = this.state;
         return (
             <div className="guns-chart__container">
                 <DiscreteColorLegend
                     className="guns-chart__legend"
                     items={legendItems}
-                    onItemMouseEnter={i => this.setState({hoveredLegendItem: i})}
-                    onItemMouseLeave={() => this.setState({hoveredLegendItem: false})}
                 />
                 <RadialChart
                     className={'donut-chart-example'}
