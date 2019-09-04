@@ -29,13 +29,13 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
                     <Descriptions.Item label="HeadShot">{model.HeadShot}</Descriptions.Item>
                     <Descriptions.Item label="Total Games">{model.TotalGames}</Descriptions.Item>
-                    <Descriptions.Item label="Defuse">{model.Defuse}</Descriptions.Item>
-                    <Descriptions.Item label="Explode">{model.Explode}</Descriptions.Item>
-                    <Descriptions.Item label="Favorite Gun">{model.FavoriteGun}</Descriptions.Item>
+                    <Descriptions.Item label="Defused Bombs">{model.DefusedBombs}</Descriptions.Item>
+                    <Descriptions.Item label="Exploded Bombs">{model.ExplodedBombs}</Descriptions.Item>
                     <Descriptions.Item label="Kd Ratio">{model.KdRatio}</Descriptions.Item>
                     <Descriptions.Item label="Kills Per Game">{model.KillsPerGame}</Descriptions.Item>
                     <Descriptions.Item label="Assists Per Game">{model.AssistsPerGame}</Descriptions.Item>
-                    <Descriptions.Item label="Death Per Game">{model.DeathPerGame}</Descriptions.Item>
+                    <Descriptions.Item label="Deaths Per Game">{model.DeathsPerGame}</Descriptions.Item>
+                    <Descriptions.Item label="Friendly Kills">{model.FriendlyKills}</Descriptions.Item>
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
@@ -69,13 +69,13 @@ const _getPlayerViewModel = (id, data) => {
         Assists: playersRow.Assists,
         HeadShot: playersRow.HeadShot,
         TotalGames: playersRow.TotalGames,
-        Defuse: playersRow.Defuse,
-        Explode: playersRow.Explode,
-        FavoriteGun: playersRow.FavoriteGun,
+        DefusedBombs: playersRow.DefusedBombs,
+        ExplodedBombs: playersRow.ExplodedBombs,
         KdRatio: playersRow.KdRatio,
         KillsPerGame: playersRow.KillsPerGame,
         AssistsPerGame: playersRow.AssistsPerGame,
-        DeathPerGame: playersRow.DeathPerGame,
+        DeathsPerGame: playersRow.DeathsPerGame,
+        FriendlyKills: playersRow.FriendlyKills,
         Guns: playersRow.Guns
     };
 };

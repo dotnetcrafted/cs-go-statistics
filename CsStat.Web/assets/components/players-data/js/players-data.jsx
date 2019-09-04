@@ -22,6 +22,10 @@ class PlayersData extends React.Component {
                     dataIndex: 'Name',
                 },
                 {
+                    title: 'Points',
+                    dataIndex: 'Points',
+                },
+                {
                     title: 'K/D Ratio',
                     dataIndex: 'KdRatio',
                 },
@@ -76,6 +80,7 @@ class PlayersData extends React.Component {
             key: i,
             avatar: item.ImagePath,
             Name: item.Name,
+            Points: item.Points,
             KdRatio: item.KdRatio,
             Kills: item.Kills,
             Deaths: item.Deaths,
