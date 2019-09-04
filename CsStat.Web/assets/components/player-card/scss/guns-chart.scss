@@ -12,6 +12,10 @@
     &__container {
         padding: 20px 0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
+    }
+
+    &__legend {
+        margin-right: 40px;
     }
 }
