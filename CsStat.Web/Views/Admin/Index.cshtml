@@ -1,13 +1,9 @@
-﻿@model List<CsStat.Web.Models.PlayerModelDto>
-
-<div>
-        @foreach (var item in Model)
-        {
-            <ul class="list-group">
-                <li class="list-group-item">
-                    @Html.ActionLink(item.NickName, "ModifyPlayerPartial", new {userName = item.NickName})
-                </li>
-            </ul>
-        }
+﻿<body>
+<div id="players">
+    @{Html.RenderAction("PlayerList","Admin");}
 </div>
+<div id="content">
+    
+</div>
+</body>
 

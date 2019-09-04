@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.Web.Models;
@@ -22,15 +23,19 @@ namespace CsStat.Web.Controllers
             if (Session["UserName"] == null)
                 return RedirectToAction("Index", "Login");
 
-            var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers());
+            var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers()).Select(x=>x.NickName);
             return View(player);
 
         }
 
-        [ChildActionOnly]
-        public PartialViewResult ModifyPlayerPartial(string nickName)
+        public PartialViewResult PlayerList()
         {
-            return PartialView(Mapper.Map<PlayerModelDto>(_playerRepository.GetPlayerByNickName(nickName)));
+            var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers()).Select(x => x.NickName);
+            return PartialView(player);
+        }
+        public PartialViewResult PlayerInfo(string nickName)
+        {
+            return PartialView();
         }
     }
 }
