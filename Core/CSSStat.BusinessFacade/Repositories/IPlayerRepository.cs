@@ -11,6 +11,6 @@ namespace BusinessFacade.Repositories
         Player GetPlayerById(string id);
         string AddPlayer(Player player);
         void AddPlayers(List<Player> players);
-        void UpdatePlayer(string id, string firstName = null, string secondName = null, string imagePath = null);
+        void UpdatePlayer(string id=null, string nickName = null,string firstName = null, string secondName = null, string imagePath = null);
     }
 }

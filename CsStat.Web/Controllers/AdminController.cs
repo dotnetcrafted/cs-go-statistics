@@ -23,19 +23,20 @@ namespace CsStat.Web.Controllers
             if (Session["UserName"] == null)
                 return RedirectToAction("Index", "Login");
 
-            var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers()).Select(x=>x.NickName);
-            return View(player);
+            var players = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers());
 
+            return View(players);
         }
 
-        public PartialViewResult PlayerList()
+        [HttpPost]
+        public ActionResult Update(List<PlayerModelDto> model)
         {
-            var player = Mapper.Map<List<PlayerModelDto>>(_playerRepository.GetAllPlayers()).Select(x => x.NickName);
-            return PartialView(player);
-        }
-        public PartialViewResult PlayerInfo(string nickName)
-        {
-            return PartialView();
+            foreach (var player in model)
+            {
+                _playerRepository.UpdatePlayer(null,player.NickName, player.FirstName, player.SecondName, player.ImagePath);    
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -78,29 +78,31 @@ namespace BusinessFacade.Repositories.Implementations
         }
 
 
-        public void UpdatePlayer(string id,string firstName = null, string secondName = null, string imagePath = null)
+        public void UpdatePlayer(string id=null, string nickName=null ,string firstName = null, string secondName = null, string imagePath = null)
         {
-            var player = GetPlayerById(id);
+            Player player;
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                player = GetPlayerById(id);
+            }
+            else if (!string.IsNullOrEmpty(nickName))
+            {
+                player = GetPlayerByNickName(nickName);
+            }
+            else
+            {
+                return;
+            }
 
             if (player == null)
             {
                 return;
             }
 
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                player.FirstName = firstName;
-            }
-
-            if (!string.IsNullOrEmpty(secondName))
-            {
-                player.SecondName = secondName;
-            }
-
-            if (!string.IsNullOrEmpty(imagePath))
-            {
-                player.ImagePath = imagePath;
-            }
+            player.FirstName = firstName;
+            player.SecondName = secondName;
+            player.ImagePath = imagePath;
 
             _mongoRepository.GetRepository<Player>().Collection.Save(player);
         }
