@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Table, Avatar, Button, Icon
+    Table, Avatar, Button, Icon, Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
@@ -22,11 +22,19 @@ class PlayersData extends React.Component {
                     dataIndex: 'Name',
                 },
                 {
-                    title: 'Points',
+                    title: (data)=>(
+                        <Tooltip title="Kills + Assists + (Defuses + Exploded Bombs) * 5 - Friendly Kills * 2">
+                            Points
+                        </Tooltip>
+                    ),
                     dataIndex: 'Points',
                 },
                 {
-                    title: 'K/D Ratio',
+                    title: (data)=>(
+                        <Tooltip title="Kills / Deaths">
+                            K/D Ratio
+                        </Tooltip>
+                    ),
                     dataIndex: 'KdRatio',
                 },
                 {
