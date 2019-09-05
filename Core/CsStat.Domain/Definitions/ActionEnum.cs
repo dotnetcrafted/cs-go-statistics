@@ -11,7 +11,7 @@ namespace CsStat.LogApi.Enums
         [LogValue("killed by the bomb")]
         KilledByBomb,
 
-        [LogValue("killed")]
+        [LogValue(" killed ")]
         [Description("Kill")]
         Kill,
 

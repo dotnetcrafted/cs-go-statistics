@@ -112,7 +112,7 @@ namespace BusinessFacade.Repositories.Implementations
                         Assists = assists,
                         FriendlyKills = friendlyKills,
                         TotalGames = _logs.Count(x =>x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame),
-                        HeadShot = Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot) / (double) kills *100, 2),
+                        HeadShot = Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action==Actions.Kill) / (double) kills *100, 2),
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
@@ -170,7 +170,7 @@ namespace BusinessFacade.Repositories.Implementations
         {
             return !logs.Any()
                 ? null
-                : logs.GroupBy(x => x.Gun).Select(r => new GunModel
+                : logs.Where(x=>x.Action==Actions.Kill).GroupBy(x => x.Gun).Select(r => new GunModel
                        {
                            Gun = r.Key,
                            Kills = r.Count()
