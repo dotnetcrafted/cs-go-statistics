@@ -160,7 +160,17 @@ namespace CsStat.LogApi
         private static Guns GetGun(string gun)
         {
             var attributeList = Guns.Null.GetAttributeList();
-            var gunIndex = attributeList.FirstOrDefault(x => x.Value.Contains(gun))?.Key ?? 0;
+
+            var gunIndex = 0;
+
+            foreach (var attribute in attributeList)
+            {
+                if (gun.Contains(attribute.Value))
+                {
+                    gunIndex = attribute.Key;
+                }
+            }
+
             return (Guns) gunIndex;
         }
 
