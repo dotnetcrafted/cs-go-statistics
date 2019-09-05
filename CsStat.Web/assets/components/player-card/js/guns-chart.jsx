@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
-import { Typography, Badge } from 'antd';
+import { Typography, Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
+import MapGunNameToImageUrl from './gun-image-map';
 
 const { Text  } = Typography;
 export default class GunsChart extends React.Component {
@@ -13,7 +14,9 @@ export default class GunsChart extends React.Component {
             data: [],
             colors: [],
             legendItems: [],
-            hoveredChartSection: false
+            hoveredChartSection: false,
+            selectedImageUrl: '',
+            selectedImageName: ''
         };
     }
 
@@ -27,21 +30,30 @@ export default class GunsChart extends React.Component {
     }
     
     render() {
-        const { data, legendItems, hoveredChartSection } = this.state;
+        const {guns} = this.props;
+        const { data, legendItems, hoveredChartSection, selectedImageUrl, selectedImageName } = this.state;
         return (
             <div className="guns-chart__container">
                 <DiscreteColorLegend
                     className="guns-chart__legend"
                     items={legendItems}
+                    onItemMouseEnter={(item) => this._setStateForImage(item.id)}
+                    onItemMouseLeave={() => this._resetStateForImage()}
                 />
                 <RadialChart
-                    className={'donut-chart-example'}
+                    className='guns-chart__chart'
                     innerRadius={50}
                     radius={100}
                     getAngle={(d) => d.theta}
                     data={data}
-                    onValueMouseOver={(v) => this.setState({ hoveredChartSection: v })}
-                    onSeriesMouseOut={(v) => this.setState({ hoveredChartSection: false })}
+                    onValueMouseOver={(v) => {
+                        this._setStateForImage(v.id);
+                        this.setState({ hoveredChartSection: v });
+                    }}
+                    onSeriesMouseOut={(v) => {
+                        // this._resetStateForImage();
+                        this.setState({ hoveredChartSection: false });
+                    }}
                     width={200}
                     height={200}
                     padAngle={0.04}
@@ -55,6 +67,20 @@ export default class GunsChart extends React.Component {
                         </Hint>
                     }
                 </RadialChart>
+                <div className="guns-chart__card-wrapper">
+                    {selectedImageUrl &&
+                        <Card
+                            className="guns-chart__card"
+                            size="small"
+                            title={selectedImageName}
+                            bodyStyle={{position: 'relative', flex: '1'}}
+                        >
+                            <div className="guns-chart__img-wrapper">
+                                <img src={selectedImageUrl}></img>
+                            </div>
+                        </Card>
+                    }
+                </div>
             </div>
         );
     }
@@ -68,6 +94,7 @@ export default class GunsChart extends React.Component {
     _getData = (guns, colors) => ( guns.map((g) => ({
         theta: g.Kills,
         label: g.Name,
+        id: g.Id,
         style: {
             fill: colors.find(c => c.id === g.Id).color,
             stroke:false
@@ -82,8 +109,21 @@ export default class GunsChart extends React.Component {
     })))
     _getLegend = (guns, colors) => ( guns.map((g) => ({
         title: `${g.Name}: ${g.Kills} kills`,
+        id: g.Id,
         color: colors.find(c => c.id === g.Id).color
     })))
+
+    _setStateForImage = (id) => {
+        const { guns } = this.props;
+        const selectedImageUrl = MapGunNameToImageUrl(guns.find(g => g.Id === id).Name);
+        const selectedImageName = guns.find(g => g.Id === id).Name;
+        this.setState({ selectedImageUrl, selectedImageName})
+    }
+
+    _resetStateForImage() {
+        this.setState({ selectedImageUrl: '', selectedImageName: ''})
+    }
+
 }
 GunsChart.propTypes = {
     guns: PropTypes.array.isRequired,
