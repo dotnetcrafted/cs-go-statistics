@@ -13,7 +13,7 @@ namespace CsStat.Web
             (
                 name: "getrepository",
                 url: "api/playersdata",
-                defaults: new { controller = "Home", action = "GetReposutory", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

@@ -86,7 +86,7 @@ namespace BusinessFacade.Repositories.Implementations
         {
             _logs = GetLogs(dateFrom, dateTo);
 
-            if (!_logs.Any())
+            if (_logs==null || !_logs.Any())
             {
                 return null;
             }
