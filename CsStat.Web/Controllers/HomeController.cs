@@ -28,7 +28,7 @@ namespace CSStat.WebApp.Controllers
         [HttpGet]
         public ActionResult GetRepository(string dateFrom = "", string dateTo="")
         {
-            var playersStat =  GetStat(dateFrom,dateTo)?.OrderByDescending(x=>x.Points).ThenByDescending(x=>x.KdRatio).ToList();
+            var playersStat =  GetStat(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();
             var json = JsonConvert.SerializeObject(playersStat);
             var result = new JsonResult
             {

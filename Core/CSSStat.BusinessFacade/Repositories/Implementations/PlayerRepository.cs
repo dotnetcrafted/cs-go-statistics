@@ -112,20 +112,21 @@ namespace BusinessFacade.Repositories.Implementations
                 var friendlyKills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
                 var assists = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist);
                 var kills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
-
+                var death = _logs.Count(x => x.Victim?.Id == player.Id);
+                var totalGames = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 playersStats.Add(new PlayerStatsModel
                     {
                         Player = player,
                         Kills = kills,
-                        Death = _logs.Count(x => x.Victim?.Id == player.Id),
+                        Death = death,
                         Assists = assists,
                         FriendlyKills = friendlyKills,
-                        TotalGames = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame),
-                        HeadShot = Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2),
+                        TotalGames = totalGames,
+                        HeadShot = kills==0 ? Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) : 0,
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
-                        Points = kills + assists + (defuse + explodeBombs) * 5 - friendlyKills * 2,
+                        Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - kills/2,
                         SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0
                     });
             }
