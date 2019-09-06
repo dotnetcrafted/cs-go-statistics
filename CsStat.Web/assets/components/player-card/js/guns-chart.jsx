@@ -51,7 +51,7 @@ export default class GunsChart extends React.Component {
                         this.setState({ hoveredChartSection: v });
                     }}
                     onSeriesMouseOut={(v) => {
-                        // this._resetStateForImage();
+                        this._resetStateForImage();
                         this.setState({ hoveredChartSection: false });
                     }}
                     width={200}
