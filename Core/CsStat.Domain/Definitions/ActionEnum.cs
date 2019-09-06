@@ -8,10 +8,13 @@ namespace CsStat.LogApi.Enums
         [Description("Unknown")]
         Unknown,
 
+        [LogValue("killed other")]
+        Other,
+
         [LogValue("killed by the bomb")]
         KilledByBomb,
 
-        [LogValue(" killed ")]
+        [LogValue("killed")]
         [Description("Kill")]
         Kill,
 
@@ -35,6 +38,8 @@ namespace CsStat.LogApi.Enums
 
         [LogValue("entered the game")]
         EnteredTheGame
+
+
 
     }
 }

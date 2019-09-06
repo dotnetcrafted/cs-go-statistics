@@ -5,10 +5,13 @@ namespace CsStat.Domain.Definitions
 {
     public enum Guns
     {
+        [IsSniperRifle(false)]
         Unknown,
 
+        [IsSniperRifle(false)]
         Null,
 
+        [IsSniperRifle(false)]
         Bomb,
 
         [Description("Glock-18")]
@@ -177,8 +180,8 @@ namespace CsStat.Domain.Definitions
         [IsSniperRifle(false)]
         Famas,
 
-        [Description("M4A4")]
-        [LogValue("m4a4")]
+        [Description("M4A1")]
+        [LogValue("m4a1")]
         [IsSniperRifle(false)]
         M4,
 

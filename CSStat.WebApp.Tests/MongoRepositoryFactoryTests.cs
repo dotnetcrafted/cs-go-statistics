@@ -68,7 +68,7 @@ namespace CSStat.WebApp.Tests
         [Test]
         public void GetPlayers()
         {
-            var players = _playerRepository.GetStatsForAllPlayers();
+            var players = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x=>x.Points);
 
             foreach (var player in players)
             {
@@ -87,6 +87,17 @@ namespace CSStat.WebApp.Tests
         public void GetPlayer()
         {
             PrintPlayer(_playerRepository.GetPlayerByNickName("Radik F."));
+        }
+
+        [Test]
+        public void GetSteamId()
+        {
+            const string idFormLog = "STEAM_1:1:35063322";
+            const long firstId = 76561197960265728;
+            var idNumber = int.Parse(idFormLog.Split(':').Last());
+            var universe = int.Parse(idFormLog.Split(':')[1]);
+            var steamId = idNumber * 2 + firstId + universe;
+            Console.WriteLine(steamId);
         }
 
         [Test]
@@ -115,9 +126,9 @@ namespace CSStat.WebApp.Tests
 
         private static void PrintPlayerStat(PlayerStatsModel log)
         {
-            var gun = string.IsNullOrEmpty(log.Guns.FirstOrDefault()?.Gun.GetDescription())
-                ? log.Guns.FirstOrDefault()?.Gun.ToString()
-                : log.Guns.FirstOrDefault()?.Gun.GetDescription();
+            var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
+                ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
+                : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
 
             Console.WriteLine(Environment.NewLine);
 

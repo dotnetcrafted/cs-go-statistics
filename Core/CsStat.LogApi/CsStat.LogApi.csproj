@@ -47,8 +47,11 @@
     <Compile Include="CsLogsApi.cs" />
     <Compile Include="Interfaces\ICsLogsApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SteamApi.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSSStat.BusinessFacade\BusinessFacade.csproj">
       <Project>{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}</Project>

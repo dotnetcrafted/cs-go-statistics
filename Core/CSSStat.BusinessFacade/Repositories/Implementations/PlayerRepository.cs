@@ -96,29 +96,39 @@ namespace BusinessFacade.Repositories.Implementations
             if(!players.Any())
                 return null;
 
-            var playersStats = (from player in players
-                let guns = GetGuns(_logs.Where(x =>x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList())
-                let sniperRifle = guns.Where(x=>x.Gun.GetAttribute<IsSniperRifleAttribute>().Value)
-                let explodeBombs = GetExplodeBombs(_logs.Where(x =>x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList())
-                let defuse = _logs.Count(x =>x.Player?.Id== player.Id && x.Action == Actions.Defuse)
-                let friendlyKills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill)
-                let assists = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist)
-                let kills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill)
-                    select new PlayerStatsModel
+            var playersStats = new List<PlayerStatsModel>();
+
+            foreach (var player in players)
+            {
+                if (player.NickName.Contains("chicken"))
+                {
+                    continue;
+                }
+
+                var guns = GetGuns(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
+                var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
+                var explodeBombs = GetExplodeBombs(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList());
+                var defuse = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Defuse);
+                var friendlyKills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
+                var assists = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist);
+                var kills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
+
+                playersStats.Add(new PlayerStatsModel
                     {
                         Player = player,
                         Kills = kills,
                         Death = _logs.Count(x => x.Victim?.Id == player.Id),
                         Assists = assists,
                         FriendlyKills = friendlyKills,
-                        TotalGames = _logs.Count(x =>x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame),
-                        HeadShot = Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action==Actions.Kill) / (double) kills *100, 2),
+                        TotalGames = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame),
+                        HeadShot = Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2),
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
-                        Points = kills + assists + (defuse+explodeBombs)*5 - friendlyKills * 2,
-                        SniperRifleKills = sniperRifle?.Select(x=>x.Kills).Sum() ?? 0
-                    }).ToList();
+                        Points = kills + assists + (defuse + explodeBombs) * 5 - friendlyKills * 2,
+                        SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0
+                    });
+            }
 
             var achievements = GetAchievements(playersStats);
 

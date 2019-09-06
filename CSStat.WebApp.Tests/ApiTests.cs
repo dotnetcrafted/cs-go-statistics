@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
+using CsStat.Domain.Entities;
 using DataService;
 using NUnit.Framework;
 
@@ -15,7 +17,7 @@ namespace CSStat.WebApp.Tests
         private static readonly CsStat.LogApi.CsLogsApi _api = new CsStat.LogApi.CsLogsApi();
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\logs.txt")]
+        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\log.txt")]
         public static void ParseLogs(string file)
         {
             var logs = string.Empty;
@@ -26,6 +28,12 @@ namespace CSStat.WebApp.Tests
             }
 
             var parsedLogs = _api.ParseLogs(logs.Split('\n').ToList());
+
+            if (parsedLogs == null)
+            {
+                return;
+            }
+
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             logRepository.InsertBatch(parsedLogs);
 
@@ -82,6 +90,20 @@ namespace CSStat.WebApp.Tests
                 }
             }
         }
+            private static void PrintLog(Log log)
+            {
+                var action = string.IsNullOrEmpty(log.Action.GetDescription())
+                    ? log.Action.ToString()
+                    : log.Action.GetDescription();
+
+                Console.WriteLine(Environment.NewLine);
+
+                Console.WriteLine(
+                    ($"PlayerName: {log?.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log?.Victim.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
+                     $"Gun: {log.Gun.GetDescription()},IsHeadshot: {log.IsHeadShot},DateTime: {log.DateTime.ToString(new CultureInfo("ru-RU", false).DateTimeFormat)}")
+                    .Replace(',', '\n'));
+                Console.WriteLine(Environment.NewLine);
+            }
     }
 }
 

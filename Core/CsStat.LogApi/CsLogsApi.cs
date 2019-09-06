@@ -28,9 +28,31 @@ namespace CsStat.LogApi
         }
         public List<Log> ParseLogs(List<string> logs)
         {
-            return !logs.Any()
+            var list = new List<Log>();
+
+            foreach (var logLine in logs)
+            {
+                if (!IsClearString(logLine))
+                {
+                    continue;
+                }
+
+                var parsed = ParseLine(logLine);
+
+                if (parsed != null)
+                {
+                    list.Add(parsed);
+                }
+            }
+
+            return !list.Any()
                 ? null 
-                : (from logLine in logs from attribute in _attributeList where logLine.Contains(attribute.Value) select ParseLine(logLine)).ToList();
+                : list;
+        }
+
+        private static bool IsClearString(string logLine)
+        {
+            return !logLine.Contains("_killed") && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
         }
         private Log ParseLine(string logLine)
         {
@@ -40,10 +62,14 @@ namespace CsStat.LogApi
                 ? GetAction(splitLine[3].Trim())
                 : GetAction(splitLine[2].Trim());
 
-            Log result;
+            var result = new Log();
 
             switch (action)
             {
+                case Actions.Other:
+                    result.Action = Actions.Other;
+                    break;
+
                 case Actions.Kill:
                     result = new Log
                     {
@@ -56,6 +82,7 @@ namespace CsStat.LogApi
                         IsHeadShot = logLine.Contains("headshot"),
                         Gun = GetGun(splitLine[5].Trim())
                     };
+
                     break;
                 case Actions.TargetBombed:
                     result = new Log
@@ -98,9 +125,14 @@ namespace CsStat.LogApi
                     break;
             }
 
-            if (result.PlayerTeam == result.VictimTeam)
+            if (result.Action==Actions.Kill && result.PlayerTeam == result.VictimTeam)
             {
                 result.Action = Actions.FriendlyKill;
+            }
+            else if(result.Action == Actions.Other)
+
+            {
+                return null;
             }
 
             return result;
@@ -151,10 +183,17 @@ namespace CsStat.LogApi
 
         private static Actions GetAction(string action)
         {
-            return (from attribute in _attributeList
-                    where action.Contains(attribute.Value)
-                    select attribute.Key into actionIndex
-                        select (Actions) actionIndex).FirstOrDefault();
+            foreach (var attribute in _attributeList)
+            {
+                if (action.Contains(attribute.Value))
+                {
+                    var actionIndex = attribute.Key;
+                    var actions = (Actions)actionIndex;
+                    return actions;
+                }
+            }
+
+            return Actions.Unknown;
         }
 
         private static Guns GetGun(string gun)
