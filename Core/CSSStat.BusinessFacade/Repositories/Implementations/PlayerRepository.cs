@@ -122,7 +122,7 @@ namespace BusinessFacade.Repositories.Implementations
                         Assists = assists,
                         FriendlyKills = friendlyKills,
                         TotalGames = totalGames,
-                        HeadShot = kills==0 ? Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) : 0,
+                        HeadShot = kills==0 ? 0 : Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) ,
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
