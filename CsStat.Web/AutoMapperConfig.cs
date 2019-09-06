@@ -33,12 +33,11 @@ namespace CsStat.Web
                     .ForMember(dest => dest.TotalGames, opts => opts.MapFrom(src => src.TotalGames))
                     .AfterMap((s, d, context) =>
                     {
-                        if (s.Guns.Any())
+                        if (s.Guns != null && s.Guns.Any())
                         {
                             d.Guns = context.Mapper.Map<List<GunViewModel>>(s.Guns);
                         }
-
-                        if (s.Achievements.Any())
+                        if (s.Achievements != null &&  s.Achievements.Any())
                         {
                             d.Achievements = context.Mapper.Map<List<AchievementViewModel>>(s.Achievements);
                         }

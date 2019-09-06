@@ -70,12 +70,39 @@ namespace CSStat.WebApp.Tests
         {
             var players = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x=>x.Points);
 
+            MappingTest(players);
+
             foreach (var player in players)
             {
                 PrintPlayerStat(player);
                 Console.WriteLine(Environment.NewLine);
             }
         }
+        private void MappingTest(IOrderedEnumerable<PlayerStatsModel> players)
+        {
+            foreach (var player in players)
+            {
+                var id = player.Player.Id;
+                var nick = player.Player.NickName;
+                var assists = player.Assists;
+                var assistsPerGame = player.AssistsPerGame;
+                var death = player.Death;
+                var playerDeathPerGame = player.DeathPerGame;
+                var playerDefuse = player.Defuse;
+                var playerExplode = player.Explode;
+                var friendlyKillsa = player.FriendlyKills;
+                var headShot = player.HeadShot;
+                var imagePatha = player.Player.ImagePath;
+                var kdRatio = player.KdRatio;
+                var PlayerKills = player.Kills;
+                var killsPerGame = player.KillsPerGame;
+                var playerPoints = player.Points;
+                var games = player.TotalGames;
+                var guns = player.Guns;
+                var achieve = player.Achievements;
+            }
+        }
+
         [Test]
         [TestCase(@"\Files\Images\test.jpg")]
         public void UpdatePlayer(string imagePath)

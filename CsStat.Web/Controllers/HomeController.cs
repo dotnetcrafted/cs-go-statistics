@@ -40,7 +40,9 @@ namespace CSStat.WebApp.Controllers
 
         private List<PlayerStatsViewModel> GetStat(string dateFrom="", string dateTo="")
         {
-            return Mapper.Map<List<PlayerStatsViewModel>>(_playerRepository.GetStatsForAllPlayers(dateFrom, dateTo));
+            var statsForAllPlayers = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo);
+
+            return Mapper.Map<List<PlayerStatsViewModel>>(statsForAllPlayers);
         }
     }
 }
