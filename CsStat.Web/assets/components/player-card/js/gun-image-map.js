@@ -62,8 +62,8 @@ const MapGunNameToImageUrl = (name) => {
             return 'https://vignette.wikia.nocookie.net/cswikia/images/3/35/CSGO_G3SG1_Inventory.png/revision/latest/scale-to-width-down/400?cb=20130813202929';
         case 'FAMAS':
             return 'https://vignette.wikia.nocookie.net/cswikia/images/e/e4/CSGO_FAMAS_Inventory.png/revision/latest/scale-to-width-down/400?cb=20130813202130';
-        case 'M4A4':
-            return 'https://vignette.wikia.nocookie.net/cswikia/images/7/77/CSGO_M4A4_Inventory.png/revision/latest/scale-to-width-down/400?cb=20130813202347';
+        case 'M4A1':
+            return 'https://vignette.wikia.nocookie.net/cswikia/images/4/4e/M4a1hud_cz.png/revision/latest/scale-to-width-down/400?cb=20100819134432';
         case 'M4A1-S':
             return 'https://vignette.wikia.nocookie.net/cswikia/images/8/81/CSGO_M4A1-S_Inventory.png/revision/latest/scale-to-width-down/400?cb=20130824215315';
         case 'AUG':
