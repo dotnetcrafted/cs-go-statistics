@@ -53,8 +53,7 @@ class PlayersData extends React.Component {
                     render: (data) => this.renderButton(data),
                 }
             ],
-            playersData: [],
-            isLoading: false
+            playersData: []
         };
     }
 
@@ -77,8 +76,8 @@ class PlayersData extends React.Component {
 
 
     getAvatar(link, record) {
-        if (record.avatar) {
-            return <Avatar className='players-data__avatar' src='https://i.imgur.com/69Ig9Mi.jpg' />;
+        if (record.ImagePath) {
+            return <Avatar className='players-data__avatar' src={record.ImagePath} />;
         }
         return <Avatar icon="user" />;
     }
@@ -86,7 +85,7 @@ class PlayersData extends React.Component {
     setViewModel() {
         const playersData = this.props.playersData.map((item, i) => ({
             key: i,
-            avatar: item.ImagePath,
+            ImagePath: item.ImagePath,
             Name: item.Name,
             Points: item.Points,
             KdRatio: item.KdRatio,
@@ -98,7 +97,8 @@ class PlayersData extends React.Component {
     }
 
     render() {
-        const { isLoading, columns } = this.state;
+        const {isLoading} = this.props;
+        const { columns } = this.state;
         const playersData = this.setViewModel();
         return (
             <Table
@@ -111,6 +111,7 @@ class PlayersData extends React.Component {
                 size="middle"
                 bordered={true}
                 scroll={{ x: true }}
+                loading={isLoading}
             />
         );
     }
@@ -120,12 +121,14 @@ PlayersData.propTypes = {
     playersDataUrl: PropTypes.string.isRequired,
     playersData: PropTypes.object.isRequired,
     fetchPlayers: PropTypes.func.isRequired,
-    selectedPlayer: PropTypes.string.isRequired
+    selectedPlayer: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
     const playersData = state.players.allPlayers;
     const selectedPlayer = state.players.selectedPlayer;
-    return { playersData, selectedPlayer }
+    const isLoading = state.players.isLoading;
+    return { playersData, selectedPlayer, isLoading }
 };
 export default connect(mapStateToProps, { fetchPlayers, selectPlayer })(PlayersData);

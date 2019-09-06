@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Card, Descriptions, Avatar, Empty, Divider
+    Card, Descriptions, Avatar, Empty, Divider, Typography
 } from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 
+const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
 
@@ -16,18 +17,17 @@ const PlayerCard = (props) => {
         return (
             <Card
                 className='player-card'
-                cover={renderCover(model)}
             >
                 <Meta
                     avatar={renderAvatar(model.ImagePath)}
-                    title={model.Name}
+                    title={<Title level={2}>{model.Name}</Title>}
                 />
                 <Divider orientation="left">Player's Statistics</Divider>
                 <Descriptions>
                     <Descriptions.Item label="Kills">{model.Kills}</Descriptions.Item>
                     <Descriptions.Item label="Deaths">{model.Deaths}</Descriptions.Item>
                     <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
-                    <Descriptions.Item label="HeadShot">{model.HeadShot}</Descriptions.Item>
+                    <Descriptions.Item label="HeadShot %">{model.HeadShot}</Descriptions.Item>
                     <Descriptions.Item label="Total Games">{model.TotalGames}</Descriptions.Item>
                     <Descriptions.Item label="Defused Bombs">{model.DefusedBombs}</Descriptions.Item>
                     <Descriptions.Item label="Exploded Bombs">{model.ExplodedBombs}</Descriptions.Item>
@@ -42,20 +42,14 @@ const PlayerCard = (props) => {
             </Card>
         );
     }
-    return <Empty/>;
-};
-const renderCover = (model) => {
-    if (model.ImagePath) {
-        return <div className='player-card__cover-wrapper'><img alt={model.Name} src='https://i.imgur.com/69Ig9Mi.jpg'/></div>;
-    }
-    return false;
+    return <Empty description="Choose a player from table"/>;
 };
 
 const renderAvatar = (src) => {
     if (src) {
-        return <Avatar className='player-card__avatar' src='https://i.imgur.com/69Ig9Mi.jpg' />;
+        return <Avatar size={48} shape="square" className='player-card__avatar' src={src} />;
     }
-    return <Avatar icon="user" />;
+    return <Avatar size={48} shape="square" icon="user" />;
 };
 
 
