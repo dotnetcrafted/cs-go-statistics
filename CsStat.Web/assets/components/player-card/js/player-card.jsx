@@ -27,7 +27,7 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Kills">{model.Kills}</Descriptions.Item>
                     <Descriptions.Item label="Deaths">{model.Deaths}</Descriptions.Item>
                     <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
-                    <Descriptions.Item label="HeadShot">{model.HeadShot}</Descriptions.Item>
+                    <Descriptions.Item label="HeadShot %">{model.HeadShot}</Descriptions.Item>
                     <Descriptions.Item label="Total Games">{model.TotalGames}</Descriptions.Item>
                     <Descriptions.Item label="Defused Bombs">{model.DefusedBombs}</Descriptions.Item>
                     <Descriptions.Item label="Exploded Bombs">{model.ExplodedBombs}</Descriptions.Item>
