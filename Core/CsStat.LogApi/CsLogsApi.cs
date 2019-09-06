@@ -6,6 +6,7 @@ using System.Linq;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
+using CsStat.Domain;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
@@ -19,12 +20,14 @@ namespace CsStat.LogApi
     {
         private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
         private static IPlayerRepository _playerRepository;
+        private static ISteamApi _steamApi;
         private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
         public CsLogsApi()
         {
             var connectionString = new ConnectionStringFactory();
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
             _playerRepository = new PlayerRepository(new MongoRepositoryFactory(connectionString));
+            _steamApi = new SteamApi();
         }
         public List<Log> ParseLogs(List<string> logs)
         {
@@ -74,10 +77,10 @@ namespace CsStat.LogApi
                     result = new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
-                        Player = GetPlayer(GetClearName(splitLine[1].Trim())),
+                        Player = GetPlayer(splitLine[1]),
                         PlayerTeam = GetTeam(splitLine[1].Trim()),
                         Action = action,
-                        Victim = GetPlayer(GetClearName(splitLine[3].Trim())),
+                        Victim = GetPlayer(splitLine[3]),
                         VictimTeam = GetTeam(splitLine[3].Trim()),
                         IsHeadShot = logLine.Contains("headshot"),
                         Gun = GetGun(splitLine[5].Trim())
@@ -104,7 +107,7 @@ namespace CsStat.LogApi
                         Player = null,
                         PlayerTeam = Teams.Null,
                         Action = action,
-                        Victim = GetPlayer(GetClearName(splitLine[1].Trim())),
+                        Victim = GetPlayer(splitLine[1]),
                         VictimTeam = GetTeam(splitLine[1].Trim()),
                         IsHeadShot = false,
                         Gun = Guns.Bomb
@@ -114,7 +117,7 @@ namespace CsStat.LogApi
                     result = new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
-                        Player = GetPlayer(GetClearName(splitLine[1].Trim())),
+                        Player = GetPlayer(splitLine[1]),
                         PlayerTeam = GetTeam(splitLine[1].Trim()),
                         Action = action,
                         Victim = null,
@@ -138,8 +141,10 @@ namespace CsStat.LogApi
             return result;
         }
 
-        private static Player GetPlayer(string nickName)
+        private static Player GetPlayer(string playerString)
         {
+            var nickName = GetClearName(playerString.Trim());
+
             var player = _playerRepository.GetPlayerByNickName(nickName);
 
             if (player != null)
@@ -147,9 +152,16 @@ namespace CsStat.LogApi
                 return player;
             }
 
+            var steamId = GetSteamId(playerString);
+
+            var imagePath = _steamApi.GetAvatarUrlBySteamId(steamId)?.FirstOrDefault().Value ?? "";
+
             player = new Player
             {
-                NickName = nickName
+                NickName = nickName,
+                SteamId = steamId,
+                ImagePath = imagePath
+
             };
 
             var playerId = _playerRepository.AddPlayer(player);
@@ -162,6 +174,16 @@ namespace CsStat.LogApi
         private static string GetClearName(string name)
         {
             return name.Split('<')[0];
+        }
+
+        private static string GetSteamId(string steamString)
+        {
+            var idFromLog = steamString.Split('<')[2].TrimEnd('>');
+            var firstId = Settings.FirstSteamId;
+            var idNumber = int.Parse(idFromLog.Split(':').Last());
+            var universe = int.Parse(idFromLog.Split(':')[1]);
+            var steamId = idNumber * 2 + firstId + universe;
+            return steamId.ToString();
         }
 
         private static Teams GetTeam(string line)

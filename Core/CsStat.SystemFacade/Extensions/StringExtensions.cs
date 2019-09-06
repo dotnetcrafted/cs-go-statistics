@@ -18,5 +18,17 @@
                 ? parsedValue
                 : defaultValue;
         }
+
+        public static long ParseOrDefault(this string value, long defaultValue)
+        {
+            if (value.IsEmpty())
+            {
+                return defaultValue;
+            }
+
+            return int.TryParse(value, out var parsedValue)
+                ? parsedValue
+                : defaultValue;
+        }
     }
 }

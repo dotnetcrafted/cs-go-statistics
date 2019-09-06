@@ -80,7 +80,7 @@ namespace CSStat.WebApp.Tests
 
         }
 
-            private static IEnumerable<string> FilterInt(this IEnumerable<string> list)
+        private static IEnumerable<string> FilterInt(this IEnumerable<string> list)
         {
             foreach (var item in list)
             {

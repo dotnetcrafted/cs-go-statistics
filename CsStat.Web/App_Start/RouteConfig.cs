@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using CsStat.Domain;
 
 namespace CsStat.Web
 {
@@ -12,7 +13,7 @@ namespace CsStat.Web
             routes.MapRoute
             (
                 name: "getrepository",
-                url: "api/playersdata",
+                url: Settings.PlayersDataApiPath,
                 defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 

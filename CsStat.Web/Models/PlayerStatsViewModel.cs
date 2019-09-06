@@ -5,6 +5,7 @@ namespace CsStat.Web.Models
     public class PlayerStatsViewModel
     {
         public string Id { get; set; }
+        public string SteamId { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public int Points { get; set; }

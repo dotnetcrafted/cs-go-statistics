@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
+using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using DataService;
 using DataService.Interfaces;
@@ -37,6 +38,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IConnectionStringFactory>().To<ConnectionStringFactory>();
             _kernel.Bind<ILogsRepository>().To<LogsRepository>();
             _kernel.Bind<IPlayerRepository>().To<PlayerRepository>();
+            _kernel.Bind<ISteamApi>().To<SteamApi>();
         }
     }
 }

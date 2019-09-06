@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BusinessFacade.Repositories;
+using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Interfaces;
 

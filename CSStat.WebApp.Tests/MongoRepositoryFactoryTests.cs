@@ -8,6 +8,7 @@ using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
+using CsStat.LogApi.Enums;
 using CSStat.WebApp.Tests.Entity;
 using DataService;
 using DataService.Interfaces;
@@ -66,11 +67,9 @@ namespace CSStat.WebApp.Tests
         }
 
         [Test]
-        public void GetPlayers()
+        public void GetPlayersInfo()
         {
             var players = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x=>x.Points);
-
-            MappingTest(players);
 
             foreach (var player in players)
             {
@@ -111,9 +110,10 @@ namespace CSStat.WebApp.Tests
             _playerRepository.UpdatePlayer(player.Id, "Danil", "Shilov", imagePath);
         }
         [Test]
-        public void GetPlayer()
+        public void GetPlayers()
         {
-            PrintPlayer(_playerRepository.GetPlayerByNickName("Radik F."));
+            var players = _playerRepository.GetAllPlayers();
+            players.ToList().ForEach(PrintPlayer);
         }
 
         [Test]
@@ -130,8 +130,13 @@ namespace CSStat.WebApp.Tests
         [Test]
         public void GetLogs()
         {
-            var logs = _logRepository.GetAllLogs().Where(x => x.Gun == Guns.Unknown).ToList();
+            var logs = _logRepository.GetAllLogs().Where(x => x.Action == Actions.Defuse && x.Player.NickName=="DJoony").ToList();
             logs.ForEach(PrintLog);
+        }
+        [Test]
+        public void GetSteamAvatars()
+        {
+            var players = _playerRepository.GetAllPlayers();
         }
 
         private static byte[] ReadImage(string path)
@@ -149,6 +154,7 @@ namespace CSStat.WebApp.Tests
         private static void PrintPlayer(Player player)
         {
             Console.WriteLine($"First Name: {player.FirstName},Second Name: {player.SecondName},Nick Name: {player.NickName},Image: {player.ImagePath}".Replace(',', '\n'));
+            Console.WriteLine(Environment.NewLine);
         }
 
         private static void PrintPlayerStat(PlayerStatsModel log)
@@ -175,7 +181,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(Environment.NewLine);
 
             Console.WriteLine(
-                ($"PlayerName: {log.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.Victim.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
+                ($"PlayerName: {log.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.Victim?.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
                 $"Gun: {log.Gun.GetDescription()},IsHeadshot: {log.IsHeadShot},DateTime: {log.DateTime.ToString(new CultureInfo("ru-RU", false).DateTimeFormat)}")
                     .Replace(',', '\n'));
             Console.WriteLine(Environment.NewLine);

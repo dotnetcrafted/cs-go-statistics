@@ -1,6 +1,7 @@
 ﻿using System;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
+using CsStat.Domain;
 using CsStat.LogApi;
 using DataService;
 
