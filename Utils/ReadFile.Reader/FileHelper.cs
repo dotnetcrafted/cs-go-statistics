@@ -75,5 +75,13 @@ namespace ReadFile.Reader
             }
             return lineCount;
         }
+
+        public static long FileLengthInBytes(string path)
+        {
+            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                return fileStream.Length;
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -15,8 +15,9 @@ namespace ReadFile.Reader
         private readonly string logsPath;
         private static string _lastFile = "";
 
+        private static string _lastReadLine = "";
 
-        private static int _skip = 0;
+        private static long _skip = 0;
         private static readonly int _take = Settings.TakeLines;
         private static readonly int _fileReadNewLinesInterval = Settings.FileReadNewLinesInterval;
 
@@ -81,23 +82,51 @@ namespace ReadFile.Reader
 
         private void WatchDirectory()
         {
-            Console.WriteLine("Watch directory");
+            ColorConsole.Yellow("Watch directory");
 
             var allFiles = Directory.GetFiles(logsPath);
             var newFiles = allFiles.Except(logFileRepository.GetFiles().Select(x => x.Name)).ToArray();
 
             if (!newFiles.Any() && !_isThereFileInQueue)
-                return;
+            {
+                if (allFiles.Length != 0 && allFiles.Last() != _lastFile)
+                {
+                    _lastFile = allFiles.Length > 0 ? allFiles.Last() : _lastFile;
 
-            Console.WriteLine("There are new files or there is file in queue");
+                    var logFile = logFileRepository.GetFileByName(_lastFile);
+                    _skip = logFile.Lenght;
+
+                    ReadLinesFromFile();
+                }
+                return;
+            }
+
+            ColorConsole.Yellow("There are new files or there is file in queue");
             foreach (var file in newFiles)
             {
-                var lines = File.ReadAllLines(file);
-                _skip = lines.Length;
-                
-                logRepository.InsertBatch(parsers.ParseLogs(lines.ToList()));
+                var lines = new List<string>();
+                long position;
+                using (var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var streamReader = new StreamReader(fileStream))
+                    {
+                        streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
+                        while (streamReader.Peek() >= 0)
+                        {
+                            lines.Add(streamReader.ReadLine());
+                        }
+                        position = streamReader.BaseStream.Length;
+                    }
+                }
 
-                logFileRepository.AddFile(new LogFile { Name = file});
+                _skip = position;
+
+                var logs = parsers.ParseLogs(lines.ToList()); 
+                ColorConsole.Yellow($"{logs.Count} logs will be added");
+                ColorConsole.Yellow($"Last read lines is {lines.Last()}");
+                logRepository.InsertBatch(logs);
+
+                logFileRepository.AddFile(new LogFile { Name = file, Lenght = position });
                 _isThereFileInQueue = true;
             }
 
@@ -105,44 +134,86 @@ namespace ReadFile.Reader
             {
                 _lastFile = newFiles.Length > 0 ? newFiles.Last() : _lastFile;
 
-                _cancellationTokenSource.Cancel();
+                ReadLinesFromFile();
+            }
+        }
 
-                if (_isTaskFinish)
+        private void ReadLinesFromFile()
+        {
+            _cancellationTokenSource.Cancel();
+
+            ColorConsole.Yellow($"Last read file is \"{_lastFile}\"");
+            if (_isTaskFinish)
+            {
+                _cancellationTokenSource = new CancellationTokenSource();
+                _cancellationToken = _cancellationTokenSource.Token;
+
+                var taskOptions = new TaskOptions
                 {
-                    _cancellationTokenSource = new CancellationTokenSource();
-                    _cancellationToken = _cancellationTokenSource.Token;
+                    Path = _lastFile,
+                    Skip = _skip
+                };
 
-                    Task.Factory.StartNew(x =>
+                Task.Factory.StartNew(x =>
+                {
+                    ColorConsole.Green("Check new lines in the file");
+
+                    _isThereFileInQueue = false;
+                    _isTaskFinish = false;
+
+                    var options = (TaskOptions)x;
+
+                    while (true)
                     {
-                        _isThereFileInQueue = false;
-                        _isTaskFinish = false;
-
-                        var path = (string) x;
-
-                        while (true)
+                        if (_cancellationToken.IsCancellationRequested && FileHelper.FileLengthInBytes(options.Path) <= options.Skip)
                         {
-                            var fileStream = File.Open(path, FileMode.Open);
-                            var totalLines = FileHelper.CountLines(fileStream);
-                            fileStream.Close();
-
-                            if (_cancellationToken.IsCancellationRequested && totalLines <= _skip)
-                            {
-                                _skip = 0;
-                                _isTaskFinish = true;
-                                _cancellationToken.ThrowIfCancellationRequested();
-                            }
-
-                            var lines = File.ReadLines(path).Skip(_skip).Take(_take).ToList();
-                            if (lines.Count > 0)
-                            {
-                                _skip += lines.Count;
-                                logRepository.InsertBatch(parsers.ParseLogs(lines));
-                            }
-
-                            Thread.Sleep(_fileReadNewLinesInterval);
+                            options.Skip = 0;
+                            _isTaskFinish = true;
+                            _cancellationToken.ThrowIfCancellationRequested();
                         }
-                    }, _lastFile, _cancellationToken);
-                }
+
+                        var lines = new List<string>();
+                        using (var fileStream = new FileStream(options.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        {
+                            using (var streamReader = new StreamReader(fileStream))
+                            {
+                                streamReader.BaseStream.Seek(options.Skip, SeekOrigin.Begin);
+                                while (streamReader.Peek() >= 0)
+                                {
+                                    var readLine = streamReader.ReadLine();
+                                    if (!string.IsNullOrEmpty(readLine))
+                                    {
+                                        lines.Add(readLine);
+                                        options.Skip = streamReader.BaseStream.Length;
+                                        logFileRepository.UpdateFile(new LogFile
+                                        {
+                                            Name = options.Path,
+                                            Lenght = options.Skip
+                                        });
+                                    }
+                                }
+                            }
+                        }
+
+                        if (lines.Count > 0)
+                        {
+                            var logs = parsers.ParseLogs(lines);
+                            if (logs != null)
+                            {
+                                ColorConsole.Yellow($"{logs.Count} logs will be added");
+
+                                logRepository.InsertBatch(logs);
+
+                                _lastReadLine = lines.Last();
+                            }
+                        }
+
+                        ColorConsole.Green($"New Lines were read {lines.Count}");
+                        ColorConsole.Green($"Last read line is \"{_lastReadLine}\"");
+
+                        Thread.Sleep(_fileReadNewLinesInterval);
+                    }
+                }, taskOptions, _cancellationToken);
             }
         }
     }

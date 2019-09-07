@@ -14,14 +14,14 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository = mongoRepository;
         }
 
-        public void InsertLog<T>(T entity) where T: Entity
+        public void InsertLog<T>(T entity) where T : Entity
         {
             _mongoRepository.GetRepository<T>().Collection.Insert(entity);
         }
 
-        public void InsertBatch<T>(IEnumerable<T> entities) where T: Entity
+        public void InsertBatch<T>(IEnumerable<T> entities) where T : Entity
         {
-            if(entities.Any())
+            if (entities != null && entities.Any())
                 _mongoRepository.GetRepository<T>().Collection.InsertBatch(entities);
         }
     }
