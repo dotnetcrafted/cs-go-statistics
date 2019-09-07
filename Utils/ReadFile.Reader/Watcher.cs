@@ -121,10 +121,13 @@ namespace ReadFile.Reader
 
                 _skip = position;
 
-                var logs = parsers.ParseLogs(lines.ToList()); 
-                ColorConsole.Yellow($"{logs.Count} logs will be added");
-                ColorConsole.Yellow($"Last read lines is {lines.Last()}");
-                logRepository.InsertBatch(logs);
+                var logs = parsers.ParseLogs(lines.ToList());
+                if (logs != null)
+                {
+                    ColorConsole.Yellow($"{logs.Count} logs will be added");
+                    ColorConsole.Yellow($"Last read lines is {lines.Last()}");
+                    logRepository.InsertBatch(logs);
+                }
 
                 logFileRepository.AddFile(new LogFile { Name = file, Lenght = position });
                 _isThereFileInQueue = true;

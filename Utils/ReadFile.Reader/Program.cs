@@ -11,11 +11,13 @@ namespace ReadFile.Reader
     {
         private static void Main()
         {
-            Console.WriteLine("Start");
+            ColorConsole.Default("Start");
 
             var parser = new CsLogsApi();
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             var fileRepository = new LogFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+
+            ColorConsole.Default($"Read logs from \"{Settings.LogsPath}\"");
 
             var watcher = new Watcher(Settings.LogsPath, parser, logRepository, fileRepository);
             
@@ -25,7 +27,7 @@ namespace ReadFile.Reader
 
             watcher.Stop();
 
-            Console.WriteLine("Finish");
+            ColorConsole.Default("Finish");
             Console.ReadLine();
         }
     }
