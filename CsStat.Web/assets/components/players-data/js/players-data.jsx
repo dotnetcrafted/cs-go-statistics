@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Table, Avatar, Button, Icon, Tooltip
+    Table, Avatar, Divider, Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
+import FilterForm from './filter-form';
 
 class PlayersData extends React.Component {
     constructor(props) {
@@ -51,13 +52,20 @@ class PlayersData extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchPlayers(this.props.playersDataUrl);
+        this._fetchPlayers(this.props.playersDataUrl);
     }
 
     _onRowButtonClick =(id)=> {
         this.props.selectPlayer(id);
     }
 
+    _fetchPlayers(url, params) {
+        this.props.fetchPlayers(url, params || {});
+    }
+
+    onFormSubmit = (params) => {
+        this._fetchPlayers(this.props.playersDataUrl, params);
+    }
 
     _getAvatar(link, record) {
         if (record.ImagePath) {
@@ -89,25 +97,30 @@ class PlayersData extends React.Component {
         const { columns } = this.state;
         const playersData = this._setViewModel();
         return (
-            <Table
-                className="players-data"
-                rowClassName="players-data__row"
-                columns={columns}
-                dataSource={playersData}
-                pagination={false}
-                loading={isLoading}
-                size="middle"
-                bordered={true}
-                scroll={{ x: true }}
-                loading={isLoading}
-                onRow={(record, rowIndex) => {
-                    return {
-                      onClick: () => {
-                        this._onRowClick(record, rowIndex);
-                      }
-                    };
-                  }}
-            />
+            <>
+                <Divider orientation="left">Choose Dates to Filter Statistics</Divider>
+                <FilterForm onFormSubmit={this.onFormSubmit} isLoading={this.props.isLoading} />
+                <Divider/>
+                <Table
+                    className="players-data"
+                    rowClassName="players-data__row"
+                    columns={columns}
+                    dataSource={playersData}
+                    pagination={false}
+                    loading={isLoading}
+                    size="middle"
+                    bordered={true}
+                    scroll={{ x: true }}
+                    loading={isLoading}
+                    onRow={(record, rowIndex) => {
+                        return {
+                        onClick: () => {
+                            this._onRowClick(record, rowIndex);
+                        }
+                        };
+                    }}
+                />
+            </>
         );
     }
 }

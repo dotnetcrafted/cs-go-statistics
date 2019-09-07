@@ -1,7 +1,16 @@
-import { FETCH_PLAYERS_DATA, SELECT_PLAYER } from '../redux-constants';
+import { FETCH_PLAYERS_DATA, SELECT_PLAYER, START_REQUEST } from '../redux-constants';
 
-const fetchPlayers = (playersDataUrl) => (dispatch) => {
-    fetch(playersDataUrl)
+const fetchPlayers = (playersDataUrl, params) => (dispatch) => {
+    const url = new URL(playersDataUrl, window.location.origin);
+    if (params) {
+        url.search = new URLSearchParams(params);
+    }
+
+    dispatch({
+        type: START_REQUEST
+    });
+
+    fetch(url)
         .then((res) => res.json())
         .then((players) => {
             players = typeof players === 'string' ? JSON.parse(players) : players;

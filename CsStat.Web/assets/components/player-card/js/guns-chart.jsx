@@ -61,7 +61,7 @@ export default class GunsChart extends React.Component {
                 >
                     {hoveredChartSection !== false &&
                         <Hint value={hoveredChartSection} >
-                            <Badge count={hoveredChartSection.theta}>
+                            <Badge count={hoveredChartSection.theta} overflowCount={10000}>
                                 <div className='guns-chart__text'>{hoveredChartSection.label}</div>
                             </Badge>
                         </Hint>

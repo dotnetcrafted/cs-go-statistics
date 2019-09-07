@@ -1,4 +1,4 @@
-import { FETCH_PLAYERS_DATA, SELECT_PLAYER } from '../redux-constants';
+import { FETCH_PLAYERS_DATA, SELECT_PLAYER, START_REQUEST } from '../redux-constants';
 
 
 const initialState = {
@@ -19,6 +19,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 selectedPlayer: action.payload
+            };
+
+        case START_REQUEST:
+            return {
+                ...state,
+                isLoading: true
             };
         default:
             return state;
