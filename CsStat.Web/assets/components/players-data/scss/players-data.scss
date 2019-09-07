@@ -1,6 +1,7 @@
 .players-data {
     &__row {
         background-color: $color-white;
+        cursor: pointer;
     }
 
     &__avatar {

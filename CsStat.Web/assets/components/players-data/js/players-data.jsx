@@ -14,7 +14,7 @@ class PlayersData extends React.Component {
             columns: [
                 {
                     dataIndex: 'avatar',
-                    render: (link, record) => this.getAvatar(link, record),
+                    render: (link, record) => this._getAvatar(link, record),
                     width: '5%',
                 },
                 {
@@ -44,13 +44,6 @@ class PlayersData extends React.Component {
                 {
                     title: 'Deaths',
                     dataIndex: 'Deaths',
-                },
-                {
-                    title: 'Detailed Info',
-                    key: 'Button',
-                    fixed: 'right',
-                    width: 100,
-                    render: (data) => this.renderButton(data),
                 }
             ],
             playersData: []
@@ -61,45 +54,40 @@ class PlayersData extends React.Component {
         this.props.fetchPlayers(this.props.playersDataUrl);
     }
 
-    renderButton = (data) => {
-        return (
-            <Button type="dashed" onClick={()=>this.onRowButtonClick(data.Button)}>
-                Show more
-                <Icon type='right' />
-            </Button>
-        )
-    }
-
-    onRowButtonClick =(id)=> {
+    _onRowButtonClick =(id)=> {
         this.props.selectPlayer(id);
     }
 
 
-    getAvatar(link, record) {
+    _getAvatar(link, record) {
         if (record.ImagePath) {
             return <Avatar className='players-data__avatar' src={record.ImagePath} />;
         }
         return <Avatar icon="user" />;
     }
 
-    setViewModel() {
+    _setViewModel() {
         const playersData = this.props.playersData.map((item, i) => ({
-            key: i,
+            key: item.Id,
             ImagePath: item.ImagePath,
             Name: item.Name,
             Points: item.Points,
             KdRatio: item.KdRatio,
             Kills: item.Kills,
-            Deaths: item.Deaths,
-            Button: item.Id
+            Deaths: item.Deaths
         }));
         return playersData;
+    }
+
+    _onRowClick(record, rowIndex) {
+        console.log(record, rowIndex);
+        this.props.selectPlayer(record.key);
     }
 
     render() {
         const {isLoading} = this.props;
         const { columns } = this.state;
-        const playersData = this.setViewModel();
+        const playersData = this._setViewModel();
         return (
             <Table
                 className="players-data"
@@ -112,6 +100,13 @@ class PlayersData extends React.Component {
                 bordered={true}
                 scroll={{ x: true }}
                 loading={isLoading}
+                onRow={(record, rowIndex) => {
+                    return {
+                      onClick: () => {
+                        this._onRowClick(record, rowIndex);
+                      }
+                    };
+                  }}
             />
         );
     }
