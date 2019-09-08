@@ -5,6 +5,7 @@ import {
 } from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
+import Achievements from './achievements';
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -19,8 +20,10 @@ const PlayerCard = (props) => {
                 className='player-card'
             >
                 <Meta
+                    className="player-card__meta"
                     avatar={renderAvatar(model.ImagePath)}
                     title={<Title level={2}>{model.Name}</Title>}
+                    description={<Achievements data={model.Achievements} />}
                 />
                 <Divider orientation="left">Player's Statistics</Divider>
                 <Descriptions>
@@ -70,7 +73,8 @@ const _getPlayerViewModel = (id, data) => {
         AssistsPerGame: playersRow.AssistsPerGame,
         DeathsPerGame: playersRow.DeathsPerGame,
         FriendlyKills: playersRow.FriendlyKills,
-        Guns: playersRow.Guns
+        Guns: playersRow.Guns,
+        Achievements: playersRow.Achievements
     };
 };
 

@@ -7,6 +7,17 @@
         height: 400px;
     }
 
+    &__meta {
+        .ant-card-meta-detail {
+            display: flex;
+        }
+
+        .ant-card-meta-description {
+            display: flex;
+            flex: 1;
+        }
+    }
+
     &__avatar {
         @include object-fit-image-parent();
     }

@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import store from '../../../general/js/redux-store';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
 
@@ -29,6 +29,7 @@ const HomePage = (props) => (
                     </Col>
                 </Row>
             </Content>
+            <Footer><div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></Footer>
         </Layout>
     </Provider>
 );

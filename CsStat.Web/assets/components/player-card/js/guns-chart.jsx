@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { Typography, Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
-import MapGunNameToImageUrl from './gun-image-map';
+import MapGunNameToImageUrl from './mapping/gun-image-map';
 
 const { Text  } = Typography;
 export default class GunsChart extends React.Component {
