@@ -4,6 +4,7 @@ using AutoMapper;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities;
 using CsStat.Domain.Models;
+using CsStat.SystemFacade.Attributes;
 using CsStat.Web.Models;
 
 namespace CsStat.Web
@@ -51,8 +52,9 @@ namespace CsStat.Web
 
                 CreateMap<AchieveModel, AchievementViewModel>()
                     .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Achieve))
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetDescription()));
-
+                    .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Achieve.GetDescription()))
+                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>()))
+                    ;
             }
         }
     }
