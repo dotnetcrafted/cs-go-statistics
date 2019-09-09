@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using AutoMapper;
-using CSStat.WebApp.Controllers;
+using CsStat.Web.Controllers;
 using CSStat.WebApp.Infrastructure;
 
 namespace CsStat.Web

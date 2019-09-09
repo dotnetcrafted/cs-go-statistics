@@ -48,16 +48,15 @@ namespace CsStat.LogApi
                 }
             }
 
-            return !list.Any()
-                ? null 
-                : list;
+            return list;
+
         }
 
         private static bool IsClearString(string logLine)
         {
             return !logLine.Contains("_killed") && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
         }
-        private Log ParseLine(string logLine)
+        private static Log ParseLine(string logLine)
         {
             var splitLine = logLine.Split('"');
 
@@ -154,13 +153,10 @@ namespace CsStat.LogApi
 
             var steamId = GetSteamId(playerString);
 
-            var imagePath = _steamApi.GetAvatarUrlBySteamId(steamId)?.FirstOrDefault().Value ?? "";
-
             player = new Player
             {
                 NickName = nickName,
                 SteamId = steamId,
-                ImagePath = imagePath
 
             };
 

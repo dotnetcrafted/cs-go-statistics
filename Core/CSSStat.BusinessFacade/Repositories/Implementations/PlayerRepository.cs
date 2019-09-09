@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO.Pipes;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
@@ -100,11 +102,6 @@ namespace BusinessFacade.Repositories.Implementations
 
             foreach (var player in players)
             {
-                if (player.NickName.Contains("chicken"))
-                {
-                    continue;
-                }
-
                 var guns = GetGuns(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
                 var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
                 var explodeBombs = GetExplodeBombs(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList());
@@ -131,14 +128,67 @@ namespace BusinessFacade.Repositories.Implementations
                     });
             }
 
+            var duplicatesIds = playersStats.GroupBy(x => x.Player.SteamId).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
+
+            if (duplicatesIds.Any())
+            {
+                foreach (var duplicatesId in duplicatesIds)
+                {
+                    var mergedStats = MergePlayersStats(playersStats.Where(x => x.Player.SteamId == duplicatesId).ToList());
+                    playersStats.RemoveAll(x => x.Player.SteamId == duplicatesId);
+                    playersStats.Add(mergedStats);
+                }
+            }
+
             var achievements = GetAchievements(playersStats);
 
             foreach (var playerStats in playersStats)
             {
-                playerStats.Achievements = achievements.Where(x => x.PlayerId == playerStats.Player.Id).ToList();
+                playerStats.Achievements = achievements.Where(x => x.PlayerId == playerStats.Player.SteamId).ToList();
             }
 
             return playersStats;
+        }
+
+        private static PlayerStatsModel MergePlayersStats(IReadOnlyCollection<PlayerStatsModel> playersStats)
+        {
+            var summaryStat = new PlayerStatsModel
+            {
+                Player = playersStats.Last().Player
+            };
+
+            foreach (var playerStats in playersStats)
+            {
+                summaryStat.Kills += playerStats.Kills;
+                summaryStat.Death += playerStats.Death;
+                summaryStat.Assists += playerStats.Assists;
+                summaryStat.FriendlyKills += playerStats.FriendlyKills;
+                summaryStat.TotalGames += playerStats.TotalGames;
+                summaryStat.HeadShot += playerStats.HeadShot;
+                summaryStat.Defuse += playerStats.Defuse;
+                summaryStat.Explode += playerStats.Explode;
+                summaryStat.Points += playerStats.Points;
+                summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
+            }
+
+            summaryStat.HeadShot /= playersStats.Count;
+
+            var guns = playersStats.SelectMany(x => x.Guns).ToList();
+            var duplicateGuns = guns.GroupBy(x => x.Gun).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
+            var mergedGuns = new List<GunModel>();
+
+            foreach (var gun in duplicateGuns)
+            {
+                mergedGuns.Add(new GunModel
+                {
+                    Gun = gun,
+                    Kills = guns.Where(x=>x.Gun==gun).Sum(x=>x.Kills)
+                });
+            }
+
+            summaryStat.Guns = mergedGuns;
+
+            return summaryStat;
         }
 
         private static List<Log> GetLogs(string dateFrom = "", string dateTo = "")
@@ -203,55 +253,55 @@ namespace BusinessFacade.Repositories.Implementations
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.First,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.Second,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(1).Take(1).First().Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(1).Take(1).First().Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Third,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(2).Take(1).First().Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(2).Take(1).First().Player.SteamId
                 },
 
                 new AchieveModel
                 {
                 Achieve =  AchievementsEnum.Killer,
-                PlayerId = playersStats.OrderByDescending(x => x.Kills).FirstOrDefault()?.Player.Id
+                PlayerId = playersStats.OrderByDescending(x => x.Kills).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.TeamPLayer,
-                    PlayerId = playersStats.OrderByDescending(x => x.Assists).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.Assists).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.HeadHunter,
-                    PlayerId = playersStats.OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Kenny,
-                    PlayerId = playersStats.OrderByDescending(x => x.Death).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x => x.Death).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Mvp,
-                    PlayerId = playersStats.OrderByDescending(x=>x.Points).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x=>x.Points).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.Sniper,
-                    PlayerId = playersStats.OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?.Player.Id
+                    PlayerId = playersStats.OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?.Player.SteamId
                 }
             };
 
