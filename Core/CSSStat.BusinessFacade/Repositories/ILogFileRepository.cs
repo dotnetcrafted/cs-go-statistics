@@ -38,20 +38,20 @@ namespace BusinessFacade.Repositories
 
         public LogFile GetFileByName(string name)
         {
-            return _mongoRepository.GetRepository<LogFile>().Collection.Find(new QueryBuilder<LogFile>().EQ(x => x.Name, name)).FirstOrDefault();
+            return _mongoRepository.GetRepository<LogFile>().Collection.Find(new QueryBuilder<LogFile>().EQ(x => x.Path, name)).FirstOrDefault();
         }
 
         public void UpdateFile(LogFile logFile)
         {
-            if(string.IsNullOrEmpty(logFile?.Name))
+            if(string.IsNullOrEmpty(logFile?.Path))
                 return;
 
-            var file = GetFileByName(logFile.Name);
+            var file = GetFileByName(logFile.Path);
 
             if(file == null)
                 return;
 
-            file.Lenght = logFile.Lenght;
+            file.ReadBytes = logFile.ReadBytes;
 
             _mongoRepository.GetRepository<LogFile>().Collection.Save(file);
         }

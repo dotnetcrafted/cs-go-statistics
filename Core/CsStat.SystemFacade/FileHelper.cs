@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ReadFile.Reader
+namespace CsStat.SystemFacade
 {
     // read more here: https://www.nimaara.com/counting-lines-of-a-text-file/
     public static class FileHelper

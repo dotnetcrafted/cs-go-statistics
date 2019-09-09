@@ -7,6 +7,7 @@ using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Interfaces;
+using CsStat.SystemFacade;
 
 namespace ReadFile.Reader
 {
@@ -85,7 +86,7 @@ namespace ReadFile.Reader
             ColorConsole.Yellow("Watch directory");
 
             var allFiles = Directory.GetFiles(logsPath);
-            var newFiles = allFiles.Except(logFileRepository.GetFiles().Select(x => x.Name)).ToArray();
+            var newFiles = allFiles.Except(logFileRepository.GetFiles().Select(x => x.Path)).ToArray();
 
             if (!newFiles.Any() && !_isThereFileInQueue)
             {
@@ -94,7 +95,7 @@ namespace ReadFile.Reader
                     _lastFile = allFiles.Length > 0 ? allFiles.Last() : _lastFile;
 
                     var logFile = logFileRepository.GetFileByName(_lastFile);
-                    _skip = logFile.Lenght;
+                    _skip = logFile.ReadBytes;
 
                     ReadLinesFromFile();
                 }
@@ -129,7 +130,7 @@ namespace ReadFile.Reader
                     logRepository.InsertBatch(logs);
                 }
 
-                logFileRepository.AddFile(new LogFile { Name = file, Lenght = position });
+                logFileRepository.AddFile(new LogFile { Path = file, ReadBytes = position });
                 _isThereFileInQueue = true;
             }
 
@@ -190,8 +191,8 @@ namespace ReadFile.Reader
                                         options.Skip = streamReader.BaseStream.Length;
                                         logFileRepository.UpdateFile(new LogFile
                                         {
-                                            Name = options.Path,
-                                            Lenght = options.Skip
+                                            Path = options.Path,
+                                            ReadBytes = options.Skip
                                         });
                                     }
                                 }

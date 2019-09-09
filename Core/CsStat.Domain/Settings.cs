@@ -8,6 +8,7 @@ namespace CsStat.Domain
     public static class Settings
     {
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
+        public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
         public static int FileReadNewLinesInterval => GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
@@ -47,6 +48,7 @@ namespace CsStat.Domain
         private static class Defaults
         {
             public static string LogsPath = Path.Combine(Environment.CurrentDirectory, "logs");
+            public static string ConsoleLogsPath = Path.Combine(Environment.CurrentDirectory, "console.log");
             public const int FileReadNewLinesInterval = 10000;
             public const int TimerInterval = 10000;
             public const int TakeLines = 50;
