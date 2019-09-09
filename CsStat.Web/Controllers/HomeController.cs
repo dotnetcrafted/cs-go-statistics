@@ -26,6 +26,7 @@ namespace CsStat.Web.Controllers
             return View();
         }
         [HttpGet]
+        [OutputCache(Duration = 600)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo="")
         {
             var playersStat =  GetPlayers(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();
