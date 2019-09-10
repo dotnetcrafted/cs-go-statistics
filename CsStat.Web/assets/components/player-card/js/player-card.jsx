@@ -31,7 +31,6 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Deaths">{model.Deaths}</Descriptions.Item>
                     <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
                     <Descriptions.Item label="HeadShot %">{model.HeadShot}</Descriptions.Item>
-                    <Descriptions.Item label="Total Games">{model.TotalGames}</Descriptions.Item>
                     <Descriptions.Item label="Defused Bombs">{model.DefusedBombs}</Descriptions.Item>
                     <Descriptions.Item label="Exploded Bombs">{model.ExplodedBombs}</Descriptions.Item>
                     <Descriptions.Item label="Kd Ratio">{model.KdRatio}</Descriptions.Item>
@@ -39,6 +38,7 @@ const PlayerCard = (props) => {
                     <Descriptions.Item label="Assists Per Game">{model.AssistsPerGame}</Descriptions.Item>
                     <Descriptions.Item label="Deaths Per Game">{model.DeathsPerGame}</Descriptions.Item>
                     <Descriptions.Item label="Friendly Kills">{model.FriendlyKills}</Descriptions.Item>
+                    <Descriptions.Item label="Points">{model.Points}</Descriptions.Item>
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
@@ -65,7 +65,6 @@ const _getPlayerViewModel = (id, data) => {
         Deaths: playersRow.Deaths,
         Assists: playersRow.Assists,
         HeadShot: playersRow.HeadShot,
-        TotalGames: playersRow.TotalGames,
         DefusedBombs: playersRow.DefusedBombs,
         ExplodedBombs: playersRow.ExplodedBombs,
         KdRatio: playersRow.KdRatio,
@@ -74,7 +73,8 @@ const _getPlayerViewModel = (id, data) => {
         DeathsPerGame: playersRow.DeathsPerGame,
         FriendlyKills: playersRow.FriendlyKills,
         Guns: playersRow.Guns,
-        Achievements: playersRow.Achievements
+        Achievements: playersRow.Achievements,
+        Points: playersRow.Points
     };
 };
 

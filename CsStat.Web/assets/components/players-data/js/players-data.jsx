@@ -31,14 +31,6 @@ class PlayersData extends React.Component {
                     },
                 },
                 {
-                    title: 'Kills',
-                    dataIndex: 'Kills',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.Kills); 
-                    },
-                },
-                {
                     title: (data)=>(
                         <Tooltip title="Kills / Deaths">
                             K/D Ratio
@@ -51,15 +43,11 @@ class PlayersData extends React.Component {
                     },
                 },
                 {
-                    title: (data)=>(
-                        <Tooltip title="Kills + Assists + (Defuses + Exploded Bombs) * 5 - Friendly Kills * 2">
-                            Points
-                        </Tooltip>
-                    ),
-                    dataIndex: 'Points',
+                    title: 'Kills',
+                    dataIndex: 'Kills',
                     className: CELL_CSS_CLASS,
                     render: (link, record) => {
-                        return this._cellWrapper(record.key, record.Points); 
+                        return this._cellWrapper(record.key, record.Kills); 
                     },
                 },
                 {
@@ -69,7 +57,15 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.Deaths); 
                     },
-                }
+                },
+                {
+                    title: 'Total Games',
+                    dataIndex: 'TotalGames',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.TotalGames); 
+                    },
+                },
             ],
             playersData: []
         };
@@ -106,7 +102,8 @@ class PlayersData extends React.Component {
             Points: item.Points,
             KdRatio: item.KdRatio,
             Kills: item.Kills,
-            Deaths: item.Deaths
+            Deaths: item.Deaths,
+            TotalGames: item.TotalGames
         }));
         return playersData;
     }
