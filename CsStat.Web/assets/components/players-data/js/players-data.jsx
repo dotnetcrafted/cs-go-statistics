@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
 import FilterForm from './filter-form';
-
+const CELL_CSS_CLASS = 'players-data__cell';
 class PlayersData extends React.Component {
     constructor(props) {
         super(props);
@@ -15,16 +15,28 @@ class PlayersData extends React.Component {
             columns: [
                 {
                     dataIndex: 'avatar',
-                    render: (link, record) => this._getAvatar(link, record),
+                    render: (link, record) => {
+                        const content = this._getAvatar(link, record);
+                        return this._cellWrapper(record.key, content); 
+                    },
                     width: '5%',
+                    className: CELL_CSS_CLASS
                 },
                 {
                     title: 'Player Name',
                     dataIndex: 'Name',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.Name); 
+                    },
                 },
                 {
                     title: 'Kills',
                     dataIndex: 'Kills',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.Kills); 
+                    },
                 },
                 {
                     title: (data)=>(
@@ -33,6 +45,10 @@ class PlayersData extends React.Component {
                         </Tooltip>
                     ),
                     dataIndex: 'KdRatio',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.KdRatio); 
+                    },
                 },
                 {
                     title: (data)=>(
@@ -41,10 +57,18 @@ class PlayersData extends React.Component {
                         </Tooltip>
                     ),
                     dataIndex: 'Points',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.Points); 
+                    },
                 },
                 {
                     title: 'Deaths',
                     dataIndex: 'Deaths',
+                    className: CELL_CSS_CLASS,
+                    render: (link, record) => {
+                        return this._cellWrapper(record.key, record.Deaths); 
+                    },
                 }
             ],
             playersData: []
@@ -87,9 +111,13 @@ class PlayersData extends React.Component {
         return playersData;
     }
 
-    _onRowClick(record, rowIndex) {
-        console.log(record, rowIndex);
+    _onRowClick(record) {
         this.props.selectPlayer(record.key);
+    }
+
+    _cellWrapper(id, content) {
+        const isSelectedClass = id === this.props.selectedPlayer ? 'is-selected' : '';
+        return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>
     }
 
     render() {
@@ -119,6 +147,7 @@ class PlayersData extends React.Component {
                         }
                         };
                     }}
+                    
                 />
             </>
         );

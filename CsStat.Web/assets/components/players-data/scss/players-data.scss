@@ -1,7 +1,25 @@
 .players-data {
+    $this: &;
+
     &__row {
         background-color: $color-white;
         cursor: pointer;
+    }
+
+    td#{$this}__cell {
+        padding: 0 !important;
+    }
+
+    &__cell-inner {
+        width: 100%;
+        height: 58px;
+        padding: 12px 8px;
+        display: flex;
+        align-items: center;
+
+        &.is-selected {
+            background-color: $color-light-blue;
+        }
     }
 
     &__avatar {
