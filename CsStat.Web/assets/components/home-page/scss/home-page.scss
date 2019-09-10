@@ -1,4 +1,6 @@
 .home-page {
+    $padding-top: 30px;
+
     &__layout {
         min-height: 100vh;
     }
@@ -14,7 +16,7 @@
     }
 
     &__content {
-        margin: 50px 0;
+        margin: $padding-top 0;
         padding: 0 $default-side-padding;
     }
 
@@ -24,5 +26,10 @@
             color: $color-white;
             margin: 0;
         }
+    }
+
+    &__card {
+        position: sticky;
+        top: $padding-top;
     }
 }

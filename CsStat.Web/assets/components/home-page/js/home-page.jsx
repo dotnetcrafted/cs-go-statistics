@@ -20,12 +20,12 @@ const HomePage = (props) => (
                 </Row>
             </Header>
             <Content className="home-page__content">
-                <Row type="flex" justify="start" align="top">
+                <Row type="flex" justify="start">
                     <Col xs={24} lg={12}>
                         {props.playersData}
                     </Col>
                     <Col xs={24} lg={{ span: 11, offset: 1 }}>
-                        {props.playerCard}
+                        <div className="home-page__card">{props.playerCard}</div>
                     </Col>
                 </Row>
             </Content>
