@@ -15,7 +15,7 @@ namespace CsStat.Domain.Definitions
         First,
 
         [Caption("Second by k/d ")]
-        [Description("Second blayer by k/d")]
+        [Description("Second player by k/d")]
         Second,
 
         [Caption("Third by k/d")]
