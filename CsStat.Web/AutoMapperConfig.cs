@@ -53,7 +53,7 @@ namespace CsStat.Web
                 CreateMap<AchieveModel, AchievementViewModel>()
                     .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Achieve))
                     .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Achieve.GetDescription()))
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>()))
+                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>().Value))
                     ;
             }
         }
