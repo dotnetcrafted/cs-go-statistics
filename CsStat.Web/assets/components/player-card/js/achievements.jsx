@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'antd';
+import { Popover } from 'antd';
 import MapAchievementIdToImage from './mapping/achievements-image-map';
 
 const Achievements = (props) => {
@@ -9,9 +9,9 @@ const Achievements = (props) => {
         <div className="achievements">
             {data && data.map((item) => (
                 <div className="achievements__item" key={item.Id}>
-                    <Tooltip title={item.Name}>
+                    <Popover title={item.Name} content={item.Description}>
                         <img className="achievements__icon" src={MapAchievementIdToImage(item.Id)} />
-                    </Tooltip>
+                    </Popover>
                 </div>
             ))}
         </div>
