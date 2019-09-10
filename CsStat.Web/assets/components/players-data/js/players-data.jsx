@@ -23,12 +23,8 @@ class PlayersData extends React.Component {
                     dataIndex: 'Name',
                 },
                 {
-                    title: (data)=>(
-                        <Tooltip title="Kills + Assists + (Defuses + Exploded Bombs) * 5 - Friendly Kills * 2">
-                            Points
-                        </Tooltip>
-                    ),
-                    dataIndex: 'Points',
+                    title: 'Kills',
+                    dataIndex: 'Kills',
                 },
                 {
                     title: (data)=>(
@@ -39,8 +35,12 @@ class PlayersData extends React.Component {
                     dataIndex: 'KdRatio',
                 },
                 {
-                    title: 'Kills',
-                    dataIndex: 'Kills',
+                    title: (data)=>(
+                        <Tooltip title="Kills + Assists + (Defuses + Exploded Bombs) * 5 - Friendly Kills * 2">
+                            Points
+                        </Tooltip>
+                    ),
+                    dataIndex: 'Points',
                 },
                 {
                     title: 'Deaths',
