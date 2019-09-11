@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Authentication;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
@@ -13,8 +14,8 @@ using CSStat.WebApp.Tests.Entity;
 using DataService;
 using DataService.Interfaces;
 using MongoDB.Driver;
-using MongoRepository;
 using NUnit.Framework;
+using MongoRepository;
 
 namespace CSStat.WebApp.Tests
 {
@@ -45,9 +46,16 @@ namespace CSStat.WebApp.Tests
         public void ConnectToDataBase()
         {
             var connectionString = _connectionString.GetConnectionString();
-            var client = new MongoClient(connectionString);
-            var server = client.GetServer();
+            MongoClientSettings settings = MongoClientSettings.FromUrl(
+                new MongoUrl(connectionString)
+            );
+            settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
+            var mongoClient = new MongoClient(settings);
+            var server = mongoClient.GetServer();
             server.GetDatabaseNames().ToList().ForEach(Console.WriteLine);
+            var db = server.GetDatabase("test");
+            var collection = db.GetCollection<MongoRepository.Entity>("entities");
+            collection.Insert(new Player { NickName = "Jack" });
         }
 
         [Test]

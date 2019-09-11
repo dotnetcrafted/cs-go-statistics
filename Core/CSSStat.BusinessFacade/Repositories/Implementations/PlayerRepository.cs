@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO.Pipes;
 using System.Linq;
@@ -172,8 +173,9 @@ namespace BusinessFacade.Repositories.Implementations
             }
 
             summaryStat.HeadShot /= playersStats.Count;
+            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot, 2);
 
-            var guns = playersStats.SelectMany(x => x.Guns).ToList();
+            var guns = playersStats.Where(x=>x.Guns!=null).SelectMany(x => x.Guns).ToList();
             var duplicateGuns = guns.GroupBy(x => x.Gun).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
             var mergedGuns = new List<GunModel>();
 
@@ -186,7 +188,10 @@ namespace BusinessFacade.Repositories.Implementations
                 });
             }
 
+            var uniqueGuns = guns.Where(x=> duplicateGuns.All(y => y != x.Gun));
+
             summaryStat.Guns = mergedGuns;
+            summaryStat.Guns.AddRange(uniqueGuns);
 
             return summaryStat;
         }

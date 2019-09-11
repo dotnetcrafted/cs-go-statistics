@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security.Authentication;
 using DataService.Interfaces;
+using MongoDB.Driver;
 using MongoRepository;
 
 namespace DataService
@@ -24,6 +26,14 @@ namespace DataService
         public MongoRepository<T> GetRepository<T>() where T : Entity
         {
             return new MongoRepository<T>(_connectionString);
+        }
+
+        public MongoRepository<T> GetRepositoryFromUrl<T>() where T : Entity
+        {
+            var set = MongoClientSettings.FromUrl(new MongoUrl(_connectionString));
+            set.SslSettings = new SslSettings{EnabledSslProtocols = SslProtocols.Tls12};
+
+            return new MongoRepository<T>();
         }
     }
 }
