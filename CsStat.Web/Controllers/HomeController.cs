@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -29,6 +30,12 @@ namespace CsStat.Web.Controllers
         [OutputCache(Duration = 600)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo="")
         {
+            if(string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
+            {
+                dateTo = DateTime.Now.AddDays(1).ToShortDateString();
+                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek-1)).ToShortDateString();
+            }
+
             var playersStat =  GetPlayers(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();
 
             var model = new SaloModel
@@ -38,6 +45,7 @@ namespace CsStat.Web.Controllers
                 DateTo = dateTo
 
             };
+
             var json = JsonConvert.SerializeObject(model);
 
             var result = new JsonResult

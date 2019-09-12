@@ -88,19 +88,19 @@ namespace BusinessFacade.Repositories.Implementations
         public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom = "", string dateTo = "")
         {
             _logs = GetLogs(dateFrom, dateTo);
+            var playersStats = new List<PlayerStatsModel>();
 
             if (_logs==null || !_logs.Any())
             {
-                return null;
+                return playersStats;
             }
 
             var players = GetAllPlayers().ToList();
 
             if(!players.Any())
-                return null;
+                return playersStats;
 
-            var playersStats = new List<PlayerStatsModel>();
-
+            
             foreach (var player in players)
             {
                 var guns = GetGuns(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
