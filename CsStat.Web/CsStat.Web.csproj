@@ -163,6 +163,7 @@
     <Compile Include="Models\AchievementViewModel.cs" />
     <Compile Include="Models\GunViewModel.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
+    <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

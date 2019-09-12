@@ -30,7 +30,16 @@ namespace CsStat.Web.Controllers
         public ActionResult GetRepository(string dateFrom = "", string dateTo="")
         {
             var playersStat =  GetPlayers(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();
-            var json = JsonConvert.SerializeObject(playersStat);
+
+            var model = new SaloModel
+            {
+                Players = playersStat,
+                DateFrom = dateFrom,
+                DateTo = dateTo
+
+            };
+            var json = JsonConvert.SerializeObject(model);
+
             var result = new JsonResult
             {
                 Data = json,
