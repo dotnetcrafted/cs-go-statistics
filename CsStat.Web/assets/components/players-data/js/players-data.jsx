@@ -29,6 +29,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.Name); 
                     },
+                    sorter: (a, b) => a.Name - b.Name,
                 },
                 {
                     title: (data)=>(
@@ -41,6 +42,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.KdRatio); 
                     },
+                    sorter: (a, b) => a.KdRatio - b.KdRatio,
                 },
                 {
                     title: 'Kills',
@@ -49,6 +51,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.Kills); 
                     },
+                    sorter: (a, b) => a.Kills - b.Kills,
                 },
                 {
                     title: 'Deaths',
@@ -57,6 +60,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.Deaths); 
                     },
+                    sorter: (a, b) => a.Deaths - b.Deaths,
                 },
                 {
                     title: 'Total Games',
@@ -65,6 +69,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.TotalGames); 
                     },
+                    sorter: (a, b) => a.TotalGames - b.TotalGames,
                 },
             ],
             playersData: []
