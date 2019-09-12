@@ -12,11 +12,11 @@ const fetchPlayers = (playersDataUrl, params) => (dispatch) => {
 
     fetch(url)
         .then((res) => res.json())
-        .then((players) => {
-            players = typeof players === 'string' ? JSON.parse(players) : players;
+        .then((data) => {
+            data = typeof data === 'string' ? JSON.parse(data) : data;
             dispatch({
                 type: FETCH_PLAYERS_DATA,
-                payload: players
+                payload: data
             });
         });
 };

@@ -4,7 +4,9 @@ import { FETCH_PLAYERS_DATA, SELECT_PLAYER, START_REQUEST } from '../redux-const
 const initialState = {
     isLoading: true,
     allPlayers: [],
-    selectedPlayer: ''
+    selectedPlayer: '',
+    DateFrom: '',
+    DateTo: ''
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +15,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                allPlayers: action.payload
+                allPlayers: action.payload.Players,
+                DateFrom: action.payload.DateFrom,
+                DateTo: action.payload.DateTo
             };
         case SELECT_PLAYER:
             return {
