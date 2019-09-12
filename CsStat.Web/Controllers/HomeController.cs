@@ -27,13 +27,13 @@ namespace CsStat.Web.Controllers
             return View();
         }
         [HttpGet]
-        [OutputCache(Duration = 600)]
+        //[OutputCache(Duration = 600)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo="")
         {
             if(string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
             {
-                dateTo = DateTime.Now.AddDays(1).ToShortDateString();
-                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek-1)).ToShortDateString();
+                dateTo = DateTime.Now.ToString("MM/dd/yyyy");
+                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek-1)).ToString("MM/dd/yyyy");
             }
 
             var playersStat =  GetPlayers(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();

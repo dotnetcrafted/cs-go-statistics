@@ -211,7 +211,7 @@ namespace BusinessFacade.Repositories.Implementations
             {
                 if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to))
                 {
-                    logs = _logsRepository.GetLogsForPeriod(DateTime.Today, to).ToList();
+                    logs = _logsRepository.GetLogsForPeriod(DateTime.Today, to.AddDays(1)).ToList();
                 }
             }
             else if (!string.IsNullOrEmpty(dateTo) && !string.IsNullOrEmpty(dateFrom))
@@ -219,7 +219,7 @@ namespace BusinessFacade.Repositories.Implementations
                 if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to)
                     && DateTime.TryParse(dateFrom, CultureInfo.InvariantCulture, DateTimeStyles.None, out var from))
                 {
-                    logs = _logsRepository.GetLogsForPeriod(from, to).ToList();
+                    logs = _logsRepository.GetLogsForPeriod(from, to.AddDays(1)).ToList();
                 }
             }
             else
