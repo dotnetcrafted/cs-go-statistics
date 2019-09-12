@@ -28,15 +28,15 @@ namespace CsStat.Web.Controllers
         }
         [HttpGet]
         //[OutputCache(Duration = 600)]
-        public ActionResult GetRepository(string dateFrom = "", string dateTo="")
+        public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
-            if(string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
+            if (string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
             {
-                dateTo = DateTime.Now.ToString("MM/dd/yyyy");
-                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek-1)).ToString("MM/dd/yyyy");
+                dateTo = DateTime.Now.ToUniversalTime().ToString("MM/dd/yyyy");
+                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek - 1)).ToString("MM/dd/yyyy");
             }
 
-            var playersStat =  GetPlayers(dateFrom,dateTo)?.OrderByDescending(x=>x.KdRatio).ThenByDescending(x=>x.Kills).ToList();
+            var playersStat = GetPlayers(dateFrom, dateTo)?.OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills).ToList();
 
             var model = new SaloModel
             {
@@ -56,10 +56,10 @@ namespace CsStat.Web.Controllers
             return result;
         }
 
-        private static IEnumerable<PlayerStatsViewModel> GetPlayers(string dateFrom="", string dateTo="")
+        private static IEnumerable<PlayerStatsViewModel> GetPlayers(string dateFrom = "", string dateTo = "")
         {
             var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
-            var steamIds = string.Join(",",players.Select(x => x.Player.SteamId).ToList());
+            var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
             var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
             foreach (var player in players)

@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 const { RangePicker } = DatePicker;
-const DATE_FORMAT = 'MM/DD/YYYY';
+const SERVER_DATE_FORMAT = 'MM/DD/YYYY';
+const USER_DATE_FORMAT = 'll';
 class FilterForm extends React.Component {
     _handleSubmit = (e) => {
         e.preventDefault();
@@ -18,8 +19,8 @@ class FilterForm extends React.Component {
     
             const rangeValue = fieldsValue['range-time-picker'];
             const values = {
-                dateFrom: rangeValue[0].format(DATE_FORMAT),
-                dateTo: rangeValue[1].format(DATE_FORMAT)
+                dateFrom: rangeValue[0].format(SERVER_DATE_FORMAT),
+                dateTo: rangeValue[1].format(SERVER_DATE_FORMAT)
             };
 
             this.props.onFormSubmit(values);
@@ -34,14 +35,14 @@ class FilterForm extends React.Component {
                 required: true,
                 message: 'Please select date.'
             }],
-            initialValue:[moment(dateFrom, 'DD.MM.YYYY'), moment(dateTo, 'DD.MM.YYYY')]
+            initialValue:[moment(dateFrom, SERVER_DATE_FORMAT), moment(dateTo, SERVER_DATE_FORMAT)]
         };
         
         return (
             <Form layout="inline" onSubmit={this._handleSubmit}>
                 <Form.Item>
                     {getFieldDecorator('range-time-picker', rangeConfig)(
-                        <RangePicker format={DATE_FORMAT} />,
+                        <RangePicker format={USER_DATE_FORMAT}/>,
                     )}
                 </Form.Item>
                 <Form.Item>
