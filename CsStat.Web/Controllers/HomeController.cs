@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.LogApi;
@@ -27,12 +28,12 @@ namespace CsStat.Web.Controllers
             return View();
         }
         [HttpGet]
-        //[OutputCache(Duration = 600)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
             {
-                dateTo = DateTime.Now.ToUniversalTime().ToString("MM/dd/yyyy");
+                dateTo = DateTime.Now.ToString("MM/dd/yyyy");
                 dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek - 1)).ToString("MM/dd/yyyy");
             }
 
