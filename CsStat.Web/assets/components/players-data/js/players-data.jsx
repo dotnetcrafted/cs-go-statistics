@@ -29,7 +29,7 @@ class PlayersData extends React.Component {
                     render: (link, record) => {
                         return this._cellWrapper(record.key, record.Name); 
                     },
-                    sorter: (a, b) => a.Name - b.Name,
+                    sorter: (a, b) => a.Name.localeCompare(b.Name),
                 },
                 {
                     title: (data)=>(
