@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Card, Descriptions, Avatar, Empty, Divider, Typography
 } from 'antd';
@@ -77,13 +76,6 @@ const _getPlayerViewModel = (id, data) => {
         Points: playersRow.Points
     };
 };
-
-
-PlayerCard.propTypes = {
-    playersData: PropTypes.object.isRequired,
-    selectedPlayer: PropTypes.string.isRequired
-};
-
 const mapStateToProps = (state) => {
     const playersData = state.players.allPlayers;
     const selectedPlayer = state.players.selectedPlayer;

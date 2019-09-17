@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {SFC, ReactNode} from 'react';
 import { Provider } from 'react-redux';
 import {
     Layout, Icon, Typography, Row, Col
@@ -9,8 +8,12 @@ import store from '../../../general/js/redux-store';
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
+type Props = { 
+    playersData: ReactNode,
+    playerCard: ReactNode 
+}
 
-const HomePage = (props) => (
+const HomePage: SFC<Props> = (props) => (
     <Provider store={store}>
         <Layout className="home-page__layout">
             <Header className="home-page__header">
@@ -33,10 +36,4 @@ const HomePage = (props) => (
         </Layout>
     </Provider>
 );
-
-HomePage.propTypes = {
-    playersData: PropTypes.node.isRequired,
-    playerCard: PropTypes.node.isRequired
-};
-
 export default HomePage;

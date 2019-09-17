@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Form, DatePicker, Button
 } from 'antd';
@@ -56,16 +55,6 @@ class FilterForm extends React.Component {
         )
     }
 };
-
-
-
-FilterForm.propTypes = {
-    onFormSubmit: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    dateFrom: PropTypes.string.isRequired,
-    dateTo: PropTypes.string.isRequired
-};
-
 
 const WrappedFilterForm = Form.create({ name: 'filter_form' })(FilterForm);
 

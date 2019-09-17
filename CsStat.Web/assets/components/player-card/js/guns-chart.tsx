@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { Typography, Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
@@ -125,6 +124,3 @@ export default class GunsChart extends React.Component {
     }
 
 }
-GunsChart.propTypes = {
-    guns: PropTypes.array.isRequired,
-};

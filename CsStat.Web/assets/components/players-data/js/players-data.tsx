@@ -1,80 +1,79 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Table, Avatar, Divider, Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
 import FilterForm from './filter-form';
+
 const CELL_CSS_CLASS = 'players-data__cell';
-class PlayersData extends React.Component {
-    constructor(props) {
-        super(props);
-        this.playersDataUrl = this.props.playersDataUrl;
-        this.state = {
-            columns: [
-                {
-                    dataIndex: 'avatar',
-                    render: (link, record) => {
-                        const content = this._getAvatar(link, record);
-                        return this._cellWrapper(record.key, content); 
-                    },
-                    width: '5%',
-                    className: CELL_CSS_CLASS
-                },
-                {
-                    title: 'Player Name',
-                    dataIndex: 'Name',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.Name); 
-                    },
-                    sorter: (a, b) => a.Name.localeCompare(b.Name),
-                },
-                {
-                    title: (data)=>(
-                        <Tooltip title="Kills / Deaths">
-                            K/D Ratio
-                        </Tooltip>
-                    ),
-                    dataIndex: 'KdRatio',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.KdRatio); 
-                    },
-                    sorter: (a, b) => a.KdRatio - b.KdRatio,
-                },
-                {
-                    title: 'Kills',
-                    dataIndex: 'Kills',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.Kills); 
-                    },
-                    sorter: (a, b) => a.Kills - b.Kills,
-                },
-                {
-                    title: 'Deaths',
-                    dataIndex: 'Deaths',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.Deaths); 
-                    },
-                    sorter: (a, b) => a.Deaths - b.Deaths,
-                },
-                {
-                    title: 'Total Games',
-                    dataIndex: 'TotalGames',
-                    className: CELL_CSS_CLASS,
-                    render: (link, record) => {
-                        return this._cellWrapper(record.key, record.TotalGames); 
-                    },
-                    sorter: (a, b) => a.TotalGames - b.TotalGames,
-                },
-            ],
-            playersData: []
-        };
-    }
+const initialState = {
+    playersData = [],
+    columns: [
+        {
+            dataIndex: 'avatar',
+            render: (link, record) => {
+                const content = this._getAvatar(link, record);
+                return this._cellWrapper(record.key, content); 
+            },
+            width: '5%',
+            className: CELL_CSS_CLASS
+        },
+        {
+            title: 'Player Name',
+            dataIndex: 'Name',
+            className: CELL_CSS_CLASS,
+            render: (link, record) => {
+                return this._cellWrapper(record.key, record.Name); 
+            },
+            sorter: (a, b) => a.Name.localeCompare(b.Name),
+        },
+        {
+            title: (data)=>(
+                <Tooltip title="Kills / Deaths">
+                    K/D Ratio
+                </Tooltip>
+            ),
+            dataIndex: 'KdRatio',
+            className: CELL_CSS_CLASS,
+            render: (link, record) => {
+                return this._cellWrapper(record.key, record.KdRatio); 
+            },
+            sorter: (a, b) => a.KdRatio - b.KdRatio,
+        },
+        {
+            title: 'Kills',
+            dataIndex: 'Kills',
+            className: CELL_CSS_CLASS,
+            render: (link, record) => {
+                return this._cellWrapper(record.key, record.Kills); 
+            },
+            sorter: (a, b) => a.Kills - b.Kills,
+        },
+        {
+            title: 'Deaths',
+            dataIndex: 'Deaths',
+            className: CELL_CSS_CLASS,
+            render: (link, record) => {
+                return this._cellWrapper(record.key, record.Deaths); 
+            },
+            sorter: (a, b) => a.Deaths - b.Deaths,
+        },
+        {
+            title: 'Total Games',
+            dataIndex: 'TotalGames',
+            className: CELL_CSS_CLASS,
+            render: (link, record) => {
+                return this._cellWrapper(record.key, record.TotalGames); 
+            },
+            sorter: (a, b) => a.TotalGames - b.TotalGames,
+        },
+    ],
+};
+type State = Readonly<typeof initialState>;
+
+class PlayersData extends React.Component<object, State> {
+    readonly state:State = initialState;
 
     componentWillMount() {
         this._fetchPlayers(this.props.playersDataUrl);
@@ -162,14 +161,6 @@ class PlayersData extends React.Component {
         );
     }
 }
-
-PlayersData.propTypes = {
-    playersDataUrl: PropTypes.string.isRequired,
-    playersData: PropTypes.object.isRequired,
-    fetchPlayers: PropTypes.func.isRequired,
-    selectedPlayer: PropTypes.string.isRequired,
-    isLoading: PropTypes.bool.isRequired
-};
 
 const mapStateToProps = (state) => {
     const playersData = state.players.allPlayers;

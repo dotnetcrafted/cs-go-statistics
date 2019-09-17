@@ -16,7 +16,7 @@ module.exports = () => ({
         jsonpFunction: 'webpackJsonpDelete'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.tsx', '.ts', '.js'],
         modules: [
             'node_modules',
             // src
@@ -27,11 +27,14 @@ module.exports = () => ({
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx?|tsx?)$/,
                 exclude: [
                     /node_modules/
                 ],
-                loader: 'babel-loader'
+                loaders: [
+                    'babel-loader',
+                    'ts-loader'
+                ]
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,

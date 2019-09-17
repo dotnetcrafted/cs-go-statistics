@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Popover } from 'antd';
 import MapAchievementIdToImage from './mapping/achievements-image-map';
 
@@ -16,9 +15,6 @@ const Achievements = (props) => {
             ))}
         </div>
     );
-};
-Achievements.propTypes = {
-    data: PropTypes.array.isRequired,
 };
 
 
