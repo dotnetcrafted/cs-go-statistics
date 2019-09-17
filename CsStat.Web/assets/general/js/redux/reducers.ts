@@ -1,21 +1,20 @@
-import { FETCH_PLAYERS_DATA, SELECT_PLAYER, START_REQUEST } from '../redux-constants';
+import { combineReducers } from 'redux';
+import { IAppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST } from './types';
 
-
-const initialState = {
-    isLoading: true,
-    allPlayers: [],
+const initialState: IAppState = {
+    isLoading: false ,
+    players: [],
     selectedPlayer: '',
     DateFrom: '',
     DateTo: ''
-};
-
-export default (state = initialState, action) => {
+}
+const rootReducer = (state = initialState, action: ActionTypes) => {
     switch (action.type) {
         case FETCH_PLAYERS_DATA:
             return {
                 ...state,
                 isLoading: false,
-                allPlayers: action.payload.Players,
+                players: action.payload.players,
                 DateFrom: action.payload.DateFrom,
                 DateTo: action.payload.DateTo
             };
@@ -34,3 +33,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default rootReducer;

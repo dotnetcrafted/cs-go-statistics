@@ -1,6 +1,4 @@
-import { FETCH_PLAYERS_DATA, SELECT_PLAYER, START_REQUEST } from '../redux-constants';
-
-const fetchPlayers = (playersDataUrl, params) => (dispatch) => {
+const fetchPlayersr = (playersDataUrl, params) => (dispatch) => {
     const url = new URL(playersDataUrl, window.location.origin);
     if (params) {
         url.search = new URLSearchParams(params);
@@ -21,11 +19,9 @@ const fetchPlayers = (playersDataUrl, params) => (dispatch) => {
         });
 };
 
-const selectPlayer = (playerId) => (dispatch) => {
+const selectPlayerr = (playerId) => (dispatch) => {
     dispatch({
         type: SELECT_PLAYER,
         payload: playerId
     });
 };
-
-export { fetchPlayers, selectPlayer };

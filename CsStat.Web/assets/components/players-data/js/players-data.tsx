@@ -3,8 +3,9 @@ import {
     Table, Avatar, Divider, Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers, selectPlayer } from '../../../general/js/redux-actions';
+import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux-actions';
 import FilterForm from './filter-form';
+import {AppState} from "../../../general/js/redux/store";
 
 const CELL_CSS_CLASS = 'players-data__cell';
 const initialState = {
@@ -83,8 +84,21 @@ class PlayersData extends React.Component<object, State> {
         this.props.selectPlayer(id);
     }
 
-    _fetchPlayers(url, params) {
-        this.props.fetchPlayers(url, params || {});
+    _fetchPlayers(playersDataUrl: string, params) {
+        const url = new URL(playersDataUrl, window.location.origin);
+        if (params) {
+            url.search = new URLSearchParams(params);
+        }
+
+        this.props.selectPlayer();
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                data = typeof data === 'string' ? JSON.parse(data) : data;
+                this.props.fetchPlayers(data);
+            });
+        
     }
 
     onFormSubmit = (params) => {
@@ -162,12 +176,12 @@ class PlayersData extends React.Component<object, State> {
     }
 }
 
-const mapStateToProps = (state) => {
-    const playersData = state.players.allPlayers;
-    const selectedPlayer = state.players.selectedPlayer;
-    const isLoading = state.players.isLoading;
-    const dateFrom = state.players.DateFrom;
-    const dateTo = state.players.DateTo;
+const mapStateToProps = (state: AppState) => {
+    const playersData = state.players;
+    const selectedPlayer = state.selectedPlayer;
+    const isLoading = state.isLoading;
+    const dateFrom = state.DateFrom;
+    const dateTo = state.DateTo;
     return { playersData, selectedPlayer, isLoading, dateFrom, dateTo }
 };
-export default connect(mapStateToProps, { fetchPlayers, selectPlayer })(PlayersData);
+export default connect(mapStateToProps, { fetchPlayers, startRequest, selectPlayer })(PlayersData);

@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 import {
     Layout, Icon, Typography, Row, Col
 } from 'antd';
-import store from '../../../general/js/redux-store';
+import configureStore from "../../../general/js/redux/store";
 
+const store = configureStore();
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 

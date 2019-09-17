@@ -5,6 +5,7 @@ import {
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
+import {AppState} from "../../../general/js/redux/store";
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -76,9 +77,9 @@ const _getPlayerViewModel = (id, data) => {
         Points: playersRow.Points
     };
 };
-const mapStateToProps = (state) => {
-    const playersData = state.players.allPlayers;
-    const selectedPlayer = state.players.selectedPlayer;
+const mapStateToProps = (state: AppState) => {
+    const playersData = state.players;
+    const selectedPlayer = state.selectedPlayer;
     return { playersData, selectedPlayer };
 };
 export default connect(mapStateToProps, { })(PlayerCard);
