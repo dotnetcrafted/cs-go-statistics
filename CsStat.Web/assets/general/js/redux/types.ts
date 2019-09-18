@@ -1,7 +1,7 @@
 
 interface IAppState {
     isLoading: boolean,
-    selectedPlayer: ''
+    selectedPlayer: string
     DateFrom: string
     DateTo: string
     players: IPlayer[]

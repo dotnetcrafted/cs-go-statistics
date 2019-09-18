@@ -3,13 +3,15 @@ import {
     Table, Avatar, Divider, Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux-actions';
+import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux/actions';
 import FilterForm from './filter-form';
 import {AppState} from "../../../general/js/redux/store";
+import { IAppState } from '../../../general/js/redux/types';
 
 const CELL_CSS_CLASS = 'players-data__cell';
+
 const initialState = {
-    playersData = [],
+    PlayersData: [],
     columns: [
         {
             dataIndex: 'avatar',
@@ -73,7 +75,15 @@ const initialState = {
 };
 type State = Readonly<typeof initialState>;
 
-class PlayersData extends React.Component<object, State> {
+interface PlayersDataProps {
+    playersDataUrl: string
+    store: IAppState,
+    fetchPlayers: typeof fetchPlayers
+    startRequest: typeof startRequest
+    selectPlayer: typeof selectPlayer
+
+}
+class PlayersData extends React.Component<PlayersDataProps, State> {
     readonly state:State = initialState;
 
     componentWillMount() {
@@ -84,7 +94,7 @@ class PlayersData extends React.Component<object, State> {
         this.props.selectPlayer(id);
     }
 
-    _fetchPlayers(playersDataUrl: string, params) {
+    _fetchPlayers(playersDataUrl: string, params?) {
         const url = new URL(playersDataUrl, window.location.origin);
         if (params) {
             url.search = new URLSearchParams(params);
@@ -114,7 +124,7 @@ class PlayersData extends React.Component<object, State> {
 
     _setViewModel(data) {
         if(data && Array.isArray(data) && data.length) {
-            const playersData = this.props.playersData.map((item, i) => ({
+            const players = this.props.store.players.map((item, i) => ({
                 key: item.Id,
                 ImagePath: item.ImagePath,
                 Name: item.Name,
@@ -124,7 +134,7 @@ class PlayersData extends React.Component<object, State> {
                 Deaths: item.Deaths,
                 TotalGames: item.TotalGames
             }));
-            return playersData;
+            return players;
         }        
     }
 
@@ -133,40 +143,39 @@ class PlayersData extends React.Component<object, State> {
     }
 
     _cellWrapper(id, content) {
-        const isSelectedClass = id === this.props.selectedPlayer ? 'is-selected' : '';
+        const isSelectedClass = id === this.props.store.selectedPlayer ? 'is-selected' : '';
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>
     }
 
     render() {
-        const {isLoading} = this.props;
+        const {isLoading} = this.props.store;
         const { columns } = this.state;
-        const playersData = this._setViewModel(this.props.playersData);
+        const players = this._setViewModel(this.props.store);
         return (
             <>
                 <Divider orientation="left">Choose Dates to Filter Statistics</Divider>
                 <FilterForm 
                     onFormSubmit={this.onFormSubmit}
-                    isLoading={this.props.isLoading}
-                    dateFrom={this.props.dateFrom}
-                    dateTo={this.props.dateTo}
+                    isLoading={this.props.store.isLoading}
+                    dateFrom={this.props.store.DateFrom}
+                    dateTo={this.props.store.DateTo}
                 />
                 <Divider/>
                 <Table
                     className="players-data"
                     rowClassName="players-data__row"
                     columns={columns}
-                    dataSource={playersData}
+                    dataSource={players}
                     pagination={false}
-                    loading={isLoading}
                     size="middle"
                     bordered={true}
                     scroll={{ x: true }}
                     loading={isLoading}
-                    onRow={(record, rowIndex) => {
+                    onRow={(record) => {
                         return {
-                        onClick: () => {
-                            this._onRowClick(record, rowIndex);
-                        }
+                            onClick: () => {
+                                this._onRowClick(record);
+                            }
                         };
                     }}
                     
@@ -176,12 +185,14 @@ class PlayersData extends React.Component<object, State> {
     }
 }
 
-const mapStateToProps = (state: AppState) => {
-    const playersData = state.players;
-    const selectedPlayer = state.selectedPlayer;
-    const isLoading = state.isLoading;
-    const dateFrom = state.DateFrom;
-    const dateTo = state.DateTo;
-    return { playersData, selectedPlayer, isLoading, dateFrom, dateTo }
-};
+const mapStateToProps = (store: AppState) => store;
+
+// const mapStateToProps = (state: AppState) => {
+//     const playersData = state.players;
+//     const selectedPlayer = state.selectedPlayer;
+//     const isLoading = state.isLoading;
+//     const dateFrom = state.DateFrom;
+//     const dateTo = state.DateTo;
+//     return { playersData, selectedPlayer, isLoading, dateFrom, dateTo }
+// };
 export default connect(mapStateToProps, { fetchPlayers, startRequest, selectPlayer })(PlayersData);
