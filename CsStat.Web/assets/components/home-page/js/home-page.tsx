@@ -1,20 +1,14 @@
 import React, {SFC, ReactNode} from 'react';
 import { Provider } from 'react-redux';
-import {
-    Layout, Icon, Typography, Row, Col
-} from 'antd';
+import { Layout, Icon, Typography, Row, Col } from 'antd';
 import configureStore from "../../../general/js/redux/store";
 
 const store = configureStore();
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
-type Props = { 
-    playersData: ReactNode,
-    playerCard: ReactNode 
-}
 
-const HomePage: SFC<Props> = (props) => (
+const HomePage: SFC<HomePageProps> = (props) => (
     <Provider store={store}>
         <Layout className="home-page__layout">
             <Header className="home-page__header">
@@ -37,4 +31,10 @@ const HomePage: SFC<Props> = (props) => (
         </Layout>
     </Provider>
 );
+
+type HomePageProps = { 
+    playersData: ReactNode,
+    playerCard: ReactNode 
+}
+
 export default HomePage;

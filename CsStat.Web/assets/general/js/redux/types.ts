@@ -1,13 +1,13 @@
 
 interface IAppState {
-    isLoading: boolean,
-    selectedPlayer: string
+    IsLoading: boolean,
+    SelectedPlayer: string
     DateFrom: string
     DateTo: string
-    players: IPlayer[]
+    Players: IPlayer[]
 };
 interface IPlayer {
-    id: string
+    Id: string
     Name: string
     ImagePath: string
     Points: number
@@ -59,4 +59,4 @@ interface FetchPlayersAction {
 
 type ActionTypes = SelectPlayerAction | StartRequestAction | FetchPlayersAction;
 
-export {IAppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
+export {IAppState, IPlayer, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}

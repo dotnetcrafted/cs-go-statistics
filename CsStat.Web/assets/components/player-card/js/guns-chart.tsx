@@ -3,24 +3,21 @@ import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { Typography, Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
 import MapGunNameToImageUrl from './mapping/gun-image-map';
+import { IAppState } from '../../../general/js/redux/types';
 
-const { Text  } = Typography;
-export default class GunsChart extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            data: [],
-            colors: [],
-            legendItems: [],
-            hoveredChartSection: false,
-            selectedImageUrl: '',
-            selectedImageName: ''
-        };
-    }
+class GunsChart extends React.Component<GunsChartProps> {
+    readonly state = {
+        data: [],
+        colors: [],
+        legendItems: [],
+        hoveredChartSection: false,
+        selectedImageUrl: '',
+        selectedImageName: ''
+    };
 
     componentWillMount() {
-        const {guns} = this.props;
+        const {guns} = this.props.store;
         this._updateState(guns);
     }
     componentWillReceiveProps(nextProps) {
@@ -124,3 +121,10 @@ export default class GunsChart extends React.Component {
     }
 
 }
+
+
+type GunsChartProps = {
+    store: IAppState
+}
+
+export default GunsChart;

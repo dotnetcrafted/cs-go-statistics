@@ -1,19 +1,17 @@
-import React from 'react';
-import {
-    Card, Descriptions, Avatar, Empty, Divider, Typography
-} from 'antd';
+import React, {SFC} from 'react';
+import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
 import {AppState} from "../../../general/js/redux/store";
+import { IAppState, IPlayer } from '../../../general/js/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
-
-const PlayerCard = (props) => {
-    if (props.selectedPlayer) {
-        const model = _getPlayerViewModel(props.selectedPlayer, props.playersData);
+const PlayerCard: SFC<PlayerCardProps> = (props) => {
+    if (props.store.SelectedPlayer) {
+        const model = _getPlayerViewModel(props.store.SelectedPlayer, props.store.Players);
         const gunsToShow = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
             <Card
@@ -48,7 +46,7 @@ const PlayerCard = (props) => {
     return <Empty description="Choose a player from table"/>;
 };
 
-const renderAvatar = (src) => {
+const renderAvatar = (src:  string) => {
     if (src) {
         return <Avatar size={48} shape="square" className='player-card__avatar' src={src} />;
     }
@@ -56,7 +54,7 @@ const renderAvatar = (src) => {
 };
 
 
-const _getPlayerViewModel = (id, data) => {
+const _getPlayerViewModel = (id: string, data: IPlayer[]) => {
     const playersRow = data.filter((item) => item.Id === id)[0];
     return {
         Name: playersRow.Name,
@@ -77,9 +75,10 @@ const _getPlayerViewModel = (id, data) => {
         Points: playersRow.Points
     };
 };
-const mapStateToProps = (state: AppState) => {
-    const playersData = state.players;
-    const selectedPlayer = state.selectedPlayer;
-    return { playersData, selectedPlayer };
-};
+
+type PlayerCardProps = {
+    store: IAppState
+}
+
+const mapStateToProps = (store: AppState) => store;
 export default connect(mapStateToProps, { })(PlayerCard);

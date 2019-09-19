@@ -5,21 +5,21 @@ const rootReducer = (state: IAppState, action: ActionTypes): IAppState => {
         case FETCH_PLAYERS_DATA:
             return {
                 ...state,
-                isLoading: false,
-                players: action.payload.players,
+                IsLoading: false,
+                Players: action.payload.Players,
                 DateFrom: action.payload.DateFrom,
                 DateTo: action.payload.DateTo
             };
         case SELECT_PLAYER:
             return {
                 ...state,
-                selectedPlayer: action.payload
+                SelectedPlayer: action.payload
             };
 
         case START_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                IsLoading: true
             };
         default:
             return state;

@@ -5,9 +5,9 @@ import rootReducer from './reducers';
 import { IAppState } from './types';
 
 const initialState: IAppState = {
-    isLoading: false ,
-    players: [],
-    selectedPlayer: '',
+    IsLoading: false,
+    Players: [],
+    SelectedPlayer: '',
     DateFrom: '',
     DateTo: ''
 }
