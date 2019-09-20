@@ -35,7 +35,7 @@ interface IAchievements {
 interface IGuns { 
     Id: number
     Name: string
-    Kills: string
+    Kills: number
 }
 
 const SELECT_PLAYER = 'SELECT_PLAYER';
@@ -59,4 +59,4 @@ interface FetchPlayersAction {
 
 type ActionTypes = SelectPlayerAction | StartRequestAction | FetchPlayersAction;
 
-export {IAppState, IPlayer, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
+export {IAppState, IPlayer, IGuns, IAchievements, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}

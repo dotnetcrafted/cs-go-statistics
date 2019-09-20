@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
 import {AppState} from "../../../general/js/redux/store";
-import { IAppState, IPlayer } from '../../../general/js/redux/types';
+import { IAppState, IPlayer, IGuns } from '../../../general/js/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -12,7 +12,7 @@ const VISIBLE_GUNS = 5;
 const PlayerCard: SFC<PlayerCardProps> = (props) => {
     if (props.store.SelectedPlayer) {
         const model = _getPlayerViewModel(props.store.SelectedPlayer, props.store.Players);
-        const gunsToShow = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
+        const gunsToShow: IGuns[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
             <Card
                 className='player-card'

@@ -1,26 +1,26 @@
 import React from 'react';
 import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
-import { Typography, Badge, Card } from 'antd';
+import {  Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
 import MapGunNameToImageUrl from './mapping/gun-image-map';
-import { IAppState } from '../../../general/js/redux/types';
+import { IGuns } from '../../../general/js/redux/types';
 
 
-class GunsChart extends React.Component<GunsChartProps> {
+class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     readonly state = {
         data: [],
         colors: [],
         legendItems: [],
-        hoveredChartSection: false,
+        hoveredChartSection: null,
         selectedImageUrl: '',
         selectedImageName: ''
     };
 
     componentWillMount() {
-        const {guns} = this.props.store;
+        const {guns} = this.props;
         this._updateState(guns);
     }
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: GunsChartProps) {
         const {guns} = nextProps;
         this._updateState(guns);
     }
@@ -40,22 +40,22 @@ class GunsChart extends React.Component<GunsChartProps> {
                     className='guns-chart__chart'
                     innerRadius={50}
                     radius={100}
-                    getAngle={(d) => d.theta}
+                    getAngle={(d: any) => d.theta}
                     data={data}
-                    onValueMouseOver={(v) => {
+                    onValueMouseOver={(v: any) => {
                         this._setStateForImage(v.id);
                         this.setState({ hoveredChartSection: v });
                     }}
                     onSeriesMouseOut={(v) => {
                         this._resetStateForImage();
-                        this.setState({ hoveredChartSection: false });
+                        this.setState({ hoveredChartSection: null });
                     }}
                     width={200}
                     height={200}
                     padAngle={0.04}
                     animation={{damping: 9, stiffness: 300}}
                 >
-                    {hoveredChartSection !== false &&
+                    {hoveredChartSection !== null &&
                         <Hint value={hoveredChartSection} >
                             <Badge count={hoveredChartSection.theta} overflowCount={10000}>
                                 <div className='guns-chart__text'>{hoveredChartSection.label}</div>
@@ -81,13 +81,13 @@ class GunsChart extends React.Component<GunsChartProps> {
         );
     }
 
-    _updateState(guns) {
-        const colors = this._getColors(guns);
-        const data = this._getData(guns, colors);
-        const legendItems = this._getLegend(guns, colors);
+    _updateState(guns: IGuns[]) {
+        const colors: Color[] = this._getColors(guns);
+        const data: Data[] = this._getData(guns, colors);
+        const legendItems: LegendItem[] = this._getLegend(guns, colors);
         this.setState({colors, data, legendItems});
     }
-    _getData = (guns, colors) => ( guns.map((g) => ({
+    _getData = (guns: IGuns[], colors: Color[]) => ( guns.map((g) => ({
         theta: g.Kills,
         label: g.Name,
         id: g.Id,
@@ -96,20 +96,20 @@ class GunsChart extends React.Component<GunsChartProps> {
             stroke:false
         }
     })))
-    _getColors = (guns) => ( guns.map((g) => ({
+    _getColors = (guns: IGuns[]) => ( guns.map((g) => ({
         id: g.Id,
         color: randomColor({
             luminosity: 'bright',
             hue: 'random'
         })
     })))
-    _getLegend = (guns, colors) => ( guns.map((g) => ({
+    _getLegend = (guns: IGuns[], colors: Color[]) => ( guns.map((g) => ({
         title: `${g.Name}: ${g.Kills} kills`,
         id: g.Id,
         color: colors.find(c => c.id === g.Id).color
     })))
 
-    _setStateForImage = (id) => {
+    _setStateForImage = (id: string) => {
         const { guns } = this.props;
         const selectedImageUrl = MapGunNameToImageUrl(guns.find(g => g.Id === id).Name);
         const selectedImageName = guns.find(g => g.Id === id).Name;
@@ -122,9 +122,35 @@ class GunsChart extends React.Component<GunsChartProps> {
 
 }
 
-
-type GunsChartProps = {
-    store: IAppState
+interface GunsChartState {
+    data: Data[]
+    colors: Color[]
+    legendItems: LegendItem[]
+    hoveredChartSection?: any
+    selectedImageUrl: string
+    selectedImageName: string
 }
 
+type GunsChartProps = {
+    guns: IGuns[]
+}
+
+type Color = {
+    id: number
+    color: any
+}
+type Data = {
+    theta: number
+    label: string
+    id: number
+    style: {
+        fill: string
+        stroke: boolean
+    }
+}
+type LegendItem = {
+    id: number
+    title: string
+    color: string
+}
 export default GunsChart;
