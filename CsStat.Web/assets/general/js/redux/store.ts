@@ -1,25 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { createStore } from 'redux';
 import rootReducer from './reducers';
-import { IAppState } from './types';
+import { IAppState, ActionTypes } from './types';
 
-const initialState: IAppState = {
-    IsLoading: false,
-    Players: [],
-    SelectedPlayer: '',
-    DateFrom: '',
-    DateTo: ''
-}
-export default function configureStore() {
-    const middleware = [thunk];
 
-    const store = createStore<IAppState>(
+export default function configureStore() {    
+    const store = createStore<IAppState, ActionTypes, IAppState, any>(
         rootReducer,
-        initialState,
-        composeWithDevTools(
-            applyMiddleware(...middleware)
-        )
+        {},
     );
   
     return store;
