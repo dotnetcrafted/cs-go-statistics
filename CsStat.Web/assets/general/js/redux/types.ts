@@ -24,7 +24,7 @@ interface IPlayer {
     HeadShot: number
     KdRatio: number
     Achievements: IAchievements[]
-    Guns: IGuns[]
+    Guns: IGun[]
 }
 
 interface IAchievements {
@@ -32,7 +32,7 @@ interface IAchievements {
     Name: string
     Description: string
 }
-interface IGuns { 
+interface IGun { 
     Id: number
     Name: string
     Kills: number
@@ -59,4 +59,4 @@ interface FetchPlayersAction {
 
 type ActionTypes = SelectPlayerAction | StartRequestAction | FetchPlayersAction;
 
-export {IAppState, IPlayer, IGuns, IAchievements, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
+export {IAppState, IPlayer, IGun, IAchievements, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
