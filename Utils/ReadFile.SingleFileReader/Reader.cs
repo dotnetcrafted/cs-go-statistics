@@ -54,7 +54,14 @@ namespace ReadFile.SingleFileReader
 
                 _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
-                ReadFile();
+                try
+                {
+                    ReadFile();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
             finally
             {
