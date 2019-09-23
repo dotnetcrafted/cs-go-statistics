@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux/actions';
 import FilterForm, {IDateValues} from './filter-form';
 import {AppState} from "../../../general/js/redux/store";
-import { IAppState } from '../../../general/js/redux/types';
+import { IAppState, IPlayer } from '../../../general/js/redux/types';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 
-class PlayersData extends React.Component<PlayersDataProps> {
+class PlayersData extends React.Component<IPlayersDataProps> {
     readonly state = {
         PlayersData: [],
         columns: [
             {
                 dataIndex: 'avatar',
-                render: (link: any, record: TablePlayer) => {
-                    const content = this._getAvatar(record);
-                    return this._cellWrapper(record.key, content); 
+                render: (_link: any, record: TablePlayer) => {
+                    const content = this.getAvatar(record);
+                    return this.cellWrapper(record.key, content); 
                 },
                 width: '5%',
                 className: CELL_CSS_CLASS
@@ -25,8 +25,8 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 title: 'Player Name',
                 dataIndex: 'Name',
                 className: CELL_CSS_CLASS,
-                render: (link: any, record: TablePlayer) => {
-                    return this._cellWrapper(record.key, record.Name); 
+                render: (_link: any, record: TablePlayer) => {
+                    return this.cellWrapper(record.key, record.Name); 
                 },
                 sorter: (a:TablePlayer, b: TablePlayer) => a.Name.localeCompare(b.Name),
             },
@@ -38,8 +38,8 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 ),
                 dataIndex: 'KdRatio',
                 className: CELL_CSS_CLASS,
-                render: (link: any, record: TablePlayer) => {
-                    return this._cellWrapper(record.key, record.KdRatio); 
+                render: (_link: any, record: TablePlayer) => {
+                    return this.cellWrapper(record.key, record.KdRatio); 
                 },
                 sorter: (a: TablePlayer, b: TablePlayer) => a.KdRatio - b.KdRatio,
             },
@@ -47,8 +47,8 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 title: 'Kills',
                 dataIndex: 'Kills',
                 className: CELL_CSS_CLASS,
-                render: (link: any, record: TablePlayer) => {
-                    return this._cellWrapper(record.key, record.Kills); 
+                render: (_link: any, record: TablePlayer) => {
+                    return this.cellWrapper(record.key, record.Kills); 
                 },
                 sorter: (a: TablePlayer, b: TablePlayer) => a.Kills - b.Kills,
             },
@@ -56,8 +56,8 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 title: 'Deaths',
                 dataIndex: 'Deaths',
                 className: CELL_CSS_CLASS,
-                render: (link: any, record: TablePlayer) => {
-                    return this._cellWrapper(record.key, record.Deaths); 
+                render: (_link: any, record: TablePlayer) => {
+                    return this.cellWrapper(record.key, record.Deaths); 
                 },
                 sorter: (a: TablePlayer, b: TablePlayer) => a.Deaths - b.Deaths,
             },
@@ -65,8 +65,8 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 title: 'Total Games',
                 dataIndex: 'TotalGames',
                 className: CELL_CSS_CLASS,
-                render: (link: any, record: TablePlayer) => {
-                    return this._cellWrapper(record.key, record.TotalGames); 
+                render: (_link: any, record: TablePlayer) => {
+                    return this.cellWrapper(record.key, record.TotalGames); 
                 },
                 sorter: (a: TablePlayer, b: TablePlayer) => a.TotalGames - b.TotalGames,
             },
@@ -74,10 +74,10 @@ class PlayersData extends React.Component<PlayersDataProps> {
     };
 
     componentWillMount() {
-        this._fetchPlayers(this.props.playersDataUrl);
+        this.fetchPlayers(this.props.playersDataUrl);
     }
 
-    _fetchPlayers(playersDataUrl: string, params?: IDateValues) {
+    private fetchPlayers(playersDataUrl: string, params?: IDateValues) {
         const url = new URL(playersDataUrl, window.location.origin);
         if (params) {
             url.search = new URLSearchParams(params).toString();
@@ -88,25 +88,22 @@ class PlayersData extends React.Component<PlayersDataProps> {
         fetch(url.toString())
             .then((res: Response) => res.json())
             .then((data: IAppState) => {
+                data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
             });
         
     }
 
-    onFormSubmit = (params: IDateValues) => {
-        this._fetchPlayers(this.props.playersDataUrl, params);
-    }
-
-    _getAvatar(record: TablePlayer) {
+    private getAvatar(record: TablePlayer) {
         if (record.ImagePath) {
             return <Avatar className='players-data__avatar' src={record.ImagePath} />;
         }
         return <Avatar icon="user" />;
     }
 
-    _setViewModel(data: IAppState) {
+    private setViewModel(data: IPlayer[]) {
         if(data && Array.isArray(data) && data.length) {
-            const players: TablePlayer[] = this.props.store.Players.map((item, i) => ({
+            const players: TablePlayer[] = data.map((item) => ({
                 key: item.Id,
                 ImagePath: item.ImagePath,
                 Name: item.Name,
@@ -117,30 +114,34 @@ class PlayersData extends React.Component<PlayersDataProps> {
                 TotalGames: item.TotalGames
             }));
             return players;
-        }        
+        }  
     }
 
-    _onRowClick(record: TablePlayer) {
+    private onRowClick(record: TablePlayer) {
         this.props.selectPlayer(record.key);
     }
 
-    _cellWrapper(id: string, content: ReactNode) {
-        const isSelectedClass = id === this.props.store.SelectedPlayer ? 'is-selected' : '';
+    private cellWrapper(id: string, content: ReactNode) {
+        const isSelectedClass = id === this.props.SelectedPlayer ? 'is-selected' : '';
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>
     }
 
+    onFormSubmit = (params: IDateValues) => {
+        this.fetchPlayers(this.props.playersDataUrl, params);
+    }
+
     render() {
-        const {IsLoading} = this.props.store;
+        const {IsLoading, DateFrom, DateTo, Players} = this.props;
         const { columns } = this.state;
-        const players = this._setViewModel(this.props.store);
+        const players = this.setViewModel(Players);
         return (
             <>
                 <Divider orientation="left">Choose Dates to Filter Statistics</Divider>
                 <FilterForm 
                     onFormSubmit={this.onFormSubmit}
-                    isLoading={this.props.store.IsLoading}
-                    dateFrom={this.props.store.DateFrom}
-                    dateTo={this.props.store.DateTo}
+                    isLoading={IsLoading}
+                    dateFrom={DateFrom}
+                    dateTo={DateTo}
                 />
                 <Divider/>
                 <Table
@@ -156,7 +157,7 @@ class PlayersData extends React.Component<PlayersDataProps> {
                     onRow={(record) => {
                         return {
                             onClick: () => {
-                                this._onRowClick(record);
+                                this.onRowClick(record);
                             }
                         };
                     }}
@@ -166,9 +167,13 @@ class PlayersData extends React.Component<PlayersDataProps> {
         );
     }
 }
-type PlayersDataProps = {
+interface IPlayersDataProps  {
     playersDataUrl: string
-    store: IAppState,
+    SelectedPlayer: string
+    IsLoading: boolean
+    DateFrom: string
+    DateTo: string
+    Players: IPlayer[]
     fetchPlayers: typeof fetchPlayers
     startRequest: typeof startRequest
     selectPlayer: typeof selectPlayer
@@ -185,6 +190,13 @@ type TablePlayer = {
     TotalGames: number
 }
 
-const mapStateToProps = (store: AppState) => store;
+const mapStateToProps = (state: AppState) => {
+    const SelectedPlayer = state.SelectedPlayer;
+    const IsLoading = state.IsLoading;
+    const DateFrom = state.DateFrom;
+    const DateTo = state.DateTo;
+    const Players = state.Players;
+    return { SelectedPlayer, IsLoading, DateFrom, DateTo, Players }
+};
 
 export default connect(mapStateToProps, { fetchPlayers, startRequest, selectPlayer })(PlayersData);

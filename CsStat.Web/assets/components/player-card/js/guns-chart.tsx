@@ -1,6 +1,6 @@
 import React from 'react';
 import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
-import {  Badge, Card } from 'antd';
+import { Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
 import MapGunNameToImageUrl from './mapping/gun-image-map';
 import { IGun } from '../../../general/js/redux/types';
@@ -8,12 +8,13 @@ import { IGun } from '../../../general/js/redux/types';
 
 class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     componentWillMount() {
+        this.setState({isHovered: false})
         const {guns} = this.props;
-        this._updateState(guns);
+        this.updateState(guns);
     }
     componentWillReceiveProps(nextProps: GunsChartProps) {
         const {guns} = nextProps;
-        this._updateState(guns);
+        this.updateState(guns);
     }
     
     render() {
@@ -23,21 +24,21 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
                 <DiscreteColorLegend
                     className="guns-chart__legend"
                     items={legendItems}
-                    onItemMouseEnter={(item:LegendItem) => this._setStateForImage(item.id)}
-                    onItemMouseLeave={() => this._resetStateForImage()}
+                    onItemMouseEnter={(item: LegendItem) => this.setStateForImage(item.id)}
+                    onItemMouseLeave={() => this.resetStateForImage()}
                 />
                 <RadialChart
                     className='guns-chart__chart'
                     innerRadius={50}
                     radius={100}
-                    getAngle={(d: any) => d.theta}
+                    getAngle={(d: Data) => d.theta}
                     data={data}
                     onValueMouseOver={(v: Data) => {
-                        this._setStateForImage(v.id);
+                        this.setStateForImage(v.id);
                         this.setState({ hoveredChartSection: v, isHovered: true });
                     }}
-                    onSeriesMouseOut={(v: Data) => {
-                        this._resetStateForImage();
+                    onSeriesMouseOut={() => {
+                        this.resetStateForImage();
                         this.setState({ isHovered: false });
                     }}
                     width={200}
@@ -45,7 +46,7 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
                     padAngle={0.04}
                     animation={{damping: 9, stiffness: 300}}
                 >
-                    {isHovered !== null ? (
+                    {isHovered !== false ? (
                         <Hint value={hoveredChartSection} >
                             <Badge count={hoveredChartSection.theta} overflowCount={10000}>
                                 <div className='guns-chart__text'>{hoveredChartSection.label}</div>
@@ -71,58 +72,58 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
         );
     }
 
-    _updateState(guns: IGun[]) {
-        const colors: Color[] = this._getColors(guns);
-        const data: Data[] = this._getData(guns, colors);
-        const legendItems: LegendItem[] = this._getLegend(guns, colors);
+    private updateState(guns: IGun[]) {
+        const colors: Color[] = this.getColors(guns);
+        const data: Data[] = this.getData(guns, colors);
+        const legendItems: LegendItem[] = this.getLegend(guns, colors);
         this.setState({colors, data, legendItems});
     }
-    _getData = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
+    private getData = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
         theta: g.Kills,
         label: g.Name,
         id: g.Id,
         style: {
-            fill: this._findColor(colors, g.Id),
+            fill: this.findColor(colors, g.Id),
             stroke: false
         }
     })))
-    _getColors = (guns: IGun[]) => ( guns.map((g) => ({
+    private getColors = (guns: IGun[]) => ( guns.map((g) => ({
         id: g.Id,
         color: randomColor({
             luminosity: 'bright',
             hue: 'random'
         })
     })))
-    _getLegend = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
+    private getLegend = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
         title: `${g.Name}: ${g.Kills} kills`,
         id: g.Id,
-        color: this._findColor(colors, g.Id),
+        color: this.findColor(colors, g.Id),
     })))
 
-    _setStateForImage = (id: number) => {
+    private setStateForImage = (id: number) => {
         const { guns } = this.props;
-        const selectedImageUrl = MapGunNameToImageUrl(this._findGunName(guns, id));
-        const selectedImageName = this._findGunName(guns, id);
+        const selectedImageUrl = MapGunNameToImageUrl(this.findGunName(guns, id));
+        const selectedImageName = this.findGunName(guns, id);
         this.setState({ selectedImageUrl, selectedImageName})
     }
 
-    _resetStateForImage() {
+    private resetStateForImage() {
         this.setState({ selectedImageUrl: '', selectedImageName: ''})
     }
 
-    _findColor = (colors: Color[], id: number) => {
+    private findColor = (colors: Color[], id: number) => {
         const colorObj = colors.find(c => c.id === id);
         return colorObj ? colorObj.color : '';
     }
 
-    _findGunName = (guns: IGun[], id: number) => {
+    private findGunName = (guns: IGun[], id: number) => {
         const gunObj = guns.find(g => g.Id === id);
         return gunObj ? gunObj.Name : '';
     }
 
 }
 
-interface GunsChartState {
+type GunsChartState = {
     data: Data[]
     colors: Color[]
     legendItems: LegendItem[]

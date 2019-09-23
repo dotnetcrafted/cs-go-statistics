@@ -3,15 +3,14 @@ import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
-import {AppState} from "../../../general/js/redux/store";
 import { IAppState, IPlayer, IGun } from '../../../general/js/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
 const PlayerCard: SFC<PlayerCardProps> = (props) => {
-    if (props.store.SelectedPlayer) {
-        const model = _getPlayerViewModel(props.store.SelectedPlayer, props.store.Players);
+    if (props.SelectedPlayer) {
+        const model = _getPlayerViewModel(props.SelectedPlayer, props.Players);
         const gunsToShow: IGun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
             <Card
@@ -75,10 +74,14 @@ const _getPlayerViewModel = (id: string, data: IPlayer[]) => {
         Points: playersRow.Points
     };
 };
-
 type PlayerCardProps = {
-    store: IAppState
+    SelectedPlayer: string
+    Players: IPlayer[]
 }
 
-const mapStateToProps = (store: AppState) => store;
+const mapStateToProps = (state: IAppState) => {
+    const SelectedPlayer = state.SelectedPlayer;
+    const Players = state.Players;
+    return { SelectedPlayer, Players }
+};
 export default connect(mapStateToProps, { })(PlayerCard);

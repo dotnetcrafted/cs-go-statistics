@@ -8,7 +8,7 @@ const SERVER_DATE_FORMAT = 'MM/DD/YYYY';
 const USER_DATE_FORMAT = 'll';
 
 class FilterForm extends React.Component<IFilterFormProps, any> {
-    _handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err: any, fieldsValue) => {
             if (err) {
@@ -37,7 +37,7 @@ class FilterForm extends React.Component<IFilterFormProps, any> {
         };
         
         return (
-            <Form layout="inline" onSubmit={this._handleSubmit}>
+            <Form layout="inline" onSubmit={this.handleSubmit}>
                 <Form.Item>
                     {getFieldDecorator('range-time-picker', rangeConfig)(
                         <RangePicker format={USER_DATE_FORMAT}/>,
