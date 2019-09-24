@@ -2,7 +2,6 @@ import 'antd/dist/antd.css';
 import './general/scss/normalize.css';
 import './general/scss/index.scss';
 
-import './general/js/lazysizes';
 
 import './components/players-data';
 import './components/player-card';
