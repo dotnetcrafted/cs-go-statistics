@@ -807,6 +807,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@deleteagency/dc@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@deleteagency/dc/-/dc-0.0.1.tgz#791e975fba65c8bb2f6a4a5440735052a0707cb3"
+  integrity sha512-Ikm8L6lcCtfRNlvnaSNGvbF0C/50HfSNVBu3dVb5rkMfiXSL2f/drp1mNN4T7TmjNog+MtxA6JJNJNHsOSljFg==
+
 "@epegzz/sass-vars-loader@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@epegzz/sass-vars-loader/-/sass-vars-loader-5.0.0.tgz#168566c7be6b36274b0ebaaae2ae8617f5c4dfc8"

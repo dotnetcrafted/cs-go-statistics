@@ -68,6 +68,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "7.4.4",
+        "@deleteagency/dc": "^0.0.1",
         "@epegzz/sass-vars-loader": "5.0.0",
         "@types/randomcolor": "0.5.3",
         "antd": "3.22.2",
