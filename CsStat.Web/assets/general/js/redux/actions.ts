@@ -1,6 +1,6 @@
-import { IAppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST } from './types';
+import { AppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST } from './types';
 
-const fetchPlayers = (newState: IAppState): ActionTypes => ({
+const fetchPlayers = (newState: AppState): ActionTypes => ({
     type: FETCH_PLAYERS_DATA,
     payload: newState
 })

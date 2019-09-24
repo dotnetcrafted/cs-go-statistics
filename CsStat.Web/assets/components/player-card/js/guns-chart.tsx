@@ -3,7 +3,7 @@ import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
 import MapGunNameToImageUrl from './mapping/gun-image-map';
-import { IGun } from '../../../general/js/redux/types';
+import { Gun } from '../../../general/js/redux/types';
 
 
 class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
@@ -72,13 +72,13 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
         );
     }
 
-    private updateState(guns: IGun[]) {
+    private updateState(guns: Gun[]) {
         const colors: Color[] = this.getColors(guns);
         const data: Data[] = this.getData(guns, colors);
         const legendItems: LegendItem[] = this.getLegend(guns, colors);
         this.setState({colors, data, legendItems});
     }
-    private getData = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
+    private getData = (guns: Gun[], colors: Color[]) => ( guns.map((g) => ({
         theta: g.Kills,
         label: g.Name,
         id: g.Id,
@@ -87,14 +87,14 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
             stroke: false
         }
     })))
-    private getColors = (guns: IGun[]) => ( guns.map((g) => ({
+    private getColors = (guns: Gun[]) => ( guns.map((g) => ({
         id: g.Id,
         color: randomColor({
             luminosity: 'bright',
             hue: 'random'
         })
     })))
-    private getLegend = (guns: IGun[], colors: Color[]) => ( guns.map((g) => ({
+    private getLegend = (guns: Gun[], colors: Color[]) => ( guns.map((g) => ({
         title: `${g.Name}: ${g.Kills} kills`,
         id: g.Id,
         color: this.findColor(colors, g.Id),
@@ -116,7 +116,7 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
         return colorObj ? colorObj.color : '';
     }
 
-    private findGunName = (guns: IGun[], id: number) => {
+    private findGunName = (guns: Gun[], id: number) => {
         const gunObj = guns.find(g => g.Id === id);
         return gunObj ? gunObj.Name : '';
     }
@@ -134,7 +134,7 @@ type GunsChartState = {
 }
 
 type GunsChartProps = {
-    guns: IGun[]
+    guns: Gun[]
 }
 
 type Color = {

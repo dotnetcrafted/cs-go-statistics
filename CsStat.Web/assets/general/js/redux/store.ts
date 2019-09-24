@@ -1,10 +1,10 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers';
-import { IAppState, ActionTypes } from './types';
+import { AppState, ActionTypes } from './types';
 
 
 export default function configureStore() {    
-    const store = createStore<IAppState, ActionTypes, IAppState, any>(
+    const store = createStore<AppState, ActionTypes, AppState, any>(
         rootReducer,
         {},
     );

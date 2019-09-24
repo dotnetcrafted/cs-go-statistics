@@ -2,13 +2,12 @@ import React, {ReactNode} from 'react';
 import { Table, Avatar, Divider, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux/actions';
-import FilterForm, {IDateValues} from './filter-form';
-import {AppState} from "../../../general/js/redux/store";
-import { IAppState, IPlayer } from '../../../general/js/redux/types';
+import FilterForm, {DateValues} from './filter-form';
+import { AppState, Player } from '../../../general/js/redux/types';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 
-class PlayersData extends React.Component<IPlayersDataProps> {
+class PlayersData extends React.Component<PlayersDataProps> {
     readonly state = {
         PlayersData: [],
         columns: [
@@ -77,7 +76,7 @@ class PlayersData extends React.Component<IPlayersDataProps> {
         this.fetchPlayers(this.props.playersDataUrl);
     }
 
-    private fetchPlayers(playersDataUrl: string, params?: IDateValues) {
+    private fetchPlayers(playersDataUrl: string, params?: DateValues) {
         const url = new URL(playersDataUrl, window.location.origin);
         if (params) {
             url.search = new URLSearchParams(params).toString();
@@ -87,7 +86,7 @@ class PlayersData extends React.Component<IPlayersDataProps> {
 
         fetch(url.toString())
             .then((res: Response) => res.json())
-            .then((data: IAppState) => {
+            .then((data: AppState) => {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
             });
@@ -101,7 +100,7 @@ class PlayersData extends React.Component<IPlayersDataProps> {
         return <Avatar icon="user" />;
     }
 
-    private setViewModel(data: IPlayer[]) {
+    private setViewModel(data: Player[]) {
         if(data && Array.isArray(data) && data.length) {
             const players: TablePlayer[] = data.map((item) => ({
                 key: item.Id,
@@ -126,7 +125,7 @@ class PlayersData extends React.Component<IPlayersDataProps> {
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>
     }
 
-    onFormSubmit = (params: IDateValues) => {
+    onFormSubmit = (params: DateValues) => {
         this.fetchPlayers(this.props.playersDataUrl, params);
     }
 
@@ -167,13 +166,13 @@ class PlayersData extends React.Component<IPlayersDataProps> {
         );
     }
 }
-interface IPlayersDataProps  {
+type PlayersDataProps = {
     playersDataUrl: string
     SelectedPlayer: string
     IsLoading: boolean
     DateFrom: string
     DateTo: string
-    Players: IPlayer[]
+    Players: Player[]
     fetchPlayers: typeof fetchPlayers
     startRequest: typeof startRequest
     selectPlayer: typeof selectPlayer

@@ -1,12 +1,12 @@
 
-interface IAppState {
+type AppState = {
     IsLoading: boolean,
     SelectedPlayer: string
     DateFrom: string
     DateTo: string
-    Players: IPlayer[]
+    Players: Player[]
 };
-interface IPlayer {
+type Player = {
     Id: string
     Name: string
     ImagePath: string
@@ -23,16 +23,16 @@ interface IPlayer {
     TotalGames: number
     HeadShot: number
     KdRatio: number
-    Achievements: IAchievement[]
-    Guns: IGun[]
+    Achievements: Achievement[]
+    Guns: Gun[]
 }
 
-interface IAchievement {
+type Achievement = {
     Id: number
     Name: string
     Description: string
 }
-interface IGun { 
+type Gun = { 
     Id: number
     Name: string
     Kills: number
@@ -43,21 +43,21 @@ const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
 const START_REQUEST = 'START_REQUEST';
 
 
-interface SelectPlayerAction {
+type SelectPlayerAction = {
     type: typeof SELECT_PLAYER
     payload: string
 }
   
-interface StartRequestAction {
+type StartRequestAction = {
     type: typeof START_REQUEST
 }
   
-interface FetchPlayersAction {
+type FetchPlayersAction = {
     type: typeof FETCH_PLAYERS_DATA
-    payload: IAppState
+    payload: AppState
 }
 
 
 type ActionTypes = SelectPlayerAction | StartRequestAction | FetchPlayersAction;
 
-export {IAppState, IPlayer, IGun, IAchievement, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
+export {AppState, Player, Gun, Achievement, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}

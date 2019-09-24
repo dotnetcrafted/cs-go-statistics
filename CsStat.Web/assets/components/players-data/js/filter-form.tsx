@@ -16,7 +16,7 @@ class FilterForm extends React.Component<IFilterFormProps, any> {
             }
     
             const rangeValue = fieldsValue['range-time-picker'];
-            const values: IDateValues = {
+            const values: DateValues = {
                 dateFrom: rangeValue[0].format(SERVER_DATE_FORMAT),
                 dateTo: rangeValue[1].format(SERVER_DATE_FORMAT)
             };
@@ -55,13 +55,13 @@ class FilterForm extends React.Component<IFilterFormProps, any> {
     }
 };
 
-export interface IDateValues {
+export type DateValues = {
     [index: string] : string
     dateFrom: string
     dateTo: string
 }
 interface IFilterFormProps extends FormComponentProps {
-    onFormSubmit: (message: IDateValues) => void;
+    onFormSubmit: (message: DateValues) => void;
     dateFrom: string
     dateTo: string
     isLoading: boolean

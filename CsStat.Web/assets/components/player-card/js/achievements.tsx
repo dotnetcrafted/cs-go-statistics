@@ -1,7 +1,7 @@
 import React, {SFC} from 'react';
 import { Popover } from 'antd';
 import MapAchievementIdToImage from './mapping/achievements-image-map';
-import { IAchievement } from '../../../general/js/redux/types';
+import { Achievement } from '../../../general/js/redux/types';
 const Achievements: SFC<AchievementsProps> = (props) => {
     const { data } = props;
     return (
@@ -18,7 +18,7 @@ const Achievements: SFC<AchievementsProps> = (props) => {
 };
 
 type AchievementsProps = {
-    data: IAchievement[]
+    data: Achievement[]
 }
 
 export default Achievements;

@@ -3,7 +3,7 @@ import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
-import { IAppState, IPlayer, IGun } from '../../../general/js/redux/types';
+import { AppState, Player, Gun } from '../../../general/js/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -11,7 +11,7 @@ const VISIBLE_GUNS = 5;
 const PlayerCard: SFC<PlayerCardProps> = (props) => {
     if (props.SelectedPlayer) {
         const model = _getPlayerViewModel(props.SelectedPlayer, props.Players);
-        const gunsToShow: IGun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
+        const gunsToShow: Gun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
             <Card
                 className='player-card'
@@ -53,7 +53,7 @@ const renderAvatar = (src:  string) => {
 };
 
 
-const _getPlayerViewModel = (id: string, data: IPlayer[]) => {
+const _getPlayerViewModel = (id: string, data: Player[]) => {
     const playersRow = data.filter((item) => item.Id === id)[0];
     return {
         Name: playersRow.Name,
@@ -76,10 +76,10 @@ const _getPlayerViewModel = (id: string, data: IPlayer[]) => {
 };
 type PlayerCardProps = {
     SelectedPlayer: string
-    Players: IPlayer[]
+    Players: Player[]
 }
 
-const mapStateToProps = (state: IAppState) => {
+const mapStateToProps = (state: AppState) => {
     const SelectedPlayer = state.SelectedPlayer;
     const Players = state.Players;
     return { SelectedPlayer, Players }

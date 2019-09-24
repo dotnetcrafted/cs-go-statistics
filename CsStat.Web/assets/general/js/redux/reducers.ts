@@ -1,7 +1,7 @@
 import {Reducer} from 'redux';
-import { IAppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST } from './types';
+import { AppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST } from './types';
 
-const rootReducer: Reducer<IAppState>  = (state: IAppState = initialState, action: ActionTypes): IAppState => {
+const rootReducer: Reducer<AppState>  = (state: AppState = initialState, action: ActionTypes): AppState => {
     switch (action.type) {
         case FETCH_PLAYERS_DATA:
             return {
@@ -27,7 +27,7 @@ const rootReducer: Reducer<IAppState>  = (state: IAppState = initialState, actio
     }
 };
 
-const initialState: IAppState = {
+const initialState: AppState = {
     IsLoading: false,
     Players: [],
     SelectedPlayer: '',
