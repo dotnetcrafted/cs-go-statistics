@@ -73,7 +73,7 @@ class PlayersData extends React.Component<IPlayersDataProps> {
         ],
     };
 
-    componentWillMount() {
+    componentDidMount() {
         this.fetchPlayers(this.props.playersDataUrl);
     }
 

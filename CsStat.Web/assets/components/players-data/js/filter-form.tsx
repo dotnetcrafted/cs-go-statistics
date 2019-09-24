@@ -25,7 +25,7 @@ class FilterForm extends React.Component<IFilterFormProps, any> {
         });
     };
     render() {
-        const {dateFrom, dateTo} = this.props;
+        const {dateFrom: dateFrom = new Date(), dateTo: dateTo = new Date()} = this.props;
         const { getFieldDecorator} = this.props.form;
         const rangeConfig = {
             rules: [{ 
