@@ -1,9 +1,9 @@
 import React, {ReactNode} from 'react';
 import { Table, Avatar, Divider, Tooltip } from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers, startRequest, selectPlayer } from '../../../general/js/redux/actions';
+import { fetchPlayers, startRequest, selectPlayer } from '../../../general/ts/redux/actions';
 import FilterForm, {DateValues} from './filter-form';
-import { AppState, Player } from '../../../general/js/redux/types';
+import { AppState, Player } from '../../../general/ts/redux/types';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 

@@ -3,7 +3,7 @@ import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
-import { AppState, Player, Gun } from '../../../general/js/redux/types';
+import { AppState, Player, Gun } from '../../../general/ts/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;

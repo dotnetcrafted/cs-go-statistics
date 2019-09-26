@@ -3,7 +3,7 @@ import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { Badge, Card } from 'antd';
 import randomColor from 'randomcolor';
 import MapGunNameToImageUrl from './mapping/gun-image-map';
-import { Gun } from '../../../general/js/redux/types';
+import { Gun } from '../../../general/ts/redux/types';
 
 
 class GunsChart extends React.Component<GunsChartProps, GunsChartState> {

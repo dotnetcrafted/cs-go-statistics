@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
 import { DcBaseComponent } from '@deleteagency/dc';
 import HomePage from './home-page';
-import PlayersData from '../../players-data/js/players-data';
-import PlayerCard from '../../player-card/js/player-card';
+import PlayersData from '../../players-data/ts/players-data';
+import PlayerCard from '../../player-card/ts/player-card';
 
 export default class HomePageComponent extends DcBaseComponent {
     static getNamespace() {
         return 'home-page';
     }
 
-    private getHomePageEl() {
+    private getHomePageEl(): ReactElement {
         return React.createElement(
             HomePage,
             {
@@ -21,7 +21,7 @@ export default class HomePageComponent extends DcBaseComponent {
         );
     }
 
-    private getPlayersDataEl() {
+    private getPlayersDataEl(): ReactElement {
         return React.createElement(
             PlayersData,
             { playersDataUrl: this.options.playersDataUrl },
@@ -29,11 +29,11 @@ export default class HomePageComponent extends DcBaseComponent {
         );
     }
 
-    private getPlayersCardEl() {
+    private getPlayersCardEl(): ReactElement {
         return React.createElement(PlayerCard, null, null);
     }
 
-    onInit() {
+    onInit(): void {
         ReactDOM.render(this.getHomePageEl(), this.element);
     }
 }

@@ -1,4 +1,4 @@
-const log = (...args) => {
+const log = (...args: any[]): void => {
     if (window.console && window.console.log) {
         window.console.log(...args);
     }
@@ -11,7 +11,7 @@ const log = (...args) => {
  * @param {String} strings for replacing
  * @return {String} compiled template
  */
-function stringFormat(template, ...strings) {
+function stringFormat(template: string, ...strings: any[]): string {
     return template.replace(/{(\d+)}/g, (match, number) =>
         (typeof strings[number] !== 'undefined' ? strings[number] : match));
 }
@@ -24,7 +24,7 @@ function stringFormat(template, ...strings) {
  *                   entry replacement within template string
  * @return {String} compiled template
  */
-function stringInterpolate(template, data, customizer = null) {
+function stringInterpolate(template: string, data: any, customizer = null): string {
     return template.replace(/{(.+?)}/g, (match, key) => {
         if (key in data) {
             if (customizer) {
@@ -35,7 +35,6 @@ function stringInterpolate(template, data, customizer = null) {
         return match;
     });
 }
-
 
 export default {
     log,
