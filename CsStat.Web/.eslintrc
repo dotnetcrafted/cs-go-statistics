@@ -3,9 +3,9 @@
         "es6": true,
         "browser": true
     },
-    "extends": ["airbnb-base"],
-    "plugins": ["react/recommended", "@typescript-eslint"],
     "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends": ["airbnb-base"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -60,6 +60,7 @@
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "error",
         "no-useless-constructor": "off",
-        "@typescript-eslint/no-useless-constructor": "error"
+        "@typescript-eslint/no-useless-constructor": "error",
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
     }
 }
