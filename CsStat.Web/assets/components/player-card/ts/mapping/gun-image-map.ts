@@ -1,4 +1,4 @@
-const MapGunNameToImageUrl = (name) => {
+const MapGunNameToImageUrl = (name: string): string => {
     switch (name) {
         case 'Glock-18':
             return 'https://vignette.wikia.nocookie.net/cswikia/images/9/99/CSGO_Glock-18_Inventory.png/revision/latest/scale-to-width-down/400?cb=20130813194200';

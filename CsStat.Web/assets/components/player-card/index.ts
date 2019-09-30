@@ -1,4 +1,3 @@
-
 import 'react-vis/dist/style.css';
 import './scss/index.scss';
 

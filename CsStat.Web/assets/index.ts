@@ -7,7 +7,7 @@ import './components/players-data';
 import './components/player-card';
 
 /* init app */
-import app from './general/ts/app.ts';
+import app from './general/ts/app';
 
 app.init();
 

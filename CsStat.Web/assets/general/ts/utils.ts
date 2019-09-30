@@ -24,7 +24,7 @@ function stringFormat(template: string, ...strings: any[]): string {
  *                   entry replacement within template string
  * @return {String} compiled template
  */
-function stringInterpolate(template: string, data: any, customizer = null): string {
+function stringInterpolate(template: string, data: any, customizer: (key: any, dataKey: any) => string): string {
     return template.replace(/{(.+?)}/g, (match, key) => {
         if (key in data) {
             if (customizer) {
@@ -39,5 +39,5 @@ function stringInterpolate(template: string, data: any, customizer = null): stri
 export default {
     log,
     stringFormat,
-    stringInterpolate,
+    stringInterpolate
 };

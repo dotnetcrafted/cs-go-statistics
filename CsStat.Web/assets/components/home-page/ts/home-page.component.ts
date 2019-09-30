@@ -6,7 +6,7 @@ import PlayersData from '../../players-data/ts/players-data';
 import PlayerCard from '../../player-card/ts/player-card';
 
 export default class HomePageComponent extends DcBaseComponent {
-    static getNamespace() {
+    static getNamespace(): string {
         return 'home-page';
     }
 
@@ -22,11 +22,7 @@ export default class HomePageComponent extends DcBaseComponent {
     }
 
     private getPlayersDataEl(): ReactElement {
-        return React.createElement(
-            PlayersData,
-            { playersDataUrl: this.options.playersDataUrl },
-            null
-        );
+        return React.createElement(PlayersData, { playersDataUrl: this.options.playersDataUrl }, null);
     }
 
     private getPlayersCardEl(): ReactElement {

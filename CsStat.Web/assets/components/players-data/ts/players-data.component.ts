@@ -9,9 +9,7 @@ export default class PlayersDataComponent extends DcBaseComponent {
     }
 
     private getPlayersDataEl(): ReactElement {
-        const {
-            playersDataUrl
-        } = this.options;
+        const { playersDataUrl } = this.options;
 
         return React.createElement(PlayersData, { playersDataUrl }, null);
     }
