@@ -1,9 +1,13 @@
 module.exports = {
     presets: [
-        ['@babel/preset-env', {
-            useBuiltIns: 'usage',
-        }],
-        '@babel/preset-react'
+        [
+            '@babel/preset-env',
+            {
+                useBuiltIns: 'usage'
+            }
+        ],
+        '@babel/preset-react',
+        '@babel/preset-typescript'
     ],
     plugins: [
         '@babel/plugin-transform-object-assign',
@@ -19,9 +23,7 @@ module.exports = {
                     {
                         mode: 'remove',
                         removeImport: true,
-                        ignoreFilenames: [
-                            'node_modules'
-                        ]
+                        ignoreFilenames: ['node_modules']
                     }
                 ]
             ]

@@ -6,43 +6,35 @@ const utils = require('./utils');
 process.env.NODE_ENV = 'production';
 
 module.exports = () => {
-    utils.log('\nPRODUCTION BUILD\n');
+  utils.log('\nPRODUCTION BUILD\n');
 
-    return {
-        optimization: {
-            minimizer: [
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        parse: {
-                            ecma: 8
-                        },
-                        compress: {
-                            ecma: 5,
-                            warnings: false,
-                            comparisons: false
-                        },
-                        mangle: {
-                            safari10: true
-                        },
-                        output: {
-                            ecma: 5,
-                            comments: false,
-                            ascii_only: true
-                        }
-                    },
-                    parallel: true,
-                    cache: true,
-                    sourceMap: true
-                })
-            ]
+  return {
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            parse: {},
+            compress: {
+              comparisons: false
+            },
+            output: {
+              comments: false,
+              ascii_only: true
+            }
+          },
+          parallel: true,
+          cache: true,
+          sourceMap: true
+        })
+      ]
+    },
+    plugins: [
+      new OptimizeCssAssetsPlugin({
+        cssProcessorPluginOptions: {
+          preset: ['default', { discardComments: { removeAll: true } }],
         },
-        plugins: [
-            new OptimizeCssAssetsPlugin({
-                cssProcessorPluginOptions: {
-                    preset: ['default', { discardComments: { removeAll: true } }],
-                },
-                canPrint: !utils.isJsonOutput()
-            })
-        ]
-    };
+        canPrint: !utils.isJsonOutput()
+      })
+    ]
+  };
 };

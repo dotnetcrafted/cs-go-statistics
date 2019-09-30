@@ -16,7 +16,7 @@ module.exports = () => ({
         jsonpFunction: 'webpackJsonpDelete'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.tsx', '.ts', '.js'],
         modules: [
             'node_modules',
             // src
@@ -27,11 +27,12 @@ module.exports = () => ({
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: [
-                    /node_modules/
-                ],
-                loader: 'babel-loader'
+                test: /\.(jsx?|tsx?)$/,
+                exclude: [/node_modules(?!(\/|\\)@deleteagency)/],
+                loaders: [
+                    'babel-loader',
+                    'ts-loader'
+                ]
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
@@ -83,7 +84,7 @@ module.exports = () => ({
         }
     },
     plugins: [
-        // set correct path to your /dist folder
+    // set correct path to your /dist folder
         new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin([{ from: './assets/favicon', to: '../dist/favicon' }]),
