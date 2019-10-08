@@ -196,40 +196,11 @@ namespace BusinessFacade.Repositories.Implementations
             return summaryStat;
         }
 
-        private static List<Log> GetLogs(string dateFrom = "", string dateTo = "")
+        private static List<Log> GetLogs(string from = "", string to = "")
         {
-            var logs = new List<Log>();
-
-            if (!string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
-            {
-                if (DateTime.TryParse(dateFrom, CultureInfo.InvariantCulture, DateTimeStyles.None, out var from))
-                {
-                    logs = _logsRepository.GetLogsForPeriod(from, DateTime.Today).ToList();
-                }
-            }
-            else if (!string.IsNullOrEmpty(dateTo) && string.IsNullOrEmpty(dateFrom))
-            {
-                if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to))
-                {
-                    logs = _logsRepository.GetLogsForPeriod(DateTime.Today, to.AddDays(1)).ToList();
-                }
-            }
-            else if (!string.IsNullOrEmpty(dateTo) && !string.IsNullOrEmpty(dateFrom))
-            {
-                if (DateTime.TryParse(dateTo, CultureInfo.InvariantCulture, DateTimeStyles.None, out var to)
-                    && DateTime.TryParse(dateFrom, CultureInfo.InvariantCulture, DateTimeStyles.None, out var from))
-                {
-                    logs = _logsRepository.GetLogsForPeriod(from, to.AddDays(1)).ToList();
-                }
-            }
-            else
-            {
-                logs = _logsRepository.GetAllLogs().ToList();
-            }
-
-            return !logs.Any() 
-                ? null 
-                : logs;
+            return _logsRepository
+                .GetLogsForPeriod(from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1))
+                .ToList();
         }
 
         private static List<GunModel> GetGuns(IReadOnlyCollection<Log> logs)

@@ -1,10 +1,18 @@
-﻿namespace CsStat.SystemFacade.Extensions
+﻿using System;
+using System.Globalization;
+
+namespace CsStat.SystemFacade.Extensions
 {
     public static class StringExtensions
     {
         public static bool IsEmpty(this string value)
         {
             return string.IsNullOrEmpty(value);
+        }
+
+        public static bool IsNotEmpty(this string value)
+        {
+            return !string.IsNullOrEmpty(value);
         }
 
         public static int ParseOrDefault(this string value, int defaultValue)
@@ -28,6 +36,16 @@
 
             return int.TryParse(value, out var parsedValue)
                 ? parsedValue
+                : defaultValue;
+        }
+
+        public static DateTime ToDate(this string str, DateTime defaultValue)
+        {
+            if (str.IsEmpty())
+                return defaultValue;
+
+            return DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date)
+                ? date
                 : defaultValue;
         }
     }
