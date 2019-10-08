@@ -57,16 +57,16 @@ namespace CsStat.Web.Controllers
 
         private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
-            var playersStat = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
-            var steamIds = string.Join(",", playersStat.Select(x => x.Player.SteamId).ToList());
+            var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
+            var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
             var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
-            foreach (var stat in playersStat)
+            foreach (var player in players)
             {
-                stat.Player.ImagePath = avatars.FirstOrDefault(x => x.Key == stat.Player.SteamId).Value;
+                player.Player.ImagePath = avatars.FirstOrDefault(x => x.Key == player.Player.SteamId).Value;
             }
 
-            return Mapper.Map<List<PlayerStatsViewModel>>(playersStat);
+            return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
     }
 }
