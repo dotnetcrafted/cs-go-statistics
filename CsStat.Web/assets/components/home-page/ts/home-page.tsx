@@ -22,10 +22,10 @@ const HomePage: SFC<HomePageProps> = props => (
             </Header>
             <Content className="home-page__content">
                 <Row type="flex" justify="start">
-                    <Col xs={24} lg={12}>
+                    <Col xs={24} lg={16}>
                         {props.playersData}
                     </Col>
-                    <Col xs={24} lg={{ span: 11, offset: 1 }}>
+                    <Col xs={24} lg={{ span: 7, offset: 1 }}>
                         <div className="home-page__card">{props.playerCard}</div>
                     </Col>
                 </Row>
