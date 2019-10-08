@@ -55,7 +55,7 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom, string dateTo)
+        private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
             var playersStat = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
             var steamIds = string.Join(",", playersStat.Select(x => x.Player.SteamId).ToList());
