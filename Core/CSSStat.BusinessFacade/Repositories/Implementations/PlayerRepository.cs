@@ -12,6 +12,7 @@ using CsStat.Domain.Entities;
 using CsStat.Domain.Models;
 using CsStat.LogApi.Enums;
 using CsStat.SystemFacade.Attributes;
+using CsStat.SystemFacade.Extensions;
 using DataService.Interfaces;
 using MongoDB.Driver.Builders;
 
@@ -21,8 +22,7 @@ namespace BusinessFacade.Repositories.Implementations
     {
         private static ILogsRepository _logsRepository;
         private static IMongoRepositoryFactory _mongoRepository;
-        private static List<Log> _logs;
-
+        
         public PlayerRepository(IMongoRepositoryFactory mongoRepository)
         {
             _mongoRepository = mongoRepository;
@@ -85,15 +85,13 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository.GetRepository<Player>().Collection.Save(player);
         }
 
-        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom = "", string dateTo = "")
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo)
         {
-            _logs = GetLogs(dateFrom, dateTo);
+            var logs = GetLogs(dateFrom, dateTo);
             var playersStats = new List<PlayerStatsModel>();
 
-            if (_logs==null || !_logs.Any())
-            {
+            if (!logs.Any())
                 return playersStats;
-            }
 
             var players = GetAllPlayers().ToList();
 
@@ -103,15 +101,15 @@ namespace BusinessFacade.Repositories.Implementations
             
             foreach (var player in players)
             {
-                var guns = GetGuns(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
+                var guns = GetGuns(logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
                 var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
-                var explodeBombs = GetExplodeBombs(_logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList());
-                var defuse = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Defuse);
-                var friendlyKills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
-                var assists = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist);
-                var kills = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
-                var death = _logs.Count(x => x.Victim?.Id == player.Id);
-                var totalGames = _logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
+                var explodeBombs = GetExplodeBombs(logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList());
+                var defuse = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Defuse);
+                var friendlyKills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
+                var assists = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist);
+                var kills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
+                var death = logs.Count(x => x.Victim?.Id == player.Id);
+                var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 playersStats.Add(new PlayerStatsModel
                     {
                         Player = player,
@@ -120,7 +118,7 @@ namespace BusinessFacade.Repositories.Implementations
                         Assists = assists,
                         FriendlyKills = friendlyKills,
                         TotalGames = totalGames,
-                        HeadShot = kills==0 ? 0 : Math.Round(_logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) ,
+                        HeadShot = kills==0 ? 0 : Math.Round(logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) ,
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
