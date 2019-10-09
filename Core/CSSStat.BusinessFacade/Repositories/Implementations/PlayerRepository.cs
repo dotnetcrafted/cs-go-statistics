@@ -275,7 +275,7 @@ namespace BusinessFacade.Repositories.Implementations
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.Sniper,
-                    PlayerId = playersStats.OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.SniperRifleKills!=0).OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?.Player.SteamId
                 }
             };
 

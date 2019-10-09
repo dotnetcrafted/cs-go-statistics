@@ -28,7 +28,7 @@ namespace CsStat.Domain.Definitions
 
         [Caption("Team player")]
         [Description("Player with most assists")]
-        TeamPLayer,
+        TeamPlayer,
 
         [Caption("Head Hunter")]
         [Description("Player with most head shots")]
