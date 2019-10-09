@@ -18,7 +18,7 @@ namespace CSStat.WebApp.Tests
         private static readonly CsStat.LogApi.CsLogsApi _api = new CsStat.LogApi.CsLogsApi();
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\testLogs.txt")]
+        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\console.log")]
         public static void ParseLogs(string file)
         {
             var logs = string.Empty;
@@ -35,8 +35,8 @@ namespace CSStat.WebApp.Tests
                 return;
             }
 
-            var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
-            logRepository.InsertBatch(parsedLogs);
+            //var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            //logRepository.InsertBatch(parsedLogs);
 
         }
         [Test]
