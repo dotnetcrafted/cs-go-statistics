@@ -154,6 +154,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapperConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -162,6 +163,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AchievementViewModel.cs" />
     <Compile Include="Models\GunViewModel.cs" />
+    <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

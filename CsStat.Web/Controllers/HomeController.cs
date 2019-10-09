@@ -7,12 +7,12 @@ using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
+using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
-using Newtonsoft.Json;
 
 namespace CsStat.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private static IPlayerRepository _playerRepository;
         private static ISteamApi _steamApi;
@@ -21,43 +21,41 @@ namespace CsStat.Web.Controllers
         {
             _playerRepository = playerRepository;
             _steamApi = new SteamApi();
-
         }
+
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
-            if (string.IsNullOrEmpty(dateFrom) && string.IsNullOrEmpty(dateTo))
+            if (dateFrom.IsEmpty() && dateTo.IsEmpty())
             {
-                dateTo = DateTime.Now.ToString("MM/dd/yyyy");
-                dateFrom = DateTime.Now.AddDays(-(int)(DateTime.Now.DayOfWeek - 1)).ToString("MM/dd/yyyy");
+                dateTo = DateTime.Now.ToShortFormat();
+                dateFrom = DateTime.Now.AddDays(-(int) (DateTime.Now.DayOfWeek - 1)).ToShortFormat();
             }
 
-            var playersStat = GetPlayers(dateFrom, dateTo)?.OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills).ToList();
+            var playersStat = GetPlayersStat(dateFrom, dateTo)
+                ?.OrderByDescending(x => x.KdRatio)
+                .ThenByDescending(x => x.Kills)
+                .ToList();
 
-            var model = new SaloModel
+            return new JsonResult
             {
-                Players = playersStat,
-                DateFrom = dateFrom,
-                DateTo = dateTo
-
-            };
-
-            var json = JsonConvert.SerializeObject(model);
-
-            var result = new JsonResult
-            {
-                Data = json,
+                Data = new SaloModel
+                {
+                    Players = playersStat,
+                    DateFrom = dateFrom,
+                    DateTo = dateTo
+                },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
-            return result;
         }
 
-        private static IEnumerable<PlayerStatsViewModel> GetPlayers(string dateFrom = "", string dateTo = "")
+        private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
             var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
             var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
