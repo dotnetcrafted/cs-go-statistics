@@ -54,7 +54,7 @@ namespace CsStat.LogApi
 
         private static bool IsClearString(string logLine)
         {
-            return !logLine.Contains("_killed") && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
+            return !logLine.Contains("_killed") && !logLine.Contains("GOTV") && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
         }
         private static Log ParseLine(string logLine)
         {

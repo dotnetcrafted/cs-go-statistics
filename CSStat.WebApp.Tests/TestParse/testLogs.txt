@@ -1,7 +1,4 @@
-L 08/17/2019 - 18:52:44: Molotov projectile spawned at 597.938477 -1631.766968 -346.838745, velocity 253.777771 681.372437 216.438553
-L 08/17/2019 - 18:52:45: "DJoony<19><STEAM_1:1:33105260><TERRORIST>" threw molotov [734 -1267 -414]
-L 08/17/2019 - 18:52:48: "Host<20><STEAM_1:0:73435701><CT>" threw flashbang [662 -1465 -403] flashbang entindex 413)
-L 08/17/2019 - 18:52:51: "DJoony<19><STEAM_1:1:33105260><TERRORIST>" [1213 -1017 -416] killed other "func_breakable<395>" [1143 -797 -344] with "glock"
-L 08/17/2019 - 18:53:07: "DJoony<19><STEAM_1:1:33105260><TERRORIST>" [344 -310 -128] killed "Host<20><STEAM_1:0:73435701><CT>" [853 -606 -336] with "ak47" (headshot)
-L 08/17/2019 - 19:43:29: "DJoony<19><STEAM_1:1:33105260><CT>" [1314 224 -160] killed other "prop_physics_multiplayer<203>" [2146 -19 -130] with "m4a1_silencer"
-L 08/17/2019 - 18:55:38: "DJoony<19><STEAM_1:1:33105260><TERRORIST>" [439 -1446 -407] killed other "prop_dynamic<192>" [448 -1403 -416] with "knife_t"
+L 10/09/2019 - 08:59:00: "GOTV<2><BOT><>" connected, address ""
+PutClientInServer: no info_player_start on level
+L 10/09/2019 - 08:59:01: "GOTV<2><BOT><>" entered the game
+L 10/09/2019 - 08:59:01: "GOTV<2><BOT><Unassigned>" changed name to "Fuse8 CS TV"
