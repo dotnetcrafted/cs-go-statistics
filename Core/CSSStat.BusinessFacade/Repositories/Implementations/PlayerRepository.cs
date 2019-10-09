@@ -227,49 +227,49 @@ namespace BusinessFacade.Repositories.Implementations
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.First,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.KdRatio!=0).OrderByDescending(x => x.KdRatio).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve = AchievementsEnum.Second,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(1).Take(1).First().Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.KdRatio!=0).OrderByDescending(x => x.KdRatio).Skip(1).Take(1).First().Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Third,
-                    PlayerId = playersStats.OrderByDescending(x => x.KdRatio).Skip(2).Take(1).First().Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.KdRatio!=0).OrderByDescending(x => x.KdRatio).Skip(2).Take(1).First().Player.SteamId
                 },
 
                 new AchieveModel
                 {
                 Achieve =  AchievementsEnum.Killer,
-                PlayerId = playersStats.OrderByDescending(x => x.Kills).FirstOrDefault()?.Player.SteamId
+                PlayerId = playersStats.Where(x=>x.Kills!=0).OrderByDescending(x => x.Kills).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
-                    Achieve =  AchievementsEnum.TeamPLayer,
-                    PlayerId = playersStats.OrderByDescending(x => x.Assists).FirstOrDefault()?.Player.SteamId
+                    Achieve =  AchievementsEnum.TeamPlayer,
+                    PlayerId = playersStats.Where(x=>x.Assists!=0).OrderByDescending(x => x.Assists).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.HeadHunter,
-                    PlayerId = playersStats.OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.HeadShot!=0).OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Kenny,
-                    PlayerId = playersStats.OrderByDescending(x => x.Death).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.Death!=0).OrderByDescending(x => x.Death).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.Mvp,
-                    PlayerId = playersStats.OrderByDescending(x=>x.Points).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.Points!=0).OrderByDescending(x=>x.Points).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel

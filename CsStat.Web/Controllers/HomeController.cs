@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
+using CsStat.Domain;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
@@ -38,10 +39,19 @@ namespace CsStat.Web.Controllers
                 dateFrom = DateTime.Now.AddDays(-(int) (DateTime.Now.DayOfWeek - 1)).ToShortFormat();
             }
 
-            var playersStat = GetPlayersStat(dateFrom, dateTo)
-                ?.OrderByDescending(x => x.KdRatio)
-                .ThenByDescending(x => x.Kills)
-                .ToList();
+            var playersStat = Settings.ShowNullPlayers == 0
+                ? GetPlayersStat(dateFrom, dateTo)
+                    .Where(x => x.TotalGames != 0)
+                    .OrderByDescending(x => x.KdRatio)
+                    .ThenByDescending(x => x.Kills)
+                    .ThenByDescending(x => x.TotalGames)
+                    .ToList()
+                : GetPlayersStat(dateFrom, dateTo)
+                    .OrderByDescending(x => x.KdRatio)
+                    .ThenByDescending(x => x.Kills)
+                    .ThenByDescending(x => x.TotalGames)
+                    .ToList();
+
 
             return new JsonResult
             {
