@@ -1,9 +1,20 @@
 .players-data {
     $this: &;
 
+    &__filters {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__row {
         background-color: $color-white;
         cursor: pointer;
+    }
+
+    &__cell {
+        &.is-hidden {
+            display: none;
+        }
     }
 
     td#{$this}__cell {

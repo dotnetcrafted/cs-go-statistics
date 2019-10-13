@@ -390,6 +390,7 @@ L 10/09/2019 - 08:59:00: "GOTV<2><BOT><>" connected, address ""
 PutClientInServer: no info_player_start on level
 L 10/09/2019 - 08:59:01: "GOTV<2><BOT><>" entered the game
 L 10/09/2019 - 08:59:01: "GOTV<2><BOT><Unassigned>" changed name to "Fuse8 CS TV"
+L 10/09/2019 - 08:59:01: "GOTV<2><BOT><Unassigned>" changed name to "Fuse8 CS TV"
 Recording GOTV demo to auto0-20191009-085901-71771514-de_dust2-fuse8delete.dem...
 L 10/09/2019 - 08:59:01: server_cvar: "sv_tags" "*grp:0i,csgo,public"
 GOTV[0] broadcast active.
