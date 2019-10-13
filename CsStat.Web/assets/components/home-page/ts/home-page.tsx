@@ -1,7 +1,9 @@
 import React, { SFC, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { Layout, Icon, Typography, Row, Col } from 'antd';
+import { Layout, Icon, Typography, Row, Col, Divider } from 'antd';
 import configureStore from '../../../general/ts/redux/store';
+import IconCopyright from './icon-copyright';
+import AuthorsCopyright from './authors-copyright';
 
 const store = configureStore();
 const { Header, Content, Footer } = Layout;
@@ -31,16 +33,13 @@ const HomePage: SFC<HomePageProps> = props => (
                 </Row>
             </Content>
             <Footer>
-                <div>
-                    Icons made by{' '}
-                    <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
-                        Freepik
-                    </a>{' '}
-                    from{' '}
-                    <a href="https://www.flaticon.com/" title="Flaticon">
-                        www.flaticon.com
-                    </a>
-                </div>
+                <AuthorsCopyright />
+                <Divider />
+                <a href="https://bitbucket.org/radik_fayskhanov/counterstrikestat">
+                    Repository is available on Bitbucket.
+                </a>
+                <Divider />
+                <IconCopyright />
             </Footer>
         </Layout>
     </Provider>
