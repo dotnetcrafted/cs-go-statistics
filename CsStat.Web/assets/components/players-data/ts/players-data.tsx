@@ -6,25 +6,26 @@ import FilterForm, { DateValues } from './filter-form';
 import { AppState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
 import { ColumnProps } from 'antd/es/table';
+import { nameof } from '../../../general/ts/extentions';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 const HIDDEN_CELL_CSS_CLASS = 'is-hidden';
 
 export const COLUMN_NAMES: ColumnNames = {
-    ImagePath: { dataIndex: 'ImagePath', readableName: 'ImagePath' },
-    Name: { dataIndex: 'Name', readableName: 'Players Name' },
-    Points: { dataIndex: 'Points', readableName: 'Points' },
-    KdRatio: { dataIndex: 'KdRatio', readableName: 'K/D Ratio' },
-    Kills: { dataIndex: 'Kills', readableName: 'Kills' },
-    Deaths: { dataIndex: 'Deaths', readableName: 'Deaths' },
-    TotalGames: { dataIndex: 'TotalGames', readableName: 'Total Games' },
-    KillsPerGame: { dataIndex: 'KillsPerGame', readableName: 'Kills/Game' },
-    HeadShot: { dataIndex: 'HeadShot', readableName: 'HeadShot %' },
-    Assists: { dataIndex: 'Assists', readableName: 'Assists' },
-    AssistsPerGame: { dataIndex: 'AssistsPerGame', readableName: 'Assists/Game' },
-    DefusedBombs: { dataIndex: 'DefusedBombs', readableName: 'Defused Bombs' },
-    ExplodedBombs: { dataIndex: 'ExplodedBombs', readableName: 'Exploded Bombs' },
-    FriendlyKills: { dataIndex: 'FriendlyKills', readableName: 'Friendly Kills' }
+    ImagePath: { dataIndex: nameof<Player>('ImagePath'), readableName: 'ImagePath' },
+    Name: { dataIndex: nameof<Player>('Name'), readableName: 'Players Name' },
+    Points: { dataIndex: nameof<Player>('Points'), readableName: 'Points' },
+    KdRatio: { dataIndex: nameof<Player>('KdRatio'), readableName: 'K/D Ratio' },
+    Kills: { dataIndex: nameof<Player>('Kills'), readableName: 'Kills' },
+    Deaths: { dataIndex: nameof<Player>('Deaths'), readableName: 'Deaths' },
+    TotalGames: { dataIndex: nameof<Player>('TotalGames'), readableName: 'Total Games' },
+    KillsPerGame: { dataIndex: nameof<Player>('KillsPerGame'), readableName: 'Kills/Game' },
+    HeadShot: { dataIndex: nameof<Player>('HeadShot'), readableName: 'HeadShot %' },
+    Assists: { dataIndex: nameof<Player>('Assists'), readableName: 'Assists' },
+    AssistsPerGame: { dataIndex: nameof<Player>('AssistsPerGame'), readableName: 'Assists/Game' },
+    DefusedBombs: { dataIndex: nameof<Player>('DefusedBombs'), readableName: 'Defused Bombs' },
+    ExplodedBombs: { dataIndex: nameof<Player>('ExplodedBombs'), readableName: 'Exploded Bombs' },
+    FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' }
 };
 const DEFAULT_COLUMNS = [
     COLUMN_NAMES.Points.dataIndex,
@@ -81,14 +82,9 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     };
 
     onCheckboxesChange = (selectedColumns: string[]): void => {
-        const { visibleColumns } = this.state;
-        let updatedColumns: string[] = [];
-        if (selectedColumns.length > visibleColumns.length) {
-            updatedColumns = selectedColumns.filter(x => !visibleColumns.includes(x)).concat(visibleColumns);
-        } else if (selectedColumns.length < visibleColumns.length) {
-            //TODO delete elements
-        }
-        this.setState({ visibleColumns: updatedColumns });
+        const visibleColumns = [...PERMANENT_COLUMNS, ...selectedColumns];
+        console.log(visibleColumns);
+        this.setState({ visibleColumns });
     };
 
     private getCellClassName(dataIndex: string): string {

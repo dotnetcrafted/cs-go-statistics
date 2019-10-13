@@ -16,7 +16,6 @@ class ColumnsSelector extends React.Component<IColumnsSelectorProps, ColumnsSele
 
     render() {
         const { visibleColumns } = this.props;
-        console.log(visibleColumns);
         const keys: string[] = Object.keys(COLUMN_NAMES);
         const excludedKeys = ['Id', 'Name', 'ImagePath', 'Achievements', 'Guns'];
         const filteredKeys = keys.filter(k => !excludedKeys.includes(k));
