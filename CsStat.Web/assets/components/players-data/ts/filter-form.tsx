@@ -89,17 +89,24 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
 
     private disabledDateFrom = (dateFrom: Moment | undefined): boolean => {
         const { dateTo } = this.state;
-        if (dateFrom && dateTo) {
-            return dateFrom.valueOf() >= dateTo.valueOf();
+
+        if (moment(dateFrom).isAfter(moment())) {
+            return true;
+        } else if (moment(dateFrom).isSameOrAfter(dateTo, 'day')) {
+            return false;
+        } else {
+            return false;
         }
-        return false;
     };
     private disabledDateTo = (dateTo: Moment | undefined): boolean => {
         const { dateFrom } = this.state;
-        if (dateFrom && dateTo) {
-            return dateTo.valueOf() <= dateFrom.valueOf() || dateTo.valueOf() > moment().valueOf();
+        if (moment(dateTo).isAfter(moment())) {
+            return true;
+        } else if (moment(dateTo).isSameOrAfter(dateFrom, 'day')) {
+            return false;
+        } else {
+            return true;
         }
-        return false;
     };
 
     private onFromChange = (value: Moment | null): void => {
