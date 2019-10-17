@@ -121,7 +121,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.Points);
             },
-            sorter: (a: Player, b: Player) => a.Points - b.Points
+            sorter: (a: Player, b: Player) => b.Points - a.Points
         },
         {
             dataIndex: COLUMN_NAMES.KdRatio.dataIndex,
@@ -130,7 +130,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.KdRatio);
             },
-            sorter: (a: Player, b: Player) => a.KdRatio - b.KdRatio
+            sorter: (a: Player, b: Player) => b.KdRatio - a.KdRatio
         },
         {
             dataIndex: COLUMN_NAMES.Kills.dataIndex,
@@ -139,7 +139,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.Kills);
             },
-            sorter: (a: Player, b: Player) => a.Kills - b.Kills
+            sorter: (a: Player, b: Player) => b.Kills - a.Kills
         },
         {
             dataIndex: COLUMN_NAMES.Deaths.dataIndex,
@@ -157,7 +157,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.TotalGames);
             },
-            sorter: (a: Player, b: Player) => a.TotalGames - b.TotalGames
+            sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
         },
         {
             dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
@@ -166,7 +166,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.KillsPerGame);
             },
-            sorter: (a: Player, b: Player) => a.KillsPerGame - b.KillsPerGame
+            sorter: (a: Player, b: Player) => b.KillsPerGame - a.KillsPerGame
         },
         {
             dataIndex: COLUMN_NAMES.HeadShot.dataIndex,
@@ -175,7 +175,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.HeadShot);
             },
-            sorter: (a: Player, b: Player) => a.HeadShot - b.HeadShot
+            sorter: (a: Player, b: Player) => b.HeadShot - a.HeadShot
         },
         {
             dataIndex: COLUMN_NAMES.Assists.dataIndex,
@@ -184,7 +184,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.Assists);
             },
-            sorter: (a: Player, b: Player) => a.Assists - b.Assists
+            sorter: (a: Player, b: Player) => b.Assists - a.Assists
         },
         {
             dataIndex: COLUMN_NAMES.AssistsPerGame.dataIndex,
@@ -193,7 +193,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.AssistsPerGame);
             },
-            sorter: (a: Player, b: Player) => a.AssistsPerGame - b.AssistsPerGame
+            sorter: (a: Player, b: Player) => b.AssistsPerGame - a.AssistsPerGame
         },
         {
             dataIndex: COLUMN_NAMES.DefusedBombs.dataIndex,
@@ -202,7 +202,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.DefusedBombs);
             },
-            sorter: (a: Player, b: Player) => a.DefusedBombs - b.DefusedBombs
+            sorter: (a: Player, b: Player) => b.DefusedBombs - a.DefusedBombs
         },
         {
             dataIndex: COLUMN_NAMES.ExplodedBombs.dataIndex,
@@ -211,7 +211,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.ExplodedBombs);
             },
-            sorter: (a: Player, b: Player) => a.ExplodedBombs - b.ExplodedBombs
+            sorter: (a: Player, b: Player) => b.ExplodedBombs - a.ExplodedBombs
         },
         {
             dataIndex: COLUMN_NAMES.FriendlyKills.dataIndex,
