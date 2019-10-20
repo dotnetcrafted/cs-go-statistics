@@ -9,6 +9,7 @@ namespace CsStat.Domain
     {
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
         public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
+        public static string DemosFolderPath => GetSetting(nameof(DemosFolderPath), Defaults.DemosFolderPath);
         public static int FileReadNewLinesInterval => GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
@@ -17,7 +18,6 @@ namespace CsStat.Domain
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
-
 
 
         private static string GetSetting(string settingName, string defaultValue = null)
@@ -50,6 +50,7 @@ namespace CsStat.Domain
         {
             public static string LogsPath = Path.Combine(Environment.CurrentDirectory, "logs");
             public static string ConsoleLogsPath = Path.Combine(Environment.CurrentDirectory, "console.log");
+            public static string DemosFolderPath = Path.Combine(Environment.CurrentDirectory, "Demos");
             public const int FileReadNewLinesInterval = 10000;
             public const int TimerInterval = 10000;
             public const int TakeLines = 50;

@@ -7,7 +7,5 @@
 
         public Player BombPlanter = null;
         public Player BombDefuser = null;
-
-
     }
 }

@@ -45,7 +45,9 @@
     <Compile Include="Attributes\Caption.cs" />
     <Compile Include="Attributes\IsSniperRifleAttribute.cs" />
     <Compile Include="Attributes\LogValueAttribute.cs" />
+    <Compile Include="BaseWatcher.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\LongExtensions.cs" />
     <Compile Include="MongoDateComparison.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="FileHelper.cs" />

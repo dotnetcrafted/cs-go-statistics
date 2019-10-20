@@ -56,6 +56,12 @@
   <ItemGroup>
     <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
+    <Compile Include="Entities\Demo\DemoFile.cs" />
+    <Compile Include="Entities\Demo\DemoLog.cs" />
+    <Compile Include="Entities\Demo\KillLog.cs" />
+    <Compile Include="Entities\Demo\PlayerLog.cs" />
+    <Compile Include="Entities\Demo\RoundLog.cs" />
+    <Compile Include="Entities\FileEntity.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\LogFile.cs" />
@@ -83,5 +89,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
