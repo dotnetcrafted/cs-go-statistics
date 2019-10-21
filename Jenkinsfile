@@ -21,5 +21,10 @@ pipeline {
           bat "\"${tool 'MSBuildLocal'}\" ./CsStat.Web/CsStat.Web.csproj /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
+    stage('Publish') {
+      steps {
+          bat'xcopy "%WORKSPACE%\\CsStat.Web" "C:\\inetpub\\SALO-CI" /s /e /y /i'
+      }
+    }
   }
 }
