@@ -1,14 +1,16 @@
-﻿using CsStat.Domain.Definitions;
-using MongoDB.Bson;
+﻿using System.Collections.Generic;
+using CsStat.Domain.Definitions;
 
 namespace CsStat.Domain.Entities.Demo
 {
     public class RoundLog
     {
         public int RoundNumber { get; set; }
-        public Teams Winner = Teams.Null;
+        public Teams Winner { get; set; }
 
-        public ObjectId BombPlanter;
-        public ObjectId BombDefuser;
+        public long? BombPlanter { get; set; }
+        public long? BombDefuser { get; set; }
+
+        public Dictionary<Teams, List<long>> Teams { get; set; }
     }
 }

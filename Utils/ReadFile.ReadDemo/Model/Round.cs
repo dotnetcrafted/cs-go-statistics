@@ -1,11 +1,16 @@
-﻿namespace ReadFile.ReadDemo.Model
+﻿using System.Collections.Generic;
+using DemoInfo;
+
+namespace ReadFile.ReadDemo.Model
 {
     public class Round
     {
         public int RoundNumber { get; set; }
-        public DemoInfo.Team Winner = DemoInfo.Team.Spectate;
+        public Team Winner = Team.Spectate;
 
         public Player BombPlanter = null;
         public Player BombDefuser = null;
+
+        public Dictionary<Team, List<Player>> Teams;
     }
 }

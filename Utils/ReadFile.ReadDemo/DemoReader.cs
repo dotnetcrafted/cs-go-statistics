@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using CsStat.SystemFacade;
 using CsStat.SystemFacade.Extensions;
 using DemoInfo;
 using ReadFile.ReadDemo.Model;
+using Player = DemoInfo.Player;
 
 namespace ReadFile.ReadDemo
 {
@@ -79,21 +81,82 @@ namespace ReadFile.ReadDemo
             _parser.ParseToEnd();
             sw.Stop();
 
-            //demoRepository.InsertLog(new DemoLog
-            //{
-            //    DemoFileName = _results.DemoFileName,
-            //    Players = _results.Players.Select(x => new PlayerLog
-            //    {
-            //        Name = x.Value.Name,
-            //        SteamID = x.Value.SteamID,
-            //        Assists = x.Value.Assists.Select(x=>x.I)
 
-            //    }).ToList(),
-            //    Rounds = _results.Rounds.Select(x => new RoundLog()).ToList(),
-            //});
+            var demoLog = new DemoLog
+            {
+                DemoFileName = _results.DemoFileName,
+                Players = _results.Players.Select(x => new PlayerLog
+                {
+                    Name = x.Value.Name,
+                    SteamID = x.Value.SteamID,
+                    Assists = x.Value.Assists?.Select(z => new KillLog
+                    {
+                        Killer = z.Killer?.SteamID,
+                        Victim = z.Victim?.SteamID,
+                        Assister = z.Assister?.SteamID,
+                        Weapon = z.Weapon,
+                        IsHeadshot = z.IsHeadshot
+                    }).ToList(),
+                    Deaths = x.Value.Deaths?.Select(z => new KillLog
+                    {
+                        Killer = z.Killer?.SteamID,
+                        Victim = z.Victim?.SteamID,
+                        Assister = z.Assister?.SteamID,
+                        Weapon = z.Weapon,
+                        IsHeadshot = z.IsHeadshot
+                    }).ToList(),
+                    Kills = x.Value.Kills?.Select(z => new KillLog
+                    {
+                        Killer = z.Killer?.SteamID,
+                        Victim = z.Victim?.SteamID,
+                        Assister = z.Assister?.SteamID,
+                        Weapon = z.Weapon,
+                        IsHeadshot = z.IsHeadshot
+                    }).ToList(),
+                    Teamkills = x.Value.Teamkills?.Select(z => new KillLog
+                    {
+                        Killer = z.Killer?.SteamID,
+                        Victim = z.Victim?.SteamID,
+                        Assister = z.Assister?.SteamID,
+                        Weapon = z.Weapon,
+                        IsHeadshot = z.IsHeadshot
+                    }).ToList(),
+                    BombDefuses = x.Value.BombDefuses?.Select(z => new RoundLog
+                    {
+                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        BombDefuser = z.BombDefuser?.SteamID,
+                        BombPlanter = z.BombPlanter?.SteamID,
+                        RoundNumber = z.RoundNumber
+                    }).ToList(),
+                    BombExplosions = x.Value.BombExplosions?.Select(z => new RoundLog
+                    {
+                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        BombDefuser = z.BombDefuser?.SteamID,
+                        BombPlanter = z.BombPlanter?.SteamID,
+                        RoundNumber = z.RoundNumber
+                    }).ToList(),
+                    BombPlants = x.Value.BombPlants?.Select(z => new RoundLog
+                    {
+                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        BombDefuser = z.BombDefuser?.SteamID,
+                        BombPlanter = z.BombPlanter?.SteamID,
+                        RoundNumber = z.RoundNumber
+                    }).ToList()
+                }).ToList(),
+                Rounds = _results.Rounds?.Select(x => new RoundLog
+                {
+                    BombPlanter = x.Value.BombPlanter?.SteamID,
+                    BombDefuser = x.Value.BombDefuser?.SteamID,
+                    RoundNumber = x.Value.RoundNumber,
+                    Winner = x.Value.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                    Teams = x.Value.Teams.ToDictionary(
+                        z => z.Key == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        z => z.Value.Select(k => k.SteamID).ToList()
+                    )
+                }).ToList()
+            };
 
-            
-            demoRepository.InsertLog(_results);
+            demoRepository.InsertLog(demoLog);
 
             Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
@@ -171,9 +234,15 @@ namespace ReadFile.ReadDemo
 
             _currentRound.Winner = winningTeam;
 
-
             _lastTScore = _parser.TScore;
             _lastCTScore = _parser.CTScore;
+
+            _currentRound.Teams = _parser.Participants
+                .Where(x => x.SteamID != 0) // skip spectators
+                .GroupBy(x => new
+                {
+                    Tema = x.Team
+                }).ToDictionary(x => x.Key.Tema, x => x.Select(z => _results.Players[z.SteamID]).ToList());
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
         }
