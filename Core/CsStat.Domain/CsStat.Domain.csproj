@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
+    <Compile Include="Definitions\RoundEndReason.cs" />
     <Compile Include="Entities\Demo\DemoFile.cs" />
     <Compile Include="Entities\Demo\DemoLog.cs" />
     <Compile Include="Entities\Demo\KillLog.cs" />

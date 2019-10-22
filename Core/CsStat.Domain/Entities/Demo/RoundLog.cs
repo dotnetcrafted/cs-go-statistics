@@ -7,9 +7,12 @@ namespace CsStat.Domain.Entities.Demo
     {
         public int RoundNumber { get; set; }
         public Teams Winner { get; set; }
+        public RoundEndReason Reason { get; set; }
 
         public long? BombPlanter { get; set; }
         public long? BombDefuser { get; set; }
+
+        public bool IsBombExploded { get; set; }
 
         public Dictionary<Teams, List<long>> Teams { get; set; }
     }

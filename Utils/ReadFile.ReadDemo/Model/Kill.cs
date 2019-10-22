@@ -2,7 +2,7 @@
 {
     public class Kill
     {
-        public Kill(Player killer, Player victim, bool isHeadshot, string weapon)
+        public Kill(Player killer, Player victim, bool isHeadshot, string weapon, int roundNumber)
         {
             Killer = killer;
             Victim = victim;
@@ -14,6 +14,7 @@
         public Player Victim { get; set; }
         public bool IsHeadshot { get; set; }
         public string Weapon { get; set; }
+        public int RoundNumber { get; set; }
         
         public Player Assister { get; set; }
     }

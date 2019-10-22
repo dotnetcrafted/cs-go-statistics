@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
@@ -10,7 +10,6 @@ using CsStat.SystemFacade;
 using CsStat.SystemFacade.Extensions;
 using DemoInfo;
 using ReadFile.ReadDemo.Model;
-using Player = DemoInfo.Player;
 
 namespace ReadFile.ReadDemo
 {
@@ -64,6 +63,9 @@ namespace ReadFile.ReadDemo
             var file = File.OpenRead(filePath);
             _currentDemoFileName = Path.GetFileName(file.Name);
 
+            if(_currentDemoFileName.IsEmpty())
+                return;
+
             _parser = new DemoParser(file);
             _parser.ParseHeader();
             _parser.MatchStarted += Parser_MatchStarted;
@@ -73,6 +75,7 @@ namespace ReadFile.ReadDemo
             _parser.TickDone += Parser_TickDone;
             _parser.BombPlanted += Parser_BombPlanted;
             _parser.BombDefused += Parser_BombDefused;
+            _parser.BombExploded += Parser_BombExploded;
 
             Console.WriteLine($"Parse file: \"{_currentDemoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
             
@@ -81,9 +84,11 @@ namespace ReadFile.ReadDemo
             _parser.ParseToEnd();
             sw.Stop();
 
-
-            var demoLog = new DemoLog
+           var demoLog = new DemoLog
             {
+                Map = _parser.Map,
+                Date = GetDemoDate(_currentDemoFileName),
+                Size = new FileInfo(file.Name).Length,
                 DemoFileName = _results.DemoFileName,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
@@ -95,7 +100,8 @@ namespace ReadFile.ReadDemo
                         Victim = z.Victim?.SteamID,
                         Assister = z.Assister?.SteamID,
                         Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot
+                        IsHeadshot = z.IsHeadshot,
+                        RoundNumber = z.RoundNumber
                     }).ToList(),
                     Deaths = x.Value.Deaths?.Select(z => new KillLog
                     {
@@ -103,7 +109,8 @@ namespace ReadFile.ReadDemo
                         Victim = z.Victim?.SteamID,
                         Assister = z.Assister?.SteamID,
                         Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot
+                        IsHeadshot = z.IsHeadshot,
+                        RoundNumber = z.RoundNumber
                     }).ToList(),
                     Kills = x.Value.Kills?.Select(z => new KillLog
                     {
@@ -111,7 +118,8 @@ namespace ReadFile.ReadDemo
                         Victim = z.Victim?.SteamID,
                         Assister = z.Assister?.SteamID,
                         Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot
+                        IsHeadshot = z.IsHeadshot,
+                        RoundNumber = z.RoundNumber
                     }).ToList(),
                     Teamkills = x.Value.Teamkills?.Select(z => new KillLog
                     {
@@ -119,7 +127,8 @@ namespace ReadFile.ReadDemo
                         Victim = z.Victim?.SteamID,
                         Assister = z.Assister?.SteamID,
                         Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot
+                        IsHeadshot = z.IsHeadshot,
+                        RoundNumber = z.RoundNumber
                     }).ToList(),
                     BombDefuses = x.Value.BombDefuses?.Select(z => new RoundLog
                     {
@@ -147,6 +156,8 @@ namespace ReadFile.ReadDemo
                 {
                     BombPlanter = x.Value.BombPlanter?.SteamID,
                     BombDefuser = x.Value.BombDefuser?.SteamID,
+                    IsBombExploded = x.Value.IsBombExploded,
+                    Reason = (CsStat.Domain.Definitions.RoundEndReason) (int) x.Value.Reason,
                     RoundNumber = x.Value.RoundNumber,
                     Winner = x.Value.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
                     Teams = x.Value.Teams.ToDictionary(
@@ -159,6 +170,21 @@ namespace ReadFile.ReadDemo
             demoRepository.InsertLog(demoLog);
 
             Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
+        }
+
+        private static DateTime? GetDemoDate(string fileName)
+        {
+            var sections = fileName?.Split('-');
+            if (sections?.Length == 6)
+            {
+                if (DateTime.TryParseExact(string.Join(" ", sections.Skip(1).Take(2)), 
+                    "yyyyMMdd hhmmss", 
+                    CultureInfo.InvariantCulture, 
+                    DateTimeStyles.None, out var date))
+                    return date;
+            }
+
+            return null;
         }
 
         private static void UpdatePlayers()
@@ -186,6 +212,7 @@ namespace ReadFile.ReadDemo
         {
             if (_matchStarted)
             {
+                _currentRound.Reason = e.Reason;
                 _roundEndedCount = 1;
             }
         }
@@ -254,7 +281,7 @@ namespace ReadFile.ReadDemo
             if (_matchStarted && e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
-                    e.Headshot, e.Weapon.Weapon.ToString());
+                    e.Headshot, e.Weapon.Weapon.ToString(), _currentRoundNumber);
 
                 if (e.Assister != null)
                 {
@@ -287,6 +314,14 @@ namespace ReadFile.ReadDemo
 
             _results.Players[e.Player.SteamID].BombPlants.Add(_currentRound);
             _currentRound.BombPlanter = _results.Players[e.Player.SteamID];
+        }
+
+        private static void Parser_BombExploded(object sender, BombEventArgs e)
+        {
+            UpdatePlayers();
+
+            _results.Players[e.Player.SteamID].BombExplosions.Add(_currentRound);
+            _currentRound.IsBombExploded = true;
         }
     }
 }

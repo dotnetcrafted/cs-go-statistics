@@ -7,5 +7,6 @@
         public bool IsHeadshot { get; set; }
         public string Weapon { get; set; }
         public long? Assister { get; set; }
+        public int RoundNumber { get; set; }
     }
 }

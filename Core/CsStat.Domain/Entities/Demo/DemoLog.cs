@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities.Demo
@@ -10,6 +11,10 @@ namespace CsStat.Domain.Entities.Demo
             Players = new List<PlayerLog>();
             Rounds = new List<RoundLog>();
         }
+
+        public string Map { get; set; }
+        public long Size { get; set; }
+        public DateTime? Date { get; set; }
 
         public string DemoFileName { get; set; }
 
