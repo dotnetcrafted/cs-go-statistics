@@ -264,6 +264,8 @@ namespace ReadFile.ReadDemo
             _lastTScore = _parser.TScore;
             _lastCTScore = _parser.CTScore;
 
+            UpdatePlayers();
+
             _currentRound.Teams = _parser.Participants
                 .Where(x => x.SteamID != 0) // skip spectators
                 .GroupBy(x => new
