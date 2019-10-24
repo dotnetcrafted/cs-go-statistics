@@ -93,7 +93,10 @@ namespace CsStat.Web.Controllers
         {
             return new JsonResult
             {
-                Data = _demoRepository.GetAllLogs().ToJson(),
+                Data = new
+                {
+                    Matches = _demoRepository.GetAllLogs()
+                },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

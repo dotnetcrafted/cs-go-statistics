@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
+using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities.Demo;
 using CsStat.SystemFacade;
@@ -173,7 +174,7 @@ namespace ReadFile.ReadDemo
                     RoundNumber = x.Value.RoundNumber,
                     Winner = x.Value.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
                     Teams = x.Value.Teams.ToDictionary(
-                        z => z.Key == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        z => z.Key == Team.CounterTerrorist ? Teams.Ct.GetDescription() : Teams.T.GetDescription(),
                         z => z.Value.Select(k => k.SteamID).ToList()
                     )
                 }).ToList()

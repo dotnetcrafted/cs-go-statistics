@@ -14,6 +14,6 @@ namespace CsStat.Domain.Entities.Demo
 
         public bool IsBombExploded { get; set; }
 
-        public Dictionary<Teams, List<long>> Teams { get; set; }
+        public Dictionary<string, List<long>> Teams { get; set; }
     }
 }
