@@ -48,13 +48,25 @@ namespace ReadFile.ReadDemo
 
             foreach (var file in newFiles)
             {
-                ParseDemo(file);
-
-                demoFileRepository.AddFile(new DemoFile
+                var isSuccessfully = true;
+                try
                 {
-                    Created = File.GetCreationTime(file),
-                    Path = file
-                });
+                    ParseDemo(file);
+                }
+                catch (Exception e)
+                {
+                    isSuccessfully = false;
+                    Console.WriteLine(e);
+                }
+                finally
+                {
+                    demoFileRepository.AddFile(new DemoFile
+                    {
+                        Created = File.GetCreationTime(file),
+                        Path = file,
+                        IsSuccessfully = isSuccessfully
+                    });
+                }
             }
         }
 
@@ -76,7 +88,7 @@ namespace ReadFile.ReadDemo
             _parser.BombPlanted += Parser_BombPlanted;
             _parser.BombDefused += Parser_BombDefused;
             _parser.BombExploded += Parser_BombExploded;
-
+            
             Console.WriteLine($"Parse file: \"{_currentDemoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
             
             var sw = new Stopwatch();
@@ -84,7 +96,7 @@ namespace ReadFile.ReadDemo
             _parser.ParseToEnd();
             sw.Stop();
 
-           var demoLog = new DemoLog
+            var demoLog = new DemoLog
             {
                 Map = _parser.Map,
                 Date = GetDemoDate(_currentDemoFileName),

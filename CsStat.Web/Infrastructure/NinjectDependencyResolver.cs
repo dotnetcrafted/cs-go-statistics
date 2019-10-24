@@ -38,6 +38,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IConnectionStringFactory>().To<ConnectionStringFactory>();
             _kernel.Bind<ILogsRepository>().To<LogsRepository>();
             _kernel.Bind<IPlayerRepository>().To<PlayerRepository>();
+            _kernel.Bind<IDemoRepository>().To<DemoRepository>();
             _kernel.Bind<ISteamApi>().To<SteamApi>();
         }
     }

@@ -8,6 +8,7 @@
             Victim = victim;
             IsHeadshot = isHeadshot;
             Weapon = weapon;
+            RoundNumber = roundNumber;
         }
 
         public Player Killer { get; set; }

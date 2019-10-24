@@ -11,16 +11,19 @@ using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 
+
 namespace CsStat.Web.Controllers
 {
     public class HomeController : BaseController
     {
         private static IPlayerRepository _playerRepository;
+        private static IDemoRepository _demoRepository;
         private static ISteamApi _steamApi;
 
-        public HomeController(IPlayerRepository playerRepository)
+        public HomeController(IPlayerRepository playerRepository, IDemoRepository demoRepository)
         {
             _playerRepository = playerRepository;
+            _demoRepository = demoRepository;
             _steamApi = new SteamApi();
         }
 
@@ -77,6 +80,22 @@ namespace CsStat.Web.Controllers
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
+        }
+
+
+        public ActionResult Matches()
+        {
+            return View();
+        }
+        
+        [HttpGet]
+        public ActionResult GetMatchesData()
+        {
+            return new JsonResult
+            {
+                Data = _demoRepository.GetAllLogs().ToJson(),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
     }
 }

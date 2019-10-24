@@ -2,5 +2,6 @@
 {
     public class DemoFile : FileEntity
     {
+        public bool IsSuccessfully { get; set; }
     }
 }
