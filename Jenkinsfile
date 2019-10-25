@@ -17,6 +17,7 @@ pipeline {
     }
     stage('Publish') {
       steps {
+          bat 'rmdir "C:\\inetpub\\wwwroot\\dist" /s /q'
           bat'xcopy "%WORKSPACE%\\CsStat.Web\\dist" "C:\\inetpub\\wwwroot\\dist" /s /e /y /i'
       }
     }
