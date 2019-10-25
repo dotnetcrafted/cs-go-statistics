@@ -28,10 +28,9 @@ export const COLUMN_NAMES: ColumnNames = {
     FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' }
 };
 const DEFAULT_COLUMNS = [
-    COLUMN_NAMES.Points.dataIndex,
     COLUMN_NAMES.KdRatio.dataIndex,
-    COLUMN_NAMES.Kills.dataIndex,
-    COLUMN_NAMES.Deaths.dataIndex,
+    COLUMN_NAMES.HeadShot.dataIndex,
+    COLUMN_NAMES.Assists.dataIndex,
     COLUMN_NAMES.TotalGames.dataIndex
 ];
 
@@ -148,16 +147,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.Deaths);
             },
-            sorter: (a: Player, b: Player) => a.Deaths - b.Deaths
-        },
-        {
-            dataIndex: COLUMN_NAMES.TotalGames.dataIndex,
-            title: COLUMN_NAMES.TotalGames.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.TotalGames.dataIndex),
-            render: (_link: any, record: Player) => {
-                return this.cellWrapper(record.Id, record.TotalGames);
-            },
-            sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
+            sorter: (a: Player, b: Player) => b.Deaths - a.Deaths
         },
         {
             dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
@@ -220,7 +210,16 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.FriendlyKills);
             },
-            sorter: (a: Player, b: Player) => a.FriendlyKills - b.FriendlyKills
+            sorter: (a: Player, b: Player) => b.FriendlyKills - a.FriendlyKills
+        },
+        {
+            dataIndex: COLUMN_NAMES.TotalGames.dataIndex,
+            title: COLUMN_NAMES.TotalGames.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.TotalGames.dataIndex),
+            render: (_link: any, record: Player) => {
+                return this.cellWrapper(record.Id, record.TotalGames);
+            },
+            sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
         }
     ];
 
