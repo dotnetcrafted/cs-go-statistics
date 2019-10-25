@@ -15,15 +15,9 @@ pipeline {
         bat 'yarn --cwd ./CsStat.Web/ run prod'
       }
     }
-    stage('Backend') {
-      steps {
-          bat label: '', script: '"C:\\tools\\nuget.exe" restore ./CsStat.Web/CsStat.Web.csproj -SolutionDirectory ./'
-          bat "\"${tool 'MSBuildLocal'}\" ./CsStat.Web/CsStat.Web.csproj /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
-      }
-    }
     stage('Publish') {
       steps {
-          bat'xcopy "%WORKSPACE%\\CsStat.Web" "C:\\inetpub\\SALO-CI" /s /e /y /i'
+          bat'xcopy "%WORKSPACE%\\CsStat.Web\\dist" "C:\\inetpub\\wwwroot\\dist" /s /e /y /i'
       }
     }
   }
