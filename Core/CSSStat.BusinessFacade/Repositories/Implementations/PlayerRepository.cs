@@ -169,9 +169,8 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.Points += playerStats.Points;
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
             }
-
-            summaryStat.HeadShot /= playersStats.Count;
-            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot, 2);
+            
+            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot/ summaryStat.Kills, 2);
 
             var guns = playersStats.Where(x=>x.Guns!=null).SelectMany(x => x.Guns).ToList();
             var duplicateGuns = guns.GroupBy(x => x.Gun).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
