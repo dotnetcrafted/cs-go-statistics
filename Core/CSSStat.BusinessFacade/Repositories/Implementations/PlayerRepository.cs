@@ -110,6 +110,7 @@ namespace BusinessFacade.Repositories.Implementations
                 var kills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
                 var death = logs.Count(x => x.Victim?.Id == player.Id);
                 var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
+                var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
                 playersStats.Add(new PlayerStatsModel
                     {
                         Player = player,
@@ -118,7 +119,7 @@ namespace BusinessFacade.Repositories.Implementations
                         Assists = assists,
                         FriendlyKills = friendlyKills,
                         TotalGames = totalGames,
-                        HeadShot = kills==0 ? 0 : Math.Round(logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill) /(double) kills * 100, 2) ,
+                        HeadShot = kills==0 ? 0 : Math.Round(headShotCount /(double) kills * 100, 2) ,
                         Guns = guns,
                         Defuse = defuse,
                         Explode = explodeBombs,
@@ -155,7 +156,7 @@ namespace BusinessFacade.Repositories.Implementations
             {
                 Player = playersStats.Last().Player
             };
-
+            
             foreach (var playerStats in playersStats)
             {
                 summaryStat.Kills += playerStats.Kills;
@@ -169,9 +170,8 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.Points += playerStats.Points;
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
             }
-            
-            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot/ summaryStat.Kills, 2);
 
+            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot / playersStats.Count(x => x.Points != 0), 2);
             var guns = playersStats.Where(x=>x.Guns!=null).SelectMany(x => x.Guns).ToList();
             var duplicateGuns = guns.GroupBy(x => x.Gun).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
             var mergedGuns = new List<GunModel>();
