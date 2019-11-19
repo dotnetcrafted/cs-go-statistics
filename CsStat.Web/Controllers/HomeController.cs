@@ -35,8 +35,10 @@ namespace CsStat.Web.Controllers
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
             {
-                dateTo = DateTime.Now.ToShortFormat();
-                dateFrom = DateTime.Now.AddDays(-(int) (DateTime.Now.DayOfWeek - 1)).ToShortFormat();
+                var day = DateTime.Now.Hour < 12 ? DateTime.Now.AddDays(-1) : DateTime.Now;
+
+                dateTo = day.ToShortFormat();
+                dateFrom = day.ToShortFormat();
             }
 
             var playersStat = Settings.ShowNullPlayers == 0
