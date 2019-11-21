@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5122D50-78CD-4D75-BD81-90C564251F15}</ProjectGuid>
+    <ProjectGuid>{851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CsStat.LogApi</RootNamespace>
-    <AssemblyName>CsStat.LogApi</AssemblyName>
+    <RootNamespace>ErrorLogger</RootNamespace>
+    <AssemblyName>ErrorLogger</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,15 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoRepository.Net45">
-      <HintPath>..\..\packages\MongoRepository.1.6.11\lib\net45\MongoRepository.Net45.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,36 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsLogsApi.cs" />
-    <Compile Include="Interfaces\ICsLogsApi.cs" />
-    <Compile Include="Interfaces\ISteamApi.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SteamApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ErorrLogger\ErrorLogger.csproj">
-      <Project>{851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D}</Project>
-      <Name>ErrorLogger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSSStat.BusinessFacade\BusinessFacade.csproj">
+    <ProjectReference Include="..\Core\CSSStat.BusinessFacade\BusinessFacade.csproj">
       <Project>{48937D9E-7A7F-4AFA-BFA3-52638BDE9DDA}</Project>
       <Name>BusinessFacade</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CsStat.Domain\CsStat.Domain.csproj">
-      <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
-      <Name>CsStat.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CsStat.SystemFacade\CsStat.SystemFacade.csproj">
-      <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
-      <Name>CsStat.SystemFacade</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSStat.DataService\CsStat.DataService.csproj">
+    <ProjectReference Include="..\Core\CSStat.DataService\CsStat.DataService.csproj">
       <Project>{69E21364-5F32-4814-B8F8-A4A36F207070}</Project>
       <Name>CsStat.DataService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\CsStat.Domain\CsStat.Domain.csproj">
+      <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
+      <Name>CsStat.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

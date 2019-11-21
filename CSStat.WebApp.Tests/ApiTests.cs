@@ -18,7 +18,7 @@ namespace CSStat.WebApp.Tests
         private static readonly CsStat.LogApi.CsLogsApi _api = new CsStat.LogApi.CsLogsApi();
 
         [Test]
-        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\console.log")]
+        [TestCase(@"d:\Projects\counterstrikestat\Latest\CSStat.WebApp.Tests\TestParse\logs.txt")]
         public static void ParseLogs(string file)
         {
             var logs = string.Empty;
