@@ -171,7 +171,11 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
             }
 
-            summaryStat.HeadShot = Math.Round(summaryStat.HeadShot / playersStats.Count(x => x.Points != 0), 2);
+            if (summaryStat.HeadShot > 0.0)
+            {
+                summaryStat.HeadShot = Math.Round(summaryStat.HeadShot / playersStats.Count(x => x.Points != 0), 2);
+            }
+
             var guns = playersStats.Where(x=>x.Guns!=null).SelectMany(x => x.Guns).ToList();
             var duplicateGuns = guns.GroupBy(x => x.Gun).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
             var mergedGuns = new List<GunModel>();
