@@ -29,6 +29,8 @@ export const COLUMN_NAMES: ColumnNames = {
 };
 const DEFAULT_COLUMNS = [
     COLUMN_NAMES.KdRatio.dataIndex,
+    COLUMN_NAMES.Kills.dataIndex,
+    COLUMN_NAMES.Deaths.dataIndex,
     COLUMN_NAMES.HeadShot.dataIndex,
     COLUMN_NAMES.Assists.dataIndex,
     COLUMN_NAMES.TotalGames.dataIndex
