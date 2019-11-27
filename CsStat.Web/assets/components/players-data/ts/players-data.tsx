@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Table, Avatar, Divider, Tooltip, Dropdown, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers, startRequest, selectPlayer } from '../../../general/ts/redux/actions';
+import { fetchPlayers, startRequest, stopRequest, selectPlayer } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
 import { AppState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
@@ -36,6 +36,7 @@ const DEFAULT_COLUMNS = [
 
 const PERMANENT_COLUMNS = [COLUMN_NAMES.ImagePath.dataIndex, COLUMN_NAMES.Name.dataIndex];
 class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
+
     readonly state = {
         visibleColumns: [...DEFAULT_COLUMNS, ...PERMANENT_COLUMNS]
     };
@@ -57,7 +58,11 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             .then((data: AppState) => {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
-            });
+            })
+            .catch((error) => {
+                this.props.stopRequest();
+                throw new Error(error);
+            })
     }
 
     private getAvatar(record: Player) {
@@ -282,6 +287,7 @@ type PlayersDataProps = {
     Players: Player[];
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
+    stopRequest: typeof stopRequest;
     selectPlayer: typeof selectPlayer;
 };
 
@@ -322,5 +328,5 @@ export type ColumnMapping = {
 };
 export default connect(
     mapStateToProps,
-    { fetchPlayers, startRequest, selectPlayer }
+    { fetchPlayers, startRequest, stopRequest, selectPlayer }
 )(PlayersData);
