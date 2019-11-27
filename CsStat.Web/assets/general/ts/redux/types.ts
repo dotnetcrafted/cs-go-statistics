@@ -32,7 +32,7 @@ type Achievement = {
     Name: string
     Description: string
 }
-type Gun = { 
+type Gun = {
     Id: number
     Name: string
     Kills: number
@@ -41,23 +41,29 @@ type Gun = {
 const SELECT_PLAYER = 'SELECT_PLAYER';
 const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
 const START_REQUEST = 'START_REQUEST';
-
+const STOP_REQUEST = 'STOP_REQUEST';
 
 type SelectPlayerAction = {
     type: typeof SELECT_PLAYER
     payload: string
 }
-  
+
 type StartRequestAction = {
     type: typeof START_REQUEST
 }
-  
+
+type StopRequestAction = {
+    type: typeof STOP_REQUEST
+}
+
 type FetchPlayersAction = {
     type: typeof FETCH_PLAYERS_DATA
     payload: AppState
 }
 
+type ActionTypes = SelectPlayerAction | StartRequestAction | StopRequestAction | FetchPlayersAction;
 
-type ActionTypes = SelectPlayerAction | StartRequestAction | FetchPlayersAction;
+export {
+    AppState, Player, Gun, Achievement, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST, STOP_REQUEST
+};
 
-export {AppState, Player, Gun, Achievement, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST}
