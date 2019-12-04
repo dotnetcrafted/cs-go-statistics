@@ -30,7 +30,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
+        //[OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
