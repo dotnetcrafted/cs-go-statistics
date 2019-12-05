@@ -4,7 +4,7 @@ import { RelatedPlayer } from '../../../general/ts/redux/types';
 const RelatedPlayers: SFC<RelatedPlayersProps> = props => {
     const { data, killerType } = props;
     const theme = (killerType: boolean) => {
-        const backgroundColor = killerType ? '#f50' : '#87d068';
+        const backgroundColor = killerType ? '#75b5a0' : '#cfb249';
         return { backgroundColor };
     };
     return (
