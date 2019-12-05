@@ -279,7 +279,7 @@ namespace BusinessFacade.Repositories.Implementations
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.HeadHunter,
-                    PlayerId = playersStats.Where(x=>x.HeadShot!=0 && x.Kills > 10).OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.HeadShot!=0 && x.Kills > 7).OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel
