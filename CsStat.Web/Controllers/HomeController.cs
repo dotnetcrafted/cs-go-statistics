@@ -76,6 +76,10 @@ namespace CsStat.Web.Controllers
             foreach (var player in players)
             {
                 player.Player.ImagePath = avatars.FirstOrDefault(x => x.Key == player.Player.SteamId).Value;
+                foreach (var victim in player.Victims)
+                {
+                    victim.ImagePath = avatars.FirstOrDefault(x => x.Key == victim.SteamId).Value;
+                }
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);

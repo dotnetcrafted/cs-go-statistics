@@ -20,7 +20,7 @@ namespace CsStat.Domain.Entities
         public int SniperRifleKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
-        public List<Victim> Victims { get; set; }
+        public List<VictimModel> Victims { get; set; }
         public double KdRatio
         {
             get
@@ -69,11 +69,5 @@ namespace CsStat.Domain.Entities
                 return Math.Round((double)Death / TotalGames,2);
             }
         }
-    }
-
-    public class Victim
-    {
-        public string Name { get; set; }
-        public int DeathCount { get; set; }
     }
 }

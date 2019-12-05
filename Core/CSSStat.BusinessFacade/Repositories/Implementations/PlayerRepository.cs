@@ -112,8 +112,20 @@ namespace BusinessFacade.Repositories.Implementations
                 var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
                 var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Victim).ToList();
-                playersStats.Add(new PlayerStatsModel
+                
+                var victimModel = new List<VictimModel>();
+                foreach (var victim in victimList.DistinctBy(x=>x.SteamId))
+                {
+                    victimModel.Add(new VictimModel
                     {
+                        Name = victim.NickName,
+                        SteamId = victim.SteamId,
+                        Deaths = victimList.Count(x=>x.SteamId == victim.SteamId)
+                    });    
+                }
+
+                playersStats.Add(new PlayerStatsModel
+                {
                         Player = player,
                         Kills = kills,
                         Death = death,
@@ -126,8 +138,8 @@ namespace BusinessFacade.Repositories.Implementations
                         Explode = explodeBombs,
                         Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - kills/2,
                         SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
-                        Victims = victimList.DistinctBy(x => x?.SteamId).Select(victim => new Victim { Name = victim?.NickName, DeathCount = victimList.Count(x => x?.SteamId == victim?.SteamId) }).ToList()
-            });
+                        Victims = victimModel
+                });
             }
 
             var duplicatesIds = playersStats.GroupBy(x => x.Player.SteamId).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
@@ -171,6 +183,11 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.Explode += playerStats.Explode;
                 summaryStat.Points += playerStats.Points;
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
+                
+                if (playerStats.Victims != null && playerStats.Victims.Any())
+                {
+                    summaryStat.Victims = playerStats.Victims;
+                }
             }
 
             if (summaryStat.HeadShot > 0.0)
