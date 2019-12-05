@@ -13,7 +13,7 @@ const RelatedPlayers: SFC<RelatedPlayersProps> = props => {
                 data.map(item => (
                     <div className="related-players__item">
                         <Tooltip title={item.Name}>
-                            <Badge count={item.Count} style={theme(killerType)}>
+                            <Badge count={item.Count} overflowCount={9999} style={theme(killerType)}>
                                 <Avatar
                                     size={48}
                                     shape="square"
