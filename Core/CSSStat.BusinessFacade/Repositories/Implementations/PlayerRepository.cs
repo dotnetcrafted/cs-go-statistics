@@ -138,7 +138,7 @@ namespace BusinessFacade.Repositories.Implementations
                         Explode = explodeBombs,
                         Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - kills/2,
                         SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
-                        Victims = victimModel
+                        Victims = victimModel.OrderByDescending(x=>x.Deaths).ToList()
                 });
             }
 
