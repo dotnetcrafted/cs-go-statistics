@@ -43,6 +43,10 @@ namespace CsStat.Web
                             d.Achievements = context.Mapper.Map<List<AchievementViewModel>>(s.Achievements);
                         }
 
+                        if (d.Victims != null && s.Victims.Any())
+                        {
+                            d.Victims = context.Mapper.Map<List<VictimViewModel>>(s.Victims);
+                        }
                     });
 
                 CreateMap<GunModel, GunViewModel>()
@@ -55,7 +59,14 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Achieve.GetDescription()))
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>().Value))
                     ;
+
+                CreateMap<VictimModel, VictimViewModel>()
+                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
+                    .ForMember(dest => dest.Deaths, opts => opts.MapFrom(src => src.Deaths))
+                    .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.ImagePath))
+                    ;
             }
+
         }
     }
 }

@@ -30,7 +30,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
+        //[OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
@@ -76,6 +76,10 @@ namespace CsStat.Web.Controllers
             foreach (var player in players)
             {
                 player.Player.ImagePath = avatars.FirstOrDefault(x => x.Key == player.Player.SteamId).Value;
+                foreach (var victim in player.Victims)
+                {
+                    victim.ImagePath = avatars.FirstOrDefault(x => x.Key == victim.SteamId).Value;
+                }
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);

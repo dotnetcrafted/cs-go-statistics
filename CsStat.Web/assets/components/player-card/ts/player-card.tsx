@@ -1,21 +1,20 @@
-import React, {SFC} from 'react';
-import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
+import React, { SFC } from 'react';
+import { Card, Descriptions, Avatar, Empty, Divider, Typography } from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
+import Victims from './victims';
 import { AppState, Player, Gun } from '../../../general/ts/redux/types';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
-const PlayerCard: SFC<PlayerCardProps> = (props) => {
+const PlayerCard: SFC<PlayerCardProps> = props => {
     if (props.SelectedPlayer) {
         const model = _getPlayerViewModel(props.SelectedPlayer, props.Players);
         const gunsToShow: Gun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
-            <Card
-                className='player-card'
-            >
+            <Card className="player-card">
                 <Meta
                     className="player-card__meta"
                     avatar={renderAvatar(model.ImagePath)}
@@ -39,22 +38,23 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
+                <Divider orientation="left">Victims</Divider>
+                <Victims data={model.Victim} />
             </Card>
         );
     }
-    return <Empty description="Choose a player from table"/>;
+    return <Empty description="Choose a player from table" />;
 };
 
-const renderAvatar = (src:  string) => {
+const renderAvatar = (src: string) => {
     if (src) {
-        return <Avatar size={48} shape="square" className='player-card__avatar' src={src} />;
+        return <Avatar size={48} shape="square" className="player-card__avatar" src={src} />;
     }
     return <Avatar size={48} shape="square" icon="user" />;
 };
 
-
 const _getPlayerViewModel = (id: string, data: Player[]) => {
-    const playersRow = data.filter((item) => item.Id === id)[0];
+    const playersRow = data.filter(item => item.Id === id)[0];
     return {
         Name: playersRow.Name,
         ImagePath: playersRow.ImagePath,
@@ -71,17 +71,21 @@ const _getPlayerViewModel = (id: string, data: Player[]) => {
         FriendlyKills: playersRow.FriendlyKills,
         Guns: playersRow.Guns,
         Achievements: playersRow.Achievements,
-        Points: playersRow.Points
+        Points: playersRow.Points,
+        Victim: playersRow.Victims
     };
 };
 type PlayerCardProps = {
-    SelectedPlayer: string
-    Players: Player[]
-}
+    SelectedPlayer: string;
+    Players: Player[];
+};
 
 const mapStateToProps = (state: AppState) => {
     const SelectedPlayer = state.SelectedPlayer;
     const Players = state.Players;
-    return { SelectedPlayer, Players }
+    return { SelectedPlayer, Players };
 };
-export default connect(mapStateToProps, { })(PlayerCard);
+export default connect(
+    mapStateToProps,
+    {}
+)(PlayerCard);

@@ -111,8 +111,21 @@ namespace BusinessFacade.Repositories.Implementations
                 var death = logs.Count(x => x.Victim?.Id == player.Id);
                 var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
-                playersStats.Add(new PlayerStatsModel
+                var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Victim).ToList();
+                
+                var victimModel = new List<VictimModel>();
+                foreach (var victim in victimList.DistinctBy(x=>x.SteamId))
+                {
+                    victimModel.Add(new VictimModel
                     {
+                        Name = victim.NickName,
+                        SteamId = victim.SteamId,
+                        Deaths = victimList.Count(x=>x.SteamId == victim.SteamId)
+                    });    
+                }
+
+                playersStats.Add(new PlayerStatsModel
+                {
                         Player = player,
                         Kills = kills,
                         Death = death,
@@ -124,8 +137,9 @@ namespace BusinessFacade.Repositories.Implementations
                         Defuse = defuse,
                         Explode = explodeBombs,
                         Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - kills/2,
-                        SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0
-                    });
+                        SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
+                        Victims = victimModel
+                });
             }
 
             var duplicatesIds = playersStats.GroupBy(x => x.Player.SteamId).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
@@ -147,7 +161,7 @@ namespace BusinessFacade.Repositories.Implementations
                 playerStats.Achievements = achievements.Where(x => x.PlayerId == playerStats.Player.SteamId).ToList();
             }
 
-            return playersStats;
+            return playersStats.Where(x=>x.TotalGames > 0);
         }
 
         private static PlayerStatsModel MergePlayersStats(IReadOnlyCollection<PlayerStatsModel> playersStats)
@@ -169,6 +183,11 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.Explode += playerStats.Explode;
                 summaryStat.Points += playerStats.Points;
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
+                
+                if (playerStats.Victims != null && playerStats.Victims.Any())
+                {
+                    summaryStat.Victims = playerStats.Victims;
+                }
             }
 
             if (summaryStat.HeadShot > 0.0)
@@ -260,7 +279,7 @@ namespace BusinessFacade.Repositories.Implementations
                 new AchieveModel
                 {
                     Achieve =  AchievementsEnum.HeadHunter,
-                    PlayerId = playersStats.Where(x=>x.HeadShot!=0).OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
+                    PlayerId = playersStats.Where(x=>x.HeadShot!=0 && x.Kills > 10).OrderByDescending(x => x.HeadShot).FirstOrDefault()?.Player.SteamId
                 },
 
                 new AchieveModel

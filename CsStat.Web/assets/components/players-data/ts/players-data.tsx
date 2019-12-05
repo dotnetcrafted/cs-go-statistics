@@ -38,7 +38,6 @@ const DEFAULT_COLUMNS = [
 
 const PERMANENT_COLUMNS = [COLUMN_NAMES.ImagePath.dataIndex, COLUMN_NAMES.Name.dataIndex];
 class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
-
     readonly state = {
         visibleColumns: [...DEFAULT_COLUMNS, ...PERMANENT_COLUMNS]
     };
@@ -61,10 +60,10 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
             })
-            .catch((error) => {
+            .catch(error => {
                 this.props.stopRequest();
                 throw new Error(error);
-            })
+            });
     }
 
     private getAvatar(record: Player) {
