@@ -4,12 +4,11 @@ import { Layout, Icon, Typography, Row, Col, Divider } from 'antd';
 import configureStore from '../../../general/ts/redux/store';
 import IconCopyright from './icon-copyright';
 import AuthorsCopyright from './authors-copyright';
-import SnowStorm from 'react-snowstorm';
-import Unsplash from 'react-unsplash-wrapper';
 
 const store = configureStore();
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
+
 const HomePage: SFC<HomePageProps> = props => (
     <Provider store={store}>
         <Layout className="home-page__layout">
@@ -19,7 +18,7 @@ const HomePage: SFC<HomePageProps> = props => (
                         <Icon type="database" theme="filled" />
                     </Col>
                     <Col xs={18} lg={6}>
-                        <Title className="home-page__title">Fuse8 CS:GO Statistics 🎄</Title>
+                        <Title className="home-page__title">Fuse8 CS:GO Statistics</Title>
                     </Col>
                 </Row>
             </Header>
@@ -33,7 +32,7 @@ const HomePage: SFC<HomePageProps> = props => (
                     </Col>
                 </Row>
             </Content>
-            <Footer className="home-page__footer">
+            <Footer>
                 <AuthorsCopyright />
                 <Divider />
                 <a href="https://bitbucket.org/radik_fayskhanov/counterstrikestat">
@@ -42,11 +41,7 @@ const HomePage: SFC<HomePageProps> = props => (
                 <Divider />
                 <IconCopyright />
             </Footer>
-            <SnowStorm />
         </Layout>
-        <div className="home-page__bg">
-            <Unsplash keywords="christmas" width="1920" height="1200" />
-        </div>
     </Provider>
 );
 
