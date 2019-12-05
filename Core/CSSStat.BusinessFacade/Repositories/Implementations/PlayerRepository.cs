@@ -203,7 +203,7 @@ namespace BusinessFacade.Repositories.Implementations
             summaryStat.Guns = mergedGuns;
             summaryStat.Guns.AddRange(uniqueGuns);
 
-            summaryStat.Victims = MergeVictims(summaryStat.Victims);
+            summaryStat.Victims = MergeVictims(summaryStat.Victims).OrderByDescending(x=>x.Deaths).ToList();
 
             return summaryStat;
         }
