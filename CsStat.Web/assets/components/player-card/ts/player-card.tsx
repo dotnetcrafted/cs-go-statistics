@@ -3,7 +3,7 @@ import { Card, Descriptions, Avatar, Empty, Divider, Typography } from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
-import Victims from './victims';
+import RelatedPlayers from './related-players';
 import { AppState, Player, Gun } from '../../../general/ts/redux/types';
 
 const { Title } = Typography;
@@ -38,8 +38,10 @@ const PlayerCard: SFC<PlayerCardProps> = props => {
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
-                <Divider orientation="left">Victims</Divider>
-                <Victims data={model.Victim} />
+                <Divider orientation="left">He has killed:</Divider>
+                <RelatedPlayers data={model.Victims} killerType={false} />
+                <Divider orientation="left">This players have killed him:</Divider>
+                <RelatedPlayers data={model.Killers} killerType={true} />
             </Card>
         );
     }
@@ -72,7 +74,8 @@ const _getPlayerViewModel = (id: string, data: Player[]) => {
         Guns: playersRow.Guns,
         Achievements: playersRow.Achievements,
         Points: playersRow.Points,
-        Victim: playersRow.Victims
+        Victims: playersRow.Victims,
+        Killers: playersRow.Killers
     };
 };
 type PlayerCardProps = {

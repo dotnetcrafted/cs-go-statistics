@@ -20,7 +20,8 @@ namespace CsStat.Domain.Entities
         public int SniperRifleKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
-        public List<VictimModel> Victims { get; set; }
+        public List<PlayerModel> Victims { get; set; }
+        public List<PlayerModel> Killers { get; set; }
         public double KdRatio
         {
             get

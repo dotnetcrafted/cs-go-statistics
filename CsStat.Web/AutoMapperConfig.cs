@@ -45,7 +45,12 @@ namespace CsStat.Web
 
                         if (d.Victims != null && s.Victims.Any())
                         {
-                            d.Victims = context.Mapper.Map<List<VictimViewModel>>(s.Victims);
+                            d.Victims = context.Mapper.Map<List<PlayerViewModel>>(s.Victims);
+                        }
+
+                        if (d.Killers != null && s.Killers.Any())
+                        {
+                            d.Killers = context.Mapper.Map<List<PlayerViewModel>>(s.Killers);
                         }
                     });
 
@@ -60,9 +65,9 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>().Value))
                     ;
 
-                CreateMap<VictimModel, VictimViewModel>()
+                CreateMap<PlayerModel, PlayerViewModel>()
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
-                    .ForMember(dest => dest.Deaths, opts => opts.MapFrom(src => src.Deaths))
+                    .ForMember(dest => dest.Count, opts => opts.MapFrom(src => src.Count))
                     .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.ImagePath))
                     ;
             }

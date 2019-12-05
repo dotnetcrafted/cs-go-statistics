@@ -21,7 +21,8 @@ namespace CsStat.Web.Models
         public int TotalGames { get; set; }
         public double HeadShot { get; set; }
         public double KdRatio { get; set; }
-        public List<VictimViewModel> Victims { get; set; }
+        public List<PlayerViewModel> Victims { get; set; }
+        public List<PlayerViewModel> Killers { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }
         public List<GunViewModel> Guns { get; set; }
     }

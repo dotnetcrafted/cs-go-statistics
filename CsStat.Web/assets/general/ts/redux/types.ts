@@ -23,7 +23,8 @@ type Player = {
     HeadShot: number;
     KdRatio: number;
     Achievements: Achievement[];
-    Victims: Victim[];
+    Victims: RelatedPlayer[];
+    Killers: RelatedPlayer[];
     Guns: Gun[];
 };
 
@@ -39,9 +40,9 @@ type Gun = {
     Kills: number;
 };
 
-type Victim = {
+type RelatedPlayer = {
     Name: string;
-    Deaths: number;
+    Count: number;
     ImagePath: string;
 };
 
@@ -80,7 +81,7 @@ export {
     Gun,
     Achievement,
     ActionTypes,
-    Victim,
+    RelatedPlayer,
     SELECT_PLAYER,
     FETCH_PLAYERS_DATA,
     START_REQUEST,

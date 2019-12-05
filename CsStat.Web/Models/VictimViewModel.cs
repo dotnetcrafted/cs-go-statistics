@@ -1,9 +1,9 @@
 ﻿namespace CsStat.Web.Models
 {
-    public class VictimViewModel
+    public class PlayerViewModel
     {
         public string Name { get; set; }
-        public int Deaths { get; set; }
+        public int Count { get; set; }
         public string ImagePath { get; set; }
     }
 }
