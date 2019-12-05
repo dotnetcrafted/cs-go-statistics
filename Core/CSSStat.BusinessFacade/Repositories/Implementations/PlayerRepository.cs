@@ -108,10 +108,11 @@ namespace BusinessFacade.Repositories.Implementations
                 var friendlyKills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
                 var assists = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Assist);
                 var kills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Kill);
-                var death = logs.Count(x => x.Victim?.Id == player.Id);
+                var death = logs.Count(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill);
                 var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
-                var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Victim).ToList();
+                var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill || x.Action == Actions.FriendlyKill).Select(x => x.Victim).ToList();
+                var killerList = logs.Where(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill || x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
 
                 playersStats.Add(new PlayerStatsModel
                 {
@@ -127,7 +128,8 @@ namespace BusinessFacade.Repositories.Implementations
                         Explode = explodeBombs,
                         Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - kills/2,
                         SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
-                        Victims = GetVictims(victimList).OrderByDescending(x=>x.Deaths).ToList()
+                        Victims = GetPlayers(victimList).OrderByDescending(x=>x.Count).ToList(),
+                        Killers = GetPlayers(killerList).OrderByDescending(x=>x.Count).ToList(),
                 });
             }
 
@@ -158,7 +160,8 @@ namespace BusinessFacade.Repositories.Implementations
             var summaryStat = new PlayerStatsModel
             {
                 Player = playersStats.Last().Player,
-                Victims = new List<VictimModel>()
+                Victims = new List<PlayerModel>(),
+                Killers = new List<PlayerModel>()
             };
             
             foreach (var playerStats in playersStats)
@@ -177,6 +180,11 @@ namespace BusinessFacade.Repositories.Implementations
                 if (playerStats.Victims != null && playerStats.Victims.Any())
                 {
                     summaryStat.Victims.AddRange(playerStats.Victims);
+                }
+
+                if (playerStats.Killers != null && playerStats.Killers.Any())
+                {
+                    summaryStat.Killers.AddRange(playerStats.Killers);
                 }
             }
 
@@ -203,37 +211,38 @@ namespace BusinessFacade.Repositories.Implementations
             summaryStat.Guns = mergedGuns;
             summaryStat.Guns.AddRange(uniqueGuns);
 
-            summaryStat.Victims = MergeVictims(summaryStat.Victims).OrderByDescending(x=>x.Deaths).ToList();
+            summaryStat.Victims = MergePlayers(summaryStat.Victims).OrderByDescending(x=>x.Count).ToList();
+            summaryStat.Killers = MergePlayers(summaryStat.Killers).OrderByDescending(x=>x.Count).ToList();
 
             return summaryStat;
         }
 
-        private static List<VictimModel> MergeVictims(List<VictimModel> victims)
+        private static List<PlayerModel> MergePlayers(List<PlayerModel> players)
         {
-            var victimModel = new List<VictimModel>();
-            foreach (var victim in victims.DistinctBy(x => x.SteamId))
+            var victimModel = new List<PlayerModel>();
+            foreach (var victim in players.DistinctBy(x => x.SteamId))
             {
-                victimModel.Add(new VictimModel
+                victimModel.Add(new PlayerModel
                 {
                     Name = victim.Name,
                     SteamId = victim.SteamId,
-                    Deaths = victims.Where(x=>x.SteamId==victim.SteamId).Sum(x=>x.Deaths) 
+                    Count = players.Where(x=>x.SteamId==victim.SteamId).Sum(x=>x.Count) 
                 });
             }
 
             return victimModel;
         }
 
-        private static List<VictimModel> GetVictims(List<Player> victims)
+        private static List<PlayerModel> GetPlayers(List<Player> players)
         {
-            var victimModel = new List<VictimModel>();
-            foreach (var victim in victims.DistinctBy(x => x.SteamId))
+            var victimModel = new List<PlayerModel>();
+            foreach (var victim in players.DistinctBy(x => x.SteamId))
             {
-                victimModel.Add(new VictimModel
+                victimModel.Add(new PlayerModel
                 {
                     Name = victim.NickName,
                     SteamId = victim.SteamId,
-                    Deaths = victims.Count(x => x.SteamId == victim.SteamId)
+                    Count = players.Count(x => x.SteamId == victim.SteamId)
                 });
             }
 

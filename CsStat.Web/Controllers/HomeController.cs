@@ -80,6 +80,11 @@ namespace CsStat.Web.Controllers
                 {
                     victim.ImagePath = avatars.FirstOrDefault(x => x.Key == victim.SteamId).Value;
                 }
+
+                foreach (var killer in player.Killers)
+                {
+                    killer.ImagePath = avatars.FirstOrDefault(x => x.Key == killer.SteamId).Value;
+                }
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
