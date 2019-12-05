@@ -1,6 +1,9 @@
 .players-data {
     $this: &;
 
+    background-color: rgba(black, 0.5);
+    padding: 30px;
+
     &__filters {
         display: flex;
         justify-content: space-between;
@@ -36,5 +39,9 @@
 
     &__avatar {
         @include object-fit-image-parent();
+    }
+
+    &__divider {
+        color: white !important;
     }
 }

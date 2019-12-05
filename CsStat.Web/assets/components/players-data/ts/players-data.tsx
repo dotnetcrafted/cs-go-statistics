@@ -239,8 +239,10 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
         const { IsLoading, DateFrom, DateTo, Players } = this.props;
 
         return (
-            <>
-                <Divider orientation="left">Choose Dates to Filter Statistics</Divider>
+            <div className="players-data">
+                <Divider orientation="left" className="players-data__divider">
+                    Choose Dates to Filter Statistics
+                </Divider>
                 <div className="players-data__filters">
                     <FilterForm
                         onFormSubmit={this.onFormSubmit}
@@ -256,7 +258,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                 </div>
                 <Divider />
                 <Table
-                    className="players-data"
                     rowClassName={() => 'players-data__row'}
                     columns={this.getColumns()}
                     dataSource={Players}
@@ -274,7 +275,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                         };
                     }}
                 />
-            </>
+            </div>
         );
     }
 }
