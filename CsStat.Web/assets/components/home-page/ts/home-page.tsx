@@ -1,9 +1,11 @@
 import React, { SFC, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { Layout, Icon, Typography, Row, Col, Divider } from 'antd';
+import { Layout, Typography, Row, Col, Divider } from 'antd';
 import configureStore from '../../../general/ts/redux/store';
 import IconCopyright from './icon-copyright';
 import AuthorsCopyright from './authors-copyright';
+import SnowStorm from 'react-snowstorm';
+import SurpriseSanta from 'surprise-santa';
 
 const store = configureStore();
 const { Header, Content, Footer } = Layout;
@@ -15,10 +17,12 @@ const HomePage: SFC<HomePageProps> = props => (
             <Header className="home-page__header">
                 <Row type="flex" justify="start" align="middle">
                     <Col xs={6} lg={1} className="home-page__logo">
-                        <Icon type="database" theme="filled" />
+                        <span style={{ fontSize: '3rem', }}>🎄</span>
                     </Col>
                     <Col xs={18} lg={6}>
-                        <Title className="home-page__title">Fuse8 CS:GO Statistics</Title>
+                        <Title level={1} className="home-page__title">
+                            Fuse8 CS:GO Statistics
+                        </Title>
                     </Col>
                 </Row>
             </Header>
@@ -42,6 +46,8 @@ const HomePage: SFC<HomePageProps> = props => (
                 <IconCopyright />
             </Footer>
         </Layout>
+        <SnowStorm snowColor="#00CCFF" />
+        <SurpriseSanta minTime={5} maxTime={10} />
     </Provider>
 );
 
