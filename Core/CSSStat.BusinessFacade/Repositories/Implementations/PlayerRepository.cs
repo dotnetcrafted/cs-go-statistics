@@ -168,7 +168,8 @@ namespace BusinessFacade.Repositories.Implementations
         {
             var summaryStat = new PlayerStatsModel
             {
-                Player = playersStats.Last().Player
+                Player = playersStats.Last().Player,
+                Victims = new List<VictimModel>()
             };
             
             foreach (var playerStats in playersStats)
@@ -183,10 +184,10 @@ namespace BusinessFacade.Repositories.Implementations
                 summaryStat.Explode += playerStats.Explode;
                 summaryStat.Points += playerStats.Points;
                 summaryStat.SniperRifleKills += playerStats.SniperRifleKills;
-                
+
                 if (playerStats.Victims != null && playerStats.Victims.Any())
                 {
-                    summaryStat.Victims = playerStats.Victims;
+                    summaryStat.Victims.AddRange(playerStats.Victims);
                 }
             }
 
@@ -205,6 +206,17 @@ namespace BusinessFacade.Repositories.Implementations
                 {
                     Gun = gun,
                     Kills = guns.Where(x=>x.Gun==gun).Sum(x=>x.Kills)
+                });
+            }
+
+            var victimModel = new List<VictimModel>();
+            foreach (var victim in summaryStat.Victims.DistinctBy(x => x.SteamId))
+            {
+                victimModel.Add(new VictimModel
+                {
+                    Name = victim.Name,
+                    SteamId = victim.SteamId,
+                    Deaths = summaryStat.Victims.Count(x => x.SteamId == victim.SteamId)
                 });
             }
 
