@@ -1,5 +1,10 @@
 import {
-    AppState, ActionTypes, SELECT_PLAYER, FETCH_PLAYERS_DATA, START_REQUEST, STOP_REQUEST
+    AppState,
+    ActionTypes,
+    SELECT_PLAYER,
+    FETCH_PLAYERS_DATA,
+    START_REQUEST,
+    STOP_REQUEST
 } from './types';
 
 const fetchPlayers = (newState: AppState): ActionTypes => ({

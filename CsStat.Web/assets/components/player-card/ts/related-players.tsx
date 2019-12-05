@@ -7,11 +7,14 @@ const RelatedPlayers: SFC<RelatedPlayersProps> = props => {
         const backgroundColor = killerType ? '#75b5a0' : '#cfb249';
         return { backgroundColor };
     };
+    const onPlayerSelect = function(name: string) {
+        props.onRelatedPlayerSelect(name);
+    };
     return (
         <div className="related-players">
             {data &&
                 data.map(item => (
-                    <div className="related-players__item">
+                    <div key={item.Name} className="related-players__item" onClick={() => onPlayerSelect(item.Name)}>
                         <Tooltip title={item.Name}>
                             <Badge count={item.Count} overflowCount={9999} style={theme(killerType)}>
                                 <Avatar
@@ -31,6 +34,7 @@ const RelatedPlayers: SFC<RelatedPlayersProps> = props => {
 type RelatedPlayersProps = {
     data: RelatedPlayer[];
     killerType: boolean;
+    onRelatedPlayerSelect: (playerId: string) => void;
 };
 
 export default RelatedPlayers;
