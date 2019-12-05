@@ -47,7 +47,7 @@ const HomePage: SFC<HomePageProps> = props => (
             </Footer>
         </Layout>
         <SnowStorm snowColor="#00CCFF" />
-        <SurpriseSanta minTime={5} maxTime={10} />
+        <SurpriseSanta minTime={40} maxTime={100} />
     </Provider>
 );
 
