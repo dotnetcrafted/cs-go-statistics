@@ -111,8 +111,8 @@ namespace BusinessFacade.Repositories.Implementations
                 var death = logs.Count(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill);
                 var totalGames = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.EnteredTheGame);
                 var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
-                var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill || x.Action == Actions.FriendlyKill).Select(x => x.Victim).ToList();
-                var killerList = logs.Where(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill || x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
+                var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Victim).ToList();
+                var killerList = logs.Where(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Player).ToList();
 
                 playersStats.Add(new PlayerStatsModel
                 {
@@ -133,6 +133,7 @@ namespace BusinessFacade.Repositories.Implementations
                 });
             }
 
+            playersStats = playersStats.Where(x => x.TotalGames > 0).ToList();
             var duplicatesIds = playersStats.GroupBy(x => x.Player.SteamId).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
 
             if (duplicatesIds.Any())
