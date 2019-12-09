@@ -98,6 +98,8 @@ namespace BusinessFacade.Repositories.Implementations
             {
                 var guns = GetGuns(logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).ToList());
                 var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
+                var grenade = guns?.Where(x => x.Gun == Guns.He).Sum(x=>x.Kills);
+                var molotov = guns?.Where(x => x.Gun == Guns.Molotov || x.Gun == Guns.Inferno || x.Gun == Guns.Inc).Sum(x=>x.Kills);
                 var explodeBombs = GetExplodeBombs(logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Plant).ToList());
                 var defuse = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.Defuse);
                 var friendlyKills = logs.Count(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill);
@@ -128,7 +130,10 @@ namespace BusinessFacade.Repositories.Implementations
                         Victims = GetPlayers(victimList).OrderByDescending(x=>x.Count).ToList(),
                         Killers = GetPlayers(killerList).OrderByDescending(x=>x.Count).ToList(),
                         FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x=>x.Count).ToList(),
-                        FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x=>x.Count).ToList()
+                        FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x=>x.Count).ToList(),
+                        GrenadeKills = grenade ?? 0,
+                        MolotovKills = molotov ?? 0
+
                 });
             }
 
@@ -336,6 +341,16 @@ namespace BusinessFacade.Repositories.Implementations
                 {
                     Achieve = AchievementsEnum.Brutus,
                     PlayerId = playersStats.Where(x=>x.FriendlyKills!=0).OrderByDescending(x=>x.FriendlyKills).FirstOrDefault()?.Player.SteamId
+                },
+                new AchieveModel
+                {
+                    Achieve = AchievementsEnum.Pitcher,
+                    PlayerId =  playersStats.Where(x=>x.GrenadeKills > 1).OrderByDescending(x=>x.GrenadeKills).FirstOrDefault()?.Player.SteamId
+                },
+                new AchieveModel
+                {
+                    Achieve = AchievementsEnum.Firebug, 
+                    PlayerId = playersStats.Where(x=>x.MolotovKills > 1).OrderByDescending(x=>x.MolotovKills).FirstOrDefault()?.Player.SteamId
                 }
             };
 
