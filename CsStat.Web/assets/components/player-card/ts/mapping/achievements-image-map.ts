@@ -31,6 +31,10 @@ const MapAchievementIdToImage = (id: number): string | undefined => {
             return icon8;
         case 9:
             return icon9;
+        case 10:
+            return icon10;
+        case 11:
+            return icon11;
 
         default:
             return undefined;
