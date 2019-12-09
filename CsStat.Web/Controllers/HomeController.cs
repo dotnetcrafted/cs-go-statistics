@@ -41,18 +41,12 @@ namespace CsStat.Web.Controllers
                 dateFrom = day.ToShortFormat();
             }
 
-            var playersStat = Settings.ShowNullPlayers == 0
-                ? GetPlayersStat(dateFrom, dateTo)
-                    .Where(x => x.TotalGames != 0)
-                    .OrderByDescending(x => x.KdRatio)
-                    .ThenByDescending(x => x.Kills)
-                    .ThenByDescending(x => x.TotalGames)
-                    .ToList()
-                : GetPlayersStat(dateFrom, dateTo)
-                    .OrderByDescending(x => x.KdRatio)
-                    .ThenByDescending(x => x.Kills)
-                    .ThenByDescending(x => x.TotalGames)
-                    .ToList();
+            var playersStat = GetPlayersStat(dateFrom, dateTo)
+                .Where(x => x.TotalGames != 0)
+                .OrderByDescending(x => x.KdRatio)
+                .ThenByDescending(x => x.Kills)
+                .ThenByDescending(x => x.TotalGames)
+                .ToList();
 
 
             return new JsonResult

@@ -7,6 +7,7 @@ import icon5 from '../../img/5.svg';
 import icon6 from '../../img/6.svg';
 import icon7 from '../../img/7.svg';
 import icon8 from '../../img/8.svg';
+import icon9 from '../../img/9.svg';
 
 const MapAchievementIdToImage = (id: number): string | undefined => {
     switch (id) {
@@ -28,6 +29,8 @@ const MapAchievementIdToImage = (id: number): string | undefined => {
             return icon7;
         case 8:
             return icon8;
+        case 9:
+            return icon9;
 
         default:
             return undefined;
