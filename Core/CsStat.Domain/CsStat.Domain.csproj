@@ -64,6 +64,7 @@
     <Compile Include="Entities\PlayerStats.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\GunsEnum.cs" />
+    <Compile Include="Entities\UsefulInfo.cs" />
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
