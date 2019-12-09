@@ -21,7 +21,9 @@ namespace CsStat.Domain.Entities
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
         public List<PlayerModel> Victims { get; set; }
+        public List<PlayerModel> FriendVictims { get; set; }
         public List<PlayerModel> Killers { get; set; }
+        public List<PlayerModel> FriendKillers { get; set; }
         public double KdRatio
         {
             get

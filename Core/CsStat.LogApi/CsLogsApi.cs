@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using BusinessFacade.Repositories;
@@ -21,7 +20,6 @@ namespace CsStat.LogApi
         private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
         private static IPlayerRepository _playerRepository;
         private static ILogger _logger;
-        private static ISteamApi _steamApi;
         private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
         public CsLogsApi()
         {
@@ -29,7 +27,6 @@ namespace CsStat.LogApi
             var mongoRepository = new MongoRepositoryFactory(connectionString);
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
             _playerRepository = new PlayerRepository(mongoRepository);
-            _steamApi = new SteamApi();
             _logger = new Logger(mongoRepository);
         }
         public List<Log> ParseLogs(List<string> logs)
@@ -217,12 +214,10 @@ namespace CsStat.LogApi
         {
             foreach (var attribute in _attributeList)
             {
-                if (action.Contains(attribute.Value))
-                {
-                    var actionIndex = attribute.Key;
-                    var actions = (Actions)actionIndex;
-                    return actions;
-                }
+                if (!action.Contains(attribute.Value)) continue;
+                var actionIndex = attribute.Key;
+                var actions = (Actions)actionIndex;
+                return actions;
             }
 
             return Actions.Unknown;

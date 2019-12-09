@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.IO.Pipes;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
@@ -113,6 +108,8 @@ namespace BusinessFacade.Repositories.Implementations
                 var headShotCount = logs.Count(x => x.Player?.Id == player.Id && x.IsHeadShot && x.Action == Actions.Kill);
                 var victimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Victim).ToList();
                 var killerList = logs.Where(x => x.Victim?.Id == player.Id && x.Action == Actions.Kill).Select(x => x.Player).ToList();
+                var friendlyVictimList = logs.Where(x => x.Player?.Id == player.Id && x.Action == Actions.FriendlyKill).Select(x => x.Victim).ToList();
+                var friendlyKillerList = logs.Where(x => x.Victim?.Id == player.Id && x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
 
                 playersStats.Add(new PlayerStatsModel
                 {
@@ -130,6 +127,8 @@ namespace BusinessFacade.Repositories.Implementations
                         SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
                         Victims = GetPlayers(victimList).OrderByDescending(x=>x.Count).ToList(),
                         Killers = GetPlayers(killerList).OrderByDescending(x=>x.Count).ToList(),
+                        FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x=>x.Count).ToList(),
+                        FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x=>x.Count).ToList()
                 });
             }
 
@@ -153,7 +152,7 @@ namespace BusinessFacade.Repositories.Implementations
                 playerStats.Achievements = achievements.Where(x => x.PlayerId == playerStats.Player.SteamId).ToList();
             }
 
-            return playersStats.Where(x=>x.TotalGames > 0);
+            return playersStats;
         }
 
         private static PlayerStatsModel MergePlayersStats(IReadOnlyCollection<PlayerStatsModel> playersStats)
@@ -332,6 +331,11 @@ namespace BusinessFacade.Repositories.Implementations
                 {
                     Achieve = AchievementsEnum.Sniper,
                     PlayerId = playersStats.Where(x=>x.SniperRifleKills!=0).OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?.Player.SteamId
+                },
+                new AchieveModel
+                {
+                    Achieve = AchievementsEnum.Brutus,
+                    PlayerId = playersStats.Where(x=>x.FriendlyKills!=0).OrderByDescending(x=>x.FriendlyKills).FirstOrDefault()?.Player.SteamId
                 }
             };
 
