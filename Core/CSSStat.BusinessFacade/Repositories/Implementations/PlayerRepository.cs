@@ -137,7 +137,7 @@ namespace BusinessFacade.Repositories.Implementations
                 });
             }
 
-            playersStats = playersStats.Where(x => x.TotalGames > 0).ToList();
+            playersStats = playersStats.Where(x => x.TotalGames > 0).OrderByDescending(x=>x.Kills).ToList();
             var duplicatesIds = playersStats.GroupBy(x => x.Player.SteamId).Where(group => group.Count() > 1).Select(group => group.Key).ToList();
 
             if (duplicatesIds.Any())
