@@ -4,17 +4,17 @@ using DataService.Interfaces;
 
 namespace BusinessFacade.Repositories.Implementations
 {
-    public class UsefulLinkRepository : IUsefulLinkRepository
+    public class UsefulLinkRepository :BaseRepository, IUsefulLinkRepository
     {
-        private static IMongoRepositoryFactory _mongoRepository;
-
-        public UsefulLinkRepository(IMongoRepositoryFactory mongoRepository)
+        private IMongoRepositoryFactory _mongoRepository;
+        public UsefulLinkRepository(IMongoRepositoryFactory mongoRepository) : base(mongoRepository)
         {
             _mongoRepository = mongoRepository;
         }
+
         public void AddInfo(UsefulInfo info)
         {
-            throw new System.NotImplementedException();
+            base.Insert(info);
         }
 
         public bool UpdateInfo(string id)
@@ -27,14 +27,14 @@ namespace BusinessFacade.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public List<UsefulInfo> GetAll()
+        public IEnumerable<UsefulInfo> GetAll()
         {
-            throw new System.NotImplementedException();
+           return base.GetAll<UsefulInfo>();
         }
 
         public UsefulInfo GetInfo(string id)
         {
-            throw new System.NotImplementedException();
+            return base.GetOne<UsefulInfo>(id);
         }
     }
 }

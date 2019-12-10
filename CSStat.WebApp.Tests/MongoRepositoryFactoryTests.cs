@@ -27,6 +27,7 @@ namespace CSStat.WebApp.Tests
         private readonly ILogsRepository _logRepository;
         private readonly IPlayerRepository _playerRepository;
         private readonly IBaseRepository _baseRepository;
+        private readonly IUsefulLinkRepository _usefulLinkRepository;
         public  MongoRepositoryFactoryTests()
         {
             _connectionString = new ConnectionStringFactory();
@@ -34,6 +35,7 @@ namespace CSStat.WebApp.Tests
             _logRepository = new LogsRepository(_mongoRepository);
             _playerRepository = new PlayerRepository(_mongoRepository);
             _baseRepository = new BaseRepository(_mongoRepository);
+            _usefulLinkRepository = new UsefulLinkRepository(_mongoRepository);
         }
         [Test]
         public void ReturnRepositoryOfType()
@@ -145,6 +147,21 @@ namespace CSStat.WebApp.Tests
         public void GetSteamAvatars()
         {
             var players = _playerRepository.GetAllPlayers();
+        }
+
+        [Test]
+        public void AddInfo()
+        {
+            var info = new UsefulInfo
+            {
+                Description = "Lorem ipsum dolor sit amet",
+                Caption = "Test info",
+                PublishDate = DateTime.Now,
+                Url = "google.com"
+            };
+
+            _usefulLinkRepository.AddInfo(info);
+
         }
 
         private static byte[] ReadImage(string path)

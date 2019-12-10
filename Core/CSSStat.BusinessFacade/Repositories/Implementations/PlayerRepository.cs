@@ -49,7 +49,7 @@ namespace BusinessFacade.Repositories.Implementations
 
         public void AddPlayers(List<Player> players)
         {
-            _mongoRepository.GetRepository<Player>().Collection.InsertBatch(players);
+           base.InsertBatch(players);
         }
 
         public void UpdatePlayer(string id, string firstName = null, string secondName = null, string imagePath = null)

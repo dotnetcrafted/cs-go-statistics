@@ -8,7 +8,7 @@ namespace BusinessFacade.Repositories
         void AddInfo(UsefulInfo info);
         bool UpdateInfo(string id);
         bool DeleteInfo(string id);
-        List<UsefulInfo> GetAll();
+        IEnumerable<UsefulInfo> GetAll();
         UsefulInfo GetInfo(string id);
     }
 }

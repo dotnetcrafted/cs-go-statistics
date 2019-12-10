@@ -42,6 +42,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IErrorLogRepository>().To<ErrorLogRepository>();
             _kernel.Bind<ISteamApi>().To<SteamApi>();
             _kernel.Bind<ILogger>().To<Logger>();
+            _kernel.Bind<IUsefulLinkRepository>().To<UsefulLinkRepository>();
         }
     }
 }

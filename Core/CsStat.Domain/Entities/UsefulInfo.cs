@@ -1,4 +1,5 @@
-﻿using MongoRepository;
+﻿using System;
+using MongoRepository;
 
 namespace CsStat.Domain.Entities
 {
@@ -8,5 +9,6 @@ namespace CsStat.Domain.Entities
         public string Description { get; set; }
         public string Image { get; set; }
         public string Url { get; set; }
+        public DateTime PublishDate { get; set; }
     }
 }
