@@ -5,9 +5,9 @@ namespace BusinessFacade.Repositories
 {
     public interface IUsefulLinkRepository
     {
-        void AddInfo(UsefulInfo info);
-        bool UpdateInfo(string id);
-        bool DeleteInfo(string id);
+        void Add(UsefulInfo info);
+        void Update(string id, UsefulInfo newInfo);
+        void Remove(string id);
         IEnumerable<UsefulInfo> GetAll();
         UsefulInfo GetInfo(string id);
     }

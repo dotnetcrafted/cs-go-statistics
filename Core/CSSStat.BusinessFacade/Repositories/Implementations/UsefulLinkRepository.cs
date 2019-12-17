@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
+using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations
 {
@@ -12,19 +13,32 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository = mongoRepository;
         }
 
-        public void AddInfo(UsefulInfo info)
+        public void Add(UsefulInfo info)
         {
             base.Insert(info);
         }
 
-        public bool UpdateInfo(string id)
+        public void Update(string id, UsefulInfo newInfo)
         {
-            throw new System.NotImplementedException();
+            var info = GetInfo(id);
+            
+            if (info == null)
+            {
+                return;
+            }
+
+            info.Caption = newInfo.Caption;
+            info.Description = newInfo.Description;
+            info.Image = newInfo.Image;
+            info.PublishDate = newInfo.PublishDate;
+            info.Url = newInfo.Url;
+            _mongoRepository.GetRepository<UsefulInfo>().Collection.Save(info);
         }
 
-        public bool DeleteInfo(string id)
+        public void Remove(string id)
         {
-            throw new System.NotImplementedException();
+            var query = new QueryBuilder<UsefulInfo>();
+            _mongoRepository.GetRepository<UsefulInfo>().Collection.Remove(query.EQ(x=>x.Id, id));
         }
 
         public IEnumerable<UsefulInfo> GetAll()

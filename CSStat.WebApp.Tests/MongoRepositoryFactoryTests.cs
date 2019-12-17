@@ -160,7 +160,7 @@ namespace CSStat.WebApp.Tests
                 Url = "google.com"
             };
 
-            _usefulLinkRepository.AddInfo(info);
+            _usefulLinkRepository.Add(info);
 
         }
 
