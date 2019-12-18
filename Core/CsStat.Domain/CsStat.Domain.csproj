@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson, Version=1.11.0.92, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <HintPath>..\..\packages\mongocsharpdriver.1.11.0\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -55,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Definitions\AchievementsEnum.cs" />
+    <Compile Include="Definitions\GrantsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
     <Compile Include="Entities\Error.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
@@ -65,6 +69,8 @@
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\GunsEnum.cs" />
     <Compile Include="Entities\UsefulInfo.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
@@ -85,6 +91,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

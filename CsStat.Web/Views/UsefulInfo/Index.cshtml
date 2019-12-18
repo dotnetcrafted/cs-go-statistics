@@ -1,27 +1,34 @@
 @model CsStat.Web.Models.UsefulLinksViewModel
 
-    <div style="margin-top: 15px; margin-left: 15px;  ">
-        @if (Model.Items.Any())
-        {
-            foreach (var item in Model.Items)
-            {
-                <div style="border: gray 1px solid;  margin-top: 15px;">
-                    Caption: @item.Caption <br />
-                    Description: @item.Description <br />
-                    URL: @item.Url <br />
-                    @if (Model.IsAdminMode)
-                    {
-                        <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add","UsefulLinks", new {id = item.Id})'">Edit</button>
-                        <button type="button" class="btn btn-delete"  onclick="location.href = '@Url.Action("Remove","UsefulLinks", new {id = item.Id})'">Delete</button>
-                    }
-                </div>
-            }
-            if (Model.IsAdminMode)
-            {
-                <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;"
-                        onclick="location.href = '@Url.Action("Add","UsefulLinks")'">Add</button>
-                <label>* on click show modal form</label>
-            }
-        }
-        </div>
+    <div style="margin-top: 15px; margin-left: 15px;">
+        <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;" onclick="location.href = '@Url.Action("SignIn", "UsefulLinks")'">
+            Sign In
+        </button>
+        <label>* on click show modal form</label>
+    </div>
 
+
+<div style="margin-top: 15px; margin-left: 15px;">
+    @if (Model.Items.Any())
+    {
+        foreach (var item in Model.Items)
+        {
+            <div style="border: gray 1px solid; margin-top: 15px;">
+                Caption: @item.Caption <br/>
+                Description: @item.Description <br/>
+                URL: @item.Url <br/>
+                @if (Model.IsAdminMode)
+                {
+                    <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "UsefulLinks", new {id = item.Id})'">Edit</button>
+                    <button type="button" class="btn btn-delete" onclick="location.href = '@Url.Action("Remove", "UsefulLinks", new {id = item.Id})'">Delete</button>
+                }
+            </div>
+        }
+        if (Model.IsAdminMode)
+        {
+            <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;"
+                    onclick="location.href = '@Url.Action("Add", "UsefulLinks")'">Add</button>
+            <label>* on click show modal form</label>
+        }
+    }
+</div>
