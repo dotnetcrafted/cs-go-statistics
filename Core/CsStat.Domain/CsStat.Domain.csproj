@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
+    <Compile Include="Entities\Error.cs" />
     <Compile Include="Definitions\RoundEndReason.cs" />
     <Compile Include="Entities\Demo\DemoFile.cs" />
     <Compile Include="Entities\Demo\DemoLog.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
+    <Compile Include="Models\VictimModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

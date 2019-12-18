@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Table, Avatar, Divider, Tooltip, Dropdown, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
-import { fetchPlayers, startRequest, selectPlayer } from '../../../general/ts/redux/actions';
+import { fetchPlayers, startRequest, stopRequest, selectPlayer } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
 import { AppState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
@@ -28,10 +28,11 @@ export const COLUMN_NAMES: ColumnNames = {
     FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' }
 };
 const DEFAULT_COLUMNS = [
-    COLUMN_NAMES.Points.dataIndex,
     COLUMN_NAMES.KdRatio.dataIndex,
     COLUMN_NAMES.Kills.dataIndex,
     COLUMN_NAMES.Deaths.dataIndex,
+    COLUMN_NAMES.HeadShot.dataIndex,
+    COLUMN_NAMES.Assists.dataIndex,
     COLUMN_NAMES.TotalGames.dataIndex
 ];
 
@@ -58,6 +59,10 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             .then((data: AppState) => {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
+            })
+            .catch(error => {
+                this.props.stopRequest();
+                throw new Error(error);
             });
     }
 
@@ -148,16 +153,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.Deaths);
             },
-            sorter: (a: Player, b: Player) => a.Deaths - b.Deaths
-        },
-        {
-            dataIndex: COLUMN_NAMES.TotalGames.dataIndex,
-            title: COLUMN_NAMES.TotalGames.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.TotalGames.dataIndex),
-            render: (_link: any, record: Player) => {
-                return this.cellWrapper(record.Id, record.TotalGames);
-            },
-            sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
+            sorter: (a: Player, b: Player) => b.Deaths - a.Deaths
         },
         {
             dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
@@ -220,7 +216,16 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             render: (_link: any, record: Player) => {
                 return this.cellWrapper(record.Id, record.FriendlyKills);
             },
-            sorter: (a: Player, b: Player) => a.FriendlyKills - b.FriendlyKills
+            sorter: (a: Player, b: Player) => b.FriendlyKills - a.FriendlyKills
+        },
+        {
+            dataIndex: COLUMN_NAMES.TotalGames.dataIndex,
+            title: COLUMN_NAMES.TotalGames.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.TotalGames.dataIndex),
+            render: (_link: any, record: Player) => {
+                return this.cellWrapper(record.Id, record.TotalGames);
+            },
+            sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
         }
     ];
 
@@ -283,6 +288,7 @@ type PlayersDataProps = {
     Players: Player[];
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
+    stopRequest: typeof stopRequest;
     selectPlayer: typeof selectPlayer;
 };
 
@@ -323,5 +329,5 @@ export type ColumnMapping = {
 };
 export default connect(
     mapStateToProps,
-    { fetchPlayers, startRequest, selectPlayer }
+    { fetchPlayers, startRequest, stopRequest, selectPlayer }
 )(PlayersData);

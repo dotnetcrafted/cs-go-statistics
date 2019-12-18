@@ -1,21 +1,28 @@
-import React, {SFC} from 'react';
-import {Card, Descriptions, Avatar, Empty, Divider, Typography} from 'antd';
+import React, { SFC } from 'react';
+import { Card, Descriptions, Avatar, Empty, Divider, Typography } from 'antd';
 import { connect } from 'react-redux';
 import GunsChart from './guns-chart';
 import Achievements from './achievements';
+import RelatedPlayers from './related-players';
 import { AppState, Player, Gun } from '../../../general/ts/redux/types';
+import { selectPlayer } from '../../../general/ts/redux/actions';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
-const PlayerCard: SFC<PlayerCardProps> = (props) => {
+const PlayerCard: SFC<PlayerCardProps> = props => {
+    const onRelatedPlayerSelect = (name: string) => {
+        const id = getIdByName(name, props.Players);
+        if (!id) {
+            throw new Error('No players found with this Name');
+        }
+        props.selectPlayer(id);
+    };
     if (props.SelectedPlayer) {
         const model = _getPlayerViewModel(props.SelectedPlayer, props.Players);
         const gunsToShow: Gun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
         return (
-            <Card
-                className='player-card'
-            >
+            <Card className="player-card">
                 <Meta
                     className="player-card__meta"
                     avatar={renderAvatar(model.ImagePath)}
@@ -39,23 +46,33 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
+                <Divider orientation="left">He has killed:</Divider>
+                <RelatedPlayers data={model.Victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
+                <Divider orientation="left">This players have killed him:</Divider>
+                <RelatedPlayers data={model.Killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
             </Card>
         );
     }
-    return <Empty description="Choose a player from table"/>;
+    return <Empty description="Choose a player from table" />;
 };
 
-const renderAvatar = (src:  string) => {
+const getIdByName = (name: string, players: Player[]): string | undefined => {
+    const player = players.find(player => player.Name === name);
+    if (player) {
+        return player.Id;
+    }
+};
+const renderAvatar = (src: string) => {
     if (src) {
-        return <Avatar size={48} shape="square" className='player-card__avatar' src={src} />;
+        return <Avatar size={48} shape="square" className="player-card__avatar" src={src} />;
     }
     return <Avatar size={48} shape="square" icon="user" />;
 };
 
-
 const _getPlayerViewModel = (id: string, data: Player[]) => {
-    const playersRow = data.filter((item) => item.Id === id)[0];
+    const playersRow = data.filter(item => item.Id === id)[0];
     return {
+        Id: playersRow.Id,
         Name: playersRow.Name,
         ImagePath: playersRow.ImagePath,
         Kills: playersRow.Kills,
@@ -71,17 +88,23 @@ const _getPlayerViewModel = (id: string, data: Player[]) => {
         FriendlyKills: playersRow.FriendlyKills,
         Guns: playersRow.Guns,
         Achievements: playersRow.Achievements,
-        Points: playersRow.Points
+        Points: playersRow.Points,
+        Victims: playersRow.Victims,
+        Killers: playersRow.Killers
     };
 };
 type PlayerCardProps = {
-    SelectedPlayer: string
-    Players: Player[]
-}
+    SelectedPlayer: string;
+    Players: Player[];
+    selectPlayer: typeof selectPlayer;
+};
 
 const mapStateToProps = (state: AppState) => {
     const SelectedPlayer = state.SelectedPlayer;
     const Players = state.Players;
-    return { SelectedPlayer, Players }
+    return { SelectedPlayer, Players };
 };
-export default connect(mapStateToProps, { })(PlayerCard);
+export default connect(
+    mapStateToProps,
+    { selectPlayer }
+)(PlayerCard);

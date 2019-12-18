@@ -1,0 +1,15 @@
+.related-players {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    &__item {
+        margin-bottom: 20px;
+        margin-left: 20px;
+        cursor: pointer;
+    }
+
+    &__avatar {
+        filter: grayscale(80%);
+    }
+}

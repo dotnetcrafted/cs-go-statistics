@@ -231,17 +231,9 @@ namespace CsStat.Domain.Definitions
         Inc,
 
         [Description("Knife")]
-        [LogValue("knife_t")]
+        [LogValue("knife")]
         [IsSniperRifle(false)]
-        KnifeT,
-
-        [Description("Knife")]
-        [LogValue("knife_ct")]
-        [IsSniperRifle(false)]
-        KnifeCT
-
-
-
+        Knife,
     }
 }
 

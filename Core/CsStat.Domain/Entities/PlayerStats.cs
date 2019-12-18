@@ -18,8 +18,14 @@ namespace CsStat.Domain.Entities
         public int Points { get; set; }
         public int FriendlyKills { get; set; }
         public int SniperRifleKills { get; set; }
+        public int GrenadeKills { get; set; }
+        public int MolotovKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
+        public List<PlayerModel> Victims { get; set; }
+        public List<PlayerModel> FriendVictims { get; set; }
+        public List<PlayerModel> Killers { get; set; }
+        public List<PlayerModel> FriendKillers { get; set; }
         public double KdRatio
         {
             get

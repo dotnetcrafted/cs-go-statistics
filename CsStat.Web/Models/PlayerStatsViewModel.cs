@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CsStat.Domain.Entities;
 
 namespace CsStat.Web.Models
 {
@@ -20,6 +21,8 @@ namespace CsStat.Web.Models
         public int TotalGames { get; set; }
         public double HeadShot { get; set; }
         public double KdRatio { get; set; }
+        public List<PlayerViewModel> Victims { get; set; }
+        public List<PlayerViewModel> Killers { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }
         public List<GunViewModel> Guns { get; set; }
     }

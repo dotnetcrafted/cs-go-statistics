@@ -7,6 +7,7 @@ using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using DataService;
 using DataService.Interfaces;
+using ErrorLogger;
 using Ninject;
 
 namespace CSStat.WebApp.Infrastructure
@@ -38,8 +39,10 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IConnectionStringFactory>().To<ConnectionStringFactory>();
             _kernel.Bind<ILogsRepository>().To<LogsRepository>();
             _kernel.Bind<IPlayerRepository>().To<PlayerRepository>();
+            _kernel.Bind<IErrorLogRepository>().To<ErrorLogRepository>();
             _kernel.Bind<IDemoRepository>().To<DemoRepository>();
             _kernel.Bind<ISteamApi>().To<SteamApi>();
+            _kernel.Bind<ILogger>().To<Logger>();
         }
     }
 }

@@ -38,22 +38,18 @@ namespace CsStat.Web.Controllers
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
             {
-                dateTo = DateTime.Now.ToShortFormat();
-                dateFrom = DateTime.Now.AddDays(-(int) (DateTime.Now.DayOfWeek - 1)).ToShortFormat();
+                var day = DateTime.Now.Hour < 12 ? DateTime.Now.AddDays(-1) : DateTime.Now;
+
+                dateTo = day.ToShortFormat();
+                dateFrom = day.ToShortFormat();
             }
 
-            var playersStat = Settings.ShowNullPlayers == 0
-                ? GetPlayersStat(dateFrom, dateTo)
-                    .Where(x => x.TotalGames != 0)
-                    .OrderByDescending(x => x.KdRatio)
-                    .ThenByDescending(x => x.Kills)
-                    .ThenByDescending(x => x.TotalGames)
-                    .ToList()
-                : GetPlayersStat(dateFrom, dateTo)
-                    .OrderByDescending(x => x.KdRatio)
-                    .ThenByDescending(x => x.Kills)
-                    .ThenByDescending(x => x.TotalGames)
-                    .ToList();
+            var playersStat = GetPlayersStat(dateFrom, dateTo)
+                .Where(x => x.TotalGames != 0)
+                .OrderByDescending(x => x.KdRatio)
+                .ThenByDescending(x => x.Kills)
+                .ThenByDescending(x => x.TotalGames)
+                .ToList();
 
 
             return new JsonResult
@@ -77,6 +73,15 @@ namespace CsStat.Web.Controllers
             foreach (var player in players)
             {
                 player.Player.ImagePath = avatars.FirstOrDefault(x => x.Key == player.Player.SteamId).Value;
+                foreach (var victim in player.Victims)
+                {
+                    victim.ImagePath = avatars.FirstOrDefault(x => x.Key == victim.SteamId).Value;
+                }
+
+                foreach (var killer in player.Killers)
+                {
+                    killer.ImagePath = avatars.FirstOrDefault(x => x.Key == killer.SteamId).Value;
+                }
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);

@@ -166,6 +166,7 @@
     <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
+    <Compile Include="Models\VictimViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +219,10 @@
       <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
       <Name>CsStat.SystemFacade</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ErorrLogger\ErrorLogger.csproj">
+      <Project>{851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D}</Project>
+      <Name>ErrorLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -253,9 +258,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release call $(ProjectDir)build-prod.bat</PostBuildEvent>
-  </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

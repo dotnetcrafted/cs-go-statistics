@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using BusinessFacade.Repositories;
@@ -12,7 +11,7 @@ using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using CsStat.LogApi.Interfaces;
 using DataService;
-using DataService.Interfaces;
+using ErrorLogger;
 
 namespace CsStat.LogApi
 {
@@ -20,14 +19,15 @@ namespace CsStat.LogApi
     {
         private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
         private static IPlayerRepository _playerRepository;
-        private static ISteamApi _steamApi;
+        private static ILogger _logger;
         private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
         public CsLogsApi()
         {
             var connectionString = new ConnectionStringFactory();
+            var mongoRepository = new MongoRepositoryFactory(connectionString);
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
-            _playerRepository = new PlayerRepository(new MongoRepositoryFactory(connectionString));
-            _steamApi = new SteamApi();
+            _playerRepository = new PlayerRepository(mongoRepository);
+            _logger = new Logger(mongoRepository);
         }
         public List<Log> ParseLogs(List<string> logs)
         {
@@ -40,11 +40,18 @@ namespace CsStat.LogApi
                     continue;
                 }
 
-                var parsed = ParseLine(logLine);
-
-                if (parsed != null)
+                try
                 {
-                    list.Add(parsed);
+                    var parsed = ParseLine(logLine);
+
+                    if (parsed != null)
+                    {
+                        list.Add(parsed);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(logLine, ex, "Bad log string format");
                 }
             }
 
@@ -54,7 +61,11 @@ namespace CsStat.LogApi
 
         private static bool IsClearString(string logLine)
         {
-            return !logLine.Contains("_killed") && !logLine.Contains("GOTV") && !logLine.Contains("><BOT><") && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
+            return !logLine.Contains("_killed") 
+                   && !logLine.Contains("GOTV") 
+                   && !logLine.Contains("><BOT><")
+                   && !logLine.Contains("chickenskilled")
+                   && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
         }
         private static Log ParseLine(string logLine)
         {
@@ -203,12 +214,10 @@ namespace CsStat.LogApi
         {
             foreach (var attribute in _attributeList)
             {
-                if (action.Contains(attribute.Value))
-                {
-                    var actionIndex = attribute.Key;
-                    var actions = (Actions)actionIndex;
-                    return actions;
-                }
+                if (!action.Contains(attribute.Value)) continue;
+                var actionIndex = attribute.Key;
+                var actions = (Actions)actionIndex;
+                return actions;
             }
 
             return Actions.Unknown;

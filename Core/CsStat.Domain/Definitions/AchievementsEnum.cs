@@ -40,6 +40,18 @@ namespace CsStat.Domain.Definitions
 
         [Caption("Kenny")]
         [Description("They Killed Kenny! You Bastards!\nPlayer with most deaths")]
-        Kenny
+        Kenny,
+        
+        [Caption("Brutus")]
+        [Description("Et tu, Brute? Player with most friendly kills")]
+        Brutus, 
+
+        [Caption("Pitcher")]
+        [Description("Player with most HE grenade kills")]
+        Pitcher ,
+
+        [Caption("Firebug")]
+        [Description("Player with most fire grenade kills")]
+        Firebug
     }
 }
