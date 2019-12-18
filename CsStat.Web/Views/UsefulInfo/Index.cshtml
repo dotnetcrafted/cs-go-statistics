@@ -1,10 +1,20 @@
+@using System.Diagnostics.Eventing.Reader
 @model CsStat.Web.Models.UsefulLinksViewModel
 
     <div style="margin-top: 15px; margin-left: 15px;">
-        <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;" onclick="location.href = '@Url.Action("SignIn", "UsefulLinks")'">
-            Sign In
-        </button>
-        <label>* on click show modal form</label>
+        @if (!Model.IsAdminMode)
+        {
+            <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;" onclick="location.href = '@Url.Action("SignIn", "SignIn")'">
+                Sign In
+            </button>
+            <label>* on click show modal form</label>
+        }
+        else
+        {
+            <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;" onclick="location.href = '@Url.Action("SignOut", "SignIn")'">
+                Sign Out
+            </button>
+        }
     </div>
 
 

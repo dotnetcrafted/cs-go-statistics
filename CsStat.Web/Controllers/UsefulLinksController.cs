@@ -16,23 +16,21 @@ namespace CsStat.Web.Controllers
         // GET
         private static IUsefulLinkRepository _usefulLinkRepository;
         private static ILogger _logger;
-        private static UserRegistrationService _registrationService;
-        private static IUserRepository _userRepository;
 
-        public UsefulLinksController(IUsefulLinkRepository usefulLinkRepository, IUserRepository userRepository)
+        public UsefulLinksController(IUsefulLinkRepository usefulLinkRepository)
         {
             _usefulLinkRepository = usefulLinkRepository;
             var connectionString = new ConnectionStringFactory();
             var mongoRepository = new MongoRepositoryFactory(connectionString);
             _logger = new Logger(mongoRepository);
-            _userRepository = userRepository;
-            _registrationService = new UserRegistrationService(_userRepository);
         }
         public ActionResult Index()
         {
+            var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
             var model = new UsefulLinksViewModel
             {
                 Items = _usefulLinkRepository.GetAll(),
+                IsAdminMode = isAdminMode
             };
             return View("~/Views/UsefulInfo/Index.cshtml", model);
         }
@@ -76,22 +74,6 @@ namespace CsStat.Web.Controllers
         {
             _usefulLinkRepository.Remove(id);
             return RedirectToAction("Index");
-        }
-
-        public ActionResult SignIn()
-        {
-            return View("~/Views/UsefulInfo/SignInForm.cshtml");
-        }
-
-        [HttpPost]
-        public ActionResult SignIn(SignInViewModel userModel)
-        {
-            if (_registrationService.SignIn(userModel))
-            {
-
-            }
-
-            return RedirectToAction("Index", "UsefulLinks");
         }
     }
 }
