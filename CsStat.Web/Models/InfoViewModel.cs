@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using MongoRepository;
+using System.Web;
 
-namespace CsStat.Domain.Entities
+namespace CsStat.Web.Models
 {
-    public class UsefulInfo : Entity
+    public class InfoViewModel
     {
         public string Caption { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
+        public HttpPostedFileBase Image { get; set; }
+        public string ImagePath { get; set; }
         public string Url { get; set; }
         public DateTime PublishDate { get; set; }
         private List<string> Tags { get; set; }
+        public string Id { get; set; }
     }
 }

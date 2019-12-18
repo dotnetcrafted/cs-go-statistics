@@ -1,9 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Web.Mvc;
+using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.Domain.Entities;
-using CsStat.Web.Helpers;
 using CsStat.Web.Models;
 using DataService;
 using ErrorLogger;
@@ -46,13 +46,21 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(UsefulInfo info)
+        public ActionResult Save(InfoViewModel infoModel)
         {
-            if (info != null)
+            if (infoModel != null)
             {
+                var imageName = Path.GetFileName(infoModel.Image?.FileName);
+                if (imageName != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/Files/Images"), imageName);
+                    infoModel.Image.SaveAs(path);
+                    infoModel.ImagePath = imageName;
+                }
+                var info = Mapper.Map<UsefulInfo>(infoModel);
                 try
                 {
-                    if (info.Id.IsNullOrWhiteSpace())
+                    if (infoModel.Id.IsNullOrWhiteSpace())
                     {
                         _usefulLinkRepository.Add(info);
                     }

@@ -169,6 +169,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AchievementViewModel.cs" />
     <Compile Include="Models\GunViewModel.cs" />
+    <Compile Include="Models\InfoViewModel.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
