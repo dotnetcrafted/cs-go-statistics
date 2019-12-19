@@ -28,13 +28,13 @@ namespace CsStat.Web.Controllers
                 Session["IsAdminMode"] = "true";
             }
 
-            return RedirectToAction("Index", "UsefulLinks");
+            return RedirectToAction("Index", "Wiki");
         }
 
         public ActionResult SignOut()
         {
             Session["IsAdminMode"] = "false";
-            return RedirectToAction("Index", "UsefulLinks");
+            return RedirectToAction("Index", "Wiki");
         }
     }
 }
