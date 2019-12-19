@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
 using AutoMapper;
@@ -27,15 +28,23 @@ namespace CsStat.Web.Controllers
         public ActionResult Index()
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
+            var usefulInfos = _usefulLinkRepository.GetAll();
             var model = new UsefulLinksViewModel
             {
-                Items = _usefulLinkRepository.GetAll(),
+                Items = usefulInfos != null ? Mapper.Map<List<InfoViewModel>>(usefulInfos) : new List<InfoViewModel>(),
                 IsAdminMode = isAdminMode
             };
             return View("~/Views/UsefulInfo/Index.cshtml", model);
         }
         public ActionResult Add(string id="")
         {
+            var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
+            
+            if (!isAdminMode)
+            {
+                return RedirectToAction("SignIn", "SignIn");
+            }
+
             if (!id.IsNullOrWhiteSpace())
             {
                 var info = _usefulLinkRepository.GetInfo(id);
@@ -53,7 +62,8 @@ namespace CsStat.Web.Controllers
                 var imageName = Path.GetFileName(infoModel.Image?.FileName);
                 if (imageName != null)
                 {
-                    string path = Path.Combine(Server.MapPath("~/Files/Images"), imageName);
+                    Directory.CreateDirectory(Server.MapPath("~/Files/Images"));
+                    var path = Path.Combine(Server.MapPath("~/Files/Images"), imageName);
                     infoModel.Image.SaveAs(path);
                     infoModel.ImagePath = imageName;
                 }

@@ -5,7 +5,7 @@ namespace CsStat.Web.Models
 {
     public class UsefulLinksViewModel
     {
-        public IEnumerable<UsefulInfo> Items { get; set; }
+        public IEnumerable<InfoViewModel> Items { get; set; }
         public bool IsAdminMode { get; set; }
     }
 }

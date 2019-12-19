@@ -12,7 +12,7 @@ namespace CsStat.Web.Models
         public string ImagePath { get; set; }
         public string Url { get; set; }
         public DateTime PublishDate { get; set; }
-        private List<string> Tags { get; set; }
+        public List<string> Tags { get; set; }
         public string Id { get; set; }
     }
 }

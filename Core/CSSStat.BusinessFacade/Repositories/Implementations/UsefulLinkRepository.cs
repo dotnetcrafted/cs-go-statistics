@@ -32,6 +32,7 @@ namespace BusinessFacade.Repositories.Implementations
             info.Image = newInfo.Image;
             info.PublishDate = newInfo.PublishDate;
             info.Url = newInfo.Url;
+            info.Tags = newInfo.Tags;
             _mongoRepository.GetRepository<UsefulInfo>().Collection.Save(info);
         }
 

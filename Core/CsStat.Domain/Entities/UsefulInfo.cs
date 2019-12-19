@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CsStat.Domain.Definitions;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities
@@ -11,6 +12,6 @@ namespace CsStat.Domain.Entities
         public string Image { get; set; }
         public string Url { get; set; }
         public DateTime PublishDate { get; set; }
-        private List<string> Tags { get; set; }
+        public string Tags { get; set; }
     }
 }

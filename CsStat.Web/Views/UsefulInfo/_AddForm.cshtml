@@ -11,7 +11,9 @@
         @Html.EditorFor(x => x.Url, new { id = "url", name = "url" }) <br />
         <input type="hidden" id="id" name="Id" value="@Model.Id">
         <label for="image">Image</label>
-        @Html.EditorFor(x => x.Image, new { htmlAttributes = new { @class = "form-control", @type = "file", id = "image", name = "image" } })
+        @Html.EditorFor(x => x.Image, new { htmlAttributes = new { @class = "form-control", @type = "file", id = "image", name = "image" } })<br />
+        <label for="tags">Tags</label>
+        @Html.EditorFor(x => x.Tags, new { id = "tags", name = "tags" }) <br />
         <input type="submit" value="Save" />
     </form>
 }

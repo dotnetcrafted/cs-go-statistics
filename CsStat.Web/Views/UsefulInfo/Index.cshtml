@@ -22,20 +22,25 @@
     {
         foreach (var item in Model.Items)
         {
-            <div style="border: gray 1px solid; margin-top: 15px;">
-                Caption: @item.Caption <br/>
-                Description: @item.Description <br/>
-                @if (!string.IsNullOrEmpty(item.Image))
-                {
-                    <img src="@Url.Content("~/Files/Images/" + item.Image)" width="200" height="100" alt="image"/> <br />
-                }
-                URL: @item.Url <br/>
-                @if (Model.IsAdminMode)
-                {
-                    <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "UsefulLinks", new {id = item.Id})'">Edit</button>
-                    <button type="button" class="btn btn-delete" onclick="location.href = '@Url.Action("Remove", "UsefulLinks", new {id = item.Id})'">Delete</button>
-                }
-            </div>
+    <div style="border: gray 1px solid; margin-top: 15px;">
+        Caption: @item.Caption <br />
+        Description: @item.Description <br />
+        @if (!string.IsNullOrEmpty(item.ImagePath))
+        {
+            <img src="@Url.Content("~/Files/Images/" + item.ImagePath)" width="200" height="100" alt="image" /> <br />
+        }
+        URL: @item.Url <br />
+        Tags:
+        @foreach (var tag in item.Tags)
+        {
+            <p>@tag</p>
+        }
+        @if (Model.IsAdminMode)
+        {
+            <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "UsefulLinks", new {id = item.Id})'">Edit</button>
+            <button type="button" class="btn btn-delete" onclick="location.href = '@Url.Action("Remove", "UsefulLinks", new {id = item.Id})'">Delete</button>
+        }
+    </div>
         }
         if (Model.IsAdminMode)
         {
