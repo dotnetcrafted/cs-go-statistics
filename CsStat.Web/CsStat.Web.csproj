@@ -160,7 +160,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
-    <Compile Include="Controllers\UsefulLinksController.cs" />
+    <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,7 +204,7 @@
     <Content Include="Web.Base.config" />
     <None Include="Properties\PublishProfiles\Salo - Web Deploy.pubxml" />
     <Content Include="Views\UsefulInfo\Index.cshtml" />
-    <Content Include="Views\UsefulInfo\_AddForm.cshtml" />
+    <Content Include="Views\UsefulInfo\AddForm.cshtml" />
     <Content Include="Views\UsefulInfo\SignInForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

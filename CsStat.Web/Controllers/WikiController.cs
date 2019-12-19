@@ -12,13 +12,13 @@ using Microsoft.Ajax.Utilities;
 
 namespace CsStat.Web.Controllers
 {
-    public class UsefulLinksController : BaseController
+    public class WikiController : BaseController
     {
         // GET
         private static IUsefulLinkRepository _usefulLinkRepository;
         private static ILogger _logger;
 
-        public UsefulLinksController(IUsefulLinkRepository usefulLinkRepository)
+        public WikiController(IUsefulLinkRepository usefulLinkRepository)
         {
             _usefulLinkRepository = usefulLinkRepository;
             var connectionString = new ConnectionStringFactory();
@@ -64,10 +64,10 @@ namespace CsStat.Web.Controllers
             if (!id.IsNullOrWhiteSpace())
             {
                 var info = _usefulLinkRepository.GetInfo(id);
-                return View("~/Views/UsefulInfo/_AddForm.cshtml", info);
+                return View("~/Views/UsefulInfo/AddForm.cshtml", info);
             }
 
-            return View("~/Views/UsefulInfo/_AddForm.cshtml", new UsefulInfo());
+            return View("~/Views/UsefulInfo/AddForm.cshtml", new UsefulInfo());
         }
 
         [HttpPost]

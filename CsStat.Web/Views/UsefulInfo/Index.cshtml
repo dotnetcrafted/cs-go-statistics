@@ -31,8 +31,8 @@
                     @if (Model.IsAdminMode)
                     {
                         <br />
-                        <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "UsefulLinks", new {id = item.Id})'">Edit</button>
-                        <button type="button" class="btn btn-delete" onclick="location.href = '@Url.Action("Remove", "UsefulLinks", new {id = item.Id})'">Delete</button>
+                        <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "Wiki", new {id = item.Id})'">Edit</button>
+                        <button type="button" class="btn btn-delete" onclick="location.href = '@Url.Action("Remove", "Wiki", new {id = item.Id})'">Delete</button>
                     }
                 </div>
             }
@@ -40,7 +40,7 @@
         @if (Model.IsAdminMode)
         {
             <button type="button" class="btn btn-add" name="btnAdd" id="btnAdd" style="margin-top: 15px;"
-                    onclick="location.href = '@Url.Action("Add", "UsefulLinks")'">
+                    onclick="location.href = '@Url.Action("Add", "Wiki")'">
                 Add
             </button>
             <label>* on click show modal form</label>

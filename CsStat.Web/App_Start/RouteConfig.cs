@@ -30,14 +30,14 @@ namespace CsStat.Web
             (
                 name: "getinfo",
                 url: Settings.InfoDataApiPath,
-                defaults: new { controller = "UsefulLinks", action = "GetInfo", id = UrlParameter.Optional }
+                defaults: new { controller = "Wiki", action = "GetInfo", id = UrlParameter.Optional }
             );
 
             routes.MapRoute
             (
                 name: "wiki",
                 url: "wiki",
-                defaults: new { controller = "UsefulLinks", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Wiki", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
