@@ -1,5 +1,3 @@
-@using System.Drawing
-@using Microsoft.Ajax.Utilities
 @model CsStat.Web.Models.UsefulLinksViewModel
 
     <div style="margin-top: 15px; margin-left: 15px;">
@@ -29,10 +27,9 @@
                 Description: @item.Description <br/>
                 @if (!string.IsNullOrEmpty(item.Image))
                 {
-                    <img src="@Path.Combine(Server.MapPath("~/Files/Images"), item.Image)" alt="" />
+                    <img src="@Url.Content("~/Files/Images/" + item.Image)" width="200" height="100" alt="image"/> <br />
                 }
                 URL: @item.Url <br/>
-                id: @item.Id <br />
                 @if (Model.IsAdminMode)
                 {
                     <button type="button" class="btn btn-edit" onclick="location.href = '@Url.Action("Add", "UsefulLinks", new {id = item.Id})'">Edit</button>
