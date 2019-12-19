@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
 using MongoDB.Driver.Builders;
@@ -15,6 +16,7 @@ namespace BusinessFacade.Repositories.Implementations
 
         public void Add(UsefulInfo info)
         {
+            info.PublishDate = DateTime.Now;
             base.Insert(info);
         }
 

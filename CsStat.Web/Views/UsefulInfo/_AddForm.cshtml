@@ -10,8 +10,9 @@
         <label for="url">URL</label>
         @Html.EditorFor(x => x.Url, new { id = "url", name = "url" }) <br />
         <input type="hidden" id="id" name="Id" value="@Model.Id">
+        <input type="hidden" id="publishDate" name="publishDate" value="@Model.PublishDate">
         <label for="image">Image</label>
-        <input type="file" name="Image" id="Image"><br />
+        <input type="file" name="Image" id="Image" accept="image/*"><br />
         @if (!string.IsNullOrEmpty(Model.Image))
         {
             <label for="imagePath">Old Image</label>

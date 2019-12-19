@@ -19,6 +19,20 @@ namespace CsStat.Web
                 defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "Admin",
+                url: "Admin",
+                defaults: new { controller = "SignIn", action = "SignIn", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "getinfo",
+                url: Settings.InfoDataApiPath,
+                defaults: new { controller = "UsefulLinks", action = "GetInfo", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

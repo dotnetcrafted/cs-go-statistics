@@ -36,6 +36,22 @@ namespace CsStat.Web.Controllers
             };
             return View("~/Views/UsefulInfo/Index.cshtml", model);
         }
+
+        public ActionResult GetInfo()
+        {
+            var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
+            var usefulInfos = _usefulLinkRepository.GetAll();
+            var model = new UsefulLinksViewModel
+            {
+                Items = usefulInfos != null ? Mapper.Map<List<InfoViewModel>>(usefulInfos) : new List<InfoViewModel>(),
+                IsAdminMode = isAdminMode
+            };
+            return new JsonResult
+            {
+                Data = model,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         public ActionResult Add(string id="")
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
