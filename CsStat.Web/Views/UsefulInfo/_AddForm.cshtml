@@ -11,7 +11,14 @@
         @Html.EditorFor(x => x.Url, new { id = "url", name = "url" }) <br />
         <input type="hidden" id="id" name="Id" value="@Model.Id">
         <label for="image">Image</label>
-        @Html.EditorFor(x => x.Image, new { htmlAttributes = new { @class = "form-control", @type = "file", id = "image", name = "image" } })<br />
+        <input type="file" name="Image" id="Image"><br />
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <label for="imagePath">Old Image</label>
+            <img src="@Url.Content("~/Files/Images/" + Model.Image)" width="200" height="100" alt="image"  />
+            <input type="hidden" name="imagePath" value="@Model.Image">
+            <br />
+        }
         <label for="tags">Tags</label>
         @Html.EditorFor(x => x.Tags, new { id = "tags", name = "tags" }) <br />
         <input type="submit" value="Save" />
