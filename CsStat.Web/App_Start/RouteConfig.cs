@@ -33,6 +33,13 @@ namespace CsStat.Web
                 defaults: new { controller = "UsefulLinks", action = "GetInfo", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "wiki",
+                url: "wiki",
+                defaults: new { controller = "UsefulLinks", action = "Index", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

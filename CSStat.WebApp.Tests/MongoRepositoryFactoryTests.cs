@@ -186,8 +186,8 @@ namespace CSStat.WebApp.Tests
         {
             var userModel = new SignInViewModel()
             {
-                Name = "saloadmin",
-                Password = "Salo1qaz@WSX"
+                Name = "admin",
+                Password = "salo"
             };
             var result = _registrationService.SignUp(userModel).FirstOrDefault();
             Console.WriteLine(result.Value);
