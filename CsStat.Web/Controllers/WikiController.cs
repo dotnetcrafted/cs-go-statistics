@@ -71,7 +71,7 @@ namespace CsStat.Web.Controllers
             return View("~/Views/UsefulInfo/AddForm.cshtml", new UsefulInfo());
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Save(InfoViewModel infoModel)
         {
             if (infoModel != null)
