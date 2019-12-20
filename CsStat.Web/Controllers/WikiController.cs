@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using BusinessFacade.Repositories;
@@ -28,7 +29,7 @@ namespace CsStat.Web.Controllers
         public ActionResult Index()
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
-            var usefulInfos = _usefulLinkRepository.GetAll();
+            var usefulInfos = _usefulLinkRepository.GetAll().OrderByDescending(x => x.PublishDate);
             var model = new UsefulLinksViewModel
             {
                 Items = usefulInfos != null ? Mapper.Map<List<InfoViewModel>>(usefulInfos) : new List<InfoViewModel>(),
@@ -40,7 +41,7 @@ namespace CsStat.Web.Controllers
         public ActionResult GetInfo()
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
-            var usefulInfos = _usefulLinkRepository.GetAll();
+            var usefulInfos = _usefulLinkRepository.GetAll()?.OrderByDescending(x=>x.PublishDate);
             var model = new UsefulLinksViewModel
             {
                 Items = usefulInfos != null ? Mapper.Map<List<InfoViewModel>>(usefulInfos) : new List<InfoViewModel>(),
