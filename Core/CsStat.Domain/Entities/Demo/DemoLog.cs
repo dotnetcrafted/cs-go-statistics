@@ -19,10 +19,13 @@ namespace CsStat.Domain.Entities.Demo
         [DataMember]
         public long Size { get; set; }
         [DataMember]
-        public DateTime? Date { get; set; }
+        public DateTime? MatchDate { get; set; }
 
         [DataMember]
         public string DemoFileName { get; set; }
+
+        [DataMember]
+        public DateTime? ParsedDate { get; set; }
 
         [DataMember]
         public List<PlayerLog> Players { get; set; }

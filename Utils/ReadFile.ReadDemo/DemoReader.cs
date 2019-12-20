@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using BusinessFacade.Repositories;
 using CSStat.CsLogsApi.Extensions;
-using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities.Demo;
 using CsStat.SystemFacade;
 using CsStat.SystemFacade.Extensions;
@@ -19,8 +19,9 @@ namespace ReadFile.ReadDemo
         private static DemoParser _parser;
         private static Result _results;
 
-        private static string _currentDemoFileName;
-
+        private static string _demoFileName;
+        private static string _fullDemoFileName;
+        
         private static bool _matchStarted;
         private static Round _currentRound;
         private static int _currentRoundNumber;
@@ -30,6 +31,7 @@ namespace ReadFile.ReadDemo
         private static int _lastCTScore;
 
         #region inint
+
         private readonly string path;
         private readonly IFileRepository<DemoFile> demoFileRepository;
         private readonly IBaseRepository demoRepository;
@@ -40,6 +42,7 @@ namespace ReadFile.ReadDemo
             this.demoFileRepository = demoFileRepository;
             this.demoRepository = demoRepository;
         }
+
         #endregion
 
         protected override void ReadFile()
@@ -50,14 +53,17 @@ namespace ReadFile.ReadDemo
             foreach (var file in newFiles)
             {
                 var isSuccessfully = true;
+                var error = string.Empty;
                 try
                 {
+                    Reset();
                     ParseDemo(file);
                 }
                 catch (Exception e)
                 {
                     isSuccessfully = false;
                     Console.WriteLine(e);
+                    error = e.ToString();
                 }
                 finally
                 {
@@ -65,18 +71,41 @@ namespace ReadFile.ReadDemo
                     {
                         Created = File.GetCreationTime(file),
                         Path = file,
-                        IsSuccessfully = isSuccessfully
+                        IsSuccessfully = isSuccessfully,
+                        Message = error
                     });
                 }
             }
         }
 
+        private static void Reset()
+        {
+            var players = new Dictionary<long, Model.Player>();
+            if (_results != null && _results.Players.Any())
+            {
+                foreach (var player in _results.Players)
+                {
+                    players.Add(player.Key, new Model.Player(player.Value.Name, player.Value.SteamID));
+                }
+            }
+            _results = new Result(_demoFileName) {Players = players};
+
+            _matchStarted = default;
+            _currentRound = null;
+            _currentRoundNumber = default;
+            _roundEndedCount = default;
+
+            _lastTScore = default;
+            _lastCTScore = default;
+        }
+
         private void ParseDemo(string filePath)
         {
             var file = File.OpenRead(filePath);
-            _currentDemoFileName = Path.GetFileName(file.Name);
+            _fullDemoFileName = file.Name;
+            _demoFileName = Path.GetFileName(file.Name);
 
-            if(_currentDemoFileName.IsEmpty())
+            if (_demoFileName.IsEmpty())
                 return;
 
             _parser = new DemoParser(file);
@@ -89,20 +118,45 @@ namespace ReadFile.ReadDemo
             _parser.BombPlanted += Parser_BombPlanted;
             _parser.BombDefused += Parser_BombDefused;
             _parser.BombExploded += Parser_BombExploded;
-            
-            Console.WriteLine($"Parse file: \"{_currentDemoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
-            
+            _parser.PlayerBind += Parser_PlayerBind;
+
+            Console.WriteLine(
+                $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
+
             var sw = new Stopwatch();
             sw.Start();
             _parser.ParseToEnd();
             sw.Stop();
 
+            MatchFinish();
+
+            Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
+        }
+
+        private static DateTime? GetDemoDate(string fileName)
+        {
+            var sections = fileName?.Split('-');
+            if (sections?.Length == 6)
+            {
+                if (DateTime.TryParseExact(string.Join(" ", sections.Skip(1).Take(2)),
+                    "yyyyMMdd hhmmss",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out var date))
+                    return date;
+            }
+
+            return null;
+        }
+
+        private void MatchFinish()
+        {
             var demoLog = new DemoLog
             {
                 Map = _parser.Map,
-                Date = GetDemoDate(_currentDemoFileName),
-                Size = new FileInfo(file.Name).Length,
+                MatchDate = GetDemoDate(_demoFileName),
+                Size = new FileInfo(_fullDemoFileName).Length,
                 DemoFileName = _results.DemoFileName,
+                ParsedDate = DateTime.Now,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -145,21 +199,27 @@ namespace ReadFile.ReadDemo
                     }).ToList(),
                     BombDefuses = x.Value.BombDefuses?.Select(z => new RoundLog
                     {
-                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        Winner = z.Winner == Team.CounterTerrorist
+                            ? CsStat.Domain.Definitions.Teams.Ct
+                            : CsStat.Domain.Definitions.Teams.T,
                         BombDefuser = z.BombDefuser?.SteamID,
                         BombPlanter = z.BombPlanter?.SteamID,
                         RoundNumber = z.RoundNumber
                     }).ToList(),
                     BombExplosions = x.Value.BombExplosions?.Select(z => new RoundLog
                     {
-                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        Winner = z.Winner == Team.CounterTerrorist
+                            ? CsStat.Domain.Definitions.Teams.Ct
+                            : CsStat.Domain.Definitions.Teams.T,
                         BombDefuser = z.BombDefuser?.SteamID,
                         BombPlanter = z.BombPlanter?.SteamID,
                         RoundNumber = z.RoundNumber
                     }).ToList(),
                     BombPlants = x.Value.BombPlants?.Select(z => new RoundLog
                     {
-                        Winner = z.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                        Winner = z.Winner == Team.CounterTerrorist
+                            ? CsStat.Domain.Definitions.Teams.Ct
+                            : CsStat.Domain.Definitions.Teams.T,
                         BombDefuser = z.BombDefuser?.SteamID,
                         BombPlanter = z.BombPlanter?.SteamID,
                         RoundNumber = z.RoundNumber
@@ -170,64 +230,57 @@ namespace ReadFile.ReadDemo
                     BombPlanter = x.Value.BombPlanter?.SteamID,
                     BombDefuser = x.Value.BombDefuser?.SteamID,
                     IsBombExploded = x.Value.IsBombExploded,
-                    Reason = (CsStat.Domain.Definitions.RoundEndReason) (int) x.Value.Reason,
+                    Reason = (CsStat.Domain.Definitions.RoundEndReason)(int)x.Value.Reason,
                     RoundNumber = x.Value.RoundNumber,
-                    Winner = x.Value.Winner == Team.CounterTerrorist ? Teams.Ct : Teams.T,
+                    Winner = x.Value.Winner == Team.CounterTerrorist
+                        ? CsStat.Domain.Definitions.Teams.Ct
+                        : CsStat.Domain.Definitions.Teams.T,
                     Teams = x.Value.Teams.ToDictionary(
-                        z => z.Key == Team.CounterTerrorist ? Teams.Ct.GetDescription() : Teams.T.GetDescription(),
+                        z => z.Key == Team.CounterTerrorist
+                            ? CsStat.Domain.Definitions.Teams.Ct.GetDescription()
+                            : CsStat.Domain.Definitions.Teams.T.GetDescription(),
                         z => z.Value.Select(k => k.SteamID).ToList()
                     )
                 }).ToList()
             };
 
             demoRepository.InsertLog(demoLog);
-
-            Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
-        private static DateTime? GetDemoDate(string fileName)
+        private static void Parser_PlayerBind(object sender, PlayerBindEventArgs e)
         {
-            var sections = fileName?.Split('-');
-            if (sections?.Length == 6)
+            _results = _results ?? new Result(_demoFileName);
+
+            if (e.Player == null || e.Player.SteamID == 0 || _results.Players.ContainsKey(e.Player.SteamID))
             {
-                if (DateTime.TryParseExact(string.Join(" ", sections.Skip(1).Take(2)), 
-                    "yyyyMMdd hhmmss", 
-                    CultureInfo.InvariantCulture, 
-                    DateTimeStyles.None, out var date))
-                    return date;
+                return;
             }
 
-            return null;
+            _results.Players.Add(e.Player.SteamID, new Model.Player(e.Player.Name, e.Player.SteamID));
         }
 
-        private static void UpdatePlayers()
+        private void Parser_MatchStarted(object sender, MatchStartedEventArgs e)
         {
-            _results = _results ?? new Result(_currentDemoFileName);
-
-            foreach (var player in _parser.PlayingParticipants.Where(x => !_results.Players.ContainsKey(x.SteamID)))
+            if (_matchStarted) // if we here again it means that the demo file contains two or more matches
             {
-                _results.Players.Add(player.SteamID, new Model.Player(player.Name, player.SteamID));
+                MatchFinish();
+                Reset();
             }
-        }
 
-        private static void Parser_MatchStarted(object sender, MatchStartedEventArgs e)
-        {
             _matchStarted = true;
 
-            _results = _results ?? new Result(_currentDemoFileName);
+            _results = _results ?? new Result(_demoFileName);
 
-            UpdatePlayers();
-
-            _currentRound = new Round { RoundNumber = _currentRoundNumber };
+            _currentRound = new Round {RoundNumber = _currentRoundNumber};
         }
 
         private static void Parser_RoundEnd(object sender, RoundEndedEventArgs e)
         {
-            if (_matchStarted)
-            {
-                _currentRound.Reason = e.Reason;
-                _roundEndedCount = 1;
-            }
+            if (!_matchStarted) 
+                return;
+
+            _currentRound.Reason = e.Reason;
+            _roundEndedCount = 1;
         }
 
         private static void Parser_RoundStart(object sender, RoundStartedEventArgs e)
@@ -235,7 +288,7 @@ namespace ReadFile.ReadDemo
             if (!_matchStarted)
                 return;
 
-            _results = _results ?? new Result(_currentDemoFileName);
+            _results = _results ?? new Result(_demoFileName);
 
             _currentRound = new Round();
             _currentRoundNumber++;
@@ -262,6 +315,8 @@ namespace ReadFile.ReadDemo
 
         private static void RoundEnd()
         {
+            Console.WriteLine($"Round number: {_currentRound.RoundNumber}");
+
             var winningTeam = Team.Spectate;
             if (_lastTScore != _parser.TScore)
             {
@@ -277,22 +332,16 @@ namespace ReadFile.ReadDemo
             _lastTScore = _parser.TScore;
             _lastCTScore = _parser.CTScore;
 
-            UpdatePlayers();
-
             _currentRound.Teams = _parser.Participants
-                .Where(x => x.SteamID != 0) // skip spectators
-                .GroupBy(x => new
-                {
-                    Tema = x.Team
-                }).ToDictionary(x => x.Key.Tema, x => x.Select(z => _results.Players[z.SteamID]).ToList());
+                .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
+                .GroupBy(x => new {x.Team}).ToDictionary(x => x.Key.Team,
+                    x => x.Select(z => _results.Players[z.SteamID]).ToList());
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
         }
 
         private static void Parser_PlayerKilled(object sender, PlayerKilledEventArgs e)
         {
-            UpdatePlayers();
-
             if (_matchStarted && e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
@@ -317,24 +366,18 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_BombDefused(object sender, BombEventArgs e)
         {
-            UpdatePlayers();
-
             _results.Players[e.Player.SteamID].BombDefuses.Add(_currentRound);
             _currentRound.BombDefuser = _results.Players[e.Player.SteamID];
         }
 
         private static void Parser_BombPlanted(object sender, BombEventArgs e)
         {
-            UpdatePlayers();
-
             _results.Players[e.Player.SteamID].BombPlants.Add(_currentRound);
             _currentRound.BombPlanter = _results.Players[e.Player.SteamID];
         }
 
         private static void Parser_BombExploded(object sender, BombEventArgs e)
         {
-            UpdatePlayers();
-
             _results.Players[e.Player.SteamID].BombExplosions.Add(_currentRound);
             _currentRound.IsBombExploded = true;
         }
