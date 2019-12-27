@@ -72,8 +72,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.onAllButtonClick} disabled={this.props.isLoading} style={{background: "gold"}}>
-                                All time
+                            <Button onClick={this.onAllButtonClick} disabled={this.props.isLoading}>
+                                All Time
                             </Button>
                         </Form.Item>
                     </Col>
