@@ -58,9 +58,9 @@ type RelatedPlayer = {
 type Post = {
     Title: string;
     Content: string;
-    tag: Tag[];
-    CreatedAt: string;
-    UpdatedAt: string;
+    tags: Tag[];
+    createdAt: string;
+    updatedAt: string;
 }
 
 type Tag = {
@@ -109,6 +109,7 @@ export {
     Player,
     Gun,
     Post,
+    Tag,
     Achievement,
     ActionTypes,
     RelatedPlayer,
