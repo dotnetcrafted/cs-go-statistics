@@ -10,16 +10,14 @@ import {
 } from './types';
 
 export const initialState: AppState = {
-    data: {
-        IsLoading: false,
-        Players: [],
-        SelectedPlayer: '',
-        DateFrom: '',
-        DateTo: ''
-    }
+    IsLoading: false,
+    Players: [],
+    SelectedPlayer: '',
+    DateFrom: '',
+    DateTo: ''
 };
 
-const rootReducer: Reducer<AppState> = (
+const dataReducer: Reducer<AppState> = (
     state: AppState = initialState,
     action: ActionTypes
 ): AppState => {
@@ -27,39 +25,28 @@ const rootReducer: Reducer<AppState> = (
         case FETCH_PLAYERS_DATA:
             return {
                 ...state,
-                data: {
-                    IsLoading: false,
-                    Players: action.payload.data.Players,
-                    DateFrom: action.payload.data.DateFrom,
-                    DateTo: action.payload.data.DateTo,
-                    SelectedPlayer: ''
-                }
+                IsLoading: false,
+                Players: action.payload.Players,
+                DateFrom: action.payload.DateFrom,
+                DateTo: action.payload.DateTo,
+                SelectedPlayer: ''
             };
         case SELECT_PLAYER:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    SelectedPlayer: action.payload
-                }
+                SelectedPlayer: action.payload
             };
 
         case START_REQUEST:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    IsLoading: true
-                }
+                IsLoading: true
             };
 
         case STOP_REQUEST:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    IsLoading: false
-                }
+                IsLoading: false
             };
 
         default:
@@ -70,7 +57,7 @@ const rootReducer: Reducer<AppState> = (
 export const createRootReducer = (history: any): Reducer =>
     combineReducers({
         router: connectRouter(history),
-        data: rootReducer
+        data: dataReducer
     });
 
 export default createRootReducer;
