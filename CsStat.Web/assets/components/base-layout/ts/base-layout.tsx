@@ -1,5 +1,7 @@
-import React, { SFC } from 'react';
-import { Layout, Typography, Row, Col, Divider } from 'antd';
+import React, { SFC, ReactNode } from 'react';
+import {
+    Layout, Typography, Row, Col, Divider
+} from 'antd';
 import SnowStorm from 'react-snowstorm';
 import SurpriseSanta from 'surprise-santa';
 import IconCopyright from '../../icon-copyright/ts/icon-copyright';
@@ -8,9 +10,8 @@ import '../scss/index.scss';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
-import HomePage from '../../pages/ts/home-page';
 
-const BaseLayout: SFC<BaseLayoutProps> = props => (
+const BaseLayout: SFC<BaseLayoutProps> = (props) => (
     <Layout className="base-layout__layout">
         <Header className="base-layout__header">
             <Row type="flex" justify="start" align="middle">
@@ -25,7 +26,7 @@ const BaseLayout: SFC<BaseLayoutProps> = props => (
             </Row>
         </Header>
         <Content className="base-layout__content">
-            <HomePage playersDataUrl={props.playersDataUrl} />
+            {props.children}
         </Content>
         <Footer>
             <AuthorsCopyright />
@@ -40,7 +41,7 @@ const BaseLayout: SFC<BaseLayoutProps> = props => (
 );
 
 type BaseLayoutProps = {
-    playersDataUrl: string;
+    children: ReactNode;
 };
 
 export default BaseLayout;

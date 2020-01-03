@@ -9,7 +9,7 @@ export default class AppComponent extends DcBaseComponent {
     }
 
     private getAppEl(): ReactElement {
-        return React.createElement(App, { playersDataUrl: this.options.playersDataUrl }, null);
+        return React.createElement(App, { playersDataUrl: this.options.playersDataUrl, wikiUrl: this.options.wikiUrl }, null);
     }
 
     onInit(): void {
