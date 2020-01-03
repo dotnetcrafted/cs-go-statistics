@@ -2,6 +2,8 @@ import 'antd/dist/antd.css';
 import './general/scss/normalize.css';
 import './general/scss/index.scss';
 
+import './components/app';
+
 /* init app */
 import app from './general/ts/app';
 
