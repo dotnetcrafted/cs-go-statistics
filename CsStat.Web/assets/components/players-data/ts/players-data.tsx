@@ -3,7 +3,7 @@ import { Table, Avatar, Divider, Tooltip, Dropdown, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, startRequest, stopRequest, selectPlayer } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
-import { AppState, RootState, Player } from '../../../general/ts/redux/types';
+import { IAppState, RootState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
 import { ColumnProps } from 'antd/es/table';
 import { nameof } from '../../../general/ts/extentions';
@@ -54,7 +54,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
         fetch(url.toString())
             .then((res: Response) => res.json())
-            .then((data: AppState) => {
+            .then((data: IAppState) => {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
                 this.props.fetchPlayers(data);
             })
@@ -86,7 +86,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
     onCheckboxesChange = (selectedColumns: string[]): void => {
         const visibleColumns = [...PERMANENT_COLUMNS, ...selectedColumns];
-        console.log(visibleColumns);
         this.setState({ visibleColumns });
     };
 
@@ -325,6 +324,7 @@ export type ColumnMapping = {
     dataIndex: string;
     readableName: string;
 };
+
 export default connect(
     mapStateToProps,
     { fetchPlayers, startRequest, stopRequest, selectPlayer }
