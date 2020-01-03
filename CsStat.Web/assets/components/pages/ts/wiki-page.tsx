@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import { Empty } from 'antd';
 import '../scss/index.scss';
 import { connect } from 'react-redux';
 import { fetchPosts, startRequest, stopRequest } from '../../../general/ts/redux/actions';
-import { RootState, Post } from '../../../general/ts/redux/types';
+import { RootState, Post as PostType } from '../../../general/ts/redux/types';
+import Post from '../../post';
 
 class WikiPage extends React.Component<WikiPageProps> {
     fetchPosts(WikiDataApiPath: string): void {
@@ -11,7 +11,7 @@ class WikiPage extends React.Component<WikiPageProps> {
 
         fetch(url.toString())
             .then((res: Response) => res.json())
-            .then((data: Post[]) => {
+            .then((data: PostType[]) => {
                 data = typeof data === 'string' ? JSON.parse(data) : data;
 
                 this.props.fetchPosts(data);
@@ -21,23 +21,33 @@ class WikiPage extends React.Component<WikiPageProps> {
             });
     }
 
-    render(): ReactNode {
+    componentDidMount(): void {
         this.fetchPosts(this.props.WikiDataApiPath);
+    }
 
+    render(): ReactNode {
+        const { Posts } = this.props;
         return (
-            <Empty />
+            <>
+                {
+                    Posts && Posts.map((post, index) => <Post key={index} post={post}/>)
+                }
+            </>
         );
     }
 }
 
 type WikiPageProps = {
+    Posts: PostType[];
+    IsLoading: boolean;
     WikiDataApiPath: string;
     fetchPosts: typeof fetchPosts;
 };
 
 const mapStateToProps = (state: RootState) => {
     const IsLoading = state.app.IsLoading;
-    return { IsLoading };
+    const Posts = state.app.Posts;
+    return { IsLoading, Posts };
 };
 
 export default connect(
