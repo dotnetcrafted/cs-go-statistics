@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import '../scss/index.scss';
+import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPosts, startRequest, stopRequest } from '../../../general/ts/redux/actions';
 import { RootState, Post as PostType } from '../../../general/ts/redux/types';
@@ -28,11 +29,11 @@ class WikiPage extends React.Component<WikiPageProps> {
     render(): ReactNode {
         const { Posts } = this.props;
         return (
-            <>
-                {
-                    Posts && Posts.map((post, index) => <Post key={index} post={post}/>)
-                }
-            </>
+            <Row type="flex" justify="start" align="middle">
+                <Col xs={24} lg={14}>
+                    { Posts && Posts.map((post, index) => <Post key={index} post={post}/>) }
+                </Col>
+            </Row>
         );
     }
 }

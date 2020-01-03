@@ -1,5 +1,6 @@
 import React, { SFC, ReactNode } from 'react';
 import { Card, Tag } from 'antd';
+import Markdown from 'markdown-to-jsx';
 import moment from 'moment';
 import { Post as PostType, Tag as TagType } from '../../../general/ts/redux/types';
 
@@ -19,7 +20,7 @@ const Post: SFC<PostProps> = (props) => {
 
     return (
         <Card className="post" title={Title} extra={getTags(tags)}>
-            <p>{Content}</p>
+            <Markdown className="markdown-body">{Content}</Markdown>
             <p>{moment(new Date(createdAt)).format(USER_DATE_FORMAT)}</p>
         </Card>
     );
