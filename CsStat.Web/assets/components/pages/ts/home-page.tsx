@@ -2,8 +2,9 @@ import React, { SFC } from 'react';
 import { Row, Col } from 'antd';
 import PlayersData from '../../players-data/ts/players-data';
 import PlayerCard from '../../player-card/ts/player-card';
+import '../scss/index.scss';
 
-const HomePage: SFC<HomePageProps> = (props) => (
+const HomePage: SFC<HomePageProps> = props => (
     <div className="home-page">
         <Row type="flex" justify="start">
             <Col xs={24} lg={14}>

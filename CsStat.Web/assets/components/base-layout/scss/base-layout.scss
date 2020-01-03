@@ -1,6 +1,4 @@
 .base-layout {
-    $padding-top: 30px;
-
     &__layout {
         min-height: 100vh;
     }
@@ -16,7 +14,7 @@
     }
 
     &__content {
-        margin: $padding-top 0;
+        margin: $container-padding-top 0;
         padding: 0 $default-side-padding;
     }
 
