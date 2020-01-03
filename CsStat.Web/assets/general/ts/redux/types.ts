@@ -1,3 +1,5 @@
+import { RouterState } from 'connected-react-router';
+
 type AppState = {
     IsLoading: boolean;
     SelectedPlayer: string;
@@ -5,6 +7,11 @@ type AppState = {
     DateTo: string;
     Players: Player[];
 };
+
+type RootState = {
+    router?: RouterState;
+    app: AppState;
+}
 
 type Player = {
     Id: string;
@@ -77,6 +84,7 @@ type ActionTypes =
     | FetchPlayersAction;
 
 export {
+    RootState,
     AppState,
     Player,
     Gun,

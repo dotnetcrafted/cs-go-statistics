@@ -3,7 +3,7 @@ import { Table, Avatar, Divider, Tooltip, Dropdown, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPlayers, startRequest, stopRequest, selectPlayer } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
-import { AppState, Player } from '../../../general/ts/redux/types';
+import { AppState, RootState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
 import { ColumnProps } from 'antd/es/table';
 import { nameof } from '../../../general/ts/extentions';
@@ -298,12 +298,12 @@ type PlayersDataState = {
     visibleColumns: string[];
 };
 
-const mapStateToProps = (state: AppState) => {
-    const SelectedPlayer = state.SelectedPlayer;
-    const IsLoading = state.IsLoading;
-    const DateFrom = state.DateFrom;
-    const DateTo = state.DateTo;
-    const Players = state.Players;
+const mapStateToProps = (state: RootState) => {
+    const SelectedPlayer = state.app.SelectedPlayer;
+    const IsLoading = state.app.IsLoading;
+    const DateFrom = state.app.DateFrom;
+    const DateTo = state.app.DateTo;
+    const Players = state.app.Players;
     return { SelectedPlayer, IsLoading, DateFrom, DateTo, Players };
 };
 

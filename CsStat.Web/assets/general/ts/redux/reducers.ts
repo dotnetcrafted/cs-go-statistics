@@ -17,7 +17,7 @@ export const initialState: AppState = {
     DateTo: ''
 };
 
-const dataReducer: Reducer<AppState> = (
+const appReducer: Reducer<AppState> = (
     state: AppState = initialState,
     action: ActionTypes
 ): AppState => {
@@ -57,7 +57,7 @@ const dataReducer: Reducer<AppState> = (
 export const createRootReducer = (history: any): Reducer =>
     combineReducers({
         router: connectRouter(history),
-        data: dataReducer
+        app: appReducer
     });
 
 export default createRootReducer;
