@@ -299,11 +299,11 @@ type PlayersDataState = {
 };
 
 const mapStateToProps = (state: AppState) => {
-    const SelectedPlayer = state.data.SelectedPlayer;
-    const IsLoading = state.data.IsLoading;
-    const DateFrom = state.data.DateFrom;
-    const DateTo = state.data.DateTo;
-    const Players = state.data.Players;
+    const SelectedPlayer = state.SelectedPlayer;
+    const IsLoading = state.IsLoading;
+    const DateFrom = state.DateFrom;
+    const DateTo = state.DateTo;
+    const Players = state.Players;
     return { SelectedPlayer, IsLoading, DateFrom, DateTo, Players };
 };
 
