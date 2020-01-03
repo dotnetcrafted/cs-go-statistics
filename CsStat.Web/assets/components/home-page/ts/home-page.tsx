@@ -1,17 +1,19 @@
 import React, { SFC, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { Layout, Typography, Row, Col, Divider } from 'antd';
+import {
+    Layout, Typography, Row, Col, Divider
+} from 'antd';
+import SnowStorm from 'react-snowstorm';
+import SurpriseSanta from 'surprise-santa';
 import configureStore from '../../../general/ts/redux/store';
 import IconCopyright from './icon-copyright';
 import AuthorsCopyright from './authors-copyright';
-import SnowStorm from 'react-snowstorm';
-import SurpriseSanta from 'surprise-santa';
 
 const store = configureStore();
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
-const HomePage: SFC<HomePageProps> = props => (
+const HomePage: SFC<HomePageProps> = (props) => (
     <Provider store={store}>
         <Layout className="home-page__layout">
             <Header className="home-page__header">
