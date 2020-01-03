@@ -1,9 +1,14 @@
+import { RouterState } from 'connected-react-router';
+
 type AppState = {
-    IsLoading: boolean;
-    SelectedPlayer: string;
-    DateFrom: string;
-    DateTo: string;
-    Players: Player[];
+    router?: RouterState;
+    data: {
+        IsLoading: boolean;
+        SelectedPlayer: string;
+        DateFrom: string;
+        DateTo: string;
+        Players: Player[];
+    }
 };
 type Player = {
     Id: string;

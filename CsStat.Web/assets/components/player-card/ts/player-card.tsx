@@ -101,8 +101,8 @@ type PlayerCardProps = {
 };
 
 const mapStateToProps = (state: AppState) => {
-    const SelectedPlayer = state.SelectedPlayer;
-    const Players = state.Players;
+    const SelectedPlayer = state.data.SelectedPlayer;
+    const Players = state.data.Players;
     return { SelectedPlayer, Players };
 };
 export default connect(
