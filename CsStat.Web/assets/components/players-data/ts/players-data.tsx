@@ -7,6 +7,8 @@ import { AppState, Player } from '../../../general/ts/redux/types';
 import ColumnsSelector from './columns-selector';
 import { ColumnProps } from 'antd/es/table';
 import { nameof } from '../../../general/ts/extentions';
+import '../scss/index.scss';
+
 
 const CELL_CSS_CLASS = 'players-data__cell';
 const HIDDEN_CELL_CSS_CLASS = 'is-hidden';
