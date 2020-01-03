@@ -1,16 +1,33 @@
 import React, { SFC } from 'react';
 import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import BaseLayout from '../../base-layout/ts/base-layout';
-import configureStore from '../../../general/ts/redux/store';
+import configureStore, { history } from '../../../general/ts/redux/store';
 import HomePage from '../../pages/ts/home-page';
+import WikiPage from '../../pages/ts/wiki-page';
+import NotFoundPage from '../../pages/ts/not-found-page';
 
 const store = configureStore();
 
 const App: SFC<AppProps> = (props) => (
     <Provider store={store}>
-        <BaseLayout>
-            <HomePage playersDataUrl={props.playersDataUrl}/>
-        </BaseLayout>
+        <ConnectedRouter history={history}>
+            <BaseLayout>
+                <Switch>
+                    <Route exact path="/" >
+                        <HomePage playersDataUrl={props.playersDataUrl}/>
+                    </Route>
+                    <Route exact path="/wiki" >
+                        <WikiPage wikiUrl={props.wikiUrl}/>
+                    </Route>
+                    <Route>
+                        <NotFoundPage/>
+                    </Route>
+                </Switch>
+
+            </BaseLayout>
+        </ConnectedRouter>
     </Provider>
 );
 

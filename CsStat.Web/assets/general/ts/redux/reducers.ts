@@ -1,4 +1,5 @@
-import { Reducer } from 'redux';
+import { Reducer, combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 import {
     AppState,
     ActionTypes,
@@ -7,6 +8,14 @@ import {
     START_REQUEST,
     STOP_REQUEST
 } from './types';
+
+export const initialState: AppState = {
+    IsLoading: false,
+    Players: [],
+    SelectedPlayer: '',
+    DateFrom: '',
+    DateTo: ''
+};
 
 const rootReducer: Reducer<AppState> = (
     state: AppState = initialState,
@@ -45,12 +54,11 @@ const rootReducer: Reducer<AppState> = (
     }
 };
 
-const initialState: AppState = {
-    IsLoading: false,
-    Players: [],
-    SelectedPlayer: '',
-    DateFrom: '',
-    DateTo: ''
-};
+export const createRootReducer = (history: any): Reducer =>
+    combineReducers({
+        router: connectRouter(history),
+        api: rootReducer
+    });
 
-export default rootReducer;
+export default createRootReducer;
+
