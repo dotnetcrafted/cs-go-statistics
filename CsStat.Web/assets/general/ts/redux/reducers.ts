@@ -1,26 +1,28 @@
 import { Reducer, combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import {
-    AppState,
+    IAppState,
     ActionTypes,
     SELECT_PLAYER,
     FETCH_PLAYERS_DATA,
     START_REQUEST,
-    STOP_REQUEST
+    STOP_REQUEST,
+    FETCH_POSTS_DATA
 } from './types';
 
-export const initialState: AppState = {
+export const initialState: IAppState = {
     IsLoading: false,
     Players: [],
     SelectedPlayer: '',
     DateFrom: '',
-    DateTo: ''
+    DateTo: '',
+    Posts: []
 };
 
-const appReducer: Reducer<AppState> = (
-    state: AppState = initialState,
+const appReducer: Reducer<IAppState> = (
+    state: IAppState = initialState,
     action: ActionTypes
-): AppState => {
+): IAppState => {
     switch (action.type) {
         case FETCH_PLAYERS_DATA:
             return {
@@ -30,6 +32,12 @@ const appReducer: Reducer<AppState> = (
                 DateFrom: action.payload.DateFrom,
                 DateTo: action.payload.DateTo,
                 SelectedPlayer: ''
+            };
+        case FETCH_POSTS_DATA:
+            return {
+                ...state,
+                IsLoading: false,
+                Posts: action.payload,
             };
         case SELECT_PLAYER:
             return {
