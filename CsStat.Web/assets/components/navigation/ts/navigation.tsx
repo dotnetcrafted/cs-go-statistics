@@ -11,7 +11,7 @@ class Navigation extends React.Component <NavigationProps> {
                 className="navigation"
                 mode="horizontal"
                 theme="dark"
-                selectedKeys={this.props.router.location.pathname}
+                selectedKeys={[this.props.router.location.pathname]}
             >
                 <Menu.Item key="/">
                     <Link to="/">
