@@ -7,43 +7,25 @@ const { Title } = Typography;
 export default class AuthorsCopyright extends React.Component {
 
     state ={
-        data: [],
-        role: []
+        data: [{
+            avatar_url: '',
+            url: '',
+            login: ''
+        }]
     }
 
-    gettingGithubAccounts = async () => {
-        const api_url = await 
+    private gettingGithubAccounts = async () => {
+        const accounts = await 
             fetch(`https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors`)
-
-        const accounts = await api_url.json()
+                .then((res: Response) => res.json())
+                .then(acc => acc.filter((elem: { type: string; }) => elem.type == "User"))
+                .catch(err => {
+                        throw new Error(err)
+                })
 
         this.setState({
-            data: accounts.filter(elem => elem.type == "User")
+            data: accounts
         })
-
-        this.state.data.forEach(item => {
-            this.gettingRole(item)
-        })
-    }
-
-    gettingRole = async (item) => {
-
-        const javaScriptCounter = 0
-        const cCounter = 0
-
-        const api_repos_url = await 
-            fetch(`${item.repos_url}`)
-
-        const repos = await api_repos_url.json()
-
-        repos.forEach(item => {
-            item.language == "JavaScript" ? javaScriptCounter = javaScriptCounter + 1 : null
-            item.language == "C#" ? cCounter = cCounter + 1 : null
-
-        });
-
-        console.log(item.login, "JavaScript =" + javaScriptCounter, "C# =" + cCounter)
-
     }
 
     componentWillMount = () => {
@@ -52,7 +34,7 @@ export default class AuthorsCopyright extends React.Component {
 
     
     render() {
-        const data = this.state.data != [] ? this.state.data : 'asdasd'
+        const data = this.state.data
         return (
             <List
                 size="small"
@@ -66,7 +48,7 @@ export default class AuthorsCopyright extends React.Component {
                             avatar={<Avatar src={person.avatar_url} />}
                             title={
                                 <div>
-                                    <a href={person.url}>{person.login}</a> – <Tag>{person.role}</Tag>
+                                    <a href={person.url}>{person.login}</a> – <Tag>Developer</Tag>
                                 </div>
                             }
                         />
@@ -76,31 +58,3 @@ export default class AuthorsCopyright extends React.Component {
         )
     }
 }
-
-
-/*const githubAccounts = {
-    rdk174: 'Rdk174',
-    medprj: 'Medprj',
-    host: 'hostile-d'
-};
-
-const data = [
-    {
-        name: 'Radik F',
-        githubLink: `https://github.com/${githubAccounts.rdk174}`,
-        avatarSrc: `https://github.com/${githubAccounts.rdk174}.png`,
-        role: 'backend'
-    },
-    {
-        name: 'Alexander M',
-        githubLink: `https://github.com/${githubAccounts.medprj}`,
-        avatarSrc: `https://github.com/${githubAccounts.medprj}.png`,
-        role: 'backend'
-    },
-    {
-        name: 'Danil S',
-        githubLink: `https://github.com/${githubAccounts.host}`,
-        avatarSrc: `https://github.com/${githubAccounts.host}.png`,
-        role: 'frontend'
-    }
-];*/
