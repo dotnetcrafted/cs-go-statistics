@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-    List, Avatar, Tag, Typography
+    List, Avatar, Typography
 } from 'antd';
 
 const { Title } = Typography;
+const URL_REP = 'https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors';
 
 export default class AuthorsCopyright extends React.Component {
     state ={
@@ -11,15 +12,11 @@ export default class AuthorsCopyright extends React.Component {
             avatar_url: '',
             url: '',
             login: ''
-        }],
-        roles: [{
-            login: '',
-            role: ''
         }]
     }
 
-    private gettingGithubAccounts = async () => {
-        const accounts = await fetch('https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors')
+    private getGithubAccounts = async () => {
+        const accounts = await fetch(URL_REP)
             .then((res: Response) => res.json())
             .then((acc) => acc.filter((elem: { type: string; }) => elem.type === 'User'))
             .catch((err) => {
@@ -29,32 +26,14 @@ export default class AuthorsCopyright extends React.Component {
         this.setState({
             data: accounts
         });
-
-        accounts.forEach((item: any) => {
-            this.gettingRole(item);
-        });
     }
 
-    private gettingRole = async (item: any) => {
-        const languageArr: string[] = [];
-
-        const repos = await
-        fetch(`${item.repos_url}`)
-            .then((res: Response) => res.json());
-
-        repos.forEach((item: any) => {
-            item.language != null ? languageArr.push(item.language) : null;
-        });
-
-        console.log(languageArr);
-    }
-
-    UNSAFE_componentWillMount = () => {
-        this.gettingGithubAccounts();
+    componentDidMount = () => {
+        this.getGithubAccounts();
     }
 
     render() {
-        const data = this.state.data;
+        const { data } = this.state;
         return (
             <List
                 size="small"
@@ -62,13 +41,13 @@ export default class AuthorsCopyright extends React.Component {
                 header={<Title level={4}>Authors and Contributors:</Title>}
                 itemLayout="horizontal"
                 dataSource={data}
-                renderItem={(person) => (
+                renderItem={(person): ReactNode => (
                     <List.Item>
                         <List.Item.Meta
                             avatar={<Avatar src={person.avatar_url} />}
                             title={
                                 <div>
-                                    <a href={person.url}>{person.login}</a> – <Tag></Tag>
+                                    <a href={person.url}>{person.login}</a>
                                 </div>
                             }
                         />
