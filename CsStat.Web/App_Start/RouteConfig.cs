@@ -34,13 +34,6 @@ namespace CsStat.Web
                 defaults: new { controller = "Wiki", action = "GetInfo", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute
-            (
-                name: "wiki",
-                url: "wiki",
-                defaults: new { controller = "Wiki", action = "Index", id = UrlParameter.Optional }
-            );
-
             routes.MapRoute(
                 name: "wiki",
                 url: Settings.WikiPagePath,
