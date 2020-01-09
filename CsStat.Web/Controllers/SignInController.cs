@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using BusinessFacade.Repositories;
+using CsStat.Domain;
 using CsStat.Web.Helpers;
 using CsStat.Web.Models;
 
@@ -37,5 +38,9 @@ namespace CsStat.Web.Controllers
         //    Session["IsAdminMode"] = "false";
         //    return RedirectToAction("Index", "Wiki");
         //}
+        public ActionResult StrapiAdmin()
+        {
+            return RedirectPermanent(Settings.CmsAdminPath);
+        }
     }
 }

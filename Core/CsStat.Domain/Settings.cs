@@ -20,6 +20,7 @@ namespace CsStat.Domain
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string ArticlesPath => GetSetting(nameof(ArticlesPath), Defaults.ArticlesPath);
+        public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
 
 
@@ -65,6 +66,7 @@ namespace CsStat.Domain
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
             public const string ArticlesPath = "http://csfuse8.site:1337/articles";
+            public const string CmsAdminPath = "http://csfuse8.site:1337/admin";
             public const int ShowNullPlayers = 1;
         }
     }

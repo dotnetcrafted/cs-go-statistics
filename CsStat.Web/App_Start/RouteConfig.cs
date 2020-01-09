@@ -29,6 +29,13 @@ namespace CsStat.Web
 
             routes.MapRoute
             (
+                name: "Admin",
+                url: "Admin",
+                defaults: new { controller = "SignIn", action = "StrapiAdmin", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
                 name: "getinfo",
                 url: Settings.InfoDataApiPath,
                 defaults: new { controller = "Wiki", action = "GetInfo", id = UrlParameter.Optional }
