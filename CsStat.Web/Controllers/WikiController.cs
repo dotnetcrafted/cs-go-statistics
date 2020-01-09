@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using AutoMapper;
 using BusinessFacade.Repositories;
+using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.Web.Models;
 using DataService;
@@ -50,6 +53,20 @@ namespace CsStat.Web.Controllers
             return new JsonResult
             {
                 Data = model,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult GetAllArticlesFromCms()
+        {
+            var json = string.Empty;
+            using (var wc = new WebClient())
+            {
+                json = wc.DownloadString(Settings.ArticlesPath);
+            }
+            return new JsonResult
+            {
+                Data = json,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
