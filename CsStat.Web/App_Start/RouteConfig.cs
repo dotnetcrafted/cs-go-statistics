@@ -19,12 +19,13 @@ namespace CsStat.Web
                 defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute
-            (
-                name: "Admin",
-                url: "Admin",
-                defaults: new { controller = "SignIn", action = "SignIn", id = UrlParameter.Optional }
-            );
+            //don't remove: custom admin
+            //routes.MapRoute
+            //(
+            //    name: "Admin",
+            //    url: "Admin",
+            //    defaults: new { controller = "SignIn", action = "SignIn", id = UrlParameter.Optional }
+            //);
 
             routes.MapRoute
             (
