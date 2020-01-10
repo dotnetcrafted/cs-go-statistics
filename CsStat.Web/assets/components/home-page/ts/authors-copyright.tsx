@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     List, Avatar, Typography
 } from 'antd';
@@ -44,7 +44,7 @@ export default class AuthorsCopyright extends React.Component {
                 renderItem={(person): ReactNode => (
                     <List.Item>
                         <List.Item.Meta
-                            avatar={<Avatar src={person.avatar_url} />}
+                            avatar={<Avatar icon="user" src={person.avatar_url} />}
                             title={
                                 <div>
                                     <a href={person.url}>{person.login}</a>
