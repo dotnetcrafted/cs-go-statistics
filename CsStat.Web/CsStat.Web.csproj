@@ -155,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,7 +194,7 @@
     <None Include="packages.config" />
     <Content Include="Web.Base.config" />
     <None Include="Properties\PublishProfiles\Salo - Web Deploy.pubxml" />
-    <Content Include="Views\Home\Matches.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

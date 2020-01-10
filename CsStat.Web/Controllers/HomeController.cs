@@ -86,24 +86,5 @@ namespace CsStat.Web.Controllers
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
-
-
-        public ActionResult Matches()
-        {
-            return View();
-        }
-        
-        [HttpGet]
-        public ActionResult GetMatchesData()
-        {
-            return new JsonResult
-            {
-                Data = new
-                {
-                    Matches = _demoRepository.GetAllLogs()
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
     }
 }

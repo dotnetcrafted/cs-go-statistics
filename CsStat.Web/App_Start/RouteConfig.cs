@@ -21,13 +21,7 @@ namespace CsStat.Web
             (
                 name: "getMatchesData",
                 url: Settings.MatchesDataApiPath,
-                defaults: new { controller = "Home", action = "GetMatchesData", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Matches",
-                url: "Matches",
-                defaults: new { controller = "Home", action = "Matches", id = UrlParameter.Optional }
+                defaults: new { controller = "Matches", action = "GetMatchesData", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
