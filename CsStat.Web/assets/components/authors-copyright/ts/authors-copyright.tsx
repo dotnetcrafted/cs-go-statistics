@@ -1,24 +1,24 @@
 import React, { ReactNode } from 'react';
-import {
-    List, Avatar, Typography
-} from 'antd';
+import { List, Avatar, Typography } from 'antd';
 
 const { Title } = Typography;
 const URL_REP = 'https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors';
 
-export default class AuthorsCopyright extends React.Component {
+export default class AuthorsCopyright extends React.Component<any, AuthorsCopyrightState> {
     state = {
         data: [
             {
+                /* eslint-disable */
                 avatar_url: '',
                 html_url: '',
                 login: ''
+                /* eslint-enable */
             }
         ]
     };
 
     private getGithubAccounts = async () => {
-        const accounts = await fetch(URL_REP)
+        const accounts: UserData[] = await fetch(URL_REP)
             .then((res: Response) => res.json())
             .then((acc) => acc.filter((elem: { type: string }) => elem.type === 'User'))
             .catch((err) => {
@@ -34,7 +34,7 @@ export default class AuthorsCopyright extends React.Component {
         this.getGithubAccounts();
     };
 
-    render() {
+    render(): ReactNode {
         const { data } = this.state;
         return (
             <List
@@ -69,3 +69,13 @@ export default class AuthorsCopyright extends React.Component {
         );
     }
 }
+
+type AuthorsCopyrightState = {
+    data: UserData[];
+};
+
+type UserData = {
+    avatar_url: string;
+    html_url: string;
+    login: string;
+};
