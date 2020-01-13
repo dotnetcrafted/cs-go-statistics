@@ -345,7 +345,7 @@ namespace ReadFile.ReadDemo
             if (_matchStarted && e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
-                    e.Headshot, e.Weapon.Weapon.ToString(), _currentRoundNumber);
+                    e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon).GetDescription(), _currentRoundNumber);
 
                 if (e.Assister != null)
                 {
