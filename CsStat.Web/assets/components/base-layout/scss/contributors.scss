@@ -1,0 +1,48 @@
+.contributors {
+
+    &__title {
+        &_txt {
+            color: $color-white;
+        }
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__link {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+        display: block;
+        min-width: max-content;
+        margin-bottom: 8px;
+        @include tablet-only {
+            min-width: 33.333333%;
+        }
+        @include mobile-only() {
+            min-width: 100%;
+        }
+
+        &:not(:last-child) {
+            padding-right: 24px;
+        }
+
+        &_avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 8px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+        }
+    }
+}
