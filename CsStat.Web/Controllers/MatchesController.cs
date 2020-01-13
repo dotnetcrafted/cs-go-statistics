@@ -1,5 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using BusinessFacade.Repositories;
+using CsStat.Domain.Entities.Demo;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 
@@ -23,20 +27,26 @@ namespace CsStat.Web.Controllers
             return View();
         }
 
-        public ActionResult Matches()
-        {
-            return View();
-        }
-
         [HttpGet]
         public ActionResult GetMatchesData()
         {
+            var matches = _demoRepository.GetAllLogs().ToList();
+
+            var players = matches.SelectMany(x => x.Players.Select(z => z.SteamID)).Distinct();
+            var steamIds = string.Join(",", players);
+            var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
+
+            foreach (var match in matches)
+            {
+                foreach (var player in match.Players)
+                {
+                    player.Avatar = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value;
+                }
+            }
+
             return new JsonResult
             {
-                Data = new
-                {
-                    Matches = _demoRepository.GetAllLogs()
-                },
+                Data = new {matches},
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
