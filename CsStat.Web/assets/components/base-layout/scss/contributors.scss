@@ -1,8 +1,10 @@
 .contributors {
+    padding: 0 20px 8px;
 
     &__title {
         &_txt {
             color: $color-white;
+            text-align: center;
         }
     }
 
@@ -11,30 +13,30 @@
         padding: 0;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
     &__link {
         display: flex;
         align-items: center;
+        color: $color-white;
     }
 
     &__item {
         display: block;
         min-width: max-content;
         margin-bottom: 8px;
+        padding: 0 12px;
+
         @include tablet-only {
             min-width: 33.333333%;
         }
         @include mobile-only() {
-            min-width: 100%;
-        }
-
-        &:not(:last-child) {
-            padding-right: 24px;
+            min-width: 50%;
         }
 
         &_avatar {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             margin-right: 8px;
             overflow: hidden;
