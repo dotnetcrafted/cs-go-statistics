@@ -228,18 +228,78 @@ namespace ReadFile.ReadDemo
                 Rounds = _results.Rounds?.Select(x => new RoundLog
                 {
                     BombPlanter = x.Value.BombPlanter?.SteamID,
+                    BombPlanterName = x.Value.BombPlanter?.Name,
                     BombDefuser = x.Value.BombDefuser?.SteamID,
+                    BombDefuserName = x.Value.BombDefuser?.Name,
                     IsBombExploded = x.Value.IsBombExploded,
-                    Reason = (CsStat.Domain.Definitions.RoundEndReason)(int)x.Value.Reason,
+                    Reason = (CsStat.Domain.Definitions.RoundEndReason) (int) x.Value.Reason,
+                    ReasonTitle = x.Value.Reason.ToString(),
                     RoundNumber = x.Value.RoundNumber,
                     Winner = x.Value.Winner == Team.CounterTerrorist
                         ? CsStat.Domain.Definitions.Teams.Ct
                         : CsStat.Domain.Definitions.Teams.T,
+                    WinnerTitle = x.Value.Winner.ToString(),
                     Teams = x.Value.Teams.ToDictionary(
                         z => z.Key == Team.CounterTerrorist
                             ? CsStat.Domain.Definitions.Teams.Ct.GetDescription()
                             : CsStat.Domain.Definitions.Teams.T.GetDescription(),
-                        z => z.Value.Select(k => k.SteamID).ToList()
+                        z => z.Value.Select(k => new PlayerLog
+                        {
+                            Name = k.Name,
+                            SteamID = k.SteamID,
+                            Kills = k.Kills.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
+                                new KillLog
+                                {
+                                    RoundNumber = x.Value.RoundNumber,
+                                    Killer = v.Killer?.SteamID,
+                                    KillerName = v.Killer?.Name,
+                                    Assister = v.Assister?.SteamID,
+                                    AssisterName = v.Assister?.Name,
+                                    Victim = v.Victim?.SteamID,
+                                    VictimName = v.Victim?.Name,
+                                    IsHeadshot = v.IsHeadshot,
+                                    Weapon = v.Weapon
+                                }).ToList(),
+                            Assists = k.Assists.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
+                                new KillLog
+                                {
+                                    RoundNumber = x.Value.RoundNumber,
+                                    Killer = v.Killer?.SteamID,
+                                    KillerName = v.Killer?.Name,
+                                    Assister = v.Assister?.SteamID,
+                                    AssisterName = v.Assister?.Name,
+                                    Victim = v.Victim?.SteamID,
+                                    VictimName = v.Victim?.Name,
+                                    IsHeadshot = v.IsHeadshot,
+                                    Weapon = v.Weapon
+                                }).ToList(),
+                            Deaths = k.Deaths.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
+                                new KillLog
+                                {
+                                    RoundNumber = x.Value.RoundNumber,
+                                    Killer = v.Killer?.SteamID,
+                                    KillerName = v.Killer?.Name,
+                                    Assister = v.Assister?.SteamID,
+                                    AssisterName = v.Assister?.Name,
+                                    Victim = v.Victim?.SteamID,
+                                    VictimName = v.Victim?.Name,
+                                    IsHeadshot = v.IsHeadshot,
+                                    Weapon = v.Weapon
+                                }).ToList(),
+                            Teamkills = k.Teamkills.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
+                                new KillLog
+                                {
+                                    RoundNumber = x.Value.RoundNumber,
+                                    Killer = v.Killer?.SteamID,
+                                    KillerName = v.Killer?.Name,
+                                    Assister = v.Assister?.SteamID,
+                                    AssisterName = v.Assister?.Name,
+                                    Victim = v.Victim?.SteamID,
+                                    VictimName = v.Victim?.Name,
+                                    IsHeadshot = v.IsHeadshot,
+                                    Weapon = v.Weapon
+                                }).ToList(),
+                        }).ToList()
                     )
                 }).ToList()
             };
