@@ -6,6 +6,7 @@
     &__header {
         height: auto;
         padding: 0 $default-side-padding;
+        background: $bg-color-main;
     }
 
     &__logo {
@@ -27,13 +28,18 @@
     }
 
     &__footer {
-        background: $bg-color-main;
-        padding: 20px 16px 0;
+        background: lighten($bg-color-main, 10%);
+        padding: 20px 0 0;
         color: $color-white;
         &_copyright {
+            padding: 6px 20px;
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            background: lighten($bg-color-main, 5%);
+            a {
+                color: $color-white;
+            }
+
             @include mobile-only() {
                 flex-direction: column;
                 align-items: center;
