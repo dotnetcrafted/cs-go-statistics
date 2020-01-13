@@ -40,7 +40,7 @@ namespace CsStat.Web.Controllers
             {
                 foreach (var player in match.Players)
                 {
-                    player.Avatar = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value;
+                    player.ProfileImageUrl = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value;
                 }
             }
 

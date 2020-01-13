@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace CsStat.Domain.Entities.Demo
 {
@@ -21,6 +22,8 @@ namespace CsStat.Domain.Entities.Demo
 
         public string Name { get; set; }
         public long SteamID { get; set; }
+        [BsonIgnore]
+        public string ProfileImageUrl { get; set; }
 
         public List<KillLog> Kills { get; set; }
         public List<KillLog> Assists { get; set; }
