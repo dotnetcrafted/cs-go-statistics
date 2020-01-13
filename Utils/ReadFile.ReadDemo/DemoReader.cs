@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using AutoMapper;
 using BusinessFacade.Repositories;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities.Demo;
@@ -35,12 +36,14 @@ namespace ReadFile.ReadDemo
         private readonly string path;
         private readonly IFileRepository<DemoFile> demoFileRepository;
         private readonly IBaseRepository demoRepository;
+        private readonly IMapper mapper;
 
-        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository)
+        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository, IMapper mapper)
         {
             this.path = path;
             this.demoFileRepository = demoFileRepository;
             this.demoRepository = demoRepository;
+            this.mapper = mapper;
         }
 
         #endregion
@@ -162,69 +165,13 @@ namespace ReadFile.ReadDemo
                 {
                     Name = x.Value.Name,
                     SteamID = x.Value.SteamID,
-                    Assists = x.Value.Assists?.Select(z => new KillLog
-                    {
-                        Killer = z.Killer?.SteamID,
-                        Victim = z.Victim?.SteamID,
-                        Assister = z.Assister?.SteamID,
-                        Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    Deaths = x.Value.Deaths?.Select(z => new KillLog
-                    {
-                        Killer = z.Killer?.SteamID,
-                        Victim = z.Victim?.SteamID,
-                        Assister = z.Assister?.SteamID,
-                        Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    Kills = x.Value.Kills?.Select(z => new KillLog
-                    {
-                        Killer = z.Killer?.SteamID,
-                        Victim = z.Victim?.SteamID,
-                        Assister = z.Assister?.SteamID,
-                        Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    Teamkills = x.Value.Teamkills?.Select(z => new KillLog
-                    {
-                        Killer = z.Killer?.SteamID,
-                        Victim = z.Victim?.SteamID,
-                        Assister = z.Assister?.SteamID,
-                        Weapon = z.Weapon,
-                        IsHeadshot = z.IsHeadshot,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    BombDefuses = x.Value.BombDefuses?.Select(z => new RoundLog
-                    {
-                        Winner = z.Winner == Team.CounterTerrorist
-                            ? CsStat.Domain.Definitions.Teams.Ct
-                            : CsStat.Domain.Definitions.Teams.T,
-                        BombDefuser = z.BombDefuser?.SteamID,
-                        BombPlanter = z.BombPlanter?.SteamID,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    BombExplosions = x.Value.BombExplosions?.Select(z => new RoundLog
-                    {
-                        Winner = z.Winner == Team.CounterTerrorist
-                            ? CsStat.Domain.Definitions.Teams.Ct
-                            : CsStat.Domain.Definitions.Teams.T,
-                        BombDefuser = z.BombDefuser?.SteamID,
-                        BombPlanter = z.BombPlanter?.SteamID,
-                        RoundNumber = z.RoundNumber
-                    }).ToList(),
-                    BombPlants = x.Value.BombPlants?.Select(z => new RoundLog
-                    {
-                        Winner = z.Winner == Team.CounterTerrorist
-                            ? CsStat.Domain.Definitions.Teams.Ct
-                            : CsStat.Domain.Definitions.Teams.T,
-                        BombDefuser = z.BombDefuser?.SteamID,
-                        BombPlanter = z.BombPlanter?.SteamID,
-                        RoundNumber = z.RoundNumber
-                    }).ToList()
+                    Assists = x.Value.Assists?.Select(z => mapper.Map<KillLog>(z)).ToList(),
+                    Deaths = x.Value.Deaths?.Select(z => mapper.Map<KillLog>(z)).ToList(),
+                    Kills = x.Value.Kills?.Select(z => mapper.Map<KillLog>(z)).ToList(),
+                    Teamkills = x.Value.Teamkills?.Select(z => mapper.Map<KillLog>(z)).ToList(),
+                    BombDefuses = x.Value.BombDefuses?.Select(z => z.RoundNumber).ToList(),
+                    BombExplosions = x.Value.BombExplosions?.Select(z => z.RoundNumber).ToList(),
+                    BombPlants = x.Value.BombPlants?.Select(z => z.RoundNumber).ToList()
                 }).ToList(),
                 Rounds = _results.Rounds?.Select(x => new RoundLog
                 {
@@ -248,58 +195,14 @@ namespace ReadFile.ReadDemo
                         {
                             Name = k.Name,
                             SteamID = k.SteamID,
-                            Kills = k.Kills.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
-                                new KillLog
-                                {
-                                    RoundNumber = x.Value.RoundNumber,
-                                    Killer = v.Killer?.SteamID,
-                                    KillerName = v.Killer?.Name,
-                                    Assister = v.Assister?.SteamID,
-                                    AssisterName = v.Assister?.Name,
-                                    Victim = v.Victim?.SteamID,
-                                    VictimName = v.Victim?.Name,
-                                    IsHeadshot = v.IsHeadshot,
-                                    Weapon = v.Weapon
-                                }).ToList(),
-                            Assists = k.Assists.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
-                                new KillLog
-                                {
-                                    RoundNumber = x.Value.RoundNumber,
-                                    Killer = v.Killer?.SteamID,
-                                    KillerName = v.Killer?.Name,
-                                    Assister = v.Assister?.SteamID,
-                                    AssisterName = v.Assister?.Name,
-                                    Victim = v.Victim?.SteamID,
-                                    VictimName = v.Victim?.Name,
-                                    IsHeadshot = v.IsHeadshot,
-                                    Weapon = v.Weapon
-                                }).ToList(),
-                            Deaths = k.Deaths.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
-                                new KillLog
-                                {
-                                    RoundNumber = x.Value.RoundNumber,
-                                    Killer = v.Killer?.SteamID,
-                                    KillerName = v.Killer?.Name,
-                                    Assister = v.Assister?.SteamID,
-                                    AssisterName = v.Assister?.Name,
-                                    Victim = v.Victim?.SteamID,
-                                    VictimName = v.Victim?.Name,
-                                    IsHeadshot = v.IsHeadshot,
-                                    Weapon = v.Weapon
-                                }).ToList(),
-                            Teamkills = k.Teamkills.Where(p => p.RoundNumber == x.Value.RoundNumber).Select(v =>
-                                new KillLog
-                                {
-                                    RoundNumber = x.Value.RoundNumber,
-                                    Killer = v.Killer?.SteamID,
-                                    KillerName = v.Killer?.Name,
-                                    Assister = v.Assister?.SteamID,
-                                    AssisterName = v.Assister?.Name,
-                                    Victim = v.Victim?.SteamID,
-                                    VictimName = v.Victim?.Name,
-                                    IsHeadshot = v.IsHeadshot,
-                                    Weapon = v.Weapon
-                                }).ToList(),
+                            Kills = k.Kills.Where(p => p.RoundNumber == x.Value.RoundNumber)
+                                .Select(v => mapper.Map<KillLog>(v)).ToList(),
+                            Assists = k.Assists.Where(p => p.RoundNumber == x.Value.RoundNumber)
+                                .Select(v => mapper.Map<KillLog>(v)).ToList(),
+                            Deaths = k.Deaths.Where(p => p.RoundNumber == x.Value.RoundNumber)
+                                .Select(v => mapper.Map<KillLog>(v)).ToList(),
+                            Teamkills = k.Teamkills.Where(p => p.RoundNumber == x.Value.RoundNumber)
+                                .Select(v => mapper.Map<KillLog>(v)).ToList()
                         }).ToList()
                     )
                 }).ToList()

@@ -15,9 +15,9 @@ namespace CsStat.Domain.Entities.Demo
             Deaths = new List<KillLog>();
             Teamkills = new List<KillLog>();
 
-            BombPlants = new List<RoundLog>();
-            BombExplosions = new List<RoundLog>();
-            BombDefuses = new List<RoundLog>();
+            BombDefuses = new List<int>();
+            BombExplosions = new List<int>();
+            BombPlants = new List<int>();
         }
 
         public string Name { get; set; }
@@ -31,8 +31,8 @@ namespace CsStat.Domain.Entities.Demo
         public List<KillLog> Deaths { get; set; }
         public List<KillLog> Teamkills { get; set; }
 
-        public List<RoundLog> BombPlants = new List<RoundLog>();
-        public List<RoundLog> BombExplosions = new List<RoundLog>();
-        public List<RoundLog> BombDefuses = new List<RoundLog>();
+        public List<int> BombDefuses { get; set; }
+        public List<int> BombExplosions { get; set; }
+        public List<int> BombPlants { get; set; }
     }
 }
