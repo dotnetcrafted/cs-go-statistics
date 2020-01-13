@@ -1,41 +1,58 @@
-import React, { ReactNode } from 'react';
-import { List, Avatar, Typography } from 'antd';
+import React from 'react';
+import { List, Avatar, Tag, Typography } from 'antd';
 
 const { Title } = Typography;
-const URL_REP = 'https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors';
 
-export default class AuthorsCopyright extends React.Component<any, AuthorsCopyrightState> {
-    state = {
-        data: [
-            {
-                /* eslint-disable */
-                avatar_url: '',
-                html_url: '',
-                login: ''
-                /* eslint-enable */
-            }
-        ]
-    };
 
-    private getGithubAccounts = async () => {
-        const accounts: UserData[] = await fetch(URL_REP)
-            .then((res: Response) => res.json())
-            .then((acc) => acc.filter((elem: { type: string }) => elem.type === 'User'))
-            .catch((err) => {
-                throw new Error(err);
-            });
+export default class AuthorsCopyright extends React.Component {
+
+    state ={
+        data: [],
+        role: []
+    }
+
+    gettingGithubAccounts = async () => {
+        const api_url = await 
+            fetch(`https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors`)
+
+        const accounts = await api_url.json()
 
         this.setState({
-            data: accounts
+            data: accounts.filter(elem => elem.type == "User")
+        })
+
+        this.state.data.forEach(item => {
+            this.gettingRole(item)
+        })
+    }
+
+    gettingRole = async (item) => {
+
+        const javaScriptCounter = 0
+        const cCounter = 0
+
+        const api_repos_url = await 
+            fetch(`${item.repos_url}`)
+
+        const repos = await api_repos_url.json()
+
+        repos.forEach(item => {
+            item.language == "JavaScript" ? javaScriptCounter = javaScriptCounter + 1 : null
+            item.language == "C#" ? cCounter = cCounter + 1 : null
+
         });
-    };
 
-    componentDidMount = () => {
-        this.getGithubAccounts();
-    };
+        console.log(item.login, "JavaScript =" + javaScriptCounter, "C# =" + cCounter)
 
-    render(): ReactNode {
-        const { data } = this.state;
+    }
+
+    componentWillMount = () => {
+        this.gettingGithubAccounts()
+    }
+
+    
+    render() {
+        const data = this.state.data != [] ? this.state.data : 'asdasd'
         return (
             <List
                 size="small"
@@ -43,29 +60,47 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
                 header={<Title level={4}>Authors and Contributors:</Title>}
                 itemLayout="horizontal"
                 dataSource={data}
-                renderItem={(person): ReactNode => (
+                renderItem={person => (
                     <List.Item>
                         <List.Item.Meta
-                            avatar={<Avatar icon="user" src={person.avatar_url} />}
+                            avatar={<Avatar src={person.avatar_url} />}
                             title={
                                 <div>
-                                    <a href={person.html_url}>{person.login}</a>
+                                    <a href={person.url}>{person.login}</a> – <Tag>{person.role}</Tag>
                                 </div>
                             }
                         />
                     </List.Item>
                 )}
             />
-        );
+        )
     }
 }
 
-type AuthorsCopyrightState = {
-    data: UserData[];
+
+/*const githubAccounts = {
+    rdk174: 'Rdk174',
+    medprj: 'Medprj',
+    host: 'hostile-d'
 };
 
-type UserData = {
-    avatar_url: string;
-    html_url: string;
-    login: string;
-};
+const data = [
+    {
+        name: 'Radik F',
+        githubLink: `https://github.com/${githubAccounts.rdk174}`,
+        avatarSrc: `https://github.com/${githubAccounts.rdk174}.png`,
+        role: 'backend'
+    },
+    {
+        name: 'Alexander M',
+        githubLink: `https://github.com/${githubAccounts.medprj}`,
+        avatarSrc: `https://github.com/${githubAccounts.medprj}.png`,
+        role: 'backend'
+    },
+    {
+        name: 'Danil S',
+        githubLink: `https://github.com/${githubAccounts.host}`,
+        avatarSrc: `https://github.com/${githubAccounts.host}.png`,
+        role: 'frontend'
+    }
+];*/
