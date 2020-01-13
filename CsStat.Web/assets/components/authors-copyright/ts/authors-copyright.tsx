@@ -1,24 +1,26 @@
-import React from 'react';
-import {
-    List, Avatar, Typography
-} from 'antd';
+import React, { ReactNode } from 'react';
+import { List, Avatar, Typography } from 'antd';
 
 const { Title } = Typography;
 const URL_REP = 'https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors';
 
-export default class AuthorsCopyright extends React.Component {
-    state ={
-        data: [{
-            avatar_url: '',
-            url: '',
-            login: ''
-        }]
-    }
+export default class AuthorsCopyright extends React.Component<any, AuthorsCopyrightState> {
+    state = {
+        data: [
+            {
+                /* eslint-disable */
+                avatar_url: '',
+                html_url: '',
+                login: ''
+                /* eslint-enable */
+            }
+        ]
+    };
 
     private getGithubAccounts = async () => {
-        const accounts = await fetch(URL_REP)
+        const accounts: UserData[] = await fetch(URL_REP)
             .then((res: Response) => res.json())
-            .then((acc) => acc.filter((elem: { type: string; }) => elem.type === 'User'))
+            .then((acc) => acc.filter((elem: { type: string }) => elem.type === 'User'))
             .catch((err) => {
                 throw new Error(err);
             });
@@ -26,28 +28,38 @@ export default class AuthorsCopyright extends React.Component {
         this.setState({
             data: accounts
         });
-    }
+    };
 
     componentDidMount = () => {
         this.getGithubAccounts();
-    }
+    };
 
-    render() {
+    render(): ReactNode {
         const { data } = this.state;
         return (
             <List
                 size="small"
                 bordered={true}
-                header={<Title level={4}>Authors and Contributors:</Title>}
+                header={
+                    <Title level={4}>Authors and Contributors:</Title>
+                }
                 itemLayout="horizontal"
+                grid={{
+                    gutter: 10,
+                    xl: 3,
+                    sm: 2,
+                    xs: 1
+                }}
                 dataSource={data}
                 renderItem={(person): ReactNode => (
-                    <List.Item>
+                    <List.Item style={{ marginTop: '10px' }}>
                         <List.Item.Meta
-                            avatar={<Avatar src={person.avatar_url} />}
+                            avatar={
+                                <Avatar icon="user" src={person.avatar_url} />
+                            }
                             title={
                                 <div>
-                                    <a href={person.url}>{person.login}</a>
+                                    <a href={person.html_url}>{person.login}</a>
                                 </div>
                             }
                         />
@@ -57,3 +69,13 @@ export default class AuthorsCopyright extends React.Component {
         );
     }
 }
+
+type AuthorsCopyrightState = {
+    data: UserData[];
+};
+
+type UserData = {
+    avatar_url: string;
+    html_url: string;
+    login: string;
+};
