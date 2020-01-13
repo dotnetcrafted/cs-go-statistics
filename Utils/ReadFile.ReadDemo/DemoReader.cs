@@ -56,8 +56,16 @@ namespace ReadFile.ReadDemo
                 var error = string.Empty;
                 try
                 {
+                    var fileStream = File.OpenRead(file);
+
+                    _fullDemoFileName = fileStream.Name;
+                    _demoFileName = Path.GetFileName(fileStream.Name);
+
+                    if (_demoFileName.IsEmpty())
+                        return;
+
                     Reset();
-                    ParseDemo(file);
+                    ParseDemo(fileStream);
                 }
                 catch (Exception e)
                 {
@@ -99,15 +107,8 @@ namespace ReadFile.ReadDemo
             _lastCTScore = default;
         }
 
-        private void ParseDemo(string filePath)
+        private void ParseDemo(FileStream file)
         {
-            var file = File.OpenRead(filePath);
-            _fullDemoFileName = file.Name;
-            _demoFileName = Path.GetFileName(file.Name);
-
-            if (_demoFileName.IsEmpty())
-                return;
-
             _parser = new DemoParser(file);
             _parser.ParseHeader();
             _parser.MatchStarted += Parser_MatchStarted;
