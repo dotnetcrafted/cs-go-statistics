@@ -37,7 +37,7 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
         return (
             <div className="contributors">
                 <div className="contributors__title">
-                    <h4 className="contributors__title_txt">Authors and Contributors</h4>
+                    <h4 className="contributors__title-txt">Authors and Contributors</h4>
                 </div>
 
                 <div className="contributors__content">
@@ -45,8 +45,7 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
                         {data.map((item, index) => (
                             <li key={index} className="contributors__item">
                                 <a className="contributors__link" href={item.html_url}>
-
-                                    <div className="contributors__item_title">
+                                    <div className="contributors__item-title">
                                         {item.login}
                                     </div>
                                 </a>
