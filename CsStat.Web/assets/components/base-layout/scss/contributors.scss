@@ -1,12 +1,10 @@
 .contributors {
     padding: 0 20px 12px;
 
-    &__title {
-        &_txt {
-            color: $color-white;
-            text-align: center;
-            text-transform: uppercase;
-        }
+    &__title-txt {
+        color: $color-white;
+        text-align: center;
+        text-transform: uppercase;
     }
 
     &__list {
@@ -16,6 +14,7 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
     &__link {
         display: flex;
         align-items: center;
@@ -28,18 +27,19 @@
         margin-bottom: 8px;
         padding: 0 12px;
         position: relative;
+    }
 
-        &_avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            margin-right: 8px;
-            overflow: hidden;
-            img {
-                width: 100%;
-                height: 100%;
-                display: block;
-            }
-        }
+    &__item-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 8px;
+        overflow: hidden;
+    }
+
+    &__item-avatar img {
+        width: 100%;
+        height: 100%;
+        display: block;
     }
 }
