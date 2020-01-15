@@ -34,7 +34,7 @@ const BaseLayout: SFC<BaseLayoutProps> = (props) => (
         <Footer className="base-layout__footer">
             <AuthorsCopyright />
             <div className="base-layout__footer-copyright">
-                <a href="https://bitbucket.org/radik_fayskhanov/counterstrikestat">Repository is available on Bitbucket.</a>
+                <a className="base-layout__footer-repository" href="https://bitbucket.org/radik_fayskhanov/counterstrikestat">Repository is available on Bitbucket.</a>
                 <IconCopyright />
             </div>
         </Footer>
