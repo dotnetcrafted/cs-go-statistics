@@ -26,7 +26,6 @@ namespace CsStat.Web
                     .ForMember(dest => dest.DefusedBombs, opts => opts.MapFrom(src => src.Defuse))
                     .ForMember(dest => dest.ExplodedBombs, opts => opts.MapFrom(src => src.Explode))
                     .ForMember(dest => dest.FriendlyKills, opts => opts.MapFrom(src => src.FriendlyKills))
-                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
                     .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.Player.ImagePath))
                     .ForMember(dest => dest.KdRatio, opts => opts.MapFrom(src => src.KdRatio))
                     .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills))
@@ -53,6 +52,9 @@ namespace CsStat.Web
                         {
                             d.Killers = context.Mapper.Map<List<PlayerViewModel>>(s.Killers);
                         }
+
+                        d.HeadShot = s.Kills == 0 ? "0" : $"{s.HeadShot} ({Math.Round(s.HeadShot / (double)s.Kills * 100, 2)}%)";
+
                     });
 
                 CreateMap<GunModel, GunViewModel>()
