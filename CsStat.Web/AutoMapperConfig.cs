@@ -32,6 +32,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.KillsPerGame, opts => opts.MapFrom(src => src.KillsPerGame))
                     .ForMember(dest => dest.Points, opts => opts.MapFrom(src => src.Points))
                     .ForMember(dest => dest.TotalGames, opts => opts.MapFrom(src => src.TotalGames))
+                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
                     .AfterMap((s, d, context) =>
                     {
                         if (s.Guns != null && s.Guns.Any())
@@ -52,9 +53,6 @@ namespace CsStat.Web
                         {
                             d.Killers = context.Mapper.Map<List<PlayerViewModel>>(s.Killers);
                         }
-
-                        d.HeadShot = s.Kills == 0 ? "0" : $"{s.HeadShot} ({Math.Round(s.HeadShot / (double)s.Kills * 100, 2)}%)";
-
                     });
 
                 CreateMap<GunModel, GunViewModel>()
