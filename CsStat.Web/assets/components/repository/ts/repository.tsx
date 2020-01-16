@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { SFC } from 'react';
+import constants from '../../../general/ts/constants';
 
-const Repository = () => (
+const Repository: SFC = () => (
     <div>
-        Repository is available on{' '}
-        <a href="https://github.com/dotnetcrafted/cs-go-statistics" title="GitHub">
+        <span>constants. is available on </span>
+        <a href={constants.REPOSITORY} title="GitHub">
             GitHub
         </a>
     </div>
