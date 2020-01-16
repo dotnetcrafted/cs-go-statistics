@@ -53,7 +53,7 @@ namespace ReadFile.ReadDemo
 
         protected override void ReadFile()
         {
-            var allFiles = Directory.GetFiles(path);
+            var allFiles = Directory.GetFiles(path, "*.dem");
             var newFiles = allFiles.Except(demoFileRepository.GetFiles().Select(x => x.Path)).ToArray();
 
             foreach (var file in newFiles)
