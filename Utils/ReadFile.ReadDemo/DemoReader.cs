@@ -31,6 +31,9 @@ namespace ReadFile.ReadDemo
         private static int _lastTScore;
         private static int _lastCTScore;
 
+        private static int _teamAWins;
+        private static int _teamBWins;
+
         #region inint
 
         private readonly string path;
@@ -108,6 +111,9 @@ namespace ReadFile.ReadDemo
 
             _lastTScore = default;
             _lastCTScore = default;
+
+            _teamAWins = default;
+            _teamBWins = default;
         }
 
         private void ParseDemo(FileStream file)
@@ -123,7 +129,7 @@ namespace ReadFile.ReadDemo
             _parser.BombDefused += Parser_BombDefused;
             _parser.BombExploded += Parser_BombExploded;
             _parser.PlayerBind += Parser_PlayerBind;
-
+            
             Console.WriteLine(
                 $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
 
@@ -161,6 +167,8 @@ namespace ReadFile.ReadDemo
                 Size = new FileInfo(_fullDemoFileName).Length,
                 DemoFileName = _results.DemoFileName,
                 ParsedDate = DateTime.Now,
+                TWins = _teamAWins,
+                CTWins = _teamBWins,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -280,6 +288,29 @@ namespace ReadFile.ReadDemo
             Console.WriteLine($"Round number: {_currentRound.RoundNumber}");
 
             var winningTeam = Team.Spectate;
+            if (_lastCTScore + _lastTScore >= 15)
+            {
+                if (_lastTScore != _parser.TScore)
+                {
+                    _teamBWins++;
+                }
+                else if (_lastCTScore != _parser.CTScore)
+                {
+                    _teamAWins++;
+                }
+            }
+            else
+            {
+                if (_lastTScore != _parser.TScore)
+                {
+                    _teamAWins++;
+                }
+                else if (_lastCTScore != _parser.CTScore)
+                {
+                    _teamBWins++;
+                }
+            }
+
             if (_lastTScore != _parser.TScore)
             {
                 winningTeam = Team.Terrorist;

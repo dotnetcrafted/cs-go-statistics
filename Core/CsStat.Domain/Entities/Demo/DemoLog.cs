@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using System.Runtime.Serialization;
+using CsStat.Domain.Definitions;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities.Demo
@@ -31,5 +35,12 @@ namespace CsStat.Domain.Entities.Demo
         public List<PlayerLog> Players { get; set; }
         [DataMember]
         public List<RoundLog> Rounds { get; set; }
+
+        [BsonIgnore]
+        public int TotalRound => Rounds.Count;
+
+        public int TWins { get; set; }
+        
+        public int CTWins { get; set; }
     }
 }
