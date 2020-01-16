@@ -167,8 +167,8 @@ namespace ReadFile.ReadDemo
                 Size = new FileInfo(_fullDemoFileName).Length,
                 DemoFileName = _results.DemoFileName,
                 ParsedDate = DateTime.Now,
-                TWins = _teamAWins,
-                CTWins = _teamBWins,
+                TeamAWins = _teamAWins,
+                TeamBWins = _teamBWins,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,

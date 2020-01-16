@@ -39,8 +39,8 @@ namespace CsStat.Domain.Entities.Demo
         [BsonIgnore]
         public int TotalRound => Rounds.Count;
 
-        public int TWins { get; set; }
+        public int TeamAWins { get; set; }
         
-        public int CTWins { get; set; }
+        public int TeamBWins { get; set; }
     }
 }
