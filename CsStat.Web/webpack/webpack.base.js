@@ -1,28 +1,28 @@
-const webpack = require("webpack");
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { repository } = require("../package.json");
-const globalVars = require("./config");
+const webpack = require('webpack');
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { repository } = require('../package.json');
+const globalVars = require('./config');
 
 module.exports = () => ({
-    devtool: "source-map",
+    devtool: 'source-map',
     entry: {
-        app: "./assets"
+        app: './assets'
     },
     output: {
-        path: path.resolve(__dirname, "../dist"),
-        publicPath: "/dist/",
-        filename: "[name].[chunkhash].js",
-        jsonpFunction: "webpackJsonpDelete"
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: '/dist/',
+        filename: '[name].[chunkhash].js',
+        jsonpFunction: 'webpackJsonpDelete'
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: ['.tsx', '.ts', '.js'],
         modules: [
-            "node_modules",
+            'node_modules',
             // src
-            path.resolve(__dirname, "../../../../"),
-            path.resolve(__dirname, "../assets/")
+            path.resolve(__dirname, '../../../../'),
+            path.resolve(__dirname, '../assets/')
         ]
     },
     module: {
@@ -30,21 +30,21 @@ module.exports = () => ({
             {
                 test: /\.(jsx?|tsx?)$/,
                 exclude: [/node_modules(?!(\/|\\)@deleteagency)/],
-                loaders: ["babel-loader", "ts-loader"]
+                loaders: ['babel-loader', 'ts-loader']
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
                 exclude: /svg[\/\\]/,
-                loader: "file-loader",
+                loader: 'file-loader',
                 options: {
-                    name: "images/[name].[ext]"
+                    name: 'images/[name].[ext]'
                 }
             },
             {
                 test: /\.(woff2?|eot|ttf)$/,
-                loader: "file-loader",
+                loader: 'file-loader',
                 options: {
-                    name: "fonts/[name].[ext]"
+                    name: 'fonts/[name].[ext]'
                 }
             },
             {
@@ -52,18 +52,18 @@ module.exports = () => ({
                 include: /svg[\/\\]/,
                 use: [
                     {
-                        loader: "svg-sprite-loader",
+                        loader: 'svg-sprite-loader',
                         options: {
-                            symbolId: "icon-[name]"
+                            symbolId: 'icon-[name]'
                         }
                     },
                     {
-                        loader: "svgo-loader",
+                        loader: 'svgo-loader',
                         options: {
                             plugins: [
                                 { removeNonInheritableGroupAttrs: true },
                                 { collapseGroups: true },
-                                { removeAttrs: { attrs: "(fill|stroke)" } }
+                                { removeAttrs: { attrs: '(fill|stroke)' } }
                             ]
                         }
                     }
@@ -73,12 +73,12 @@ module.exports = () => ({
     },
     optimization: {
         splitChunks: {
-            chunks: "initial",
-            automaticNameDelimiter: ".",
-            name: "vendors"
+            chunks: 'initial',
+            automaticNameDelimiter: '.',
+            name: 'vendors'
         },
         runtimeChunk: {
-            name: "vendors"
+            name: 'vendors'
         }
     },
     plugins: [
@@ -86,12 +86,12 @@ module.exports = () => ({
         new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin([
-            { from: "./assets/favicon", to: "../dist/favicon" }
+            { from: './assets/favicon', to: '../dist/favicon' }
         ]),
 
         new webpack.DefinePlugin({
             DEFINE_VIEWPORT_WIDTH_DESKTOP_WIDE: JSON.stringify(
-                globalVars.viewports["desktop-wide"]
+                globalVars.viewports['desktop-wide']
             ),
             DEFINE_VIEWPORT_WIDTH_DESKTOP: JSON.stringify(
                 globalVars.viewports.desktop
@@ -100,7 +100,7 @@ module.exports = () => ({
                 globalVars.viewports.tablet
             ),
             DEFINE_VIEWPORT_WIDTH_MOBILE_WIDE: JSON.stringify(
-                globalVars.viewports["mobile-wide"]
+                globalVars.viewports['mobile-wide']
             ),
             DEFINE_CONTAINER_MAX_WIDTH: JSON.stringify(
                 globalVars.containerMaxWidth

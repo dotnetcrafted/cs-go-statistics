@@ -9,4 +9,5 @@ const Repository: SFC = () => (
         </a>
     </div>
 );
+
 export default Repository;
