@@ -4,6 +4,7 @@ import {
 } from 'antd';
 import IconCopyright from '../../icon-copyright';
 import AuthorsCopyright from '../../authors-copyright';
+import Repository from '../../repository';
 import '../scss/index.scss';
 import Navigation from '../../navigation';
 
@@ -34,7 +35,7 @@ const BaseLayout: SFC<BaseLayoutProps> = (props) => (
         <Footer className="base-layout__footer">
             <AuthorsCopyright />
             <div className="base-layout__footer-copyright">
-                <a className="base-layout__footer-repository" href="https://bitbucket.org/radik_fayskhanov/counterstrikestat">Repository is available on Bitbucket.</a>
+                <Repository />
                 <IconCopyright />
             </div>
         </Footer>
