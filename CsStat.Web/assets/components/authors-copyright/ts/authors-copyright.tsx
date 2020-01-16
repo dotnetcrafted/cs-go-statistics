@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
+import constants from '../../../general/ts/constants';
 
-const URL_REP = 'https://api.github.com/repos/dotnetcrafted/cs-go-statistics/contributors';
+const API_URL_TAG = (repoPath: string): string => `https://api.github.com/repos${repoPath}/contributors`;
 
 export default class AuthorsCopyright extends React.Component<any, AuthorsCopyrightState> {
     state = {
@@ -15,8 +16,14 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
         ]
     };
 
+    private getApiUrl(): string {
+        const repoPath = new URL(constants.REPOSITORY).pathname;
+        return API_URL_TAG(repoPath);
+    }
+
     private getGithubAccounts = async () => {
-        const accounts: UserData[] = await fetch(URL_REP)
+        const apiUrl = this.getApiUrl();
+        const accounts: UserData[] = await fetch(apiUrl)
             .then((res: Response) => res.json())
             .then((acc) => acc.filter((elem: { type: string }) => elem.type === 'User'))
             .catch((err) => {
@@ -29,6 +36,7 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
     };
 
     componentDidMount = () => {
+        this.getApiUrl();
         this.getGithubAccounts();
     };
 
@@ -45,9 +53,7 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
                         {data.map((item, index) => (
                             <li key={index} className="contributors__item">
                                 <a className="contributors__link" href={item.html_url}>
-                                    <div className="contributors__item-title">
-                                        {item.login}
-                                    </div>
+                                    <div className="contributors__item-title">{item.login}</div>
                                 </a>
                             </li>
                         ))}
