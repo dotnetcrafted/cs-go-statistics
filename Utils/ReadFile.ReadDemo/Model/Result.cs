@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
-using CsStat.Domain.Entities.Demo;
 using MongoRepository;
 
 namespace ReadFile.ReadDemo.Model

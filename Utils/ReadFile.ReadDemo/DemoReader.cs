@@ -188,9 +188,7 @@ namespace ReadFile.ReadDemo
                         : CsStat.Domain.Definitions.Teams.T,
                     WinnerTitle = x.Value.Winner.ToString(),
                     Teams = x.Value.Teams.ToDictionary(
-                        z => z.Key == Team.CounterTerrorist
-                            ? CsStat.Domain.Definitions.Teams.Ct.GetDescription()
-                            : CsStat.Domain.Definitions.Teams.T.GetDescription(),
+                        z => z.Key.ToString(),
                         z => z.Value.Select(k => new PlayerLog
                         {
                             Name = k.Name,
