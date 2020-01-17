@@ -7,6 +7,9 @@ namespace CsStat.Domain.Entities.Demo
     {
         public int RoundNumber { get; set; }
 
+        public int TScore { get; set; }
+        public int CTScore { get; set; }
+
         public Teams Winner { get; set; }
         public string WinnerTitle { get; set; }
 
@@ -21,6 +24,6 @@ namespace CsStat.Domain.Entities.Demo
 
         public bool IsBombExploded { get; set; }
 
-        public Dictionary<string, List<PlayerLog>> Teams { get; set; }
+        public List<SquadLog> Squads { get; set; }
     }
 }

@@ -17,6 +17,10 @@ namespace ReadFile.ReadDemo
 {
     public class DemoReader : BaseWatcher
     {
+        private const string SuqadA = "SquadA";
+        private const string SuqadB = "SquadB";
+        private const int SwapRoundNumber = 15;
+
         private static DemoParser _parser;
         private static Result _results;
 
@@ -31,8 +35,8 @@ namespace ReadFile.ReadDemo
         private static int _lastTScore;
         private static int _lastCTScore;
 
-        private static int _teamAWins;
-        private static int _teamBWins;
+        private static int _squadAScore;
+        private static int _squadBScore;
 
         #region inint
 
@@ -106,14 +110,14 @@ namespace ReadFile.ReadDemo
 
             _matchStarted = default;
             _currentRound = null;
-            _currentRoundNumber = default;
+            _currentRoundNumber = 1;
             _roundEndedCount = default;
 
-            _lastTScore = default;
             _lastCTScore = default;
-
-            _teamAWins = default;
-            _teamBWins = default;
+            _lastTScore = default;
+            
+            _squadAScore = default;
+            _squadBScore = default;
         }
 
         private void ParseDemo(FileStream file)
@@ -167,8 +171,8 @@ namespace ReadFile.ReadDemo
                 Size = new FileInfo(_fullDemoFileName).Length,
                 DemoFileName = _results.DemoFileName,
                 ParsedDate = DateTime.Now,
-                TeamAWins = _teamAWins,
-                TeamBWins = _teamBWins,
+                TotalSquadAScore = _squadAScore,
+                TotalSquadBScore = _squadBScore,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -195,9 +199,13 @@ namespace ReadFile.ReadDemo
                         ? CsStat.Domain.Definitions.Teams.Ct
                         : CsStat.Domain.Definitions.Teams.T,
                     WinnerTitle = x.Value.Winner.ToString(),
-                    Teams = x.Value.Teams.ToDictionary(
-                        z => z.Key.ToString(),
-                        z => z.Value.Select(k => new PlayerLog
+                    TScore = x.Value.TScore,
+                    CTScore = x.Value.CTScore,
+                    Squads = x.Value.Squads.Select(z => new SquadLog()
+                    {
+                        Team = z.Team.ToString(),
+                        SquadTitle = z.Title,
+                        Players = z.Players.Select(k => new PlayerLog
                         {
                             Name = k.Name,
                             SteamID = k.SteamID,
@@ -210,7 +218,7 @@ namespace ReadFile.ReadDemo
                             Teamkills = k.Teamkills.Where(p => p.RoundNumber == x.Value.RoundNumber)
                                 .Select(v => mapper.Map<KillLog>(v)).ToList()
                         }).ToList()
-                    )
+                    }).ToList()
                 }).ToList()
             };
 
@@ -287,30 +295,33 @@ namespace ReadFile.ReadDemo
         {
             Console.WriteLine($"Round number: {_currentRound.RoundNumber}");
 
-            var winningTeam = Team.Spectate;
-            if (_lastCTScore + _lastTScore >= 15)
+            if (_lastCTScore + _lastTScore > SwapRoundNumber - 1)
             {
                 if (_lastTScore != _parser.TScore)
                 {
-                    _teamBWins++;
+                    _squadBScore++;
                 }
                 else if (_lastCTScore != _parser.CTScore)
                 {
-                    _teamAWins++;
+                    _squadAScore++;
                 }
             }
             else
             {
                 if (_lastTScore != _parser.TScore)
                 {
-                    _teamAWins++;
+                    _squadAScore++;
                 }
                 else if (_lastCTScore != _parser.CTScore)
                 {
-                    _teamBWins++;
+                    _squadBScore++;
                 }
             }
 
+            _lastCTScore = _parser.CTScore;
+            _lastTScore = _parser.TScore;
+
+            var winningTeam = Team.Spectate;
             if (_lastTScore != _parser.TScore)
             {
                 winningTeam = Team.Terrorist;
@@ -322,15 +333,33 @@ namespace ReadFile.ReadDemo
 
             _currentRound.Winner = winningTeam;
 
-            _lastTScore = _parser.TScore;
-            _lastCTScore = _parser.CTScore;
+            _currentRound.TScore = _parser.TScore;
+            _currentRound.CTScore = _parser.CTScore;
 
-            _currentRound.Teams = _parser.Participants
+            _currentRound.Squads = _parser.Participants
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
-                .GroupBy(x => new {x.Team}).ToDictionary(x => x.Key.Team,
-                    x => x.Select(z => _results.Players[z.SteamID]).ToList());
+                .GroupBy(x => new {x.Team})
+                .Select(x => new Squad
+                {
+                    Team = x.Key.Team,
+                    Title = GetSquadName(x.Key.Team),
+                    Players = x.Select(z => _results.Players[z.SteamID]).ToList()
+                })
+                .ToList();
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
+        }
+
+        private static string GetSquadName(Team team)
+        {
+            if (_lastCTScore + _lastTScore > SwapRoundNumber)
+            {
+                return team == Team.CounterTerrorist ? SuqadA : SuqadB;
+            }
+            else
+            {
+                return team == Team.CounterTerrorist ? SuqadB : SuqadA;
+            }
         }
 
         private static void Parser_PlayerKilled(object sender, PlayerKilledEventArgs e)
