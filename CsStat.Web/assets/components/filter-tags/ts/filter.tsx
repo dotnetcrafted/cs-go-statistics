@@ -28,6 +28,7 @@ class Filter extends React.Component<FilterProps> {
         return (
             <div className="filter">
                 <ul className="filter__list">
+                    <li onClick={() => this.props.postFilter('all')} className="filter__item">all</li>
                     {this.state.tagsArr}
                 </ul>
             </div>

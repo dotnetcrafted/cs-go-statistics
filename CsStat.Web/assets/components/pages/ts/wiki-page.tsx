@@ -33,19 +33,25 @@ class WikiPage extends React.Component<WikiPageProps> {
     }
 
     postFilter(tag: any) {
-        const filter: any[] = [];
+        if (tag !== 'all') {
+            const filter: any[] = [];
 
-        this.props.Posts.forEach((post) => {
-            post.tags.forEach((item) => {
-                // eslint-disable-next-line no-unused-expressions
-                item.Caption === tag ? filter.push(post) : null;
+            this.props.Posts.forEach((post) => {
+                post.tags.forEach((item) => {
+                    // eslint-disable-next-line no-unused-expressions
+                    item.Caption === tag ? filter.push(post) : null;
+                });
             });
-        });
 
-        this.setState({
-            filtered: filter,
-            isFiltered: true
-        });
+            this.setState({
+                filtered: filter,
+                isFiltered: true
+            });
+        } else {
+            this.setState({
+                isFiltered: false
+            });
+        }
     }
 
     filter(): ReactNode {
