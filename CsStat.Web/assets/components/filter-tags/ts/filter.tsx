@@ -8,14 +8,12 @@ class Filter extends React.Component<FilterProps> {
     componentDidMount(): void {
         const { posts } = this.props;
         const Arr: any[] = [];
-        let id = 0;
 
         posts.forEach((post) => {
             post.tags.forEach((tag: any) => {
-                Arr.push(
-                    <li key={id} onClick={() => this.props.postFilter(tag.Caption)} className="filter__item">{tag.Caption}</li>
-                );
-                id++;
+                if (!Arr.includes(tag.Caption)) {
+                    Arr.push(tag.Caption);
+                }
             });
         });
 
@@ -29,7 +27,9 @@ class Filter extends React.Component<FilterProps> {
             <div className="filter">
                 <ul className="filter__list">
                     <li onClick={() => this.props.postFilter('all')} className="filter__item">all</li>
-                    {this.state.tagsArr}
+                    {this.state.tagsArr.map((tag, index) => (
+                        <li key={index} onClick={() => this.props.postFilter(tag)} className="filter__item">{tag}</li>
+                    ))}
                 </ul>
             </div>
         );
