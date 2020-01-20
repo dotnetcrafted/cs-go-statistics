@@ -234,6 +234,11 @@ namespace CsStat.Domain.Definitions
         [LogValue("knife")]
         [IsSniperRifle(false)]
         Knife,
+
+        [Description("system event")]
+        [LogValue("world")]
+        [IsSniperRifle(false)]
+        World,
     }
 }
 

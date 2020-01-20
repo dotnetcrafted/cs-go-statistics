@@ -114,6 +114,7 @@ namespace BusinessFacade.Repositories.Implementations
                 var assists = playerLogs.Count(x => x.Action == Actions.Assist);
                 var kills = playerLogs.Count(x => x.Action == Actions.Kill);
                 var death = victimLogs.Count(x => x.Action == Actions.Kill);
+                var suicides = victimLogs.Count(x => x.Action == Actions.Suicide);
                 var totalGames = playerLogs.Count(x => x.Action == Actions.EnteredTheGame);
                 var headShotCount = playerLogs.Count(x => x.IsHeadShot && x.Action == Actions.Kill);
                 var victimList = playerLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Victim).ToList();
@@ -140,7 +141,8 @@ namespace BusinessFacade.Repositories.Implementations
                         FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x=>x.Count).ToList(),
                         FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x=>x.Count).ToList(),
                         GrenadeKills = grenade ?? 0,
-                        MolotovKills = molotov ?? 0
+                        MolotovKills = molotov ?? 0,
+                        Suicides = suicides
 
                 });
             }

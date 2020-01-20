@@ -36,8 +36,8 @@ namespace CSStat.WebApp.Tests
                 return;
             }
 
-            //var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
-            //logRepository.InsertBatch(parsedLogs);
+            var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            logRepository.InsertBatch(parsedLogs);
 
         }
         [Test]

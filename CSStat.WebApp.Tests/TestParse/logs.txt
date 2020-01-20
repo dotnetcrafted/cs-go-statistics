@@ -1,1 +1,5 @@
-L 11/19/2019 - 13:01:02: ACCOLADE, FINAL: {chickenskilled},	anton.k<2>,	VALUE: 13.000000,	POS: 1,	SCORE: 18.571428
+L 01/17/2020 - 12:16:37: "laViper<6><STEAM_1:0:56767661>" switched from team <Unassigned> to <CT>
+L 01/17/2020 - 12:16:38: "Medved<3><STEAM_1:0:29480860><TERRORIST>" triggered "Dropped_The_Bomb"
+L 01/17/2020 - 12:16:38: "Medved<3><STEAM_1:0:29480860><TERRORIST>" [773 -603 -354] committed suicide with "inferno"
+L 01/17/2020 - 12:16:38: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "2")
+L 01/17/2020 - 12:16:38: Team "CT" scored "1" with "2" players

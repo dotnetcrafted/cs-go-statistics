@@ -123,6 +123,27 @@ namespace CsStat.LogApi
                         Gun = Guns.Bomb
                     };
                     break;
+                case Actions.Suicide:
+                    var player = GetPlayer(splitLine[1]);
+                    var team = GetTeam(splitLine[1].Trim());
+                    var gun = GetGun(splitLine[3].Trim());
+
+                    if(gun == Guns.World)
+                        break;
+                    
+                    result = new Log
+                    {
+                        DateTime = GetDateTime(splitLine[0].Trim()),
+                        Player = player,
+                        PlayerTeam = team,
+                        Action = action,
+                        Victim = player,
+                        VictimTeam = team,
+                        IsHeadShot = false,
+                        Gun = gun
+                    };
+
+                    break;
                 default:
                     result = new Log
                     {

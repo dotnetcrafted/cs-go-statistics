@@ -37,8 +37,10 @@ namespace CsStat.LogApi.Enums
         TargetBombed,
 
         [LogValue("entered the game")]
-        EnteredTheGame
+        EnteredTheGame,
 
+        [LogValue("committed suicide")]
+        Suicide,
 
 
     }

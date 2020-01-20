@@ -33,6 +33,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Points, opts => opts.MapFrom(src => src.Points))
                     .ForMember(dest => dest.TotalGames, opts => opts.MapFrom(src => src.TotalGames))
                     .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
+                    .ForMember(dest => dest.Suicides, opts => opts.MapFrom(src => src.Suicides))
                     .AfterMap((s, d, context) =>
                     {
                         if (s.Guns != null && s.Guns.Any())
