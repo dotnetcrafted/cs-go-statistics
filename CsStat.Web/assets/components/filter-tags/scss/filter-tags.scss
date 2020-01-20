@@ -1,0 +1,15 @@
+.filter__list {
+    display: flex;
+    justify-content: center;
+}
+
+.filter__item {
+    display: block;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: .9em;
+}
+
+.filter__item:hover {
+    color: red;
+}

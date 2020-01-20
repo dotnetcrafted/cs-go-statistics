@@ -5,8 +5,14 @@ import { connect } from 'react-redux';
 import { fetchPosts, startRequest, stopRequest } from '../../../general/ts/redux/actions';
 import { RootState, Post as PostType } from '../../../general/ts/redux/types';
 import Post from '../../post';
+import Filter from '../../filter-tags';
 
 class WikiPage extends React.Component<WikiPageProps> {
+    state = {
+        filtered: [],
+        isFiltered: false
+    }
+
     fetchPosts(WikiDataApiPath: string): void {
         const url = new URL(WikiDataApiPath, window.location.origin);
 
@@ -17,13 +23,33 @@ class WikiPage extends React.Component<WikiPageProps> {
 
                 this.props.fetchPosts(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             });
     }
 
     componentDidMount(): void {
         this.fetchPosts(this.props.WikiDataApiPath);
+    }
+
+    postFilter(tag: any) {
+        const filter: any[] = [];
+
+        this.props.Posts.forEach((post) => {
+            post.tags.forEach((item) => {
+                // eslint-disable-next-line no-unused-expressions
+                item.Caption === tag ? filter.push(post) : null;
+            });
+        });
+
+        this.setState({
+            filtered: filter,
+            isFiltered: true
+        });
+    }
+
+    filter(): ReactNode {
+        return this.state.filtered.map((post: PostType, index: number) => <Post key={index} post={post} />);
     }
 
     getPosts(): ReactNode {
@@ -37,11 +63,18 @@ class WikiPage extends React.Component<WikiPageProps> {
 
     render(): ReactNode {
         return (
-            <Row type="flex" justify="start" align="middle">
-                <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
-                    {this.getPosts()}
-                </Col>
-            </Row>
+            <div className="asdasdasdasdasdaadas">
+                {this.props.Posts.length > 0 ?
+                    <Filter posts={this.props.Posts} postFilter={(tag: any) => this.postFilter(tag)}/> :
+                    <Empty />
+                }
+
+                <Row type="flex" justify="start" align="middle">
+                    <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
+                        {!this.state.isFiltered ? this.getPosts() : this.filter()}
+                    </Col>
+                </Row>
+            </div>
         );
     }
 }
