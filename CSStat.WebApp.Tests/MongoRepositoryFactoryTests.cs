@@ -221,7 +221,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(
                 ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
                 $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-                $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.Achieve.GetDescription()).ToList())}," +
+                $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.AchieveId.GetDescription()).ToList())}," +
                 $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 

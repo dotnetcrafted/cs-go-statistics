@@ -10,6 +10,7 @@ using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using CsStat.LogApi.Interfaces;
+using CsStat.StrapiApi;
 using DataService;
 using ErrorLogger;
 
@@ -25,8 +26,9 @@ namespace CsStat.LogApi
         {
             var connectionString = new ConnectionStringFactory();
             var mongoRepository = new MongoRepositoryFactory(connectionString);
+            var strapi = new StrapiApi.StrapiApi();
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
-            _playerRepository = new PlayerRepository(mongoRepository);
+            _playerRepository = new PlayerRepository(mongoRepository, strapi);
             _logger = new Logger(mongoRepository);
         }
         public List<Log> ParseLogs(List<string> logs)

@@ -41,6 +41,7 @@ type Achievement = {
     Id: number;
     Name: string;
     Description: string;
+    IconUrl: string;
 };
 
 type Gun = {

@@ -6,6 +6,7 @@ using BusinessFacade.Repositories.Implementations;
 using CsStat.Domain.Entities;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
+using CsStat.StrapiApi;
 using DataService;
 using DataService.Interfaces;
 using ErrorLogger;
@@ -45,6 +46,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<ILogger>().To<Logger>();
             _kernel.Bind<IUsefulLinkRepository>().To<UsefulLinkRepository>();
             _kernel.Bind<IUserRepository>().To<UserRepository>();
+            _kernel.Bind<IStrapiApi>().To<StrapiApi>();
         }
     }
 }

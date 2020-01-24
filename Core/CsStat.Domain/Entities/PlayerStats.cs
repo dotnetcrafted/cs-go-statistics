@@ -74,5 +74,10 @@ namespace CsStat.Domain.Entities
                 return Math.Round((double)Deaths / TotalGames,2);
             }
         }
+
+        public PlayerStatsModel()
+        {
+            Achievements = new List<AchieveModel>();
+        }
     }
 }
