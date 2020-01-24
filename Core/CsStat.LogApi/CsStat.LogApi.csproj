@@ -71,6 +71,10 @@
       <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
       <Name>CsStat.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CsStat.StrapiApi\CsStat.StrapiApi.csproj">
+      <Project>{CBEB0D43-468F-4160-90E3-6AE272FDCF1A}</Project>
+      <Name>CsStat.StrapiApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsStat.SystemFacade\CsStat.SystemFacade.csproj">
       <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
       <Name>CsStat.SystemFacade</Name>

@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CsStat.Domain;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
@@ -61,7 +60,7 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
+        private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
             var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).OrderByDescending(x=>x.KdRatio).ToList();
             var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
@@ -83,5 +82,6 @@ namespace CsStat.Web.Controllers
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
+
     }
 }

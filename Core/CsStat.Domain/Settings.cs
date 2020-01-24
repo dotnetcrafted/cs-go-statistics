@@ -9,19 +9,26 @@ namespace CsStat.Domain
     {
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
         public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
-        public static int FileReadNewLinesInterval => GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
+
+        public static int FileReadNewLinesInterval =>
+            GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
+
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
-        public static string PlayersDataSteamApiPath => GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
+
+        public static string PlayersDataSteamApiPath =>
+            GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
+
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string ArticlesPath => GetSetting(nameof(ArticlesPath), Defaults.ArticlesPath);
+        public static string AchievementsPath => GetSetting(nameof(AchievementsPath), Defaults.AchievementsPath);
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
+        public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
-
 
 
         private static string GetSetting(string settingName, string defaultValue = null)
@@ -60,11 +67,16 @@ namespace CsStat.Domain
             public const string PlayersDataApiPath = "api/playersdata";
             public const string WikiDataApiPath = "api/articles";
             public const string WikiPagePath = "wiki";
-            public const string PlayersDataSteamApiPath = @"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
+
+            public const string PlayersDataSteamApiPath =
+                @"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
+
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
             public const string ArticlesPath = "https://admin.csfuse8.site/articles?_sort=createdAt:desc";
+            public const string AchievementsPath = "https://admin.csfuse8.site/Achievements";
             public const string CmsAdminPath = "https://admin.csfuse8.site/shell";
+            public const string AdminPath = "https://admin.csfuse8.site";
             public const int ShowNullPlayers = 1;
         }
     }
