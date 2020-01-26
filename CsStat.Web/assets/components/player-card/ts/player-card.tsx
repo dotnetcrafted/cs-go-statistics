@@ -24,8 +24,9 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
         if (!id) {
             throw new Error('No players found with this Name');
         }
+        const search = utils.getUrlSearch({ PlayerId: id }, props.router.location.search);
         history.push({
-            search: `?PlayerId=${id}`
+            search
         });
     };
 

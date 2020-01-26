@@ -78,13 +78,14 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     private onRowClick(record: Player): void {
+        const search = utils.getUrlSearch({ PlayerId: record.Id }, this.props.router.location.search);
         history.push({
-            search: `?PlayerId=${record.Id}`
+            search
         });
     }
 
     private cellWrapper(id: string, content: ReactNode): ReactNode {
-        const search = qs.parse(history.location.search);
+        const search = qs.parse(this.props.router.location.search);
         const { PlayerId } = search;
         const isSelectedClass = id === PlayerId ? 'is-selected' : '';
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>;
@@ -92,6 +93,11 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
     onFormSubmit = (params: DateValues): void => {
         this.fetchPlayers(this.props.playersDataUrl, params);
+
+        const search = utils.getUrlSearch(params, this.props.router.location.search);
+        history.push({
+            search
+        });
     };
 
     onCheckboxesChange = (selectedColumns: string[]): void => {
@@ -216,13 +222,17 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     componentDidMount() {
-        this.fetchPlayers(this.props.playersDataUrl);
+        const search: any = qs.parse(this.props.router.location.search);
+        this.fetchPlayers(this.props.playersDataUrl, search);
     }
 
     render(): ReactNode {
         const {
-            IsLoading, DateFrom, DateTo, Players
+            IsLoading, Players
         } = this.props;
+
+        const search: any = qs.parse(this.props.router.location.search);
+        const { dateFrom, dateTo } = search;
 
         return (
             <>
@@ -231,8 +241,8 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                     <FilterForm
                         onFormSubmit={this.onFormSubmit}
                         isLoading={IsLoading}
-                        dateFrom={DateFrom}
-                        dateTo={DateTo}
+                        dateFrom={dateFrom}
+                        dateTo={dateTo}
                     />
                     <Dropdown overlay={this.columnSelector} trigger={['click']}>
                         <Button className="ant-dropdown-link">
@@ -266,8 +276,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 type PlayersDataProps = {
     playersDataUrl: string;
     IsLoading: boolean;
-    DateFrom: string;
-    DateTo: string;
     Players: Player[];
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
@@ -304,14 +312,10 @@ export type ColumnMapping = {
 
 const mapStateToProps = (state: RootState) => {
     const IsLoading = state.app.IsLoading;
-    const DateFrom = state.app.DateFrom;
-    const DateTo = state.app.DateTo;
     const Players = state.app.Players;
     const router = state.router;
     return {
         IsLoading,
-        DateFrom,
-        DateTo,
         Players,
         router
     };

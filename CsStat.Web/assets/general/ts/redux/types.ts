@@ -2,8 +2,6 @@ import { RouterState } from 'connected-react-router';
 
 interface IAppState {
     IsLoading: boolean;
-    DateFrom: string;
-    DateTo: string;
     Players: Player[];
     Posts: Post[];
 }
