@@ -4,6 +4,7 @@ import {
 } from 'antd';
 import { connect } from 'react-redux';
 import { ColumnProps } from 'antd/es/table';
+import qs from 'query-string';
 import {
     fetchPlayers, startRequest, stopRequest, selectPlayer
 } from '../../../general/ts/redux/actions';
@@ -13,6 +14,7 @@ import ColumnsSelector from './columns-selector';
 import { nameof } from '../../../general/ts/extentions';
 import '../scss/index.scss';
 import utils from '../../../general/ts/utils';
+import { history } from '../../../general/ts/redux/store';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 const HIDDEN_CELL_CSS_CLASS = 'is-hidden';
@@ -77,10 +79,15 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
     private onRowClick(record: Player): void {
         this.props.selectPlayer(record.Id);
+        history.push({
+            search: `?PlayerId=${record.Id}`
+        });
     }
 
     private cellWrapper(id: string, content: ReactNode): ReactNode {
-        const isSelectedClass = id === this.props.SelectedPlayer ? 'is-selected' : '';
+        const search = qs.parse(history.location.search);
+        const { PlayerId } = search;
+        const isSelectedClass = id === PlayerId ? 'is-selected' : '';
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>;
     }
 
@@ -268,25 +275,11 @@ type PlayersDataProps = {
     startRequest: typeof startRequest;
     stopRequest: typeof stopRequest;
     selectPlayer: typeof selectPlayer;
+    router: any;
 };
 
 type PlayersDataState = {
     visibleColumns: string[];
-};
-
-const mapStateToProps = (state: RootState) => {
-    const SelectedPlayer = state.app.SelectedPlayer;
-    const IsLoading = state.app.IsLoading;
-    const DateFrom = state.app.DateFrom;
-    const DateTo = state.app.DateTo;
-    const Players = state.app.Players;
-    return {
-        SelectedPlayer,
-        IsLoading,
-        DateFrom,
-        DateTo,
-        Players
-    };
 };
 
 export type ColumnNames = {
@@ -310,6 +303,23 @@ export type ColumnNames = {
 export type ColumnMapping = {
     dataIndex: string;
     readableName: string;
+};
+
+const mapStateToProps = (state: RootState) => {
+    const SelectedPlayer = state.app.SelectedPlayer;
+    const IsLoading = state.app.IsLoading;
+    const DateFrom = state.app.DateFrom;
+    const DateTo = state.app.DateTo;
+    const Players = state.app.Players;
+    const router = state.router;
+    return {
+        SelectedPlayer,
+        IsLoading,
+        DateFrom,
+        DateTo,
+        Players,
+        router
+    };
 };
 
 export default connect(

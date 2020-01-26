@@ -38,7 +38,7 @@ type Player = {
 };
 
 type Achievement = {
-    Id: number;
+    AchievementId: number;
     Name: string;
     Description: string;
     IconUrl: string;
