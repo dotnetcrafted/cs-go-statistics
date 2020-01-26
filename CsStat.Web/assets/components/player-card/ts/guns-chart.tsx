@@ -19,7 +19,9 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     }
 
     render() {
-        const { data, legendItems, hoveredChartSection, selectedImageUrl, selectedImageName, isHovered } = this.state;
+        const {
+            data, legendItems, hoveredChartSection, selectedImageUrl, selectedImageName, isHovered
+        } = this.state;
         return (
             <div className="guns-chart__container">
                 <DiscreteColorLegend
@@ -81,7 +83,7 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     }
 
     private getData = (guns: Gun[], colors: Color[]) =>
-        guns.map(g => ({
+        guns.map((g) => ({
             theta: g.Kills,
             label: g.Name,
             id: g.Id,
@@ -92,7 +94,7 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
         }));
 
     private getColors = (guns: Gun[]) =>
-        guns.map(g => ({
+        guns.map((g) => ({
             id: g.Id,
             color: randomColor({
                 luminosity: 'bright',
@@ -101,7 +103,7 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
         }));
 
     private getLegend = (guns: Gun[], colors: Color[]) =>
-        guns.map(g => ({
+        guns.map((g) => ({
             title: `${g.Name}: ${g.Kills} kills`,
             id: g.Id,
             color: this.findColor(colors, g.Id)
@@ -119,12 +121,12 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     }
 
     private findColor = (colors: Color[], id: number) => {
-        const colorObj = colors.find(c => c.id === id);
+        const colorObj = colors.find((c) => c.id === id);
         return colorObj ? colorObj.color : '';
     };
 
     private findGunName = (guns: Gun[], id: number) => {
-        const gunObj = guns.find(g => g.Id === id);
+        const gunObj = guns.find((g) => g.Id === id);
         return gunObj ? gunObj.Name : '';
     };
 }
