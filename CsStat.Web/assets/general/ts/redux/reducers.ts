@@ -3,7 +3,6 @@ import { connectRouter } from 'connected-react-router';
 import {
     IAppState,
     ActionTypes,
-    SELECT_PLAYER,
     FETCH_PLAYERS_DATA,
     START_REQUEST,
     STOP_REQUEST,
@@ -13,7 +12,6 @@ import {
 export const initialState: IAppState = {
     IsLoading: false,
     Players: [],
-    SelectedPlayer: '',
     DateFrom: '',
     DateTo: '',
     Posts: []
@@ -31,18 +29,12 @@ const appReducer: Reducer<IAppState> = (
                 Players: action.payload.Players,
                 DateFrom: action.payload.DateFrom,
                 DateTo: action.payload.DateTo,
-                SelectedPlayer: ''
             };
         case FETCH_POSTS_DATA:
             return {
                 ...state,
                 IsLoading: false,
                 Posts: action.payload,
-            };
-        case SELECT_PLAYER:
-            return {
-                ...state,
-                SelectedPlayer: action.payload
             };
 
         case START_REQUEST:

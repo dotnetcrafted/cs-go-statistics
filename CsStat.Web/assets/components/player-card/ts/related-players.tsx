@@ -1,19 +1,20 @@
 import React, { SFC } from 'react';
 import { Tooltip, Avatar, Badge } from 'antd';
 import { RelatedPlayer } from '../../../general/ts/redux/types';
-const RelatedPlayers: SFC<RelatedPlayersProps> = props => {
+
+const RelatedPlayers: SFC<RelatedPlayersProps> = (props) => {
     const { data, killerType } = props;
     const theme = (killerType: boolean) => {
         const backgroundColor = killerType ? '#75b5a0' : '#cfb249';
         return { backgroundColor };
     };
-    const onPlayerSelect = function(name: string) {
+    const onPlayerSelect = function (name: string) {
         props.onRelatedPlayerSelect(name);
     };
     return (
         <div className="related-players">
             {data &&
-                data.map(item => (
+                data.map((item) => (
                     <div key={item.Name} className="related-players__item" onClick={() => onPlayerSelect(item.Name)}>
                         <Tooltip title={item.Name}>
                             <Badge count={item.Count} overflowCount={9999} style={theme(killerType)}>

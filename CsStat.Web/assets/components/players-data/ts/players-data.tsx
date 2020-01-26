@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { ColumnProps } from 'antd/es/table';
 import qs from 'query-string';
 import {
-    fetchPlayers, startRequest, stopRequest, selectPlayer
+    fetchPlayers, startRequest, stopRequest
 } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
 import { IAppState, RootState, Player } from '../../../general/ts/redux/types';
@@ -78,7 +78,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     private onRowClick(record: Player): void {
-        this.props.selectPlayer(record.Id);
         history.push({
             search: `?PlayerId=${record.Id}`
         });
@@ -266,7 +265,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
 type PlayersDataProps = {
     playersDataUrl: string;
-    SelectedPlayer: string;
     IsLoading: boolean;
     DateFrom: string;
     DateTo: string;
@@ -274,7 +272,6 @@ type PlayersDataProps = {
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
     stopRequest: typeof stopRequest;
-    selectPlayer: typeof selectPlayer;
     router: any;
 };
 
@@ -306,14 +303,12 @@ export type ColumnMapping = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    const SelectedPlayer = state.app.SelectedPlayer;
     const IsLoading = state.app.IsLoading;
     const DateFrom = state.app.DateFrom;
     const DateTo = state.app.DateTo;
     const Players = state.app.Players;
     const router = state.router;
     return {
-        SelectedPlayer,
         IsLoading,
         DateFrom,
         DateTo,
@@ -327,7 +322,6 @@ export default connect(
     {
         fetchPlayers,
         startRequest,
-        stopRequest,
-        selectPlayer
+        stopRequest
     }
 )(PlayersData);

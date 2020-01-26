@@ -8,7 +8,6 @@ import GunsChart from './guns-chart';
 import Achievements from './achievements';
 import RelatedPlayers from './related-players';
 import { RootState, Player, Gun } from '../../../general/ts/redux/types';
-import { selectPlayer } from '../../../general/ts/redux/actions';
 import '../scss/index.scss';
 import utils from '../../../general/ts/utils';
 import { history } from '../../../general/ts/redux/store';
@@ -17,7 +16,7 @@ const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
 const PlayerCard: SFC<PlayerCardProps> = (props) => {
-    const search = qs.parse(history.location.search);
+    const search = qs.parse(props.router.location.search);
     const { PlayerId } = search;
 
     const onRelatedPlayerSelect = (name: string) => {
@@ -25,7 +24,6 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
         if (!id) {
             throw new Error('No players found with this Name');
         }
-        props.selectPlayer(id);
         history.push({
             search: `?PlayerId=${id}`
         });
@@ -106,17 +104,15 @@ const _getPlayerViewModel = (id: string, data: Player[]) => {
     };
 };
 type PlayerCardProps = {
-    SelectedPlayer: string;
+    router: any;
     Players: Player[];
-    selectPlayer: typeof selectPlayer;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const SelectedPlayer = state.app.SelectedPlayer;
     const Players = state.app.Players;
-    return { SelectedPlayer, Players };
+    const router = state.router;
+    return { Players, router };
 };
 export default connect(
-    mapStateToProps,
-    { selectPlayer }
+    mapStateToProps
 )(PlayerCard);
