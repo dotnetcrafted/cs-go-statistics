@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, DatePicker, Button, Row, Col } from 'antd';
+import {
+    Form, DatePicker, Button, Row, Col
+} from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import moment, { Moment } from 'moment';
 import en_GB from 'antd/es/date-picker/locale/en_GB';
@@ -82,15 +84,14 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
         );
     }
 
-    private getDateObject = (date: string): Moment => {
+    private getDateObject = (date?: string): Moment => {
         if (date) {
             return moment(new Date(date));
-        } else {
-            return moment();
         }
+        return moment();
     };
 
-    private getConfig = (dateString: string): Config => {
+    private getConfig = (dateString?: string): Config => {
         const dateObject = this.getDateObject(dateString);
         return {
             rules: [
@@ -109,21 +110,20 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
 
         if (moment(dateFrom).isAfter(moment())) {
             return true;
-        } else if (moment(dateFrom).isSameOrAfter(dateTo, 'day')) {
-            return false;
-        } else {
+        } if (moment(dateFrom).isSameOrAfter(dateTo, 'day')) {
             return false;
         }
+        return false;
     };
+
     private disabledDateTo = (dateTo: Moment | undefined): boolean => {
         const { dateFrom } = this.state;
         if (moment(dateTo).isAfter(moment())) {
             return true;
-        } else if (moment(dateTo).isSameOrAfter(dateFrom, 'day')) {
+        } if (moment(dateTo).isSameOrAfter(dateFrom, 'day')) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     };
 
     private onFromChange = (value: Moment | null): void => {
@@ -147,6 +147,7 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
             this.setState({ dateToIsOpen: true });
         }
     };
+
     private handleToOpenChange = (open: boolean): void => {
         this.setState({ dateToIsOpen: open });
     };
@@ -195,7 +196,7 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
 
         this.props.onFormSubmit(values);
     };
-    
+
     private onAllButtonClick = () => {
         const values: DateValues = {
             dateFrom: '',
@@ -213,8 +214,8 @@ export type DateValues = {
 };
 interface IFilterFormProps extends FormComponentProps {
     onFormSubmit: (message: DateValues) => void;
-    dateFrom: string;
-    dateTo: string;
+    dateFrom?: string;
+    dateTo?: string;
     isLoading: boolean;
 }
 
