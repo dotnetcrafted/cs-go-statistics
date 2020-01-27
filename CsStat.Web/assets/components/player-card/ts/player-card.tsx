@@ -58,7 +58,7 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
                 </Descriptions>
                 <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                 {gunsToShow && <GunsChart guns={gunsToShow} />}
-                <Divider orientation="left">{`${model.Name} have killed them:`}</Divider>
+                <Divider orientation="left">{`${model.Name} has killed them:`}</Divider>
                 <RelatedPlayers data={model.Victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
                 <Divider orientation="left">{`They have killed ${model.Name}`}</Divider>
                 <RelatedPlayers data={model.Killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
