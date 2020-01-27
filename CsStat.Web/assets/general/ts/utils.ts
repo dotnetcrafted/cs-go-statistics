@@ -41,6 +41,8 @@ function stringInterpolate(template: string, data: any, customizer: (key: any, d
 
 const getHeadshotsString = (HeadShot: number, Kills: number): string => (Kills === 0 ? '0' : `${Math.round((HeadShot / Kills) * 100)}% (${HeadShot})`);
 
+const getHeadshotsPercent = (HeadShot: number, Kills: number): number => (Kills === 0 ? 0 : Math.round((HeadShot / Kills) * 100));
+
 const getUrlSearch = (newValues: object, oldString: string): string => {
     const oldValues = qs.parse(oldString);
     const assigned = { ...oldValues, ...newValues };
@@ -52,5 +54,6 @@ export default {
     stringFormat,
     stringInterpolate,
     getHeadshotsString,
+    getHeadshotsPercent,
     getUrlSearch
 };

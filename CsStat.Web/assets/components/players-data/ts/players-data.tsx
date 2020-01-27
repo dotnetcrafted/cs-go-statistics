@@ -169,7 +169,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             title: COLUMN_NAMES.HeadShot.readableName,
             className: this.getCellClassName(COLUMN_NAMES.HeadShot.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, utils.getHeadshotsString(record.HeadShot, record.Kills)),
-            sorter: (a: Player, b: Player) => b.HeadShot - a.HeadShot
+            sorter: (a: Player, b: Player) => utils.getHeadshotsPercent(b.HeadShot, b.Kills) - utils.getHeadshotsPercent(a.HeadShot, a.Kills)
         },
         {
             dataIndex: COLUMN_NAMES.Assists.dataIndex,
