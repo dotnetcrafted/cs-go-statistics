@@ -163,7 +163,7 @@ namespace CsStat.LogApi
             {
                 result.Action = Actions.FriendlyKill;
             }
-            else if(result.Action == Actions.Other)
+            else if(result.Action == Actions.Other || result.Action == Actions.Unknown)
 
             {
                 return null;
