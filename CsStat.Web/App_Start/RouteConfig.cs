@@ -48,6 +48,12 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
+                name: "serverinfo",
+                url: Settings.ServerInfoDataApiPath,
+                defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

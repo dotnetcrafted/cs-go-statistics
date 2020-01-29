@@ -36,7 +36,7 @@ namespace CSStat.WebApp.Tests
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
             _logRepository = new LogsRepository(_mongoRepository);
-            _playerRepository = new PlayerRepository(_mongoRepository);
+            //_playerRepository = new PlayerRepository(_mongoRepository);
             _baseRepository = new BaseRepository(_mongoRepository);
             _usefulLinkRepository = new UsefulLinkRepository(_mongoRepository);
             _userRepository = new UserRepository(_mongoRepository);
@@ -212,17 +212,17 @@ namespace CSStat.WebApp.Tests
 
         private static void PrintPlayerStat(PlayerStatsModel log)
         {
-            var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
-                ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
-                : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
+            //var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
+            //    ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
+            //    : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
 
-            Console.WriteLine(Environment.NewLine);
+            //Console.WriteLine(Environment.NewLine);
 
-            Console.WriteLine(
-                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
-                $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-                $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.AchieveId.GetDescription()).ToList())}," +
-                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
+            //Console.WriteLine(
+            //    ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
+            //    $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
+            //    $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.AchieveId.GetDescription()).ToList())}," +
+            //    $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 
         private static void PrintLog(Log log)
