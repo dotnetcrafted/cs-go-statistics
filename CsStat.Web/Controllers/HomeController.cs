@@ -22,14 +22,13 @@ namespace CsStat.Web.Controllers
             _playerRepository = playerRepository;
             _steamApi = new SteamApi();
         }
-
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo")]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
