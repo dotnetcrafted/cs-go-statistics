@@ -17,6 +17,7 @@ namespace CsStat.Domain
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
+        public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
 
         public static string PlayersDataSteamApiPath =>
@@ -28,7 +29,9 @@ namespace CsStat.Domain
         public static string AchievementsPath => GetSetting(nameof(AchievementsPath), Defaults.AchievementsPath);
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
+        public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
+        public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
 
 
         private static string GetSetting(string settingName, string defaultValue = null)
@@ -66,6 +69,7 @@ namespace CsStat.Domain
             public const int TakeLines = 50;
             public const string PlayersDataApiPath = "api/playersdata";
             public const string WikiDataApiPath = "api/articles";
+            public const string ServerInfoDataApiPath = "api/serverinfo";
             public const string WikiPagePath = "wiki";
 
             public const string PlayersDataSteamApiPath =
@@ -77,7 +81,9 @@ namespace CsStat.Domain
             public const string AchievementsPath = "https://admin.csfuse8.site/Achievements";
             public const string CmsAdminPath = "https://admin.csfuse8.site/shell";
             public const string AdminPath = "https://admin.csfuse8.site";
+            public const string CsServerIp = "192.168.100.241";
             public const int ShowNullPlayers = 1;
+            public const int CsServerPort = 27015;
         }
     }
 }

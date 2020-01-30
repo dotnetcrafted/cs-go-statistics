@@ -99,7 +99,15 @@ namespace BusinessFacade.Repositories.Implementations
             foreach (var player in players)
             {
                 var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId).ToList();
-                var victimLogs = logs.Where(x => x.Victim?.SteamId == player.SteamId).ToList();
+                var victimLogs = logs.Where(x => x.Victim?.SteamId == player.SteamId && x.Action == Actions.Kill).ToList();
+
+                if (victimLogs.Any())
+                {
+                    foreach (var victim in victimLogs)
+                    {
+                        victim.Player.NickName = player.NickName;
+                    }
+                }
 
                 if (!playerLogs.Any() && !victimLogs.Any())
                 {
@@ -216,14 +224,14 @@ namespace BusinessFacade.Repositories.Implementations
             playersStats.Where(x=>x.Assists > 0).OrderByDescending(x => x.Assists).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.TeamPlayer));
 
-            playersStats.Where(x=>x.HeadShot!=0 && x.Kills > 7).OrderByDescending(x => x.HeadShot).FirstOrDefault()?
+            playersStats.Where(x=>x.HeadShot > 0 && x.Kills > 7).OrderByDescending(x => x.HeadShot).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.HeadHunter));
                 
-            playersStats.Where(x=>x.Deaths > 0).OrderByDescending(x => x.Deaths).FirstOrDefault()?
+            playersStats.Where(x=>x.Deaths > 0).OrderByDescending(x => x.Deaths).ThenBy(x=>x.KdRatio).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Kenny));
                 
-            playersStats.Where(x=>x.Points > 0).OrderByDescending(x=>x.Points).FirstOrDefault()?.
-                 Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Mvp));              
+            playersStats.Where(x=>x.Points > 0).OrderByDescending(x=>x.Points).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Mvp));              
 
             playersStats.Where(x=>x.SniperRifleKills > 0).OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Sniper));

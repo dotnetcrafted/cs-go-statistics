@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using ServerQueries.Source;
+
 
 namespace CSStat.WebApp.Tests
 {
@@ -15,6 +18,21 @@ namespace CSStat.WebApp.Tests
             var achievements = JsonConvert.DeserializeObject<List<AchievementModelTest>>(json);
 
             return new List<AchievementModelTest>();
+        }
+
+        [Test]
+        public void TestQuery()
+        {
+            IQueryConnection conn = new QueryConnection();
+            conn.Host = "192.168.100.241";
+            conn.Port = 27015;
+
+            conn.Connect();
+            var info = conn.GetInfo();
+            //var players = conn.GetPlayers();
+            //var rules = conn.GetRules();
+            //conn.Disconnect();
+            Console.WriteLine(info.ToString());
         }
 
         private string GetJson(string url)
@@ -38,6 +56,8 @@ namespace CSStat.WebApp.Tests
                     return reader.ReadToEnd();
                 }
             }
+
+
         }
     }
 }

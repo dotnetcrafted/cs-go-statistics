@@ -101,6 +101,10 @@
       <Project>{8BF54175-DFD2-41AD-80FD-B8C962170293}</Project>
       <Name>CsStat.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\ServerQueries\ServerQueries.csproj">
+      <Project>{f4ff265d-ba20-4284-9bd2-dacfcd06a7ca}</Project>
+      <Name>ServerQueries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
