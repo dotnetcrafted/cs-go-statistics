@@ -99,17 +99,9 @@ namespace BusinessFacade.Repositories.Implementations
             foreach (var player in players)
             {
                 var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId).ToList();
-                var victimLogs = logs.Where(x => x.Victim?.SteamId == player.SteamId && x.Action == Actions.Kill).ToList();
+                var playersKillersLogs = logs.Where(x => x.Victim?.SteamId == player.SteamId).ToList();
 
-                if (victimLogs.Any())
-                {
-                    foreach (var victim in victimLogs)
-                    {
-                        victim.Player.NickName = player.NickName;
-                    }
-                }
-
-                if (!playerLogs.Any() && !victimLogs.Any())
+                if (!playerLogs.Any() && !playersKillersLogs.Any())
                 {
                     continue;
                 }
@@ -123,13 +115,13 @@ namespace BusinessFacade.Repositories.Implementations
                 var friendlyKills = playerLogs.Count(x => x.Action == Actions.FriendlyKill);
                 var assists = playerLogs.Count(x => x.Action == Actions.Assist);
                 var kills = playerLogs.Count(x => x.Action == Actions.Kill);
-                var deaths = victimLogs.Count(x => x.Action == Actions.Kill);
+                var deaths = playersKillersLogs.Count(x => x.Action == Actions.Kill);
                 var totalGames = playerLogs.Count(x => x.Action == Actions.EnteredTheGame);
                 var headShotCount = playerLogs.Count(x => x.IsHeadShot && x.Action == Actions.Kill);
                 var victimList = playerLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Victim).ToList();
-                var killerList = victimLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Player).ToList();
+                var killerList = playersKillersLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Player).ToList();
                 var friendlyVictimList = playerLogs.Where(x => x.Action == Actions.FriendlyKill).Select(x => x.Victim).ToList();
-                var friendlyKillerList = victimLogs.Where(x => x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
+                var friendlyKillerList = playersKillersLogs.Where(x => x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
 
                 playersStats.Add(new PlayerStatsModel
                 {
