@@ -81,3 +81,4 @@ _[Ss]cripts
 CsStat.Web/Web.config
 .vscode
 CSStat.WebApp.Tests/TestParse/testLogs.txt
+CsStat.Web/Web.config
