@@ -103,7 +103,7 @@ namespace BusinessFacade.Repositories.Implementations
             
             foreach (var player in players)
             {
-                var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId || x.Victim?.SteamId == player.SteamId).ToList();
+                var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId || x.Victim?.SteamId == player.SteamId || x.Action == Actions.TargetBombed).ToList();
 
                 if (!playerLogs.Any())
                 {

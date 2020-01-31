@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CsStat.Domain.Entities;
+using CsStat.LogApi.Enums;
 using DataService.Interfaces;
 using MongoDB.Driver.Builders;
 
@@ -25,7 +26,7 @@ namespace BusinessFacade.Repositories.Implementations
         public IEnumerable<Log> GetPlayerLogs(Player player)
         {
             var query = new QueryBuilder<Log>();
-            return _mongoRepository.GetRepository<Log>().Collection.Find(query.Or(query.EQ(x=>x.Player.SteamId, player.SteamId), query.EQ(x=>x.Victim.SteamId, player.SteamId))).ToList();
+            return _mongoRepository.GetRepository<Log>().Collection.Find(query.Or(query.EQ(x=>x.Player.SteamId, player.SteamId), query.EQ(x=>x.Victim.SteamId, player.SteamId), query.EQ(x=>x.Action, Actions.TargetBombed))).ToList();
         }
 
         public LogsRepository(IMongoRepositoryFactory mongoRepository) : base(mongoRepository)
