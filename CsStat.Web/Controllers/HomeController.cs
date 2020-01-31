@@ -62,14 +62,14 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        public JsonResult GetPlayerStat(string playerName = "")
+        public JsonResult GetPlayerStat(string playerName = "", string dateFrom = "", string dateTo="")
         {
             if (playerName.IsNullOrWhiteSpace())
             {
                 return new JsonResult();
             }
             
-            var stat = _playerRepository.GetStatsForPlayer(playerName);
+            var stat = _playerRepository.GetStatsForPlayer(playerName, dateFrom, dateTo);
             
             if(stat== null)
                 return new JsonResult();

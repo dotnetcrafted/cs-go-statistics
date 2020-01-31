@@ -88,7 +88,7 @@ namespace CSStat.WebApp.Tests
         [Test]
         public void GetStatForPLayer()
         {
-            var stat = _playerRepository.GetStatsForPlayer("rdk");
+            var stat = _playerRepository.GetStatsForPlayer("rdk","01/31/2020");
             if (stat != null)
             {
                 PrintPlayerStat(stat);
