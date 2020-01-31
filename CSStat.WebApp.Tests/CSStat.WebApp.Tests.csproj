@@ -93,6 +93,10 @@
       <Project>{C5122D50-78CD-4D75-BD81-90C564251F15}</Project>
       <Name>CsStat.LogApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\CsStat.StrapiApi\CsStat.StrapiApi.csproj">
+      <Project>{CBEB0D43-468F-4160-90E3-6AE272FDCF1A}</Project>
+      <Name>CsStat.StrapiApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\CsStat.SystemFacade\CsStat.SystemFacade.csproj">
       <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
       <Name>CsStat.SystemFacade</Name>

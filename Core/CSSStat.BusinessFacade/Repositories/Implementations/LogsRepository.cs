@@ -22,6 +22,12 @@ namespace BusinessFacade.Repositories.Implementations
             return _mongoRepository.GetRepository<Log>().Collection.Find(query.And(query.GTE(x => x.DateTime, timeFrom), query.LTE(x => x.DateTime, timeTo))).ToList();
         }
 
+        public IEnumerable<Log> GetPlayerLogs(Player player)
+        {
+            var query = new QueryBuilder<Log>();
+            return _mongoRepository.GetRepository<Log>().Collection.Find(query.Or(query.EQ(x=>x.Player.SteamId, player.SteamId), query.EQ(x=>x.Victim.SteamId, player.SteamId))).ToList();
+        }
+
         public LogsRepository(IMongoRepositoryFactory mongoRepository) : base(mongoRepository)
         {
             _mongoRepository = mongoRepository;
