@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
@@ -26,6 +27,8 @@ namespace BusinessFacade.Repositories.Implementations
             _logsRepository = new LogsRepository(_mongoRepository);
             _strapiApi = strapiApi;
         }
+
+        #region Mongo
 
         public IEnumerable<Player> GetAllPlayers()
         {
@@ -82,6 +85,8 @@ namespace BusinessFacade.Repositories.Implementations
             _mongoRepository.GetRepository<Player>().Collection.Save(player);
         }
 
+        #endregion
+
         public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo)
         {
             var logs = GetLogs(dateFrom, dateTo);
@@ -98,58 +103,79 @@ namespace BusinessFacade.Repositories.Implementations
             
             foreach (var player in players)
             {
-                var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId).ToList();
-                var playersKillersLogs = logs.Where(x => x.Victim?.SteamId == player.SteamId).ToList();
+                var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId || x.Victim?.SteamId == player.SteamId || x.Action == Actions.TargetBombed).ToList();
 
-                if (!playerLogs.Any() && !playersKillersLogs.Any())
+                if (!playerLogs.Any())
                 {
                     continue;
                 }
 
-                var guns = GetGuns(playerLogs.Where(x =>x.Action == Actions.Kill).ToList());
-                var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
-                var grenade = guns?.Where(x => x.Gun == Guns.He).Sum(x=>x.Kills);
-                var molotov = guns?.Where(x => x.Gun == Guns.Molotov || x.Gun == Guns.Inferno || x.Gun == Guns.Inc).Sum(x=>x.Kills);
-                var explodeBombs = GetExplodeBombs(playerLogs.Where(x=>x.Action==Actions.Plant).ToList(), logs.Where(x=>x.Action==Actions.TargetBombed).ToList());
-                var defuse = playerLogs.Count(x =>x.Action == Actions.Defuse);
-                var friendlyKills = playerLogs.Count(x => x.Action == Actions.FriendlyKill);
-                var assists = playerLogs.Count(x => x.Action == Actions.Assist);
-                var kills = playerLogs.Count(x => x.Action == Actions.Kill);
-                var deaths = playersKillersLogs.Count(x => x.Action == Actions.Kill);
-                var totalGames = playerLogs.Count(x => x.Action == Actions.EnteredTheGame);
-                var headShotCount = playerLogs.Count(x => x.IsHeadShot && x.Action == Actions.Kill);
-                var victimList = playerLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Victim).ToList();
-                var killerList = playersKillersLogs.Where(x => x.Action == Actions.Kill).Select(x => x.Player).ToList();
-                var friendlyVictimList = playerLogs.Where(x => x.Action == Actions.FriendlyKill).Select(x => x.Victim).ToList();
-                var friendlyKillerList = playersKillersLogs.Where(x => x.Action == Actions.FriendlyKill).Select(x => x.Player).ToList();
-
-                playersStats.Add(new PlayerStatsModel
-                {
-                        Player = player,
-                        Kills = kills,
-                        Deaths = deaths,
-                        Assists = assists,
-                        FriendlyKills = friendlyKills,
-                        TotalGames = totalGames,
-                        HeadShot = headShotCount ,
-                        Guns = guns,
-                        Defuse = defuse,
-                        Explode = explodeBombs,
-                        Points = kills + assists + (defuse + explodeBombs)*2 - friendlyKills * 2 - deaths/2,
-                        SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
-                        Victims = GetPlayers(victimList).OrderByDescending(x=>x.Count).ToList(),
-                        Killers = GetPlayers(killerList).OrderByDescending(x=>x.Count).ToList(),
-                        FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x=>x.Count).ToList(),
-                        FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x=>x.Count).ToList(),
-                        GrenadeKills = grenade ?? 0,
-                        MolotovKills = molotov ?? 0
-
-                });
+                playersStats.Add(CountStats(playerLogs, player));
             }
 
             SetAchievementsToPLayers(playersStats.OrderByDescending(x=>x.KdRatio).ToList());
 
             return playersStats;
+        }
+
+
+        public PlayerStatsModel GetStatsForPlayer(string playerName)
+        {
+            var player = GetPlayerByNickName(playerName);
+            
+            if (player == null)
+            {
+                return null;
+            }
+
+            var logs = _logsRepository.GetPlayerLogs(player).ToList();
+            
+            return !logs.Any() 
+                ? new PlayerStatsModel() 
+                : CountStats(logs, player);
+        }
+
+        private static PlayerStatsModel CountStats(List<Log> logs, Player player)
+        {
+            var guns = GetGuns(logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).ToList());
+            var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
+            var grenade = guns?.Where(x => x.Gun == Guns.He).Sum(x => x.Kills);
+            var molotov = guns?.Where(x => x.Gun == Guns.Molotov || x.Gun == Guns.Inferno || x.Gun == Guns.Inc).Sum(x => x.Kills);
+            var explodeBombs = GetExplodeBombs(logs.Where(x => x.Action == Actions.Plant).ToList(), logs.Where(x => x.Action == Actions.TargetBombed).ToList());
+            var defuse = logs.Count(x => x.Action == Actions.Defuse);
+            var friendlyKills = logs.Count(x => x.Action == Actions.FriendlyKill && x.Player.SteamId == player.SteamId);
+            var assists = logs.Count(x => x.Action == Actions.Assist && x.Player.SteamId == player.SteamId);
+            var kills = logs.Count(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId);
+            var deaths = logs.Count(x => x.Action == Actions.Kill && x.Victim?.SteamId == player.SteamId);
+            var totalGames = logs.Count(x => x.Action == Actions.EnteredTheGame);
+            var headShotCount = logs.Count(x => x.IsHeadShot && x.Action == Actions.Kill && x.Player.SteamId == player.SteamId);
+            var victimList = logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).Select(x => x.Victim).ToList();
+            var killerList = logs.Where(x => x.Action == Actions.Kill && x.Victim?.SteamId == player.SteamId).Select(x => x.Player).ToList();
+            var friendlyVictimList = logs.Where(x => x.Action == Actions.FriendlyKill && x.Player.SteamId == player.SteamId).Select(x => x.Victim).ToList();
+            var friendlyKillerList = logs.Where(x => x.Action == Actions.FriendlyKill && x.Victim?.SteamId == player.SteamId).Select(x => x.Player).ToList();
+
+            return new PlayerStatsModel
+            {
+                Player = player,
+                Kills = kills,
+                Deaths = deaths,
+                Assists = assists,
+                FriendlyKills = friendlyKills,
+                TotalGames = totalGames,
+                HeadShot = headShotCount,
+                Guns = guns,
+                Defuse = defuse,
+                Explode = explodeBombs,
+                Points = kills + assists + (defuse + explodeBombs) * 2 - friendlyKills * 2 - deaths / 2,
+                SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
+                Victims = GetPlayers(victimList).OrderByDescending(x => x.Count).ToList(),
+                Killers = GetPlayers(killerList).OrderByDescending(x => x.Count).ToList(),
+                FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x => x.Count).ToList(),
+                FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x => x.Count).ToList(),
+                GrenadeKills = grenade ?? 0,
+                MolotovKills = molotov ?? 0
+
+            };
         }
         
         private static List<PlayerModel> GetPlayers(List<Player> players)
