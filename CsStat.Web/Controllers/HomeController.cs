@@ -5,10 +5,12 @@ using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
+using CSStat.CsLogsApi.Extensions;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace CsStat.Web.Controllers
 {
@@ -59,6 +61,25 @@ namespace CsStat.Web.Controllers
             };
         }
 
+        public JsonResult GetPlayerStat(string playerName = "")
+        {
+            if (playerName.IsNullOrWhiteSpace())
+            {
+                return new JsonResult();
+            }
+            
+            var stat = _playerRepository.GetStatsForPlayer(playerName);
+            
+            if(stat== null)
+                return new JsonResult();
+
+            return new JsonResult
+            {
+                Data = stat,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
             var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).OrderByDescending(x=>x.KdRatio).ToList();
@@ -81,6 +102,5 @@ namespace CsStat.Web.Controllers
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
-
     }
 }

@@ -19,6 +19,13 @@ namespace CsStat.Web
                 defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "playerstat",
+                url: Settings.PlayerStatApiPath,
+                defaults: new { controller = "Home", action = "GetPlayerStat", id = UrlParameter.Optional }
+            );
+
             //don't remove: custom admin
             //routes.MapRoute
             //(

@@ -6,6 +6,7 @@ namespace BusinessFacade.Repositories
     public interface IPlayerRepository
     {
         IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom="", string dateTo="");
+        PlayerStatsModel GetStatsForPlayer(string playerName);
         IEnumerable<Player> GetAllPlayers();
         Player GetPlayerByNickName(string nickName);
         Player GetPlayerById(string id);

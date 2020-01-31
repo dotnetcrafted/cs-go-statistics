@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
+using CsStat.StrapiApi;
 using CsStat.Web.Helpers;
 using CsStat.Web.Models;
 using CSStat.WebApp.Tests.Entity;
@@ -30,13 +32,15 @@ namespace CSStat.WebApp.Tests
         private readonly IUsefulLinkRepository _usefulLinkRepository;
         private readonly IUserRepository _userRepository;
         private readonly UserRegistrationService _registrationService;
+        private readonly IStrapiApi _strapiApi;
 
         public  MongoRepositoryFactoryTests()
         {
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
+            _strapiApi = new StrapiApi();
             _logRepository = new LogsRepository(_mongoRepository);
-            //_playerRepository = new PlayerRepository(_mongoRepository);
+            _playerRepository = new PlayerRepository(_mongoRepository, _strapiApi);
             _baseRepository = new BaseRepository(_mongoRepository);
             _usefulLinkRepository = new UsefulLinkRepository(_mongoRepository);
             _userRepository = new UserRepository(_mongoRepository);
@@ -78,6 +82,20 @@ namespace CSStat.WebApp.Tests
                 {
                     PrintPlayerStat(logModel);
                 }
+            }
+        }
+
+        [Test]
+        public void GetStatForPLayer()
+        {
+            var stat = _playerRepository.GetStatsForPlayer("rdk");
+            if (stat != null)
+            {
+                PrintPlayerStat(stat);
+            }
+            else
+            {
+                Console.WriteLine("Unknown player");
             }
         }
 
@@ -212,17 +230,17 @@ namespace CSStat.WebApp.Tests
 
         private static void PrintPlayerStat(PlayerStatsModel log)
         {
-            //var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
-            //    ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
-            //    : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
+            var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
+                ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
+                : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
 
-            //Console.WriteLine(Environment.NewLine);
-
-            //Console.WriteLine(
-            //    ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
-            //    $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-            //    $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.AchieveId.GetDescription()).ToList())}," +
-            //    $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
+            Console.WriteLine(Environment.NewLine);
+            //{ string.Join(" | ", log.Achievements?.Select(x => x.AchievementId.GetDescription()).ToList())}
+            Console.WriteLine(
+                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
+                $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
+                $"Points: {log.Points},Acheivements: " +
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 
         private static void PrintLog(Log log)

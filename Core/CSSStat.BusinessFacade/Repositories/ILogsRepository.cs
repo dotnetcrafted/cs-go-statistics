@@ -8,5 +8,6 @@ namespace BusinessFacade.Repositories
     {
         IEnumerable<Log> GetAllLogs();
         IEnumerable<Log> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo);
+        IEnumerable<Log> GetPlayerLogs(Player player);
     }
 }
