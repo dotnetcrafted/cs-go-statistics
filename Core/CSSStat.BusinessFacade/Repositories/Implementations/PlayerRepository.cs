@@ -119,7 +119,7 @@ namespace BusinessFacade.Repositories.Implementations
         }
 
 
-        public PlayerStatsModel GetStatsForPlayer(string playerName)
+        public PlayerStatsModel GetStatsForPlayer(string playerName, string from ="", string to="")
         {
             var player = GetPlayerByNickName(playerName);
             
@@ -128,7 +128,7 @@ namespace BusinessFacade.Repositories.Implementations
                 return null;
             }
 
-            var logs = _logsRepository.GetPlayerLogs(player).ToList();
+            var logs = _logsRepository.GetPlayerLogs(player, from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1)).ToList();
             
             return !logs.Any() 
                 ? new PlayerStatsModel() 
