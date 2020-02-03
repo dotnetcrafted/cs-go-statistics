@@ -31,6 +31,7 @@ namespace CsStat.Domain
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
         public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
+        public static string PlayersListApiPath => GetSetting(nameof(PlayersListApiPath), Defaults.PlayersListApiPath);
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
         public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
 
@@ -69,9 +70,10 @@ namespace CsStat.Domain
             public const int TimerInterval = 10000;
             public const int TakeLines = 50;
             public const string PlayersDataApiPath = "api/playersdata";
-            public const string PlayerStatApiPath = "api/playerstat";
+            public const string PlayerStatApiPath = "api/bot/playerstat";
+            public const string PlayersListApiPath = "api/bot/playerslist";
             public const string WikiDataApiPath = "api/articles";
-            public const string ServerInfoDataApiPath = "api/serverinfo";
+            public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
 
             public const string PlayersDataSteamApiPath =
