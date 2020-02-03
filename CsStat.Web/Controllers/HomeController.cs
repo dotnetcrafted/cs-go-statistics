@@ -11,6 +11,7 @@ using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using Microsoft.Ajax.Utilities;
+using MongoDB.Driver;
 
 namespace CsStat.Web.Controllers
 {
@@ -62,21 +63,24 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        public JsonResult GetPlayerStat(string playerName = "", string dateFrom = "", string dateTo="")
+        public JsonResult GetPlayerStat(string playerName = "", string intervalAlias="")
         {
             if (playerName.IsNullOrWhiteSpace())
             {
                 return new JsonResult();
             }
-            
-            var stat = _playerRepository.GetStatsForPlayer(playerName, dateFrom, dateTo);
-            
-            if(stat== null)
-                return new JsonResult();
+
+            var dateFrom = string.Empty;
+            var dateTo = string.Empty;
+
+            if (intervalAlias.ToLower() == "today")
+            {
+                dateFrom = DateTime.Now.Hour < 12 ? DateTime.Now.AddDays(-1).ToShortDateString() : DateTime.Now.ToShortDateString();
+            }
 
             return new JsonResult
             {
-                Data = stat,
+                Data = GetStatForOnePlayer(playerName, dateFrom, dateTo),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
@@ -102,6 +106,13 @@ namespace CsStat.Web.Controllers
             }
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
+        }
+
+        private static PlayerStatsViewModel GetStatForOnePlayer(string playerName, string dateFrom, string dateTo)
+        {
+            var stat = _playerRepository.GetStatsForPlayer(playerName, dateFrom, dateTo);
+
+            return stat == null ? new PlayerStatsViewModel() : Mapper.Map<PlayerStatsViewModel>(stat);
         }
     }
 }
