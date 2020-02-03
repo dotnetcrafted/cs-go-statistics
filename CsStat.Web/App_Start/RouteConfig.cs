@@ -23,7 +23,14 @@ namespace CsStat.Web
             (
                 name: "playerstat",
                 url: Settings.PlayerStatApiPath,
-                defaults: new { controller = "Home", action = "GetPlayerStat", id = UrlParameter.Optional }
+                defaults: new { controller = "HangoutBot", action = "GetPlayerStat", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "playerslist",
+                url: Settings.PlayersListApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetPlayerList", id = UrlParameter.Optional }
             );
 
             //don't remove: custom admin
@@ -57,7 +64,7 @@ namespace CsStat.Web
             routes.MapRoute(
                 name: "serverinfo",
                 url: Settings.ServerInfoDataApiPath,
-                defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
+                defaults: new { controller = "HangoutBot", action = "ServerInfo", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
