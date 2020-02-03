@@ -73,7 +73,7 @@ namespace CsStat.Web.Controllers
             var dateFrom = string.Empty;
             var dateTo = string.Empty;
 
-            if (intervalAlias.ToLower() == "today")
+            if (intervalAlias.ToLower() != "all")
             {
                 dateFrom = DateTime.Now.Hour < 12 ? DateTime.Now.AddDays(-1).ToShortDateString() : DateTime.Now.ToShortDateString();
             }
