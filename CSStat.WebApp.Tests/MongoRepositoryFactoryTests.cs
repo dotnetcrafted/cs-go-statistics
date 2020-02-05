@@ -140,7 +140,6 @@ namespace CSStat.WebApp.Tests
         public void UpdatePlayer(string imagePath)
         {
             var player = _playerRepository.GetPlayerByNickName("Host");
-            _playerRepository.UpdatePlayer(player.Id, "Danil", "Shilov", imagePath);
         }
         [Test]
         public void GetPlayers()
@@ -224,7 +223,7 @@ namespace CSStat.WebApp.Tests
         }
         private static void PrintPlayer(Player player)
         {
-            Console.WriteLine($"First Name: {player.FirstName},Second Name: {player.SecondName},Nick Name: {player.NickName},Image: {player.ImagePath}".Replace(',', '\n'));
+            Console.WriteLine($"Nick Name: {player.NickName},Image: {player.ImagePath},SteamID: {player.SteamId}, Is Retired: {player.IsRetired}".Replace(',', '\n'));
             Console.WriteLine(Environment.NewLine);
         }
 

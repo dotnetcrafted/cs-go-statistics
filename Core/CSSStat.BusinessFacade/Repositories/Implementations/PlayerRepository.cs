@@ -32,7 +32,9 @@ namespace BusinessFacade.Repositories.Implementations
 
         public IEnumerable<Player> GetAllPlayers()
         {
-            return base.GetAll<Player>().OrderByDescending(x=>x.Id).DistinctBy(x=>x.SteamId);
+            var query = new QueryBuilder<Player>();
+            return _mongoRepository.GetRepository<Player>().Collection.Find(query.Where(x => !x.IsRetired)).DistinctBy(x => x.SteamId);
+            //return base.GetAll<Player>().OrderByDescending(x=>x.Id).DistinctBy(x=>x.SteamId);
         }
 
         public Player GetPlayerByNickName(string nickName)
@@ -56,33 +58,6 @@ namespace BusinessFacade.Repositories.Implementations
         public void AddPlayers(List<Player> players)
         {
            base.InsertBatch(players);
-        }
-
-        public void UpdatePlayer(string id, string firstName = null, string secondName = null, string imagePath = null)
-        {
-            var player = GetPlayerById(id);
-
-            if (player == null)
-            {
-                return;
-            }
-
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                player.FirstName = firstName;
-            }
-
-            if (!string.IsNullOrEmpty(secondName))
-            {
-                player.SecondName = secondName;
-            }
-
-            if (!string.IsNullOrEmpty(imagePath))
-            {
-                player.ImagePath = imagePath;
-            }
-
-            _mongoRepository.GetRepository<Player>().Collection.Save(player);
         }
 
         #endregion
