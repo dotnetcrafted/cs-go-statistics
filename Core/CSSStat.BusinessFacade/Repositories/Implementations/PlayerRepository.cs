@@ -205,12 +205,13 @@ namespace BusinessFacade.Repositories.Implementations
         {
             return !logs.Any()
                 ? null
-                : logs.Where(x=>x.Action==Actions.Kill).GroupBy(x => x.Gun).Select(r => new GunModel
-                       {
-                           Gun = r.Key,
-                           Kills = r.Count()
-                       }).OrderByDescending(x=>x.Kills).ToList();
-
+                : logs.Where(x => x.Action == Actions.Kill)
+                    .GroupBy(x => x.Gun)
+                    .Select(r => new GunModel
+                    {
+                        Gun = r.Key,
+                        Kills = r.Count()
+                    }).OrderByDescending(x => x.Kills).ToList();
         }
 
         private static int GetExplodeBombs(IReadOnlyCollection<Log> playersLogs, IReadOnlyCollection<Log> logs)
@@ -268,6 +269,34 @@ namespace BusinessFacade.Repositories.Implementations
                 
             playersStats.Where(x=>x.Defuse > 0).OrderByDescending(x=>x.Defuse).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Sapper));
+        }
+
+        public List<WeaponStat> GetWeaponStat()
+        {
+            return GetLogs()
+                .Where(l => l.Action == Actions.Kill)
+                .Where(l => l.Gun != Guns.Null &&
+                            l.Gun != Guns.Unknown &&
+                            l.Gun != Guns.Bomb)
+                .GroupBy(gg => gg.Gun)
+                .Select(g => new WeaponStat
+                {
+                    Title = g.Key.GetDescription(),
+                    Total = g.Count(),
+                    Players = g.GroupBy(pg => new
+                        {
+                            pg.Player.NickName,
+                            pg.Player.SteamId,
+                        })
+                        .Select(p => new WeaponPlayerStat
+                        {
+                            NickName = p.Key.NickName,
+                            SteamId = p.Key.SteamId,
+                            Kills = p.Count()
+                        })
+                        .OrderByDescending(z => z.Kills)
+                        .ToList()
+                }).ToList();
         }
     }
 }

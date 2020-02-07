@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using BusinessFacade.Repositories.Implementations;
 using CsStat.Domain.Entities;
+using CsStat.Domain.Models;
 
 namespace BusinessFacade.Repositories
 {
@@ -13,5 +15,7 @@ namespace BusinessFacade.Repositories
         string AddPlayer(Player player);
         void AddPlayers(List<Player> players);
         void UpdatePlayer(string id, string firstName = null, string secondName = null, string imagePath = null);
+
+        List<WeaponStat> GetWeaponStat();
     }
 }

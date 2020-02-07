@@ -107,6 +107,8 @@
     <Compile Include="Models\GunModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
     <Compile Include="Models\VictimModel.cs" />
+    <Compile Include="Models\WeaponPlayerStat.cs" />
+    <Compile Include="Models\WeaponStat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

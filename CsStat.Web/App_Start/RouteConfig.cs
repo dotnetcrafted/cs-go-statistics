@@ -33,6 +33,13 @@ namespace CsStat.Web
                 defaults: new { controller = "HangoutBot", action = "GetPlayerList", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "weaponstat",
+                url: Settings.WeaponsDataApiPath,
+                defaults: new { controller = "Weapon", action = "GetWeaponsStat", id = UrlParameter.Optional }
+            );
+
             //don't remove: custom admin
             //routes.MapRoute
             //(

@@ -17,6 +17,7 @@ namespace CsStat.Domain
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
+        public static string WeaponsDataApiPath => GetSetting(nameof(WeaponsDataApiPath), Defaults.WeaponsDataApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
         public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
@@ -72,6 +73,7 @@ namespace CsStat.Domain
             public const string PlayersDataApiPath = "api/playersdata";
             public const string PlayerStatApiPath = "api/bot/playerstat";
             public const string PlayersListApiPath = "api/bot/playerslist";
+            public const string WeaponsDataApiPath = "api/weaponsdata";
             public const string WikiDataApiPath = "api/articles";
             public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
