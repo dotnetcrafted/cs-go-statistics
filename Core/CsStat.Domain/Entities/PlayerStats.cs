@@ -11,7 +11,8 @@ namespace CsStat.Domain.Entities
         public int Kills { get; set; }
         public int Deaths { get; set; }
         public int Assists { get; set; }
-        public int HeadShot { get; set; }
+        public int HeadShotsCount { get; set; }
+        public double HeadShotsPercent { get; set; }
         public int TotalGames { get; set; }
         public int Defuse { get; set; }
         public int Explode { get; set; }

@@ -162,7 +162,8 @@ namespace BusinessFacade.Repositories.Implementations
                 Assists = assists,
                 FriendlyKills = friendlyKills,
                 TotalGames = totalGames,
-                HeadShot = headShotCount,
+                HeadShotsCount = headShotCount,
+                HeadShotsPercent = kills == 0 ? 0 : (double)headShotCount/kills * 100,
                 Guns = guns,
                 Defuse = defuse,
                 Explode = explodeBombs,
@@ -242,8 +243,8 @@ namespace BusinessFacade.Repositories.Implementations
             playersStats.Where(x=>x.Assists > 0).OrderByDescending(x => x.Assists).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.TeamPlayer));
 
-            playersStats.Where(x=>x.HeadShot > 0 && x.Kills > 7).OrderByDescending(x => x.HeadShot).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.HeadHunter));
+            playersStats.Where(x=>x.HeadShotsCount > 0 && x.Kills > 7).OrderByDescending(x => x.HeadShotsPercent).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.HeadHunter)); 
                 
             playersStats.Where(x=>x.Deaths > 0).OrderByDescending(x => x.Deaths).ThenBy(x=>x.KdRatio).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Kenny));
