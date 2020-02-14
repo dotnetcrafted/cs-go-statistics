@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using BusinessFacade.Repositories;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
+using CsStat.Web.Models;
 
 namespace CsStat.Web.Controllers
 {
@@ -33,11 +34,11 @@ namespace CsStat.Web.Controllers
             var steamIds = string.Join(",", ids.Select(x => x).ToList());
             var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
-            var players = ids.Select(x => new
+            var players = ids.Select(x => new PlayerWeaponViewModel
             {
                 SteamId = x,
                 ImagePath = avatars.FirstOrDefault(a => a.Key == x).Value
-            }).ToDictionary(x => x.SteamId, z => z.ImagePath);
+            });
 
             return Json(new
             {

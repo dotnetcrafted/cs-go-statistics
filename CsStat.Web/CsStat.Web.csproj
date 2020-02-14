@@ -176,6 +176,7 @@
     <Compile Include="Models\InfoViewModel.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
+    <Compile Include="Models\PlayerWeaponViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Models\ServerInfoModel.cs" />
     <Compile Include="Models\UsefulLinksViewModel.cs" />
