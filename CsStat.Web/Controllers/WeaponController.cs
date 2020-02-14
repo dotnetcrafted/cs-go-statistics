@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using BusinessFacade.Repositories;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
@@ -24,6 +25,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
         public JsonResult GetWeaponsStat()
         {
             var weaponStats = _playerRepository.GetWeaponStat();
