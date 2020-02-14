@@ -181,7 +181,7 @@
     <Compile Include="Models\ServerInfoModel.cs" />
     <Compile Include="Models\UsefulLinksViewModel.cs" />
     <Compile Include="Models\SignInViewModel.cs" />
-    <Compile Include="Models\VictimViewModel.cs" />
+    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
