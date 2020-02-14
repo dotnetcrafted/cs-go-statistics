@@ -285,12 +285,11 @@ namespace BusinessFacade.Repositories.Implementations
                     Total = g.Count(),
                     Players = g.GroupBy(pg => new
                         {
-                            pg.Player.NickName,
                             pg.Player.SteamId,
                         })
                         .Select(p => new WeaponPlayerStat
                         {
-                            NickName = p.Key.NickName,
+                            NickName = p.OrderByDescending(x => x.DateTime).First().Player.NickName,
                             SteamId = p.Key.SteamId,
                             Kills = p.Count()
                         })
