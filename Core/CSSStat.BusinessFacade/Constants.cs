@@ -18,6 +18,7 @@
             public const string Firebug = "11";
             public const string Sapper = "12";
             public const string Bomberman = "13";
+            public const string Samurai = "14";
         }
     }
 }

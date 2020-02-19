@@ -21,6 +21,7 @@ namespace CsStat.Domain.Entities
         public int SniperRifleKills { get; set; }
         public int GrenadeKills { get; set; }
         public int MolotovKills { get; set; }
+        public int KnifeKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
         public List<PlayerModel> Victims { get; set; }
