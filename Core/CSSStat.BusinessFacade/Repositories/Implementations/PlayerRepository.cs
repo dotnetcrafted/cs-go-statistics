@@ -140,6 +140,7 @@ namespace BusinessFacade.Repositories.Implementations
             var guns = GetGuns(logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).ToList());
             var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
             var grenade = guns?.Where(x => x.Gun == Guns.He).Sum(x => x.Kills);
+            var knife = guns?.Where(x => x.Gun == Guns.Knife).Sum(x => x.Kills);
             var molotov = guns?.Where(x => x.Gun == Guns.Molotov || x.Gun == Guns.Inferno || x.Gun == Guns.Inc).Sum(x => x.Kills);
             var explodeBombs = GetExplodeBombs(logs.Where(x => x.Action == Actions.Plant).ToList(), logs.Where(x => x.Action == Actions.TargetBombed).ToList());
             var defuse = logs.Count(x => x.Action == Actions.Defuse);
@@ -174,7 +175,8 @@ namespace BusinessFacade.Repositories.Implementations
                 FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x => x.Count).ToList(),
                 FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x => x.Count).ToList(),
                 GrenadeKills = grenade ?? 0,
-                MolotovKills = molotov ?? 0
+                MolotovKills = molotov ?? 0,
+                KnifeKills = knife ?? 0
 
             };
         }
@@ -269,6 +271,9 @@ namespace BusinessFacade.Repositories.Implementations
                 
             playersStats.Where(x=>x.Defuse > 0).OrderByDescending(x=>x.Defuse).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Sapper));
+
+            playersStats.Where(x => x.KnifeKills > 0).OrderByDescending(x => x.KnifeKills).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai));
         }
     }
 }
