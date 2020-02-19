@@ -18,7 +18,7 @@ class ColumnsSelector extends React.Component<IColumnsSelectorProps, ColumnsSele
         const { visibleColumns } = this.props;
         const keys: string[] = Object.keys(COLUMN_NAMES);
         const excludedKeys = ['Id', 'Name', 'ImagePath', 'Achievements', 'Guns'];
-        const filteredKeys = keys.filter(k => !excludedKeys.includes(k));
+        const filteredKeys = keys.filter((k) => !excludedKeys.includes(k));
         const options = filteredKeys.reduce<Key[]>((previousValue: Key[], currentValue: string): Key[] => {
             previousValue.push({
                 value: COLUMN_NAMES[currentValue].dataIndex,
@@ -31,7 +31,7 @@ class ColumnsSelector extends React.Component<IColumnsSelectorProps, ColumnsSele
             <Checkbox.Group onChange={this.onChange} defaultValue={visibleColumns} className="columns-selector">
                 <Menu>
                     {options &&
-                        options.map(tick => (
+                        options.map((tick) => (
                             <Menu.Item key={tick.value}>
                                 <Checkbox value={tick.value} defaultChecked={visibleColumns.includes(tick.value)}>
                                     {tick.label}

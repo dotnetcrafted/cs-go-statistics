@@ -1,4 +1,4 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const utils = require('./utils');
 
@@ -6,35 +6,24 @@ const utils = require('./utils');
 process.env.NODE_ENV = 'production';
 
 module.exports = () => {
-  utils.log('\nPRODUCTION BUILD\n');
+    utils.log('\nPRODUCTION BUILD\n');
 
-  return {
-    optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            parse: {},
-            compress: {
-              comparisons: false
-            },
-            output: {
-              comments: false,
-              ascii_only: true
-            }
-          },
-          parallel: true,
-          cache: true,
-          sourceMap: true
-        })
-      ]
-    },
-    plugins: [
-      new OptimizeCssAssetsPlugin({
-        cssProcessorPluginOptions: {
-          preset: ['default', { discardComments: { removeAll: true } }],
+    return {
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    sourceMap: true,
+                }),
+            ]
         },
-        canPrint: !utils.isJsonOutput()
-      })
-    ]
-  };
+        plugins: [
+            new OptimizeCssAssetsPlugin({
+                cssProcessorPluginOptions: {
+                    preset: ['default', { discardComments: { removeAll: true } }],
+                },
+                canPrint: !utils.isJsonOutput()
+            })
+        ]
+    };
 };

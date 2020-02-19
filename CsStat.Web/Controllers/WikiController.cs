@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Web.Mvc;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CsStat.Domain;
 using CsStat.Domain.Entities;
+using CsStat.StrapiApi;
 using CsStat.Web.Models;
 using DataService;
 using ErrorLogger;
@@ -21,15 +18,30 @@ namespace CsStat.Web.Controllers
     {
         // GET
         private static IUsefulLinkRepository _usefulLinkRepository;
+        private static IStrapiApi _strapiApi;
         private static ILogger _logger;
 
-        public WikiController(IUsefulLinkRepository usefulLinkRepository)
+        public WikiController(IUsefulLinkRepository usefulLinkRepository, IStrapiApi strapiApi)
         {
             _usefulLinkRepository = usefulLinkRepository;
             var connectionString = new ConnectionStringFactory();
             var mongoRepository = new MongoRepositoryFactory(connectionString);
             _logger = new Logger(mongoRepository);
+            _strapiApi = strapiApi;
         }
+        public ActionResult GetAllArticlesFromCms()
+        {
+            var json = _strapiApi.GetArticles();
+
+            return new JsonResult
+            {
+                Data = json,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+            };
+        }
+
+        #region CustomAdmin
+
         public ActionResult Index()
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
@@ -45,7 +57,7 @@ namespace CsStat.Web.Controllers
         public ActionResult GetInfo()
         {
             var isAdminMode = Session["IsAdminMode"] != null && Session["IsAdminMode"].ToString() == "true";
-            var usefulInfos = _usefulLinkRepository.GetAll()?.OrderByDescending(x=>x.PublishDate);
+            var usefulInfos = _usefulLinkRepository.GetAll()?.OrderByDescending(x => x.PublishDate);
             var model = new UsefulLinksViewModel
             {
                 Items = usefulInfos != null ? Mapper.Map<List<InfoViewModel>>(usefulInfos) : new List<InfoViewModel>(),
@@ -56,39 +68,6 @@ namespace CsStat.Web.Controllers
                 Data = model,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
-        }
-
-        public ActionResult GetAllArticlesFromCms()
-        {
-            var json = GetJson(Settings.ArticlesPath);
-            return new JsonResult
-            {
-                Data = json,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-            };
-        }
-
-        private string GetJson(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            try
-            {
-                WebResponse response = request.GetResponse();
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, System.Text.Encoding.UTF8);
-                    return reader.ReadToEnd();
-                }
-            }
-            catch (WebException ex)
-            {
-                WebResponse errorResponse = ex.Response;
-                using (Stream responseStream = errorResponse.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, System.Text.Encoding.GetEncoding("utf-8"));
-                    return reader.ReadToEnd();
-                }
-            }
         }
 
         public ActionResult Add(string id="")
@@ -148,5 +127,7 @@ namespace CsStat.Web.Controllers
             _usefulLinkRepository.Remove(id);
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

@@ -19,6 +19,20 @@ namespace CsStat.Web
                 defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "playerstat",
+                url: Settings.PlayerStatApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetPlayerStat", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "playerslist",
+                url: Settings.PlayersListApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetPlayerList", id = UrlParameter.Optional }
+            );
+
             //don't remove: custom admin
             //routes.MapRoute
             //(
@@ -45,6 +59,12 @@ namespace CsStat.Web
                 name: "wiki",
                 url: Settings.WikiPagePath,
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "serverinfo",
+                url: Settings.ServerInfoDataApiPath,
+                defaults: new { controller = "HangoutBot", action = "ServerInfo", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

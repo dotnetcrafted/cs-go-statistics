@@ -28,10 +28,6 @@ class WikiPage extends React.Component<WikiPageProps> {
             });
     }
 
-    componentDidMount(): void {
-        this.fetchPosts(this.props.WikiDataApiPath);
-    }
-
     postFilter(tag: any) {
         if (tag !== 'all') {
             const filter: any[] = [];
@@ -56,6 +52,10 @@ class WikiPage extends React.Component<WikiPageProps> {
 
     filter(): ReactNode {
         return this.state.filtered.map((post: PostType, index: number) => <Post key={index} post={post} />);
+    }
+
+    componentDidMount(): void {
+        this.fetchPosts(this.props.WikiDataApiPath);
     }
 
     getPosts(): ReactNode {

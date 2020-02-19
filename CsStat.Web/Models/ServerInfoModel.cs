@@ -1,0 +1,9 @@
+﻿namespace CsStat.Web.Models
+{
+    public class ServerInfoModel
+    {
+        public bool IsAlive { get; set; }
+        public int PlayersCount { get; set; }
+        public string Map { get; set; }
+    }
+}

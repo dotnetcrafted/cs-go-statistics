@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using CSStat.CsLogsApi.Extensions;
+using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.Domain.Models;
-using CsStat.SystemFacade.Attributes;
 using CsStat.Web.Models;
 
 namespace CsStat.Web
@@ -21,7 +20,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Player.NickName))
                     .ForMember(dest => dest.Assists, opts => opts.MapFrom(src => src.Assists))
                     .ForMember(dest => dest.AssistsPerGame, opts => opts.MapFrom(src => src.AssistsPerGame))
-                    .ForMember(dest => dest.Deaths, opts => opts.MapFrom(src => src.Death))
+                    .ForMember(dest => dest.Deaths, opts => opts.MapFrom(src => src.Deaths))
                     .ForMember(dest => dest.DeathsPerGame, opts => opts.MapFrom(src => src.DeathPerGame))
                     .ForMember(dest => dest.DefusedBombs, opts => opts.MapFrom(src => src.Defuse))
                     .ForMember(dest => dest.ExplodedBombs, opts => opts.MapFrom(src => src.Explode))
@@ -32,16 +31,12 @@ namespace CsStat.Web
                     .ForMember(dest => dest.KillsPerGame, opts => opts.MapFrom(src => src.KillsPerGame))
                     .ForMember(dest => dest.Points, opts => opts.MapFrom(src => src.Points))
                     .ForMember(dest => dest.TotalGames, opts => opts.MapFrom(src => src.TotalGames))
-                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
+                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShotsCount))
                     .AfterMap((s, d, context) =>
                     {
                         if (s.Guns != null && s.Guns.Any())
                         {
                             d.Guns = context.Mapper.Map<List<GunViewModel>>(s.Guns);
-                        }
-                        if (s.Achievements != null &&  s.Achievements.Any())
-                        {
-                            d.Achievements = context.Mapper.Map<List<AchievementViewModel>>(s.Achievements);
                         }
 
                         if (d.Victims != null && s.Victims.Any())
@@ -53,6 +48,15 @@ namespace CsStat.Web
                         {
                             d.Killers = context.Mapper.Map<List<PlayerViewModel>>(s.Killers);
                         }
+
+                        if (d.Achievements != null && d.Achievements.Any())
+                        {
+                            d.Achievements = context.Mapper.Map<List<AchievementViewModel>>(s.Achievements);
+                            foreach (var achievement in d.Achievements)
+                            {
+                                achievement.IconUrl = $"{Settings.AdminPath}{achievement.IconUrl}";
+                            }
+                        }
                     });
 
                 CreateMap<GunModel, GunViewModel>()
@@ -60,16 +64,16 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Gun.GetDescription()))
                     .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills));
 
-                CreateMap<AchieveModel, AchievementViewModel>()
-                    .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Achieve))
-                    .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Achieve.GetDescription()))
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Achieve.GetAttribute<Caption>().Value))
-                    ;
-
                 CreateMap<PlayerModel, PlayerViewModel>()
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
                     .ForMember(dest => dest.Count, opts => opts.MapFrom(src => src.Count))
                     .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.ImagePath))
+                    ;
+                CreateMap<AchieveModel, AchievementViewModel>()
+                    .ForMember(dest => dest.IconUrl, opts => opts.MapFrom(src => src.Icon.Url))
+                    .ForMember(dest => dest.AchievementId, opts => opts.MapFrom(src => src.AchievementId))
+                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
+                    .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Description))
                     ;
             }
 
