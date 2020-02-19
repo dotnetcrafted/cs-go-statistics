@@ -18,6 +18,7 @@ const TAG_COLORS = [
     'geekblue',
     'purple'
 ];
+
 const Post: SFC<PostProps> = (props) => {
     const getRandomColor = (colors: string[]): string => colors[Math.floor(Math.random() * colors.length)];
 
