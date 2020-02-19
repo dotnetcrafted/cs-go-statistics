@@ -282,7 +282,8 @@ namespace BusinessFacade.Repositories.Implementations
                 .Select(g => new WeaponStat
                 {
                     Title = g.Key.GetDescription(),
-                    Total = g.Count(),
+                    Headshots = g.Count(x => x.IsHeadShot),
+                    Kills = g.Count(),
                     Players = g.GroupBy(pg => new
                         {
                             pg.Player.SteamId,
@@ -291,11 +292,14 @@ namespace BusinessFacade.Repositories.Implementations
                         {
                             NickName = p.OrderByDescending(x => x.DateTime).First().Player.NickName,
                             SteamId = p.Key.SteamId,
-                            Kills = p.Count()
+                            Kills = p.Count(),
+                            Headshots = p.Count(z => z.IsHeadShot)
                         })
                         .OrderByDescending(z => z.Kills)
                         .ToList()
-                }).ToList();
+                })
+                .OrderBy(x => x.Title)
+                .ToList();
         }
     }
 }
