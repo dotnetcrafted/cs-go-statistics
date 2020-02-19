@@ -480,9 +480,6 @@
     <Folder Include="Scripts\tinymce\themes\silver\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\MongoRepository.1.6.11\MongoRepository.chm">
-      <Link>Documentation\MongoRepository.chm</Link>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Web.Base.config" />
     <None Include="Properties\PublishProfiles\Salo - Web Deploy.pubxml" />
