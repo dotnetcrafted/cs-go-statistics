@@ -293,9 +293,7 @@ namespace ReadFile.ReadDemo
 
         private static void RoundEnd()
         {
-            Console.WriteLine($"Round number: {_currentRound.RoundNumber}");
-
-            if (_lastCTScore + _lastTScore > SwapRoundNumber - 1)
+            if (_lastCTScore + _lastTScore > SwapRoundNumber)
             {
                 if (_lastTScore != _parser.TScore)
                 {
