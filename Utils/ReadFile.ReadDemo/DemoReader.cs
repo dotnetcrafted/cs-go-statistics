@@ -144,6 +144,8 @@ namespace ReadFile.ReadDemo
 
             MatchFinish();
 
+            Console.WriteLine($"{SuqadA}: {_squadAScore}");
+            Console.WriteLine($"{SuqadB}: {_squadBScore}");
             Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
@@ -346,6 +348,12 @@ namespace ReadFile.ReadDemo
                 .ToList();
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
+
+            var squadScore = _lastCTScore + _lastTScore > SwapRoundNumber
+                    ? $"{SuqadB}(T): {_squadBScore} - {SuqadA}: {_squadAScore}(CT)"
+                    : $"{SuqadA}(T): {_squadAScore} - {SuqadB}: {_squadBScore}(CT)";
+            
+            Console.WriteLine($"Round number: {_currentRound.RoundNumber, -2} | {squadScore}");
         }
 
         private static string GetSquadName(Team team)
