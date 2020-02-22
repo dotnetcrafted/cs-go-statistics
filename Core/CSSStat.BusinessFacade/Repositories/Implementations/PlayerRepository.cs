@@ -11,7 +11,6 @@ using CsStat.StrapiApi;
 using CsStat.SystemFacade.Attributes;
 using CsStat.SystemFacade.Extensions;
 using DataService.Interfaces;
-using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations
 {
@@ -32,15 +31,13 @@ namespace BusinessFacade.Repositories.Implementations
 
         public IEnumerable<Player> GetAllPlayers()
         {
-            var query = new QueryBuilder<Player>();
-            return _mongoRepository.GetRepository<Player>().Collection.Find(query.Where(x => !x.IsRetired)).DistinctBy(x => x.SteamId);
+            return _mongoRepository.GetRepository<Player>().GetAll(x => !x.IsRetired).DistinctBy(x => x.SteamId);
             //return base.GetAll<Player>().OrderByDescending(x=>x.Id).DistinctBy(x=>x.SteamId);
         }
 
         public Player GetPlayerByNickName(string nickName)
         {
-            var query = new QueryBuilder<Player>();
-            return _mongoRepository.GetRepository<Player>().Collection.Find(query.EQ(x => x.NickName, nickName)).FirstOrDefault();
+            return _mongoRepository.GetRepository<Player>().GetAll(x => x.NickName == nickName).FirstOrDefault();
         }
 
         public Player GetPlayerById(string id)
@@ -50,7 +47,7 @@ namespace BusinessFacade.Repositories.Implementations
 
         public string AddPlayer(Player player)
         {
-            return _mongoRepository.GetRepository<Player>().Collection.Insert(player).Ok
+            return _mongoRepository.GetRepository<Player>().Add(player) != null
                 ? GetPlayerByNickName(player.NickName).Id
                 : string.Empty;
         }

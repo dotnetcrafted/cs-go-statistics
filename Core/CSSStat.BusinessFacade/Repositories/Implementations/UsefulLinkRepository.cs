@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
-using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations
 {
@@ -35,13 +34,12 @@ namespace BusinessFacade.Repositories.Implementations
             info.PublishDate = newInfo.PublishDate;
             info.Url = newInfo.Url;
             info.Tags = newInfo.Tags;
-            _mongoRepository.GetRepository<UsefulInfo>().Collection.Save(info);
+            _mongoRepository.GetRepository<UsefulInfo>().Update(info);
         }
 
         public void Remove(string id)
         {
-            var query = new QueryBuilder<UsefulInfo>();
-            _mongoRepository.GetRepository<UsefulInfo>().Collection.Remove(query.EQ(x=>x.Id, id));
+            _mongoRepository.GetRepository<UsefulInfo>().Delete(x=>x.Id == id);
         }
 
         public IEnumerable<UsefulInfo> GetAll()

@@ -2,7 +2,6 @@
 using System.Linq;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
-using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations
 {
@@ -21,8 +20,7 @@ namespace BusinessFacade.Repositories.Implementations
 
         public User GetByName(string name)
         {
-            var query = new QueryBuilder<User>();
-            return _mongoRepository.GetRepository<User>().Collection.Find(query.EQ(x => x.Name, name.ToLower())).FirstOrDefault();
+            return _mongoRepository.GetRepository<User>().GetAll(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
         }
 
         public IEnumerable<User> GetAll()

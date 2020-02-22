@@ -2,9 +2,7 @@
 using System.Linq;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 
 namespace BusinessFacade.Repositories
@@ -28,17 +26,17 @@ namespace BusinessFacade.Repositories
 
         public IEnumerable<LogFile> GetFiles()
         {
-            return _mongoRepository.GetRepository<LogFile>().Collection.FindAll();
+            return _mongoRepository.GetRepository<LogFile>();
         }
 
         public void AddFile(LogFile logFile)
         {
-            _mongoRepository.GetRepository<LogFile>().Collection.Insert(logFile);
+            _mongoRepository.GetRepository<LogFile>().Add(logFile);
         }
 
         public LogFile GetFileByName(string name)
         {
-            return _mongoRepository.GetRepository<LogFile>().Collection.Find(new QueryBuilder<LogFile>().EQ(x => x.Path, name)).FirstOrDefault();
+            return _mongoRepository.GetRepository<LogFile>().GetAll(x => x.Path == name).FirstOrDefault();
         }
 
         public void UpdateFile(LogFile logFile)
@@ -53,7 +51,7 @@ namespace BusinessFacade.Repositories
 
             file.ReadBytes = logFile.ReadBytes;
 
-            _mongoRepository.GetRepository<LogFile>().Collection.Save(file);
+            _mongoRepository.GetRepository<LogFile>().Update(file);
         }
     }
 }

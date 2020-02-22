@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace BusinessFacade.Repositories
 {
