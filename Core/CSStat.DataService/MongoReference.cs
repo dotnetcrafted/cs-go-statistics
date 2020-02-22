@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace DataService
 {
@@ -16,7 +16,7 @@ namespace DataService
         {
             get
             {
-                var value = new MongoRepository<T>().Collection.FindOneById(Ref.Id);
+                var value = new MongoRepository<T>().GetById(Ref.Id.ToString());
                 return value;
             }
         }

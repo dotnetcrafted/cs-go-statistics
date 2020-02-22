@@ -2,7 +2,7 @@
 using System.Security.Authentication;
 using DataService.Interfaces;
 using MongoDB.Driver;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace DataService
 {
