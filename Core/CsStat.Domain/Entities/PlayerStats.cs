@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CsStat.Domain.Models;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities
 {

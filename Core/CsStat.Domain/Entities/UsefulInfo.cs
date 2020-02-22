@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities
 {
     public class UsefulInfo : Entity
     {
         public string Caption { get; set; }
-        [UIHint("tinymce_jquery_full"), AllowHtml]
+        [UIHint("tinymce_jquery_full")]
         public string Description { get; set; }
         public string Image { get; set; }
         public string Url { get; set; }

@@ -1,4 +1,4 @@
-﻿using MongoRepository;
+﻿using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities
 {

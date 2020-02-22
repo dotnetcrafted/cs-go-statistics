@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Security.Cryptography;
 using CsStat.SystemFacade.Attributes;
 
 namespace CsStat.Domain.Definitions

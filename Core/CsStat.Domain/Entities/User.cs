@@ -1,5 +1,5 @@
 ﻿using CsStat.Domain.Definitions;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities
 {
