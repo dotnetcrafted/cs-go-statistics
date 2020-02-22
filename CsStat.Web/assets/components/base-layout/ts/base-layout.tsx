@@ -7,6 +7,7 @@ import AuthorsCopyright from '../../authors-copyright';
 import Repository from '../../repository';
 import '../scss/index.scss';
 import Navigation from '../../navigation';
+import { ServerInfo } from 'components/server-info';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -22,6 +23,9 @@ const BaseLayout: SFC<BaseLayoutProps> = (props) => (
                     <Title level={1} className="base-layout__title">
                         Fuse8 CS:GO Statistics
                     </Title>
+                </Col>
+                <Col xs={6} lg={4}>
+                    <ServerInfo />
                 </Col>
                 <Col xs={6} lg={10}>
                     <Navigation/>
