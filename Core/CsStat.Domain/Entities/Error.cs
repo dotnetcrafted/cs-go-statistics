@@ -1,4 +1,3 @@
-﻿using System;
 using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities
