@@ -5,5 +5,6 @@
         public bool IsAlive { get; set; }
         public int PlayersCount { get; set; }
         public string Map { get; set; }
+        public string Image { get; set; }
     }
 }

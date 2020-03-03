@@ -19,6 +19,7 @@ namespace CsStat.Domain
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
         public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
+        public static string ServerInfoDataMockApiPath => GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
 
         public static string PlayersDataSteamApiPath =>
@@ -72,6 +73,7 @@ namespace CsStat.Domain
             public const string PlayerStatApiPath = "api/playerstat";
             public const string WikiDataApiPath = "api/articles";
             public const string ServerInfoDataApiPath = "api/serverinfo";
+            public const string ServerInfoDataMockApiPath = "api/serverinfomock";
             public const string WikiPagePath = "wiki";
 
             public const string PlayersDataSteamApiPath =
