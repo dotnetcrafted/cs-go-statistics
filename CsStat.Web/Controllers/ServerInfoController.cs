@@ -29,18 +29,18 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        public JsonResult ServerInfoMock(bool isAlive = true, string map = "")
+        public JsonResult ServerInfoMock(bool? isAlive, string map = "")
         {
-            if (isAlive)
+            if (isAlive ?? new Random().Next(0, 2) == 1)
             {
                 return new JsonResult
                 {
                     Data = new ServerInfoModel
                     {
                         IsAlive = true,
-                        PlayersCount = new Random().Next(0, 10),
-                        Map = map.OrDefault(_maps[new Random().Next(0, 7)]),
-                        Image = $"imagePath\\{map.OrDefault(_maps[new Random().Next(0, 7)])}.jpg"
+                        PlayersCount = new Random().Next(0, 20),
+                        Map = map.OrDefault(_maps[new Random().Next(0, 8)]),
+                        Image = $"imagePath\\{map.OrDefault(_maps[new Random().Next(0, 8)])}.jpg"
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
