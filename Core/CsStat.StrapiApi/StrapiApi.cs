@@ -28,9 +28,10 @@ namespace CsStat.StrapiApi
         {
             var json = GetJsonFromUrl(Settings.MapInfoPath);
 
-            return string.IsNullOrEmpty(json) 
+            return string.IsNullOrEmpty(json)
                 ? new MapInfoModel()
-                : JsonConvert.DeserializeObject<List<MapInfoModel>>(json).FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower()));
+                : JsonConvert.DeserializeObject<List<MapInfoModel>>(json)
+                      .FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower())) ?? new MapInfoModel();
         }
 
         private string GetJsonFromUrl(string url)

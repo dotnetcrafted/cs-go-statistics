@@ -36,14 +36,16 @@ namespace CsStat.Web.Controllers
         {
             if (isAlive ?? new Random().Next(0, 2) == 1)
             {
+                var mapInfo = _strapiApi.GetMapInfo(map.OrDefault(_maps[new Random().Next(0, 8)]));
+                
                 return new JsonResult
                 {
                     Data = new ServerInfoModel
                     {
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
-                        Map = map.OrDefault(_maps[new Random().Next(0, 8)]),
-                        ImageUrl = "https://admin.csfuse8.site/uploads/15989dfab7bd4ee2abd457829e22b987.png"
+                        Map = mapInfo.MapName,
+                        ImageUrl = mapInfo.Image?.Url
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
