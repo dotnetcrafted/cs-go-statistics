@@ -2,6 +2,7 @@
 using System.Web.Helpers;
 using System.Web.Mvc;
 using CsStat.Domain;
+using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using ServerQueries.Source;
@@ -11,13 +12,15 @@ namespace CsStat.Web.Controllers
     public class ServerInfoController : Controller
     {
         private readonly IQueryConnection _queryConnection;
+        private static IStrapiApi _strapiApi;
 
         private readonly string[] _maps =
             {"de_dust2", "de_mirage", "de_inferno", "de_cache", "de_nuke", "de_overpass", "de_train", "de_vertigo"};
         
-        public ServerInfoController(IQueryConnection queryConnection)
+        public ServerInfoController(IQueryConnection queryConnection, IStrapiApi strapiApi)
         {
             _queryConnection = queryConnection;
+            _strapiApi = strapiApi;
         }
 
         public JsonResult ServerInfo()
@@ -40,7 +43,7 @@ namespace CsStat.Web.Controllers
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
                         Map = map.OrDefault(_maps[new Random().Next(0, 8)]),
-                        Image = $"imagePath\\{map.OrDefault(_maps[new Random().Next(0, 8)])}.jpg"
+                        ImageUrl = $"imagePath\\{map.OrDefault(_maps[new Random().Next(0, 8)])}.jpg"
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
@@ -53,8 +56,22 @@ namespace CsStat.Web.Controllers
                     IsAlive = false,
                     PlayersCount = 0,
                     Map = string.Empty,
-                    Image = "server_is_off.jpg"
+                    ImageUrl = "server_is_off.jpg"
                 },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult ServerInfoWidget()
+        {
+            var serverInfo = GetServerInfo();
+            var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
+            serverInfo.ImageUrl = mapInfo.Image.Url;
+            serverInfo.Description = mapInfo.Description;
+            
+            return new JsonResult
+            {
+                Data = serverInfo,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

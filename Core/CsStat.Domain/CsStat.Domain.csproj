@@ -95,6 +95,7 @@
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
+    <Compile Include="Models\MapInfoModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
     <Compile Include="Models\VictimModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
