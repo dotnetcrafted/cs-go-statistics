@@ -1,26 +1,66 @@
 .server-info {
+    position: relative;
+    overflow: hidden; 
+    z-index: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0.5em;
+    background-color: #555;
+    border-radius: 10px;
     color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+    
+    @include desktop {
+        min-height: 80px;
+        font-size: 1.5rem;
+    }
 
     &__map {
-        height: 64px;
-        margin-right: 15px;
-        object-fit: contain;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -30;
+        object-fit: cover;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(black, 0.4);
+        }
+    }
+
+    &__name {
+        color: #ffbb66;
+        text-transform: uppercase;
     }
 
     &__players {
         font-size: 1.25rem;
-        font-weight: 500;
-    }
+        font-weight: 700;
+        letter-spacing: -1px;
 
-    &__connected {
-        font-size: 2rem;
-        letter-spacing: -4px;
-    }
-
-    &__separator {
-        margin-left: 5px;
+        @include desktop {
+            font-size: 2rem;
+            letter-spacing: -4px;
+        }
     }
 }

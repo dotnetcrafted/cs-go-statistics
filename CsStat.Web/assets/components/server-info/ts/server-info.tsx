@@ -1,5 +1,7 @@
 import React from 'react';
 
+const UPDATE_IN_SEC = 15;
+
 class ServerInfo extends React.Component {
     intervalId: number;
 
@@ -15,7 +17,7 @@ class ServerInfo extends React.Component {
 
     componentDidMount() {
         this.fetchData();
-        this.intervalId = window.setInterval(() => this.fetchData, 15000);
+        this.intervalId = window.setInterval(() => this.fetchData(), UPDATE_IN_SEC * 1000);
     }
 
     componentWillUnmount() {
@@ -26,31 +28,42 @@ class ServerInfo extends React.Component {
         fetch('/api/serverinfo')
             .then((res: Response) => res.json())
             .then((data: any) => {
-                console.log(data);
                 this.setState({
-                    data
+                    data,
                 })
             })
-            .catch((error) => {
-                console.log('error', error);
+            .catch(() => {
+                this.setState({
+                    data: null,
+                })
             });
     }
 
     render() {
         const { data } = this.state;
 
-        if (!data || !data.IsAlive) {
-            return <div className="server-info">Server is down</div>;
+        if (!data) {
+            return null;
         }
 
         return (
             <div className="server-info">
-                <img className="server-info__map" src="//picsum.photos/id/1025/128/128" alt="Map Name"/>
-                <div className="server-info__players">
-                    <span className="server-info__connected">{data.PlayersCount}</span>
-                    <span className="server-info__separator">/</span>
-                    <span className="server-info__total">20</span>
+                <div>
+                    {
+                        data.ImageUrl &&
+                        <div className="server-info__map">
+                            <img src={data.ImageUrl} />
+                        </div>
+                    }
+                    {
+                        data.IsAlive &&
+                            <>
+                                <div className="server-info__name">{data.Map}</div>
+                                <div className="server-info__players">{data.PlayersCount}</div>
+                            </>
+                    }
                 </div>
+
             </div>
         )
     }
