@@ -43,7 +43,7 @@ namespace CsStat.Web.Controllers
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
                         Map = map.OrDefault(_maps[new Random().Next(0, 8)]),
-                        ImageUrl = $"imagePath\\{map.OrDefault(_maps[new Random().Next(0, 8)])}.jpg"
+                        ImageUrl = "https://admin.csfuse8.site/uploads/15989dfab7bd4ee2abd457829e22b987.png"
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
@@ -66,7 +66,7 @@ namespace CsStat.Web.Controllers
         {
             var serverInfo = GetServerInfo();
             var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
-            serverInfo.ImageUrl = mapInfo.Image.Url;
+            serverInfo.ImageUrl = $"{Settings.AdminPath}{mapInfo.Image.Url}";
             serverInfo.Description = mapInfo.Description;
             
             return new JsonResult
