@@ -6,6 +6,7 @@ using BusinessFacade.Repositories;
 using CsStat.Domain.Entities.Demo;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
+using CsStat.SystemFacade.Extensions;
 
 namespace CsStat.Web.Controllers
 {
@@ -27,8 +28,9 @@ namespace CsStat.Web.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public ActionResult GetMatchesData()
+        public ActionResult GetFullData()
         {
             var matches = _demoRepository.GetAllLogs().ToList();
 
@@ -50,5 +52,51 @@ namespace CsStat.Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+
+        [HttpGet]
+        public ActionResult GetMatchesData()
+        {
+            var matches = _demoRepository.GetMatches().ToList();
+
+            return new JsonResult
+            {
+                Data = matches.Select(x => new MatchViewData()
+                {
+                    Id = x.Id,
+                    Map = x.Map,
+                    Date = x.MatchDate
+                }),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        [HttpGet]
+        public ActionResult GetMatch(string matchId)
+        {
+            if (matchId.IsNotEmpty())
+            {
+                var match = _demoRepository.GetMatch(matchId);
+
+                return new JsonResult
+                {
+                    Data = new { match },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+
+            return new JsonResult
+            {
+                Data = "missing match id",
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+    }
+
+    public class MatchViewData
+    {
+        public string Id { get; set; }
+        public string Map { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

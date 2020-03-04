@@ -14,7 +14,9 @@ namespace CsStat.Domain
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
+        public static string FullMatchesDataApiPath => GetSetting(nameof(FullMatchesDataApiPath), Defaults.FullMatchesDataApiPath);
         public static string MatchesDataApiPath => GetSetting(nameof(MatchesDataApiPath), Defaults.MatchesDataApiPath);
+        public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
         public static string DemoReaderPagePath => GetSetting(nameof(DemoReaderPagePath), Defaults.DemoReaderPagePath);
@@ -61,7 +63,9 @@ namespace CsStat.Domain
             public const int TimerInterval = 10000;
             public const int TakeLines = 50;
             public const string PlayersDataApiPath = "api/playersdata";
+            public const string FullMatchesDataApiPath = "api/fullmatchesdata";
             public const string MatchesDataApiPath = "api/matchesdata";
+            public const string MatchDataApiPath = "api/matchdata";
             public const string WikiDataApiPath = "api/articles";
             public const string WikiPagePath = "wiki";
             public const string DemoReaderPagePath = "demo-reader";

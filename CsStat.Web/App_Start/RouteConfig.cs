@@ -55,9 +55,23 @@ namespace CsStat.Web
 
             routes.MapRoute
             (
+                name: "getFullMatchesData",
+                url: Settings.FullMatchesDataApiPath,
+                defaults: new { controller = "Matches", action = "GetFullData", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
                 name: "getMatchesData",
                 url: Settings.MatchesDataApiPath,
                 defaults: new { controller = "Matches", action = "GetMatchesData", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "getMatchData",
+                url: Settings.MatchDataApiPath,
+                defaults: new { controller = "Matches", action = "GetMatch", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
