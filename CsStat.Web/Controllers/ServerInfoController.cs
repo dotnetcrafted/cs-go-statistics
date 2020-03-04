@@ -58,7 +58,7 @@ namespace CsStat.Web.Controllers
                     IsAlive = false,
                     PlayersCount = 0,
                     Map = string.Empty,
-                    ImageUrl = "server_is_off.jpg"
+                    ImageUrl = "https://admin.csfuse8.site/uploads/7203cded792e4d2ca72e3b47d248db6c.jpg"
                 },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
