@@ -51,41 +51,6 @@ namespace CsStat.Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        public JsonResult ServerInfo()
-        {
-            return new JsonResult
-            {
-                Data = GetServerInfo(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
-        private ServerInfoModel GetServerInfo()
-        {
-            _queryConnection.Host = Settings.CsServerIp;
-            _queryConnection.Port = Settings.CsServerPort;
-
-            try
-            {
-                _queryConnection.Connect();
-                var info = _queryConnection.GetInfo();
-
-                return new ServerInfoModel
-                {
-                    IsAlive = true,
-                    PlayersCount = info.Players,
-                    Map = info.Map
-                };
-            }
-            catch (Exception e)
-            {
-                return new ServerInfoModel
-                {
-                    IsAlive = false,
-                    PlayersCount = 0
-                };
-            }
-        }
 
         private static PlayerStatsViewModel GetStatForOnePlayer(string playerName, string dateFrom, string dateTo)
         {

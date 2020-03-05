@@ -25,7 +25,7 @@ class ServerInfo extends React.Component {
     }
 
     fetchData = (): void => {
-        fetch('/api/serverinfo')
+        fetch('/api/bot/serverinfo')
             .then((res: Response) => res.json())
             .then((data: any) => {
                 this.setState({

@@ -72,6 +72,7 @@ namespace CsStat.Domain
             public const string PlayersDataApiPath = "api/playersdata";
             public const string PlayerStatApiPath = "api/bot/playerstat";
             public const string PlayersListApiPath = "api/bot/playerslist";
+            public const string ServerInfoDataMockApiPath = "api/serverinfomock";
             public const string WikiDataApiPath = "api/articles";
             public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
