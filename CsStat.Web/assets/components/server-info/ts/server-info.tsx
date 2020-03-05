@@ -2,7 +2,16 @@ import React from 'react';
 
 const UPDATE_IN_SEC = 15;
 
-class ServerInfo extends React.Component {
+type ServerInfoState = {
+    data?: {
+        ImageUrl: string;
+        Map: string;
+        IsAlive: boolean;
+        PlayersCount: number;
+    } | null
+};
+
+class ServerInfo extends React.Component<any, ServerInfoState> {
     intervalId: number;
 
     constructor(props: any){
