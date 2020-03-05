@@ -68,6 +68,12 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
+                name: "serverinfomock",
+                url: Settings.ServerInfoDataMockApiPath,
+                defaults: new { controller = "ServerInfo", action = "ServerInfoMock", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
