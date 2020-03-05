@@ -34,6 +34,16 @@ namespace CsStat.StrapiApi
                       .FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower())) ?? new MapInfoModel();
         }
 
+        public ImageInfoModel GetImage(string imageName)
+        {
+            var json = GetJsonFromUrl(Settings.ImagesPath);
+
+            return string.IsNullOrEmpty(json)
+                ? new ImageInfoModel()
+                : JsonConvert.DeserializeObject<List<ImageInfoModel>>(json)
+                      .FirstOrDefault(x => x.CodeName.ToLower().Equals(imageName.ToLower())) ?? new ImageInfoModel();
+        }
+
         private string GetJsonFromUrl(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

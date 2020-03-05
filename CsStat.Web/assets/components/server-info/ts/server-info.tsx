@@ -55,10 +55,10 @@ class ServerInfo extends React.Component {
                             <img src={data.ImageUrl} />
                         </div>
                     }
+                    <div className="server-info__name">{data.Map}</div>
                     {
                         data.IsAlive &&
                             <>
-                                <div className="server-info__name">{data.Map}</div>
                                 <div className="server-info__players">{data.PlayersCount}</div>
                             </>
                     }

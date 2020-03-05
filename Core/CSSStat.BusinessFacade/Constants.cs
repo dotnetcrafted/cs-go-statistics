@@ -19,5 +19,11 @@
             public const string Sapper = "12";
             public const string Bomberman = "13";
         }
+
+        public static class ImagesName
+        {
+            public const string Logo = "logo";
+            public const string ServerIsDown = "serverDown";
+        }
     }
 }

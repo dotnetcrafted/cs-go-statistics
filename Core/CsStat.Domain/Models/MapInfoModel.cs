@@ -7,8 +7,4 @@
         public Image Image { get; set; }
     }
 
-    public class Image
-    {
-        public string Url { get; set; }
-    }
 }

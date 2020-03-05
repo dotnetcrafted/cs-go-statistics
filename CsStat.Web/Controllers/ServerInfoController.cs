@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using BusinessFacade;
 using CsStat.Domain;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
@@ -25,9 +26,23 @@ namespace CsStat.Web.Controllers
 
         public JsonResult ServerInfo()
         {
+            var serverInfo = GetServerInfo();
+
+            if (serverInfo.IsAlive)
+            {
+                var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
+                serverInfo.ImageUrl = $"{Settings.AdminPath}{mapInfo.Image.Url}";
+                serverInfo.Description = mapInfo.Description;
+            }
+            else
+            {
+                serverInfo.ImageUrl = $"{Settings.AdminPath}{_strapiApi.GetImage(Constants.ImagesName.ServerIsDown)?.Image.Url}";
+                serverInfo.Map = "Server is down";
+            }
+
             return new JsonResult
             {
-                Data = GetServerInfo(),
+                Data = serverInfo,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
@@ -63,21 +78,6 @@ namespace CsStat.Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
-        public JsonResult ServerInfoWidget()
-        {
-            var serverInfo = GetServerInfo();
-            var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
-            serverInfo.ImageUrl = $"{Settings.AdminPath}{mapInfo.Image.Url}";
-            serverInfo.Description = mapInfo.Description;
-            
-            return new JsonResult
-            {
-                Data = serverInfo,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
         private ServerInfoModel GetServerInfo()
         {
             _queryConnection.Host = Settings.CsServerIp;

@@ -67,12 +67,6 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
-                name: "serverinfowidget",
-                url: Settings.ServerInfoDataWidgetApiPath,
-                defaults: new { controller = "ServerInfo", action = "ServerInfoWidget", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
