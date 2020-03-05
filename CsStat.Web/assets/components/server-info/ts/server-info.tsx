@@ -8,7 +8,7 @@ type ServerInfoState = {
         Map: string;
         IsAlive: boolean;
         PlayersCount: number;
-    }
+    } | null
 };
 
 class ServerInfo extends React.Component<any, ServerInfoState> {
@@ -18,7 +18,7 @@ class ServerInfo extends React.Component<any, ServerInfoState> {
         super(props);
 
         this.state = {
-            data: undefined,
+            data: null,
         }
 
         this.intervalId = -1;
@@ -43,7 +43,7 @@ class ServerInfo extends React.Component<any, ServerInfoState> {
             })
             .catch(() => {
                 this.setState({
-                    data: undefined,
+                    data: null,
                 })
             });
     }
