@@ -23,7 +23,10 @@ module.exports = () => ({
             // src
             path.resolve(__dirname, '../../../../'),
             path.resolve(__dirname, '../assets/')
-        ]
+        ],
+        alias: {
+            'style-settings': path.resolve(__dirname, '../assets/general/scss/settings/index'),
+        }
     },
     module: {
         rules: [

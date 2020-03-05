@@ -15,6 +15,11 @@ namespace CsStat.SystemFacade.Extensions
             return !string.IsNullOrEmpty(value);
         }
 
+        public static string OrDefault(this string value, string defaultValue)
+        {
+            return value.IsNotEmpty() ? value : defaultValue;
+        }
+
         public static int ParseOrDefault(this string value, int defaultValue)
         {
             if (value.IsEmpty())

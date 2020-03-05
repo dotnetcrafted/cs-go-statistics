@@ -19,15 +19,15 @@ namespace CsStat.Domain
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
         public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
+        public static string ServerInfoDataMockApiPath => GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
-
-        public static string PlayersDataSteamApiPath =>
-            GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
-
+        public static string PlayersDataSteamApiPath =>GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string ArticlesPath => GetSetting(nameof(ArticlesPath), Defaults.ArticlesPath);
         public static string AchievementsPath => GetSetting(nameof(AchievementsPath), Defaults.AchievementsPath);
+        public static string MapInfoPath => GetSetting(nameof(MapInfoPath), Defaults.MapInfoPath);
+        public static string ImagesPath => GetSetting(nameof(ImagesPath), Defaults.ImagesPath);
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
         public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
@@ -72,17 +72,17 @@ namespace CsStat.Domain
             public const string PlayersDataApiPath = "api/playersdata";
             public const string PlayerStatApiPath = "api/bot/playerstat";
             public const string PlayersListApiPath = "api/bot/playerslist";
+            public const string ServerInfoDataMockApiPath = "api/serverinfomock";
             public const string WikiDataApiPath = "api/articles";
             public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
-
-            public const string PlayersDataSteamApiPath =
-                @"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
-
+            public const string PlayersDataSteamApiPath =@"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
             public const string ArticlesPath = "https://admin.csfuse8.site/articles?_sort=createdAt:desc";
             public const string AchievementsPath = "https://admin.csfuse8.site/Achievements";
+            public const string MapInfoPath = "https://admin.csfuse8.site/map-infos";
+            public const string ImagesPath = "https://admin.csfuse8.site/images";
             public const string CmsAdminPath = "https://admin.csfuse8.site/shell";
             public const string AdminPath = "https://admin.csfuse8.site";
             public const string CsServerIp = "192.168.100.241";

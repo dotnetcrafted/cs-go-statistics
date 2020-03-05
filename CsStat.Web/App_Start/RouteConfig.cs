@@ -64,7 +64,7 @@ namespace CsStat.Web
             routes.MapRoute(
                 name: "serverinfo",
                 url: Settings.ServerInfoDataApiPath,
-                defaults: new { controller = "HangoutBot", action = "ServerInfo", id = UrlParameter.Optional }
+                defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

@@ -13,11 +13,9 @@ class Navigation extends React.Component <NavigationProps> {
                 theme="dark"
                 selectedKeys={[this.props.router.location.pathname]}
             >
-                <Menu.Item key="/">
-                    <Link to="/">
-                        Home
-                    </Link>
-                </Menu.Item>
+                {/* <Menu.Item key="/matches">
+                    <Link to="/matches">Matches</Link>
+                </Menu.Item> */}
                 <Menu.Item key="/wiki">
                     <Link to="/wiki">Wiki</Link>
                 </Menu.Item>
