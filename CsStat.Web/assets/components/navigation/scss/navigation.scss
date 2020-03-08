@@ -1,6 +1,8 @@
 .navigation {
+    text-align: right;
+    text-transform: uppercase;
+    
     &.ant-menu-horizontal {
-        margin-left: 20px;
         line-height: 70px;
     }
 }

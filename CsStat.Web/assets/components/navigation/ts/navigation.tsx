@@ -14,16 +14,11 @@ class Navigation extends React.Component <NavigationProps> {
                 theme="dark"
                 selectedKeys={[this.props.router.location.pathname]}
             >
-                <Menu.Item key={constants.ROUTES.HOME}>
-                    <Link to={constants.ROUTES.HOME}>
-                        Home
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={constants.ROUTES.WIKI}>
-                    <Link to={constants.ROUTES.WIKI}>Wiki</Link>
-                </Menu.Item>
-                <Menu.Item key={constants.ROUTES.DEMO_READER}>
-                    <Link to={constants.ROUTES.DEMO_READER}>Demo Reader</Link>
+                {/* <Menu.Item key="/matches">
+                    <Link to="/matches">Matches</Link>
+                </Menu.Item> */}
+                <Menu.Item key="/wiki">
+                    <Link to="/wiki">Wiki</Link>
                 </Menu.Item>
             </Menu>
         );

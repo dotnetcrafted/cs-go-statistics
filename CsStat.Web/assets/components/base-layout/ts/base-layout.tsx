@@ -1,4 +1,5 @@
 import React, { SFC, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Layout, Typography, Row, Col
 } from 'antd';
@@ -7,6 +8,7 @@ import AuthorsCopyright from '../../authors-copyright';
 import Repository from '../../repository';
 import '../scss/index.scss';
 import Navigation from '../../navigation';
+import { ServerInfo } from 'components/server-info';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -14,16 +16,19 @@ const { Title } = Typography;
 const BaseLayout: SFC<BaseLayoutProps> = (props) => (
     <Layout className="base-layout__layout">
         <Header className="base-layout__header">
-            <Row type="flex" justify="start" align="middle">
-                <Col xs={6} lg={2} className="base-layout__logo">
-                    <span style={{ fontSize: '3rem', }}>🏅</span>
+            <Row type="flex" justify="center" align="middle">
+                <Col xs={6} lg={6}>
+                    <Link to="/">
+                        <Title level={1} className="base-layout__title">
+                            <span className="base-layout__title-icon">🏅</span>
+                            <span className="base-layout__title-text">Fuse8 CS:GO Statistics</span>
+                        </Title>
+                    </Link>
                 </Col>
-                <Col xs={12} lg={6}>
-                    <Title level={1} className="base-layout__title">
-                        Fuse8 CS:GO Statistics
-                    </Title>
+                <Col xs={12} lg={4}>
+                    <ServerInfo />
                 </Col>
-                <Col xs={6} lg={10}>
+                <Col xs={6} lg={6}>
                     <Navigation/>
                 </Col>
             </Row>
