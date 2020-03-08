@@ -9,6 +9,8 @@ import WikiPage from '../../pages/ts/wiki-page';
 import NotFoundPage from '../../pages/ts/not-found-page';
 import DemoReaderPage from '../../pages/ts/demo-reader-page';
 import constants from '../../../general/ts/constants';
+import { Matches } from 'components/matches';
+import { MatchDetails } from 'components/match-details';
 
 const store = configureStore();
 
@@ -25,6 +27,12 @@ const App: SFC<AppProps> = (props) => (
                     </Route>
                     <Route exact path={constants.ROUTES.DEMO_READER} >
                         <DemoReaderPage MatchesDataApiPath={props.MatchesDataApiPath}/>
+                    </Route>
+                    <Route exact path={constants.ROUTES.MATCHES} >
+                        <Matches />
+                    </Route>
+                    <Route exact path={constants.ROUTES.MATCH_DETAILS} >
+                        <MatchDetails />
                     </Route>
                     <Route>
                         <NotFoundPage/>
