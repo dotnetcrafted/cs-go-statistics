@@ -3,7 +3,6 @@ import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../general/ts/redux/types';
-import constants from '../../../general/ts/constants';
 
 class Navigation extends React.Component <NavigationProps> {
     render(): ReactNode {
