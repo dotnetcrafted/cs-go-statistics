@@ -295,7 +295,14 @@ namespace ReadFile.ReadDemo
 
         private static void RoundEnd()
         {
-            if (_lastCTScore + _lastTScore > SwapRoundNumber)
+            //It happens if there is only one player on the server and he switches between times
+            if (_lastCTScore == _parser.CTScore && _lastTScore == _parser.TScore)
+            {
+                _currentRoundNumber--;
+                return;
+            }
+
+            if (_lastCTScore + _lastTScore >= SwapRoundNumber)
             {
                 if (_lastTScore != _parser.TScore)
                 {
@@ -348,17 +355,17 @@ namespace ReadFile.ReadDemo
                 .ToList();
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
-
-            var squadScore = _lastCTScore + _lastTScore > SwapRoundNumber
-                    ? $"{SuqadB}(T): {_squadBScore} - {SuqadA}: {_squadAScore}(CT)"
-                    : $"{SuqadA}(T): {_squadAScore} - {SuqadB}: {_squadBScore}(CT)";
             
-            Console.WriteLine($"Round number: {_currentRound.RoundNumber, -2} | {squadScore}");
+            var squadScore = _lastCTScore + _lastTScore >= SwapRoundNumber
+                    ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
+                    : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
+
+            Console.WriteLine($"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason} ");
         }
 
         private static string GetSquadName(Team team)
         {
-            if (_lastCTScore + _lastTScore > SwapRoundNumber)
+            if (_lastCTScore + _lastTScore >= SwapRoundNumber)
             {
                 return team == Team.CounterTerrorist ? SuqadA : SuqadB;
             }
