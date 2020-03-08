@@ -4,8 +4,9 @@ import {
 } from 'antd';
 import { connect } from 'react-redux';
 import { ColumnProps } from 'antd/es/table';
+import qs from 'query-string';
 import {
-    fetchPlayers, startRequest, stopRequest, selectPlayer
+    fetchPlayers, startRequest, stopRequest
 } from '../../../general/ts/redux/actions';
 import FilterForm, { DateValues } from './filter-form';
 import { IAppState, RootState, Player } from '../../../general/ts/redux/types';
@@ -13,6 +14,7 @@ import ColumnsSelector from './columns-selector';
 import { nameof } from '../../../general/ts/extentions';
 import '../scss/index.scss';
 import utils from '../../../general/ts/utils';
+import { history } from '../../../general/ts/redux/store';
 
 const CELL_CSS_CLASS = 'players-data__cell';
 const HIDDEN_CELL_CSS_CLASS = 'is-hidden';
@@ -76,16 +78,26 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     private onRowClick(record: Player): void {
-        this.props.selectPlayer(record.Id);
+        const search = utils.getUrlSearch({ PlayerId: record.Id }, this.props.router.location.search);
+        history.push({
+            search
+        });
     }
 
     private cellWrapper(id: string, content: ReactNode): ReactNode {
-        const isSelectedClass = id === this.props.SelectedPlayer ? 'is-selected' : '';
+        const search = qs.parse(this.props.router.location.search);
+        const { PlayerId } = search;
+        const isSelectedClass = id === PlayerId ? 'is-selected' : '';
         return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>;
     }
 
     onFormSubmit = (params: DateValues): void => {
         this.fetchPlayers(this.props.playersDataUrl, params);
+
+        const search = utils.getUrlSearch(params, this.props.router.location.search);
+        history.push({
+            search
+        });
     };
 
     onCheckboxesChange = (selectedColumns: string[]): void => {
@@ -157,7 +169,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             title: COLUMN_NAMES.HeadShot.readableName,
             className: this.getCellClassName(COLUMN_NAMES.HeadShot.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, utils.getHeadshotsString(record.HeadShot, record.Kills)),
-            sorter: (a: Player, b: Player) => b.HeadShot - a.HeadShot
+            sorter: (a: Player, b: Player) => utils.getHeadshotsPercent(b.HeadShot, b.Kills) - utils.getHeadshotsPercent(a.HeadShot, a.Kills)
         },
         {
             dataIndex: COLUMN_NAMES.Assists.dataIndex,
@@ -210,13 +222,17 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     componentDidMount() {
-        this.fetchPlayers(this.props.playersDataUrl);
+        const search: any = qs.parse(this.props.router.location.search);
+        this.fetchPlayers(this.props.playersDataUrl, search);
     }
 
     render(): ReactNode {
         const {
-            IsLoading, DateFrom, DateTo, Players
+            IsLoading, Players
         } = this.props;
+
+        const search: any = qs.parse(this.props.router.location.search);
+        const { dateFrom, dateTo } = search;
 
         return (
             <>
@@ -225,8 +241,8 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                     <FilterForm
                         onFormSubmit={this.onFormSubmit}
                         isLoading={IsLoading}
-                        dateFrom={DateFrom}
-                        dateTo={DateTo}
+                        dateFrom={dateFrom}
+                        dateTo={dateTo}
                     />
                     <Dropdown overlay={this.columnSelector} trigger={['click']}>
                         <Button className="ant-dropdown-link">
@@ -259,34 +275,16 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
 type PlayersDataProps = {
     playersDataUrl: string;
-    SelectedPlayer: string;
     IsLoading: boolean;
-    DateFrom: string;
-    DateTo: string;
     Players: Player[];
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
     stopRequest: typeof stopRequest;
-    selectPlayer: typeof selectPlayer;
+    router: any;
 };
 
 type PlayersDataState = {
     visibleColumns: string[];
-};
-
-const mapStateToProps = (state: RootState) => {
-    const SelectedPlayer = state.app.SelectedPlayer;
-    const IsLoading = state.app.IsLoading;
-    const DateFrom = state.app.DateFrom;
-    const DateTo = state.app.DateTo;
-    const Players = state.app.Players;
-    return {
-        SelectedPlayer,
-        IsLoading,
-        DateFrom,
-        DateTo,
-        Players
-    };
 };
 
 export type ColumnNames = {
@@ -312,12 +310,22 @@ export type ColumnMapping = {
     readableName: string;
 };
 
+const mapStateToProps = (state: RootState) => {
+    const IsLoading = state.app.IsLoading;
+    const Players = state.app.Players;
+    const router = state.router;
+    return {
+        IsLoading,
+        Players,
+        router
+    };
+};
+
 export default connect(
     mapStateToProps,
     {
         fetchPlayers,
         startRequest,
-        stopRequest,
-        selectPlayer
+        stopRequest
     }
 )(PlayersData);

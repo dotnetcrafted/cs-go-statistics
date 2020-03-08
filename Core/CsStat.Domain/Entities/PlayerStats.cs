@@ -9,9 +9,10 @@ namespace CsStat.Domain.Entities
     {
         public Player Player { get; set; }
         public int Kills { get; set; }
-        public int Death { get; set; }
+        public int Deaths { get; set; }
         public int Assists { get; set; }
-        public int HeadShot { get; set; }
+        public int HeadShotsCount { get; set; }
+        public double HeadShotsPercent { get; set; }
         public int TotalGames { get; set; }
         public int Defuse { get; set; }
         public int Explode { get; set; }
@@ -20,6 +21,7 @@ namespace CsStat.Domain.Entities
         public int SniperRifleKills { get; set; }
         public int GrenadeKills { get; set; }
         public int MolotovKills { get; set; }
+        public int KnifeKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<GunModel>Guns { get; set; }
         public List<PlayerModel> Victims { get; set; }
@@ -30,9 +32,9 @@ namespace CsStat.Domain.Entities
         {
             get
             {
-                if (Death > 0)
+                if (Deaths > 0)
                 {
-                    return Math.Round((double)Kills / Death,2);
+                    return Math.Round((double)Kills / Deaths,2);
                 }
 
                 return Kills;
@@ -71,8 +73,13 @@ namespace CsStat.Domain.Entities
                     return 0;
                 }
 
-                return Math.Round((double)Death / TotalGames,2);
+                return Math.Round((double)Deaths / TotalGames,2);
             }
+        }
+
+        public PlayerStatsModel()
+        {
+            Achievements = new List<AchieveModel>();
         }
     }
 }

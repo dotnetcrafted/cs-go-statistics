@@ -17,7 +17,7 @@ class WikiPage extends React.Component<WikiPageProps> {
 
                 this.props.fetchPosts(data);
             })
-            .catch(error => {
+            .catch((error) => {
                 throw new Error(error);
             });
     }

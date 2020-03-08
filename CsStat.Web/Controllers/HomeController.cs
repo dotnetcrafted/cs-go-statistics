@@ -5,11 +5,13 @@ using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CsStat.Domain;
+using CSStat.CsLogsApi.Extensions;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
+using Microsoft.Ajax.Utilities;
+using MongoDB.Driver;
 
 
 namespace CsStat.Web.Controllers
@@ -26,14 +28,13 @@ namespace CsStat.Web.Controllers
             _demoRepository = demoRepository;
             _steamApi = new SteamApi();
         }
-
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo")]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
@@ -64,9 +65,9 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        private static IEnumerable<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
+        private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
         {
-            var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).ToList();
+            var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).OrderByDescending(x=>x.KdRatio).ToList();
             var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
             var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
@@ -86,5 +87,7 @@ namespace CsStat.Web.Controllers
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
+
+
     }
 }

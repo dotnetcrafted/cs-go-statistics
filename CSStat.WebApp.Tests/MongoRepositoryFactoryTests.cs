@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
+using CsStat.StrapiApi;
 using CsStat.Web.Helpers;
 using CsStat.Web.Models;
 using CSStat.WebApp.Tests.Entity;
@@ -30,13 +32,15 @@ namespace CSStat.WebApp.Tests
         private readonly IUsefulLinkRepository _usefulLinkRepository;
         private readonly IUserRepository _userRepository;
         private readonly UserRegistrationService _registrationService;
+        private readonly IStrapiApi _strapiApi;
 
         public  MongoRepositoryFactoryTests()
         {
             _connectionString = new ConnectionStringFactory();
             _mongoRepository = new MongoRepositoryFactory(_connectionString);
+            _strapiApi = new StrapiApi();
             _logRepository = new LogsRepository(_mongoRepository);
-            _playerRepository = new PlayerRepository(_mongoRepository);
+            _playerRepository = new PlayerRepository(_mongoRepository, _strapiApi);
             _baseRepository = new BaseRepository(_mongoRepository);
             _usefulLinkRepository = new UsefulLinkRepository(_mongoRepository);
             _userRepository = new UserRepository(_mongoRepository);
@@ -82,6 +86,20 @@ namespace CSStat.WebApp.Tests
         }
 
         [Test]
+        public void GetStatForPLayer()
+        {
+            var stat = _playerRepository.GetStatsForPlayer("rdk","01/31/2020");
+            if (stat != null)
+            {
+                PrintPlayerStat(stat);
+            }
+            else
+            {
+                Console.WriteLine("Unknown player");
+            }
+        }
+
+        [Test]
         public void GetPlayersInfo()
         {
             var players = _playerRepository.GetStatsForAllPlayers().OrderByDescending(x=>x.Points);
@@ -100,12 +118,12 @@ namespace CSStat.WebApp.Tests
                 var nick = player.Player.NickName;
                 var assists = player.Assists;
                 var assistsPerGame = player.AssistsPerGame;
-                var death = player.Death;
+                var death = player.Deaths;
                 var playerDeathPerGame = player.DeathPerGame;
                 var playerDefuse = player.Defuse;
                 var playerExplode = player.Explode;
                 var friendlyKillsa = player.FriendlyKills;
-                var headShot = player.HeadShot;
+                var headShot = player.HeadShotsCount;
                 var imagePatha = player.Player.ImagePath;
                 var kdRatio = player.KdRatio;
                 var PlayerKills = player.Kills;
@@ -122,12 +140,12 @@ namespace CSStat.WebApp.Tests
         public void UpdatePlayer(string imagePath)
         {
             var player = _playerRepository.GetPlayerByNickName("Host");
-            _playerRepository.UpdatePlayer(player.Id, "Danil", "Shilov", imagePath);
         }
         [Test]
         public void GetPlayers()
         {
             var players = _playerRepository.GetAllPlayers();
+            players.Any();
             players.ToList().ForEach(PrintPlayer);
         }
 
@@ -206,7 +224,7 @@ namespace CSStat.WebApp.Tests
         }
         private static void PrintPlayer(Player player)
         {
-            Console.WriteLine($"First Name: {player.FirstName},Second Name: {player.SecondName},Nick Name: {player.NickName},Image: {player.ImagePath}".Replace(',', '\n'));
+            Console.WriteLine($"Nick Name: {player.NickName},Image: {player.ImagePath},SteamID: {player.SteamId}, Is Retired: {player.IsRetired}".Replace(',', '\n'));
             Console.WriteLine(Environment.NewLine);
         }
 
@@ -217,12 +235,12 @@ namespace CSStat.WebApp.Tests
                 : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
 
             Console.WriteLine(Environment.NewLine);
-
+            //{ string.Join(" | ", log.Achievements?.Select(x => x.AchievementId.GetDescription()).ToList())}
             Console.WriteLine(
-                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Death},Assists: {log.Assists}," +
+                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
                 $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
-                $"Points: {log.Points},Acheivements: {string.Join(" | ", log.Achievements.Select(x=>x.Achieve.GetDescription()).ToList())}," +
-                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
+                $"Points: {log.Points},Acheivements: " +
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShotsCount}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 
         private static void PrintLog(Log log)

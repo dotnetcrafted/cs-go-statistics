@@ -2,7 +2,6 @@ import {
     IAppState,
     Post,
     ActionTypes,
-    SELECT_PLAYER,
     FETCH_PLAYERS_DATA,
     START_REQUEST,
     STOP_REQUEST,
@@ -27,11 +26,6 @@ const stopRequest = (): ActionTypes => ({
     type: STOP_REQUEST
 });
 
-const selectPlayer = (playerId: string): ActionTypes => ({
-    type: SELECT_PLAYER,
-    payload: playerId
-});
-
 export {
-    fetchPlayers, startRequest, stopRequest, selectPlayer, fetchPosts
+    fetchPlayers, startRequest, stopRequest, fetchPosts
 };

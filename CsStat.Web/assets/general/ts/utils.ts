@@ -1,3 +1,6 @@
+
+import qs from 'query-string';
+
 const log = (...args: any[]): void => {
     if (window.console && window.console.log) {
         window.console.log(...args);
@@ -36,13 +39,21 @@ function stringInterpolate(template: string, data: any, customizer: (key: any, d
     });
 }
 
-const getHeadshotsString = (HeadShot: number, Kills: number): string => {
-    return Kills === 0 ? '0' : `${HeadShot} (${Math.round((HeadShot / Kills) * 100)}%)`
+const getHeadshotsString = (HeadShot: number, Kills: number): string => (Kills === 0 ? '0' : `${Math.round((HeadShot / Kills) * 100)}% (${HeadShot})`);
+
+const getHeadshotsPercent = (HeadShot: number, Kills: number): number => (Kills === 0 ? 0 : Math.round((HeadShot / Kills) * 100));
+
+const getUrlSearch = (newValues: object, oldString: string): string => {
+    const oldValues = qs.parse(oldString);
+    const assigned = { ...oldValues, ...newValues };
+    return qs.stringify(assigned);
 };
 
 export default {
     log,
     stringFormat,
     stringInterpolate,
-    getHeadshotsString
+    getHeadshotsString,
+    getHeadshotsPercent,
+    getUrlSearch
 };

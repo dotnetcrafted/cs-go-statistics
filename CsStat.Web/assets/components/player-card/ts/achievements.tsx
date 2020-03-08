@@ -1,15 +1,15 @@
-import React, {SFC} from 'react';
+import React, { SFC } from 'react';
 import { Popover } from 'antd';
-import MapAchievementIdToImage from './mapping/achievements-image-map';
 import { Achievement } from '../../../general/ts/redux/types';
+
 const Achievements: SFC<AchievementsProps> = (props) => {
     const { data } = props;
     return (
         <div className="achievements">
             {data && data.map((item) => (
-                <div className="achievements__item" key={item.Id}>
+                <div className="achievements__item" key={item.AchievementId}>
                     <Popover title={item.Name} content={item.Description}>
-                        <img className="achievements__icon" src={MapAchievementIdToImage(item.Id)} />
+                        <img className="achievements__icon" src={item.IconUrl} />
                     </Popover>
                 </div>
             ))}
