@@ -162,6 +162,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HangoutBotController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServerInfoController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -480,9 +481,6 @@
     <Folder Include="Scripts\tinymce\themes\silver\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\MongoRepository.1.6.11\MongoRepository.chm">
-      <Link>Documentation\MongoRepository.chm</Link>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Web.Base.config" />
     <None Include="Properties\PublishProfiles\Salo - Web Deploy.pubxml" />

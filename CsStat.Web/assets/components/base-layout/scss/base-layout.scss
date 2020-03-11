@@ -7,6 +7,10 @@
         height: auto;
         padding: 0 $default-side-padding;
         background: $color-dark-blue;
+
+        @include desktop {
+            padding: 10px $default-side-padding;
+        }
     }
 
     &__logo {
@@ -20,10 +24,24 @@
     }
 
     &__title {
+        display: flex;
+        align-items: center;
         @at-root h1#{&} {
             font-size: 20px;
             color: $color-white;
             margin: 0;
+        }
+    }
+
+    &__title-icon {
+        font-size: 3rem;
+    }
+
+    &__title-text {
+        display: none;
+
+        @include desktop {
+            display: block;
         }
     }
 
