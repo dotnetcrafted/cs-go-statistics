@@ -22,6 +22,7 @@ namespace CsStat.Domain
         public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
         public static string ServerInfoDataMockApiPath => GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
+        public static string MatchesPagePath => GetSetting(nameof(MatchesPagePath), Defaults.MatchesPagePath);
         public static string DemoReaderPagePath => GetSetting(nameof(DemoReaderPagePath), Defaults.DemoReaderPagePath);
         public static string PlayersDataSteamApiPath => GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
@@ -82,7 +83,7 @@ namespace CsStat.Domain
             public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
             public const string DemoReaderPagePath = "demo-reader";
-            public const string PlayersDataSteamApiPath = @"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
+            public const string PlayersDataSteamApiPath =@"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
             public const string ArticlesPath = "https://admin.csfuse8.site/articles?_sort=createdAt:desc";
@@ -94,6 +95,7 @@ namespace CsStat.Domain
             public const string CsServerIp = "192.168.100.241";
             public const int ShowNullPlayers = 1;
             public const int CsServerPort = 27015;
+            public const string MatchesPagePath = "matches";
         }
     }
 }

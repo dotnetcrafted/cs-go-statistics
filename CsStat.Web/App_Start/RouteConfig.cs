@@ -62,6 +62,13 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
+                name: "matches",
+                url: Settings.MatchesPagePath+"/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
                 name: "serverinfo",
                 url: Settings.ServerInfoDataApiPath,
                 defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
