@@ -31,13 +31,7 @@ namespace CsStat.Web.Controllers
         }
         public ActionResult GetAllArticlesFromCms()
         {
-            var json = _strapiApi.GetArticles();
-
-            return new JsonResult
-            {
-                Data = json,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-            };
+            return Json(_strapiApi.GetArticles());
         }
 
         #region CustomAdmin

@@ -50,16 +50,15 @@ namespace CsStat.Web.Controllers
                 .ToList();
 
 
-            return new JsonResult
-            {
-                Data = new SaloModel
+            return Json
+            (
+                new SaloModel
                 {
                     Players = playersStat,
                     DateFrom = dateFrom,
                     DateTo = dateTo
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                }
+            );
         }
 
         private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
