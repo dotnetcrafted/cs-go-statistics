@@ -1,2 +1,7 @@
 @using CsStat.Domain
 <div data-dc-component-app data-dc-app-options='{"playersDataUrl": "@Settings.PlayersDataApiPath", "WikiDataApiPath": "@Settings.WikiDataApiPath"}'></div>
+<script>
+    appState = {
+        apiPaths: @Html.Raw(Settings.ToJson())
+    }
+</script>

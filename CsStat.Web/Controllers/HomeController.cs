@@ -6,6 +6,7 @@ using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using CSStat.CsLogsApi.Extensions;
+using CsStat.Domain;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
@@ -27,6 +28,8 @@ namespace CsStat.Web.Controllers
         }
         public ActionResult Index()
         {
+            var a = Settings.ToJson();
+
             return View();
         }
 
