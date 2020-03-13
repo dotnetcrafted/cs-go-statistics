@@ -25,35 +25,35 @@ namespace CsStat.Domain
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
 
-        [IncludePropertyToJson]
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
         public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
         public static string DemosFolderPath => GetSetting(nameof(DemosFolderPath), Defaults.DemosFolderPath);
-        public static int FileReadNewLinesInterval => GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
-        public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
-        public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
-        public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
-        public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
         public static string FullMatchesDataApiPath => GetSetting(nameof(FullMatchesDataApiPath), Defaults.FullMatchesDataApiPath);
+
+        [IncludePropertyToJson]
         public static string MatchesDataApiPath => GetSetting(nameof(MatchesDataApiPath), Defaults.MatchesDataApiPath);
-        public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);        
+
+        ///<filters>
+        /// matchId: string
+        /// ?matchId=5e256e7758daf2046cbe14c2
+        /// </filters>
+        [IncludePropertyToJson]
+        public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);
+        
+        [IncludePropertyToJson]
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
 
         [IncludePropertyToJson]
         public static string ServerInfoDataApiPath =>GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
         public static string ServerInfoDataMockApiPath =>GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
         public static string PlayersListApiPath => GetSetting(nameof(PlayersListApiPath), Defaults.PlayersListApiPath);
-        public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
-        public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
         public static int FileReadNewLinesInterval =>GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
-        public static string PlayersDataSteamApiPath =>GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
         public static string MatchesPagePath => GetSetting(nameof(MatchesPagePath), Defaults.MatchesPagePath);
         public static string DemoReaderPagePath => GetSetting(nameof(DemoReaderPagePath), Defaults.DemoReaderPagePath);
         public static string PlayersDataSteamApiPath => GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
-        public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string ArticlesPath => GetSetting(nameof(ArticlesPath), Defaults.ArticlesPath);
         public static string AchievementsPath => GetSetting(nameof(AchievementsPath), Defaults.AchievementsPath);
@@ -62,7 +62,6 @@ namespace CsStat.Domain
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
-        public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
         public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
         
