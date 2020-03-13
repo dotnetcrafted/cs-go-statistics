@@ -33,7 +33,8 @@ export const COLUMN_NAMES: ColumnNames = {
     AssistsPerGame: { dataIndex: nameof<Player>('AssistsPerGame'), readableName: 'Assists/Game' },
     DefusedBombs: { dataIndex: nameof<Player>('DefusedBombs'), readableName: 'Defused Bombs' },
     ExplodedBombs: { dataIndex: nameof<Player>('ExplodedBombs'), readableName: 'Exploded Bombs' },
-    FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' }
+    FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' },
+    KdDif: { dataIndex: nameof<Player>('KdDif'), readableName: 'K/D Diff' }
 };
 const DEFAULT_COLUMNS = [
     COLUMN_NAMES.KdRatio.dataIndex,
@@ -41,7 +42,8 @@ const DEFAULT_COLUMNS = [
     COLUMN_NAMES.Deaths.dataIndex,
     COLUMN_NAMES.HeadShot.dataIndex,
     COLUMN_NAMES.Assists.dataIndex,
-    COLUMN_NAMES.TotalGames.dataIndex
+    COLUMN_NAMES.TotalGames.dataIndex,
+    COLUMN_NAMES.KdDif.dataIndex
 ];
 
 const PERMANENT_COLUMNS = [COLUMN_NAMES.ImagePath.dataIndex, COLUMN_NAMES.Name.dataIndex];
@@ -156,6 +158,13 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             className: this.getCellClassName(COLUMN_NAMES.Deaths.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Deaths),
             sorter: (a: Player, b: Player) => b.Deaths - a.Deaths
+        },
+        {
+            dataIndex: COLUMN_NAMES.KdDif.dataIndex,
+            title: COLUMN_NAMES.KdDif.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.KdDif.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.KdDif),
+            sorter: (a: Player, b: Player) => b.KdDif - a.KdDif
         },
         {
             dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
@@ -303,6 +312,7 @@ export type ColumnNames = {
     DefusedBombs: ColumnMapping;
     ExplodedBombs: ColumnMapping;
     FriendlyKills: ColumnMapping;
+    KdDif: ColumnMapping;
 };
 
 export type ColumnMapping = {

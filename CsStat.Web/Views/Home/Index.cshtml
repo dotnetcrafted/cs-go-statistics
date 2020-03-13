@@ -4,3 +4,9 @@
      "WikiDataApiPath": "@Settings.WikiDataApiPath",
      "MatchesDataApiPath": "@Settings.MatchesDataApiPath"
      }'></div>
+<script>
+    appState = {
+        apiPaths: @Html.Raw(Settings.ToJson())
+    }
+</script>
+

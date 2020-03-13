@@ -10,7 +10,7 @@ using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
 {
-    public class ServerInfoController : Controller
+    public class ServerInfoController : BaseController
     {
         private readonly IQueryConnection _queryConnection;
         private static IStrapiApi _strapiApi;
@@ -40,11 +40,7 @@ namespace CsStat.Web.Controllers
                 serverInfo.Map = "Server is down";
             }
 
-            return new JsonResult
-            {
-                Data = serverInfo,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return Json(serverInfo);
         }
 
         public JsonResult ServerInfoMock(bool? isAlive, string map = "")
@@ -66,17 +62,16 @@ namespace CsStat.Web.Controllers
                 };
             }
 
-            return new JsonResult
-            {
-                Data = new ServerInfoModel
+            return Json
+            (
+                new ServerInfoModel
                 {
                     IsAlive = false,
                     PlayersCount = 0,
                     Map = string.Empty,
                     ImageUrl = "https://admin.csfuse8.site/uploads/7203cded792e4d2ca72e3b47d248db6c.jpg"
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                }
+            );
         }
         private ServerInfoModel GetServerInfo()
         {

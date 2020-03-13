@@ -76,6 +76,7 @@ namespace CsStat.Domain.Entities
                 return Math.Round((double)Deaths / TotalGames,2);
             }
         }
+        public int KdDif => Kills - Deaths;
 
         public PlayerStatsModel()
         {

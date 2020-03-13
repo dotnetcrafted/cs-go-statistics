@@ -6,6 +6,7 @@ using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using CSStat.CsLogsApi.Extensions;
+using CsStat.Domain;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
@@ -30,6 +31,8 @@ namespace CsStat.Web.Controllers
         }
         public ActionResult Index()
         {
+            var a = Settings.ToJson();
+
             return View();
         }
 
@@ -53,16 +56,15 @@ namespace CsStat.Web.Controllers
                 .ToList();
 
 
-            return new JsonResult
-            {
-                Data = new SaloModel
+            return Json
+            (
+                new SaloModel
                 {
                     Players = playersStat,
                     DateFrom = dateFrom,
                     DateTo = dateTo
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                }
+            );
         }
 
         private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")

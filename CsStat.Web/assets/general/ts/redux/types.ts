@@ -28,6 +28,7 @@ type Player = {
     TotalGames: number;
     HeadShot: number;
     KdRatio: number;
+    KdDif: number;
     Achievements: Achievement[];
     Victims: RelatedPlayer[];
     Killers: RelatedPlayer[];

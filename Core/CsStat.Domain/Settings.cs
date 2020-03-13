@@ -1,12 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using CsStat.SystemFacade.Attributes;
 using CsStat.SystemFacade.Extensions;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CsStat.Domain
 {
     public static class Settings
     {
+        public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
+
+        ///<filters>
+        /// dateFrom: string, nullable ; dateTo: string, nullable
+        /// ?dateFrom=03/12/2020&dateTo=03/13/2020
+        /// </filters>
+        [IncludePropertyToJson]
+        public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
+        public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
+
+        [IncludePropertyToJson]
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
         public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
         public static string DemosFolderPath => GetSetting(nameof(DemosFolderPath), Defaults.DemosFolderPath);
@@ -19,9 +38,18 @@ namespace CsStat.Domain
         public static string MatchesDataApiPath => GetSetting(nameof(MatchesDataApiPath), Defaults.MatchesDataApiPath);
         public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);        
         public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
-        public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
-        public static string ServerInfoDataMockApiPath => GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
+
+        [IncludePropertyToJson]
+        public static string ServerInfoDataApiPath =>GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
+        public static string ServerInfoDataMockApiPath =>GetSetting(nameof(ServerInfoDataMockApiPath), Defaults.ServerInfoDataMockApiPath);
+        public static string PlayersListApiPath => GetSetting(nameof(PlayersListApiPath), Defaults.PlayersListApiPath);
+        public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
+        public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
+        public static int FileReadNewLinesInterval =>GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
+        public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
+        public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
+        public static string PlayersDataSteamApiPath =>GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
         public static string MatchesPagePath => GetSetting(nameof(MatchesPagePath), Defaults.MatchesPagePath);
         public static string DemoReaderPagePath => GetSetting(nameof(DemoReaderPagePath), Defaults.DemoReaderPagePath);
         public static string PlayersDataSteamApiPath => GetSetting(nameof(PlayersDataSteamApiPath), Defaults.PlayersDataSteamApiPath);
@@ -33,10 +61,24 @@ namespace CsStat.Domain
         public static string ImagesPath => GetSetting(nameof(ImagesPath), Defaults.ImagesPath);
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
+        public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
+        public static string ApiKey => GetSetting(nameof(ApiKey), Defaults.ApiKey);
         public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
-        public static string PlayersListApiPath => GetSetting(nameof(PlayersListApiPath), Defaults.PlayersListApiPath);
-        public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
         public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
+        
+        public static string ToJson()
+        {
+            var settings = typeof(Settings);
+            var propertyInfo = settings.GetFilteredProperties();
+            
+            var model = propertyInfo.Select(info => new SettingsModel
+            {
+                Name = info.Name.ToCamelCase(),
+                Value = info.GetValue(null).ToString()
+            }).ToList();
+
+            return JsonConvert.SerializeObject(model);
+        }
 
         private static string GetSetting(string settingName, string defaultValue = null)
         {
@@ -97,5 +139,12 @@ namespace CsStat.Domain
             public const int CsServerPort = 27015;
             public const string MatchesPagePath = "matches";
         }
+    }
+
+    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    public class SettingsModel
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

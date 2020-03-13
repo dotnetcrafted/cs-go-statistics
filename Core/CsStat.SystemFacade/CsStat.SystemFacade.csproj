@@ -58,8 +58,10 @@
     <Compile Include="Attributes\Caption.cs" />
     <Compile Include="Attributes\IsSniperRifleAttribute.cs" />
     <Compile Include="Attributes\LogValueAttribute.cs" />
-    <Compile Include="BaseWatcher.cs" />
+    <Compile Include="Attributes\IncludePropertyToJsonAttribute.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="BaseWatcher.cs" />
     <Compile Include="Extensions\LongExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="MongoDateComparison.cs" />

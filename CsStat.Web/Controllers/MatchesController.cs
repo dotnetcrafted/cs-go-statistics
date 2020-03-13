@@ -46,11 +46,7 @@ namespace CsStat.Web.Controllers
                 }
             }
 
-            return new JsonResult
-            {
-                Data = new {matches},
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return Json(matches);
         }
 
 
@@ -59,16 +55,15 @@ namespace CsStat.Web.Controllers
         {
             var matches = _demoRepository.GetMatches().ToList();
 
-            return new JsonResult
-            {
-                Data = matches.Select(x => new MatchViewData()
-                {
-                    Id = x.Id,
-                    Map = x.Map,
-                    Date = x.MatchDate
-                }),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return Json
+            (
+                matches.Select(x => new MatchViewData
+                    {
+                        Id = x.Id,
+                        Map = x.Map,
+                        Date = x.MatchDate
+                    })
+            );
         }
 
         [HttpGet]
@@ -78,18 +73,10 @@ namespace CsStat.Web.Controllers
             {
                 var match = _demoRepository.GetMatch(matchId);
 
-                return new JsonResult
-                {
-                    Data = new { match },
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                };
+                return Json(match);
             }
 
-            return new JsonResult
-            {
-                Data = "missing match id",
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return Json("missing match id");
         }
     }
 

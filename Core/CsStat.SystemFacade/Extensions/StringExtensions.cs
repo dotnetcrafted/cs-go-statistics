@@ -53,5 +53,12 @@ namespace CsStat.SystemFacade.Extensions
                 ? date
                 : defaultValue;
         }
+
+        public static string ToCamelCase(this string value)
+        {
+            var firstChar = value[0].ToString().ToLower();
+            value = value.Substring(1, value.Length - 1);
+            return firstChar + value;
+        }
     }
 }
