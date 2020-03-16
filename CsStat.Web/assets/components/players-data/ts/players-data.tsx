@@ -23,25 +23,27 @@ export const COLUMN_NAMES: ColumnNames = {
     ImagePath: { dataIndex: nameof<Player>('ImagePath'), readableName: 'ImagePath' },
     Name: { dataIndex: nameof<Player>('Name'), readableName: 'Players Name' },
     Points: { dataIndex: nameof<Player>('Points'), readableName: 'Points' },
-    KdRatio: { dataIndex: nameof<Player>('KdRatio'), readableName: 'K/D Ratio' },
-    Kills: { dataIndex: nameof<Player>('Kills'), readableName: 'Kills' },
-    Deaths: { dataIndex: nameof<Player>('Deaths'), readableName: 'Deaths' },
-    TotalGames: { dataIndex: nameof<Player>('TotalGames'), readableName: 'Total Games' },
-    KillsPerGame: { dataIndex: nameof<Player>('KillsPerGame'), readableName: 'Kills/Game' },
+    Kad: { dataIndex: nameof<Player>('Kad'), readableName: 'K/A/D' },
+    KdRatio: { dataIndex: nameof<Player>('KdRatio'), readableName: 'KD Ratio' },
+    KdDif: { dataIndex: nameof<Player>('KdDif'), readableName: 'KD Diff' },
     HeadShot: { dataIndex: nameof<Player>('HeadShot'), readableName: 'HeadShots' },
+    TotalGames: { dataIndex: nameof<Player>('TotalGames'), readableName: 'Total Games' },
+    Kills: { dataIndex: nameof<Player>('Kills'), readableName: 'Kills' },
     Assists: { dataIndex: nameof<Player>('Assists'), readableName: 'Assists' },
+    Deaths: { dataIndex: nameof<Player>('Deaths'), readableName: 'Deaths' },
+    KillsPerGame: { dataIndex: nameof<Player>('KillsPerGame'), readableName: 'Kills/Game' },
     AssistsPerGame: { dataIndex: nameof<Player>('AssistsPerGame'), readableName: 'Assists/Game' },
     DefusedBombs: { dataIndex: nameof<Player>('DefusedBombs'), readableName: 'Defused Bombs' },
     ExplodedBombs: { dataIndex: nameof<Player>('ExplodedBombs'), readableName: 'Exploded Bombs' },
     FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' }
 };
 const DEFAULT_COLUMNS = [
+    COLUMN_NAMES.Points.dataIndex,
+    COLUMN_NAMES.Kad.dataIndex,
     COLUMN_NAMES.KdRatio.dataIndex,
-    COLUMN_NAMES.Kills.dataIndex,
-    COLUMN_NAMES.Deaths.dataIndex,
+    COLUMN_NAMES.KdDif.dataIndex,
     COLUMN_NAMES.HeadShot.dataIndex,
-    COLUMN_NAMES.Assists.dataIndex,
-    COLUMN_NAMES.TotalGames.dataIndex
+    COLUMN_NAMES.TotalGames.dataIndex,
 ];
 
 const PERMANENT_COLUMNS = [COLUMN_NAMES.ImagePath.dataIndex, COLUMN_NAMES.Name.dataIndex];
@@ -84,11 +86,17 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
         });
     }
 
-    private cellWrapper(id: string, content: ReactNode): ReactNode {
+    private cellWrapper(id: string, content: ReactNode, value?: number): ReactNode {
         const search = qs.parse(this.props.router.location.search);
         const { PlayerId } = search;
         const isSelectedClass = id === PlayerId ? 'is-selected' : '';
-        return <div className={`players-data__cell-inner ${isSelectedClass}`}>{content}</div>;
+        var textColorClass = "";
+
+        if (value != undefined) {
+            textColorClass = value < 0 ? 'red-text' : 'green-text';
+        }
+
+        return <div className={`players-data__cell-inner ${isSelectedClass} ${textColorClass}`}>{content}</div>;
     }
 
     onFormSubmit = (params: DateValues): void => {
@@ -135,84 +143,99 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             className: this.getCellClassName(COLUMN_NAMES.Points.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Points),
             sorter: (a: Player, b: Player) => b.Points - a.Points
-        },
+        }, //points
+        {
+            dataIndex: COLUMN_NAMES.Kad.dataIndex,
+            title: () => <Tooltip title="Kills / Assists / Deaths">{COLUMN_NAMES.Kad.readableName}</Tooltip>,
+            className: this.getCellClassName(COLUMN_NAMES.Kad.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Kad),
+            sorter: (a: Player, b: Player) => a.Kills - b.Kills
+        }, //kad
         {
             dataIndex: COLUMN_NAMES.KdRatio.dataIndex,
             title: () => <Tooltip title="Kills / Deaths">{COLUMN_NAMES.KdRatio.readableName}</Tooltip>,
             className: this.getCellClassName(COLUMN_NAMES.KdRatio.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.KdRatio),
             sorter: (a: Player, b: Player) => b.KdRatio - a.KdRatio
-        },
+        }, //Kd ratio        
         {
-            dataIndex: COLUMN_NAMES.Kills.dataIndex,
-            title: COLUMN_NAMES.Kills.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.Kills.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Kills),
-            sorter: (a: Player, b: Player) => b.Kills - a.Kills
-        },
-        {
-            dataIndex: COLUMN_NAMES.Deaths.dataIndex,
-            title: COLUMN_NAMES.Deaths.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.Deaths.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Deaths),
-            sorter: (a: Player, b: Player) => b.Deaths - a.Deaths
-        },
-        {
-            dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
-            title: COLUMN_NAMES.KillsPerGame.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.KillsPerGame.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.KillsPerGame),
-            sorter: (a: Player, b: Player) => b.KillsPerGame - a.KillsPerGame
-        },
+        dataIndex: COLUMN_NAMES.KdDif.dataIndex,
+        title: COLUMN_NAMES.KdDif.readableName,
+        className: this.getCellClassName(COLUMN_NAMES.KdDif.dataIndex),
+        render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.KdDif, record.KdDif),
+        sorter: (a: Player, b: Player) => b.KdDif - a.KdDif
+        }, //kd dif
         {
             dataIndex: COLUMN_NAMES.HeadShot.dataIndex,
             title: COLUMN_NAMES.HeadShot.readableName,
             className: this.getCellClassName(COLUMN_NAMES.HeadShot.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, utils.getHeadshotsString(record.HeadShot, record.Kills)),
             sorter: (a: Player, b: Player) => utils.getHeadshotsPercent(b.HeadShot, b.Kills) - utils.getHeadshotsPercent(a.HeadShot, a.Kills)
-        },
-        {
-            dataIndex: COLUMN_NAMES.Assists.dataIndex,
-            title: COLUMN_NAMES.Assists.dataIndex,
-            className: this.getCellClassName(COLUMN_NAMES.Assists.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Assists),
-            sorter: (a: Player, b: Player) => b.Assists - a.Assists
-        },
-        {
-            dataIndex: COLUMN_NAMES.AssistsPerGame.dataIndex,
-            title: COLUMN_NAMES.AssistsPerGame.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.AssistsPerGame.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.AssistsPerGame),
-            sorter: (a: Player, b: Player) => b.AssistsPerGame - a.AssistsPerGame
-        },
-        {
-            dataIndex: COLUMN_NAMES.DefusedBombs.dataIndex,
-            title: COLUMN_NAMES.DefusedBombs.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.DefusedBombs.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.DefusedBombs),
-            sorter: (a: Player, b: Player) => b.DefusedBombs - a.DefusedBombs
-        },
-        {
-            dataIndex: COLUMN_NAMES.ExplodedBombs.dataIndex,
-            title: COLUMN_NAMES.ExplodedBombs.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.ExplodedBombs.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.ExplodedBombs),
-            sorter: (a: Player, b: Player) => b.ExplodedBombs - a.ExplodedBombs
-        },
-        {
-            dataIndex: COLUMN_NAMES.FriendlyKills.dataIndex,
-            title: COLUMN_NAMES.FriendlyKills.readableName,
-            className: this.getCellClassName(COLUMN_NAMES.FriendlyKills.dataIndex),
-            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.FriendlyKills),
-            sorter: (a: Player, b: Player) => b.FriendlyKills - a.FriendlyKills
-        },
+        }, //headshots
         {
             dataIndex: COLUMN_NAMES.TotalGames.dataIndex,
             title: COLUMN_NAMES.TotalGames.readableName,
             className: this.getCellClassName(COLUMN_NAMES.TotalGames.dataIndex),
             render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.TotalGames),
             sorter: (a: Player, b: Player) => b.TotalGames - a.TotalGames
-        }
+        }, //total games
+        {
+            dataIndex: COLUMN_NAMES.Kills.dataIndex,
+            title: COLUMN_NAMES.Kills.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.Kills.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Kills),
+            sorter: (a: Player, b: Player) => b.Kills - a.Kills
+        }, //kills
+        {
+            dataIndex: COLUMN_NAMES.Assists.dataIndex,
+            title: COLUMN_NAMES.Assists.dataIndex,
+            className: this.getCellClassName(COLUMN_NAMES.Assists.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Assists),
+            sorter: (a: Player, b: Player) => b.Assists - a.Assists
+        }, //assists
+        {
+            dataIndex: COLUMN_NAMES.Deaths.dataIndex,
+            title: COLUMN_NAMES.Deaths.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.Deaths.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.Deaths),
+            sorter: (a: Player, b: Player) => b.Deaths - a.Deaths
+        }, //deaths
+        {
+            dataIndex: COLUMN_NAMES.KillsPerGame.dataIndex,
+            title: COLUMN_NAMES.KillsPerGame.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.KillsPerGame.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.KillsPerGame),
+            sorter: (a: Player, b: Player) => b.KillsPerGame - a.KillsPerGame
+        }, //kills per game
+        {
+            dataIndex: COLUMN_NAMES.AssistsPerGame.dataIndex,
+            title: COLUMN_NAMES.AssistsPerGame.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.AssistsPerGame.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.AssistsPerGame),
+            sorter: (a: Player, b: Player) => b.AssistsPerGame - a.AssistsPerGame
+        }, //assists per game
+        {
+            dataIndex: COLUMN_NAMES.DefusedBombs.dataIndex,
+            title: COLUMN_NAMES.DefusedBombs.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.DefusedBombs.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.DefusedBombs),
+            sorter: (a: Player, b: Player) => b.DefusedBombs - a.DefusedBombs
+        }, //defused bombs
+        {
+            dataIndex: COLUMN_NAMES.ExplodedBombs.dataIndex,
+            title: COLUMN_NAMES.ExplodedBombs.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.ExplodedBombs.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.ExplodedBombs),
+            sorter: (a: Player, b: Player) => b.ExplodedBombs - a.ExplodedBombs
+        }, //exploded bombs
+        {
+            dataIndex: COLUMN_NAMES.FriendlyKills.dataIndex,
+            title: COLUMN_NAMES.FriendlyKills.readableName,
+            className: this.getCellClassName(COLUMN_NAMES.FriendlyKills.dataIndex),
+            render: (_link: any, record: Player) => this.cellWrapper(record.Id, record.FriendlyKills),
+            sorter: (a: Player, b: Player) => b.FriendlyKills - a.FriendlyKills
+        }, //friendly kills
+
     ];
 
     get columnSelector(): ReactNode {
