@@ -20,6 +20,8 @@ namespace CsStat.Web.Models
         public int ExplodedBombs { get; set; }
         public int TotalGames { get; set; }
         public int HeadShot { get; set; }
+        public int KdDif { get; set; }
+        public string Kad => $"{Kills}/{Assists}/{Deaths}";
         public double KdRatio { get; set; }
         public List<PlayerViewModel> Victims { get; set; }
         public List<PlayerViewModel> Killers { get; set; }

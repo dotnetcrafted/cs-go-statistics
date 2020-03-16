@@ -32,6 +32,14 @@
         &.is-selected {
             background-color: $color-light-blue;
         }
+
+        &.red-text {
+            color: $color-orange-red;
+        }
+
+        &.green-text {
+            color: $color-green;
+        }
     }
 
     &__avatar {
