@@ -18,8 +18,8 @@ namespace CsStat.Domain
         public static int ShowNullPlayers => GetSetting(nameof(ShowNullPlayers), Defaults.ShowNullPlayers);
 
         ///<filters>
-        /// dateFrom: string, nullable ; dateTo: string, nullable
-        /// ?dateFrom=03/12/2020&dateTo=03/13/2020
+        /// dateFrom?: string; dateTo?: string
+        /// /api/playersdata?dateFrom=03/12/2020&dateTo=03/13/2020
         /// </filters>
         [IncludePropertyToJson]
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
@@ -35,7 +35,7 @@ namespace CsStat.Domain
 
         ///<filters>
         /// matchId: string
-        /// ?matchId=5e64919758daf29cb0b18cc1
+        /// /api/matchdata?matchId=5e64919758daf29cb0b18cc1
         /// </filters>
         [IncludePropertyToJson]
         public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);
