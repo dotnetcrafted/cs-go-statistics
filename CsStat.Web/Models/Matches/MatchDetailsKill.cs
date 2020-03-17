@@ -2,7 +2,7 @@
 {
     public class MatchDetailsKill
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string FormattedTime { get; set; } // 0:28
         public long Killer { get; set; } // MatchDetailsSquadPlayer id
         public long? Victim { get; set; } // MatchDetailsSquadPlayer id,

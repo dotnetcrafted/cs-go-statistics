@@ -90,10 +90,10 @@ namespace CsStat.Web.Controllers
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills
-                                    .Select(kill => new MatchDetailsKill
+                                    .Select((kill, index) => new MatchDetailsKill
                                     {
-                                        Id = "",
-                                        FormattedTime = "",
+                                        Id = index,
+                                        FormattedTime = "0",
                                         Killer = player.SteamID,
                                         Victim = kill.Victim,
                                         Assister = kill.Assister,
@@ -102,9 +102,9 @@ namespace CsStat.Web.Controllers
                                         IsHeadshot = kill.IsHeadshot
                                     })
                                 )).ToList(),
-                        Squads = round.Squads.Select(squad => new MatchDetailsSquad
+                        Squads = round.Squads.Select((squad, index) => new MatchDetailsSquad
                         {
-                            Id = squad.SquadTitle.Replace(" ", ""),
+                            Id = index,
                             Title = squad.SquadTitle,
                             Players = squad.Players.Select(player => new MatchDetailsSquadPlayer
                             {
