@@ -82,7 +82,7 @@ namespace CsStat.Web.Controllers
                     CTScore = match.TotalSquadBScore,
                     Rounds = match.Rounds.Select(round => new MatchRound
                     {
-                        Id = "",
+                        Id = round.RoundNumber,
                         CTScore = round.CTScore,
                         TScore = round.TScore,
                         Reason = (int) round.Reason,
@@ -104,11 +104,11 @@ namespace CsStat.Web.Controllers
                                 )).ToList(),
                         Squads = round.Squads.Select(squad => new MatchDetailsSquad
                         {
-                            Id = "",
+                            Id = squad.SquadTitle.Replace(" ", ""),
                             Title = squad.SquadTitle,
                             Players = squad.Players.Select(player => new MatchDetailsSquadPlayer
                             {
-                                Id = "",
+                                Id = player.SteamID,
                                 Name = player.Name,
                                 SteamImage = player.ProfileImageUrl,
                                 Kills = player.Kills.Count,

@@ -4,7 +4,7 @@ namespace CsStat.Web.Models.Matches
 {
     public class MatchRound
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int TScore { get; set; } // 2
         public int CTScore { get; set; } // 0
         public int Reason { get; set; } // 1
