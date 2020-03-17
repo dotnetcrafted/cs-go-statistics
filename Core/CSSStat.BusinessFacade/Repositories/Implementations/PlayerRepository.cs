@@ -4,6 +4,7 @@ using System.Linq;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
+using CsStat.Domain.Extensions;
 using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Enums;
@@ -211,51 +212,53 @@ namespace BusinessFacade.Repositories.Implementations
             
             if (!achievements.Any())
                 return;
-            
-            playersStats.Where(x=>x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x=>x.Kills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.FirstKd)); 
 
-            playersStats.Where(x=>x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x=>x.Kills).Skip(1).Take(1).First()
-                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
-                
-            playersStats.Where(x=>x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills).Skip(2).Take(1).First()
-                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
+            playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
+                .FirstOrDefault()?
+                .Achievements
+                .Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.FirstKd));
 
-            playersStats.Where(x=>x.Kills > 0).OrderByDescending(x => x.Kills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Killer));
+            playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
+                .Skip(1).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
 
-            playersStats.Where(x=>x.Assists > 0).OrderByDescending(x => x.Assists).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.TeamPlayer));
+            playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
+                .Skip(2).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
 
-            playersStats.Where(x=>x.HeadShotsCount > 0 && x.Kills > 7).OrderByDescending(x => x.HeadShotsPercent).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.HeadHunter)); 
-                
-            playersStats.Where(x=>x.Deaths > 0).OrderByDescending(x => x.Deaths).ThenBy(x=>x.KdRatio).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Kenny));
-                
-            playersStats.Where(x=>x.Points > 0).OrderByDescending(x=>x.Points).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Mvp));              
+            playersStats.Where(x => x.Kills > 0).OrderByDescending(x => x.Kills).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Killer));
 
-            playersStats.Where(x=>x.SniperRifleKills > 0).OrderByDescending(x=>x.SniperRifleKills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Sniper));
+            playersStats.Where(x => x.Assists > 0).OrderByDescending(x => x.Assists).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.TeamPlayer));
+
+            playersStats.Where(x => x.HeadShotsCount > 0 && x.Kills > 7).OrderByDescending(x => Math.Round(x.HeadShotsPercent)).ThenByDescending(x=>x.KdRatio)
+                .FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.HeadHunter));
+
+            playersStats.Where(x => x.Deaths > 0).OrderByDescending(x => x.Deaths).ThenBy(x => x.KdRatio)
+                .FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Kenny));
+
+            playersStats.Where(x => x.Points > 0).OrderByDescending(x => x.Points).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Mvp));
+
+            var playerStats = playersStats.Where(x => x.SniperRifleKills > 0).OrderByDescending(x => x.SniperRifleKills).FirstOrDefault();
+            playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Sniper).ChangeDescription(playerStats.SniperRifleKills));
 
             playersStats.Where(x => x.FriendlyKills > 0).OrderByDescending(x => x.FriendlyKills).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Brutus));
-               
-            playersStats.Where(x=>x.GrenadeKills > 0).OrderByDescending(x=>x.GrenadeKills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Pitcher));
 
-            playersStats.Where(x=>x.MolotovKills > 0).OrderByDescending(x=>x.MolotovKills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Firebug));
+            playerStats = playersStats.Where(x => x.GrenadeKills > 0).OrderByDescending(x => x.GrenadeKills).FirstOrDefault();
+            playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Pitcher).ChangeDescription(playerStats.GrenadeKills));
 
-            playersStats.Where(x=>x.Explode > 0).OrderByDescending(x=>x.Explode).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Bomberman));
-                
-            playersStats.Where(x=>x.Defuse > 0).OrderByDescending(x=>x.Defuse).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x=>x.AchievementId == Constants.AchievementsIds.Sapper));
+            playerStats = playersStats.Where(x => x.MolotovKills > 0).OrderByDescending(x => x.MolotovKills).FirstOrDefault();
+            playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Firebug).ChangeDescription(playerStats.MolotovKills));
 
-            playersStats.Where(x => x.KnifeKills > 0).OrderByDescending(x => x.KnifeKills).FirstOrDefault()?
-                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai));
+            playersStats.Where(x => x.Explode > 0).OrderByDescending(x => x.Explode).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Bomberman));
+
+            playersStats.Where(x => x.Defuse > 0).OrderByDescending(x => x.Defuse).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Sapper));
+
+            playerStats = playersStats.Where(x => x.KnifeKills > 0).OrderByDescending(x => x.KnifeKills).FirstOrDefault();
+            playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai).ChangeDescription(playerStats.KnifeKills));
         }
     }
 }
