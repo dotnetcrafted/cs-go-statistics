@@ -21,7 +21,12 @@ namespace BusinessFacade.Repositories.Implementations
         {
             return _mongoRepository.GetRepository<DemoLog>().Collection
                 .FindAllAs<DemoLog>()
-                .SetFields(Fields.Include(nameof(DemoLog.Id), nameof(DemoLog.MatchDate), nameof(DemoLog.Map)))
+                .SetFields(Fields.Include(
+                    nameof(DemoLog.Id), 
+                    nameof(DemoLog.MatchDate), 
+                    nameof(DemoLog.Map), 
+                    nameof(DemoLog.TotalSquadAScore), 
+                    nameof(DemoLog.TotalSquadBScore)))
                 .OrderByDescending(x => x.MatchDate)
                 .ToList();
         }

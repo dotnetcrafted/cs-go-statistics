@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using BusinessFacade.Repositories;
-using CsStat.Domain.Entities.Demo;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
+using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Controllers
 {
@@ -57,11 +55,13 @@ namespace CsStat.Web.Controllers
 
             return Json
             (
-                matches.Select(x => new MatchViewData
+                matches.Select(x => new BaseMatch
                     {
                         Id = x.Id,
                         Map = x.Map,
-                        Date = x.MatchDate
+                        Date = x.MatchDate,
+                        TScore = x.TotalSquadAScore,
+                        CTScore = x.TotalSquadBScore
                     })
             );
         }
@@ -73,17 +73,58 @@ namespace CsStat.Web.Controllers
             {
                 var match = _demoRepository.GetMatch(matchId);
 
-                return Json(match);
+                var matchDetails = new MatchDetails
+                {
+                    Id = match.Id,
+                    Map = match.Map,
+                    Date = match.MatchDate,
+                    TScore = match.TotalSquadAScore,
+                    CTScore = match.TotalSquadBScore,
+                    Rounds = match.Rounds.Select(round => new MatchRound
+                    {
+                        Id = "",
+                        CTScore = round.CTScore,
+                        TScore = round.TScore,
+                        Reason = (int) round.Reason,
+                        ReasonTitle = round.ReasonTitle,
+                        Kills = round.Squads
+                            .SelectMany(squad => squad.Players
+                                .SelectMany(player => player.Kills
+                                    .Select(kill => new MatchDetailsKill
+                                    {
+                                        Id = "",
+                                        FormattedTime = "",
+                                        Killer = player.SteamID,
+                                        Victim = kill.Victim,
+                                        Assister = kill.Assister,
+                                        Weapon = kill.Weapon,
+                                        IsSuicide = kill.IsSuicide,
+                                        IsHeadshot = kill.IsHeadshot
+                                    })
+                                )).ToList(),
+                        Squads = round.Squads.Select(squad => new MatchDetailsSquad
+                        {
+                            Id = "",
+                            Title = squad.SquadTitle,
+                            Players = squad.Players.Select(player => new MatchDetailsSquadPlayer
+                            {
+                                Id = "",
+                                Name = player.Name,
+                                SteamImage = player.ProfileImageUrl,
+                                Kills = player.Kills.Count,
+                                Deaths = player.Deaths.Count,
+                                Assists = player.Assists.Count,
+                                Adr = 0.0,
+                                Ud = 0.0
+                            }).ToList()
+                        }).ToList()
+                    }).ToList()
+                };
+                
+                return Json(matchDetails);
             }
 
             return Json("missing match id");
         }
-    }
-
-    public class MatchViewData
-    {
-        public string Id { get; set; }
-        public string Map { get; set; }
-        public DateTime? Date { get; set; }
     }
 }
