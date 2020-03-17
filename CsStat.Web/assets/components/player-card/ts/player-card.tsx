@@ -60,10 +60,10 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
                     </Descriptions>
                     <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                     {gunsToShow && <GunsChart guns={gunsToShow} />}
-                    <Divider orientation="left">{`${model.name} has killed them:`}</Divider>
-                    <RelatedPlayers data={model.victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
-                    <Divider orientation="left">{`They have killed ${model.name}`}</Divider>
-                    <RelatedPlayers data={model.killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
+                    <Divider orientation="left">{'Victims'}</Divider>
+                    <RelatedPlayers data={model.victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
+                    <Divider orientation="left">{`Killers`}</Divider>
+                    <RelatedPlayers data={model.killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
                 </Card>
             );
         }
