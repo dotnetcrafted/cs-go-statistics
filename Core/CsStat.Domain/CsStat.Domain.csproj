@@ -102,6 +102,7 @@
     <Compile Include="Definitions\GunsEnum.cs" />
     <Compile Include="Entities\UsefulInfo.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extensions\AchieveModelExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
