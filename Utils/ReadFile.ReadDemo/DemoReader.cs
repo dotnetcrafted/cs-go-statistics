@@ -155,8 +155,8 @@ namespace ReadFile.ReadDemo
             if (sections?.Length == 6)
             {
                 if (DateTime.TryParseExact(string.Join(" ", sections.Skip(1).Take(2)),
-                    "yyyyMMdd hhmmss",
-                    CultureInfo.InvariantCulture,
+                    "yyyyMMdd HHmmss",
+                    null, 
                     DateTimeStyles.None, out var date))
                     return date;
             }
