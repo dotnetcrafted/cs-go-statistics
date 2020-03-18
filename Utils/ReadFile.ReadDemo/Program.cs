@@ -17,7 +17,7 @@ namespace ReadFile.ReadDemo
         private static void Main()
         {
             Console.WriteLine("Start");
-            Console.WriteLine($"Reading demo files from \"{Settings.DemosFolderPath}\"");
+            Console.WriteLine($"Reading demo files from \"{Settings.DemosFolderPath}\" folder");
 
             var demoReader = new DemoReader(Settings.DemosFolderPath,
                 new BaseFileRepository<DemoFile>(new MongoRepositoryFactory(new ConnectionStringFactory())),

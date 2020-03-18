@@ -133,7 +133,7 @@ namespace ReadFile.ReadDemo
             _parser.BombDefused += Parser_BombDefused;
             _parser.BombExploded += Parser_BombExploded;
             _parser.PlayerBind += Parser_PlayerBind;
-            
+
             Console.WriteLine(
                 $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
 
@@ -144,8 +144,6 @@ namespace ReadFile.ReadDemo
 
             MatchFinish();
 
-            Console.WriteLine($"{SuqadA}: {_squadAScore}");
-            Console.WriteLine($"{SuqadB}: {_squadBScore}");
             Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
@@ -225,6 +223,9 @@ namespace ReadFile.ReadDemo
             };
 
             demoRepository.Insert(demoLog);
+
+            Console.WriteLine($"{SuqadA}: {_squadAScore}");
+            Console.WriteLine($"{SuqadB}: {_squadBScore}");
         }
 
         private static void Parser_PlayerBind(object sender, PlayerBindEventArgs e)
@@ -355,12 +356,21 @@ namespace ReadFile.ReadDemo
                 .ToList();
 
             _results.Rounds.Add(_currentRoundNumber, _currentRound);
-            
+
+            var foregroundColor = Console.ForegroundColor;
+            if (winningTeam == Team.CounterTerrorist)
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+            if (winningTeam == Team.Terrorist)
+                Console.ForegroundColor = ConsoleColor.Red;
+
             var squadScore = _lastCTScore + _lastTScore >= SwapRoundNumber
                     ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
                     : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
 
             Console.WriteLine($"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason} ");
+
+            Console.ForegroundColor = foregroundColor;
         }
 
         private static string GetSquadName(Team team)
