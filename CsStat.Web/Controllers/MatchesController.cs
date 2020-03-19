@@ -1,9 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using BusinessFacade;
 using BusinessFacade.Repositories;
+using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
+using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
+using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Controllers
@@ -13,12 +19,16 @@ namespace CsStat.Web.Controllers
         private static IPlayerRepository _playerRepository;
         private static IDemoRepository _demoRepository;
         private static ISteamApi _steamApi;
+        private static IStrapiApi _strapiApi;
+        private static List<MapInfoModel> _mapInfos;
 
-        public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository)
+        public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository, IStrapiApi strapiApi)
         {
             _playerRepository = playerRepository;
             _demoRepository = demoRepository;
             _steamApi = new SteamApi();
+            _strapiApi = strapiApi;
+            _mapInfos = _strapiApi.GetAllMapInfos();
         }
 
         public ActionResult Index()
@@ -53,6 +63,11 @@ namespace CsStat.Web.Controllers
         {
             var matches = _demoRepository.GetMatches().ToList();
 
+            if (!matches.Any())
+            {
+                return Json("An error occurred getting matches");
+            }
+
             return Json
             (
                 matches.Select(x => new BaseMatch
@@ -61,8 +76,9 @@ namespace CsStat.Web.Controllers
                         Map = x.Map,
                         Date = x.MatchDate,
                         TScore = x.TotalSquadAScore,
-                        CTScore = x.TotalSquadBScore
-                    })
+                        CTScore = x.TotalSquadBScore,
+                        MapImage = GetMapImage(x.Map)
+                })
             );
         }
 
@@ -73,10 +89,17 @@ namespace CsStat.Web.Controllers
             {
                 var match = _demoRepository.GetMatch(matchId);
 
+                if (match == null)
+                    return Json("Match not found");
+
+                var steamIds = string.Join(",", match.Players.Select(x=>x.SteamID).ToList());
+                var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
+
                 var matchDetails = new MatchDetails
                 {
                     Id = match.Id,
                     Map = match.Map,
+                    MapImage = GetMapImage(match.Map),
                     Date = match.MatchDate,
                     TScore = match.TotalSquadAScore,
                     CTScore = match.TotalSquadBScore,
@@ -110,7 +133,7 @@ namespace CsStat.Web.Controllers
                             {
                                 Id = player.SteamID,
                                 Name = player.Name,
-                                SteamImage = player.ProfileImageUrl,
+                                SteamImage = avatars.FirstOrDefault(x=>x.Key == player.SteamID.ToString()).Value,
                                 Kills = player.Kills.Count,
                                 Deaths = player.Deaths.Count,
                                 Assists = player.Assists.Count,
@@ -125,6 +148,13 @@ namespace CsStat.Web.Controllers
             }
 
             return Json("missing match id");
+        }
+
+        private static string GetMapImage(string mapName)
+        {
+            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl 
+                   ??_strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl 
+                   ?? "";
         }
     }
 }

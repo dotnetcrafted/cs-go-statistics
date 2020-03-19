@@ -35,7 +35,7 @@ namespace CsStat.Domain
 
         ///<filters>
         /// matchId: string
-        /// /api/matchdata?matchId=5e64919758daf29cb0b18cc1
+        /// /api/matchdata?matchId=5e71c0c858daf2008805cb57
         /// </filters>
         [IncludePropertyToJson]
         public static string MatchDataApiPath => GetSetting(nameof(MatchDataApiPath), Defaults.MatchDataApiPath);

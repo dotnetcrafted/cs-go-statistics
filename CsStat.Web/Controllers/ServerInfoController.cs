@@ -31,12 +31,12 @@ namespace CsStat.Web.Controllers
             if (serverInfo.IsAlive)
             {
                 var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
-                serverInfo.ImageUrl = $"{Settings.AdminPath}{mapInfo.Image.Url}";
+                serverInfo.ImageUrl = mapInfo.Image.FullUrl;
                 serverInfo.Description = mapInfo.Description;
             }
             else
             {
-                serverInfo.ImageUrl = $"{Settings.AdminPath}{_strapiApi.GetImage(Constants.ImagesName.ServerIsDown)?.Image.Url}";
+                serverInfo.ImageUrl = _strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl;
                 serverInfo.Map = "Server is down";
             }
 
@@ -56,7 +56,7 @@ namespace CsStat.Web.Controllers
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
                         Map = mapInfo.MapName,
-                        ImageUrl = mapInfo.Image?.Url
+                        ImageUrl = mapInfo.Image?.FullUrl
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };

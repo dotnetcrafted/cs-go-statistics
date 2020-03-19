@@ -24,7 +24,7 @@
         public static class ImagesName
         {
             public const string Logo = "logo";
-            public const string ServerIsDown = "serverDown";
+            public const string DefaultImage = "serverDown";
         }
     }
 }

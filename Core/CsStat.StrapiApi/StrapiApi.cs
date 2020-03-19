@@ -24,14 +24,18 @@ namespace CsStat.StrapiApi
                 : JsonConvert.DeserializeObject<List<AchieveModel>>(json);
         }
 
-        public MapInfoModel GetMapInfo(string mapName)
+        public List<MapInfoModel> GetAllMapInfos()
         {
             var json = GetJsonFromUrl(Settings.MapInfoPath);
 
             return string.IsNullOrEmpty(json)
-                ? new MapInfoModel()
-                : JsonConvert.DeserializeObject<List<MapInfoModel>>(json)
-                      .FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower())) ?? new MapInfoModel();
+                ? new List<MapInfoModel>()
+                : JsonConvert.DeserializeObject<List<MapInfoModel>>(json);
+        }
+
+        public MapInfoModel GetMapInfo(string mapName)
+        {
+            return GetAllMapInfos().FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower())) ?? new MapInfoModel();
         }
 
         public ImageInfoModel GetImage(string imageName)
