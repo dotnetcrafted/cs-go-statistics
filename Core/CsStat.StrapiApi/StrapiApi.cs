@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using CsStat.Domain;
 using CsStat.Domain.Models;
@@ -21,6 +22,30 @@ namespace CsStat.StrapiApi
             return string.IsNullOrEmpty(json)
                 ? new List<AchieveModel>()
                 : JsonConvert.DeserializeObject<List<AchieveModel>>(json);
+        }
+
+        public List<MapInfoModel> GetAllMapInfos()
+        {
+            var json = GetJsonFromUrl(Settings.MapInfoPath);
+
+            return string.IsNullOrEmpty(json)
+                ? new List<MapInfoModel>()
+                : JsonConvert.DeserializeObject<List<MapInfoModel>>(json);
+        }
+
+        public MapInfoModel GetMapInfo(string mapName)
+        {
+            return GetAllMapInfos().FirstOrDefault(x => x.MapName.ToLower().Equals(mapName.ToLower())) ?? new MapInfoModel();
+        }
+
+        public ImageInfoModel GetImage(string imageName)
+        {
+            var json = GetJsonFromUrl(Settings.ImagesPath);
+
+            return string.IsNullOrEmpty(json)
+                ? new ImageInfoModel()
+                : JsonConvert.DeserializeObject<List<ImageInfoModel>>(json)
+                      .FirstOrDefault(x => x.CodeName.ToLower().Equals(imageName.ToLower())) ?? new ImageInfoModel();
         }
 
         private string GetJsonFromUrl(string url)

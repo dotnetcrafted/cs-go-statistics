@@ -123,7 +123,7 @@ namespace CSStat.WebApp.Tests
                 var playerDefuse = player.Defuse;
                 var playerExplode = player.Explode;
                 var friendlyKillsa = player.FriendlyKills;
-                var headShot = player.HeadShot;
+                var headShot = player.HeadShotsCount;
                 var imagePatha = player.Player.ImagePath;
                 var kdRatio = player.KdRatio;
                 var PlayerKills = player.Kills;
@@ -145,6 +145,7 @@ namespace CSStat.WebApp.Tests
         public void GetPlayers()
         {
             var players = _playerRepository.GetAllPlayers();
+            players.Any();
             players.ToList().ForEach(PrintPlayer);
         }
 
@@ -239,7 +240,7 @@ namespace CSStat.WebApp.Tests
                 ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
                 $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
                 $"Points: {log.Points},Acheivements: " +
-                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShot}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
+                $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShotsCount}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
         }
 
         private static void PrintLog(Log log)

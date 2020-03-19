@@ -7,6 +7,10 @@ import configureStore, { history } from '../../../general/ts/redux/store';
 import HomePage from '../../pages/ts/home-page';
 import WikiPage from '../../pages/ts/wiki-page';
 import NotFoundPage from '../../pages/ts/not-found-page';
+import DemoReaderPage from '../../pages/ts/demo-reader-page';
+import constants from '../../../general/ts/constants';
+import { Matches } from 'components/matches';
+import { MatchDetails } from 'components/match-details';
 
 const store = configureStore();
 
@@ -15,11 +19,20 @@ const App: SFC<AppProps> = (props) => (
         <ConnectedRouter history={history}>
             <BaseLayout>
                 <Switch>
-                    <Route exact path="/" >
+                    <Route exact path={constants.ROUTES.HOME} >
                         <HomePage playersDataUrl={props.playersDataUrl}/>
                     </Route>
-                    <Route exact path="/wiki" >
+                    <Route exact path={constants.ROUTES.WIKI} >
                         <WikiPage WikiDataApiPath={props.WikiDataApiPath}/>
+                    </Route>
+                    <Route exact path={constants.ROUTES.DEMO_READER} >
+                        <DemoReaderPage MatchesDataApiPath={props.MatchesDataApiPath}/>
+                    </Route>
+                    <Route exact path={constants.ROUTES.MATCHES} >
+                        <Matches />
+                    </Route>
+                    <Route exact path={constants.ROUTES.MATCH_DETAILS} >
+                        <MatchDetails />
                     </Route>
                     <Route>
                         <NotFoundPage/>
@@ -34,6 +47,7 @@ const App: SFC<AppProps> = (props) => (
 type AppProps = {
     playersDataUrl: string;
     WikiDataApiPath: string;
+    MatchesDataApiPath: string;
 };
 
 export default App;

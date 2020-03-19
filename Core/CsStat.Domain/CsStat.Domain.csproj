@@ -63,6 +63,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -92,7 +93,16 @@
     <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\GrantsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
+    <Compile Include="Entities\Demo\SquadLog.cs" />
     <Compile Include="Entities\Error.cs" />
+    <Compile Include="Definitions\RoundEndReason.cs" />
+    <Compile Include="Entities\Demo\DemoFile.cs" />
+    <Compile Include="Entities\Demo\DemoLog.cs" />
+    <Compile Include="Entities\Demo\KillLog.cs" />
+    <Compile Include="Entities\Demo\PlayerLog.cs" />
+    <Compile Include="Entities\Demo\RoundLog.cs" />
+    <Compile Include="Entities\Demo\TeamLog.cs" />
+    <Compile Include="Entities\FileEntity.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\LogFile.cs" />
@@ -105,6 +115,9 @@
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
     <Compile Include="Models\GunModel.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\ImageInfoModel.cs" />
+    <Compile Include="Models\MapInfoModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
     <Compile Include="Models\VictimModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

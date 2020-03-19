@@ -161,7 +161,10 @@
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HangoutBotController.cs" />
+    <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Matches\BaseMatch.cs" />
+    <Compile Include="Controllers\ServerInfoController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\WikiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,6 +177,11 @@
     <Compile Include="Models\GunViewModel.cs" />
     <Compile Include="Models\InfoViewModel.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
+    <Compile Include="Models\Matches\MatchDetailsKill.cs" />
+    <Compile Include="Models\Matches\MatchDetails.cs" />
+    <Compile Include="Models\Matches\MatchDetailsSquad.cs" />
+    <Compile Include="Models\Matches\MatchDetailsSquadPlayer.cs" />
+    <Compile Include="Models\Matches\MatchRound.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Models\ServerInfoModel.cs" />
@@ -487,6 +495,7 @@
     <Content Include="Views\UsefulInfo\AddForm.cshtml" />
     <Content Include="Views\UsefulInfo\SignInForm.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

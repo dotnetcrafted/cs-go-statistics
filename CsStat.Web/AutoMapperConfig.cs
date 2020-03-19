@@ -31,7 +31,8 @@ namespace CsStat.Web
                     .ForMember(dest => dest.KillsPerGame, opts => opts.MapFrom(src => src.KillsPerGame))
                     .ForMember(dest => dest.Points, opts => opts.MapFrom(src => src.Points))
                     .ForMember(dest => dest.TotalGames, opts => opts.MapFrom(src => src.TotalGames))
-                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShot))
+                    .ForMember(dest => dest.HeadShot, opts => opts.MapFrom(src => src.HeadShotsCount))
+                    .ForMember(dest => dest.KdDif, opts => opts.MapFrom(src => src.KdDif))
                     .AfterMap((s, d, context) =>
                     {
                         if (s.Guns != null && s.Guns.Any())

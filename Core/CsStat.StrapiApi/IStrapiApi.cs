@@ -7,5 +7,8 @@ namespace CsStat.StrapiApi
     {
         string GetArticles();
         List<AchieveModel> GetAchieves();
+        MapInfoModel GetMapInfo(string mapName);
+        List<MapInfoModel> GetAllMapInfos();
+        ImageInfoModel GetImage(string imageName);
     }
 }
