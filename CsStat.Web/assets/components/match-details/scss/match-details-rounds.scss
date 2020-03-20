@@ -1,0 +1,31 @@
+.match-details-rounds {
+
+    &__list {
+        @include reset-list();
+
+        display: flex;
+    }
+
+    &__li {
+        flex: 1;
+        min-width: 40px;
+    }
+
+    &__cell {
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+
+        &--t {
+            color: $color-t-primary;
+        }
+
+        &--mid {
+            font-size: 20px;
+        }
+
+        &--ct {
+            color: $color-ct-primary;
+        }
+    }
+}

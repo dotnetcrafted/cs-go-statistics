@@ -1,5 +1,3 @@
-import MatchDetailsController from './ts/match-details.controller';
+import './scss/index.scss';
 
-export {
-    MatchDetailsController as MatchDetails,
-};
+export { MatchDetailsController as MatchDetails } from './ts/match-details.controller'

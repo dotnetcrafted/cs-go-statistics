@@ -1,0 +1,85 @@
+.matches-card {
+    $this: &;
+
+    display: block;
+
+    &__header {
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+        background: #ddd;
+        border-radius: 10px 10px 0 0;
+
+        &::before {
+            content: '';
+            display: block;
+            padding-top: 40%;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: rgba(0,0,0,0.3);
+        }
+    }
+
+    &__image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    &__date {
+        position: absolute;
+        z-index: 10;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 4px 6px;
+        background-color: white;
+        border-radius: 4px;
+        color: $color-grey;
+        font-weight: 500;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__main {
+        padding: 10px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 0 0 10px 10px;
+        border-top: none;
+        color: #333;
+        text-align: center;
+    }
+
+    &__title {
+        text-transform: uppercase;
+    }
+
+    &__score {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &__colon {
+        margin: 0 5px;
+    }
+
+    &:hover {
+        #{$this}__image {
+            transform: scale(1.05);
+        }
+    }
+}

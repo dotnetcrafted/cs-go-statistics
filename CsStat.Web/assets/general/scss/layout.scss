@@ -40,3 +40,17 @@ html {
     white-space: nowrap;
     -webkit-clip-path: inset(100%);
 }
+
+.container {
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-t-primary {
+    color: $color-t-primary;
+}
+
+.color-ct-primary {
+    color: $color-ct-primary;
+}

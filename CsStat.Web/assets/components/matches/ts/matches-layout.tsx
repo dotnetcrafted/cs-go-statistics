@@ -1,14 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { MatchesCard } from './macthes-card';
 
-const MatchesLayout = () => {
+const MatchesLayout = ({ matches }: any) => {
+    if (!Array.isArray(matches)) return null;
+
     return (
-        <div>
-            <h1>Matches</h1>
-            <div>Filters</div>
-            <Link to="/matches/test-id">test link to match details</Link>
-            <div>
-            </div>        
+        <div className="matches">
+            <div className="container">
+                <h1>Matches</h1>
+                <div>Filters</div>
+                <ul className="matches__list">
+                    {
+                        matches.map((match) => {
+                            return (
+                                <li className="matches__li" key={match.id}>
+                                    <MatchesCard match={match} />
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
         </div>
     );
 }

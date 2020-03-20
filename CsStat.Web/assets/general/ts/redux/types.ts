@@ -66,11 +66,11 @@ type Tag = {
     Caption: string;
 }
 
-interface Matches {
+export interface Matches {
     matches: BaseMatch[],
 }
 
-interface BaseMatch {
+export interface BaseMatch {
     id: string;
     date: string, // ISO
     map: string, // de_inferno
@@ -80,26 +80,26 @@ interface BaseMatch {
     duration?: number, // 129 - total in seconds
 }
 
-interface MatchDetails extends BaseMatch {
+export interface MatchDetails extends BaseMatch {
     rounds: MatchRound[],
 }
 
-interface MatchRound {
+export interface MatchRound {
     id: number,
     tScore: number, // 1
     ctScore: number, // 0
     reason: number, // 2 - bomb planted, etc
     squads: MatchDetailsSquad[],
-    kills: MatchDedailsKill[],
+    kills: MatchDetailsKill[],
 }
 
-interface MatchDetailsSquad {
+export interface MatchDetailsSquad {
     id: string, // t
     title: string, // Team A
     players: MatchDetailsSquadPlayer[]
 }
 
-interface MatchDetailsSquadPlayer {
+export interface MatchDetailsSquadPlayer {
     id: string, // steamId
     name: string, // djoony
     steamImage: string, // url to steam profile image
@@ -110,7 +110,7 @@ interface MatchDetailsSquadPlayer {
     ud: number, // 24,
 }
 
-interface MatchDedailsKill {
+export interface MatchDetailsKill {
     id: string,
     formattedTime: string, // 0:28
     killer: string, // MatchDetailsSquadPlayer id

@@ -1,0 +1,13 @@
+.matches {
+    &__list {
+        @include reset-list();
+
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__li {
+        width: 25%;
+        padding: 15px;
+    }
+}
