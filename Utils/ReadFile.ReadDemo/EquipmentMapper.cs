@@ -5,100 +5,100 @@ namespace ReadFile.ReadDemo
 {
     public static class EquipmentMapper
     {
-        public static Guns Map(EquipmentElement weapon)
+        public static Weapons Map(EquipmentElement weapon)
         {
             switch (weapon)
             {
                 case EquipmentElement.AK47:
-                    return Guns.Ak;
+                    return Weapons.Ak;
                 case EquipmentElement.AUG:
-                    return Guns.Aug;
+                    return Weapons.Aug;
                 case EquipmentElement.AWP:
-                    return Guns.Awp;
+                    return Weapons.Awp;
                 case EquipmentElement.Bizon:
-                    return Guns.Bizon;
+                    return Weapons.Bizon;
                 case EquipmentElement.Bomb:
-                    return Guns.Bomb;
+                    return Weapons.Bomb;
                 case EquipmentElement.CZ:
-                    return Guns.CZ75;
+                    return Weapons.CZ75;
                 case EquipmentElement.Deagle:
-                    return Guns.Deagle;
+                    return Weapons.Deagle;
                 case EquipmentElement.Decoy:
-                    return Guns.Decoy;
+                    return Weapons.Decoy;
                 case EquipmentElement.DualBarettas:
-                    return Guns.Elite;
+                    return Weapons.Elite;
                 case EquipmentElement.Famas:
-                    return Guns.Famas;
+                    return Weapons.Famas;
                 case EquipmentElement.FiveSeven:
-                    return Guns.FiveSeven;
+                    return Weapons.FiveSeven;
                 case EquipmentElement.Flash:
-                    return Guns.Flash;
+                    return Weapons.Flash;
                 case EquipmentElement.G3SG1:
-                    return Guns.G3sgl;
+                    return Weapons.G3sgl;
                 case EquipmentElement.Gallil:
-                    return Guns.Galil;
+                    return Weapons.Galil;
                 case EquipmentElement.Glock:
-                    return Guns.Glock;
+                    return Weapons.Glock;
                 case EquipmentElement.HE:
-                    return Guns.He;
+                    return Weapons.He;
                 case EquipmentElement.P2000:
-                    return Guns.P2000;
+                    return Weapons.P2000;
                 case EquipmentElement.Incendiary:
-                    return Guns.Inc;
+                    return Weapons.Inc;
                 case EquipmentElement.Knife:
-                    return Guns.Knife;
+                    return Weapons.Knife;
                 case EquipmentElement.M249:
-                    return Guns.M249;
+                    return Weapons.M249;
                 case EquipmentElement.M4A4:
-                    return Guns.M4;
+                    return Weapons.M4;
                 case EquipmentElement.M4A1:
-                    return Guns.M4s;
+                    return Weapons.M4s;
                 case EquipmentElement.Mac10:
-                    return Guns.Mac;
+                    return Weapons.Mac;
                 case EquipmentElement.Swag7:
-                    return Guns.Mag;
+                    return Weapons.Mag;
                 case EquipmentElement.Molotov:
-                    return Guns.Molotov;
+                    return Weapons.Molotov;
                 case EquipmentElement.MP5SD:
-                    return Guns.Mp5;
+                    return Weapons.Mp5;
                 case EquipmentElement.MP7:
-                    return Guns.Mp7;
+                    return Weapons.Mp7;
                 case EquipmentElement.MP9:
-                    return Guns.Mp9;
+                    return Weapons.Mp9;
                 case EquipmentElement.Negev:
-                    return Guns.Negev;
+                    return Weapons.Negev;
                 case EquipmentElement.Nova:
-                    return Guns.Nova;
+                    return Weapons.Nova;
                 case EquipmentElement.P250:
-                    return Guns.P250;
+                    return Weapons.P250;
                 case EquipmentElement.P90:
-                    return Guns.P90;
+                    return Weapons.P90;
                 case EquipmentElement.Revolver:
-                    return Guns.Revolver;
+                    return Weapons.Revolver;
                 case EquipmentElement.SawedOff:
-                    return Guns.Sawedoff;
+                    return Weapons.Sawedoff;
                 case EquipmentElement.Scar20:
-                    return Guns.Scar;
+                    return Weapons.Scar;
                 case EquipmentElement.SG556:
-                    return Guns.Sg;
+                    return Weapons.Sg;
                 case EquipmentElement.Smoke:
-                    return Guns.Smoke;
+                    return Weapons.Smoke;
                 case EquipmentElement.Scout:
-                    return Guns.Scout;
+                    return Weapons.Scout;
                 case EquipmentElement.Zeus:
-                    return Guns.Taser;
+                    return Weapons.Taser;
                 case EquipmentElement.Tec9:
-                    return Guns.Tec9;
+                    return Weapons.Tec9;
                 case EquipmentElement.UMP:
-                    return Guns.Ump;
+                    return Weapons.Ump;
                 case EquipmentElement.USP:
-                    return Guns.Usps;
+                    return Weapons.Usps;
                 case EquipmentElement.XM1014:
-                    return Guns.Xml;
+                    return Weapons.Xml;
                 case EquipmentElement.World:
-                    return Guns.World;
+                    return Weapons.World;
                 default:
-                    return Guns.Unknown;
+                    return Weapons.Unknown;
             }
         }
     }

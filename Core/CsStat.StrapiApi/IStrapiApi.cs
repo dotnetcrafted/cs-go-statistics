@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CsStat.Domain.Definitions;
 using CsStat.Domain.Models;
 
 namespace CsStat.StrapiApi
@@ -10,5 +11,7 @@ namespace CsStat.StrapiApi
         MapInfoModel GetMapInfo(string mapName);
         List<MapInfoModel> GetAllMapInfos();
         ImageInfoModel GetImage(string imageName);
+        List<WeaponModel> GetAllWeapons();
+        WeaponModel GetWeapon(Weapons weapon);
     }
 }

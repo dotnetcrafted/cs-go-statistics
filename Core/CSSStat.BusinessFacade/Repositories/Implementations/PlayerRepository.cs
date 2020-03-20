@@ -20,12 +20,15 @@ namespace BusinessFacade.Repositories.Implementations
         private static ILogsRepository _logsRepository;
         private static IMongoRepositoryFactory _mongoRepository;
         private static IStrapiApi _strapiApi;
+        private static List<WeaponModel> _weapons;
         
         public PlayerRepository(IMongoRepositoryFactory mongoRepository, IStrapiApi strapiApi) : base(mongoRepository)
         {
             _mongoRepository = mongoRepository;
             _logsRepository = new LogsRepository(_mongoRepository);
             _strapiApi = strapiApi;
+
+            _weapons = _strapiApi.GetAllWeapons();
         }
 
         #region Mongo
@@ -75,7 +78,6 @@ namespace BusinessFacade.Repositories.Implementations
             if(!players.Any())
                 return playersStats;
 
-            
             foreach (var player in players)
             {
                 var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId || x.Victim?.SteamId == player.SteamId || x.Action == Actions.TargetBombed).ToList();
@@ -84,7 +86,6 @@ namespace BusinessFacade.Repositories.Implementations
                 {
                     continue;
                 }
-
                 playersStats.Add(CountStats(playerLogs, player));
             }
 
@@ -112,11 +113,12 @@ namespace BusinessFacade.Repositories.Implementations
 
         private static PlayerStatsModel CountStats(List<Log> logs, Player player)
         {
-            var guns = GetGuns(logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).ToList());
-            var sniperRifle = guns?.Where(x => x.Gun.GetAttribute<IsSniperRifleAttribute>().Value);
-            var grenade = guns?.Where(x => x.Gun == Guns.He).Sum(x => x.Kills);
-            var knife = guns?.Where(x => x.Gun == Guns.Knife).Sum(x => x.Kills);
-            var molotov = guns?.Where(x => x.Gun == Guns.Molotov || x.Gun == Guns.Inferno || x.Gun == Guns.Inc).Sum(x => x.Kills);
+            var gunlogs = logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).OrderBy(x=>x.Gun).ToList();
+            var guns = GetGuns(gunlogs);
+            var sniperRifle = guns?.Where(x => x.Weapon.Type.Type == WeaponTypes.SniperRifle);
+            var grenade = guns?.Where(x => x.Weapon.Id == (int)Weapons.He).Sum(x => x.Kills);
+            var knife = guns?.Where(x => x.Weapon.Id == (int)Weapons.Knife).Sum(x => x.Kills);
+            var molotov = guns?.Where(x => x.Weapon.Id == (int)Weapons.Molotov || x.Weapon.Id == (int)Weapons.Inferno || x.Weapon.Id == (int)Weapons.Inc).Sum(x => x.Kills);
             var explodeBombs = GetExplodeBombs(logs.Where(x => x.Action == Actions.Plant).ToList(), logs.Where(x => x.Action == Actions.TargetBombed).ToList());
             var defuse = logs.Count(x => x.Action == Actions.Defuse);
             var friendlyKills = logs.Count(x => x.Action == Actions.FriendlyKill && x.Player.SteamId == player.SteamId);
@@ -179,13 +181,13 @@ namespace BusinessFacade.Repositories.Implementations
                 .ToList();
         }
 
-        private static List<GunModel> GetGuns(IReadOnlyCollection<Log> logs)
+        private static List<WeaponStatModel> GetGuns(IReadOnlyCollection<Log> logs)
         {
             return !logs.Any()
                 ? null
-                : logs.Where(x=>x.Action==Actions.Kill).GroupBy(x => x.Gun).Select(r => new GunModel
+                : logs.Where(x=>x.Action==Actions.Kill).GroupBy(x => x.Gun).Select(r => new WeaponStatModel
                        {
-                           Gun = r.Key,
+                           Weapon = _weapons.FirstOrDefault(x=>x.Id == (int)r.Key),
                            Kills = r.Count()
                        }).OrderByDescending(x=>x.Kills).ToList();
 
