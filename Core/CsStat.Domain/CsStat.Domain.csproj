@@ -93,6 +93,7 @@
     <Compile Include="Definitions\AchievementsEnum.cs" />
     <Compile Include="Definitions\GrantsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
+    <Compile Include="Definitions\WeaponTypes.cs" />
     <Compile Include="Entities\Demo\SquadLog.cs" />
     <Compile Include="Entities\Error.cs" />
     <Compile Include="Definitions\RoundEndReason.cs" />
@@ -109,12 +110,13 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\PlayerStats.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
-    <Compile Include="Definitions\GunsEnum.cs" />
+    <Compile Include="Definitions\WeaponsEnum.cs" />
     <Compile Include="Entities\UsefulInfo.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
-    <Compile Include="Models\GunModel.cs" />
+    <Compile Include="Models\WeaponModel.cs" />
+    <Compile Include="Models\WeaponStatModel.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ImageInfoModel.cs" />
     <Compile Include="Models\MapInfoModel.cs" />

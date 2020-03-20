@@ -36,7 +36,6 @@ export const COLUMN_NAMES: ColumnNames = {
     DefusedBombs: { dataIndex: nameof<Player>('DefusedBombs'), readableName: 'Defused Bombs' },
     ExplodedBombs: { dataIndex: nameof<Player>('ExplodedBombs'), readableName: 'Exploded Bombs' },
     FriendlyKills: { dataIndex: nameof<Player>('FriendlyKills'), readableName: 'Friendly Kills' },
-    KdDif: { dataIndex: nameof<Player>('KdDif'), readableName: 'K/D Diff' }
 };
 const DEFAULT_COLUMNS = [
     COLUMN_NAMES.Points.dataIndex,

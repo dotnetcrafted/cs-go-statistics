@@ -23,7 +23,7 @@ namespace CsStat.Domain.Entities
         public int MolotovKills { get; set; }
         public int KnifeKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
-        public List<GunModel>Guns { get; set; }
+        public List<WeaponStatModel>Guns { get; set; }
         public List<PlayerModel> Victims { get; set; }
         public List<PlayerModel> FriendVictims { get; set; }
         public List<PlayerModel> Killers { get; set; }

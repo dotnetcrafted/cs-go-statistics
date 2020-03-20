@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using CsStat.Domain;
+using CsStat.Domain.Definitions;
 using CsStat.Domain.Models;
 using Newtonsoft.Json;
 
@@ -46,6 +47,20 @@ namespace CsStat.StrapiApi
                 ? new ImageInfoModel()
                 : JsonConvert.DeserializeObject<List<ImageInfoModel>>(json)
                       .FirstOrDefault(x => x.CodeName.ToLower().Equals(imageName.ToLower())) ?? new ImageInfoModel();
+        }
+
+        public List<WeaponModel> GetAllWeapons()
+        {
+            var json = GetJsonFromUrl(Settings.WeaponsPath);
+
+            return string.IsNullOrEmpty(json)
+                ? new List<WeaponModel>()
+                : JsonConvert.DeserializeObject<List<WeaponModel>>(json);
+        }
+
+        public WeaponModel GetWeapon(Weapons weapon)
+        {
+            return GetAllWeapons().FirstOrDefault(x => x.Id == (int) weapon);
         }
 
         private string GetJsonFromUrl(string url)

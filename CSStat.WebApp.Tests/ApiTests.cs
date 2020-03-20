@@ -72,7 +72,7 @@ namespace CSStat.WebApp.Tests
         [Test]
         public static void AttributeTest()
         {
-            var gun = Guns.Ak;
+            var gun = Weapons.Ak;
             var attributeList = gun.GetAttributeList();
 
             foreach (var attribute in attributeList)

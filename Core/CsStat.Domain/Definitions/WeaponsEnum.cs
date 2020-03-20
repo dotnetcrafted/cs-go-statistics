@@ -3,24 +3,18 @@ using CsStat.SystemFacade.Attributes;
 
 namespace CsStat.Domain.Definitions
 {
-    public enum Guns
+    public enum Weapons
     {
         [Description("World")]
-        [IsSniperRifle(false)] 
         World, // suicide
 
-        [IsSniperRifle(false)]
         Unknown,
 
-        [IsSniperRifle(false)]
         Null,
 
-        [IsSniperRifle(false)]
         Bomb,
 
-        [Description("Glock-18")]
         [LogValue("glock")]
-        [IsSniperRifle(false)]
         Glock,
 
         [Description("Dual Berettas")]

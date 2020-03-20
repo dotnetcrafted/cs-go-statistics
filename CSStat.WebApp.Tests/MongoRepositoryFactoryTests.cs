@@ -110,6 +110,12 @@ namespace CSStat.WebApp.Tests
                 Console.WriteLine(Environment.NewLine);
             }
         }
+
+        [Test]
+        public void GetWeapons()
+        {
+            var weapons = _strapiApi.GetAllWeapons();
+        }
         private void MappingTest(IOrderedEnumerable<PlayerStatsModel> players)
         {
             foreach (var player in players)
@@ -122,9 +128,9 @@ namespace CSStat.WebApp.Tests
                 var playerDeathPerGame = player.DeathPerGame;
                 var playerDefuse = player.Defuse;
                 var playerExplode = player.Explode;
-                var friendlyKillsa = player.FriendlyKills;
+                var friendlyKills = player.FriendlyKills;
                 var headShot = player.HeadShotsCount;
-                var imagePatha = player.Player.ImagePath;
+                var imagePath = player.Player.ImagePath;
                 var kdRatio = player.KdRatio;
                 var PlayerKills = player.Kills;
                 var killsPerGame = player.KillsPerGame;
@@ -230,9 +236,9 @@ namespace CSStat.WebApp.Tests
 
         private static void PrintPlayerStat(PlayerStatsModel log)
         {
-            var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Gun.GetDescription())
-                ? log.Guns?.FirstOrDefault()?.Gun.ToString() ?? ""
-                : log.Guns?.FirstOrDefault()?.Gun.GetDescription() ?? "";
+            var gun = string.IsNullOrEmpty(log.Guns?.FirstOrDefault()?.Weapon.Name)
+                ? log.Guns?.FirstOrDefault()?.Weapon.ToString() ?? ""
+                : log.Guns?.FirstOrDefault()?.Weapon.Name ?? "";
 
             Console.WriteLine(Environment.NewLine);
             //{ string.Join(" | ", log.Achievements?.Select(x => x.AchievementId.GetDescription()).ToList())}

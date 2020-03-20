@@ -60,6 +60,7 @@ namespace CsStat.Domain
         public static string AchievementsPath => GetSetting(nameof(AchievementsPath), Defaults.AchievementsPath);
         public static string MapInfoPath => GetSetting(nameof(MapInfoPath), Defaults.MapInfoPath);
         public static string ImagesPath => GetSetting(nameof(ImagesPath), Defaults.ImagesPath);
+        public static string WeaponsPath => GetSetting(nameof(WeaponsPath), Defaults.WeaponsPath);
         public static string CmsAdminPath => GetSetting(nameof(CmsAdminPath), Defaults.CmsAdminPath);
         public static string AdminPath => GetSetting(nameof(AdminPath), Defaults.AdminPath);
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
@@ -128,16 +129,17 @@ namespace CsStat.Domain
             public const string PlayersDataSteamApiPath =@"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
-            public const string ArticlesPath = "https://admin.csfuse8.site/articles?_sort=createdAt:desc";
-            public const string AchievementsPath = "https://admin.csfuse8.site/Achievements";
-            public const string MapInfoPath = "https://admin.csfuse8.site/map-infos";
-            public const string ImagesPath = "https://admin.csfuse8.site/images";
-            public const string CmsAdminPath = "https://admin.csfuse8.site/shell";
             public const string AdminPath = "https://admin.csfuse8.site";
             public const string CsServerIp = "192.168.100.241";
             public const int ShowNullPlayers = 1;
             public const int CsServerPort = 27015;
             public const string MatchesPagePath = "matches";
+            public static string ArticlesPath => $"{AdminPath}/articles?_sort=createdAt:desc";
+            public static string AchievementsPath => $"{AdminPath}/Achievements";
+            public static string MapInfoPath => $"{AdminPath}/map-infos";
+            public static string ImagesPath => $"{AdminPath}/images";
+            public static string CmsAdminPath => $"{AdminPath}/shell";
+            public static string WeaponsPath => $"{AdminPath}/weapons";
         }
     }
 

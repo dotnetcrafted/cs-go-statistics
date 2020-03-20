@@ -60,9 +60,9 @@ namespace CsStat.Web
                         }
                     });
 
-                CreateMap<GunModel, GunViewModel>()
-                    .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Gun))
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Gun.GetDescription()))
+                CreateMap<WeaponStatModel, GunViewModel>()
+                    .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Weapon))
+                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Weapon.Name))
                     .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills));
 
                 CreateMap<PlayerModel, PlayerViewModel>()

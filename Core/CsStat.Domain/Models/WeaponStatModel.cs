@@ -2,9 +2,9 @@
 
 namespace CsStat.Domain.Models
 {
-    public class GunModel
+    public class WeaponStatModel
     {
-        public Guns Gun { get; set; }
+        public WeaponModel Weapon { get; set; }
         public int Kills { get; set; }
 
     }
