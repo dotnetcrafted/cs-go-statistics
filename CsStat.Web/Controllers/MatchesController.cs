@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using BusinessFacade;
 using BusinessFacade.Repositories;
+using CsStat.Domain.Definitions;
 using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
@@ -19,6 +21,7 @@ namespace CsStat.Web.Controllers
         private static ISteamApi _steamApi;
         private static IStrapiApi _strapiApi;
         private static List<MapInfoModel> _mapInfos;
+        private static List<WeaponModel> _weapons;
 
         public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository,
             IStrapiApi strapiApi)
@@ -28,6 +31,7 @@ namespace CsStat.Web.Controllers
             _steamApi = new SteamApi();
             _strapiApi = strapiApi;
             _mapInfos = _strapiApi.GetAllMapInfos();
+            _weapons = strapiApi.GetAllWeapons();
         }
 
         public ActionResult Index()
@@ -94,7 +98,6 @@ namespace CsStat.Web.Controllers
 
                 var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
                 var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
-
                 var matchDetails = new MatchDetails
                 {
                     Id = match.Id,
@@ -122,7 +125,14 @@ namespace CsStat.Web.Controllers
                                         Killer = player.SteamID,
                                         Victim = kill.Victim,
                                         Assister = kill.Assister,
-                                        Weapon = kill.Weapon,
+                                        Weapon = new WeaponViewModel
+                                        {
+                                            Id = (int)kill.Weapon,
+                                            IconUrl = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Icon.FullUrl,
+                                            ImageUrl = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Image.FullUrl,
+                                            Name = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Name,
+                                            Type = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Type.Name,
+                                        },
                                         IsSuicide = kill.IsSuicide,
                                         IsHeadshot = kill.IsHeadshot,
                                         Time = kill.Time,

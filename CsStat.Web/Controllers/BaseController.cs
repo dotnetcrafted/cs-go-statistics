@@ -16,7 +16,8 @@ namespace CsStat.Web.Controllers
             var options = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Error
+                ReferenceLoopHandling = ReferenceLoopHandling.Error,
+                NullValueHandling = NullValueHandling.Ignore
             };
 
             return new JsonNetResult(options)
@@ -24,7 +25,7 @@ namespace CsStat.Web.Controllers
                 Data = data,
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
             };
         }
     }
