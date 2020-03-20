@@ -2,7 +2,7 @@
 {
     public class MatchDetailsSquadPlayer
     {
-        public long Id { get; set; } // steamId
+        public string Id { get; set; } // steamId
         public string Name { get; set; } // djoony
         public string SteamImage { get; set; } // url to steam profile image
 

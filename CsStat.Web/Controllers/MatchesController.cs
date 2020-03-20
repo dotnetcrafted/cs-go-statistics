@@ -131,7 +131,7 @@ namespace CsStat.Web.Controllers
                             Title = squad.SquadTitle,
                             Players = squad.Players.Select(player => new MatchDetailsSquadPlayer
                             {
-                                Id = player.SteamID,
+                                Id = player.SteamID.ToString(),
                                 Name = player.Name,
                                 SteamImage = avatars.FirstOrDefault(x=>x.Key == player.SteamID.ToString()).Value,
                                 Kills = player.Kills.Count,
