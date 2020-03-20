@@ -1,0 +1,13 @@
+.match-kills {
+    &__list {
+        @include reset-list();
+    }
+
+    &__li {
+        text-align: right;
+    }
+    
+    &__player {
+        font-weight: 600;
+    }
+}

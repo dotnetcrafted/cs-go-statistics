@@ -13,6 +13,7 @@ body {
 
 html {
     position: relative;
+    overflow-y: scroll;
     font-size: 100%;
 
     &.is-blocked {

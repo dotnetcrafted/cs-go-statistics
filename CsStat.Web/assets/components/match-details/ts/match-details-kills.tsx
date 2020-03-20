@@ -6,7 +6,7 @@ import {
 } from 'general/ts/redux/types';
 
 export class MatchDetailsKills extends React.Component<any, {}> {
-    getPlayerNameById(id: string) {
+    getPlayerById(id: string) {
         const { round } = this.props;
 
         if (!id) return null;
@@ -15,13 +15,23 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
         round.squads.forEach((squad: MatchDetailsSquad) => {
             squad.players.forEach((player: MatchDetailsSquadPlayer) => {
-                if (player.id === id) {
+                if (player.id.toString() === id.toString()) {
                     foundPlayer = player;
                 }
             });
         });
 
-        return foundPlayer ? foundPlayer.name : null;
+        return foundPlayer || null;
+    }
+
+    renderPlayer(id: string) {
+        const player = this.getPlayerById(id);
+
+        if (!player) return null;
+
+        const playerCss = player.team === 'Team A' ? 'color-t-primary': 'color-ct-primary';
+
+        return <span className={`match-kills__player ${playerCss}`}>{player.name}</span>
     }
 
     render() {
@@ -30,30 +40,24 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         if (!round || !Array.isArray(round.kills)) return null;
 
         return (
-            <div>
-                <ul>
+            <div className="match-kills">
+                <ul className="match-kills__list">
                     {
-                        round.kills.map((kill: MatchDetailsKill) => {
-                            const killer = this.getPlayerNameById(kill.killer);
-                            const assister = this.getPlayerNameById(kill.assister);
+                        round.kills.map((kill: MatchDetailsKill, i: number) => {
                             const weaponIcon = kill.weapon;
                             const headshotIcon = kill.isHeadshot && 'HS';
-                            const victim = this.getPlayerNameById(kill.victim);
-
-                            console.log(kill.isHeadshot);
-
 
                             return (
-                                <li key={kill.id}>
-                                    {killer}
+                                <li className="match-kills__li" key={`${round.id}-${i}`}>
+                                    {this.renderPlayer(kill.killer)}
                                     &nbsp;
-                                    {assister}
+                                    {this.renderPlayer(kill.assister)}
                                     &nbsp;
                                     {weaponIcon}
                                     &nbsp;
                                     {headshotIcon}
                                     &nbsp;
-                                    {victim}
+                                    {this.renderPlayer(kill.victim)}
                                 </li>
                             );
                         })

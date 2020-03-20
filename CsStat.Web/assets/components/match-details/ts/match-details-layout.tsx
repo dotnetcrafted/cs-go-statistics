@@ -1,31 +1,37 @@
 import React from 'react';
-import { MatchDetails } from 'general/ts/redux/types';
+import { MatchDetails, MatchRound } from 'general/ts/redux/types';
 import { MatchDetailsRounds } from './match-details-rounds';
 import { MatchDetailsStats } from './match-details-stats';
 import { MatchDetailsKills } from './match-details-kills';
 
 interface MatchDetailsLayoutProps {
-    match: MatchDetails,
+    match: MatchDetails | null,
+    round: MatchRound | null,
+    selectedRoundId: number | null,
+    selectRound: any,
 }
 
-const MatchDetailsLayout = ({ match } : MatchDetailsLayoutProps) => {
+const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: MatchDetailsLayoutProps) => {
     if (!match) return null;
 
-    console.log(match);
-
-    const round = match.rounds[match.rounds.length - 3];
-    console.log(round);
+    //console.log(match);
+    //console.log(round);
 
     return (
-        <div>
+        <div className="match">
             <div className="container">
                 <h1>Match Details</h1>
                 <div>{match.map}</div>
-                <MatchDetailsRounds rounds={match.rounds} />
-                <MatchDetailsStats squads={round.squads} />
-                <MatchDetailsKills round={round} />
+                <MatchDetailsRounds
+                    rounds={match.rounds}
+                    selectedRoundId={selectedRoundId}
+                    selectRound={selectRound}
+                />
+                <MatchDetailsStats squads={round} />
+                <div className="match__kills">
+                    <MatchDetailsKills round={round} />
+                </div>
             </div>
-
         </div>
     );
 }

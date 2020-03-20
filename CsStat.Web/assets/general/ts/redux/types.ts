@@ -101,6 +101,7 @@ export interface MatchDetailsSquad {
 
 export interface MatchDetailsSquadPlayer {
     id: string, // steamId
+    team: string // Team A
     name: string, // djoony
     steamImage: string, // url to steam profile image
     kad: string, // 10/2/5,

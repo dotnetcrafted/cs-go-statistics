@@ -1,11 +1,18 @@
 import React from 'react';
+import { MatchDetails } from 'general/ts/redux/types';
 import MatchDetailsLayout from './match-details-layout';
 
-export class MatchDetailsController extends React.Component<any, any> {
+interface MatchDetailsControllerState {
+    match: MatchDetails | null,
+    selectedRoundId: number | null,
+}
+
+export class MatchDetailsController extends React.Component<any, MatchDetailsControllerState> {
     constructor(props: any) {
         super(props);
         this.state = {
             match: null,
+            selectedRoundId: null,
         }
     }
 
@@ -22,9 +29,35 @@ export class MatchDetailsController extends React.Component<any, any> {
             })
     }
 
+    selectRound = (roundId: number) => {
+        this.setState({ selectedRoundId: roundId });
+    }
+
+    getRound() {
+        const { match } = this.state;
+
+        if (!match || !Array.isArray(match.rounds) || !match.rounds.length) return null;
+
+        let roundId = this.state.selectedRoundId;
+
+        if (!roundId) {
+            return match.rounds[match.rounds.length - 1];
+        }
+
+        const foundRound = match.rounds.find((round) => round.id === roundId);
+
+        return foundRound || null;
+    }
+
+
     render() {
         return (
-            <MatchDetailsLayout match={this.state.match} />
+            <MatchDetailsLayout
+                match={this.state.match} 
+                round={this.getRound()}
+                selectedRoundId={this.state.selectedRoundId}
+                selectRound={this.selectRound}
+            />
         );
     }
 }
