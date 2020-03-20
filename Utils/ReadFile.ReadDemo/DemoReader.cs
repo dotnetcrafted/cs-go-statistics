@@ -393,7 +393,7 @@ namespace ReadFile.ReadDemo
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
-                    e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon).GetDescription(), _currentRoundNumber,
+                    e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon), _currentRoundNumber,
                     e.Killer.SteamID == e.Victim.SteamID);
 
                 if (e.Assister != null)
@@ -415,7 +415,7 @@ namespace ReadFile.ReadDemo
             if (e.Killer == null && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(null, _results.Players[e.Victim.SteamID],
-                    e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon).GetDescription(),
+                    e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon),
                     _currentRoundNumber, true);
 
                 if (e.Assister != null)
@@ -442,7 +442,7 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_BombExploded(object sender, BombEventArgs e)
         {
-            _results.Players[e.Player.SteamID].BombExplosions.Add(_currentRound);
+            _results.Players[_currentRound.BombPlanter.SteamID].BombExplosions.Add(_currentRound);
             _currentRound.IsBombExploded = true;
         }
     }

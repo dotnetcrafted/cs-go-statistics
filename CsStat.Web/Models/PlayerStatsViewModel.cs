@@ -26,6 +26,6 @@ namespace CsStat.Web.Models
         public List<PlayerViewModel> Victims { get; set; }
         public List<PlayerViewModel> Killers { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }
-        public List<GunViewModel> Guns { get; set; }
+        public List<WeaponViewModel> Guns { get; set; }
     }
 }

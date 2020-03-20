@@ -37,7 +37,7 @@ namespace CsStat.Web
                     {
                         if (s.Guns != null && s.Guns.Any())
                         {
-                            d.Guns = context.Mapper.Map<List<GunViewModel>>(s.Guns);
+                            d.Guns = context.Mapper.Map<List<WeaponViewModel>>(s.Guns);
                         }
 
                         if (d.Victims != null && s.Victims.Any())
@@ -60,10 +60,13 @@ namespace CsStat.Web
                         }
                     });
 
-                CreateMap<WeaponStatModel, GunViewModel>()
-                    .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Weapon))
+                CreateMap<WeaponStatModel, WeaponViewModel>()
+                    .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Weapon.Id))
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Weapon.Name))
-                    .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills));
+                    .ForMember(dest => dest.IconUrl, opts => opts.MapFrom(src => src.Weapon.Icon.FullUrl))
+                    .ForMember(dest => dest.ImageUrl, opts => opts.MapFrom(src => src.Weapon.Image.FullUrl))
+                    .ForMember(dest => dest.Type, opts => opts.MapFrom(src => src.Weapon.Type.Name))
+                    .AfterMap((s, d, context) => { d.Kills = s.Kills; });
 
                 CreateMap<PlayerModel, PlayerViewModel>()
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
