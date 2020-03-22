@@ -14,9 +14,13 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         let foundPlayer: MatchDetailsSquadPlayer | undefined;
 
         round.squads.forEach((squad: MatchDetailsSquad) => {
+            const team = squad.title;
             squad.players.forEach((player: MatchDetailsSquadPlayer) => {
                 if (player.id.toString() === id.toString()) {
-                    foundPlayer = player;
+                    foundPlayer = {
+                        ...player,
+                        team
+                    };
                 }
             });
         });
@@ -29,9 +33,17 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
         if (!player) return null;
 
-        const playerCss = player.team === 'Team A' ? 'color-t-primary': 'color-ct-primary';
+        const playerCss = player.team === 'Team A' ? 'color-t-primary' : 'color-ct-primary';
 
         return <span className={`match-kills__player ${playerCss}`}>{player.name}</span>
+    }
+
+    renderWeapon() {
+        return <img
+            className="match-kills__weapon"
+            src='https://admin.csfuse8.site/uploads/4f940096703b4100b751a9127c1acea4.png'
+            alt=""
+        />;
     }
 
     render() {
@@ -53,7 +65,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
                                     &nbsp;
                                     {this.renderPlayer(kill.assister)}
                                     &nbsp;
-                                    {weaponIcon}
+                                    {this.renderWeapon()}
                                     &nbsp;
                                     {headshotIcon}
                                     &nbsp;

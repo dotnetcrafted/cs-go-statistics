@@ -10,4 +10,9 @@
     &__player {
         font-weight: 600;
     }
+
+    &__weapon {
+        max-height: 16px;
+        object-fit: contain;
+    }
 }
