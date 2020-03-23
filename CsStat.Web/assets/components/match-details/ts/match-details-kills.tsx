@@ -56,7 +56,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
                 <ul className="match-kills__list">
                     {
                         round.kills.map((kill: MatchDetailsKill, i: number) => {
-                            const weaponIcon = kill.weapon;
+                            //const weaponIcon = kill.weapon;
                             const headshotIcon = kill.isHeadshot && 'HS';
 
                             return (

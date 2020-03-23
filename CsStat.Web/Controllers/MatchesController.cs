@@ -123,9 +123,9 @@ namespace CsStat.Web.Controllers
                                     {
                                         Id = index,
                                         FormattedTime = "0",
-                                        Killer = player.SteamID,
-                                        Victim = kill.Victim,
-                                        Assister = kill.Assister,
+                                        Killer = player.SteamID.ToString(),
+                                        Victim = kill.Victim?.ToString(),
+                                        Assister = kill.Assister?.ToString(),
                                         Weapon = new WeaponViewModel
                                         {
                                             Id = (int)kill.Weapon,
@@ -139,7 +139,7 @@ namespace CsStat.Web.Controllers
                                         Time = kill.Time,
                                         IsPenetrated = kill.IsPenetrated
                                     })
-                                )).ToList(),
+                                )).OrderByDescending(x=>x.Time).ToList(),
                         Squads = round.Squads.Select((squad, index) => new MatchDetailsSquad
                         {
                             Id = index,

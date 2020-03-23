@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
         public string FormattedTime { get; set; } // 0:28
-        public long Killer { get; set; } // MatchDetailsSquadPlayer id
-        public long? Victim { get; set; } // MatchDetailsSquadPlayer id,
-        public long? Assister { get; set; } // MatchDetailsSquadPlayer id
+        public string Killer { get; set; } // MatchDetailsSquadPlayer id
+        public string Victim { get; set; } // MatchDetailsSquadPlayer id,
+        public string Assister { get; set; } // MatchDetailsSquadPlayer id
         public WeaponViewModel Weapon { get; set; } // "USP-S"
         public bool IsHeadshot { get; set; }
         public bool IsSuicide { get; set; }
