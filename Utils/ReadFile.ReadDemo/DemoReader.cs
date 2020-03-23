@@ -12,6 +12,7 @@ using CsStat.SystemFacade;
 using CsStat.SystemFacade.Extensions;
 using DemoInfo;
 using ReadFile.ReadDemo.Model;
+using Player = DemoInfo.Player;
 
 namespace ReadFile.ReadDemo
 {
@@ -40,6 +41,8 @@ namespace ReadFile.ReadDemo
 
         private static int _squadAScore;
         private static int _squadBScore;
+
+        private static List<Player> _participants = new List<Player>();
 
         #region inint
 
@@ -124,6 +127,8 @@ namespace ReadFile.ReadDemo
             
             _squadAScore = default;
             _squadBScore = default;
+
+            _participants = new List<Player>();
         }
 
         private void ParseDemo(FileStream file)
@@ -292,6 +297,14 @@ namespace ReadFile.ReadDemo
             _currentRound = new Round();
             _currentRoundNumber++;
             _currentRound.RoundNumber = _currentRoundNumber;
+
+            _participants = _parser.Participants.ToList();
+        }
+
+        private static IEnumerable<Player> GetParticipants(IEnumerable<Player> participantsAtStart, IEnumerable<Player> participantsAtEnd)
+        {
+            var diff = participantsAtStart.Where(x => participantsAtEnd.All(z => z.SteamID != x.SteamID));
+            return participantsAtEnd.Union(diff);
         }
 
         private static void Parser_TickDone(object sender, TickDoneEventArgs e)
@@ -359,7 +372,7 @@ namespace ReadFile.ReadDemo
 
             _currentRound.Duration = (int) Math.Round((_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate);
             
-            _currentRound.Squads = _parser.Participants
+            _currentRound.Squads = GetParticipants(_participants, _parser.Participants)
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
                 .GroupBy(x => new {x.Team})
                 .Select(x => new Squad
@@ -412,8 +425,6 @@ namespace ReadFile.ReadDemo
 
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
-                
-
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon), _currentRoundNumber,
                     e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects);
