@@ -377,7 +377,7 @@ namespace ReadFile.ReadDemo
                 Console.ForegroundColor = ConsoleColor.Cyan;
 
             if (winningTeam == Team.Terrorist)
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             var squadScore = _currentRoundNumber > SwapRoundNumber
                     ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
