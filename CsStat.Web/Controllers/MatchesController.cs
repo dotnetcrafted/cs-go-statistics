@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using AutoMapper;
 using BusinessFacade;
 using BusinessFacade.Repositories;
-using CsStat.Domain.Definitions;
 using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
+using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Controllers
