@@ -8,6 +8,7 @@ namespace CsStat.Web.Models.Matches
         public int TScore { get; set; } // 2
         public int CTScore { get; set; } // 0
         public int Reason { get; set; } // 1
+        public string ReasonIconUrl { get; set; } // 1
         public string ReasonTitle { get; set; } // bomb exploded
         public int Duration { get; set; }
 

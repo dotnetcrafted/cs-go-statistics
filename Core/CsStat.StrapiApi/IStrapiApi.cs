@@ -11,6 +11,7 @@ namespace CsStat.StrapiApi
         MapInfoModel GetMapInfo(string mapName);
         List<MapInfoModel> GetAllMapInfos();
         ImageInfoModel GetImage(string imageName);
+        List<ImageInfoModel> GetAllImages();
         List<WeaponModel> GetAllWeapons();
         WeaponModel GetWeapon(Weapons weapon);
     }

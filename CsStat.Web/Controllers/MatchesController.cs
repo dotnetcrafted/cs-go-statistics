@@ -92,6 +92,7 @@ namespace CsStat.Web.Controllers
             if (matchId.IsNotEmpty())
             {
                 var match = _demoRepository.GetMatch(matchId);
+                var images = _strapiApi.GetAllImages();
 
                 if (match == null)
                     return Json("Match not found");
@@ -115,6 +116,7 @@ namespace CsStat.Web.Controllers
                         Reason = (int) round.Reason,
                         ReasonTitle = round.ReasonTitle,
                         Duration = round.Duration,
+                        ReasonIconUrl = images.FirstOrDefault(x=>x.CodeName == round.ReasonTitle)?.Image.FullUrl,
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills
@@ -166,8 +168,8 @@ namespace CsStat.Web.Controllers
 
         private static string GetMapImage(string mapName)
         {
-            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
-                   ?? _strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl
+            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl 
+                   ??_strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl 
                    ?? "";
         }
     }

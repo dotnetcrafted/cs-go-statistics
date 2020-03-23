@@ -36,7 +36,7 @@ namespace CsStat.Web.Controllers
             }
             else
             {
-                serverInfo.ImageUrl = _strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl;
+                serverInfo.ImageUrl = _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl;
                 serverInfo.Map = "Server is down";
             }
 

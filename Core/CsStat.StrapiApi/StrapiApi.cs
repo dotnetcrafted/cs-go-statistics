@@ -41,12 +41,17 @@ namespace CsStat.StrapiApi
 
         public ImageInfoModel GetImage(string imageName)
         {
+            return GetAllImages().FirstOrDefault(x => x.CodeName.ToLower().Equals(imageName.ToLower())) ?? new ImageInfoModel();
+        }
+
+        public List<ImageInfoModel> GetAllImages()
+        {
             var json = GetJsonFromUrl(Settings.ImagesPath);
 
             return string.IsNullOrEmpty(json)
-                ? new ImageInfoModel()
-                : JsonConvert.DeserializeObject<List<ImageInfoModel>>(json)
-                      .FirstOrDefault(x => x.CodeName.ToLower().Equals(imageName.ToLower())) ?? new ImageInfoModel();
+                ? new List<ImageInfoModel>()
+                : JsonConvert.DeserializeObject<List<ImageInfoModel>>(json);
+
         }
 
         public List<WeaponModel> GetAllWeapons()
