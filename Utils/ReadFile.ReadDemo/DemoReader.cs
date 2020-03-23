@@ -321,37 +321,32 @@ namespace ReadFile.ReadDemo
                 return;
             }
 
-            if (_lastCTScore + _lastTScore >= SwapRoundNumber)
+            var winningTeam = Team.Spectate;
+            if (_currentRoundNumber > SwapRoundNumber)
             {
-                if (_lastTScore != _parser.TScore)
+                if (_parser.TScore != _lastTScore && _parser.TScore > _lastTScore)
                 {
+                    winningTeam = Team.Terrorist;
                     _squadBScore++;
                 }
-                else if (_lastCTScore != _parser.CTScore)
+                else if (_parser.CTScore != _lastCTScore && _parser.CTScore > _lastCTScore)
                 {
+                    winningTeam = Team.CounterTerrorist;
                     _squadAScore++;
                 }
             }
             else
             {
-                if (_lastTScore != _parser.TScore)
+                if (_parser.TScore != _lastTScore && _parser.TScore > _lastTScore)
                 {
+                    winningTeam = Team.Terrorist;
                     _squadAScore++;
                 }
-                else if (_lastCTScore != _parser.CTScore)
+                else if (_parser.CTScore != _lastCTScore && _parser.CTScore > _lastCTScore)
                 {
+                    winningTeam = Team.CounterTerrorist;
                     _squadBScore++;
                 }
-            }
-
-            var winningTeam = Team.Spectate;
-            if (_lastTScore != _parser.TScore)
-            {
-                winningTeam = Team.Terrorist;
-            }
-            else if (_lastCTScore != _parser.CTScore)
-            {
-                winningTeam = Team.CounterTerrorist;
             }
 
             _lastCTScore = _parser.CTScore;
@@ -384,7 +379,7 @@ namespace ReadFile.ReadDemo
             if (winningTeam == Team.Terrorist)
                 Console.ForegroundColor = ConsoleColor.Red;
 
-            var squadScore = _lastCTScore + _lastTScore > SwapRoundNumber
+            var squadScore = _currentRoundNumber > SwapRoundNumber
                     ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
                     : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
 
@@ -398,7 +393,7 @@ namespace ReadFile.ReadDemo
 
         private static string GetSquadName(Team team)
         {
-            if (_lastCTScore + _lastTScore > SwapRoundNumber)
+            if (_currentRoundNumber > SwapRoundNumber)
             {
                 return team == Team.CounterTerrorist ? SuqadA : SuqadB;
             }
