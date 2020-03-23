@@ -20,8 +20,10 @@ namespace CsStat.Domain.Entities.Demo
 
         [DataMember]
         public string Map { get; set; }
+
         [DataMember]
         public long Size { get; set; }
+
         [DataMember]
         public DateTime? MatchDate { get; set; }
 
@@ -33,6 +35,7 @@ namespace CsStat.Domain.Entities.Demo
 
         [DataMember]
         public List<PlayerLog> Players { get; set; }
+
         [DataMember]
         public List<RoundLog> Rounds { get; set; }
 
@@ -40,9 +43,9 @@ namespace CsStat.Domain.Entities.Demo
         public int TotalRound => Rounds.Count;
 
         public int TotalSquadAScore { get; set; }
-        
+
         public int TotalSquadBScore { get; set; }
 
-        public float MatchDuration { get; set; }
+        public int Duration { get; set; }
     }
 }

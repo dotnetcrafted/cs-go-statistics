@@ -10,5 +10,7 @@
         public string Weapon { get; set; } // "USP-S"
         public bool IsHeadshot { get; set; }
         public bool IsSuicide { get; set; }
+        public int Time { get; set; }
+        public bool IsPenetrated { get; set; }
     }
 }

@@ -3,7 +3,7 @@
     public class Kill
     {
         public Kill(Player killer, Player victim, bool isHeadshot, string weapon, int roundNumber,
-            bool isSuicide, float killTime, int penetratedObjects)
+            bool isSuicide, float time, int penetratedObjects)
         {
             Killer = killer;
             Victim = victim;
@@ -11,7 +11,7 @@
             Weapon = weapon;
             RoundNumber = roundNumber;
             IsSuicide = isSuicide;
-            KillTime = killTime;
+            Time = time;
             PenetratedObjects = penetratedObjects;
         }
 
@@ -21,7 +21,7 @@
         public string Weapon { get; set; }
         public int RoundNumber { get; set; }
 
-        public float KillTime { get; set; }
+        public float Time { get; set; }
 
         public bool IsSuicide { get; set; }
 

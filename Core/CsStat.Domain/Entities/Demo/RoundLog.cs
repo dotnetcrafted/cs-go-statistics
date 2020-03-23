@@ -6,6 +6,7 @@ namespace CsStat.Domain.Entities.Demo
     public class RoundLog
     {
         public int RoundNumber { get; set; }
+        public int Duration { get; set; }
 
         public int TScore { get; set; }
         public int CTScore { get; set; }

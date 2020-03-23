@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using BusinessFacade;
 using BusinessFacade.Repositories;
@@ -9,7 +8,6 @@ using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
-using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Controllers
@@ -22,7 +20,8 @@ namespace CsStat.Web.Controllers
         private static IStrapiApi _strapiApi;
         private static List<MapInfoModel> _mapInfos;
 
-        public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository, IStrapiApi strapiApi)
+        public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository,
+            IStrapiApi strapiApi)
         {
             _playerRepository = playerRepository;
             _demoRepository = demoRepository;
@@ -71,13 +70,14 @@ namespace CsStat.Web.Controllers
             return Json
             (
                 matches.Select(x => new BaseMatch
-                    {
-                        Id = x.Id,
-                        Map = x.Map,
-                        Date = x.MatchDate,
-                        TScore = x.TotalSquadAScore,
-                        CTScore = x.TotalSquadBScore,
-                        MapImage = GetMapImage(x.Map)
+                {
+                    Id = x.Id,
+                    Map = x.Map,
+                    Date = x.MatchDate,
+                    TScore = x.TotalSquadAScore,
+                    CTScore = x.TotalSquadBScore,
+                    MapImage = GetMapImage(x.Map),
+                    Duration = x.Duration
                 })
             );
         }
@@ -103,6 +103,7 @@ namespace CsStat.Web.Controllers
                     Date = match.MatchDate,
                     TScore = match.TotalSquadAScore,
                     CTScore = match.TotalSquadBScore,
+                    Duration = match.Duration,
                     Rounds = match.Rounds.Select(round => new MatchRound
                     {
                         Id = round.RoundNumber,
@@ -110,6 +111,7 @@ namespace CsStat.Web.Controllers
                         TScore = round.TScore,
                         Reason = (int) round.Reason,
                         ReasonTitle = round.ReasonTitle,
+                        Duration = round.Duration,
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills
@@ -122,7 +124,9 @@ namespace CsStat.Web.Controllers
                                         Assister = kill.Assister,
                                         Weapon = kill.Weapon,
                                         IsSuicide = kill.IsSuicide,
-                                        IsHeadshot = kill.IsHeadshot
+                                        IsHeadshot = kill.IsHeadshot,
+                                        Time = kill.Time,
+                                        IsPenetrated = kill.IsPenetrated
                                     })
                                 )).ToList(),
                         Squads = round.Squads.Select((squad, index) => new MatchDetailsSquad
@@ -152,8 +156,8 @@ namespace CsStat.Web.Controllers
 
         private static string GetMapImage(string mapName)
         {
-            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl 
-                   ??_strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl 
+            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
+                   ?? _strapiApi.GetImage(Constants.ImagesName.DefaultImage)?.Image.FullUrl
                    ?? "";
         }
     }

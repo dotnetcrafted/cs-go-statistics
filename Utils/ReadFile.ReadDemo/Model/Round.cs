@@ -13,7 +13,7 @@ namespace ReadFile.ReadDemo.Model
         public int TScore { get; set; }
         public int CTScore { get; set; }
 
-        public float Duration { get; set; }
+        public int Duration { get; set; }
 
         public Player BombPlanter = null;
         public Player BombDefuser = null;

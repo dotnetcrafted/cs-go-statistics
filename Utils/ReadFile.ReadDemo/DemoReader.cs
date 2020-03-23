@@ -180,7 +180,7 @@ namespace ReadFile.ReadDemo
                 ParsedDate = DateTime.Now,
                 TotalSquadAScore = _squadAScore,
                 TotalSquadBScore = _squadBScore,
-                MatchDuration = (_parser.CurrentTick - _matchTickTimeStart) / _parser.TickRate,
+                Duration = (int) Math.Round((_parser.CurrentTick - _matchTickTimeStart) / _parser.TickRate),
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -203,6 +203,7 @@ namespace ReadFile.ReadDemo
                     Reason = (CsStat.Domain.Definitions.RoundEndReason) (int) x.Value.Reason,
                     ReasonTitle = x.Value.Reason.ToString(),
                     RoundNumber = x.Value.RoundNumber,
+                    Duration = x.Value.Duration,
                     Winner = x.Value.Winner == Team.CounterTerrorist
                         ? CsStat.Domain.Definitions.Teams.Ct
                         : CsStat.Domain.Definitions.Teams.T,
@@ -232,7 +233,7 @@ namespace ReadFile.ReadDemo
 
             demoRepository.Insert(demoLog);
 
-            var time = TimeSpan.FromSeconds(demoLog.MatchDuration);
+            var time = TimeSpan.FromSeconds(demoLog.Duration);
             Console.WriteLine($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
 
             Console.WriteLine($"{SuqadA}: {_squadAScore}");
@@ -361,7 +362,7 @@ namespace ReadFile.ReadDemo
             _currentRound.TScore = _parser.TScore;
             _currentRound.CTScore = _parser.CTScore;
 
-            _currentRound.Duration = (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;
+            _currentRound.Duration = (int) Math.Round((_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate);
             
             _currentRound.Squads = _parser.Participants
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators

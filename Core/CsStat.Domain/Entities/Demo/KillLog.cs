@@ -12,7 +12,8 @@
         public string AssisterName { get; set; }
         public bool IsSuicide { get; set; }
         public int RoundNumber { get; set; }
-        public float KillTime { get; set; }
+        public int Time { get; set; }
         public int PenetratedObjects { get; set; }
+        public bool IsPenetrated => PenetratedObjects != 0;
     }
 }
