@@ -38,12 +38,55 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         return <span className={`match-kills__player ${playerCss}`}>{player.name}</span>
     }
 
+    renderAssister(kill: MatchDetailsKill) {
+        if (!kill.assister) return null;
+
+        return (
+            <>
+                &nbsp;<b>+</b>&nbsp;
+                {this.renderPlayer(kill.assister)}
+            </>
+        );
+    }
+
     renderWeapon() {
         return <img
             className="match-kills__weapon"
             src='https://admin.csfuse8.site/uploads/4f940096703b4100b751a9127c1acea4.png'
             alt=""
         />;
+    }
+
+    renderPenetrationIcon(kill: MatchDetailsKill) {
+        if (!kill.isPenetrated) return null
+
+        return (
+            <>
+                &nbsp;
+                PROSTREL
+            </>
+        );
+    }
+
+    renderHeadshotIcon(kill: MatchDetailsKill) {
+        if (!kill.isHeadshot) return null;
+
+        return (
+            <>
+                &nbsp;
+                HEADSHOT
+            </>
+        );
+    }
+
+    renderTime(time: number) {
+        if (Math.ceil(time/60) < 0) {
+            return `0:${time}`;
+        }
+
+        const minutes = Math.floor(time/60);
+
+        return `${minutes}:${time - (minutes * 60)}`;
     }
 
     render() {
@@ -56,20 +99,21 @@ export class MatchDetailsKills extends React.Component<any, {}> {
                 <ul className="match-kills__list">
                     {
                         round.kills.map((kill: MatchDetailsKill, i: number) => {
-                            //const weaponIcon = kill.weapon;
-                            const headshotIcon = kill.isHeadshot && 'HS';
-
                             return (
                                 <li className="match-kills__li" key={`${round.id}-${i}`}>
-                                    {this.renderPlayer(kill.killer)}
-                                    &nbsp;
-                                    {this.renderPlayer(kill.assister)}
-                                    &nbsp;
-                                    {this.renderWeapon()}
-                                    &nbsp;
-                                    {headshotIcon}
-                                    &nbsp;
-                                    {this.renderPlayer(kill.victim)}
+                                    <span className="match-kills__log">
+                                        {this.renderPlayer(kill.killer)}
+                                        {this.renderAssister(kill)}
+                                        &nbsp;
+                                        {this.renderWeapon()}
+                                        {this.renderPenetrationIcon(kill)}
+                                        {this.renderHeadshotIcon(kill)}
+                                        &nbsp;
+                                        {this.renderPlayer(kill.victim)}
+                                    </span>
+                                    <span className="match-kills__time">
+                                        {this.renderTime(kill.time)}
+                                    </span>
                                 </li>
                             );
                         })

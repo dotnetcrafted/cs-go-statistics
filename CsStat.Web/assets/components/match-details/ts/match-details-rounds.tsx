@@ -17,7 +17,7 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
     renderEmptyRound(roundIndex: number) {
         return (
             <li className="match-details-rounds__li" key={roundIndex}>
-                <a className={`match-details-rounds__col`} href="#"                >
+                <a className={`match-details-rounds__col`} href="#">
                     <div className={`match-details-rounds__cell match-details-rounds__cell--top`}></div>
                     <div className="match-details-rounds__cell match-details-rounds__cell--mid">{roundIndex}</div>
                     <div className={`match-details-rounds__cell match-details-rounds__cell--bottom`}>                    </div>

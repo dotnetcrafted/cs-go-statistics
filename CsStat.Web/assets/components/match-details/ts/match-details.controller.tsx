@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createMatchSelector } from 'connected-react-router';
 import { MatchDetails } from 'general/ts/redux/types';
 import MatchDetailsLayout from './match-details-layout';
 
@@ -7,7 +9,7 @@ interface MatchDetailsControllerState {
     selectedRoundId: number | null,
 }
 
-export class MatchDetailsController extends React.Component<any, MatchDetailsControllerState> {
+class MatchDetailsController extends React.Component<any, MatchDetailsControllerState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -17,7 +19,9 @@ export class MatchDetailsController extends React.Component<any, MatchDetailsCon
     }
 
     componentDidMount() {
-        fetch('/api/matchdata?matchId=5e78898ff9346a5f70fec647')
+        const { matchId } = this.props;
+
+        fetch(`/api/matchdata?matchId=${matchId}`)
             .then((res: Response) => res.json())
             .then((data) => {
                 this.setState({
@@ -61,3 +65,19 @@ export class MatchDetailsController extends React.Component<any, MatchDetailsCon
         );
     }
 }
+
+const mapStateToProps = (state: any) => {
+    const matchSelector = createMatchSelector('/matches/:id');
+    const match: any = matchSelector(state);
+    const matchId = match && match.params.id;
+    
+    return {
+        matchId,
+        router: state.router,
+    };
+};
+
+export const MatchDetailsControllerConnected = connect(
+    mapStateToProps,
+    null
+)(MatchDetailsController);

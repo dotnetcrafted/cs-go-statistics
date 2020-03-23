@@ -14,14 +14,15 @@ interface MatchDetailsLayoutProps {
 const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: MatchDetailsLayoutProps) => {
     if (!match) return null;
 
-    //console.log(match);
-    //console.log(round);
+    console.log(match);
+    console.log(round);
 
     return (
         <div className="match">
             <div className="container">
                 <h1>Match Details</h1>
                 <div>{match.map}</div>
+                <div>{match.duration}</div>
                 <MatchDetailsRounds
                     rounds={match.rounds}
                     selectedRoundId={selectedRoundId}

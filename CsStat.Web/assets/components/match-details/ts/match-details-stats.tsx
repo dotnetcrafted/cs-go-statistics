@@ -35,7 +35,7 @@ const columns = [
     {
         title: 'ud',
         dataIndex: 'ud',
-        key: 'adr',
+        key: 'ud',
     }
 ];
 
@@ -47,9 +47,10 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
             {
                 round.squads.map((squad) => {
                     return (
-                        <div className="match-stats__col">
+                        <div className="match-stats__col" key={squad.title}>
                             <Table
                                 className="match-stats__table"
+                                rowKey={(record) => record.id}
                                 dataSource={squad.players}
                                 columns={columns}
                                 bordered={true}

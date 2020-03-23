@@ -115,12 +115,14 @@ export interface MatchDetailsSquadPlayer {
 export interface MatchDetailsKill {
     id: string,
     formattedTime: string, // 0:28
-    killer: string, // MatchDetailsSquadPlayer id
-    victim: string, // MatchDetailsSquadPlayer id,
-    assister: string,// MatchDetailsSquadPlayer id
-    weapon: string, // "USP-S"
+    killer: string,
+    victim: string,
+    assister: string,
+    weapon: string,
+    time: number,
     isHeadshot: boolean, 
     isSuicide: boolean,
+    isPenetrated: boolean,
 }
 
 const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
