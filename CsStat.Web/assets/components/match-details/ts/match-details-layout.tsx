@@ -27,7 +27,9 @@ const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: Matc
                     selectedRoundId={selectedRoundId}
                     selectRound={selectRound}
                 />
-                <MatchDetailsStats squads={round} />
+                <div className="match__stats">
+                    <MatchDetailsStats round={round} />
+                </div>
                 <div className="match__kills">
                     <MatchDetailsKills round={round} />
                 </div>
