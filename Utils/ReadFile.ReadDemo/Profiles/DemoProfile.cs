@@ -19,6 +19,8 @@ namespace ReadFile.ReadDemo.Profiles
                 .ForMember(dest => dest.Victim, opts => opts.MapFrom(src => src.Victim == null ? (long?) null : src.Victim.SteamID))
                 .ForMember(dest => dest.VictimName, opts => opts.MapFrom(src => src.Victim == null ? null : src.Victim.Name))
                 .ForMember(dest => dest.IsSuicide, opts => opts.MapFrom(src => src.IsSuicide))
+                .ForMember(dest => dest.KillTime, opts => opts.MapFrom(src => src.KillTime))
+                .ForMember(dest => dest.PenetratedObjects, opts => opts.MapFrom(src => src.PenetratedObjects))
                 ;
         }
     }

@@ -32,6 +32,9 @@ namespace ReadFile.ReadDemo
         private static int _currentRoundNumber;
         private static int _roundEndedCount;
 
+        private static int _matchTickTimeStart;
+        private static int _rountTickTimeStart;
+
         private static int _lastTScore;
         private static int _lastCTScore;
 
@@ -112,6 +115,9 @@ namespace ReadFile.ReadDemo
             _currentRound = null;
             _currentRoundNumber = 1;
             _roundEndedCount = default;
+            
+            _matchTickTimeStart = 0;
+            _rountTickTimeStart = 0;
 
             _lastCTScore = default;
             _lastTScore = default;
@@ -133,6 +139,7 @@ namespace ReadFile.ReadDemo
             _parser.BombDefused += Parser_BombDefused;
             _parser.BombExploded += Parser_BombExploded;
             _parser.PlayerBind += Parser_PlayerBind;
+            _parser.FreezetimeEnded += Parser_FreezetimeEnded;
 
             Console.WriteLine(
                 $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
@@ -173,6 +180,7 @@ namespace ReadFile.ReadDemo
                 ParsedDate = DateTime.Now,
                 TotalSquadAScore = _squadAScore,
                 TotalSquadBScore = _squadBScore,
+                MatchDuration = (_parser.CurrentTick - _matchTickTimeStart) / _parser.TickRate,
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -224,6 +232,9 @@ namespace ReadFile.ReadDemo
 
             demoRepository.Insert(demoLog);
 
+            var time = TimeSpan.FromSeconds(demoLog.MatchDuration);
+            Console.WriteLine($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
+
             Console.WriteLine($"{SuqadA}: {_squadAScore}");
             Console.WriteLine($"{SuqadB}: {_squadBScore}");
         }
@@ -249,6 +260,7 @@ namespace ReadFile.ReadDemo
             }
 
             _matchStarted = true;
+            _matchTickTimeStart = _parser.CurrentTick;
 
             _results = _results ?? new Result(_demoFileName);
 
@@ -262,6 +274,11 @@ namespace ReadFile.ReadDemo
 
             _currentRound.Reason = e.Reason;
             _roundEndedCount = 1;
+        }
+
+        private void Parser_FreezetimeEnded(object sender, FreezetimeEndedEventArgs e)
+        {
+            _rountTickTimeStart = _parser.CurrentTick;
         }
 
         private static void Parser_RoundStart(object sender, RoundStartedEventArgs e)
@@ -344,6 +361,8 @@ namespace ReadFile.ReadDemo
             _currentRound.TScore = _parser.TScore;
             _currentRound.CTScore = _parser.CTScore;
 
+            _currentRound.Duration = (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;
+            
             _currentRound.Squads = _parser.Participants
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
                 .GroupBy(x => new {x.Team})
@@ -364,18 +383,21 @@ namespace ReadFile.ReadDemo
             if (winningTeam == Team.Terrorist)
                 Console.ForegroundColor = ConsoleColor.Red;
 
-            var squadScore = _lastCTScore + _lastTScore >= SwapRoundNumber
+            var squadScore = _lastCTScore + _lastTScore > SwapRoundNumber
                     ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
                     : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
 
-            Console.WriteLine($"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason} ");
+            var duration = TimeSpan.FromSeconds(_currentRound.Duration);
+            
+            Console.WriteLine(
+                $"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff}");
 
             Console.ForegroundColor = foregroundColor;
         }
 
         private static string GetSquadName(Team team)
         {
-            if (_lastCTScore + _lastTScore >= SwapRoundNumber)
+            if (_lastCTScore + _lastTScore > SwapRoundNumber)
             {
                 return team == Team.CounterTerrorist ? SuqadA : SuqadB;
             }
@@ -390,11 +412,15 @@ namespace ReadFile.ReadDemo
             if(!_matchStarted)
                 return;
 
+            var killTime = (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;
+
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
+                
+
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon).GetDescription(), _currentRoundNumber,
-                    e.Killer.SteamID == e.Victim.SteamID);
+                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects);
 
                 if (e.Assister != null)
                 {
@@ -416,7 +442,7 @@ namespace ReadFile.ReadDemo
             {
                 var kill = new Kill(null, _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon).GetDescription(),
-                    _currentRoundNumber, true);
+                    _currentRoundNumber, true, killTime, e.PenetratedObjects);
 
                 if (e.Assister != null)
                 {
@@ -442,7 +468,7 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_BombExploded(object sender, BombEventArgs e)
         {
-            _results.Players[e.Player.SteamID].BombExplosions.Add(_currentRound);
+            _results.Players[_currentRound.BombPlanter.SteamID].BombExplosions.Add(_currentRound);
             _currentRound.IsBombExploded = true;
         }
     }

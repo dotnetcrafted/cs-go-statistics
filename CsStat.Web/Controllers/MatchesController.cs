@@ -92,7 +92,7 @@ namespace CsStat.Web.Controllers
                 if (match == null)
                     return Json("Match not found");
 
-                var steamIds = string.Join(",", match.Players.Select(x=>x.SteamID).ToList());
+                var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
                 var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
                 var matchDetails = new MatchDetails
@@ -133,7 +133,7 @@ namespace CsStat.Web.Controllers
                             {
                                 Id = player.SteamID.ToString(),
                                 Name = player.Name,
-                                SteamImage = avatars.FirstOrDefault(x=>x.Key == player.SteamID.ToString()).Value,
+                                SteamImage = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value,
                                 Kills = player.Kills.Count,
                                 Deaths = player.Deaths.Count,
                                 Assists = player.Assists.Count,
@@ -143,7 +143,7 @@ namespace CsStat.Web.Controllers
                         }).ToList()
                     }).ToList()
                 };
-                
+
                 return Json(matchDetails);
             }
 

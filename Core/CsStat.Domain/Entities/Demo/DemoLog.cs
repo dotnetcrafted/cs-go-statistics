@@ -42,5 +42,7 @@ namespace CsStat.Domain.Entities.Demo
         public int TotalSquadAScore { get; set; }
         
         public int TotalSquadBScore { get; set; }
+
+        public float MatchDuration { get; set; }
     }
 }
