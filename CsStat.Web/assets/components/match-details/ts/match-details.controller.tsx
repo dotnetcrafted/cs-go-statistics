@@ -17,7 +17,7 @@ export class MatchDetailsController extends React.Component<any, MatchDetailsCon
     }
 
     componentDidMount() {
-        fetch('/api/matchdata?matchId=5e71c12a58daf2008805cb58')
+        fetch('/api/matchdata?matchId=5e78898ff9346a5f70fec647')
             .then((res: Response) => res.json())
             .then((data) => {
                 this.setState({

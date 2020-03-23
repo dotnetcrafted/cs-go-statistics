@@ -139,7 +139,7 @@ namespace CsStat.Web.Controllers
                                         Time = kill.Time,
                                         IsPenetrated = kill.IsPenetrated
                                     })
-                                )).OrderByDescending(x=>x.Time).ToList(),
+                                )).OrderBy(x=>x.Time).ToList(),
                         Squads = round.Squads.Select((squad, index) => new MatchDetailsSquad
                         {
                             Id = index,
