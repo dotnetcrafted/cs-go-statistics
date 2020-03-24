@@ -169,7 +169,7 @@ namespace CsStat.Web.Controllers
                                     .Sum(t => t.Assists),
                                 Adr = Math.Round(playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                                x.RoundNumber <= round.RoundNumber)
-                                                     .Sum(t => t.Damage) / (double) round.RoundNumber, 2),
+                                                     .Sum(t => t.Damage) / (double) round.RoundNumber, 0),
                                 Ud = playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                    x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.UtilityDamage)
