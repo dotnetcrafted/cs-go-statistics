@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using System.Web;
 
 namespace CsStat.Web.Models
 {
@@ -8,7 +8,7 @@ namespace CsStat.Web.Models
     {
         public string Caption { get; set; }
         public string Description { get; set; }
-        public HttpPostedFileBase Image { get; set; }
+        public IFormFile Image { get; set; }
         public string ImagePath { get; set; }
         public string Url { get; set; }
         public DateTime PublishDate { get; set; }

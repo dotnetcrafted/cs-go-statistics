@@ -1,31 +1,31 @@
 ﻿using System;
-using System.Web.Mvc;
-using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Web.Models;
-using Microsoft.Ajax.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
 {
     public class HangoutBotController : Controller
     {
+        private static IMapper _mapper;
         private static IPlayerRepository _playerRepository;
-        private IQueryConnection _queryConnection;
-        public HangoutBotController(IPlayerRepository playerRepository, IQueryConnection queryConnection)
+        private static IQueryConnection _queryConnection;
+        public HangoutBotController(IPlayerRepository playerRepository, IQueryConnection queryConnection, IMapper mapper)
         {
             _playerRepository = playerRepository;
             _queryConnection = queryConnection;
+            _mapper = mapper;
         }
         // GET
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "playerName;intervalAlias")]
+        [ResponseCache(Duration = 600, VaryByQueryKeys = new string[] { "playerName", "intervalAlias" })]
         public JsonResult GetPlayerStat(string playerName = "", string intervalAlias = "")
         {
-            if (playerName.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(playerName))
             {
-                return new JsonResult();
+                return new JsonResult(null);
             }
 
             var dateFrom = string.Empty;
@@ -36,28 +36,16 @@ namespace CsStat.Web.Controllers
                 dateFrom = DateTime.Now.Hour < 12 ? DateTime.Now.AddDays(-1).ToShortDateString() : DateTime.Now.ToShortDateString();
             }
 
-            return new JsonResult
-            {
-                Data = GetStatForOnePlayer(playerName, dateFrom, dateTo),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return new JsonResult(GetStatForOnePlayer(playerName, dateFrom, dateTo));
         }
 
         public JsonResult GetPlayerList()
         {
-            return new JsonResult
-            {
-                Data = _playerRepository.GetAllPlayers(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return new JsonResult(_playerRepository.GetAllPlayers());
         }
         public JsonResult ServerInfo()
         {
-            return new JsonResult
-            {
-                Data = GetServerInfo(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return new JsonResult(GetServerInfo());
         }
 
         private ServerInfoModel GetServerInfo()
@@ -91,7 +79,7 @@ namespace CsStat.Web.Controllers
         {
             var stat = _playerRepository.GetStatsForPlayer(playerName, dateFrom, dateTo);
 
-            return stat == null ? new PlayerStatsViewModel() : Mapper.Map<PlayerStatsViewModel>(stat);
+            return stat == null ? new PlayerStatsViewModel() : _mapper.Map<PlayerStatsViewModel>(stat);
         }
     }
 }

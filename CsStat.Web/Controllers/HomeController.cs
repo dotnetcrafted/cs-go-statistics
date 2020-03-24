@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CSStat.CsLogsApi.Extensions;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
-using Microsoft.Ajax.Utilities;
 using MongoDB.Driver;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CsStat.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private static IMapper _mapper;
         private static IPlayerRepository _playerRepository;
         private static ISteamApi _steamApi;
 
-        public HomeController(IPlayerRepository playerRepository)
+        public HomeController(IPlayerRepository playerRepository, IMapper mapper)
         {
             _playerRepository = playerRepository;
             _steamApi = new SteamApi();
+            _mapper = mapper;
         }
         public ActionResult Index()
         {
@@ -31,7 +30,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo")]
+        [ResponseCache(Duration = 600, VaryByQueryKeys = new string[] { "dateFrom", "dateTo" })]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
@@ -50,16 +49,14 @@ namespace CsStat.Web.Controllers
                 .ToList();
 
 
-            return new JsonResult
-            {
-                Data = new SaloModel
+            return new JsonResult(
+                new SaloModel
                 {
                     Players = playersStat,
                     DateFrom = dateFrom,
                     DateTo = dateTo
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                }
+            );
         }
 
         private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
@@ -82,7 +79,7 @@ namespace CsStat.Web.Controllers
                 }
             }
 
-            return Mapper.Map<List<PlayerStatsViewModel>>(players);
+            return _mapper.Map<List<PlayerStatsViewModel>>(players);
         }
 
 

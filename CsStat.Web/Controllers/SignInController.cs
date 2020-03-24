@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using BusinessFacade.Repositories;
+﻿using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Web.Helpers;
 using CsStat.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CsStat.Web.Controllers
 {

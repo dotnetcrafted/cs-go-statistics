@@ -103,7 +103,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.PublishDate, opts => opts.MapFrom(src => src.PublishDate))
                     .ForMember(dest => dest.Url, opts => opts.MapFrom(src => src.Url))
                     .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.Image))
-                    .ForMember(dest => dest.Tags, opts => opts.MapFrom(src => src.Tags.Split(';')))
+                    .ForMember(dest => dest.Tags, opts => opts.MapFrom(src => src.Tags.Split(';', System.StringSplitOptions.None)))
                     .ForAllOtherMembers(x => x.Ignore())
                     ;
             }
