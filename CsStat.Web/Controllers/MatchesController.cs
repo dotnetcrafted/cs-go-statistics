@@ -9,9 +9,7 @@ using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
-using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
-using Microsoft.Ajax.Utilities;
 
 namespace CsStat.Web.Controllers
 {
@@ -39,8 +37,7 @@ namespace CsStat.Web.Controllers
         {
             return View();
         }
-
-
+        
         [HttpGet]
         public ActionResult GetFullData()
         {
@@ -186,8 +183,8 @@ namespace CsStat.Web.Controllers
 
         private static string GetMapImage(string mapName)
         {
-            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl 
-                   ??_strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl 
+            return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
+                   ?? _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl
                    ?? "";
         }
     }
