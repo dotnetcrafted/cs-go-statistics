@@ -111,10 +111,6 @@
       <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
       <Name>CsStat.SystemFacade</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CsStat.Web\CsStat.Web.csproj">
-      <Project>{8BF54175-DFD2-41AD-80FD-B8C962170293}</Project>
-      <Name>CsStat.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\ServerQueries\ServerQueries.csproj">
       <Project>{f4ff265d-ba20-4284-9bd2-dacfcd06a7ca}</Project>
       <Name>ServerQueries</Name>
