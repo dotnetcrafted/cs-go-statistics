@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="DemoReader.cs" />
     <Compile Include="EquipmentMapper.cs" />
+    <Compile Include="Model\Damage.cs" />
     <Compile Include="Model\Kill.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Result.cs" />

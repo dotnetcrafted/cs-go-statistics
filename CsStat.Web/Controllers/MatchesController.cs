@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BusinessFacade;
@@ -108,7 +109,9 @@ namespace CsStat.Web.Controllers
                             SteamId = player.SteamID,
                             Kills = player.Kills.Count,
                             Assists = player.Assists.Count,
-                            Death = player.Deaths.Count
+                            Death = player.Deaths.Count,
+                            Damage = player.Damage.Sum(x => x.HealthDamage),
+                            UtilityDamage = player.UtilityDamage.Sum(x => x.HealthDamage)
                         }))).ToList();
 
                 var matchDetails = new MatchDetails
@@ -164,8 +167,12 @@ namespace CsStat.Web.Controllers
                                 Assists = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.Assists),
-                                Adr = 0.0,
-                                Ud = 0.0
+                                Adr = Math.Round(playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
+                                                                               x.RoundNumber <= round.RoundNumber)
+                                                     .Sum(t => t.Damage) / (double) round.RoundNumber, 2),
+                                Ud = playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
+                                                                   x.RoundNumber <= round.RoundNumber)
+                                    .Sum(t => t.UtilityDamage)
                             }).ToList()
                         }).OrderBy(x => x.Title).ToList()
                     }).ToList()

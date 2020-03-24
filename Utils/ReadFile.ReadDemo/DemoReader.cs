@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities.Demo;
 using CsStat.SystemFacade;
 using CsStat.SystemFacade.Extensions;
@@ -27,7 +26,7 @@ namespace ReadFile.ReadDemo
 
         private static string _demoFileName;
         private static string _fullDemoFileName;
-        
+
         private static bool _matchStarted;
         private static Round _currentRound;
         private static int _currentRoundNumber;
@@ -43,6 +42,7 @@ namespace ReadFile.ReadDemo
         private static int _squadBScore;
 
         private static List<Player> _participants = new List<Player>();
+        private static List<Damage> _playerDamageStat = new List<Damage>();
 
         #region inint
 
@@ -51,7 +51,8 @@ namespace ReadFile.ReadDemo
         private readonly IBaseRepository demoRepository;
         private readonly IMapper mapper;
 
-        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository, IMapper mapper)
+        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository,
+            IMapper mapper)
         {
             this.path = path;
             this.demoFileRepository = demoFileRepository;
@@ -112,23 +113,25 @@ namespace ReadFile.ReadDemo
                     players.Add(player.Key, new Model.Player(player.Value.Name, player.Value.SteamID));
                 }
             }
+
             _results = new Result(_demoFileName) {Players = players};
 
             _matchStarted = default;
             _currentRound = null;
             _currentRoundNumber = 1;
             _roundEndedCount = default;
-            
+
             _matchTickTimeStart = 0;
             _rountTickTimeStart = 0;
 
             _lastCTScore = default;
             _lastTScore = default;
-            
+
             _squadAScore = default;
             _squadBScore = default;
 
             _participants = new List<Player>();
+            _playerDamageStat = new List<Damage>();
         }
 
         private void ParseDemo(FileStream file)
@@ -145,6 +148,7 @@ namespace ReadFile.ReadDemo
             _parser.BombExploded += Parser_BombExploded;
             _parser.PlayerBind += Parser_PlayerBind;
             _parser.FreezetimeEnded += Parser_FreezetimeEnded;
+            _parser.PlayerHurt += Parser_PlayerHurt;
 
             Console.WriteLine(
                 $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
@@ -159,6 +163,30 @@ namespace ReadFile.ReadDemo
             Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
+        private static void Parser_PlayerHurt(object sender, PlayerHurtEventArgs e)
+        {
+            if (!_matchStarted)
+                return;
+
+            if (e.Player == null || e.Attacker == null)
+                return;
+
+            var attakersTeam = _participants.FirstOrDefault(x => x.SteamID == e.Attacker.SteamID)?.Team;
+            var victimsTeam = _participants.FirstOrDefault(x => x.SteamID == e.Player.SteamID)?.Team;
+
+            if (attakersTeam == victimsTeam) // attacked teammate
+                return;
+
+            _playerDamageStat.Add(new Damage
+            {
+                RoundNumber = _currentRoundNumber,
+                Weapon = EquipmentMapper.Map(e.Weapon.Weapon),
+                SteamId = e.Attacker.SteamID,
+                HealthDamage = e.HealthDamage,
+                ArmorDamage = e.ArmorDamage
+            });
+        }
+
         private static DateTime? GetDemoDate(string fileName)
         {
             var sections = fileName?.Split('-');
@@ -166,7 +194,7 @@ namespace ReadFile.ReadDemo
             {
                 if (DateTime.TryParseExact(string.Join(" ", sections.Skip(1).Take(2)),
                     "yyyyMMdd HHmmss",
-                    null, 
+                    null,
                     DateTimeStyles.None, out var date))
                     return date;
             }
@@ -196,7 +224,9 @@ namespace ReadFile.ReadDemo
                     Teamkills = x.Value.Teamkills?.Select(z => mapper.Map<KillLog>(z)).ToList(),
                     BombDefuses = x.Value.BombDefuses?.Select(z => z.RoundNumber).ToList(),
                     BombExplosions = x.Value.BombExplosions?.Select(z => z.RoundNumber).ToList(),
-                    BombPlants = x.Value.BombPlants?.Select(z => z.RoundNumber).ToList()
+                    BombPlants = x.Value.BombPlants?.Select(z => z.RoundNumber).ToList(),
+                    Damage = GetDamage(_playerDamageStat.Where(stat => !stat.IsNadeDamage), x.Value.SteamID),
+                    UtilityDamage = GetDamage(_playerDamageStat.Where(stat => stat.IsNadeDamage), x.Value.SteamID)
                 }).ToList(),
                 Rounds = _results.Rounds?.Select(x => new RoundLog
                 {
@@ -215,7 +245,7 @@ namespace ReadFile.ReadDemo
                     WinnerTitle = x.Value.Winner.ToString(),
                     TScore = x.Value.TScore,
                     CTScore = x.Value.CTScore,
-                    Squads = x.Value.Squads.Select(z => new SquadLog()
+                    Squads = x.Value.Squads.Select(z => new SquadLog
                     {
                         Team = z.Team.ToString(),
                         SquadTitle = z.Title,
@@ -230,11 +260,16 @@ namespace ReadFile.ReadDemo
                             Deaths = k.Deaths.Where(p => p.RoundNumber == x.Value.RoundNumber)
                                 .Select(v => mapper.Map<KillLog>(v)).ToList(),
                             Teamkills = k.Teamkills.Where(p => p.RoundNumber == x.Value.RoundNumber)
-                                .Select(v => mapper.Map<KillLog>(v)).ToList()
+                                .Select(v => mapper.Map<KillLog>(v)).ToList(),
+                            Damage = GetDamage(_playerDamageStat.Where(stat => !stat.IsNadeDamage), k.SteamID,
+                                x.Value.RoundNumber),
+                            UtilityDamage = GetDamage(_playerDamageStat.Where(stat => stat.IsNadeDamage), k.SteamID,
+                                x.Value.RoundNumber)
                         }).ToList()
                     }).ToList()
                 }).ToList()
             };
+            ;
 
             demoRepository.Insert(demoLog);
 
@@ -243,6 +278,21 @@ namespace ReadFile.ReadDemo
 
             Console.WriteLine($"{SuqadA}: {_squadAScore}");
             Console.WriteLine($"{SuqadB}: {_squadBScore}");
+        }
+
+        private static List<DamageLog> GetDamage(IEnumerable<Damage> stat, long steamId, int roundNumber = 0)
+        {
+            var query = stat.Where(x => x.SteamId == steamId);
+            if (roundNumber != 0)
+                query = query.Where(x => x.RoundNumber == roundNumber);
+
+            return query.GroupBy(x => x.RoundNumber)
+                .Select(x => new DamageLog
+                {
+                    RoundNumber = x.Key,
+                    HealthDamage = x.Sum(z => z.HealthDamage),
+                    ArmorDamage = x.Sum(z => z.ArmorDamage)
+                }).ToList();
         }
 
         private static void Parser_PlayerBind(object sender, PlayerBindEventArgs e)
@@ -275,14 +325,14 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_RoundEnd(object sender, RoundEndedEventArgs e)
         {
-            if (!_matchStarted) 
+            if (!_matchStarted)
                 return;
 
             _currentRound.Reason = e.Reason;
             _roundEndedCount = 1;
         }
 
-        private void Parser_FreezetimeEnded(object sender, FreezetimeEndedEventArgs e)
+        private static void Parser_FreezetimeEnded(object sender, FreezetimeEndedEventArgs e)
         {
             _rountTickTimeStart = _parser.CurrentTick;
         }
@@ -301,7 +351,8 @@ namespace ReadFile.ReadDemo
             _participants = _parser.Participants.ToList();
         }
 
-        private static IEnumerable<Player> GetParticipants(IEnumerable<Player> participantsAtStart, IEnumerable<Player> participantsAtEnd)
+        private static IEnumerable<Player> GetParticipants(IEnumerable<Player> participantsAtStart,
+            IEnumerable<Player> participantsAtEnd)
         {
             var diff = participantsAtStart.Where(x => participantsAtEnd.All(z => z.SteamID != x.SteamID));
             return participantsAtEnd.Union(diff);
@@ -371,7 +422,7 @@ namespace ReadFile.ReadDemo
             _currentRound.CTScore = _parser.CTScore;
 
             _currentRound.Duration = (int) Math.Round((_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate);
-            
+
             _currentRound.Squads = GetParticipants(_participants, _parser.Participants)
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
                 .GroupBy(x => new {x.Team})
@@ -393,11 +444,11 @@ namespace ReadFile.ReadDemo
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             var squadScore = _currentRoundNumber > SwapRoundNumber
-                    ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
-                    : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
+                ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
+                : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
 
             var duration = TimeSpan.FromSeconds(_currentRound.Duration);
-            
+
             Console.WriteLine(
                 $"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff}");
 
@@ -418,7 +469,7 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_PlayerKilled(object sender, PlayerKilledEventArgs e)
         {
-            if(!_matchStarted)
+            if (!_matchStarted)
                 return;
 
             var killTime = (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;

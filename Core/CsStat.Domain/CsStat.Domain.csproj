@@ -94,6 +94,7 @@
     <Compile Include="Definitions\GrantsEnum.cs" />
     <Compile Include="Definitions\TeamsEnum.cs" />
     <Compile Include="Definitions\WeaponTypes.cs" />
+    <Compile Include="Entities\Demo\DamageLog.cs" />
     <Compile Include="Entities\Demo\SquadLog.cs" />
     <Compile Include="Entities\Error.cs" />
     <Compile Include="Definitions\RoundEndReason.cs" />

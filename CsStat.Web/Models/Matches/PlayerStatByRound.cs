@@ -7,5 +7,7 @@
         public int Kills { get; set; }
         public int Assists { get; set; }
         public int Death { get; set; }
+        public int Damage { get; set; }
+        public int UtilityDamage { get; set; }
     }
 }

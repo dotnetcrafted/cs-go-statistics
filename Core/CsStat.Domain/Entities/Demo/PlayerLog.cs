@@ -31,6 +31,9 @@ namespace CsStat.Domain.Entities.Demo
         public List<KillLog> Deaths { get; set; }
         public List<KillLog> Teamkills { get; set; }
 
+        public List<DamageLog> Damage { get; set; }
+        public List<DamageLog> UtilityDamage { get; set; }
+
         public List<int> BombDefuses { get; set; }
         public List<int> BombExplosions { get; set; }
         public List<int> BombPlants { get; set; }
