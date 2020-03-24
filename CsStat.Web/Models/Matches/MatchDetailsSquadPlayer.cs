@@ -8,6 +8,8 @@ namespace CsStat.Web.Models.Matches
         public string Name { get; set; } // djoony
         public string SteamImage { get; set; } // url to steam profile image
 
+        public string Team { get; set; } // CounterTerrorist or Terrorist
+
         public int Kills { get; set; }
         public int Assists { get; set; }
         public int Deaths { get; set; }

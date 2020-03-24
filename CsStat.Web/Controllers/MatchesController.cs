@@ -163,6 +163,7 @@ namespace CsStat.Web.Controllers
                             {
                                 Id = player.SteamID.ToString(),
                                 Name = player.Name,
+                                Team = squad.Team,
                                 SteamImage = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value,
                                 Kills = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
