@@ -1,43 +1,64 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Web;
-using System.Web.Caching;
-using System.Web.Mvc;
 
 namespace CsStat.Web.Helpers
 {
-    public static class HtmlHelperExtensions
+    public class HtmlHelperExtensions
     {
-        private const string DistPath = "/dist";
-        private const string ManifestJsonPath = DistPath + "/manifest.json";
+        private const string DistPath = "dist";
+        private readonly string ManifestJsonPath = null;
 
-        public static bool FileExistsInManifest(this HtmlHelper htmlHelper, string fileKey)
+        private readonly IMemoryCache _cache;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public HtmlHelperExtensions(IMemoryCache memoryCache, IWebHostEnvironment webHostEnvironment)
+        {
+            _cache = memoryCache;
+            _webHostEnvironment = webHostEnvironment;
+            ManifestJsonPath = Path.Combine(DistPath, "manifest.json");
+        }
+
+        public bool FileExistsInManifest(string fileKey)
         {
             var parsedManifestJson = GetManifestJsonData();
             var fileWebPath = parsedManifestJson[fileKey]?.ToString();
             return !string.IsNullOrEmpty(fileWebPath);
         }
 
-        private static dynamic GetManifestJsonData()
+        private dynamic GetManifestJsonData()
         {
-            if (HttpRuntime.Cache[ManifestJsonPath] != null) return HttpRuntime.Cache[ManifestJsonPath];
+            if (_cache.Get(ManifestJsonPath) != null) return _cache.Get(ManifestJsonPath);
 
-            var serverManifestJsonFilePath = HttpContext.Current.Server.MapPath(ManifestJsonPath);
+            var serverManifestJsonFilePath = Path.Combine(_webHostEnvironment.ContentRootPath, ManifestJsonPath);
             var isManifestExist = !string.IsNullOrEmpty(serverManifestJsonFilePath) && File.Exists(serverManifestJsonFilePath);
             if (!isManifestExist)
             {
                 throw new FileNotFoundException("File not found", ManifestJsonPath);
             }
 
+
+
             var fileContent = File.ReadAllText(serverManifestJsonFilePath);
-            dynamic manifestFileContent = JsonConvert.DeserializeObject(fileContent);
-            HttpRuntime.Cache.Insert(ManifestJsonPath, manifestFileContent, new CacheDependency(serverManifestJsonFilePath));
-            return HttpRuntime.Cache[ManifestJsonPath];
+            object manifestFileContent = JsonConvert.DeserializeObject(fileContent);
+            
+            var _fileProvider = new PhysicalFileProvider(_webHostEnvironment.ContentRootPath);
+
+            IChangeToken token = _fileProvider.Watch(ManifestJsonPath);
+
+            var options = new MemoryCacheEntryOptions()
+                        .AddExpirationToken(token);
+            _cache.Set(ManifestJsonPath, manifestFileContent, options);
+            return _cache.Get(ManifestJsonPath);
         }
 
 
-        public static string GetFileWebPath(this HtmlHelper htmlHelper, string fileKey)
+        public string GetFileWebPath(string fileKey)
         {
             var parsedManifestJson = GetManifestJsonData();
             var fileWebPath = parsedManifestJson[fileKey]?.ToString();

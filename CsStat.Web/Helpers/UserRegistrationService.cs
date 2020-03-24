@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessFacade.Repositories;
-using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.Web.Models;
 using DataService;
 using DataService.Extensions;
+using DataService.Interfaces;
 using ErrorLogger;
 
 namespace CsStat.Web.Helpers
@@ -21,12 +21,10 @@ namespace CsStat.Web.Helpers
         private static IUserRepository _userRepository;
         private static ILogger _logger;
 
-        public UserRegistrationService(IUserRepository userRepository)
+        public UserRegistrationService(IUserRepository userRepository, ILogger logger)
         {
             _userRepository = userRepository;
-            var connectionString = new ConnectionStringFactory();
-            var mongoRepository = new MongoRepositoryFactory(connectionString);
-            _logger = new Logger(mongoRepository);
+            _logger = logger;
         }
         public Dictionary<SignUp, string> SignUp(SignInViewModel userModel)
         {
