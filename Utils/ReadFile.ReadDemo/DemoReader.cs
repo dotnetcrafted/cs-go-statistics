@@ -427,7 +427,7 @@ namespace ReadFile.ReadDemo
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon), _currentRoundNumber,
-                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects);
+                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects, e.AssistedFlash);
 
                 if (e.Assister != null)
                 {
@@ -449,7 +449,7 @@ namespace ReadFile.ReadDemo
             {
                 var kill = new Kill(null, _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon),
-                    _currentRoundNumber, true, killTime, e.PenetratedObjects);
+                    _currentRoundNumber, true, killTime, e.PenetratedObjects, e.AssistedFlash);
 
                 if (e.Assister != null)
                 {

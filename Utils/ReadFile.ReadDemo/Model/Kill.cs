@@ -5,7 +5,7 @@ namespace ReadFile.ReadDemo.Model
     public class Kill
     {
         public Kill(Player killer, Player victim, bool isHeadshot, Weapons weapon, int roundNumber,
-            bool isSuicide, float time, int penetratedObjects)
+            bool isSuicide, float time, int penetratedObjects, bool isFlashed)
         {
             Killer = killer;
             Victim = victim;
@@ -15,6 +15,7 @@ namespace ReadFile.ReadDemo.Model
             IsSuicide = isSuicide;
             Time = time;
             PenetratedObjects = penetratedObjects;
+            IsFlashed = isFlashed;
         }
 
         public Player Killer { get; set; }
@@ -30,5 +31,7 @@ namespace ReadFile.ReadDemo.Model
         public Player Assister { get; set; }
 
         public int PenetratedObjects { get; set; }
+
+        public bool IsFlashed { get; set; }
     }
 }
