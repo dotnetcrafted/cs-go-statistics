@@ -1,15 +1,21 @@
-import { RouterState } from 'connected-react-router';
+import { RouterState } from "connected-react-router";
 
 interface IAppState {
     IsLoading: boolean;
     Players: Player[];
     Posts: Post[];
+    FilteredPosts: Post[];
+}
+
+interface IFilterByTag {
+    FilteredPosts: Post[];
 }
 
 type RootState = {
     router?: RouterState;
     app: IAppState;
-}
+    filter: IFilterByTag;
+};
 
 type Player = {
     Id: string;
@@ -59,16 +65,29 @@ type Post = {
     tags: Tag[];
     createdAt: string;
     updatedAt: string;
-}
+};
 
 type Tag = {
     Caption: string;
-}
+};
 
-const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
-const START_REQUEST = 'START_REQUEST';
-const STOP_REQUEST = 'STOP_REQUEST';
-const FETCH_POSTS_DATA = 'FETCH_POSTS_DATA';
+const FETCH_PLAYERS_DATA = "FETCH_PLAYERS_DATA";
+const START_REQUEST = "START_REQUEST";
+const STOP_REQUEST = "STOP_REQUEST";
+const FETCH_POSTS_DATA = "FETCH_POSTS_DATA";
+const FILTER_BY_TAG = "FILTER_BY_TAG";
+const REFRESH_POSTS = "REFRESH_POSTS";
+
+type FilterByTagAction = {
+    type: typeof FILTER_BY_TAG;
+    tag: string;
+    payload: Post[];
+};
+
+type ResfreshPostsAction = {
+    type: typeof REFRESH_POSTS;
+    payload: Post[];
+};
 
 type StartRequestAction = {
     type: typeof START_REQUEST;
@@ -92,11 +111,14 @@ type ActionTypes =
     | StartRequestAction
     | StopRequestAction
     | FetchPlayersAction
-    | FetchPostsAction;
+    | FetchPostsAction
+    | FilterByTagAction
+    | ResfreshPostsAction;
 
 export {
     RootState,
     IAppState,
+    IFilterByTag,
     Player,
     Gun,
     Post,
@@ -105,6 +127,10 @@ export {
     ActionTypes,
     RelatedPlayer,
     FetchPostsAction,
+    FilterByTagAction,
+    ResfreshPostsAction,
+    REFRESH_POSTS,
+    FILTER_BY_TAG,
     FETCH_PLAYERS_DATA,
     START_REQUEST,
     STOP_REQUEST,

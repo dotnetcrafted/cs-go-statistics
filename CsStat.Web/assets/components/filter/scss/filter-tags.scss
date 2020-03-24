@@ -1,0 +1,22 @@
+.filter {
+    margin: 0 0 24px 0;
+
+    &__list {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        max-width: 900px;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        display: block;
+        padding: 0 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
