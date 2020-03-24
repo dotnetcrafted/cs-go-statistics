@@ -167,7 +167,7 @@ namespace CsStat.Web.Controllers
                                 Adr = 0.0,
                                 Ud = 0.0
                             }).ToList()
-                        }).ToList()
+                        }).OrderByDescending(x => x.Title).ToList()
                     }).ToList()
                 };
 
