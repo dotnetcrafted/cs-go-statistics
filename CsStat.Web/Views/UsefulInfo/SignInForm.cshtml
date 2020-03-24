@@ -1,5 +1,3 @@
-@using Microsoft.Ajax.Utilities
-
 @model string
 
 @using (Html.BeginForm("SignIn", "SignIn"))
@@ -10,7 +8,7 @@
         <label for="password">Password</label>
         <input type="password" name="password" id="Password"> <br />
         <input type="submit" value="Sign In" />
-        @if (!Model.IsNullOrWhiteSpace())
+        @if (!string.IsNullOrWhiteSpace(Model))
         {
             <p>@Model</p>
         }

@@ -1,4 +1,5 @@
-
+@using CsStat.Web.Helpers
+@inject HtmlHelperExtensions Helper
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +19,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter-Strike Statistics</title>
-    <link rel="stylesheet" href='@Html.GetFileWebPath("vendors.css")'>
-    <link rel="stylesheet" href='@Html.GetFileWebPath("app.css")'>
+    <link rel="stylesheet" href='@Helper.GetFileWebPath("vendors.css")'>
+    <link rel="stylesheet" href='@Helper.GetFileWebPath("app.css")'>
     <link href="/dist/favicon/favicon.ico" type="image/x-icon" rel="icon" />
 </head>
 <body>
     @RenderBody()
-    <script src='@Html.GetFileWebPath("vendors.js")' defer></script>
-    <script src='@Html.GetFileWebPath("app.js")' defer></script>
+    <script src='@Helper.GetFileWebPath("vendors.js")' defer></script>
+    <script src='@Helper.GetFileWebPath("app.js")' defer></script>
 </body>
 </html>
