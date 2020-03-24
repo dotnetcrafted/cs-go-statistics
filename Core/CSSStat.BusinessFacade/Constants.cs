@@ -19,6 +19,7 @@
             public const string Sapper = "12";
             public const string Bomberman = "13";
             public const string Samurai = "14";
+            public const string Pacifist = "15";
         }
 
         public static class ImagesName

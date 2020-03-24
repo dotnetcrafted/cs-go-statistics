@@ -250,6 +250,9 @@ namespace BusinessFacade.Repositories.Implementations
             playersStats.Where(x => x.Defuse > 0).OrderByDescending(x => x.Defuse).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Sapper));
 
+            playersStats.Where(x => x.Kills > 0).OrderBy(x => x.Kills).ThenByDescending(x=>x.Deaths).FirstOrDefault()?
+                .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Pacifist));
+
             playerStats = playersStats.Where(x => x.KnifeKills > 0).OrderByDescending(x => x.KnifeKills).FirstOrDefault();
             playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai).ChangeDescription(playerStats.KnifeKills));
         }
