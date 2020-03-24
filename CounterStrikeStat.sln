@@ -5,11 +5,6 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSStat.WebApp.Tests", "CSStat.WebApp.Tests\CSStat.WebApp.Tests.csproj", "{B6068993-5F2C-482C-ADBA-C2A3B9DFD6B5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D} = {851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{B998A3BB-4A41-4496-B6EE-504A863EBBD2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFile.Reader", "Utils\ReadFile.Reader\ReadFile.Reader.csproj", "{576C1CBA-54B8-434A-BB08-5D3AE5061833}"
@@ -36,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsStat.SystemFacade", "Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFile.ReadDemo", "Utils\ReadFile.ReadDemo\ReadFile.ReadDemo.csproj", "{4B581EBB-472B-49A3-BB48-0010E1AF1D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStat.Web", "CsStat.Web\CsStat.Web.csproj", "{8BF54175-DFD2-41AD-80FD-B8C962170293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsStat.Web", "CsStat.Web\CsStat.Web.csproj", "{8BF54175-DFD2-41AD-80FD-B8C962170293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6068993-5F2C-482C-ADBA-C2A3B9DFD6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6068993-5F2C-482C-ADBA-C2A3B9DFD6B5}.OnlyWeb|Any CPU.ActiveCfg = Release|Any CPU
-		{B6068993-5F2C-482C-ADBA-C2A3B9DFD6B5}.OnlyWeb|Any CPU.Build.0 = Release|Any CPU
-		{B6068993-5F2C-482C-ADBA-C2A3B9DFD6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{576C1CBA-54B8-434A-BB08-5D3AE5061833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{576C1CBA-54B8-434A-BB08-5D3AE5061833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{576C1CBA-54B8-434A-BB08-5D3AE5061833}.OnlyWeb|Any CPU.ActiveCfg = Release|Any CPU
@@ -123,8 +114,8 @@ Global
 		{4B581EBB-472B-49A3-BB48-0010E1AF1D33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8BF54175-DFD2-41AD-80FD-B8C962170293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8BF54175-DFD2-41AD-80FD-B8C962170293}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BF54175-DFD2-41AD-80FD-B8C962170293}.OnlyWeb|Any CPU.ActiveCfg = OnlyWeb|Any CPU
-		{8BF54175-DFD2-41AD-80FD-B8C962170293}.OnlyWeb|Any CPU.Build.0 = OnlyWeb|Any CPU
+		{8BF54175-DFD2-41AD-80FD-B8C962170293}.OnlyWeb|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF54175-DFD2-41AD-80FD-B8C962170293}.OnlyWeb|Any CPU.Build.0 = Release|Any CPU
 		{8BF54175-DFD2-41AD-80FD-B8C962170293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF54175-DFD2-41AD-80FD-B8C962170293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

@@ -1,76 +1,72 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using CsStat.Domain;
+﻿using CsStat.Domain;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 
 namespace CsStat.Web
 {
     public class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterRoutes(IRouteBuilder routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.LowercaseUrls = true;
-
             routes.MapRoute
             (
                 name: "getrepository",
-                url: Settings.PlayersDataApiPath,
-                defaults: new { controller = "Home", action = "GetRepository", id = UrlParameter.Optional }
+                template: Settings.PlayersDataApiPath,
+                defaults: new { controller = "Home", action = "GetRepository"}
             );
 
             routes.MapRoute
             (
                 name: "playerstat",
-                url: Settings.PlayerStatApiPath,
-                defaults: new { controller = "HangoutBot", action = "GetPlayerStat", id = UrlParameter.Optional }
+                template: Settings.PlayerStatApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetPlayerStat" }
             );
 
             routes.MapRoute
             (
                 name: "playerslist",
-                url: Settings.PlayersListApiPath,
-                defaults: new { controller = "HangoutBot", action = "GetPlayerList", id = UrlParameter.Optional }
+                template: Settings.PlayersListApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetPlayerList" }
             );
 
             //don't remove: custom admin
             //routes.MapRoute
             //(
             //    name: "Admin",
-            //    url: "Admin",
-            //    defaults: new { controller = "SignIn", action = "SignIn", id = UrlParameter.Optional }
+            //    template: "Admin",
+            //    defaults: new { controller = "SignIn", action = "SignIn" }
             //);
 
             routes.MapRoute
             (
                 name: "Admin",
-                url: "Admin",
-                defaults: new { controller = "SignIn", action = "Admin", id = UrlParameter.Optional }
+                template: "Admin",
+                defaults: new { controller = "SignIn", action = "Admin" }
             );
 
             routes.MapRoute
             (
                 name: "getinfo",
-                url: Settings.WikiDataApiPath,
-                defaults: new { controller = "Wiki", action = "GetAllArticlesFromCms", id = UrlParameter.Optional }
+                template: Settings.WikiDataApiPath,
+                defaults: new { controller = "Wiki", action = "GetAllArticlesFromCms" }
             );
 
             routes.MapRoute(
                 name: "wiki",
-                url: Settings.WikiPagePath,
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                template: Settings.WikiPagePath,
+                defaults: new { controller = "Home", action = "Index" }
             );
 
             routes.MapRoute(
                 name: "serverinfo",
-                url: Settings.ServerInfoDataApiPath,
-                defaults: new { controller = "HangoutBot", action = "ServerInfo", id = UrlParameter.Optional }
+                template: Settings.ServerInfoDataApiPath,
+                defaults: new { controller = "HangoutBot", action = "ServerInfo" }
             );
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Home", action = "Index" }
             );
         }
     }
