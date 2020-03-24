@@ -87,9 +87,10 @@ export interface MatchDetails extends BaseMatch {
 
 export interface MatchRound {
     id: number,
-    tScore: number, // 1
-    ctScore: number, // 0
-    reason: number, // 2 - bomb planted, etc
+    tScore: number,
+    ctScore: number,
+    reason: number,
+    reasonTitle: string,
     squads: MatchDetailsSquad[],
     kills: MatchDetailsKill[],
 }
@@ -118,7 +119,7 @@ export interface MatchDetailsKill {
     killer: string,
     victim: string,
     assister: string,
-    weapon: string,
+    weapon: number,
     time: number,
     isHeadshot: boolean, 
     isSuicide: boolean,

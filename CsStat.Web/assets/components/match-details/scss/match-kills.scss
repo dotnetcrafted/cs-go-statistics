@@ -33,7 +33,13 @@
     }
 
     &__weapon {
-        max-height: 16px;
+        max-height: 20px;
+        object-fit: contain;
+    }
+
+    &__headshot,
+    &__suicide {
+        max-height: 24px;
         object-fit: contain;
     }
 }

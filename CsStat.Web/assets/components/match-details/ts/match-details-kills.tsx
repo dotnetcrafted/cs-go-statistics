@@ -4,6 +4,7 @@ import {
     MatchDetailsSquadPlayer,
     MatchDetailsKill
 } from 'general/ts/redux/types';
+import { getWeaponById, getIconByName } from 'project/helpers';
 
 export class MatchDetailsKills extends React.Component<any, {}> {
     getPlayerById(id: string) {
@@ -14,13 +15,9 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         let foundPlayer: MatchDetailsSquadPlayer | undefined;
 
         round.squads.forEach((squad: MatchDetailsSquad) => {
-            const team = squad.title;
             squad.players.forEach((player: MatchDetailsSquadPlayer) => {
                 if (player.id.toString() === id.toString()) {
-                    foundPlayer = {
-                        ...player,
-                        team
-                    };
+                    foundPlayer = player;
                 }
             });
         });
@@ -33,7 +30,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
         if (!player) return null;
 
-        const playerCss = player.team === 'Team A' ? 'color-t-primary' : 'color-ct-primary';
+        const playerCss = player.team === 'Terrorist' ? 'color-t-primary' : 'color-ct-primary';
 
         return <span className={`match-kills__player ${playerCss}`}>{player.name}</span>
     }
@@ -43,50 +40,93 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
         return (
             <>
-                &nbsp;<b>+</b>&nbsp;
+                &nbsp;<b>+</b>&nbsp; 
                 {this.renderPlayer(kill.assister)}
             </>
         );
     }
 
-    renderWeapon() {
+    renderWeapon(id: number) {
+        const weapon  = getWeaponById(id);
+
+        if (!weapon) return 'unknown weapon';
+
         return <img
             className="match-kills__weapon"
-            src='https://admin.csfuse8.site/uploads/4f940096703b4100b751a9127c1acea4.png'
-            alt=""
+            src={weapon.iconUrl}
+            alt={weapon.name}
+            title={weapon.name}
         />;
     }
 
-    renderPenetrationIcon(kill: MatchDetailsKill) {
-        if (!kill.isPenetrated) return null
+    renderPenetrationIcon(isPenetrated: boolean) {
+        if (!isPenetrated) return null;
+
+        const penetratedIcon = getIconByName('penetratedIcon');
+
+        if (!penetratedIcon) return 'penetrated';
 
         return (
             <>
-                &nbsp;
-                PROSTREL
+                <img
+                    className="match-kills__penetrated"
+                    src={penetratedIcon.url}
+                    alt={'penetrated'}
+                    title={'Damage incomed through obstacles'}
+                />
             </>
         );
     }
 
-    renderHeadshotIcon(kill: MatchDetailsKill) {
-        if (!kill.isHeadshot) return null;
+    renderHeadshotIcon(isHeadshot: boolean) {
+        if (!isHeadshot) return null;
+
+        const headshotIcon = getIconByName('headShotIcon');
+
+        if (!headshotIcon) return 'headshot'
 
         return (
             <>
-                &nbsp;
-                HEADSHOT
+                <img
+                    className="match-kills__headshot"
+                    src={headshotIcon.url}
+                    alt={'headshot'}
+                    title={'Damage incomed right in the head'}
+                />
+            </>
+        );
+    }
+
+    renderSuicideIcon(isSuicide: boolean) {
+        if (!isSuicide) return null;
+
+        const suicideIcon = getIconByName('suicideIcon');
+
+        if (!suicideIcon) return 'suicide';
+
+        return (
+            <>
+                <img
+                    className="match-kills__suicide"
+                    src={suicideIcon.url}
+                    alt={'suicide'}
+                    title={'Emo'}
+                />
             </>
         );
     }
 
     renderTime(time: number) {
-        if (Math.ceil(time/60) < 0) {
-            return `0:${time}`;
+        const minutes = Math.floor(time/60);
+        const formattedMinutes = minutes < 0 ? '0': minutes;
+        const seconds = time - (minutes * 60);
+        let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+        
+        if (seconds === 0) {
+            formattedSeconds = '00';
         }
 
-        const minutes = Math.floor(time/60);
-
-        return `${minutes}:${time - (minutes * 60)}`;
+        return `${formattedMinutes}:${formattedSeconds}`;
     }
 
     render() {
@@ -105,9 +145,10 @@ export class MatchDetailsKills extends React.Component<any, {}> {
                                         {this.renderPlayer(kill.killer)}
                                         {this.renderAssister(kill)}
                                         &nbsp;
-                                        {this.renderWeapon()}
-                                        {this.renderPenetrationIcon(kill)}
-                                        {this.renderHeadshotIcon(kill)}
+                                        {!kill.isSuicide && this.renderWeapon(kill.weapon)}
+                                        {this.renderPenetrationIcon(kill.isPenetrated)}
+                                        {this.renderHeadshotIcon(kill.isHeadshot)}
+                                        {this.renderSuicideIcon(kill.isSuicide)}
                                         &nbsp;
                                         {this.renderPlayer(kill.victim)}
                                     </span>

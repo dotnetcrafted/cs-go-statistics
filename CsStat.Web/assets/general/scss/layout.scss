@@ -55,3 +55,14 @@ html {
 .color-ct-primary {
     color: $color-ct-primary;
 }
+
+.of-cover {
+    & > img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

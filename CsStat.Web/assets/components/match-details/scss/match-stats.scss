@@ -8,5 +8,9 @@
 
     &__table {
         background-color: #F5F5F5;
+
+        .ant-table-tbody .ant-table-row td {
+            padding: 5px 10px;
+        }
     }
 }

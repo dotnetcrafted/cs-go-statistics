@@ -1,4 +1,5 @@
 import React from 'react';
+import { getIconByName } from 'project/helpers';
 import { MatchRound } from 'general/ts/redux/types';
 
 interface MatchDetailsRoundsProps {
@@ -13,11 +14,19 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
 
         return false;
     }
+
+    renderReasonIcon(reason: string) {
+        const reasonIcon = getIconByName(reason);
+
+        if (!reasonIcon) return reason;
+
+        return <img className="match-details-rounds__icon" src={reasonIcon.url} alt={reason} title={reason} />
+    }
    
     renderEmptyRound(roundIndex: number) {
         return (
             <li className="match-details-rounds__li" key={roundIndex}>
-                <a className={`match-details-rounds__col`} href="#">
+                <a className={`match-details-rounds__col`}>
                     <div className={`match-details-rounds__cell match-details-rounds__cell--top`}></div>
                     <div className="match-details-rounds__cell match-details-rounds__cell--mid">{roundIndex}</div>
                     <div className={`match-details-rounds__cell match-details-rounds__cell--bottom`}>                    </div>
@@ -36,18 +45,17 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
         return (
             <li className="match-details-rounds__li" key={round.id}>
                 <a className={`match-details-rounds__col ${colCss}`}
-                    href="#"
                     onClick={(event) => {
                         event.preventDefault();
                         selectRound(round.id)
                     }}
                 >
                     <div className={`match-details-rounds__cell match-details-rounds__cell--top ${topCss}`}>
-                        {isAttackReason && round.reason}
+                        {isAttackReason && this.renderReasonIcon(round.reasonTitle)}
                     </div>
                     <div className="match-details-rounds__cell match-details-rounds__cell--mid">{round.id}</div>
                     <div className={`match-details-rounds__cell match-details-rounds__cell--bottom ${bottomCss}`}>
-                        {!isAttackReason && round.reason}
+                        {!isAttackReason && this.renderReasonIcon(round.reasonTitle)}
                     </div>
                 </a>
             </li>

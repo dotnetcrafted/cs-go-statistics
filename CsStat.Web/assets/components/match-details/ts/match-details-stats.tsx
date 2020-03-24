@@ -48,6 +48,7 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
                 round.squads.map((squad) => {
                     return (
                         <div className="match-stats__col" key={squad.title}>
+                            <h3 className="match__team">{squad.title}</h3>
                             <Table
                                 className="match-stats__table"
                                 rowKey={(record) => record.id}
