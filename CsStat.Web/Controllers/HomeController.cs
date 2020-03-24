@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CSStat.CsLogsApi.Extensions;
-using CsStat.Domain;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
-using Microsoft.Ajax.Utilities;
-using MongoDB.Driver;
 
 
 namespace CsStat.Web.Controllers
@@ -20,20 +15,16 @@ namespace CsStat.Web.Controllers
     public class HomeController : BaseController
     {
         private static IPlayerRepository _playerRepository;
-        private static IDemoRepository _demoRepository;
         private static ISteamApi _steamApi;
 
-        public HomeController(IPlayerRepository playerRepository, IDemoRepository demoRepository)
+        public HomeController(IPlayerRepository playerRepository)
         {
             _playerRepository = playerRepository;
-            _demoRepository = demoRepository;
             _steamApi = new SteamApi();
+            
         }
         public ActionResult Index()
-        {
-            var a = Settings.ToJson();
-
-            return View();
+        { return View();
         }
 
         [HttpGet]

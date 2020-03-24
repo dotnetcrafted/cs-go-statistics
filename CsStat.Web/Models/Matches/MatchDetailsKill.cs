@@ -1,4 +1,6 @@
-﻿namespace CsStat.Web.Models.Matches
+﻿using CsStat.Domain.Definitions;
+
+namespace CsStat.Web.Models.Matches
 {
     public class MatchDetailsKill
     {
@@ -6,7 +8,7 @@
         public string Killer { get; set; } // MatchDetailsSquadPlayer id
         public string Victim { get; set; } // MatchDetailsSquadPlayer id,
         public string Assister { get; set; } // MatchDetailsSquadPlayer id
-        public WeaponViewModel Weapon { get; set; } // "USP-S"
+        public Weapons Weapon { get; set; } // "USP-S"
         public bool IsHeadshot { get; set; }
         public bool IsSuicide { get; set; }
         public int Time { get; set; }

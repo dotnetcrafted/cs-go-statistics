@@ -138,16 +138,7 @@ namespace CsStat.Web.Controllers
                                         Killer = player.SteamID.ToString(),
                                         Victim = kill.Victim?.ToString(),
                                         Assister = kill.Assister?.ToString(),
-                                        Weapon = new WeaponViewModel
-                                        {
-                                            Id = (int) kill.Weapon,
-                                            IconUrl = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Icon
-                                                .FullUrl,
-                                            ImageUrl = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Image
-                                                .FullUrl,
-                                            Name = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Name,
-                                            Type = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Type.Name,
-                                        },
+                                        Weapon = kill.Weapon,
                                         IsSuicide = kill.IsSuicide,
                                         IsHeadshot = kill.IsHeadshot,
                                         Time = kill.Time,

@@ -1,4 +1,9 @@
 @using CsStat.Domain
+@using CsStat.StrapiApi
+@using CsStat.SystemFacade.Extensions
+@using CsStat.Web.Models
+
+
 <div data-dc-component-app data-dc-app-options='{
      "playersDataUrl": "@Settings.PlayersDataApiPath",
      "WikiDataApiPath": "@Settings.WikiDataApiPath",
@@ -6,7 +11,25 @@
      }'></div>
 <script>
     appState = {
-        apiPaths: @Html.Raw(Settings.ToJson())
+        apiPaths: @Html.Raw(Settings.ToJson()),
+
+        icons: @Html.Raw(new StrapiApi().GetAllImages()?
+                   .Select(icon => new ImageViewModel
+                   {
+                       Name = icon.CodeName,
+                       Url = icon.Image.FullUrl
+
+                   }).ToJson()),
+
+        weapons: @Html.Raw(new StrapiApi().GetAllWeapons()?.
+                     Select(weapon => new WeaponViewModel
+                     {
+                         Id = weapon.Id,
+                         Name = weapon.Name,
+                         IconUrl = weapon.Icon.FullUrl,
+                         ImageUrl = weapon.Image.FullUrl,
+                         Type = weapon.Type.Name
+                     }).ToJson(false, true)),
     }
 </script>
 
