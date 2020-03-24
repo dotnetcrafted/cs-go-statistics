@@ -3,7 +3,6 @@
     public class MatchDetailsKill
     {
         public int Id { get; set; }
-        public string FormattedTime { get; set; } // 0:28
         public string Killer { get; set; } // MatchDetailsSquadPlayer id
         public string Victim { get; set; } // MatchDetailsSquadPlayer id,
         public string Assister { get; set; } // MatchDetailsSquadPlayer id

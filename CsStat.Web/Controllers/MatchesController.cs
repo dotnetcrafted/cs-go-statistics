@@ -135,7 +135,6 @@ namespace CsStat.Web.Controllers
                                     .Select((kill, index) => new MatchDetailsKill
                                     {
                                         Id = index,
-                                        FormattedTime = "0",
                                         Killer = player.SteamID.ToString(),
                                         Victim = kill.Victim?.ToString(),
                                         Assister = kill.Assister?.ToString(),

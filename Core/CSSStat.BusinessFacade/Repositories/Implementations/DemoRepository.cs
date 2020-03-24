@@ -26,7 +26,8 @@ namespace BusinessFacade.Repositories.Implementations
                     nameof(DemoLog.MatchDate), 
                     nameof(DemoLog.Map), 
                     nameof(DemoLog.TotalSquadAScore), 
-                    nameof(DemoLog.TotalSquadBScore)))
+                    nameof(DemoLog.TotalSquadBScore),
+                    nameof(DemoLog.Duration)))
                 .OrderByDescending(x => x.MatchDate)
                 .ToList();
         }
