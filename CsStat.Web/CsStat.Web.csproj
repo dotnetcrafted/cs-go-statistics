@@ -163,6 +163,7 @@
     <Compile Include="Controllers\HangoutBotController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Matches\PlayerStatByRound.cs" />
     <Compile Include="Models\Matches\BaseMatch.cs" />
     <Compile Include="Controllers\ServerInfoController.cs" />
     <Compile Include="Controllers\SignInController.cs" />

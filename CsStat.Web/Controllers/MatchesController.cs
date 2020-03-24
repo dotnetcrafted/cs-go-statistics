@@ -10,6 +10,7 @@ using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
+using Microsoft.Ajax.Utilities;
 
 namespace CsStat.Web.Controllers
 {
@@ -98,6 +99,18 @@ namespace CsStat.Web.Controllers
 
                 var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
                 var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
+
+                var playerStatByRounds = match.Rounds.SelectMany(round => round.Squads.SelectMany(squad =>
+                    squad.Players.Select(player =>
+                        new PlayerStatByRound
+                        {
+                            RoundNumber = round.RoundNumber,
+                            SteamId = player.SteamID,
+                            Kills = player.Kills.Count,
+                            Assists = player.Assists.Count,
+                            Death = player.Deaths.Count
+                        }))).ToList();
+
                 var matchDetails = new MatchDetails
                 {
                     Id = match.Id,
@@ -115,7 +128,7 @@ namespace CsStat.Web.Controllers
                         Reason = (int) round.Reason,
                         ReasonTitle = round.ReasonTitle,
                         Duration = round.Duration,
-                        ReasonIconUrl = images.FirstOrDefault(x=>x.CodeName == round.ReasonTitle)?.Image.FullUrl,
+                        ReasonIconUrl = images.FirstOrDefault(x => x.CodeName == round.ReasonTitle)?.Image.FullUrl,
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills
@@ -128,18 +141,20 @@ namespace CsStat.Web.Controllers
                                         Assister = kill.Assister?.ToString(),
                                         Weapon = new WeaponViewModel
                                         {
-                                            Id = (int)kill.Weapon,
-                                            IconUrl = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Icon.FullUrl,
-                                            ImageUrl = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Image.FullUrl,
-                                            Name = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Name,
-                                            Type = _weapons.FirstOrDefault(x=>x.Id == (int)kill.Weapon)?.Type.Name,
+                                            Id = (int) kill.Weapon,
+                                            IconUrl = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Icon
+                                                .FullUrl,
+                                            ImageUrl = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Image
+                                                .FullUrl,
+                                            Name = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Name,
+                                            Type = _weapons.FirstOrDefault(x => x.Id == (int) kill.Weapon)?.Type.Name,
                                         },
                                         IsSuicide = kill.IsSuicide,
                                         IsHeadshot = kill.IsHeadshot,
                                         Time = kill.Time,
                                         IsPenetrated = kill.IsPenetrated
                                     })
-                                )).OrderBy(x=>x.Time).ToList(),
+                                )).OrderBy(x => x.Time).ToList(),
                         Squads = round.Squads.Select((squad, index) => new MatchDetailsSquad
                         {
                             Id = index,
@@ -149,9 +164,15 @@ namespace CsStat.Web.Controllers
                                 Id = player.SteamID.ToString(),
                                 Name = player.Name,
                                 SteamImage = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value,
-                                Kills = player.Kills.Count,
-                                Deaths = player.Deaths.Count,
-                                Assists = player.Assists.Count,
+                                Kills = playerStatByRounds
+                                    .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
+                                    .Sum(t => t.Kills),
+                                Deaths = playerStatByRounds
+                                    .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
+                                    .Sum(t => t.Death),
+                                Assists = playerStatByRounds
+                                    .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
+                                    .Sum(t => t.Assists),
                                 Adr = 0.0,
                                 Ud = 0.0
                             }).ToList()
