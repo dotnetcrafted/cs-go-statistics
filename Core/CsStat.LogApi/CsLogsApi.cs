@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using BusinessFacade.Repositories;
-using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using CsStat.LogApi.Interfaces;
-using DataService;
 using ErrorLogger;
 
 namespace CsStat.LogApi
@@ -21,14 +19,11 @@ namespace CsStat.LogApi
         private static IPlayerRepository _playerRepository;
         private static ILogger _logger;
         private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
-        public CsLogsApi()
+        public CsLogsApi(IPlayerRepository playerRepository, ILogger logger)
         {
-            var connectionString = new ConnectionStringFactory();
-            var mongoRepository = new MongoRepositoryFactory(connectionString);
-            var strapi = new StrapiApi.StrapiApi();
             _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
-            _playerRepository = new PlayerRepository(mongoRepository, strapi);
-            _logger = new Logger(mongoRepository);
+            _playerRepository = playerRepository;
+            _logger = logger;
         }
         public List<Log> ParseLogs(List<string> logs)
         {
