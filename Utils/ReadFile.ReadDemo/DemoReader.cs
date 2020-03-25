@@ -167,7 +167,7 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_PlayerHurt(object sender, PlayerHurtEventArgs e)
         {
-            if (!_matchStarted && e.Attacker == null || e.Player == null)
+            if (!_matchStarted || e.Attacker == null || e.Player == null)
                 return;
 
             var attakersTeam = GetParticipants(_participants, _parser.Participants)
