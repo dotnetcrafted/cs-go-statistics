@@ -171,7 +171,7 @@ namespace CsStat.Web.Controllers
                                 Ud = playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                    x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.UtilityDamage)
-                            }).ToList()
+                            }).OrderByDescending(player => player.Kd).ToList()
                         }).OrderBy(x => x.Title).ToList()
                     }).ToList()
                 };
