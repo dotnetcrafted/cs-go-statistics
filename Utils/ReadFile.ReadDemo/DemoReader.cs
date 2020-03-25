@@ -17,6 +17,8 @@ namespace ReadFile.ReadDemo
 {
     public class DemoReader : BaseWatcher
     {
+        private const int FullHP = 100;
+
         private const string SuqadA = "Team A";
         private const string SuqadB = "Team B";
         private const int SwapRoundNumber = 15;
@@ -165,24 +167,32 @@ namespace ReadFile.ReadDemo
 
         private static void Parser_PlayerHurt(object sender, PlayerHurtEventArgs e)
         {
-            if (!_matchStarted)
+            if (!_matchStarted && e.Attacker == null || e.Player == null)
                 return;
 
-            if (e.Player == null || e.Attacker == null)
-                return;
-
-            var attakersTeam = _participants.FirstOrDefault(x => x.SteamID == e.Attacker.SteamID)?.Team;
-            var victimsTeam = _participants.FirstOrDefault(x => x.SteamID == e.Player.SteamID)?.Team;
+            var attakersTeam = GetParticipants(_participants, _parser.Participants)
+                .FirstOrDefault(x => x.SteamID == e.Attacker.SteamID)?.Team;
+            var victimsTeam = GetParticipants(_participants, _parser.Participants)
+                .FirstOrDefault(x => x.SteamID == e.Player.SteamID)?.Team;
 
             if (attakersTeam == victimsTeam) // attacked teammate
+                return;
+
+            var givenDamage = _playerDamageStat.Where(damage => damage.RoundNumber == _currentRoundNumber &&
+                                                                damage.Attacker == e.Attacker.SteamID &&
+                                                                damage.Victim == e.Player.SteamID)
+                .Sum(x => x.HealthDamage);
+
+            if (givenDamage >= 100)
                 return;
 
             _playerDamageStat.Add(new Damage
             {
                 RoundNumber = _currentRoundNumber,
                 Weapon = EquipmentMapper.Map(e.Weapon.Weapon),
-                SteamId = e.Attacker.SteamID,
-                HealthDamage = e.HealthDamage,
+                Attacker = e.Attacker.SteamID,
+                Victim = e.Player.SteamID,
+                HealthDamage = e.HealthDamage + givenDamage <= FullHP ? e.HealthDamage : FullHP - givenDamage,
                 ArmorDamage = e.ArmorDamage
             });
         }
@@ -282,7 +292,7 @@ namespace ReadFile.ReadDemo
 
         private static List<DamageLog> GetDamage(IEnumerable<Damage> stat, long steamId, int roundNumber = 0)
         {
-            var query = stat.Where(x => x.SteamId == steamId);
+            var query = stat.Where(x => x.Attacker == steamId);
             if (roundNumber != 0)
                 query = query.Where(x => x.RoundNumber == roundNumber);
 

@@ -17,7 +17,8 @@ namespace ReadFile.ReadDemo.Model
         };
 
         public int RoundNumber { get; set; }
-        public long SteamId { get; set; }
+        public long Attacker { get; set; }
+        public long Victim { get; set; }
         public int HealthDamage { get; set; }
         public int ArmorDamage { get; set; }
         public Weapons Weapon { get; set; }
