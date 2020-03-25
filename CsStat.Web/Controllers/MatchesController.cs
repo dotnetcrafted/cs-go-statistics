@@ -164,9 +164,10 @@ namespace CsStat.Web.Controllers
                                 Assists = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.Assists),
-                                Adr = Math.Round(playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
-                                                                               x.RoundNumber <= round.RoundNumber)
-                                                     .Sum(t => t.Damage) / (double) round.RoundNumber, 0),
+                                Adr = Convert.ToInt32(Math.Floor(
+                                    playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
+                                                                  x.RoundNumber <= round.RoundNumber)
+                                        .Sum(t => t.Damage) / (double) round.RoundNumber)),
                                 Ud = playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                    x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.UtilityDamage)
