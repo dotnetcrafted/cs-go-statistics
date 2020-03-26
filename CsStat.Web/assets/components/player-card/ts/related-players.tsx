@@ -15,14 +15,14 @@ const RelatedPlayers: SFC<RelatedPlayersProps> = (props) => {
         <div className="related-players">
             {data &&
                 data.map((item) => (
-                    <div key={item.Name} className="related-players__item" onClick={() => onPlayerSelect(item.Name)}>
-                        <Tooltip title={item.Name}>
-                            <Badge count={item.Count} overflowCount={9999} style={theme(killerType)}>
+                    <div key={item.name} className="related-players__item" onClick={() => onPlayerSelect(item.name)}>
+                        <Tooltip title={item.name}>
+                            <Badge count={item.count} overflowCount={9999} style={theme(killerType)}>
                                 <Avatar
                                     size={48}
                                     shape="square"
                                     className="related-players__avatar"
-                                    src={item.ImagePath}
+                                    src={item.imagePath}
                                 />
                             </Badge>
                         </Tooltip>

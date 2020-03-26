@@ -2,7 +2,7 @@ import { RouterState } from 'connected-react-router';
 
 interface IAppState {
     IsLoading: boolean;
-    Players: Player[];
+    players: Player[];
     Posts: Post[];
 }
 
@@ -12,59 +12,59 @@ type RootState = {
 }
 
 type Player = {
-    Id: string;
-    Name: string;
-    ImagePath: string;
-    Points: number;
-    Kills: number;
-    Deaths: number;
-    Assists: number;
-    FriendlyKills: number;
-    KillsPerGame: number;
-    AssistsPerGame: number;
-    DeathsPerGame: number;
-    DefusedBombs: number;
-    ExplodedBombs: number;
-    TotalGames: number;
-    HeadShot: number;
-    KdRatio: number;
-    KdDif: number;
-    Kad: string;
-    Achievements: Achievement[];
-    Victims: RelatedPlayer[];
-    Killers: RelatedPlayer[];
-    Guns: Gun[];
+    id: string;
+    name: string;
+    imagePath: string;
+    points: number;
+    kills: number;
+    deaths: number;
+    assists: number;
+    friendlyKills: number;
+    killsPerGame: number;
+    assistsPerGame: number;
+    deathsPerGame: number;
+    defusedBombs: number;
+    explodedBombs: number;
+    totalGames: number;
+    headShot: number;
+    kdRatio: number;
+    kdDif: number;
+    kad: string;
+    achievements: Achievement[];
+    victims: RelatedPlayer[];
+    killers: RelatedPlayer[];
+    guns: Gun[];
 };
 
 type Achievement = {
-    AchievementId: number;
-    Name: string;
-    Description: string;
-    IconUrl: string;
+    achievementId: number;
+    name: string;
+    description: string;
+    iconUrl: string;
 };
 
 type Gun = {
-    Id: number;
-    Name: string;
-    Kills: number;
+    id: number;
+    name: string;
+    kills: number;
 };
 
 type RelatedPlayer = {
-    Name: string;
-    Count: number;
-    ImagePath: string;
+    name: string;
+    count: number;
+    imagePath: string;
 };
 
 type Post = {
-    Title: string;
-    Content: string;
+    title: string;
+    content: string;
     tags: Tag[];
     createdAt: string;
     updatedAt: string;
 }
 
 type Tag = {
-    Caption: string;
+    caption: string;
 }
 
 export interface Matches {

@@ -84,18 +84,18 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
 
     private getData = (guns: Gun[], colors: Color[]) =>
         guns.map((g) => ({
-            theta: g.Kills,
-            label: g.Name,
-            id: g.Id,
+            theta: g.kills,
+            label: g.name,
+            id: g.id,
             style: {
-                fill: this.findColor(colors, g.Id),
+                fill: this.findColor(colors, g.id),
                 stroke: false
             }
         }));
 
     private getColors = (guns: Gun[]) =>
         guns.map((g) => ({
-            id: g.Id,
+            id: g.id,
             color: randomColor({
                 luminosity: 'bright',
                 hue: 'random'
@@ -104,9 +104,9 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
 
     private getLegend = (guns: Gun[], colors: Color[]) =>
         guns.map((g) => ({
-            title: `${g.Name}: ${g.Kills} kills`,
-            id: g.Id,
-            color: this.findColor(colors, g.Id)
+            title: `${g.name}: ${g.kills} kills`,
+            id: g.id,
+            color: this.findColor(colors, g.id)
         }));
 
     private setStateForImage = (id: number) => {
@@ -126,8 +126,8 @@ class GunsChart extends React.Component<GunsChartProps, GunsChartState> {
     };
 
     private findGunName = (guns: Gun[], id: number) => {
-        const gunObj = guns.find((g) => g.Id === id);
-        return gunObj ? gunObj.Name : '';
+        const gunObj = guns.find((g) => g.id === id);
+        return gunObj ? gunObj.name : '';
     };
 }
 

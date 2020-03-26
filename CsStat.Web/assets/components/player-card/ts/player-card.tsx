@@ -20,7 +20,7 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
     const { PlayerId } = search;
 
     const onRelatedPlayerSelect = (name: string) => {
-        const id = getIdByName(name, props.Players);
+        const id = getIdByName(name, props.players);
         if (!id) {
             throw new Error('No players found with this Name');
         }
@@ -30,40 +30,40 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
         });
     };
 
-    if (typeof PlayerId === 'string' && props.Players.length > 0) {
-        const model = _getPlayerViewModel(PlayerId, props.Players);
+    if (typeof PlayerId === 'string' && props.players.length > 0) {
+        const model = _getPlayerViewModel(PlayerId, props.players);
         if (model) {
-            const gunsToShow: Gun[] = model.Guns && [...model.Guns].slice(0, VISIBLE_GUNS);
+            const gunsToShow: Gun[] = model.guns && [...model.guns].slice(0, VISIBLE_GUNS);
 
             return (
                 <Card className="player-card">
                     <Meta
                         className="player-card__meta"
-                        avatar={renderAvatar(model.ImagePath)}
-                        title={<Title level={2}>{model.Name}</Title>}
-                        description={<Achievements data={model.Achievements} />}
+                        avatar={renderAvatar(model.imagePath)}
+                        title={<Title level={2}>{model.name}</Title>}
+                        description={<Achievements data={model.achievements} />}
                     />
                     <Divider orientation="left">Player's Statistics</Divider>
                     <Descriptions>
-                        <Descriptions.Item label="Kills">{model.Kills}</Descriptions.Item>
-                        <Descriptions.Item label="Deaths">{model.Deaths}</Descriptions.Item>
-                        <Descriptions.Item label="Assists">{model.Assists}</Descriptions.Item>
-                        <Descriptions.Item label="HeadShots">{utils.getHeadshotsString(model.HeadShot, model.Kills)}</Descriptions.Item>
-                        <Descriptions.Item label="Defused Bombs">{model.DefusedBombs}</Descriptions.Item>
-                        <Descriptions.Item label="Exploded Bombs">{model.ExplodedBombs}</Descriptions.Item>
-                        <Descriptions.Item label="Kd Ratio">{model.KdRatio}</Descriptions.Item>
-                        <Descriptions.Item label="Kills Per Game">{model.KillsPerGame}</Descriptions.Item>
-                        <Descriptions.Item label="Assists Per Game">{model.AssistsPerGame}</Descriptions.Item>
-                        <Descriptions.Item label="Deaths Per Game">{model.DeathsPerGame}</Descriptions.Item>
-                        <Descriptions.Item label="Friendly Kills">{model.FriendlyKills}</Descriptions.Item>
-                        <Descriptions.Item label="Points">{model.Points}</Descriptions.Item>
+                        <Descriptions.Item label="Kills">{model.kills}</Descriptions.Item>
+                        <Descriptions.Item label="Deaths">{model.deaths}</Descriptions.Item>
+                        <Descriptions.Item label="Assists">{model.assists}</Descriptions.Item>
+                        <Descriptions.Item label="HeadShots">{utils.getHeadshotsString(model.headShot, model.kills)}</Descriptions.Item>
+                        <Descriptions.Item label="Defused Bombs">{model.defusedBombs}</Descriptions.Item>
+                        <Descriptions.Item label="Exploded Bombs">{model.explodedBombs}</Descriptions.Item>
+                        <Descriptions.Item label="Kd Ratio">{model.kdRatio}</Descriptions.Item>
+                        <Descriptions.Item label="Kills Per Game">{model.killsPerGame}</Descriptions.Item>
+                        <Descriptions.Item label="Assists Per Game">{model.assistsPerGame}</Descriptions.Item>
+                        <Descriptions.Item label="Deaths Per Game">{model.deathsPerGame}</Descriptions.Item>
+                        <Descriptions.Item label="Friendly Kills">{model.friendlyKills}</Descriptions.Item>
+                        <Descriptions.Item label="Points">{model.points}</Descriptions.Item>
                     </Descriptions>
                     <Divider orientation="left">{`Top ${VISIBLE_GUNS} Guns Used`}</Divider>
                     {gunsToShow && <GunsChart guns={gunsToShow} />}
-                    <Divider orientation="left">{`${model.Name} has killed them:`}</Divider>
-                    <RelatedPlayers data={model.Victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
-                    <Divider orientation="left">{`They have killed ${model.Name}`}</Divider>
-                    <RelatedPlayers data={model.Killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
+                    <Divider orientation="left">{`${model.name} has killed them:`}</Divider>
+                    <RelatedPlayers data={model.victims} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={false} />
+                    <Divider orientation="left">{`They have killed ${model.name}`}</Divider>
+                    <RelatedPlayers data={model.killers} onRelatedPlayerSelect={onRelatedPlayerSelect} killerType={true} />
                 </Card>
             );
         }
@@ -72,9 +72,9 @@ const PlayerCard: SFC<PlayerCardProps> = (props) => {
 };
 
 const getIdByName = (name: string, players: Player[]): string | undefined => {
-    const player = players.find((player) => player.Name === name);
+    const player = players.find((player) => player.name === name);
     if (player) {
-        return player.Id;
+        return player.id;
     }
 };
 const renderAvatar = (src: string) => {
@@ -84,44 +84,45 @@ const renderAvatar = (src: string) => {
     return <Avatar size={48} shape="square" icon="user" />;
 };
 const _getPlayerViewModel = (id: string, data: Player[]) => {
-    const playersRow = data.filter((item) => item.Id === id)[0];
+    const playersRow = data.filter((item) => item.id === id)[0];
     let model = null;
 
     if (playersRow) {
         model = {
-            Id: playersRow.Id,
-            Name: playersRow.Name,
-            ImagePath: playersRow.ImagePath,
-            Kills: playersRow.Kills,
-            Deaths: playersRow.Deaths,
-            Assists: playersRow.Assists,
-            HeadShot: playersRow.HeadShot,
-            DefusedBombs: playersRow.DefusedBombs,
-            ExplodedBombs: playersRow.ExplodedBombs,
-            KdRatio: playersRow.KdRatio,
-            KillsPerGame: playersRow.KillsPerGame,
-            AssistsPerGame: playersRow.AssistsPerGame,
-            DeathsPerGame: playersRow.DeathsPerGame,
-            FriendlyKills: playersRow.FriendlyKills,
-            Guns: playersRow.Guns,
-            Achievements: playersRow.Achievements,
-            Points: playersRow.Points,
-            Victims: playersRow.Victims,
-            Killers: playersRow.Killers
+            id: playersRow.id,
+            name: playersRow.name,
+            imagePath: playersRow.imagePath,
+            kills: playersRow.kills,
+            deaths: playersRow.deaths,
+            assists: playersRow.assists,
+            headShot: playersRow.headShot,
+            defusedBombs: playersRow.defusedBombs,
+            explodedBombs: playersRow.explodedBombs,
+            kdRatio: playersRow.kdRatio,
+            killsPerGame: playersRow.killsPerGame,
+            assistsPerGame: playersRow.assistsPerGame,
+            deathsPerGame: playersRow.deathsPerGame,
+            friendlyKills: playersRow.friendlyKills,
+            guns: playersRow.guns,
+            achievements: playersRow.achievements,
+            points: playersRow.points,
+            victims: playersRow.victims,
+            killers: playersRow.killers
         };
     }
 
     return model;
 };
+
 type PlayerCardProps = {
     router: any;
-    Players: Player[];
+    players: Player[];
 };
 
 const mapStateToProps = (state: RootState) => {
-    const Players = state.app.Players;
+    const players = state.app.players;
     const router = state.router;
-    return { Players, router };
+    return { players, router };
 };
 export default connect(
     mapStateToProps

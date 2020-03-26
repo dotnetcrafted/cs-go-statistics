@@ -11,7 +11,7 @@ import {
 
 export const initialState: IAppState = {
     IsLoading: false,
-    Players: [],
+    players: [],
     Posts: []
 };
 
@@ -24,7 +24,7 @@ const appReducer: Reducer<IAppState> = (
             return {
                 ...state,
                 IsLoading: false,
-                Players: action.payload.Players
+                players: action.payload.players
             };
         case FETCH_POSTS_DATA:
             return {
