@@ -1,6 +1,6 @@
 ﻿namespace CsStat.Domain.Models
 {
-    public class PlayerModel
+    public class VictimKillerModel
     {
         public string Name { get; set; }
         public string SteamId { get; set; }

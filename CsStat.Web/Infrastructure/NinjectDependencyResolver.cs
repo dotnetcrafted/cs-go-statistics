@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using BusinessFacade;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CsStat.Domain.Entities;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;

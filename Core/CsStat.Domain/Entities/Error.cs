@@ -1,5 +1,4 @@
-﻿using System;
-using MongoRepository;
+﻿using MongoRepository;
 
 namespace CsStat.Domain.Entities
 {

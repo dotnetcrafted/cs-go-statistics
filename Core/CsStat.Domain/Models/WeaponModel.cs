@@ -1,7 +1,5 @@
-﻿using System;
-using CsStat.Domain.Definitions;
+﻿using CsStat.Domain.Definitions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace CsStat.Domain.Models
 {

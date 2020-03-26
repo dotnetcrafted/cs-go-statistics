@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using CsStat.SystemFacade.Attributes;
+﻿using CsStat.SystemFacade.Attributes;
 
 namespace CsStat.Domain.Definitions
 {

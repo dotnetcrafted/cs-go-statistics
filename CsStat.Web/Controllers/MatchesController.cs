@@ -97,6 +97,7 @@ namespace CsStat.Web.Controllers
 
                 var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
                 var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
+                var players = _playerRepository.GetAllPlayers(); 
 
                 var playerStatByRounds = match.Rounds.SelectMany(round => round.Squads.SelectMany(squad =>
                     squad.Players.Select(player =>
@@ -104,7 +105,7 @@ namespace CsStat.Web.Controllers
                         {
                             RoundNumber = round.RoundNumber,
                             SteamId = player.SteamID,
-                            Kills = player.Kills.Count,
+                            Kills = player.Kills.Where(x=>!x.IsSuicide).ToList().Count - player.Kills.Where(x => x.IsSuicide).ToList().Count,
                             Assists = player.Assists.Count,
                             Death = player.Deaths.Count,
                             Damage = player.Damage.Sum(x => x.HealthDamage),
@@ -153,6 +154,7 @@ namespace CsStat.Web.Controllers
                             {
                                 Id = player.SteamID.ToString(),
                                 Name = player.Name,
+                                Rang = /*players.FirstOrDefault(x=>x.SteamId == player.SteamID.ToString())?.Rang ??*/ 0,
                                 Team = squad.Team,
                                 SteamImage = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value,
                                 Kills = playerStatByRounds
@@ -164,7 +166,7 @@ namespace CsStat.Web.Controllers
                                 Assists = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.Assists),
-                                Adr = Convert.ToInt32(Math.Floor(
+                                Adr = Convert.ToInt32(Math.Round(
                                     playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                   x.RoundNumber <= round.RoundNumber)
                                         .Sum(t => t.Damage) / (double) round.RoundNumber)),

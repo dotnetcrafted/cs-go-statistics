@@ -164,6 +164,7 @@
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
+    <Compile Include="Models\AppStateModel.cs" />
     <Compile Include="Models\Matches\PlayerStatByRound.cs" />
     <Compile Include="Models\Matches\BaseMatch.cs" />
     <Compile Include="Controllers\ServerInfoController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Models\Matches\MatchDetailsSquadPlayer.cs" />
     <Compile Include="Models\Matches\MatchRound.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
+    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Models\ServerInfoModel.cs" />
     <Compile Include="Models\UsefulLinksViewModel.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace CsStat.Domain.Models
+﻿namespace CsStat.Domain.Models
 {
     public class Image
     {

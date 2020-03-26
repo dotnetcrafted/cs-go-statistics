@@ -7,6 +7,7 @@ namespace CsStat.Web.Models.Matches
         public string Id { get; set; } // steamId
         public string Name { get; set; } // djoony
         public string SteamImage { get; set; } // url to steam profile image
+        public int Rang { get; set; } // 1-5
 
         public string Team { get; set; } // CounterTerrorist or Terrorist
 
