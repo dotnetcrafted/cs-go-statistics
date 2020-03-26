@@ -99,7 +99,8 @@ namespace ReadFile.ReadDemo
                         Created = File.GetCreationTime(file),
                         Path = file,
                         IsSuccessfully = isSuccessfully,
-                        Message = error
+                        Message = error,
+                        Runner = Environment.MachineName
                     });
                 }
             }
@@ -178,12 +179,15 @@ namespace ReadFile.ReadDemo
             if (attakersTeam == victimsTeam) // attacked teammate
                 return;
 
-            var givenDamage = _playerDamageStat.Where(damage => damage.RoundNumber == _currentRoundNumber &&
-                                                                damage.Attacker == e.Attacker.SteamID &&
-                                                                damage.Victim == e.Player.SteamID)
-                .Sum(x => x.HealthDamage);
+            var query = _playerDamageStat.Where(damage => damage.RoundNumber == _currentRoundNumber &&
+                                                          damage.Attacker == e.Attacker.SteamID &&
+                                                          damage.Victim == e.Player.SteamID)
+                .ToList();
 
-            if (givenDamage >= 100)
+            var givenDamage = query.Sum(x => x.HealthDamage);
+            var lastHealth = query.Any() ? query.Min(x => x.Health) : FullHP;
+
+            if (givenDamage >= FullHP)
                 return;
 
             _playerDamageStat.Add(new Damage
@@ -192,7 +196,8 @@ namespace ReadFile.ReadDemo
                 Weapon = EquipmentMapper.Map(e.Weapon.Weapon),
                 Attacker = e.Attacker.SteamID,
                 Victim = e.Player.SteamID,
-                HealthDamage = e.HealthDamage + givenDamage <= FullHP ? e.HealthDamage : FullHP - givenDamage,
+                Health = e.Health,
+                HealthDamage = e.HealthDamage + givenDamage <= FullHP ? e.HealthDamage : lastHealth,
                 ArmorDamage = e.ArmorDamage
             });
         }
