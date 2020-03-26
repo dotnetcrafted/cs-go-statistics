@@ -20,16 +20,16 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
 
         if (!reasonIcon) return reason;
 
-        return <img className="match-details-rounds__icon" src={reasonIcon.url} alt={reason} title={reason} />
+        return <img className="match-rounds__icon" src={reasonIcon.url} alt={reason} title={reason} />
     }
    
     renderEmptyRound(roundIndex: number) {
         return (
-            <li className="match-details-rounds__li" key={roundIndex}>
-                <a className={`match-details-rounds__col`}>
-                    <div className={`match-details-rounds__cell match-details-rounds__cell--top`}></div>
-                    <div className="match-details-rounds__cell match-details-rounds__cell--mid">{roundIndex}</div>
-                    <div className={`match-details-rounds__cell match-details-rounds__cell--bottom`}>                    </div>
+            <li className="match-rounds__li" key={roundIndex}>
+                <a className={`match-rounds__col`}>
+                    <div className={`match-rounds__cell match-rounds__cell--top`}></div>
+                    <div className="match-rounds__cell match-rounds__cell--mid">{roundIndex}</div>
+                    <div className={`match-rounds__cell match-rounds__cell--bottom`}>                    </div>
                 </a>
             </li>
         );
@@ -43,18 +43,18 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
         const bottomCss = !isAttackReason ? 'has-value' : '';
 
         return (
-            <li className="match-details-rounds__li" key={round.id}>
-                <a className={`match-details-rounds__col ${colCss}`}
+            <li className="match-rounds__li" key={round.id}>
+                <a className={`match-rounds__col ${colCss}`}
                     onClick={(event) => {
                         event.preventDefault();
                         selectRound(round.id)
                     }}
                 >
-                    <div className={`match-details-rounds__cell match-details-rounds__cell--top ${topCss}`}>
+                    <div className={`match-rounds__cell match-rounds__cell--top ${topCss}`}>
                         {isAttackReason && this.renderReasonIcon(round.reasonTitle)}
                     </div>
-                    <div className="match-details-rounds__cell match-details-rounds__cell--mid">{round.id}</div>
-                    <div className={`match-details-rounds__cell match-details-rounds__cell--bottom ${bottomCss}`}>
+                    <div className="match-rounds__cell match-rounds__cell--mid">{round.id}</div>
+                    <div className={`match-rounds__cell match-rounds__cell--bottom ${bottomCss}`}>
                         {!isAttackReason && this.renderReasonIcon(round.reasonTitle)}
                     </div>
                 </a>
@@ -85,8 +85,8 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
         if (!Array.isArray(rounds)) return null;
 
         return (
-            <div className="match-details-rounds">
-                <ul className="match-details-rounds__list">
+            <div className="match-rounds">
+                <ul className="match-rounds__list">
                     {this.renderRounds()}
                 </ul>
             </div>

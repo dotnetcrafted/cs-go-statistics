@@ -1,4 +1,4 @@
-.match-details-rounds {
+.match-rounds {
     &__list {
         @include reset-list();
 
@@ -8,7 +8,23 @@
     &__li {
         flex: 1;
         min-width: 30px;
-        padding: 0 2px;
+        padding: 0 4px;
+
+        &:nth-child(15) {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -1px;
+                display: block;
+                transform: translateY(-50%);
+                height: 90px;
+                width: 2px;
+                background-color: #e4e4e4;
+            }
+        }
     }
 
     &__cell {
