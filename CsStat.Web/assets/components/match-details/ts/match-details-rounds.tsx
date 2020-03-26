@@ -27,9 +27,9 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
         return (
             <li className="match-rounds__li" key={roundIndex}>
                 <a className={`match-rounds__col`}>
-                    <div className={`match-rounds__cell match-rounds__cell--top`}></div>
+                    <div className="match-rounds__cell match-rounds__cell--top no-value"></div>
                     <div className="match-rounds__cell match-rounds__cell--mid">{roundIndex}</div>
-                    <div className={`match-rounds__cell match-rounds__cell--bottom`}>                    </div>
+                    <div className="match-rounds__cell match-rounds__cell--bottom no-value"></div>
                 </a>
             </li>
         );
@@ -39,8 +39,10 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
         const { selectedRoundId, selectRound } = this.props;
         const colCss = selectedRoundId === round.id ? 'is-selected' : '';
         const isAttackReason = this.checkAttackReason(round.reason);
-        const topCss = isAttackReason ? 'has-value' : '';
-        const bottomCss = !isAttackReason ? 'has-value' : '';
+        const topCss = isAttackReason ? 'color-t-primary' : 'no-value';
+        const bottomCss = !isAttackReason ? 'color-ct-primary' : 'no-value';
+        const attackReasonIcon = isAttackReason && this.renderReasonIcon(round.reasonTitle);
+        const defenceReasonIcon = !isAttackReason && this.renderReasonIcon(round.reasonTitle);
 
         return (
             <li className="match-rounds__li" key={round.id}>
@@ -50,12 +52,12 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
                         selectRound(round.id)
                     }}
                 >
-                    <div className={`match-rounds__cell match-rounds__cell--top ${topCss}`}>
-                        {isAttackReason && this.renderReasonIcon(round.reasonTitle)}
+                    <div className={`match-rounds__cell match-rounds__cell--top ${round.id <= 15 ? topCss : bottomCss}`}>
+                        {round.id <= 15 ? attackReasonIcon : defenceReasonIcon}
                     </div>
                     <div className="match-rounds__cell match-rounds__cell--mid">{round.id}</div>
-                    <div className={`match-rounds__cell match-rounds__cell--bottom ${bottomCss}`}>
-                        {!isAttackReason && this.renderReasonIcon(round.reasonTitle)}
+                    <div className={`match-rounds__cell match-rounds__cell--bottom ${round.id <= 15 ? bottomCss : topCss}`}>
+                        {round.id <= 15 ? defenceReasonIcon : attackReasonIcon}
                     </div>
                 </a>
             </li>

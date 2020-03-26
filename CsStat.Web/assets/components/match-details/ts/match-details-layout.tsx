@@ -25,12 +25,13 @@ const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: Matc
             <div className="container">
                 <div className="match__content">
                     <div className="match__header">
-                        <h1 className="match__title">{match.map}
-                            <span>({match.duration})</span>
-                        </h1>
+                        <div className="match__title">
+                            <h1 className="match__map">{match.map}</h1>
+                            {/* <span>({match.duration})</span> */}
+                        </div>
                         <div className="match__score">
                             <span className="color-t-primary">{match.tScore}</span>
-                            <span>:</span>
+                            <span className="match__score-colon">:</span>
                             <span className="color-ct-primary">{match.ctScore}</span>
                         </div>
                     </div>
