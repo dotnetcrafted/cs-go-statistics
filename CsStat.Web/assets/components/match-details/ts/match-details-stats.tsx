@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
+import { getPlayerById } from 'project/helpers';
 import { MatchRound } from 'general/ts/redux/types';
 
 interface MatchDetailsStatsProps {
@@ -8,32 +9,37 @@ interface MatchDetailsStatsProps {
 
 const columns = [
     {
-        title: 'Name',
+        title: 'Rank',
+        dataIndex: 'rank',
+        key: 'rank',
+    },
+    {
+        title: 'Player',
         dataIndex: 'name',
         key: 'name',
     },
     {
-        title: 'k/a/d',
+        title: 'K/A/D',
         dataIndex: 'kad',
         key: 'kad',
     },
     {
-        title: 'kdDiff',
+        title: 'KD Diff',
         dataIndex: 'kdDiff',
         key: 'kdDiff',
     },
     {
-        title: 'kd',
+        title: 'KD',
         dataIndex: 'kd',
         key: 'kd',
     },
     {
-        title: 'adr',
+        title: 'ADR',
         dataIndex: 'adr',
         key: 'adr',
     },
     {
-        title: 'ud',
+        title: 'UD',
         dataIndex: 'ud',
         key: 'ud',
     }
@@ -42,17 +48,28 @@ const columns = [
 export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
     if (!round || !Array.isArray(round.squads)) return null;
 
+
     return (
         <div className="match-stats">
             {
                 round.squads.map((squad) => {
+                    const players = squad.players.map((player) => {
+                        const cmsPlayer = getPlayerById(player.id);
+
+                        if (!cmsPlayer) return player;
+
+                        return ({
+                            ...player,
+                            rank: cmsPlayer.rang
+                        })
+                    })
                     return (
-                        <div className="match-stats__col" key={squad.title}>
-                            <h3 className="match__team">{squad.title}</h3>
+                        <div className="match-stats__team" key={squad.title}>
+                            <h3 className="match-stats__title">{squad.title}</h3>
                             <Table
                                 className="match-stats__table"
                                 rowKey={(record) => record.id}
-                                dataSource={squad.players}
+                                dataSource={players}
                                 columns={columns}
                                 bordered={true}
                                 pagination={false}

@@ -36,6 +36,7 @@
     &__header {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 20px;
     }
 
     &__title {
@@ -59,12 +60,17 @@
         color: #696969;
     }
 
+    &__body {
+        display: flex;
+        margin-top: 40px;
+    }
+
     &__stats {
-        margin-top: 50px;
+        width: 50%;
     }
 
     &__kills {
-        max-width: 600px;
-        margin: 50px auto 0;
+        width: 50%;
+        padding-top: 37px;
     }
 }

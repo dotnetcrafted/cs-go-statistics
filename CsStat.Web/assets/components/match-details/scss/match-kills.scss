@@ -33,13 +33,16 @@
     }
 
     &__weapon {
+        margin: 0 2px;
         max-height: 20px;
         object-fit: contain;
     }
 
     &__headshot,
-    &__suicide {
+    &__suicide,
+    &__penetrated {
         max-height: 24px;
+        margin: 0 2px;
         object-fit: contain;
     }
 }

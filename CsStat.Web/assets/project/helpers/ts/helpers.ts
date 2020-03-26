@@ -19,3 +19,13 @@ export const getIconByName = (name: string) => {
 
     return foundIcon ? foundIcon : null;
 }
+
+export const getPlayerById = (id: string) => {
+    const players = app.state.players;
+
+    if (!Array.isArray(players)) return null;
+
+    const foundPlayer = players.find((player) => player.steamId === id);
+
+    return foundPlayer ? foundPlayer : null;
+}
