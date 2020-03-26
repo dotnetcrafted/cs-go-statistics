@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CsStat.Domain;
 using CsStat.Web.Models;
 using Microsoft.Ajax.Utilities;
 using ServerQueries.Source;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CsStat.Domain.Entities.Demo;
 using DataService.Interfaces;
-using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations

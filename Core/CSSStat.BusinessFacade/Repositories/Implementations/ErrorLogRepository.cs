@@ -1,5 +1,4 @@
-﻿using System;
-using CsStat.Domain.Entities;
+﻿using CsStat.Domain.Entities;
 using DataService.Interfaces;
 
 namespace BusinessFacade.Repositories.Implementations

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.Domain.Models;
@@ -42,12 +41,12 @@ namespace CsStat.Web
 
                         if (d.Victims != null && s.Victims.Any())
                         {
-                            d.Victims = context.Mapper.Map<List<PlayerViewModel>>(s.Victims);
+                            d.Victims = context.Mapper.Map<List<VictimKillerViewModel>>(s.Victims);
                         }
 
                         if (d.Killers != null && s.Killers.Any())
                         {
-                            d.Killers = context.Mapper.Map<List<PlayerViewModel>>(s.Killers);
+                            d.Killers = context.Mapper.Map<List<VictimKillerViewModel>>(s.Killers);
                         }
 
                         if (d.Achievements != null && d.Achievements.Any())
@@ -68,7 +67,7 @@ namespace CsStat.Web
                     .ForMember(dest => dest.Type, opts => opts.MapFrom(src => src.Weapon.Type.Name))
                     .AfterMap((s, d, context) => { d.Kills = s.Kills; });
 
-                CreateMap<PlayerModel, PlayerViewModel>()
+                CreateMap<VictimKillerModel, VictimKillerViewModel>()
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
                     .ForMember(dest => dest.Count, opts => opts.MapFrom(src => src.Count))
                     .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.ImagePath))

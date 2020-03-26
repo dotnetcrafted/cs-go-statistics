@@ -1,6 +1,4 @@
-﻿using CsStat.Domain.Definitions;
-
-namespace CsStat.Domain.Models
+﻿namespace CsStat.Domain.Models
 {
     public class WeaponStatModel
     {

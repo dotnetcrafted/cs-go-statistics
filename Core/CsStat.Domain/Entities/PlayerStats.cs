@@ -24,10 +24,10 @@ namespace CsStat.Domain.Entities
         public int KnifeKills { get; set; }
         public List<AchieveModel> Achievements { get; set; }
         public List<WeaponStatModel>Guns { get; set; }
-        public List<PlayerModel> Victims { get; set; }
-        public List<PlayerModel> FriendVictims { get; set; }
-        public List<PlayerModel> Killers { get; set; }
-        public List<PlayerModel> FriendKillers { get; set; }
+        public List<VictimKillerModel> Victims { get; set; }
+        public List<VictimKillerModel> FriendVictims { get; set; }
+        public List<VictimKillerModel> Killers { get; set; }
+        public List<VictimKillerModel> FriendKillers { get; set; }
         public double KdRatio
         {
             get

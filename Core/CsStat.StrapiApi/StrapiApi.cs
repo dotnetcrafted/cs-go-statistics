@@ -57,7 +57,6 @@ namespace CsStat.StrapiApi
         public List<WeaponModel> GetAllWeapons()
         {
             var json = GetJsonFromUrl(Settings.WeaponsPath);
-
             return string.IsNullOrEmpty(json)
                 ? new List<WeaponModel>()
                 : JsonConvert.DeserializeObject<List<WeaponModel>>(json);

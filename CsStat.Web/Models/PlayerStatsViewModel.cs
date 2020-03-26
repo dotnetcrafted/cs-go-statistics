@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CsStat.Domain.Entities;
 
 namespace CsStat.Web.Models
 {
@@ -23,8 +22,8 @@ namespace CsStat.Web.Models
         public int KdDif => Kills - Deaths;
         public string Kad => $"{Kills}/{Assists}/{Deaths}";
         public double KdRatio { get; set; }
-        public List<PlayerViewModel> Victims { get; set; }
-        public List<PlayerViewModel> Killers { get; set; }
+        public List<VictimKillerViewModel> Victims { get; set; }
+        public List<VictimKillerViewModel> Killers { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }
         public List<WeaponViewModel> Guns { get; set; }
     }

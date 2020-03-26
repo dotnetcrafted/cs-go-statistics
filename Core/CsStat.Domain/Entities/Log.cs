@@ -1,7 +1,6 @@
 ﻿using System;
 using CsStat.Domain.Definitions;
 using CsStat.LogApi.Enums;
-using DataService;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities
