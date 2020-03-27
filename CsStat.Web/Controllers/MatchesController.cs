@@ -72,7 +72,8 @@ namespace CsStat.Web.Controllers
             return Json
             (
                 matches
-                    .OrderByDescending(x => x.ParsedDate)
+                    .OrderByDescending(x => x.MatchDate)
+                    .ThenByDescending(x => x.ParsedDate)
                     .Select(x => new BaseMatch
                     {
                         Id = x.Id,
