@@ -251,7 +251,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
     render(): ReactNode {
         const {
-            IsLoading, players
+            isLoading, players
         } = this.props;
 
         const search: any = qs.parse(this.props.router.location.search);
@@ -263,7 +263,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                 <div className="players-data__filters">
                     <FilterForm
                         onFormSubmit={this.onFormSubmit}
-                        isLoading={IsLoading}
+                        isLoading={isLoading}
                         dateFrom={dateFrom}
                         dateTo={dateTo}
                     />
@@ -284,7 +284,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
                     size="middle"
                     bordered={true}
                     scroll={{ x: true }}
-                    loading={IsLoading}
+                    loading={isLoading}
                     onRow={(record) => ({
                         onClick: () => {
                             this.onRowClick(record);
@@ -298,7 +298,7 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
 type PlayersDataProps = {
     playersDataUrl: string;
-    IsLoading: boolean;
+    isLoading: boolean;
     players: Player[];
     fetchPlayers: typeof fetchPlayers;
     startRequest: typeof startRequest;
@@ -335,13 +335,10 @@ export type ColumnMapping = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    const IsLoading = state.app.IsLoading;
-    const players = state.app.players;
-    const router = state.router;
     return {
-        IsLoading,
-        players,
-        router
+        isLoading: state.app.isLoading,
+        players: state.app.players,
+        router: state.router,
     };
 };
 

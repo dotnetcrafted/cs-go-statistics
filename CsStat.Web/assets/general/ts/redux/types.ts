@@ -1,9 +1,9 @@
 import { RouterState } from 'connected-react-router';
 
 interface IAppState {
-    IsLoading: boolean;
+    isLoading: boolean;
     players: Player[];
-    Posts: Post[];
+    posts: Post[];
 }
 
 type RootState = {

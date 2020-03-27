@@ -32,6 +32,9 @@ const Post: SFC<PostProps> = (props) => {
         title, content, createdAt, tags
     } = props.post;
 
+    console.log(props);
+    
+
     return (
         <Card className="post" title={title} extra={getTags(tags)}>
             <Markdown className="markdown-body">{content}</Markdown>

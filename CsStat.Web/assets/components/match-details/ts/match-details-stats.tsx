@@ -82,19 +82,3 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
         </div>
     );
 }
-
-
-                            //rowClassName={() => 'players-data__row'}
-                            //columns={this.getColumns()}
-                            //rowKey={(record) => record.Id}
-                            //pagination={false}
-                            //size="middle"
-                            //bordered={true}
-                            //scroll={{ x: true }}
-                            //loading={IsLoading}
-                            // onRow={(record) => ({
-                            //     onClick: () => {
-                            //         this.onRowClick(record);
-                            //     }
-                            // })}
-                    ///>
