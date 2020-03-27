@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using BusinessFacade;
 using BusinessFacade.Repositories;
+using CsStat.Domain.Entities.Demo;
 using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
@@ -37,7 +38,7 @@ namespace CsStat.Web.Controllers
         {
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult GetFullData()
         {
@@ -107,11 +108,13 @@ namespace CsStat.Web.Controllers
                         {
                             RoundNumber = round.RoundNumber,
                             SteamId = player.SteamID,
-                            Kills = player.Kills.Where(x=>!x.IsSuicide).ToList().Count - player.Kills.Where(x => x.IsSuicide).ToList().Count,
+                            Kills = player.Kills.Where(x => !x.IsSuicide).ToList().Count -
+                                    player.Kills.Where(x => x.IsSuicide).ToList().Count,
                             Assists = player.Assists.Count,
                             Death = player.Deaths.Count,
                             Damage = player.Damage.Sum(x => x.HealthDamage),
-                            UtilityDamage = player.UtilityDamage.Sum(x => x.HealthDamage)
+                            UtilityDamage = player.UtilityDamage.Sum(x => x.HealthDamage),
+                            Score = GetScore(player)
                         }))).ToList();
 
                 var matchDetails = new MatchDetails
@@ -171,7 +174,10 @@ namespace CsStat.Web.Controllers
                                         .Sum(t => t.Damage) / (double) round.RoundNumber)),
                                 Ud = playerStatByRounds.Where(x => x.SteamId == player.SteamID &&
                                                                    x.RoundNumber <= round.RoundNumber)
-                                    .Sum(t => t.UtilityDamage)
+                                    .Sum(t => t.UtilityDamage),
+                                Score = playerStatByRounds
+                                    .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
+                                    .Sum(t => t.Score)
                             }).OrderByDescending(player => player.Kd).ToList()
                         }).OrderBy(x => x.Title).ToList()
                     }).ToList()
@@ -181,6 +187,28 @@ namespace CsStat.Web.Controllers
             }
 
             return Json("missing match id");
+        }
+
+        private static int GetScore(PlayerLog player)
+        {
+            var bombPlanted = player.BombPlants.Count;
+            var bombExploded = player.BombExplosions.Count;
+
+            var bombDefuse = player.BombDefuses.Count;
+
+            var kills = player.Kills.Count(x => !x.IsSuicide);
+            var assist = player.Assists.Count;
+
+            var killTeammate = player.Teamkills.Count;
+            var suicide = player.Kills.Count(x => x.IsSuicide);
+
+            return (bombPlanted * 2) +
+                   (bombExploded * 2) +
+                   (bombDefuse * 2) +
+                   (kills * 2) +
+                   assist +
+                   (killTeammate * -1) +
+                   (suicide * -2);
         }
 
         private static string GetMapImage(string mapName)

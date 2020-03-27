@@ -16,5 +16,7 @@ namespace CsStat.Web.Models.Matches
         public double Kd => Math.Round(Deaths > 0 ? (double)Kills / (double)Deaths : Kills, 2); // 1.24
         public int Adr { get; set; } // 118 ??
         public int Ud { get; set; } // 24 ??
+        
+        public int Score { get; set; } // 120
     }
 }
