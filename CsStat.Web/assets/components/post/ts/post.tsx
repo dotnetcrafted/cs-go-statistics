@@ -25,19 +25,19 @@ const Post: SFC<PostProps> = (props) => {
         if (tags.length === 0) {
             return <span></span>;
         }
-        return tags.map((tag: TagType, index: number) => <Tag key={index} color={getRandomColor(TAG_COLORS)}>{tag.caption}</Tag>);
+        return tags.map((tag: TagType) => <Tag key={tag.id} color={getRandomColor(TAG_COLORS)}>{tag.caption}</Tag>);
     };
 
     const {
         title, content, createdAt, tags
     } = props.post;
 
-    console.log(props);
-    
-
     return (
         <Card className="post" title={title} extra={getTags(tags)}>
-            <Markdown className="markdown-body">{content}</Markdown>
+            {
+                content &&
+                <Markdown className="markdown-body">{content}</Markdown>
+            }
             <p>{moment(new Date(createdAt)).format(USER_DATE_FORMAT)}</p>
         </Card>
     );

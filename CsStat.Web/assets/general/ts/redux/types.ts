@@ -56,6 +56,7 @@ type RelatedPlayer = {
 };
 
 type Post = {
+    id: string,
     title: string;
     content: string;
     tags: Tag[];
@@ -64,6 +65,7 @@ type Post = {
 }
 
 type Tag = {
+    id: string,
     caption: string;
 }
 

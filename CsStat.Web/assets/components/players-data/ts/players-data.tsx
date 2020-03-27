@@ -88,8 +88,8 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
 
     private cellWrapper(id: string, content: ReactNode, value?: number): ReactNode {
         const search = qs.parse(this.props.router.location.search);
-        const { PlayerId } = search;
-        const isSelectedClass = id === PlayerId ? 'is-selected' : '';
+        const { playerId } = search;
+        const isSelectedClass = id === playerId ? 'is-selected' : '';
         var textColorClass = "";
 
         if (value != undefined) {

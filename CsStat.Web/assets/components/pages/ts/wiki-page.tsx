@@ -30,7 +30,7 @@ class WikiPage extends React.Component<WikiPageProps> {
         const { posts } = this.props;
 
         if (posts.length > 0) {
-            return posts.map((post: PostType, index: number) => <Post key={index} post={post} />);
+            return posts.map((post: PostType) => <Post key={post.id} post={post} />);
         }
         return <Empty />;
     }
