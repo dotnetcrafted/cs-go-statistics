@@ -20,7 +20,7 @@ const CELL_CSS_CLASS = 'players-data__cell';
 const HIDDEN_CELL_CSS_CLASS = 'is-hidden';
 
 export const COLUMN_NAMES: ColumnNames = {
-    imagePath: { dataIndex: nameof<Player>('imagePath'), readableName: 'ImagePath' },
+    imagePath: { dataIndex: nameof<Player>('steamImage'), readableName: 'Steam Image' },
     name: { dataIndex: nameof<Player>('name'), readableName: 'Players Name' },
     points: { dataIndex: nameof<Player>('points'), readableName: 'Points' },
     kad: { dataIndex: nameof<Player>('kad'), readableName: 'K/A/D' },
@@ -73,14 +73,14 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
     }
 
     private getAvatar(record: Player): ReactNode {
-        if (record.imagePath) {
-            return <Avatar className="players-data__avatar" src={record.imagePath} />;
+        if (record.steamImage) {
+            return <Avatar className="players-data__avatar" src={record.steamImage} />;
         }
         return <Avatar icon="user" />;
     }
 
     private onRowClick(record: Player): void {
-        const search = utils.getUrlSearch({ PlayerId: record.id }, this.props.router.location.search);
+        const search = utils.getUrlSearch({ playerId: record.id }, this.props.router.location.search);
         history.push({
             search
         });

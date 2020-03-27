@@ -11,36 +11,40 @@ import { RootState, Player, Gun } from '../../../general/ts/redux/types';
 import '../scss/index.scss';
 import utils from '../../../general/ts/utils';
 import { history } from '../../../general/ts/redux/store';
+import { getPlayerById, DEFAULT_CMS_PLAYER } from 'project/helpers';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const VISIBLE_GUNS = 5;
 const PlayerCard: SFC<PlayerCardProps> = (props) => {
     const search = qs.parse(props.router.location.search);
-    const { PlayerId } = search;
+    const { playerId } = search;
 
     const onRelatedPlayerSelect = (name: string) => {
         const id = getIdByName(name, props.players);
+
         if (!id) {
             throw new Error('No players found with this Name');
         }
-        const search = utils.getUrlSearch({ PlayerId: id }, props.router.location.search);
+        const search = utils.getUrlSearch({ playerId: id }, props.router.location.search);
         history.push({
             search
         });
     };
 
-    if (typeof PlayerId === 'string' && props.players.length > 0) {
-        const model = _getPlayerViewModel(PlayerId, props.players);
+    if (typeof playerId === 'string' && props.players.length > 0) {
+        const model = getPlayerViewModel(playerId, props.players);
+        
         if (model) {
             const gunsToShow: Gun[] = model.guns && [...model.guns].slice(0, VISIBLE_GUNS);
-
+            const cmsPlayer = getPlayerById(model.steamId) || DEFAULT_CMS_PLAYER
+            
             return (
                 <Card className="player-card">
                     <Meta
                         className="player-card__meta"
-                        avatar={renderAvatar(model.imagePath)}
-                        title={<Title level={2}>{model.name}</Title>}
+                        avatar={renderAvatar(cmsPlayer.steamImage)}
+                        title={<Title level={2}>{cmsPlayer.nickName}</Title>}
                         description={<Achievements data={model.achievements} />}
                     />
                     <Divider orientation="left">Player's Statistics</Divider>
@@ -83,15 +87,14 @@ const renderAvatar = (src: string) => {
     }
     return <Avatar size={48} shape="square" icon="user" />;
 };
-const _getPlayerViewModel = (id: string, data: Player[]) => {
+const getPlayerViewModel = (id: string, data: Player[]) => {
     const playersRow = data.filter((item) => item.id === id)[0];
     let model = null;
 
     if (playersRow) {
         model = {
             id: playersRow.id,
-            name: playersRow.name,
-            imagePath: playersRow.imagePath,
+            steamId: playersRow.steamId,
             kills: playersRow.kills,
             deaths: playersRow.deaths,
             assists: playersRow.assists,

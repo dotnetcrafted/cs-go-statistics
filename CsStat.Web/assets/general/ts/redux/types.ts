@@ -13,8 +13,9 @@ type RootState = {
 
 type Player = {
     id: string;
-    name: string;
-    imagePath: string;
+    steamId: string,
+    steamImage: string,
+    name: string,
     points: number;
     kills: number;
     deaths: number;
@@ -50,9 +51,8 @@ type Gun = {
 };
 
 type RelatedPlayer = {
-    name: string;
+    steamId: string,
     count: number;
-    imagePath: string;
 };
 
 type Post = {
