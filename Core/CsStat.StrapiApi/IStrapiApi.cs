@@ -6,7 +6,7 @@ namespace CsStat.StrapiApi
 {
     public interface IStrapiApi
     {
-        string GetArticles();
+        List<ArticleModel> GetArticles();
         List<AchieveModel> GetAchieves();
         MapInfoModel GetMapInfo(string mapName);
         List<MapInfoModel> GetAllMapInfos();

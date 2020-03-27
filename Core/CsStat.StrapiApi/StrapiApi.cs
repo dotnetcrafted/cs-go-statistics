@@ -11,9 +11,13 @@ namespace CsStat.StrapiApi
 {
     public class StrapiApi : IStrapiApi
     {
-        public string GetArticles()
+        public List<ArticleModel> GetArticles()
         {
-            return GetJsonFromUrl(Settings.ArticlesPath);
+            var json = GetJsonFromUrl(Settings.ArticlesPath);
+            
+            return string.IsNullOrEmpty(json)
+                ? new List<ArticleModel>()
+                : JsonConvert.DeserializeObject<List<ArticleModel>>(json);
         }
 
         public List<AchieveModel> GetAchieves()

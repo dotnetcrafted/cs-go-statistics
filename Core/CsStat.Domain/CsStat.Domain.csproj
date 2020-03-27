@@ -116,6 +116,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\AchieveModel.cs" />
+    <Compile Include="Models\ArticleModel.cs" />
     <Compile Include="Models\WeaponModel.cs" />
     <Compile Include="Models\WeaponStatModel.cs" />
     <Compile Include="Models\Image.cs" />
