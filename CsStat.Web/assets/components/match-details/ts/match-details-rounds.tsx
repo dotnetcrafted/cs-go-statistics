@@ -20,7 +20,7 @@ export class MatchDetailsRounds extends React.Component<MatchDetailsRoundsProps,
 
         if (!reasonIcon) return reason;
 
-        return <img className="match-rounds__icon" src={reasonIcon.url} alt={reason} title={reason} />
+        return <img className="match-rounds__icon" src={reasonIcon.image} alt={reason} title={reason} />
     }
    
     renderEmptyRound(roundIndex: number) {

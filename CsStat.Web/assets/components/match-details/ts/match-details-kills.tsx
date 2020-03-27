@@ -53,7 +53,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
         return <img
             className="match-kills__weapon"
-            src={weapon.iconUrl}
+            src={weapon.iconImage}
             alt={weapon.name}
             title={weapon.name}
         />;
@@ -70,7 +70,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
             <>
                 <img
                     className="match-kills__penetrated"
-                    src={penetratedIcon.url}
+                    src={penetratedIcon.image}
                     alt={'penetrated'}
                     title={'Damage incomed through obstacles'}
                 />
@@ -89,7 +89,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
             <>
                 <img
                     className="match-kills__headshot"
-                    src={headshotIcon.url}
+                    src={headshotIcon.image}
                     alt={'headshot'}
                     title={'Damage incomed right in the head'}
                 />
@@ -108,7 +108,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
             <>
                 <img
                     className="match-kills__suicide"
-                    src={suicideIcon.url}
+                    src={suicideIcon.image}
                     alt={'suicide'}
                     title={'Emo'}
                 />
