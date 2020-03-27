@@ -22,6 +22,7 @@ namespace BusinessFacade.Repositories.Implementations
                 .FindAllAs<DemoLog>()
                 .SetFields(Fields.Include(
                     nameof(DemoLog.Id), 
+                    nameof(DemoLog.ParsedDate), 
                     nameof(DemoLog.MatchDate), 
                     nameof(DemoLog.Map), 
                     nameof(DemoLog.TotalSquadAScore), 

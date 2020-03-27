@@ -71,16 +71,18 @@ namespace CsStat.Web.Controllers
 
             return Json
             (
-                matches.Select(x => new BaseMatch
-                {
-                    Id = x.Id,
-                    Map = x.Map,
-                    Date = x.MatchDate,
-                    TScore = x.TotalSquadAScore,
-                    CTScore = x.TotalSquadBScore,
-                    MapImage = GetMapImage(x.Map),
-                    Duration = x.Duration
-                })
+                matches
+                    .OrderByDescending(x => x.ParsedDate)
+                    .Select(x => new BaseMatch
+                    {
+                        Id = x.Id,
+                        Map = x.Map,
+                        Date = x.MatchDate,
+                        TScore = x.TotalSquadAScore,
+                        CTScore = x.TotalSquadBScore,
+                        MapImage = GetMapImage(x.Map),
+                        Duration = x.Duration
+                    })
             );
         }
 
