@@ -63,7 +63,9 @@ namespace CsStat.Web.Controllers
         [HttpGet]
         public ActionResult GetMatchesData()
         {
-            var matches = _demoRepository.GetMatches().ToList();
+            var matches = _demoRepository.GetMatches()
+                .Where(x => x.TotalSquadAScore + x.TotalSquadBScore > 5)
+                .ToList();
 
             if (!matches.Any())
             {
