@@ -14,8 +14,13 @@
     }
 
     &__logo {
-        color: $color-white;
-        font-size: 32px;
+        display: inline-block;
+        padding-right: 10px;
+
+        img {
+            max-width: 100%;
+            max-height: 60px;
+        }
     }
 
     &__content {
