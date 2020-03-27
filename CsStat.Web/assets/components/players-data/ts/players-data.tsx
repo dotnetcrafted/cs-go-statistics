@@ -268,8 +268,6 @@ class PlayersData extends React.Component<PlayersDataProps, PlayersDataState> {
             });
         });
 
-        console.log(mappedPlayers);
-
         return (
             <>
                 <Divider orientation="left">Choose Dates to Filter Statistics</Divider>
