@@ -171,7 +171,6 @@ namespace BusinessFacade.Repositories.Implementations
             {
                 victimModel.Add(new VictimKillerModel
                 {
-                    Name = victim.NickName,
                     SteamId = victim.SteamId,
                     Count = players.Count(x => x.SteamId == victim.SteamId)
                 });

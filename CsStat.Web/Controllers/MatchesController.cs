@@ -100,7 +100,6 @@ namespace CsStat.Web.Controllers
 
                 var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
                 var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
-                var players = _playerRepository.GetAllPlayers(); 
 
                 var playerStatByRounds = match.Rounds.SelectMany(round => round.Squads.SelectMany(squad =>
                     squad.Players.Select(player =>
@@ -156,10 +155,7 @@ namespace CsStat.Web.Controllers
                             Players = squad.Players.Select(player => new MatchDetailsSquadPlayer
                             {
                                 Id = player.SteamID.ToString(),
-                                Name = player.Name,
-                                Rang = /*players.FirstOrDefault(x=>x.SteamId == player.SteamID.ToString())?.Rang ??*/ 0,
                                 Team = squad.Team,
-                                SteamImage = avatars.FirstOrDefault(x => x.Key == player.SteamID.ToString()).Value,
                                 Kills = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.Kills),

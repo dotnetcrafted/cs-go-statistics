@@ -32,7 +32,7 @@ namespace CsStat.Web.Controllers
             {
                 SteamId = player.SteamId,
                 NickName = player.NickName,
-                ImagePath = player.ImagePath,
+                SteamImage = player.ImagePath,
                 Rang = player.Rang
             });
             var model = new AppStateModel
@@ -42,18 +42,18 @@ namespace CsStat.Web.Controllers
                     .Select(icon => new ImageViewModel
                     {
                         Name = icon.CodeName,
-                        Url = icon.Image.FullUrl
+                        Image = icon.Image.FullUrl
                     }).ToJson(),
                 Weapons = _strapiApi.GetAllWeapons()?
                     .Select(weapon => new WeaponViewModel
                     {
                         Id = weapon.Id,
                         Name = weapon.Name,
-                        IconUrl = weapon.Icon.FullUrl,
-                        ImageUrl = weapon.Image.FullUrl,
+                        IconImage = weapon.Icon.FullUrl,
+                        PhotoImage = weapon.Image.FullUrl,
                         Type = weapon.Type.Name
                     }).ToJson(false, true),
-                Players = JsonConvert.SerializeObject(allPlayers)
+                Players = allPlayers.ToJson()
             };
 
             return View(model);

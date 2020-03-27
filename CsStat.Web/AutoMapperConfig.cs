@@ -16,7 +16,7 @@ namespace CsStat.Web
             {
                 CreateMap<PlayerStatsModel, PlayerStatsViewModel>()
                     .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Player.Id))
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Player.NickName))
+                    .ForMember(dest => dest.SteamId, opts => opts.MapFrom(src => src.Player.SteamId))
                     .ForMember(dest => dest.Assists, opts => opts.MapFrom(src => src.Assists))
                     .ForMember(dest => dest.AssistsPerGame, opts => opts.MapFrom(src => src.AssistsPerGame))
                     .ForMember(dest => dest.Deaths, opts => opts.MapFrom(src => src.Deaths))
@@ -24,7 +24,6 @@ namespace CsStat.Web
                     .ForMember(dest => dest.DefusedBombs, opts => opts.MapFrom(src => src.Defuse))
                     .ForMember(dest => dest.ExplodedBombs, opts => opts.MapFrom(src => src.Explode))
                     .ForMember(dest => dest.FriendlyKills, opts => opts.MapFrom(src => src.FriendlyKills))
-                    .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.Player.ImagePath))
                     .ForMember(dest => dest.KdRatio, opts => opts.MapFrom(src => src.KdRatio))
                     .ForMember(dest => dest.Kills, opts => opts.MapFrom(src => src.Kills))
                     .ForMember(dest => dest.KillsPerGame, opts => opts.MapFrom(src => src.KillsPerGame))
@@ -41,12 +40,12 @@ namespace CsStat.Web
 
                         if (d.Victims != null && s.Victims.Any())
                         {
-                            d.Victims = context.Mapper.Map<List<VictimKillerViewModel>>(s.Victims);
+                            d.Victims = s.Victims;
                         }
 
                         if (d.Killers != null && s.Killers.Any())
                         {
-                            d.Killers = context.Mapper.Map<List<VictimKillerViewModel>>(s.Killers);
+                            d.Killers = s.Killers;
                         }
 
                         if (d.Achievements != null && d.Achievements.Any())
@@ -62,16 +61,11 @@ namespace CsStat.Web
                 CreateMap<WeaponStatModel, WeaponViewModel>()
                     .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Weapon.Id))
                     .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Weapon.Name))
-                    .ForMember(dest => dest.IconUrl, opts => opts.MapFrom(src => src.Weapon.Icon.FullUrl))
-                    .ForMember(dest => dest.ImageUrl, opts => opts.MapFrom(src => src.Weapon.Image.FullUrl))
+                    .ForMember(dest => dest.IconImage, opts => opts.MapFrom(src => src.Weapon.Icon.FullUrl))
+                    .ForMember(dest => dest.PhotoImage, opts => opts.MapFrom(src => src.Weapon.Image.FullUrl))
                     .ForMember(dest => dest.Type, opts => opts.MapFrom(src => src.Weapon.Type.Name))
                     .AfterMap((s, d, context) => { d.Kills = s.Kills; });
 
-                CreateMap<VictimKillerModel, VictimKillerViewModel>()
-                    .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
-                    .ForMember(dest => dest.Count, opts => opts.MapFrom(src => src.Count))
-                    .ForMember(dest => dest.ImagePath, opts => opts.MapFrom(src => src.ImagePath))
-                    ;
                 CreateMap<AchieveModel, AchievementViewModel>()
                     .ForMember(dest => dest.IconUrl, opts => opts.MapFrom(src => src.Icon.Url))
                     .ForMember(dest => dest.AchievementId, opts => opts.MapFrom(src => src.AchievementId))
