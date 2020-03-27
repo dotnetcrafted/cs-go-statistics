@@ -53,6 +53,7 @@
 
         "import/extensions": "off",
         "import/first": "off",
+        "import/prefer-default-export": "off",
         "import/no-unresolved": "off",
         "import/no-extraneous-dependencies": "off",
         "implicit-arrow-linebreak": "off",
