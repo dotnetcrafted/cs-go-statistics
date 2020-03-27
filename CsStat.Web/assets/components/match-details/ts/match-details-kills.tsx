@@ -4,7 +4,10 @@ import {
     MatchDetailsSquadPlayer,
     MatchDetailsKill
 } from 'general/ts/redux/types';
-import { getWeaponById, getIconByName } from 'project/helpers';
+import { 
+    getWeaponById, 
+    getIconByName, 
+    getPlayerById } from 'project/helpers';
 
 export class MatchDetailsKills extends React.Component<any, {}> {
     getPlayerById(id: string) {
@@ -27,12 +30,13 @@ export class MatchDetailsKills extends React.Component<any, {}> {
 
     renderPlayer(id: string) {
         const player = this.getPlayerById(id);
+        const cmsPlayer = getPlayerById(id);
 
         if (!player) return null;
 
         const playerCss = player.team === 'Terrorist' ? 'color-t-primary' : 'color-ct-primary';
 
-        return <span className={`match-kills__player ${playerCss}`}>{player.name}</span>
+        return <span className={`match-kills__player ${playerCss}`}>{cmsPlayer.nickName}</span>
     }
 
     renderAssister(kill: MatchDetailsKill) {

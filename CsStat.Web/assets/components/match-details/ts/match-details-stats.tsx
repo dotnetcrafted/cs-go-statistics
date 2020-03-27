@@ -60,7 +60,8 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
 
                         return ({
                             ...player,
-                            rank: cmsPlayer.rang
+                            rank: cmsPlayer.rang,
+                            name: cmsPlayer.nickName
                         })
                     })
                     return (
