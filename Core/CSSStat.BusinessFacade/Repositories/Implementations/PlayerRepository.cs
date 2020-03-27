@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
@@ -63,9 +62,9 @@ namespace BusinessFacade.Repositories.Implementations
 
         #endregion
 
-        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo)
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo, Constants.PeriodDay? periodDay = Constants.PeriodDay.All)
         {
-            var logs = GetLogs(dateFrom, dateTo);
+            var logs = GetLogs(dateFrom, dateTo, periodDay);
             var playersStats = new List<PlayerStatsModel>();
 
             if (!logs.Any())
@@ -173,10 +172,11 @@ namespace BusinessFacade.Repositories.Implementations
             return victimModel;
         }
 
-        private static List<Log> GetLogs(string from = "", string to = "")
+        private static List<Log> GetLogs(string from = "", string to = "", Constants.PeriodDay? periodDay = Constants.PeriodDay.All)
         {
+            var periodDayCondition = PeriodsDayCondition.Get(periodDay);
             return _logsRepository
-                .GetLogsForPeriod(from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1))
+                .GetLogsForPeriod(from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1), periodDayCondition)
                 .ToList();
         }
 
@@ -189,7 +189,6 @@ namespace BusinessFacade.Repositories.Implementations
                            Gun = r.Key,
                            Kills = r.Count()
                        }).OrderByDescending(x=>x.Kills).ToList();
-
         }
 
         private static int GetExplodeBombs(IReadOnlyCollection<Log> playersLogs, IReadOnlyCollection<Log> logs)

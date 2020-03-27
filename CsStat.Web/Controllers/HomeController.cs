@@ -12,6 +12,7 @@ using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using Microsoft.Ajax.Utilities;
 using MongoDB.Driver;
+using static BusinessFacade.Constants;
 
 namespace CsStat.Web.Controllers
 {
@@ -31,8 +32,8 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo")]
-        public ActionResult GetRepository(string dateFrom = "", string dateTo = "")
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
+        public ActionResult GetRepository(string dateFrom = "", string dateTo = "", PeriodDay? periodDay = null)
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
             {
@@ -42,7 +43,7 @@ namespace CsStat.Web.Controllers
                 dateFrom = day.ToShortFormat();
             }
 
-            var playersStat = GetPlayersStat(dateFrom, dateTo)
+            var playersStat = GetPlayersStat(dateFrom, dateTo, periodDay)
                 .Where(x => x.TotalGames != 0)
                 .OrderByDescending(x => x.KdRatio)
                 .ThenByDescending(x => x.Kills)
@@ -62,9 +63,9 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        private static List<PlayerStatsViewModel> GetPlayersStat(string dateFrom = "", string dateTo = "")
+        private static List<PlayerStatsViewModel> GetPlayersStat(string from = "", string to = "", PeriodDay? periodDay = null)
         {
-            var players = _playerRepository.GetStatsForAllPlayers(dateFrom, dateTo).OrderByDescending(x=>x.KdRatio).ToList();
+            var players = _playerRepository.GetStatsForAllPlayers(from, to, periodDay).OrderByDescending(x=>x.KdRatio).ToList();
             var steamIds = string.Join(",", players.Select(x => x.Player.SteamId).ToList());
             var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
 
@@ -84,7 +85,5 @@ namespace CsStat.Web.Controllers
 
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
         }
-
-
     }
 }

@@ -27,5 +27,12 @@
             public const string Logo = "logo";
             public const string ServerIsDown = "serverDown";
         }
+
+        public enum PeriodDay
+        {
+            All,
+            Afternoon,
+            Evening
+        }
     }
 }
