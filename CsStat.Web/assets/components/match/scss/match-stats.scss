@@ -1,18 +1,64 @@
 .match-stats {
     &__title {
         margin: 0;
+        font-weight: bold;
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        padding: 12px;
+        flex: 0.1;
+
+        > span {
+            font-size: 5rem;
+            line-height: 5rem;
+        }
     }
     &__team {
+        display: flex;
+
         & + & {
             margin-top: 10px;
+        }
+        &.terrorist {            
+            .ant-table-row:nth-child(odd) {
+                background-color: rgba($color-t-primary, .5);
+            }
+            .ant-table-row:nth-child(2n) {
+                background-color: rgba($color-t-primary, .8);
+            }
+            .match-stats__title{
+                color: $color-t-primary;
+            }
+        }
+        &.counterterrorist {
+            .ant-table-row:nth-child(odd) {
+                background-color: rgba($color-ct-primary, .5);
+            }
+            .ant-table-row:nth-child(2n) {
+                background-color: rgba($color-ct-primary, .8);
+            }
+            .match-stats__title{
+                color: $color-ct-primary;
+            }
         }
     }
 
     &__table {
-        background-color: #F5F5F5;
+        flex: 1;
 
-        .ant-table-tbody .ant-table-row td {
-            padding: 5px 10px;
+        .ant-table-thead > tr > th {
+            color: #696969;
+        }
+        .ant-table-tbody > tr > td{
+            color: white;
+            font-weight: bold;
+        }
+        .ant-table-tbody > tr > td,
+        .ant-table-thead > tr > th,
+        .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr{
+            border: none;
+            padding: 4px;
+            background: none;
         }
     }
 }

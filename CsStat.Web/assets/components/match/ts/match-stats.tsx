@@ -15,6 +15,7 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
         <div className="match-stats">
             {
                 round.squads.map((squad) => {
+                    const teamCss = ((squad.players[0] || {}).team || "").toLocaleLowerCase();
                     const players = squad.players.map((player) => {
                         const cmsPlayer = getPlayerById(player.id);
 
@@ -26,17 +27,23 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
                             name: cmsPlayer.nickName
                         });
                     });
-
+                    const title = squad.title.split(" ")
+                            .sort((one, two) => (one.length < two.length ? -1 : 1));
                     return (
-                        <div className="match-stats__team" key={squad.title}>
-                            <h3 className="match-stats__title">{squad.title}</h3>
+                        <div className={`match-stats__team ${teamCss}`} key={squad.title}>
+                            <div className="match-stats__title">
+                                <span>{title[0]}</span>
+                                <br/>
+                                {title[1]}
+                            </div>
                             <Table
                                 className="match-stats__table"
                                 rowKey={(record) => record.id}
                                 dataSource={players}
                                 columns={columns}
-                                bordered={true}
+                                bordered={false}
                                 pagination={false}
+                                size={undefined}
                             />
                         </div>
                     );
