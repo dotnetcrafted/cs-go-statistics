@@ -19,12 +19,12 @@
 
     &__time {
         display: inline-block;
-        margin-left: 12px;
-        padding: 4px 0px;
+        padding: 0px 4px;
         border-radius: 4px;
-        color:#696969;
+        color: #696969;
         font-weight: 500;
         font-size: 14px;
+        background-color: rgba(0, 0, 0, 0.1);
     }
 
     &__player {
