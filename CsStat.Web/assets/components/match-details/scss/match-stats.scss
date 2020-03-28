@@ -1,7 +1,10 @@
 .match-stats {
+    &__title {
+        margin: 0;
+    }
     &__team {
         & + & {
-            margin-top: 30px;
+            margin-top: 10px;
         }
     }
 

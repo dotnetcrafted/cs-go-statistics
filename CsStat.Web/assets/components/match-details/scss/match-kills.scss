@@ -13,25 +13,33 @@
 
     &__log {
         display: inline-block;
-        background-color: rgba(0,0,0,0.1);
         padding: 4px 10px;
         border-radius: 4px;
     }
 
     &__time {
         display: inline-block;
-        margin-left: 20px;
-        padding: 4px 10px;
-        background-color: #555;
+        margin-left: 12px;
+        padding: 4px 0px;
         border-radius: 4px;
-        color: white;
+        color: #aaa;
         font-weight: 500;
+        font-size: 14px;
     }
     
     &__player {
-        font-weight: 600;
+        padding: 0px 4px 2px 4px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: white;
+        
+        &.color-t-primary {
+            background-color: $color-t-primary;
+        }        
+        &.color-ct-primary {
+            background-color: $color-ct-primary;
+        }
     }
-
     &__weapon {
         margin: 0 2px;
         max-height: 20px;
@@ -41,8 +49,15 @@
     &__headshot,
     &__suicide,
     &__penetrated {
-        max-height: 24px;
         margin: 0 2px;
+        max-height: 24px;
         object-fit: contain;
+    }
+    &__weapon,
+    &__headshot,
+    &__suicide,
+    &__penetrated {
+        -webkit-filter: brightness(0.68)contrast(3.4)hue-rotate(217deg)saturate(9.9);
+        filter: brightness(0.68)contrast(3.4)hue-rotate(217deg)saturate(9.9);
     }
 }

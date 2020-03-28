@@ -8,7 +8,6 @@
     &__li {
         flex: 1;
         min-width: 30px;
-        padding: 0 4px;
 
         &:nth-child(15) {
             position: relative;
@@ -52,16 +51,18 @@
         }
         
         &.no-value {
-            color: #E4E4E4;
+            color: #E4E4E400;
         }
     }
 
     &__col {
         display: block;
         border-radius: 4px;
+        padding: 0 4px;
 
         &.is-selected {
             background-color: rgba(0,0,0,0.1);
+            border-radius: 4px 4px 0 0;
         }
     }
 
