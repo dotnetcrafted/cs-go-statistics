@@ -27,7 +27,7 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
             .then((res: Response) => res.json())
             .then((acc) => acc.filter((elem: { type: string }) => elem.type === 'User'))
             .catch((err) => {
-                throw new Error(err);
+                console.log(err);
             });
 
         this.setState({
@@ -42,6 +42,9 @@ export default class AuthorsCopyright extends React.Component<any, AuthorsCopyri
 
     render(): ReactNode {
         const { data } = this.state;
+
+        if (!data) return null;
+
         return (
             <div className="contributors">
                 <div className="contributors__title">
