@@ -1,26 +1,23 @@
 import React from 'react';
-import { MatchDetails, MatchRound } from 'general/ts/redux/types';
-import { MatchDetailsRounds } from './match-details-rounds';
-import { MatchDetailsStats } from './match-details-stats';
-import { MatchDetailsKills } from './match-details-kills';
+import { MatchModel, MatchRoundModel } from 'models';
+import { MatchRounds } from './match-rounds';
+import { MatchStats } from './match-stats';
+import { MatchKills } from './match-kills';
 
 interface MatchDetailsLayoutProps {
-    match: MatchDetails | null,
-    round: MatchRound | null,
+    match: MatchModel | null,
+    round: MatchRoundModel | null,
     selectedRoundId: number | null,
     selectRound: any,
 }
 
-const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: MatchDetailsLayoutProps) => {
+const MatchLayout: React.FC<MatchDetailsLayoutProps> = ({ match, round, selectedRoundId, selectRound }) => {
     if (!match) return null;
-
-    //console.log(match);
-    //console.log(round);
 
     return (
         <div className="match">
             <div className="match__bg of-cover">
-                <img src={match.mapImage} />
+                <img src={match.mapImage} alt={match.map} />
             </div>
             <div className="container">
                 <div className="match__content">
@@ -35,23 +32,23 @@ const MatchDetailsLayout = ({ match, round, selectedRoundId, selectRound }: Matc
                             <span className="color-ct-primary">{match.ctScore}</span>
                         </div>
                     </div>
-                    <MatchDetailsRounds
+                    <MatchRounds
                         rounds={match.rounds}
                         selectedRoundId={selectedRoundId}
                         selectRound={selectRound}
                     />
                     <div className="match__body">
                         <div className="match__stats">
-                            <MatchDetailsStats round={round} />
+                            <MatchStats round={round} />
                         </div>
                         <div className="match__kills">
-                            <MatchDetailsKills round={round} />
+                            <MatchKills round={round} />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
-export default MatchDetailsLayout;
+export default MatchLayout;

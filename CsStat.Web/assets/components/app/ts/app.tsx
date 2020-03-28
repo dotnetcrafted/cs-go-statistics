@@ -9,7 +9,7 @@ import WikiPage from '../../pages/ts/wiki-page';
 import NotFoundPage from '../../pages/ts/not-found-page';
 import constants from '../../../general/ts/constants';
 import { Matches } from 'components/matches';
-import { MatchDetails } from 'components/match-details';
+import { Match } from 'components/match';
 
 const store = configureStore();
 
@@ -28,7 +28,7 @@ const App: SFC<AppProps> = (props) => (
                         <Matches />
                     </Route>
                     <Route exact path={constants.ROUTES.MATCH_DETAILS} >
-                        <MatchDetails />
+                        <Match />
                     </Route>
                     <Route>
                         <NotFoundPage/>

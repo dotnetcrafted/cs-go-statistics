@@ -1,6 +1,3 @@
 import './scss/index.scss';
-import MatchesController from './ts/matches.controller';
 
-export {
-    MatchesController as Matches,
-};
+export { MatchesController as Matches } from './ts/matches.controller';

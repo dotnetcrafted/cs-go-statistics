@@ -13,21 +13,19 @@
 
     &__log {
         display: inline-block;
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0, 0, 0, 0.07);
         padding: 4px 10px;
         border-radius: 4px;
     }
 
     &__time {
         display: inline-block;
-        margin-left: 20px;
         padding: 4px 10px;
-        background-color: #555;
         border-radius: 4px;
-        color: white;
+        color: #696969;
         font-weight: 500;
     }
-    
+
     &__player {
         font-weight: 600;
     }

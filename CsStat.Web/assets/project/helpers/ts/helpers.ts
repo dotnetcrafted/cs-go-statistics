@@ -1,31 +1,26 @@
 import app from 'general/ts/app';
+import { CmsIconModel, CmsPlayerModel, CmsWeaponModel } from 'models';
 
-export const getWeaponById = (id: number) => {
+export const getWeaponById = (id: number): CmsWeaponModel | null => {
     const weapons = app.state.weapons;
 
     if (!Array.isArray(weapons)) return null;
 
-    const foundWeapon = weapons.find((weapon) => weapon.id === id);
+    return weapons.find((weapon) => weapon.id === id) || null;
+};
 
-    return foundWeapon ? foundWeapon : null;
-}
-
-export const getIconByName = (name: string) => {
+export const getIconByName = (name: string): CmsIconModel | null => {
     const icons = app.state.icons;
 
     if (!Array.isArray(icons)) return null;
 
-    const foundIcon = icons.find((icon) => icon.name === name);
+    return icons.find((icon) => icon.name === name) || null;
+};
 
-    return foundIcon ? foundIcon : null;
-}
-
-export const getPlayerById = (id: string) => {
+export const getPlayerById = (id: string): CmsPlayerModel | null => {
     const players = app.state.players;
 
     if (!Array.isArray(players)) return null;
 
-    const foundPlayer = players.find((player) => player.steamId === id);
-
-    return foundPlayer ? foundPlayer : null;
-}
+    return players.find((player) => player.steamId === id) || null;
+};

@@ -1,16 +1,20 @@
-import React from 'react';
-import MatchesLayout from './matches-layout';
+import React, { ReactNode } from 'react';
+import { MatchesModel } from 'models';
+import { MatchesLayout } from './matches-layout';
 
-//const MatchesControllerState
+interface MatchesControllerState {
+    matches: MatchesModel | null,
+}
 
-class MatchesController extends React.Component<any, any> {
+export class MatchesController extends React.Component<any, MatchesControllerState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            macthes: null,
-        }
+            matches: null,
+        };
     }
-    componentDidMount() {
+
+    componentDidMount(): void {
         fetch('/api/matchesdata')
             .then((res: Response) => res.json())
             .then((data) => {
@@ -20,14 +24,12 @@ class MatchesController extends React.Component<any, any> {
             })
             .catch((err) => {
                 console.log(err);
-            })
+            });
     }
 
-    render() {
+    render(): ReactNode {
         return (
             <MatchesLayout matches={this.state.matches} />
         );
     }
 }
-
-export default MatchesController;
