@@ -1,13 +1,15 @@
 import React from 'react';
-import { parseISO, format } from 'date-fns';
-import { BaseMatch } from 'general/ts/redux/types';
 import { Link } from 'react-router-dom';
+import { parseISO, format } from 'date-fns';
+import { BaseMatchModel } from 'models';
 
-interface MacthesCardProps {
-    match: BaseMatch,
+interface MatchesCardProps {
+    match: BaseMatchModel | null,
 }
 
-export const MatchesCard = ({ match }: MacthesCardProps) => {
+export const MatchesCard: React.FC<MatchesCardProps> = ({ match }) => {
+    if (!match) return null;
+
     return (
         <Link className="matches-card" to={`/matches/${match.id}`}>
             <div className="matches-card__header">
@@ -21,8 +23,8 @@ export const MatchesCard = ({ match }: MacthesCardProps) => {
                     <span className="matches-card__colon">:</span>
                     <span className="color-ct-primary">{match.ctScore}</span>
                 </div>
-                <div className="matches-card__duration">{match.duration}</div>
+                {/*<div className="matches-card__duration">{match.duration}</div>*/}
             </div>
         </Link>
     );
-}
+};

@@ -1,53 +1,15 @@
 import React from 'react';
 import { Table } from 'antd';
+import { MatchRoundModel } from 'models';
 import { getPlayerById } from 'project/helpers';
-import { MatchRound } from 'general/ts/redux/types';
+import { columns } from './enums';
 
-interface MatchDetailsStatsProps {
-    round: MatchRound | null,
+interface MatchStatsProps {
+    round: MatchRoundModel | null,
 }
 
-const columns = [
-    {
-        title: 'Rank',
-        dataIndex: 'rank',
-        key: 'rank',
-    },
-    {
-        title: 'Player',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'K/A/D',
-        dataIndex: 'kad',
-        key: 'kad',
-    },
-    {
-        title: 'KD Diff',
-        dataIndex: 'kdDiff',
-        key: 'kdDiff',
-    },
-    {
-        title: 'KD',
-        dataIndex: 'kd',
-        key: 'kd',
-    },
-    {
-        title: 'ADR',
-        dataIndex: 'adr',
-        key: 'adr',
-    },
-    {
-        title: 'UD',
-        dataIndex: 'ud',
-        key: 'ud',
-    }
-];
-
-export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
+export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
     if (!round || !Array.isArray(round.squads)) return null;
-
 
     return (
         <div className="match-stats">
@@ -62,8 +24,9 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
                             ...player,
                             rank: cmsPlayer.rang,
                             name: cmsPlayer.nickName
-                        })
-                    })
+                        });
+                    });
+
                     return (
                         <div className="match-stats__team" key={squad.title}>
                             <h3 className="match-stats__title">{squad.title}</h3>
@@ -81,4 +44,4 @@ export const MatchDetailsStats = ({ round }: MatchDetailsStatsProps) => {
             }
         </div>
     );
-}
+};

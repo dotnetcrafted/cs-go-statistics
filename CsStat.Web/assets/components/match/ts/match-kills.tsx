@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
-    MatchDetailsSquad,
-    MatchDetailsSquadPlayer,
-    MatchDetailsKill
-} from 'general/ts/redux/types';
-import { 
-    getWeaponById, 
-    getIconByName, 
-    getPlayerById } from 'project/helpers';
+    MatchSquadModel,
+    MatchPlayerModel,
+    MatchKillModel,
+} from 'models';
+import {
+    getWeaponById,
+    getIconByName,
+    getPlayerById
+} from 'project/helpers';
 
-export class MatchDetailsKills extends React.Component<any, {}> {
-    getPlayerById(id: string) {
+export class MatchKills extends React.Component<any, {}> {
+    getPlayerById(id: string): MatchPlayerModel | null {
         const { round } = this.props;
 
         if (!id) return null;
 
-        let foundPlayer: MatchDetailsSquadPlayer | undefined;
+        let foundPlayer: MatchPlayerModel | null = null;
 
-        round.squads.forEach((squad: MatchDetailsSquad) => {
-            squad.players.forEach((player: MatchDetailsSquadPlayer) => {
+        round.squads.forEach((squad: MatchSquadModel) => {
+            squad.players.forEach((player: MatchPlayerModel) => {
                 if (player.id.toString() === id.toString()) {
                     foundPlayer = player;
                 }
@@ -28,30 +29,30 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         return foundPlayer || null;
     }
 
-    renderPlayer(id: string) {
+    renderPlayer(id: string): ReactNode | null {
         const player = this.getPlayerById(id);
         const cmsPlayer = getPlayerById(id);
 
-        if (!player) return null;
+        if (!player || !cmsPlayer) return null;
 
         const playerCss = player.team === 'Terrorist' ? 'color-t-primary' : 'color-ct-primary';
 
-        return <span className={`match-kills__player ${playerCss}`}>{cmsPlayer.nickName}</span>
+        return <span className={`match-kills__player ${playerCss}`}>{cmsPlayer.nickName}</span>;
     }
 
-    renderAssister(kill: MatchDetailsKill) {
+    renderAssister(kill: MatchKillModel): ReactNode | null {
         if (!kill.assister) return null;
 
         return (
             <>
-                &nbsp;<b>+</b>&nbsp; 
+                &nbsp;<b>+</b>&nbsp;
                 {this.renderPlayer(kill.assister)}
             </>
         );
     }
 
-    renderWeapon(id: number) {
-        const weapon  = getWeaponById(id);
+    renderWeapon(id: number): ReactNode | string {
+        const weapon = getWeaponById(id);
 
         if (!weapon) return 'unknown weapon';
 
@@ -63,7 +64,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         />;
     }
 
-    renderPenetrationIcon(isPenetrated: boolean) {
+    renderPenetrationIcon(isPenetrated: boolean): ReactNode | string {
         if (!isPenetrated) return null;
 
         const penetratedIcon = getIconByName('penetratedIcon');
@@ -71,37 +72,33 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         if (!penetratedIcon) return 'penetrated';
 
         return (
-            <>
-                <img
-                    className="match-kills__penetrated"
-                    src={penetratedIcon.image}
-                    alt={'penetrated'}
-                    title={'Damage incomed through obstacles'}
-                />
-            </>
+            <img
+                className="match-kills__penetrated"
+                src={penetratedIcon.image}
+                alt={'penetrated'}
+                title={'Damage incomes through obstacles'}
+            />
         );
     }
 
-    renderHeadshotIcon(isHeadshot: boolean) {
+    renderHeadshotIcon(isHeadshot: boolean): ReactNode | string {
         if (!isHeadshot) return null;
 
         const headshotIcon = getIconByName('headShotIcon');
 
-        if (!headshotIcon) return 'headshot'
+        if (!headshotIcon) return 'headshot';
 
         return (
-            <>
-                <img
-                    className="match-kills__headshot"
-                    src={headshotIcon.image}
-                    alt={'headshot'}
-                    title={'Damage incomed right in the head'}
-                />
-            </>
+            <img
+                className="match-kills__headshot"
+                src={headshotIcon.image}
+                alt={'headshot'}
+                title={'Damage incomes right in the head'}
+            />
         );
     }
 
-    renderSuicideIcon(isSuicide: boolean) {
+    renderSuicideIcon(isSuicide: boolean): ReactNode | string {
         if (!isSuicide) return null;
 
         const suicideIcon = getIconByName('suicideIcon');
@@ -109,23 +106,21 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         if (!suicideIcon) return 'suicide';
 
         return (
-            <>
-                <img
-                    className="match-kills__suicide"
-                    src={suicideIcon.image}
-                    alt={'suicide'}
-                    title={'Emo'}
-                />
-            </>
+            <img
+                className="match-kills__suicide"
+                src={suicideIcon.image}
+                alt={'suicide'}
+                title={'Emo'}
+            />
         );
     }
 
-    renderTime(time: number) {
-        const minutes = Math.floor(time/60);
-        const formattedMinutes = minutes < 0 ? '0': minutes;
+    renderTime(time: number): string {
+        const minutes = Math.floor(time / 60);
+        const formattedMinutes = minutes < 0 ? '0' : minutes;
         const seconds = time - (minutes * 60);
         let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-        
+
         if (seconds === 0) {
             formattedSeconds = '00';
         }
@@ -133,7 +128,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
         return `${formattedMinutes}:${formattedSeconds}`;
     }
 
-    render() {
+    render(): ReactNode {
         const { round } = this.props;
 
         if (!round || !Array.isArray(round.kills)) return null;
@@ -142,7 +137,7 @@ export class MatchDetailsKills extends React.Component<any, {}> {
             <div className="match-kills">
                 <ul className="match-kills__list">
                     {
-                        round.kills.map((kill: MatchDetailsKill, i: number) => {
+                        round.kills.map((kill: MatchKillModel, i: number) => {
                             return (
                                 <li className="match-kills__li" key={`${round.id}-${i}`}>
                                     <span className="match-kills__log">

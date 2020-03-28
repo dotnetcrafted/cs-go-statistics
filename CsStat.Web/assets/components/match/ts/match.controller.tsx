@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { createMatchSelector } from 'connected-react-router';
-import { MatchDetails } from 'general/ts/redux/types';
-import MatchDetailsLayout from './match-details-layout';
+import { MatchModel, MatchRoundModel } from 'models';
+import MatchLayout from './match-layout';
 
-interface MatchDetailsControllerState {
-    match: MatchDetails | null,
+interface MatchControllerState {
+    match: MatchModel | null,
     selectedRoundId: number | null,
 }
 
-class MatchDetailsController extends React.Component<any, MatchDetailsControllerState> {
+class MatchController extends React.Component<any, MatchControllerState> {
     constructor(props: any) {
         super(props);
         this.state = {
             match: null,
             selectedRoundId: null,
-        }
+        };
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         const { matchId } = this.props;
 
         fetch(`/api/matchdata?matchId=${matchId}`)
@@ -30,34 +30,31 @@ class MatchDetailsController extends React.Component<any, MatchDetailsController
             })
             .catch((err) => {
                 console.log(err);
-            })
+            });
     }
 
-    selectRound = (roundId: number) => {
+    selectRound = (roundId: number): void => {
         this.setState({ selectedRoundId: roundId });
-    }
+    };
 
-    getRound() {
+    getRound(): MatchRoundModel | null {
         const { match } = this.state;
 
         if (!match || !Array.isArray(match.rounds) || !match.rounds.length) return null;
 
-        let roundId = this.state.selectedRoundId;
+        const roundId = this.state.selectedRoundId;
 
         if (!roundId) {
             return match.rounds[match.rounds.length - 1];
         }
 
-        const foundRound = match.rounds.find((round) => round.id === roundId);
-
-        return foundRound || null;
+        return match.rounds.find((round) => round.id === roundId) || null;
     }
 
-
-    render() {
+    render(): ReactNode {
         return (
-            <MatchDetailsLayout
-                match={this.state.match} 
+            <MatchLayout
+                match={this.state.match}
                 round={this.getRound()}
                 selectedRoundId={this.state.selectedRoundId}
                 selectRound={this.selectRound}
@@ -70,14 +67,14 @@ const mapStateToProps = (state: any) => {
     const matchSelector = createMatchSelector('/matches/:id');
     const match: any = matchSelector(state);
     const matchId = match && match.params.id;
-    
+
     return {
         matchId,
         router: state.router,
     };
 };
 
-export const MatchDetailsControllerConnected = connect(
+export const MatchControllerConnected = connect(
     mapStateToProps,
     null
-)(MatchDetailsController);
+)(MatchController);
