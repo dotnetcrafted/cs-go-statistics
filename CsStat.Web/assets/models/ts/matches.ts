@@ -47,6 +47,7 @@ export interface MatchPlayerModel {
     score: number,
     steamId: string,
     steamImage: string,
+    isDied: boolean,
 }
 
 export interface MatchKillModel {

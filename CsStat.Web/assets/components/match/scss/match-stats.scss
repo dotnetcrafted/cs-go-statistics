@@ -2,8 +2,6 @@
     &__title {
         margin: 0;
         font-weight: bold;
-        flex-direction: column-reverse;
-        justify-content: center;
         text-align: center;
         padding: 12px;
         flex: 0.1;
@@ -13,31 +11,30 @@
             line-height: 5rem;
         }
     }
+
     &__team {
         display: flex;
 
         & + & {
             margin-top: 10px;
         }
-        &.terrorist {            
-            .ant-table-row:nth-child(odd) {
-                background-color: rgba($color-t-primary, .5);
+
+        &.terrorist {
+            .ant-table-row {
+                background-color: rgba($color-t-primary, 0.8);
             }
-            .ant-table-row:nth-child(2n) {
-                background-color: rgba($color-t-primary, .8);
-            }
-            .match-stats__title{
+
+            .match-stats__title {
                 color: $color-t-primary;
             }
         }
+
         &.counterterrorist {
-            .ant-table-row:nth-child(odd) {
-                background-color: rgba($color-ct-primary, .5);
+            .ant-table-row {
+                background-color: rgba($color-ct-primary, 0.8);
             }
-            .ant-table-row:nth-child(2n) {
-                background-color: rgba($color-ct-primary, .8);
-            }
-            .match-stats__title{
+
+            .match-stats__title {
                 color: $color-ct-primary;
             }
         }
@@ -46,19 +43,54 @@
     &__table {
         flex: 1;
 
-        .ant-table-thead > tr > th {
-            color: #696969;
+        .ant-table-tbody > tr {
+            &.ant-table-row {
+                &.died {
+                    td {
+                        background-color: rgba(0, 0, 0, 0.15);
+
+                        &:nth-child(2) {
+                            position: relative;
+                            overflow: hidden;
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
         }
-        .ant-table-tbody > tr > td{
-            color: white;
-            font-weight: bold;
+
+        .died {
+            & td {
+                &:nth-child(2) {
+                    &::after {
+                        content: '☠';
+                        position: absolute;
+                        right: 5%;
+                        top: -38px;
+                        font-size: 65px;
+                        color: rgba(0, 0, 0, 0.04);
+                        z-index: -1;
+                        transform: rotate(-28deg);
+                    }
+                }
+            }
         }
+
         .ant-table-tbody > tr > td,
-        .ant-table-thead > tr > th,
-        .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr{
-            border: none;
+        .ant-table-thead > tr > th {
             padding: 4px;
             background: none;
+        }
+
+        .ant-table-thead > tr > th {
+            color: #696969;
+            border: none;
+        }
+
+        .ant-table-tbody > tr > td {
+            color: white;
+            font-weight: 500;
+            padding: 8px;
         }
     }
 }

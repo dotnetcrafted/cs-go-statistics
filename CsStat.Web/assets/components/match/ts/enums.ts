@@ -11,7 +11,7 @@ export const columns: ColumnProps<MatchPlayerModel>[] = [
     {
         title: 'Player',
         dataIndex: 'name',
-        key: 'name',
+        key: 'name'
     },
     {
         title: 'K/A/D',

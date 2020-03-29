@@ -43,7 +43,7 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
                                 columns={columns}
                                 bordered={false}
                                 pagination={false}
-                                size={undefined}
+                                rowClassName = {(record) => (record.isDied ? "died" : "")}
                             />
                         </div>
                     );

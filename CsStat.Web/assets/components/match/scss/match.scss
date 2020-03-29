@@ -22,7 +22,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            background-image: linear-gradient(rgba(0,0,0,0.1) 30%, white);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1) 30%, white);
         }
     }
 
@@ -65,15 +65,15 @@
         margin: 0 -30px -30px;
         padding: 30px;
         background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
+        border-radius: 0 0 15px 15px;
     }
 
     &__stats {
-        width: 50%;
+        width: 60%;
     }
 
     &__kills {
-        width: 50%;
+        width: 40%;
         padding-top: 37px;
     }
 }
