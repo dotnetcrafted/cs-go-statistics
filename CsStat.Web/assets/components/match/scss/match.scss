@@ -13,24 +13,15 @@
         z-index: -30;
         object-fit: cover;
 
-        &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            z-index: 5;
-            width: 100%;
-            height: 100%;
-            display: block;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.1) 30%, white);
+        img {
+            object-position: top center;
         }
     }
 
     &__content {
         padding: 30px;
-        background: white;
+        background: rgba(0, 0, 0, 0.7);
         border-radius: 20px;
-        box-shadow: 0 2px 5px 1px #696969;
     }
 
     &__header {
@@ -47,6 +38,7 @@
 
     &__map {
         margin: 0 15px 0 0;
+        color: white;
     }
 
     &__score {
@@ -62,10 +54,7 @@
 
     &__body {
         display: flex;
-        margin: 0 -30px -30px;
-        padding: 30px;
-        background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 0 0 15px 15px;
+        margin-top: 30px;
     }
 
     &__stats {

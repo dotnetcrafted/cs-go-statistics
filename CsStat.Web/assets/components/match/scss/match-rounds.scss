@@ -42,7 +42,7 @@
         &--mid {
             min-height: 0;
             padding: 2px 0;
-            color: #696969;
+            color: #CCCCCC;
             font-size: 16px;
         }
 
@@ -51,7 +51,7 @@
         }
 
         &.no-value {
-            color: #E4E4E4;
+            color: #696969;
         }
     }
 
@@ -61,8 +61,8 @@
         padding: 0 4px;
 
         &.is-selected {
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 4px 4px 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
         }
     }
 

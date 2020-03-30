@@ -27,15 +27,8 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
                             name: cmsPlayer.nickName
                         });
                     });
-                    const title = squad.title.split(" ")
-                            .sort((one, two) => (one.length < two.length ? -1 : 1));
                     return (
                         <div className={`match-stats__team ${teamCss}`} key={squad.title}>
-                            <div className="match-stats__title">
-                                <span>{title[0]}</span>
-                                <br/>
-                                {title[1]}
-                            </div>
                             <Table
                                 className="match-stats__table"
                                 rowKey={(record) => record.id}

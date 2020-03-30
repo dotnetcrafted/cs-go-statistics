@@ -13,22 +13,22 @@
 
     &__log {
         display: inline-block;
-        padding: 4px 10px;
+        padding: 2px 10px;
         border-radius: 4px;
+        color: white;
     }
 
     &__time {
         display: inline-block;
         padding: 0 4px;
         border-radius: 4px;
-        color: #696969;
+        color: #AAAAAA;
         font-weight: 500;
         font-size: 14px;
-        background-color: rgba(0, 0, 0, 0.1);
     }
 
     &__player {
-        padding: 0 4px 2px 4px;
+        padding: 2px 5px;
         border-radius: 4px;
         font-size: 14px;
         color: white;
@@ -54,12 +54,5 @@
         margin: 0 2px;
         max-height: 24px;
         object-fit: contain;
-    }
-
-    &__weapon,
-    &__headshot,
-    &__suicide,
-    &__penetrated {
-        filter: brightness(0.68) contrast(3.4) hue-rotate(217deg) saturate(9.9);
     }
 }
