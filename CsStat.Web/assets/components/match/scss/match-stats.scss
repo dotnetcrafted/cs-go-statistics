@@ -38,6 +38,16 @@
                 color: $color-ct-primary;
             }
         }
+
+        .ant-table-tbody {
+            > tr {
+                &.ant-table-row:hover {
+                    > td {
+                        background: unset;
+                    }
+                }
+            }
+        }
     }
 
     &__table {
