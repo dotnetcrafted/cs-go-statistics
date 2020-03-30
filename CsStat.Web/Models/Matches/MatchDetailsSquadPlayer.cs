@@ -18,5 +18,6 @@ namespace CsStat.Web.Models.Matches
         public int Ud { get; set; } // 24 ??
         
         public int Score { get; set; } // 120
+        public bool IsDied { get; set; }
     }
 }

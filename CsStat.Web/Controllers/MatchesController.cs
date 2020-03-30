@@ -179,7 +179,10 @@ namespace CsStat.Web.Controllers
                                     .Sum(t => t.UtilityDamage),
                                 Score = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
-                                    .Sum(t => t.Score)
+                                    .Sum(t => t.Score),
+                                IsDied = playerStatByRounds
+                                    .First(x => x.SteamId == player.SteamID && x.RoundNumber == round.RoundNumber)
+                                    .Death > 0
                             }).OrderByDescending(player => player.Score).ToList()
                         }).OrderBy(x => x.Title).ToList()
                     }).ToList()
