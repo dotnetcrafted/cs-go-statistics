@@ -180,7 +180,7 @@ namespace CsStat.Web.Controllers
                                 Score = playerStatByRounds
                                     .Where(x => x.SteamId == player.SteamID && x.RoundNumber <= round.RoundNumber)
                                     .Sum(t => t.Score)
-                            }).OrderByDescending(player => player.Kd).ToList()
+                            }).OrderByDescending(player => player.Score).ToList()
                         }).OrderBy(x => x.Title).ToList()
                     }).ToList()
                 };
