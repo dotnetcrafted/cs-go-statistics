@@ -101,9 +101,6 @@ namespace CsStat.Web.Controllers
                 if (match == null)
                     return Json("Match not found");
 
-                var steamIds = string.Join(",", match.Players.Select(x => x.SteamID).ToList());
-                var avatars = _steamApi.GetAvatarUrlBySteamId(steamIds);
-
                 var playerStatByRounds = match.Rounds.SelectMany(round => round.Squads.SelectMany(squad =>
                     squad.Players.Select(player =>
                         new PlayerStatByRound
