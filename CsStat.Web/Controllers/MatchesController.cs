@@ -82,8 +82,8 @@ namespace CsStat.Web.Controllers
                         Id = x.Id,
                         Map = x.Map,
                         Date = x.MatchDate,
-                        TScore = x.TotalSquadAScore,
-                        CTScore = x.TotalSquadBScore,
+                        AScore = x.TotalSquadAScore,
+                        BScore = x.TotalSquadBScore,
                         MapImage = GetMapImage(x.Map),
                         Duration = x.Duration
                     })
@@ -122,8 +122,8 @@ namespace CsStat.Web.Controllers
                     Map = match.Map,
                     MapImage = GetMapImage(match.Map),
                     Date = match.MatchDate,
-                    TScore = match.TotalSquadAScore,
-                    CTScore = match.TotalSquadBScore,
+                    AScore = match.TotalSquadAScore,
+                    BScore = match.TotalSquadBScore,
                     Duration = match.Duration,
                     Rounds = match.Rounds.Select(round => new MatchRound
                     {
