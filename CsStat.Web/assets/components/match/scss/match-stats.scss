@@ -8,7 +8,7 @@
 
         &.terrorist {
             .ant-table-row {
-                background-color: rgba($color-t-primary, 0.8);
+                background-color: rgba($color-t-primary, 0.9);
             }
 
             .match-stats__title {
@@ -18,7 +18,7 @@
 
         &.counterterrorist {
             .ant-table-row {
-                background-color: rgba($color-ct-primary, 0.8);
+                background-color: rgba($color-ct-primary, 0.9);
             }
 
             .match-stats__title {
