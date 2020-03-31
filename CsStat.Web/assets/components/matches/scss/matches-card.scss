@@ -7,24 +7,24 @@
         position: relative;
         overflow: hidden;
         z-index: 0;
-        background: #ddd;
+        background: #DDDDDD;
         border-radius: 10px 10px 0 0;
 
         &::before {
-            content: '';
+            content: "";
             display: block;
             padding-top: 40%;
         }
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(0, 0, 0, 0.3);
         }
     }
 
@@ -45,7 +45,7 @@
         left: 50%;
         transform: translateX(-50%);
         padding: 4px 6px;
-        background-color: white;
+        background-color: #F5F5F5;
         border-radius: 4px;
         color: $color-grey;
         font-weight: 500;
@@ -55,15 +55,16 @@
 
     &__main {
         padding: 10px;
-        background: white;
-        border: 1px solid #ddd;
+        background: #F5F5F5;
+        border: 1px solid #DDDDDD;
         border-radius: 0 0 10px 10px;
         border-top: none;
-        color: #333;
+        color: #333333;
         text-align: center;
     }
 
     &__title {
+        margin: 0;
         text-transform: uppercase;
     }
 
@@ -75,6 +76,10 @@
 
     &__colon {
         margin: 0 5px;
+    }
+
+    &__duration {
+        font-weight: 500;
     }
 
     &:hover {

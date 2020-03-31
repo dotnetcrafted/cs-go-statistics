@@ -1,5 +1,10 @@
 import app from 'general/ts/app';
-import { CmsIconModel, CmsPlayerModel, CmsWeaponModel } from 'models';
+import {
+    CmsIconModel,
+    CmsPlayerModel,
+    CmsWeaponModel,
+    DurationModel
+} from 'models';
 
 export const getWeaponById = (id: number): CmsWeaponModel | null => {
     const weapons = app.state.weapons;
@@ -24,3 +29,19 @@ export const getPlayerById = (id: string): CmsPlayerModel | null => {
 
     return players.find((player) => player.steamId === id) || null;
 };
+
+export const getDuration = (duration: number): DurationModel => {
+    if (typeof duration !== 'number') {
+        return ({ hours: 0, minutes: 0, seconds: 0})
+    }
+    
+    const hours = Math.floor(duration / 60 / 60);
+    const minutes = Math.floor((duration - (hours * 60 * 60)) / 60);
+    const seconds = duration - (hours * 60 * 60 + minutes * 60)
+
+    return ({
+        hours,
+        minutes,
+        seconds
+    })
+}
