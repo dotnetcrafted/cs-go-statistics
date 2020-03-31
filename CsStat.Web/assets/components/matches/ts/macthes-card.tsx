@@ -23,9 +23,9 @@ export const MatchesCard: React.FC<MatchesCardProps> = ({ match }) => {
             <div className="matches-card__main">
                 <h3 className="matches-card__title">{match.map}</h3>
                 <div className="matches-card__score">
-                    <span className={teamACss}>{hasHalfPeriod ? match.bScore : match.aScore }</span>
+                    <span className={teamACss}>{match.aScore}</span>
                     <span className="matches-card__colon">:</span>
-                    <span className={teamBCss}>{hasHalfPeriod ? match.aScore : match.bScore }</span>
+                    <span className={teamBCss}>{match.bScore}</span>
                 </div>
                 {/*<div className="matches-card__duration">{match.duration}</div>*/}
             </div>

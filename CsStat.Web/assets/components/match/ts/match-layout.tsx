@@ -31,9 +31,9 @@ const MatchLayout: React.FC<MatchDetailsLayoutProps> = ({ match, round, selected
                             {/* <span>({match.duration})</span> */}
                         </div>
                         <div className="match__score">
-                            <span className={teamACss}>{hasHalfPeriod ? match.bScore : match.aScore }</span>
+                            <span className={teamACss}>{match.aScore}</span>
                             <span className="match__score-colon">:</span>
-                            <span className={teamBCss}>{hasHalfPeriod ? match.aScore: match.bScore}</span>
+                            <span className={teamBCss}>{match.bScore}</span>
                         </div>
                     </div>
                     <MatchRounds
