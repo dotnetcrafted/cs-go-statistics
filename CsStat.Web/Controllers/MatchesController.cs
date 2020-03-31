@@ -181,7 +181,7 @@ namespace CsStat.Web.Controllers
                                     .First(x => x.SteamId == player.SteamID && x.RoundNumber == round.RoundNumber)
                                     .Death > 0
                             }).OrderByDescending(player => player.Score).ToList()
-                        }).OrderBy(x => x.Title).ToList()
+                        }).OrderByDescending(x => x.Title).ToList()
                     }).ToList()
                 };
 
