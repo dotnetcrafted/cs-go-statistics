@@ -228,7 +228,7 @@ namespace ReadFile.ReadDemo
                 ParsedDate = DateTime.Now,
                 TotalSquadAScore = _squadAScore,
                 TotalSquadBScore = _squadBScore,
-                Duration = (int) Math.Round((_parser.CurrentTick - _matchTickTimeStart) / _parser.TickRate),
+                Duration = (int) Math.Round(GetMatchDuration()),
                 Players = _results.Players.Select(x => new PlayerLog
                 {
                     Name = x.Value.Name,
@@ -247,8 +247,10 @@ namespace ReadFile.ReadDemo
                 {
                     BombPlanter = x.Value.BombPlanter?.SteamID,
                     BombPlanterName = x.Value.BombPlanter?.Name,
+                    BombPlantedTime = x.Value.BombPlantedTime,
                     BombDefuser = x.Value.BombDefuser?.SteamID,
                     BombDefuserName = x.Value.BombDefuser?.Name,
+                    BombDefusedTime = x.Value.BombDefusedTime,
                     IsBombExploded = x.Value.IsBombExploded,
                     Reason = (CsStat.Domain.Definitions.RoundEndReason) (int) x.Value.Reason,
                     ReasonTitle = x.Value.Reason.ToString(),
@@ -429,7 +431,7 @@ namespace ReadFile.ReadDemo
             _currentRound.TScore = _parser.TScore;
             _currentRound.CTScore = _parser.CTScore;
 
-            _currentRound.Duration = (int) Math.Round((_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate);
+            _currentRound.Duration = (int) Math.Round(GetRoundDuration());
 
             _currentRound.Squads = GetParticipants(_participants, _parser.Participants)
                 .Where(x => x.SteamID != 0 && x.Team != Team.Spectate) // skip spectators
@@ -480,7 +482,7 @@ namespace ReadFile.ReadDemo
             if (!_matchStarted)
                 return;
 
-            var killTime = (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;
+            var killTime = GetRoundDuration();
 
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
@@ -524,18 +526,29 @@ namespace ReadFile.ReadDemo
         {
             _results.Players[e.Player.SteamID].BombDefuses.Add(_currentRound);
             _currentRound.BombDefuser = _results.Players[e.Player.SteamID];
+            _currentRound.BombDefusedTime = GetRoundDuration();
         }
 
         private static void Parser_BombPlanted(object sender, BombEventArgs e)
         {
             _results.Players[e.Player.SteamID].BombPlants.Add(_currentRound);
             _currentRound.BombPlanter = _results.Players[e.Player.SteamID];
+            _currentRound.BombPlantedTime = GetRoundDuration();
         }
 
         private static void Parser_BombExploded(object sender, BombEventArgs e)
         {
             _results.Players[_currentRound.BombPlanter.SteamID].BombExplosions.Add(_currentRound);
             _currentRound.IsBombExploded = true;
+        }
+
+        private static float GetRoundDuration()
+        {
+            return (_parser.CurrentTick - _rountTickTimeStart) / _parser.TickRate;
+        }
+        private static float GetMatchDuration()
+        {
+            return (_parser.CurrentTick - _matchTickTimeStart) / _parser.TickRate;
         }
     }
 }

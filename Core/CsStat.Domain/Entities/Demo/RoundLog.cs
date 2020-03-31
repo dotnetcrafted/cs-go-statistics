@@ -19,9 +19,11 @@ namespace CsStat.Domain.Entities.Demo
 
         public long? BombPlanter { get; set; }
         public string BombPlanterName { get; set; }
+        public float BombPlantedTime { get; set; }
 
         public long? BombDefuser { get; set; }
         public string BombDefuserName { get; set; }
+        public float BombDefusedTime { get; set; }
 
         public bool IsBombExploded { get; set; }
 

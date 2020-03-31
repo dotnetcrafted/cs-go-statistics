@@ -15,11 +15,14 @@ namespace ReadFile.ReadDemo.Model
 
         public int Duration { get; set; }
 
+        public float BombPlantedTime { get; set; }
         public Player BombPlanter = null;
+
+        public float BombDefusedTime { get; set; }
         public Player BombDefuser = null;
 
         public bool IsBombExploded { get; set; }
-        
+
         public Dictionary<Team, List<Player>> Teams;
 
         public List<Squad> Squads;
