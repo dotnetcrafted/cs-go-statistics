@@ -121,7 +121,7 @@ namespace ReadFile.ReadDemo
 
             _matchStarted = default;
             _currentRound = null;
-            _currentRoundNumber = 1;
+            _currentRoundNumber = 0;
             _roundEndedCount = default;
 
             _matchTickTimeStart = 0;
@@ -360,8 +360,6 @@ namespace ReadFile.ReadDemo
             _results = _results ?? new Result(_demoFileName);
 
             _currentRound = new Round();
-            _currentRoundNumber++;
-            _currentRound.RoundNumber = _currentRoundNumber;
 
             _participants = _parser.Participants.ToList();
         }
@@ -396,41 +394,47 @@ namespace ReadFile.ReadDemo
             //It happens if there is only one player on the server and he switches between times
             if (_lastCTScore == _parser.CTScore && _lastTScore == _parser.TScore)
             {
-                _currentRoundNumber--;
                 return;
             }
+            
+            _currentRoundNumber++;
+            _currentRound.RoundNumber = _currentRoundNumber;
 
-            var winningTeam = Team.Spectate;
-            if (_currentRoundNumber > SwapRoundNumber)
+            Team winningTeam;
+            if (_currentRoundNumber <= SwapRoundNumber)
             {
-                if (_parser.TScore != _lastTScore && _parser.TScore > _lastTScore)
-                {
-                    winningTeam = Team.Terrorist;
-                    _squadBScore++;
-                }
-                else if (_parser.CTScore != _lastCTScore && _parser.CTScore > _lastCTScore)
+                if (_currentRound.Reason == RoundEndReason.BombDefused ||
+                    _currentRound.Reason == RoundEndReason.TargetSaved ||
+                    _currentRound.Reason == RoundEndReason.CTWin)
                 {
                     winningTeam = Team.CounterTerrorist;
                     _squadAScore++;
+                }
+                else
+                {
+                    winningTeam = Team.Terrorist;
+                    _squadBScore++;
                 }
             }
             else
             {
-                if (_parser.TScore != _lastTScore && _parser.TScore > _lastTScore)
-                {
-                    winningTeam = Team.Terrorist;
-                    _squadAScore++;
-                }
-                else if (_parser.CTScore != _lastCTScore && _parser.CTScore > _lastCTScore)
+                if (_currentRound.Reason == RoundEndReason.BombDefused ||
+                    _currentRound.Reason == RoundEndReason.TargetSaved ||
+                    _currentRound.Reason == RoundEndReason.CTWin)
                 {
                     winningTeam = Team.CounterTerrorist;
                     _squadBScore++;
                 }
+                else
+                {
+                    winningTeam = Team.Terrorist;
+                    _squadAScore++;
+                }
             }
 
-            _lastCTScore = _parser.CTScore;
             _lastTScore = _parser.TScore;
-
+            _lastCTScore = _parser.CTScore;
+            
             _currentRound.Winner = winningTeam;
 
             _currentRound.TScore = _parser.TScore;
@@ -458,9 +462,9 @@ namespace ReadFile.ReadDemo
             if (winningTeam == Team.Terrorist)
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-            var squadScore = _currentRoundNumber > SwapRoundNumber
-                ? $"{SuqadB}(T): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (CT)"
-                : $"{SuqadA}(T): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (CT)";
+            var squadScore = _currentRoundNumber <= SwapRoundNumber
+                ? $"{SuqadA}(CT): {_squadAScore,-2} - {SuqadB}: {_squadBScore,-2} (T)"
+                : $"{SuqadB}(CT): {_squadBScore,-2} - {SuqadA}: {_squadAScore,-2} (T)";
 
             var duration = TimeSpan.FromSeconds(_currentRound.Duration);
 
@@ -472,7 +476,7 @@ namespace ReadFile.ReadDemo
 
         private static string GetSquadName(Team team)
         {
-            if (_currentRoundNumber > SwapRoundNumber)
+            if (_currentRoundNumber <= SwapRoundNumber)
             {
                 return team == Team.CounterTerrorist ? SuqadA : SuqadB;
             }
