@@ -20,11 +20,19 @@ class Filter extends React.Component<FilterProps> {
         });
     }
 
-    filter(tag: string): void {
+    filter(e: any, tag: string): void {
+        e.target.classList.add('active');
+
         this.props.filteredByTag(tag, this.props.filtersTags);
     }
 
     refresh(): void {
+        const div = document.querySelectorAll('.filter__item');
+        div.forEach((item) => {
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+            }
+        });
         this.props.refreshPosts(this.props.filtersTags);
     }
 
@@ -40,7 +48,7 @@ class Filter extends React.Component<FilterProps> {
                         all
                     </li>
                     {this.state.tagsArr.map((tag, index) => (
-                        <li onClick={() => this.filter(tag)} key={index} className='filter__item'>
+                        <li onClick={(e) => this.filter(e, tag)} key={index} className='filter__item'>
                             {tag}
                         </li>
                     ))}

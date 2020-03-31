@@ -18,5 +18,9 @@
         &:hover {
             color: red;
         }
+
+        &.active {
+            color: red;
+        }
     }
 }
