@@ -16,6 +16,9 @@ namespace CsStat.Web.Controllers
 {
     public class MatchesController : BaseController
     {
+        private const int RoundsLimit = 5;
+        private const int MatchesLimit = 12;
+
         private static IPlayerRepository _playerRepository;
         private static IDemoRepository _demoRepository;
         private static ISteamApi _steamApi;
@@ -64,7 +67,7 @@ namespace CsStat.Web.Controllers
         public ActionResult GetMatchesData()
         {
             var matches = _demoRepository.GetMatches()
-                .Where(x => x.TotalSquadAScore + x.TotalSquadBScore > 5)
+                .Where(x => x.TotalSquadAScore + x.TotalSquadBScore > RoundsLimit)
                 .ToList();
 
             if (!matches.Any())
@@ -77,6 +80,7 @@ namespace CsStat.Web.Controllers
                 matches
                     .OrderByDescending(x => x.MatchDate)
                     .ThenByDescending(x => x.ParsedDate)
+                    .Take(MatchesLimit)
                     .Select(x => new BaseMatch
                     {
                         Id = x.Id,
