@@ -10,6 +10,10 @@ interface MatchesCardProps {
 export const MatchesCard: React.FC<MatchesCardProps> = ({ match }) => {
     if (!match) return null;
 
+    const hasHalfPeriod = match.aScore + match.bScore > 15;
+    const teamACss = hasHalfPeriod ? 'color-ct-primary' : 'color-t-primary';
+    const teamBCss = hasHalfPeriod ? 'color-t-primary' : 'color-ct-primary';
+
     return (
         <Link className="matches-card" to={`/matches/${match.id}`}>
             <div className="matches-card__header">
@@ -19,9 +23,9 @@ export const MatchesCard: React.FC<MatchesCardProps> = ({ match }) => {
             <div className="matches-card__main">
                 <h3 className="matches-card__title">{match.map}</h3>
                 <div className="matches-card__score">
-                    <span className="color-t-primary">{match.tScore}</span>
+                    <span className={teamACss}>{hasHalfPeriod ? match.bScore : match.aScore }</span>
                     <span className="matches-card__colon">:</span>
-                    <span className="color-ct-primary">{match.ctScore}</span>
+                    <span className={teamBCss}>{hasHalfPeriod ? match.aScore : match.bScore }</span>
                 </div>
                 {/*<div className="matches-card__duration">{match.duration}</div>*/}
             </div>

@@ -7,8 +7,8 @@ export interface BaseMatchModel {
     date: string,
     map: string,
     mapImage: string,
-    tScore: number,
-    ctScore: number,
+    aScore: number,
+    bScore: number,
     duration: number,
 }
 
@@ -18,8 +18,8 @@ export interface MatchModel extends BaseMatchModel {
 
 export interface MatchRoundModel {
     id: number,
-    tScore: number,
-    ctScore: number,
+    aScore: number,
+    bScore: number,
     reason: number,
     reasonTitle: string,
     duration: number,
