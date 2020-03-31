@@ -14,10 +14,6 @@ interface MatchDetailsLayoutProps {
 const MatchLayout: React.FC<MatchDetailsLayoutProps> = ({ match, round, selectedRoundId, selectRound }) => {
     if (!match) return null;
 
-    const hasHalfPeriod = match.aScore + match.bScore > 15;
-    const teamACss = hasHalfPeriod ? 'color-ct-primary' : 'color-t-primary';
-    const teamBCss = hasHalfPeriod ? 'color-t-primary' : 'color-ct-primary';
-
     return (
         <div className="match">
             <div className="match__bg of-cover">
@@ -31,9 +27,9 @@ const MatchLayout: React.FC<MatchDetailsLayoutProps> = ({ match, round, selected
                             {/* <span>({match.duration})</span> */}
                         </div>
                         <div className="match__score">
-                            <span className={teamACss}>{match.aScore}</span>
+                            <span className="color-t-primary">{match.aScore}</span>
                             <span className="match__score-colon">:</span>
-                            <span className={teamBCss}>{match.bScore}</span>
+                            <span className="color-ct-primary">{match.bScore}</span>
                         </div>
                     </div>
                     <MatchRounds
