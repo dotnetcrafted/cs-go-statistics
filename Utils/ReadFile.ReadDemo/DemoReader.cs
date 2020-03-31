@@ -121,7 +121,7 @@ namespace ReadFile.ReadDemo
 
             _matchStarted = default;
             _currentRound = null;
-            _currentRoundNumber = 0;
+            _currentRoundNumber = 1;
             _roundEndedCount = default;
 
             _matchTickTimeStart = 0;
@@ -361,6 +361,9 @@ namespace ReadFile.ReadDemo
 
             _currentRound = new Round();
 
+            _currentRoundNumber++;
+            _currentRound.RoundNumber = _currentRoundNumber;
+
             _participants = _parser.Participants.ToList();
         }
 
@@ -396,45 +399,31 @@ namespace ReadFile.ReadDemo
             {
                 return;
             }
-            
-            _currentRoundNumber++;
-            _currentRound.RoundNumber = _currentRoundNumber;
 
             Team winningTeam;
-            if (_currentRoundNumber <= SwapRoundNumber)
+
+            if (_currentRound.Reason == RoundEndReason.BombDefused ||
+                _currentRound.Reason == RoundEndReason.TargetSaved ||
+                _currentRound.Reason == RoundEndReason.CTWin)
             {
-                if (_currentRound.Reason == RoundEndReason.BombDefused ||
-                    _currentRound.Reason == RoundEndReason.TargetSaved ||
-                    _currentRound.Reason == RoundEndReason.CTWin)
-                {
-                    winningTeam = Team.CounterTerrorist;
+                winningTeam = Team.CounterTerrorist;
+                if (_currentRoundNumber <= SwapRoundNumber)
                     _squadAScore++;
-                }
                 else
-                {
-                    winningTeam = Team.Terrorist;
                     _squadBScore++;
-                }
             }
             else
             {
-                if (_currentRound.Reason == RoundEndReason.BombDefused ||
-                    _currentRound.Reason == RoundEndReason.TargetSaved ||
-                    _currentRound.Reason == RoundEndReason.CTWin)
-                {
-                    winningTeam = Team.CounterTerrorist;
+                winningTeam = Team.Terrorist;
+                if (_currentRoundNumber <= SwapRoundNumber)
                     _squadBScore++;
-                }
                 else
-                {
-                    winningTeam = Team.Terrorist;
                     _squadAScore++;
-                }
             }
 
             _lastTScore = _parser.TScore;
             _lastCTScore = _parser.CTScore;
-            
+
             _currentRound.Winner = winningTeam;
 
             _currentRound.TScore = _parser.TScore;
