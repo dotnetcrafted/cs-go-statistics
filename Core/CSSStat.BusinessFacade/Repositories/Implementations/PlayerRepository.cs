@@ -219,10 +219,10 @@ namespace BusinessFacade.Repositories.Implementations
                 .Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.FirstKd));
 
             playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
-                .Skip(1).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
+                .Skip(1).Take(1).FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
 
             playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
-                .Skip(2).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
+                .Skip(2).Take(1).FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
 
             playersStats.Where(x => x.Kills > 0).OrderByDescending(x => x.Kills).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Killer));
