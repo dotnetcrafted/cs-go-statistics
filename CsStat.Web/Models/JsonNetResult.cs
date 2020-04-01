@@ -7,10 +7,11 @@ namespace CsStat.Web.Models
 {
     public class JsonNetResult : JsonResult
     {
-        private static JsonSerializerSettings Settings => new JsonSerializerSettings
+        private static JsonSerializerSettings _settings;
+        public JsonNetResult(JsonSerializerSettings settings)
         {
-            ReferenceLoopHandling = ReferenceLoopHandling.Error
-        };
+            _settings = settings;
+        }
 
         public override void ExecuteResult(ControllerContext context)
         {
@@ -32,7 +33,7 @@ namespace CsStat.Web.Models
             if (Data == null)
                 return;
 
-            var scriptSerializer = JsonSerializer.Create(Settings);
+            var scriptSerializer = JsonSerializer.Create(_settings);
 
             using (var sw = new StringWriter())
             {

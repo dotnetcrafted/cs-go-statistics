@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using CsStat.Domain.Entities;
+using CsStat.Domain.Models;
 
 namespace CsStat.Web.Models
 {
     public class PlayerStatsViewModel
     {
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string ImagePath { get; set; }
+        public string SteamId { get; set; }
         public int Points { get; set; }
         public int Kills { get; set; }
         public int Deaths { get; set; }
@@ -23,9 +22,9 @@ namespace CsStat.Web.Models
         public int KdDif => Kills - Deaths;
         public string Kad => $"{Kills}/{Assists}/{Deaths}";
         public double KdRatio { get; set; }
-        public List<PlayerViewModel> Victims { get; set; }
-        public List<PlayerViewModel> Killers { get; set; }
+        public List<VictimKillerModel> Victims { get; set; }
+        public List<VictimKillerModel> Killers { get; set; }
         public List<AchievementViewModel> Achievements { get; set; }
-        public List<GunViewModel> Guns { get; set; }
+        public List<WeaponViewModel> Guns { get; set; }
     }
 }

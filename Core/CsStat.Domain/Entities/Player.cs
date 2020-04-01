@@ -8,5 +8,6 @@ namespace CsStat.Domain.Entities
         public string SteamId { get; set; }
         public string ImagePath { get; set; }
         public bool IsRetired { get; set; }
+        public int Rang { get; set; }
     }
 }

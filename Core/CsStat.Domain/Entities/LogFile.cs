@@ -1,12 +1,7 @@
-﻿using System;
-using MongoRepository;
-
-namespace CsStat.Domain.Entities
+﻿namespace CsStat.Domain.Entities
 {
-    public class LogFile : Entity, IBaseEntity
+    public class LogFile : FileEntity
     {
-        public string Path { get; set; }
         public long ReadBytes { get; set; }
-        public DateTime Created { get; set; }
     }
 }

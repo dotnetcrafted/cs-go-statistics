@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using CsStat.Web.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CsStat.Web.Controllers
 {
@@ -11,12 +13,19 @@ namespace CsStat.Web.Controllers
             System.Text.Encoding contentEncoding,
             JsonRequestBehavior behavior)
         {
-            return new JsonNetResult()
+            var options = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                ReferenceLoopHandling = ReferenceLoopHandling.Error,
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return new JsonNetResult(options)
             {
                 Data = data,
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
-                JsonRequestBehavior = behavior,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
             };
         }
     }

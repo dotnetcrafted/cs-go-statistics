@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 const UPDATE_IN_SEC = 15;
 
 type ServerInfoState = {
-    data?: {
-        ImageUrl: string;
-        Map: string;
-        IsAlive: boolean;
-        PlayersCount: number;
+    data: {
+        imageUrl: string;
+        map: string;
+        isAlive: boolean;
+        playersCount: number;
     } | null
 };
 
-class ServerInfo extends React.Component<any, ServerInfoState> {
+export class ServerInfo extends React.Component<any, ServerInfoState> {
     intervalId: number;
 
-    constructor(props: any){
+    constructor(props: any) {
         super(props);
 
         this.state = {
             data: null,
-        }
+        };
 
         this.intervalId = -1;
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.fetchData();
         this.intervalId = window.setInterval(() => this.fetchData(), UPDATE_IN_SEC * 1000);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         clearInterval(this.intervalId);
     }
 
@@ -39,16 +39,16 @@ class ServerInfo extends React.Component<any, ServerInfoState> {
             .then((data: any) => {
                 this.setState({
                     data,
-                })
+                });
             })
             .catch(() => {
                 this.setState({
                     data: null,
-                })
+                });
             });
-    }
+    };
 
-    render() {
+    render(): ReactNode {
         const { data } = this.state;
 
         if (!data) {
@@ -59,23 +59,21 @@ class ServerInfo extends React.Component<any, ServerInfoState> {
             <div className="server-info">
                 <div>
                     {
-                        data.ImageUrl &&
+                        data.imageUrl &&
                         <div className="server-info__map">
-                            <img src={data.ImageUrl} />
+                            <img src={data.imageUrl} alt="" />
                         </div>
                     }
-                    <div className="server-info__name">{data.Map}</div>
+                    <div className="server-info__name">{data.map}</div>
                     {
-                        data.IsAlive &&
-                            <>
-                                <div className="server-info__players">{data.PlayersCount}</div>
-                            </>
+                        data.isAlive &&
+                        <>
+                            <div className="server-info__players">{data.playersCount}</div>
+                        </>
                     }
                 </div>
 
             </div>
-        )
+        );
     }
 }
-
-export default ServerInfo;

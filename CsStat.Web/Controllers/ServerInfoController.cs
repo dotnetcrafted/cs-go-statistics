@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using BusinessFacade;
 using CsStat.Domain;
@@ -10,7 +9,7 @@ using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
 {
-    public class ServerInfoController : Controller
+    public class ServerInfoController : BaseController
     {
         private readonly IQueryConnection _queryConnection;
         private static IStrapiApi _strapiApi;
@@ -31,20 +30,16 @@ namespace CsStat.Web.Controllers
             if (serverInfo.IsAlive)
             {
                 var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
-                serverInfo.ImageUrl = $"{Settings.AdminPath}{mapInfo.Image.Url}";
+                serverInfo.ImageUrl = mapInfo.Image.FullUrl;
                 serverInfo.Description = mapInfo.Description;
             }
             else
             {
-                serverInfo.ImageUrl = $"{Settings.AdminPath}{_strapiApi.GetImage(Constants.ImagesName.ServerIsDown)?.Image.Url}";
+                serverInfo.ImageUrl = _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl;
                 serverInfo.Map = "Server is down";
             }
 
-            return new JsonResult
-            {
-                Data = serverInfo,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+            return Json(serverInfo);
         }
 
         public JsonResult ServerInfoMock(bool? isAlive, string map = "")
@@ -60,23 +55,22 @@ namespace CsStat.Web.Controllers
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
                         Map = mapInfo.MapName,
-                        ImageUrl = mapInfo.Image?.Url
+                        ImageUrl = mapInfo.Image?.FullUrl
                     },
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet
                 };
             }
 
-            return new JsonResult
-            {
-                Data = new ServerInfoModel
+            return Json
+            (
+                new ServerInfoModel
                 {
                     IsAlive = false,
                     PlayersCount = 0,
                     Map = string.Empty,
                     ImageUrl = "https://admin.csfuse8.site/uploads/7203cded792e4d2ca72e3b47d248db6c.jpg"
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                }
+            );
         }
         private ServerInfoModel GetServerInfo()
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using CsStat.Domain.Definitions;
 using CsStat.LogApi.Enums;
-using DataService;
 using MongoRepository;
 
 namespace CsStat.Domain.Entities
@@ -15,6 +14,6 @@ namespace CsStat.Domain.Entities
         public Teams VictimTeam { get; set; }
         public Actions Action { get; set; }
         public bool IsHeadShot { get; set; }
-        public Guns Gun { get; set; }
+        public Weapons Gun { get; set; }
     }
 }
