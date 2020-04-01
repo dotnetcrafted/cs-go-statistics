@@ -4,20 +4,20 @@ using System.Linq;
 using System.Web.Mvc;
 using BusinessFacade;
 using BusinessFacade.Repositories;
+using CsStat.Domain;
 using CsStat.Domain.Entities.Demo;
 using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
+using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Controllers
 {
     public class MatchesController : BaseController
     {
-        private const int RoundsLimit = 5;
-        private const int MatchesLimit = 12;
 
         private static IPlayerRepository _playerRepository;
         private static IDemoRepository _demoRepository;
@@ -64,10 +64,10 @@ namespace CsStat.Web.Controllers
 
 
         [HttpGet]
-        public ActionResult GetMatchesData()
+        public ActionResult GetMatchesData(string page)
         {
             var matches = _demoRepository.GetMatches()
-                .Where(x => x.TotalSquadAScore + x.TotalSquadBScore > RoundsLimit)
+                .Where(x => x.TotalSquadAScore + x.TotalSquadBScore > Settings.RoundsLimit)
                 .ToList();
 
             if (!matches.Any())
@@ -75,12 +75,15 @@ namespace CsStat.Web.Controllers
                 return Json("An error occurred getting matches");
             }
 
-            return Json
-            (
-                matches
+            var pageNum = ParsePageNumber(page);
+
+            var model = new MatchesViewModel
+            {
+                Matches = matches
                     .OrderByDescending(x => x.MatchDate)
                     .ThenByDescending(x => x.ParsedDate)
-                    .Take(MatchesLimit)
+                    .Skip((pageNum - 1) * Settings.MatchesLimit)
+                    .Take(Settings.MatchesLimit)
                     .Select(x => new BaseMatch
                     {
                         Id = x.Id,
@@ -90,8 +93,17 @@ namespace CsStat.Web.Controllers
                         BScore = x.TotalSquadBScore,
                         MapImage = GetMapImage(x.Map),
                         Duration = x.Duration
-                    })
-            );
+                    }),
+                Pagination = new Pagination 
+                { 
+                    PageSize = Settings.MatchesLimit,
+                    TotalPages = (int)Math.Ceiling((decimal)matches.Count()/Settings.MatchesLimit),
+                    CurrentPage = pageNum,
+                    TotalItems = matches.Count
+                }
+            };
+
+            return Json(model);
         }
 
         [HttpGet]
@@ -222,6 +234,13 @@ namespace CsStat.Web.Controllers
             return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
                    ?? _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl
                    ?? "";
+        }
+
+        private static int ParsePageNumber(string page)
+        {
+            var pageNum = page.ParseOrDefault(1);
+            return pageNum < 1 ? 1 : pageNum;
+
         }
     }
 }
