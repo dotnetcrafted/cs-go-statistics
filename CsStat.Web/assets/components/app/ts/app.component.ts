@@ -9,9 +9,9 @@ export default class AppComponent extends DcBaseComponent {
     }
 
     private getAppEl(): ReactElement {
-        return React.createElement(App, { 
+        return React.createElement(App, {
             playersDataUrl: this.options.playersDataUrl,
-            WikiDataApiPath: this.options.WikiDataApiPath
+            wikiDataApiPath: this.options.wikiDataApiPath,
         }, null);
     }
 

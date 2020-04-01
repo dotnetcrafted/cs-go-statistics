@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace CSStat.WebApp.Tests
+﻿namespace CSStat.WebApp.Tests
 {
     public class AchievementModelTest
     {

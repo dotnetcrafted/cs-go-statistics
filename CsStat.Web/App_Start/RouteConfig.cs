@@ -62,9 +62,43 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
+                name: "matches",
+                url: Settings.MatchesPagePath+"/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
                 name: "serverinfo",
                 url: Settings.ServerInfoDataApiPath,
                 defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
+            );
+                
+            routes.MapRoute(
+                name: "demo-reader",
+                url: Settings.DemoReaderPagePath,
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "getFullMatchesData",
+                url: Settings.FullMatchesDataApiPath,
+                defaults: new { controller = "Matches", action = "GetFullData", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "getMatchesData",
+                url: Settings.MatchesDataApiPath,
+                defaults: new { controller = "Matches", action = "GetMatchesData", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "getMatchData",
+                url: Settings.MatchDataApiPath,
+                defaults: new { controller = "Matches", action = "GetMatch", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

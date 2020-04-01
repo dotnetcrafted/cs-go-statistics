@@ -13,6 +13,7 @@ body {
 
 html {
     position: relative;
+    overflow-y: scroll;
     font-size: 100%;
 
     &.is-blocked {
@@ -39,4 +40,29 @@ html {
     clip: rect(0 0 0 0);
     white-space: nowrap;
     -webkit-clip-path: inset(100%);
+}
+
+.container {
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-t-primary {
+    color: $color-t-primary;
+}
+
+.color-ct-primary {
+    color: $color-ct-primary;
+}
+
+.of-cover {
+    & > img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }

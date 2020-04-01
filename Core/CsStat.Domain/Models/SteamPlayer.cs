@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CsStat.Domain.Entities;
 using Newtonsoft.Json;
 
 namespace CsStat.Domain.Models

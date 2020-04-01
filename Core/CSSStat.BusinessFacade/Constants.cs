@@ -22,10 +22,17 @@
             public const string Pacifist = "15";
         }
 
-        public static class ImagesName
+        public static class ImagesIds
         {
             public const string Logo = "logo";
-            public const string ServerIsDown = "serverDown";
+            public const string DefaultImage = "serverDown";
+        }
+
+        public static class IconsIds
+        {
+            public const string Suicide = "suicideIcon";
+            public const string HeadShot = "headShotIcon";
+            public const string FlashBang = "flashBangIcon";
         }
 
         public enum PeriodDay

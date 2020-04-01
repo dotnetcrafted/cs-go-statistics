@@ -10,9 +10,9 @@ import {
 } from './types';
 
 export const initialState: IAppState = {
-    IsLoading: false,
-    Players: [],
-    Posts: []
+    isLoading: false,
+    players: [],
+    posts: []
 };
 
 const appReducer: Reducer<IAppState> = (
@@ -23,26 +23,26 @@ const appReducer: Reducer<IAppState> = (
         case FETCH_PLAYERS_DATA:
             return {
                 ...state,
-                IsLoading: false,
-                Players: action.payload.Players
+                isLoading: false,
+                players: action.payload.players
             };
         case FETCH_POSTS_DATA:
             return {
                 ...state,
-                IsLoading: false,
-                Posts: action.payload,
+                isLoading: false,
+                posts: action.payload,
             };
 
         case START_REQUEST:
             return {
                 ...state,
-                IsLoading: true
+                isLoading: true
             };
 
         case STOP_REQUEST:
             return {
                 ...state,
-                IsLoading: false
+                isLoading: false
             };
 
         default:

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using BusinessFacade;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CsStat.Domain.Entities;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
@@ -43,6 +43,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<ILogsRepository>().To<LogsRepository>();
             _kernel.Bind<IPlayerRepository>().To<PlayerRepository>();
             _kernel.Bind<IErrorLogRepository>().To<ErrorLogRepository>();
+            _kernel.Bind<IDemoRepository>().To<DemoRepository>();
             _kernel.Bind<ISteamApi>().To<SteamApi>();
             _kernel.Bind<ILogger>().To<Logger>();
             _kernel.Bind<IUsefulLinkRepository>().To<UsefulLinkRepository>();

@@ -7,7 +7,7 @@ using CsStat.Domain.Models;
 using CsStat.LogApi.Interfaces;
 using Newtonsoft.Json;
 
-namespace CsStat.LogApi
+namespace BusinessFacade
 {
     public class SteamApi : ISteamApi
     {
