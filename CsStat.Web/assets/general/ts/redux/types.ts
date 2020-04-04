@@ -21,9 +21,9 @@ type RootState = {
 
 type Player = {
     id: string;
-    steamId: string,
-    steamImage: string,
-    name: string,
+    steamId: string;
+    steamImage: string;
+    name: string;
     points: number;
     kills: number;
     deaths: number;
@@ -59,12 +59,12 @@ type Gun = {
 };
 
 type RelatedPlayer = {
-    steamId: string,
+    steamId: string;
     count: number;
 };
 
 type Post = {
-    id: string,
+    id: string;
     title: string;
     content: string;
     tags: Tag[];
@@ -90,11 +90,11 @@ type ResfreshPostsAction = {
     payload: Post[];
 }
 
-const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
-const FETCH_POSTS_DATA = 'FETCH_POSTS_DATA';
-const FECTH_MATCHES_DATA = 'FETCH_MATCHES_DATA';
-const START_REQUEST = 'START_REQUEST';
-const STOP_REQUEST = 'STOP_REQUEST';
+const FETCH_PLAYERS_DATA = "FETCH_PLAYERS_DATA";
+const FETCH_POSTS_DATA = "FETCH_POSTS_DATA";
+const FECTH_MATCHES_DATA = "FETCH_MATCHES_DATA";
+const START_REQUEST = "START_REQUEST";
+const STOP_REQUEST = "STOP_REQUEST";
 
 type StartRequestAction = {
     type: typeof START_REQUEST;
@@ -131,8 +131,8 @@ type ActionTypes =
     | FetchPostsAction
     | FilterByTagAction
     | ResfreshPostsAction;
- //   | FetchMatchesAction
- //   | FetchMatchesDetailsAction;
+//   | FetchMatchesAction
+//   | FetchMatchesDetailsAction;
 
 export {
     RootState,
@@ -156,5 +156,5 @@ export {
     START_REQUEST,
     STOP_REQUEST,
     FETCH_POSTS_DATA,
-    FECTH_MATCHES_DATA,
+    FECTH_MATCHES_DATA
 };

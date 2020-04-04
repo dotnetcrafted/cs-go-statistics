@@ -5,7 +5,7 @@ import { Post as PostType, RootState } from '../../../general/ts/redux/types';
 
 class Filter extends React.Component<FilterProps> {
     state = {
-        tagsArr: []
+        tagsArr: [],
     };
 
     getListTags(): void {
@@ -16,7 +16,7 @@ class Filter extends React.Component<FilterProps> {
         });
 
         this.setState({
-            tagsArr: Array.from(set)
+            tagsArr: Array.from(set),
         });
     }
 
@@ -72,7 +72,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
     filteredByTag,
-    refreshPosts
+    refreshPosts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
