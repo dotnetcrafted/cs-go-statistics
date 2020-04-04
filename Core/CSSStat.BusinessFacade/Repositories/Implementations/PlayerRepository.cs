@@ -33,9 +33,8 @@ namespace BusinessFacade.Repositories.Implementations
 
         public IEnumerable<Player> GetAllPlayers()
         {
-            var query = new QueryBuilder<Player>();
-            var players = _mongoRepository.GetRepository<Player>().Collection.Find(query.Where(x => !x.IsRetired)).DistinctBy(x => x.SteamId).ToList();
-            var steamIds = string.Join(",", players.Select(x => x.SteamId).ToList());
+            var players = _mongoRepository.GetRepository<Player>().Where(x => !x.IsRetired).DistinctBy(x => x.SteamId).ToList();
+            var steamIds = string.Join(",", players.Select(x => x.SteamId));
             var avatars = new SteamApi().GetAvatarUrlBySteamId(steamIds);
             
             foreach (var player in players)

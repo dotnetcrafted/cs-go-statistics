@@ -6,7 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="DemoInfoNet" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\CSSStat.BusinessFacade\BusinessFacade.csproj" />
+    <ProjectReference Include="..\..\Core\CsStat.Domain\CsStat.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\CsStat.LogApi\CsStat.LogApi.csproj" />
+    <ProjectReference Include="..\..\Core\CsStat.SystemFacade\CsStat.SystemFacade.csproj" />
   </ItemGroup>
 
 </Project>

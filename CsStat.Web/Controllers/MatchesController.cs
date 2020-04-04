@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.UI;
 using BusinessFacade;
 using BusinessFacade.Repositories;
 using CsStat.Domain.Entities.Demo;
@@ -12,6 +10,7 @@ using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models.Matches;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CsStat.Web.Controllers
 {
@@ -96,7 +95,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 25920000, Location = OutputCacheLocation.Server, VaryByParam = "matchId")]
+        [ResponseCache(Duration = 25920000, VaryByQueryKeys = new string[] { "matchId" })]
         public ActionResult GetMatch(string matchId)
         {
             if (matchId.IsNotEmpty())

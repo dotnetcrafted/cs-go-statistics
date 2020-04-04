@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace ReadFile.ReadDemo.Model
 {

@@ -1,4 +1,5 @@
 using AutoMapper;
+using BusinessFacade;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CsStat.LogApi;

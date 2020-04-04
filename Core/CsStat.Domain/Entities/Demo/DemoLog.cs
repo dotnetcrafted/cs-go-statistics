@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoRepository;
+using MongoRepository.DAL;
 
 namespace CsStat.Domain.Entities.Demo
 {

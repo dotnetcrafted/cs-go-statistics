@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Web.Mvc;
 using BusinessFacade;
 using CsStat.Domain;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
@@ -48,17 +48,14 @@ namespace CsStat.Web.Controllers
             {
                 var mapInfo = _strapiApi.GetMapInfo(map.OrDefault(_maps[new Random().Next(0, 8)]));
                 
-                return new JsonResult
-                {
-                    Data = new ServerInfoModel
+                return new JsonResult(
+                    new ServerInfoModel
                     {
                         IsAlive = true,
                         PlayersCount = new Random().Next(0, 20),
                         Map = mapInfo.MapName,
                         ImageUrl = mapInfo.Image?.FullUrl
-                    },
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                };
+                    });
             }
 
             return Json

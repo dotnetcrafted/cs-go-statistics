@@ -2,7 +2,6 @@
 using System.Linq;
 using CsStat.Domain.Entities;
 using DataService.Interfaces;
-using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories
 {
@@ -24,18 +23,17 @@ namespace BusinessFacade.Repositories
 
         public IEnumerable<T> GetFiles()
         {
-            return _mongoRepository.GetRepository<T>().Collection.FindAll();
+            return _mongoRepository.GetRepository<T>();
         }
 
         public void AddFile(T demoFile)
         {
-            _mongoRepository.GetRepository<T>().Collection.Insert(demoFile);
+            _mongoRepository.GetRepository<T>();
         }
 
         public T GetFileByName(string name)
         {
-            return _mongoRepository.GetRepository<T>()
-                .Collection.Find(new QueryBuilder<T>().EQ(x => x.Path, name)).FirstOrDefault();
+            return _mongoRepository.GetRepository<T>().FirstOrDefault(x => x.Path == name);
         }
     }
 }

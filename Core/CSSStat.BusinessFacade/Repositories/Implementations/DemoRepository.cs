@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CsStat.Domain.Entities.Demo;
 using DataService.Interfaces;
-using MongoDB.Driver.Builders;
 
 namespace BusinessFacade.Repositories.Implementations
 {
@@ -18,30 +17,28 @@ namespace BusinessFacade.Repositories.Implementations
 
         public IEnumerable<DemoLog> GetMatches()
         {
-            return _mongoRepository.GetRepository<DemoLog>().Collection
-                .FindAllAs<DemoLog>()
-                .SetFields(Fields.Include(
-                    nameof(DemoLog.Id), 
-                    nameof(DemoLog.ParsedDate), 
-                    nameof(DemoLog.MatchDate), 
-                    nameof(DemoLog.Map), 
-                    nameof(DemoLog.TotalSquadAScore), 
-                    nameof(DemoLog.TotalSquadBScore),
-                    nameof(DemoLog.Duration)))
+            return _mongoRepository.GetRepository<DemoLog>()
+                .Select(x => new DemoLog { 
+                    Id = x.Id,
+                    ParsedDate = x.ParsedDate,
+                    MatchDate = x.MatchDate,
+                    Map= x.Map,
+                    TotalSquadAScore = x.TotalSquadAScore,
+                    TotalSquadBScore = x.TotalSquadBScore,
+                    Duration = x.Duration
+                })
                 .OrderByDescending(x => x.MatchDate)
                 .ToList();
         }
 
         public IEnumerable<DemoLog> GetAllLogs()
         {
-            return _mongoRepository.GetRepository<DemoLog>().Collection.FindAll();
+            return _mongoRepository.GetRepository<DemoLog>();
         }
 
         public DemoLog GetMatch(string matchId)
         {
-            var query = new QueryBuilder<DemoLog>();
-            return _mongoRepository.GetRepository<DemoLog>().Collection.Find(query.EQ(x => x.Id, matchId))
-                .FirstOrDefault();
+            return _mongoRepository.GetRepository<DemoLog>().FirstOrDefault(x => x.Id == matchId);
         }
 
         public IEnumerable<DemoLog> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo)

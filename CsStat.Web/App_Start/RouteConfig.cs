@@ -59,42 +59,42 @@ namespace CsStat.Web
 
             routes.MapRoute(
                 name: "matches",
-                url: Settings.MatchesPagePath+"/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                template: Settings.MatchesPagePath+"/{id}",
+                defaults: new { controller = "Home", action = "Index" }
             );
 
 
             routes.MapRoute(
                 name: "serverinfo",
-                url: Settings.ServerInfoDataApiPath,
-                defaults: new { controller = "ServerInfo", action = "ServerInfo", id = UrlParameter.Optional }
+                template: Settings.ServerInfoDataApiPath,
+                defaults: new { controller = "ServerInfo", action = "ServerInfo" }
             );
                 
             routes.MapRoute(
                 name: "demo-reader",
-                url: Settings.DemoReaderPagePath,
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                template: Settings.DemoReaderPagePath,
+                defaults: new { controller = "Home", action = "Index" }
             );
 
             routes.MapRoute
             (
                 name: "getFullMatchesData",
-                url: Settings.FullMatchesDataApiPath,
-                defaults: new { controller = "Matches", action = "GetFullData", id = UrlParameter.Optional }
+                template: Settings.FullMatchesDataApiPath,
+                defaults: new { controller = "Matches", action = "GetFullData" }
             );
 
             routes.MapRoute
             (
                 name: "getMatchesData",
-                url: Settings.MatchesDataApiPath,
-                defaults: new { controller = "Matches", action = "GetMatchesData", id = UrlParameter.Optional }
+                template: Settings.MatchesDataApiPath,
+                defaults: new { controller = "Matches", action = "GetMatchesData" }
             );
 
             routes.MapRoute
             (
                 name: "getMatchData",
-                url: Settings.MatchDataApiPath,
-                defaults: new { controller = "Matches", action = "GetMatch", id = UrlParameter.Optional }
+                template: Settings.MatchDataApiPath,
+                defaults: new { controller = "Matches", action = "GetMatch" }
             );
 
             routes.MapRoute(
