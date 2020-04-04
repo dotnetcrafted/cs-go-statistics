@@ -15,7 +15,8 @@ export const initialState: IAppState = {
     isLoading: false,
     players: [],
     posts: [],
-    filteredPosts: []
+    filteredPost: [],
+    tagsList: []
 };
 
 const appReducer: Reducer<IAppState> = (
@@ -33,8 +34,7 @@ const appReducer: Reducer<IAppState> = (
             return {
                 ...state,
                 isLoading: false,
-                posts: action.payload,
-                filteredPosts: action.payload
+                posts: action.payload
             };
 
         case START_REQUEST:
@@ -51,49 +51,38 @@ const appReducer: Reducer<IAppState> = (
         case FILTER_BY_TAG:
             return {
                 ...state,
-                filteredPosts: state.filteredPosts.filter(post => {
-                    const filter = post.tags.filter(
-                        tag => tag.caption === action.tag
-                    );
-                    if (filter.length > 0) {
-                        return post;
-                    }
+                filteredPost: state.posts.filter((post: any) => {
+                    const stringTags = post.tags.map((tag: any) => tag.caption);
+
+                    const check = () => {
+                        let valid = true;
+
+                        action.tagsArr.forEach((item: any) => {
+                            if (!stringTags.includes(item)) {
+                                valid = false;
+                            }
+                        });
+
+                        return valid;
+                    };
+
+                    return check();
                 })
             };
         case REFRESH_POSTS:
             return {
                 ...state,
-                filteredPosts: action.payload
+                posts: action.payload
             };
         default:
             return state;
     }
 };
 
-// export const initialFilterState: IFilterByTag = {
-//     FilteredPosts: initialState.Posts
-// };
-
-// const filteredByTag: Reducer<IFilterByTag> = (
-//     state: IFilterByTag = initialFilterState,
-//     action: ActionTypes
-// ): IFilterByTag => {
-//     switch (action.type) {
-//         case FILTER_BY_TAG:
-//             return {
-//                 ...state,
-//                 FilteredPosts: []
-//             };
-//         default:
-//             return state;
-//     }
-// };
-
 export const createRootReducer = (history: any): Reducer =>
     combineReducers({
         router: connectRouter(history),
         app: appReducer
-        // filter: filteredByTag
     });
 
 export default createRootReducer;

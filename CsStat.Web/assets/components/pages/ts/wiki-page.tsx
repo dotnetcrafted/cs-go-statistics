@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import '../scss/index.scss';
-import { Row, Col, Empty } from 'antd';
+// import { Row, Col, Empty } from 'antd';
 import { connect } from 'react-redux';
 import { fetchPosts, startRequest, stopRequest } from '../../../general/ts/redux/actions';
 import { RootState, Post as PostType } from '../../../general/ts/redux/types';
@@ -23,31 +23,37 @@ class WikiPage extends React.Component<WikiPageProps> {
             });
     }
 
-    getPosts(): ReactNode {
-        const { posts, filteredPosts } = this.props;
+    getPosts = (): ReactNode => {
+        const { posts, filteredPost } = this.props;
 
-        if (posts.length > 0) {
-            console.log(this.props);
-            return filteredPosts.map((post: PostType, index: number) => <Post key={index} post={post} />);
+        console.log(this.props);
+
+        if (posts.length > 0 && filteredPost.length === 0) {
+            return posts.map((post: any, index: number) => <Post key={index} post={post} />);
         }
 
-        return <Empty />;
-    }
+        if (filteredPost.length > 0) {
+            return filteredPost.map((post: any, index: number) => <Post key={index} post={post} />);
+        }
+
+        return null;
+    };
 
     componentDidMount(): void {
         this.fetchPosts(this.props.wikiDataApiPath);
     }
 
     render(): ReactNode {
+        const { posts } = this.props;
         return (
             <React.Fragment>
-                {this.props.posts.length > 0 ? <Filter filtersTags={this.props.posts} /> : null}
+                <div className='posts'>
+                    <div className='posts__inner'>
+                        <div className='posts__content'>{this.getPosts()}</div>
 
-                <Row type='flex' justify='start' align='middle'>
-                    <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
-                        {this.getPosts()}
-                    </Col>
-                </Row>
+                        <div className='posts__aside'>{posts.length > 0 ? <Filter /> : null}</div>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }
@@ -55,7 +61,7 @@ class WikiPage extends React.Component<WikiPageProps> {
 
 type WikiPageProps = {
     posts: PostType[];
-    filteredPosts: PostType[];
+    filteredPost: PostType[];
     isLoading: boolean;
     wikiDataApiPath: string;
     fetchPosts: typeof fetchPosts;
@@ -65,7 +71,7 @@ const mapStateToProps = (state: RootState) => {
     return {
         isLoading: state.app.isLoading,
         posts: state.app.posts,
-        filteredPosts: state.app.filteredPosts,
+        filteredPost: state.app.filteredPost,
     };
 };
 

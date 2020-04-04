@@ -4,19 +4,13 @@ interface IAppState {
     isLoading: boolean;
     players: Player[];
     posts: Post[];
-    filteredPosts: Post[];
-}
-interface IFilterByTag {
-    isLoading: boolean;
-    players: Player[];
-    posts: Post[];
-    filteredPosts: Post[];
+    filteredPost: Post[];
+    tagsList: string[];
 }
 
 type RootState = {
     router?: RouterState;
     app: IAppState;
-    filter: IFilterByTag;
 };
 
 type Player = {
@@ -82,13 +76,14 @@ const REFRESH_POSTS = "REFRESH_POSTS";
 type FilterByTagAction = {
     type: typeof FILTER_BY_TAG;
     tag: string;
+    tagsArr: string[];
     payload: Post[];
 };
 
 type ResfreshPostsAction = {
     type: typeof REFRESH_POSTS;
     payload: Post[];
-}
+};
 
 const FETCH_PLAYERS_DATA = "FETCH_PLAYERS_DATA";
 const FETCH_POSTS_DATA = "FETCH_POSTS_DATA";
@@ -137,7 +132,6 @@ type ActionTypes =
 export {
     RootState,
     IAppState,
-    IFilterByTag,
     Player,
     Gun,
     Post,

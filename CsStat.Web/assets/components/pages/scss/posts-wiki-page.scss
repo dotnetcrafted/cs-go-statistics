@@ -1,0 +1,19 @@
+.posts {
+    padding: 24px;
+
+    &__inner {
+        display: flex;
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__aside {
+        flex: 1 0 300px;
+        max-width: 300px;
+        padding: 0 0 0 24px;
+    }
+}

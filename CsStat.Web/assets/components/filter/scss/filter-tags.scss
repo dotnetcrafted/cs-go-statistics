@@ -1,12 +1,9 @@
 .filter {
-    margin: 0 0 24px 0;
-
     &__list {
-        margin: 0 auto;
         display: flex;
-        justify-content: center;
-        max-width: 900px;
         flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
     }
 
     &__item {
@@ -14,13 +11,16 @@
         padding: 0 10px;
         cursor: pointer;
         font-size: 0.9em;
+        border: 1px solid #f1f1f1;
+        border-radius: 5px;
+        margin: 0 3px 3px 0;
 
         &:hover {
-            color: red;
+            background: #ffcbcb;
         }
 
         &.active {
-            color: red;
+            background: #ffcbcb;
         }
     }
 }

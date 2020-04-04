@@ -28,9 +28,14 @@ const stopRequest = (): ActionTypes => ({
     type: STOP_REQUEST
 });
 
-const filteredByTag = (tag: string, posts: Post[]): ActionTypes => ({
+const filteredByTag = (
+    tag: string,
+    tagsArr: string[],
+    posts: Post[]
+): ActionTypes => ({
     type: FILTER_BY_TAG,
     tag,
+    tagsArr,
     payload: posts
 });
 

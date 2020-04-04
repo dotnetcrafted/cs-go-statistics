@@ -11,7 +11,7 @@ class Filter extends React.Component<FilterProps> {
     getListTags(): void {
         const set = new Set();
 
-        this.props.filtersTags.forEach((item: any) => {
+        this.props.posts.forEach((item: any) => {
             item.tags.map((tags: any) => set.add(tags.caption));
         });
 
@@ -21,9 +21,17 @@ class Filter extends React.Component<FilterProps> {
     }
 
     filter(e: any, tag: string): void {
-        e.target.classList.add('active');
+        const { tagsList, posts } = this.props;
 
-        this.props.filteredByTag(tag, this.props.filtersTags);
+        if (tagsList.includes(tag)) {
+            tagsList.splice(tagsList.indexOf(tag), 1);
+            e.target.classList.remove('active');
+        } else {
+            tagsList.push(tag);
+            e.target.classList.add('active');
+        }
+
+        this.props.filteredByTag(tag, tagsList, posts);
     }
 
     refresh(): void {
@@ -33,7 +41,7 @@ class Filter extends React.Component<FilterProps> {
                 item.classList.remove('active');
             }
         });
-        this.props.refreshPosts(this.props.filtersTags);
+        this.props.refreshPosts(this.props.posts);
     }
 
     componentDidMount(): void {
@@ -59,15 +67,17 @@ class Filter extends React.Component<FilterProps> {
 }
 
 type FilterProps = {
-    filtersTags: any;
-    filteredPosts: PostType[];
+    posts: PostType[];
+    tagsList: string[];
     filteredByTag: typeof filteredByTag;
     refreshPosts: typeof refreshPosts;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const filteredPosts = state.app.filteredPosts;
-    return { filteredPosts };
+    return {
+        posts: state.app.posts,
+        tagsList: state.app.tagsList,
+    };
 };
 
 const mapDispatchToProps = {
