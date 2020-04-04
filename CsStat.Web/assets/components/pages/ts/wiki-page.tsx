@@ -62,15 +62,15 @@ type WikiPageProps = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    return { 
+    return {
         isLoading: state.app.isLoading,
         posts: state.app.posts,
-        filteredPosts: state.app.filteredPosts
+        filteredPosts: state.app.filteredPosts,
     };
 };
 
 export default connect(mapStateToProps, {
     fetchPosts,
     startRequest,
-    stopRequest
+    stopRequest,
 })(WikiPage);
