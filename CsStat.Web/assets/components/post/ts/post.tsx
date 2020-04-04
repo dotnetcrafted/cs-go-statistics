@@ -26,7 +26,7 @@ const Post: SFC<PostProps> = (props) => {
         if (tags.length === 0) {
             return <span></span>;
         }
-        return tags.map((tag: TagType) => <Tag key={tag.id} color={getRandomColor(TAG_COLORS)}>{tag.caption}</Tag>);
+        return tags.map((tag: TagType, index: number) => <Tag key={index} color={getRandomColor(TAG_COLORS)}>{tag.caption}</Tag>);
     };
 
     const {

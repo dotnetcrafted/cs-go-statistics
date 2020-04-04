@@ -12,7 +12,7 @@ class Filter extends React.Component<FilterProps> {
         const set = new Set();
 
         this.props.filtersTags.forEach((item: any) => {
-            item.tags.map((tags: any) => set.add(tags.Caption));
+            item.tags.map((tags: any) => set.add(tags.caption));
         });
 
         this.setState({
@@ -60,14 +60,14 @@ class Filter extends React.Component<FilterProps> {
 
 type FilterProps = {
     filtersTags: any;
-    FilteredPosts: PostType[];
+    filteredPosts: PostType[];
     filteredByTag: typeof filteredByTag;
     refreshPosts: typeof refreshPosts;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const FilteredPosts = state.app.filteredPosts;
-    return { FilteredPosts };
+    const filteredPosts = state.app.filteredPosts;
+    return { filteredPosts };
 };
 
 const mapDispatchToProps = {

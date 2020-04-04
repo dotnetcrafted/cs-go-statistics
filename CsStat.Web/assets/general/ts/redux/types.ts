@@ -73,7 +73,6 @@ type Post = {
 };
 
 type Tag = {
-    id: string,
     caption: string;
 };
 
@@ -89,8 +88,6 @@ type FilterByTagAction = {
 type ResfreshPostsAction = {
     type: typeof REFRESH_POSTS;
     payload: Post[];
-    id: string,
-    caption: string;
 }
 
 const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
