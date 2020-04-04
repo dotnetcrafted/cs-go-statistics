@@ -7,9 +7,9 @@ const Achievements: SFC<AchievementsProps> = (props) => {
     return (
         <div className="achievements">
             {data && data.map((item) => (
-                <div className="achievements__item" key={item.AchievementId}>
-                    <Popover title={item.Name} content={item.Description}>
-                        <img className="achievements__icon" src={item.IconUrl} />
+                <div className="achievements__item" key={item.achievementId}>
+                    <Popover title={item.name} content={item.description}>
+                        <img className="achievements__icon" src={item.iconUrl} />
                     </Popover>
                 </div>
             ))}

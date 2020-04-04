@@ -16,6 +16,8 @@ namespace ReadFile.ReadDemo.Model
             Deaths = new List<Kill>();
             Teamkills = new List<Kill>();
 
+            Damage = new List<Damage>();
+
             BombPlants = new List<Round>();
             BombExplosions = new List<Round>();
             BombDefuses = new List<Round>();
@@ -30,6 +32,8 @@ namespace ReadFile.ReadDemo.Model
         public List<Kill> Deaths { get; set; }
         public List<Kill> Teamkills { get; set; }
 
+        public List<Damage> Damage { get; set; }
+        
         public List<Round> BombPlants = new List<Round>();
         public List<Round> BombExplosions = new List<Round>();
         public List<Round> BombDefuses = new List<Round>();

@@ -15,6 +15,11 @@ namespace CsStat.SystemFacade.Extensions
             return !string.IsNullOrEmpty(value);
         }
 
+        public static string OrDefault(this string value, string defaultValue)
+        {
+            return value.IsNotEmpty() ? value : defaultValue;
+        }
+
         public static int ParseOrDefault(this string value, int defaultValue)
         {
             if (value.IsEmpty())
@@ -47,6 +52,13 @@ namespace CsStat.SystemFacade.Extensions
             return DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date)
                 ? date
                 : defaultValue;
+        }
+
+        public static string ToCamelCase(this string value)
+        {
+            var firstChar = value[0].ToString().ToLower();
+            value = value.Substring(1, value.Length - 1);
+            return firstChar + value;
         }
     }
 }

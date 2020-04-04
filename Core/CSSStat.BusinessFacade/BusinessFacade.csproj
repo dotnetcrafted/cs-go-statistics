@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MongoRepositoryNetCore" Version="1.0.1" />
   </ItemGroup>

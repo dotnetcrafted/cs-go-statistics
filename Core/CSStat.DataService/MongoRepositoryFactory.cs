@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Authentication;
 using DataService.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoRepository.DAL;
 
@@ -10,6 +11,7 @@ namespace DataService
     {
         private readonly IConnectionStringFactory _connectionStringFactory;
         private readonly string _connectionString;
+
         public MongoRepositoryFactory(IConnectionStringFactory connectionStringFactory)
         {
             _connectionStringFactory = connectionStringFactory;
@@ -23,8 +25,10 @@ namespace DataService
 
             _connectionString = connectionString;
         }
+
         public MongoRepository<T> GetRepository<T>() where T : Entity
         {
+            BsonDefaults.MaxSerializationDepth = 500;
             return new MongoRepository<T>(_connectionString);
         }
 
@@ -32,7 +36,7 @@ namespace DataService
         {
             var set = MongoClientSettings.FromUrl(new MongoUrl(_connectionString));
             set.SslSettings = new SslSettings{EnabledSslProtocols = SslProtocols.Tls12};
-
+            
             return new MongoRepository<T>();
         }
     }

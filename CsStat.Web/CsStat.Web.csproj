@@ -36,5 +36,4 @@
     <ProjectReference Include="..\Core\CsStat.StrapiApi\CsStat.StrapiApi.csproj" />
     <ProjectReference Include="..\Utils\ServerQueries\ServerQueries.csproj" />
   </ItemGroup>
-
 </Project>

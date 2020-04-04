@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
-using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
-using CsStat.SystemFacade;
-using DataService;
 using NUnit.Framework;
 
 namespace CSStat.WebApp.Tests
@@ -72,7 +68,7 @@ namespace CSStat.WebApp.Tests
         [Test]
         public static void AttributeTest()
         {
-            var gun = Guns.Ak;
+            var gun = Weapons.Ak;
             var attributeList = gun.GetAttributeList();
 
             foreach (var attribute in attributeList)

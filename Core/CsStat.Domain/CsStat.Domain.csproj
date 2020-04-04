@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="3.2.1" />
     <PackageReference Include="MongoRepositoryNetCore" Version="1.0.1" />

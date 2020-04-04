@@ -1,4 +1,4 @@
-﻿using CsStat.Web.Models;
+using CsStat.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsStat.Web.Controllers

@@ -1,10 +1,15 @@
 import { dcFactory } from '@deleteagency/dc';
 
+interface IApp {
+    dcFactory: typeof dcFactory;
+    config: any;
+    state: any;
+}
+
 class App implements IApp {
     dcFactory = dcFactory;
 
     config = (window as any).appConfig || {};
-
     state = (window as any).appState || {};
 
     init(): void {
@@ -23,11 +28,5 @@ class App implements IApp {
     }
 }
 
-interface IApp {
-    dcFactory: typeof dcFactory;
-    config: any;
-    state: any;
-}
-
-const instance = new App();
-export default instance;
+const app = new App();
+export default app;

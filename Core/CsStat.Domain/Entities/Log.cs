@@ -14,6 +14,6 @@ namespace CsStat.Domain.Entities
         public Teams VictimTeam { get; set; }
         public Actions Action { get; set; }
         public bool IsHeadShot { get; set; }
-        public Guns Gun { get; set; }
+        public Weapons Gun { get; set; }
     }
 }

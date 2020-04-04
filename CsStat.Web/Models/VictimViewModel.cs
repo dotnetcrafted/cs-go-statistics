@@ -1,6 +1,6 @@
 ﻿namespace CsStat.Web.Models
 {
-    public class PlayerViewModel
+    public class VictimKillerViewModel
     {
         public string Name { get; set; }
         public int Count { get; set; }

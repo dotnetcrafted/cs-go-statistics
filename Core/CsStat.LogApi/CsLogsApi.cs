@@ -103,7 +103,7 @@ namespace CsStat.LogApi
                         Victim = null,
                         VictimTeam = Teams.Null,
                         IsHeadShot = false,
-                        Gun = Guns.Null
+                        Gun = Weapons.Null
                     };
                     break;
                 case Actions.KilledByBomb:
@@ -116,7 +116,7 @@ namespace CsStat.LogApi
                         Victim = GetPlayer(splitLine[1]),
                         VictimTeam = GetTeam(splitLine[1].Trim()),
                         IsHeadShot = false,
-                        Gun = Guns.Bomb
+                        Gun = Weapons.Bomb
                     };
                     break;
                 default:
@@ -129,7 +129,7 @@ namespace CsStat.LogApi
                         Victim = null,
                         VictimTeam = Teams.Null,
                         IsHeadShot = false,
-                        Gun = Guns.Null
+                        Gun = Weapons.Null
                     };
                     break;
             }
@@ -219,9 +219,9 @@ namespace CsStat.LogApi
             return Actions.Unknown;
         }
 
-        private static Guns GetGun(string gun)
+        private static Weapons GetGun(string gun)
         {
-            var attributeList = Guns.Null.GetAttributeList();
+            var attributeList = Weapons.Null.GetAttributeList();
 
             var gunIndex = 0;
 
@@ -233,7 +233,7 @@ namespace CsStat.LogApi
                 }
             }
 
-            return (Guns) gunIndex;
+            return (Weapons) gunIndex;
         }
 
     }

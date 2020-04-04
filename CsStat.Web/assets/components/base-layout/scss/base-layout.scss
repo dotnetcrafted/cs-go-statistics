@@ -1,5 +1,8 @@
 .base-layout {
     &__layout {
+        grid-template-columns: 100%;
+        grid-template-rows: auto 1fr auto;
+        display: grid;
         min-height: 100vh;
     }
 
@@ -7,23 +10,49 @@
         height: auto;
         padding: 0 $default-side-padding;
         background: $color-dark-blue;
+
+        @include desktop {
+            padding: 10px $default-side-padding;
+        }
     }
 
     &__logo {
-        color: $color-white;
-        font-size: 32px;
+        display: inline-block;
+        padding-right: 10px;
+
+        img {
+            max-width: 100%;
+            max-height: 60px;
+        }
     }
 
     &__content {
-        margin: $container-padding-top 0;
-        padding: 0 $default-side-padding;
+        background-color: white;
+
+        & > :only-child {
+            height: 100%;
+        }
     }
 
     &__title {
+        display: flex;
+        align-items: center;
         @at-root h1#{&} {
             font-size: 20px;
             color: $color-white;
             margin: 0;
+        }
+    }
+
+    &__title-icon {
+        font-size: 3rem;
+    }
+
+    &__title-text {
+        display: none;
+
+        @include desktop {
+            display: block;
         }
     }
 

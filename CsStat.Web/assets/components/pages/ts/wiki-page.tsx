@@ -7,8 +7,8 @@ import { RootState, Post as PostType } from '../../../general/ts/redux/types';
 import Post from '../../post';
 
 class WikiPage extends React.Component<WikiPageProps> {
-    fetchPosts(WikiDataApiPath: string): void {
-        const url = new URL(WikiDataApiPath, window.location.origin);
+    fetchPosts(wikiDataApiPath: string): void {
+        const url = new URL(wikiDataApiPath, window.location.origin);
 
         fetch(url.toString())
             .then((res: Response) => res.json())
@@ -23,14 +23,14 @@ class WikiPage extends React.Component<WikiPageProps> {
     }
 
     componentDidMount(): void {
-        this.fetchPosts(this.props.WikiDataApiPath);
+        this.fetchPosts(this.props.wikiDataApiPath);
     }
 
     getPosts(): ReactNode {
-        const { Posts } = this.props;
+        const { posts } = this.props;
 
-        if (Posts.length > 0) {
-            return Posts.map((post: PostType, index: number) => <Post key={index} post={post} />);
+        if (posts.length > 0) {
+            return posts.map((post: PostType) => <Post key={post.id} post={post} />);
         }
         return <Empty />;
     }
@@ -47,16 +47,17 @@ class WikiPage extends React.Component<WikiPageProps> {
 }
 
 type WikiPageProps = {
-    Posts: PostType[];
-    IsLoading: boolean;
-    WikiDataApiPath: string;
+    posts: PostType[];
+    isLoading: boolean;
+    wikiDataApiPath: string;
     fetchPosts: typeof fetchPosts;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const IsLoading = state.app.IsLoading;
-    const Posts = state.app.Posts;
-    return { IsLoading, Posts };
+    return { 
+        isLoading: state.app.isLoading,
+        posts: state.app.posts,
+    };
 };
 
 export default connect(

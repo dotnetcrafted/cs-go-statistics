@@ -19,6 +19,27 @@
             public const string Sapper = "12";
             public const string Bomberman = "13";
             public const string Samurai = "14";
+            public const string Pacifist = "15";
+        }
+
+        public static class ImagesIds
+        {
+            public const string Logo = "logo";
+            public const string DefaultImage = "serverDown";
+        }
+
+        public static class IconsIds
+        {
+            public const string Suicide = "suicideIcon";
+            public const string HeadShot = "headShotIcon";
+            public const string FlashBang = "flashBangIcon";
+        }
+
+        public enum PeriodDay
+        {
+            All,
+            Afternoon,
+            Evening
         }
     }
 }

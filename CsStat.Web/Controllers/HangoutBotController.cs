@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using BusinessFacade.Repositories;
-using CsStat.Domain;
 using CsStat.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using ServerQueries.Source;
@@ -42,37 +41,6 @@ namespace CsStat.Web.Controllers
         public JsonResult GetPlayerList()
         {
             return new JsonResult(_playerRepository.GetAllPlayers());
-        }
-        public JsonResult ServerInfo()
-        {
-            return new JsonResult(GetServerInfo());
-        }
-
-        private ServerInfoModel GetServerInfo()
-        {
-            _queryConnection.Host = Settings.CsServerIp;
-            _queryConnection.Port = Settings.CsServerPort;
-
-            try
-            {
-                _queryConnection.Connect();
-                var info = _queryConnection.GetInfo();
-
-                return new ServerInfoModel
-                {
-                    IsAlive = true,
-                    PlayersCount = info.Players,
-                    Map = info.Map
-                };
-            }
-            catch (Exception e)
-            {
-                return new ServerInfoModel
-                {
-                    IsAlive = false,
-                    PlayersCount = 0
-                };
-            }
         }
 
         private static PlayerStatsViewModel GetStatForOnePlayer(string playerName, string dateFrom, string dateTo)
