@@ -24,11 +24,11 @@ class WikiPage extends React.Component<WikiPageProps> {
     }
 
     getPosts = (): ReactNode => {
-        const { posts, filteredPost } = this.props;
+        const { posts, filteredPost, tagsList } = this.props;
 
         console.log(this.props);
 
-        if (posts.length > 0 && filteredPost.length === 0) {
+        if (posts.length > 0 && filteredPost.length === 0 && tagsList.length === 0) {
             return posts.map((post: any, index: number) => <Post key={index} post={post} />);
         }
 
@@ -62,6 +62,7 @@ class WikiPage extends React.Component<WikiPageProps> {
 type WikiPageProps = {
     posts: PostType[];
     filteredPost: PostType[];
+    tagsList: string[];
     isLoading: boolean;
     wikiDataApiPath: string;
     fetchPosts: typeof fetchPosts;
@@ -72,6 +73,7 @@ const mapStateToProps = (state: RootState) => {
         isLoading: state.app.isLoading,
         posts: state.app.posts,
         filteredPost: state.app.filteredPost,
+        tagsList: state.app.tagsList,
     };
 };
 

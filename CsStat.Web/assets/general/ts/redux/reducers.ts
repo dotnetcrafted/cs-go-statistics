@@ -72,7 +72,8 @@ const appReducer: Reducer<IAppState> = (
         case REFRESH_POSTS:
             return {
                 ...state,
-                posts: action.payload
+                tagsList: [],
+                filteredPost: []
             };
         default:
             return state;
