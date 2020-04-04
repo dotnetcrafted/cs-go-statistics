@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessFacade.Repositories;
-using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.Web.Models;
 using DataService;

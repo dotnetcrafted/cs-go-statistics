@@ -66,7 +66,7 @@ type FilterProps = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    const FilteredPosts = state.app.FilteredPosts;
+    const FilteredPosts = state.app.filteredPosts;
     return { FilteredPosts };
 };
 

@@ -1,14 +1,16 @@
 import { RouterState } from "connected-react-router";
 
 interface IAppState {
-    IsLoading: boolean;
-    Players: Player[];
-    Posts: Post[];
-    FilteredPosts: Post[];
+    isLoading: boolean;
+    players: Player[];
+    posts: Post[];
+    filteredPosts: Post[];
 }
-
 interface IFilterByTag {
-    FilteredPosts: Post[];
+    isLoading: boolean;
+    players: Player[];
+    posts: Post[];
+    filteredPosts: Post[];
 }
 
 type RootState = {
@@ -18,63 +20,63 @@ type RootState = {
 };
 
 type Player = {
-    Id: string;
-    Name: string;
-    ImagePath: string;
-    Points: number;
-    Kills: number;
-    Deaths: number;
-    Assists: number;
-    FriendlyKills: number;
-    KillsPerGame: number;
-    AssistsPerGame: number;
-    DeathsPerGame: number;
-    DefusedBombs: number;
-    ExplodedBombs: number;
-    TotalGames: number;
-    HeadShot: number;
-    KdRatio: number;
-    Achievements: Achievement[];
-    Victims: RelatedPlayer[];
-    Killers: RelatedPlayer[];
-    Guns: Gun[];
+    id: string;
+    steamId: string,
+    steamImage: string,
+    name: string,
+    points: number;
+    kills: number;
+    deaths: number;
+    assists: number;
+    friendlyKills: number;
+    killsPerGame: number;
+    assistsPerGame: number;
+    deathsPerGame: number;
+    defusedBombs: number;
+    explodedBombs: number;
+    totalGames: number;
+    headShot: number;
+    kdRatio: number;
+    kdDif: number;
+    kad: string;
+    achievements: Achievement[];
+    victims: RelatedPlayer[];
+    killers: RelatedPlayer[];
+    guns: Gun[];
 };
 
 type Achievement = {
-    AchievementId: number;
-    Name: string;
-    Description: string;
-    IconUrl: string;
+    achievementId: number;
+    name: string;
+    description: string;
+    iconUrl: string;
 };
 
 type Gun = {
-    Id: number;
-    Name: string;
-    Kills: number;
+    id: number;
+    name: string;
+    kills: number;
 };
 
 type RelatedPlayer = {
-    Name: string;
-    Count: number;
-    ImagePath: string;
+    steamId: string,
+    count: number;
 };
 
 type Post = {
-    Title: string;
-    Content: string;
+    id: string,
+    title: string;
+    content: string;
     tags: Tag[];
     createdAt: string;
     updatedAt: string;
 };
 
 type Tag = {
-    Caption: string;
+    id: string,
+    caption: string;
 };
 
-const FETCH_PLAYERS_DATA = "FETCH_PLAYERS_DATA";
-const START_REQUEST = "START_REQUEST";
-const STOP_REQUEST = "STOP_REQUEST";
-const FETCH_POSTS_DATA = "FETCH_POSTS_DATA";
 const FILTER_BY_TAG = "FILTER_BY_TAG";
 const REFRESH_POSTS = "REFRESH_POSTS";
 
@@ -87,7 +89,15 @@ type FilterByTagAction = {
 type ResfreshPostsAction = {
     type: typeof REFRESH_POSTS;
     payload: Post[];
-};
+    id: string,
+    caption: string;
+}
+
+const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
+const FETCH_POSTS_DATA = 'FETCH_POSTS_DATA';
+const FECTH_MATCHES_DATA = 'FETCH_MATCHES_DATA';
+const START_REQUEST = 'START_REQUEST';
+const STOP_REQUEST = 'STOP_REQUEST';
 
 type StartRequestAction = {
     type: typeof START_REQUEST;
@@ -107,6 +117,16 @@ type FetchPostsAction = {
     payload: Post[];
 };
 
+// type FetchMatchesAction = {
+//     type: typeof FECTH_MATCHES_DATA;
+//     payload: Matches;
+// };
+
+// type FetchMatchesDetailsAction = {
+//     type: typeof FECTH_MATCHES_DATA;
+//     payload: MatchDetails;
+// };
+
 type ActionTypes =
     | StartRequestAction
     | StopRequestAction
@@ -114,6 +134,8 @@ type ActionTypes =
     | FetchPostsAction
     | FilterByTagAction
     | ResfreshPostsAction;
+ //   | FetchMatchesAction
+ //   | FetchMatchesDetailsAction;
 
 export {
     RootState,
@@ -132,7 +154,10 @@ export {
     REFRESH_POSTS,
     FILTER_BY_TAG,
     FETCH_PLAYERS_DATA,
+    //FetchMatchesAction,
+    //FetchMatchesDetailsAction,
     START_REQUEST,
     STOP_REQUEST,
-    FETCH_POSTS_DATA
+    FETCH_POSTS_DATA,
+    FECTH_MATCHES_DATA,
 };

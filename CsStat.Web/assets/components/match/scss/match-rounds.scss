@@ -1,0 +1,73 @@
+.match-rounds {
+    &__list {
+        @include reset-list();
+
+        display: flex;
+    }
+
+    &__li {
+        flex: 1;
+        min-width: 30px;
+
+        &:nth-child(15) {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -1px;
+                display: block;
+                transform: translateY(-50%);
+                height: 90px;
+                width: 2px;
+                background-color: rgb(228, 228, 228);
+            }
+        }
+    }
+
+    &__cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+
+        &--top {
+            border-bottom: 4px solid;
+        }
+
+        &--mid {
+            min-height: 0;
+            padding: 2px 0;
+            color: #CCCCCC;
+            font-size: 16px;
+        }
+
+        &--bottom {
+            border-top: 4px solid;
+        }
+
+        &.no-value {
+            color: #696969;
+        }
+    }
+
+    &__col {
+        display: block;
+        border-radius: 4px;
+        padding: 0 4px;
+
+        &.is-selected {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    }
+
+    &__icon {
+        height: 24px;
+        object-fit: contain;
+    }
+}

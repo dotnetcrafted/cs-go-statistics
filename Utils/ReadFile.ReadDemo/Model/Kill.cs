@@ -1,20 +1,37 @@
-﻿namespace ReadFile.ReadDemo.Model
+﻿using CsStat.Domain.Definitions;
+
+namespace ReadFile.ReadDemo.Model
 {
     public class Kill
     {
-        public Kill(Player killer, Player victim, bool isHeadshot, string weapon)
+        public Kill(Player killer, Player victim, bool isHeadshot, Weapons weapon, int roundNumber,
+            bool isSuicide, float time, int penetratedObjects, bool isFlashed)
         {
             Killer = killer;
             Victim = victim;
             IsHeadshot = isHeadshot;
             Weapon = weapon;
+            RoundNumber = roundNumber;
+            IsSuicide = isSuicide;
+            Time = time;
+            PenetratedObjects = penetratedObjects;
+            IsFlashed = isFlashed;
         }
 
         public Player Killer { get; set; }
         public Player Victim { get; set; }
         public bool IsHeadshot { get; set; }
-        public string Weapon { get; set; }
-        
+        public Weapons Weapon { get; set; }
+        public int RoundNumber { get; set; }
+
+        public float Time { get; set; }
+
+        public bool IsSuicide { get; set; }
+
         public Player Assister { get; set; }
+
+        public int PenetratedObjects { get; set; }
+
+        public bool IsFlashed { get; set; }
     }
 }

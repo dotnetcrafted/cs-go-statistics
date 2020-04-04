@@ -1,0 +1,99 @@
+.match-stats {
+    &__team {
+        display: flex;
+
+        & + & {
+            margin-top: 20px;
+        }
+
+        &.terrorist {
+            .ant-table-row {
+                background-color: rgba($color-t-primary, 0.9);
+            }
+
+            .match-stats__title {
+                color: $color-t-primary;
+            }
+        }
+
+        &.counterterrorist {
+            .ant-table-row {
+                background-color: rgba($color-ct-primary, 0.9);
+            }
+
+            .match-stats__title {
+                color: $color-ct-primary;
+            }
+        }
+
+        .ant-table-tbody {
+            > tr {
+                &.ant-table-row:hover {
+                    > td {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    &__table {
+        flex: 1;
+
+        .ant-table-tbody > tr {
+            &.ant-table-row {
+                &.died {
+                    td {
+                        background-color: rgba(0, 0, 0, 0.3);
+
+                        &:nth-child(2) {
+                            position: relative;
+                            overflow: hidden;
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        .died {
+            & td {
+                &:nth-child(2) {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        right: 25%;
+                        width: 80px;
+                        height: 80px;
+                        background-image: url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/skull-and-crossbones_2620.png);
+                        background-origin: border-box;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        opacity: 0.035;
+                        z-index: -1;
+                        transform: translateY(-50%) rotate(-28deg);
+                    }
+                }
+            }
+        }
+
+        .ant-table-tbody > tr > td,
+        .ant-table-thead > tr > th {
+            padding: 4px;
+            background-color: transparent;
+        }
+
+        .ant-table-thead > tr > th {
+            color: #AAAAAA;
+            border: transparent;
+        }
+
+        .ant-table-tbody > tr > td {
+            color: white;
+            font-weight: 500;
+            padding: 8px;
+            border-color: black;
+        }
+    }
+}

@@ -53,12 +53,15 @@
 
         "import/extensions": "off",
         "import/first": "off",
+        "import/prefer-default-export": "off",
         "import/no-unresolved": "off",
         "import/no-extraneous-dependencies": "off",
         "implicit-arrow-linebreak": "off",
+        "max-len": "off",
+        "arrow-body-style": "off",
+        "spaced-comment": "off",
 
         "no-void": ["warn"],
-        "max-len": ["warn"],
         "no-mixed-operators": ["warn"],
         "react/jsx-uses-vars": "warn",
         "react/react-in-jsx-scope": "off",

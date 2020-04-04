@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
 
 namespace BusinessFacade.Repositories

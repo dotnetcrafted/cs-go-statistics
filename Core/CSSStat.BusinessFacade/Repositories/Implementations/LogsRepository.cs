@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using DataService.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
@@ -18,18 +20,33 @@ namespace BusinessFacade.Repositories.Implementations
            return base.GetAll<Log>();
         }
 
-        public IEnumerable<Log> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo)
+        public IEnumerable<Log> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo, Expression<Func<Log, bool>> сondition = null)
         {
-            var query = new QueryBuilder<Log>();
-            return _mongoRepository.GetRepository<Log>().Collection.Find(query.And(query.GTE(x => x.DateTime, timeFrom), query.LTE(x => x.DateTime, timeTo))).ToList();
+            var builder = new QueryBuilder<Log>();
+
+            var queries = new List<IMongoQuery> {
+                Query.And(Query.GTE("DateTime", timeFrom), Query.LTE("DateTime", timeTo))
+            };
+                                   
+            var query = builder.And(queries);
+
+            var logs = _mongoRepository.GetRepository<Log>().Collection.Find(query).AsQueryable();
+
+            if (сondition != null)
+            {
+                logs = logs.Where(сondition);
+            }
+                
+            return logs.ToList();
         }
 
         public IEnumerable<Log> GetPlayerLogs(Player player, DateTime timeFrom, DateTime timeTo)
         {
-            var andList = new List<IMongoQuery>();
-
-            andList.Add(Query.Or(Query.EQ("Player.SteamId", player.SteamId), Query.EQ("Victim.SteamId", player.SteamId), Query.EQ("Action", Actions.TargetBombed)));
-            andList.Add(Query.And(Query.GTE("DateTime", timeFrom), Query.LTE("DateTime",timeTo)));
+            var andList = new List<IMongoQuery>
+            {
+                Query.Or(Query.EQ("Player.SteamId", player.SteamId), Query.EQ("Victim.SteamId", player.SteamId), Query.EQ("Action", Actions.TargetBombed)),
+                Query.And(Query.GTE("DateTime", timeFrom), Query.LTE("DateTime", timeTo))
+            };
 
             var query = new QueryBuilder<Log>();
 

@@ -8,8 +8,8 @@ import Post from '../../post';
 import Filter from '../../filter';
 
 class WikiPage extends React.Component<WikiPageProps> {
-    fetchPosts(WikiDataApiPath: string): void {
-        const url = new URL(WikiDataApiPath, window.location.origin);
+    fetchPosts(wikiDataApiPath: string): void {
+        const url = new URL(wikiDataApiPath, window.location.origin);
 
         fetch(url.toString())
             .then((res: Response) => res.json())
@@ -24,24 +24,24 @@ class WikiPage extends React.Component<WikiPageProps> {
     }
 
     getPosts(): ReactNode {
-        const { Posts, FilteredPosts } = this.props;
+        const { posts, filteredPosts } = this.props;
 
-        if (Posts.length > 0) {
+        if (posts.length > 0) {
             console.log(this.props);
-            return FilteredPosts.map((post: PostType, index: number) => <Post key={index} post={post} />);
+            return filteredPosts.map((post: PostType, index: number) => <Post key={index} post={post} />);
         }
 
         return <Empty />;
     }
 
     componentDidMount(): void {
-        this.fetchPosts(this.props.WikiDataApiPath);
+        this.fetchPosts(this.props.wikiDataApiPath);
     }
 
     render(): ReactNode {
         return (
             <React.Fragment>
-                {this.props.Posts.length > 0 ? <Filter filtersTags={this.props.Posts} /> : null}
+                {this.props.posts.length > 0 ? <Filter filtersTags={this.props.posts} /> : null}
 
                 <Row type='flex' justify='start' align='middle'>
                     <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
@@ -54,18 +54,19 @@ class WikiPage extends React.Component<WikiPageProps> {
 }
 
 type WikiPageProps = {
-    Posts: PostType[];
-    FilteredPosts: PostType[];
-    IsLoading: boolean;
-    WikiDataApiPath: string;
+    posts: PostType[];
+    filteredPosts: PostType[];
+    isLoading: boolean;
+    wikiDataApiPath: string;
     fetchPosts: typeof fetchPosts;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const IsLoading = state.app.IsLoading;
-    const Posts = state.app.Posts;
-    const FilteredPosts = state.app.FilteredPosts;
-    return { IsLoading, Posts, FilteredPosts };
+    return { 
+        isLoading: state.app.isLoading,
+        posts: state.app.posts,
+        filteredPosts: state.app.filteredPosts
+    };
 };
 
 export default connect(mapStateToProps, {

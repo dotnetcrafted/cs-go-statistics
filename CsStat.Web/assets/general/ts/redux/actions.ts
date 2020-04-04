@@ -35,6 +35,8 @@ const filteredByTag = (tag: string, posts: Post[]): ActionTypes => ({
 });
 
 const refreshPosts = (posts: Post[]): ActionTypes => ({
+    id: '',
+    caption: '',
     type: REFRESH_POSTS,
     payload: posts
 });

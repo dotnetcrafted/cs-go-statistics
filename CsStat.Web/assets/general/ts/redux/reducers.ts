@@ -12,10 +12,10 @@ import {
 } from "./types";
 
 export const initialState: IAppState = {
-    IsLoading: false,
-    Players: [],
-    Posts: [],
-    FilteredPosts: []
+    isLoading: false,
+    players: [],
+    posts: [],
+    filteredPosts: []
 };
 
 const appReducer: Reducer<IAppState> = (
@@ -26,34 +26,34 @@ const appReducer: Reducer<IAppState> = (
         case FETCH_PLAYERS_DATA:
             return {
                 ...state,
-                IsLoading: false,
-                Players: action.payload.Players
+                isLoading: false,
+                players: action.payload.players
             };
         case FETCH_POSTS_DATA:
             return {
                 ...state,
-                IsLoading: false,
-                Posts: action.payload,
-                FilteredPosts: action.payload
+                isLoading: false,
+                posts: action.payload,
+                filteredPosts: action.payload
             };
 
         case START_REQUEST:
             return {
                 ...state,
-                IsLoading: true
+                isLoading: true
             };
 
         case STOP_REQUEST:
             return {
                 ...state,
-                IsLoading: false
+                isLoading: false
             };
         case FILTER_BY_TAG:
             return {
                 ...state,
-                FilteredPosts: state.FilteredPosts.filter(post => {
+                filteredPosts: state.filteredPosts.filter(post => {
                     const filter = post.tags.filter(
-                        tag => tag.Caption === action.tag
+                        tag => tag.caption === action.tag
                     );
                     if (filter.length > 0) {
                         return post;
@@ -63,7 +63,7 @@ const appReducer: Reducer<IAppState> = (
         case REFRESH_POSTS:
             return {
                 ...state,
-                FilteredPosts: action.payload
+                filteredPosts: action.payload
             };
         default:
             return state;

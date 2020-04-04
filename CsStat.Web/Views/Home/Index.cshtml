@@ -1,2 +1,17 @@
 @using CsStat.Domain
-<div data-dc-component-app data-dc-app-options='{"playersDataUrl": "@Settings.PlayersDataApiPath", "WikiDataApiPath": "@Settings.WikiDataApiPath"}'></div>
+@model CsStat.Web.Models.AppStateModel
+
+<div data-dc-component-app data-dc-app-options='{
+     "playersDataUrl": "@Settings.PlayersDataApiPath",
+     "wikiDataApiPath": "@Settings.WikiDataApiPath",
+     "matchesDataApiPath": "@Settings.MatchesDataApiPath"
+     }'></div>
+<script>
+    appState = {
+        apiPaths: @Html.Raw(Model.ApiPaths),
+        icons: @Html.Raw(Model.Icons),
+        weapons: @Html.Raw(Model.Weapons),
+        players: @Html.Raw(Model.Players)
+    }
+</script>
+
