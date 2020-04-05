@@ -1,6 +1,7 @@
 .match-stats {
     &__team {
         display: flex;
+        overflow-y: auto;
 
         & + & {
             margin-top: 20px;
@@ -51,23 +52,6 @@
                             overflow: hidden;
                             z-index: 1;
                         }
-                    }
-                }
-            }
-        }
-
-        .died {
-            & td {
-                &:nth-child(2) {
-                    &::after {
-                        content: '☠';
-                        position: absolute;
-                        right: 5%;
-                        top: 50%;
-                        font-size: 65px;
-                        color: rgba(0, 0, 0, 0.04);
-                        z-index: -1;
-                        transform: translateY(-50%) rotate(-28deg);
                     }
                 }
             }

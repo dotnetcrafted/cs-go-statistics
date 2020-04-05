@@ -4,7 +4,13 @@
     }
 
     &__li {
+        color: white;
+        font-size: 12px;
         text-align: right;
+
+        @include desktop {
+            font-size: 14px;
+        }
 
         & + & {
             margin-top: 5px;
@@ -24,35 +30,40 @@
         border-radius: 4px;
         color: #AAAAAA;
         font-weight: 500;
-        font-size: 14px;
     }
 
     &__player {
         padding: 2px 5px;
         border-radius: 4px;
-        font-size: 14px;
-        color: white;
 
-        &.color-t-primary {
+        &.t {
             background-color: $color-t-primary;
         }
 
-        &.color-ct-primary {
+        &.ct {
             background-color: $color-ct-primary;
         }
     }
 
     &__weapon {
         margin: 0 2px;
-        max-height: 20px;
+        max-height: 16px;
         object-fit: contain;
+
+        @include desktop {
+            max-height: 20px;
+        }
     }
 
     &__headshot,
     &__suicide,
     &__penetrated {
         margin: 0 2px;
-        max-height: 24px;
+        max-height: 20px;
         object-fit: contain;
+
+        @include desktop {
+            max-height: 24px;
+        }
     }
 }

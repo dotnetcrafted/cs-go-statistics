@@ -35,7 +35,7 @@ export class MatchKills extends React.Component<any, {}> {
 
         if (!player || !cmsPlayer) return null;
 
-        const playerCss = player.team === 'Terrorist' ? 'color-t-primary' : 'color-ct-primary';
+        const playerCss = player.team === 'Terrorist' ? 't' : 'ct';
 
         return <span className={`match-kills__player ${playerCss}`}>{cmsPlayer.nickName}</span>;
     }
