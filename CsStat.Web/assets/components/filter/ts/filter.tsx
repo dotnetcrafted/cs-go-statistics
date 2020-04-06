@@ -9,14 +9,14 @@ class Filter extends React.Component<FilterProps> {
     };
 
     getListTags(): void {
-        const set = new Set();
+        const { posts } = this.props;
 
-        this.props.posts.forEach((item: any) => {
-            item.tags.map((tags: any) => set.add(tags.caption));
-        });
+        const set = Array.from(
+            new Set(posts.reduce((prev: any, curr: any) => [...prev, ...curr.tags.map((tag: any) => tag.caption)], []))
+        );
 
         this.setState({
-            tagsArr: Array.from(set),
+            tagsArr: set,
         });
     }
 

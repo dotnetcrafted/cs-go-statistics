@@ -51,23 +51,11 @@ const appReducer: Reducer<IAppState> = (
         case FILTER_BY_TAG:
             return {
                 ...state,
-                filteredPost: state.posts.filter((post: any) => {
-                    const stringTags = post.tags.map((tag: any) => tag.caption);
-
-                    const check = () => {
-                        let valid = true;
-
-                        action.tagsArr.forEach((item: any) => {
-                            if (!stringTags.includes(item)) {
-                                valid = false;
-                            }
-                        });
-
-                        return valid;
-                    };
-
-                    return check();
-                })
+                filteredPost: state.posts.filter((post: any) =>
+                    action.tagsArr.every((item: any) =>
+                        post.tags.map((tag: any) => tag.caption).includes(item)
+                    )
+                )
             };
         case REFRESH_POSTS:
             return {
