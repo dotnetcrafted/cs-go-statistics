@@ -10,6 +10,10 @@
     <DebugSymbols>true</DebugSymbols>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
+
+    <!-- Makes the TypeScript compilation task a no-op -->
+    <!-- https://www.typescriptlang.org/docs/handbook/compiler-options-in-msbuild.html#typescriptcompileblocked -->
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
