@@ -59,6 +59,7 @@ namespace CsStat.Web
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IStrapiApi, StrapiApi.StrapiApi>();
             services.AddTransient<IQueryConnection, QueryConnection>();
+            services.AddTransient<IDemoRepository, DemoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
