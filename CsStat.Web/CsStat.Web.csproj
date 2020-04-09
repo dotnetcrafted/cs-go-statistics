@@ -18,12 +18,16 @@
 
   <ItemGroup>
     <Compile Remove="dist\**" />
+    <Compile Remove="wwwroot\dist\**" />
     <Content Remove="assets\**" />
     <Content Remove="dist\**" />
+    <Content Remove="wwwroot\dist\**" />
     <EmbeddedResource Remove="assets\**" />
     <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="wwwroot\dist\**" />
     <None Remove="assets\**" />
     <None Remove="dist\**" />
+    <None Remove="wwwroot\dist\**" />
   </ItemGroup>
 
   <ItemGroup>
