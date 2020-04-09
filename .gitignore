@@ -76,7 +76,7 @@ _[Ss]cripts
 *.dot[Cc]over
 *.jpg
 */node_modules/*
-*/dist/*
+*/wwwroot/dist/*
 
 CsStat.Web/Web.config
 .vscode

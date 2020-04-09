@@ -24,7 +24,7 @@ pipeline {
     stage('Publish') {
       steps {
           bat 'rmdir "C:\\inetpub\\wwwroot\\dist" /s /q'
-          bat 'xcopy "%WORKSPACE%\\CsStat.Web\\dist" "C:\\inetpub\\wwwroot\\dist" /s /e /y /i'
+          bat 'xcopy "%WORKSPACE%\\CsStat.Web\\wwwroot\\dist" "C:\\inetpub\\wwwroot\\dist" /s /e /y /i'
           bat 'xcopy "%WORKSPACE%\\CsStat.Web\\bin" C:\\inetpub\\wwwroot\\bin\\ /f /s /j /z /d /q /y'
           bat 'xcopy "%WORKSPACE%\\CsStat.Web\\views" C:\\inetpub\\wwwroot\\views\\ /f /s /j /z /d /q /y'
           bat 'xcopy "%WORKSPACE%\\CsStat.Web\\favicon.ico" C:\\inetpub\\wwwroot /j /z /d /q /y'

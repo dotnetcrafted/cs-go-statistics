@@ -11,7 +11,7 @@ namespace CsStat.Web.Helpers
 {
     public class HtmlHelperExtensions
     {
-        private const string DistPath = "dist";
+        private const string DistPath = "wwwroot\\dist";
         private readonly string ManifestJsonPath = null;
 
         private readonly IMemoryCache _cache;

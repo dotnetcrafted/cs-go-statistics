@@ -1,3 +1,3 @@
-Project/McS/code/dist/*
 Project/McS/code/webpack/*
-Project/McS/code/assets/general/js/jquery.js
+Project/McS/code/wwwroot/dist/*
+Project/McS/code/wwwroot/general/js/jquery.js

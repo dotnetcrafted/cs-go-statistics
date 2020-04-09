@@ -8,10 +8,10 @@ const globalVars = require('./config');
 module.exports = () => ({
     devtool: 'source-map',
     entry: {
-        app: './assets'
+        app: './wwwroot'
     },
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, '../wwwroot/dist'),
         publicPath: '/dist/',
         filename: '[name].[chunkhash].js',
         jsonpFunction: 'webpackJsonpDelete'
@@ -22,10 +22,10 @@ module.exports = () => ({
             'node_modules',
             // src
             path.resolve(__dirname, '../../../../'),
-            path.resolve(__dirname, '../assets/')
+            path.resolve(__dirname, '../wwwroot/')
         ],
         alias: {
-            'style-settings': path.resolve(__dirname, '../assets/general/scss/settings/index'),
+            'style-settings': path.resolve(__dirname, '../wwwroot/general/scss/settings/index'),
         }
     },
     module: {
@@ -89,7 +89,7 @@ module.exports = () => ({
         new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin([
-            { from: './assets/favicon', to: '../dist/favicon' }
+            { from: './wwwroot/favicon', to: '../dist/favicon' }
         ]),
 
         new webpack.DefinePlugin({
