@@ -5,27 +5,29 @@ using CsStat.Domain;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
+using ServerQueries;
+using ServerQueries.Models;
 using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
 {
     public class ServerInfoController : BaseController
     {
-        private readonly IQueryConnection _queryConnection;
+        private readonly IServerQueries _serverQueries;
         private static IStrapiApi _strapiApi;
 
         private readonly string[] _maps =
             {"de_dust2", "de_mirage", "de_inferno", "de_cache", "de_nuke", "de_overpass", "de_train", "de_vertigo"};
         
-        public ServerInfoController(IQueryConnection queryConnection, IStrapiApi strapiApi)
+        public ServerInfoController(IServerQueries serverQueries, IStrapiApi strapiApi)
         {
-            _queryConnection = queryConnection;
+            _serverQueries = serverQueries;
             _strapiApi = strapiApi;
         }
 
         public JsonResult ServerInfo()
         {
-            var serverInfo = GetServerInfo();
+            var serverInfo = _serverQueries.GetServerInfo();
 
             if (serverInfo.IsAlive)
             {
@@ -71,32 +73,6 @@ namespace CsStat.Web.Controllers
                     ImageUrl = "https://admin.csfuse8.site/uploads/7203cded792e4d2ca72e3b47d248db6c.jpg"
                 }
             );
-        }
-        private ServerInfoModel GetServerInfo()
-        {
-            _queryConnection.Host = Settings.CsServerIp;
-            _queryConnection.Port = Settings.CsServerPort;
-
-            try
-            {
-                _queryConnection.Connect();
-                var info = _queryConnection.GetInfo();
-
-                return new ServerInfoModel
-                {
-                    IsAlive = true,
-                    PlayersCount = info.Players,
-                    Map = info.Map
-                };
-            }
-            catch (Exception e)
-            {
-                return new ServerInfoModel
-                {
-                    IsAlive = false,
-                    PlayersCount = 0
-                };
-            }
         }
     }
 }

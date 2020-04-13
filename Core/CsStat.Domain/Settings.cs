@@ -22,6 +22,7 @@ namespace CsStat.Domain
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
 
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
+        public static string CsPath => GetSetting(nameof(LogsPath), Defaults.CsPath);
         public static string ConsoleLogsPath => GetSetting(nameof(ConsoleLogsPath), Defaults.ConsoleLogsPath);
         public static string DemosFolderPath => GetSetting(nameof(DemosFolderPath), Defaults.DemosFolderPath);
         public static string FullMatchesDataApiPath => GetSetting(nameof(FullMatchesDataApiPath), Defaults.FullMatchesDataApiPath);
@@ -130,6 +131,7 @@ namespace CsStat.Domain
             public const int ShowNullPlayers = 1;
             public const int CsServerPort = 27015;
             public const string MatchesPagePath = "matches";
+            public const string CsPath = @"D:\Games\CS_GO_DS\server";
             public static string ArticlesPath => $"{AdminPath}/articles?_sort=createdAt:desc";
             public static string AchievementsPath => $"{AdminPath}/Achievements";
             public static string MapInfoPath => $"{AdminPath}/map-infos";

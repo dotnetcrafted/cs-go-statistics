@@ -11,6 +11,7 @@ using DataService;
 using DataService.Interfaces;
 using ErrorLogger;
 using Ninject;
+using ServerQueries;
 using ServerQueries.Source;
 
 namespace CSStat.WebApp.Infrastructure
@@ -49,7 +50,7 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IUsefulLinkRepository>().To<UsefulLinkRepository>();
             _kernel.Bind<IUserRepository>().To<UserRepository>();
             _kernel.Bind<IStrapiApi>().To<StrapiApi>();
-            _kernel.Bind<IQueryConnection>().To<QueryConnection>();
+            _kernel.Bind<IServerQueries>().To<ServerQueries.ServerQueries>();
         }
     }
 }

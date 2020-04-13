@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using ServerQueries.Responses;
 
 namespace ServerQueries.Source
