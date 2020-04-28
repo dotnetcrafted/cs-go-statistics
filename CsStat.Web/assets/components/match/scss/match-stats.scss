@@ -1,6 +1,7 @@
 .match-stats {
     &__team {
         display: flex;
+        overflow-y: auto;
 
         & + & {
             margin-top: 20px;
@@ -60,12 +61,17 @@
             & td {
                 &:nth-child(2) {
                     &::after {
-                        content: '☠';
+                        content: '';
                         position: absolute;
-                        right: 5%;
                         top: 50%;
-                        font-size: 65px;
-                        color: rgba(0, 0, 0, 0.04);
+                        right: 25%;
+                        width: 80px;
+                        height: 80px;
+                        background-image: url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/skull-and-crossbones_2620.png);
+                        background-origin: border-box;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        opacity: 0.035;
                         z-index: -1;
                         transform: translateY(-50%) rotate(-28deg);
                     }

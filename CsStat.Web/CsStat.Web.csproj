@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\AppStateModel.cs" />
+    <Compile Include="Models\MatchesViewModel.cs" />
     <Compile Include="Models\Matches\PlayerStatByRound.cs" />
     <Compile Include="Models\Matches\BaseMatch.cs" />
     <Compile Include="Controllers\ServerInfoController.cs" />

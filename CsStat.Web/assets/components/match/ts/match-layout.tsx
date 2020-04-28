@@ -45,11 +45,13 @@ const MatchLayout: React.FC<MatchDetailsLayoutProps> = ({ match, round, selected
                             </div>
                         </div>
                     </div>
-                    <MatchRounds
-                        rounds={match.rounds}
-                        selectedRoundId={selectedRoundId}
-                        selectRound={selectRound}
-                    />
+                    <div className="match__rounds">
+                        <MatchRounds
+                            rounds={match.rounds}
+                            selectedRoundId={selectedRoundId}
+                            selectRound={selectRound}
+                        />
+                    </div>
                     <div className="match__body">
                         <div className="match__stats">
                             <MatchStats round={round} />
