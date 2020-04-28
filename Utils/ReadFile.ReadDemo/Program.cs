@@ -18,11 +18,12 @@ namespace ReadFile.ReadDemo
         {
             Console.WriteLine("Start");
             Console.WriteLine($"Reading demo files from \"{Settings.DemosFolderPath}\" folder");
+            var progress = new Progress<string>(Console.WriteLine);
 
             var demoReader = new DemoReader(Settings.DemosFolderPath,
                 new BaseFileRepository<DemoFile>(new MongoRepositoryFactory(new ConnectionStringFactory())),
                 new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory())),
-                Config.CreateMapper()
+                Config.CreateMapper(), progress
             );
 
             demoReader.Start(Settings.TimerInterval);

@@ -5,6 +5,8 @@
         Text,
         Warning,
         Error,
-        Success
+        Success,
+        CtWin,
+        TerroristWin
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="Entities\PlayerStats.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\WeaponsEnum.cs" />
+    <Compile Include="Entities\ServerTools\ServerToolsSettings.cs" />
     <Compile Include="Entities\UsefulInfo.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extensions\AchieveModelExtensions.cs" />
@@ -145,5 +146,6 @@
   <ItemGroup>
     <Content Include="LICENSE.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,14 +20,12 @@ namespace BusinessFacade.Repositories.Implementations
         private static ILogsRepository _logsRepository;
         private static IMongoRepositoryFactory _mongoRepository;
         private static IStrapiApi _strapiApi;
-        private static List<WeaponModel> _weapons;
 
         public PlayerRepository(IMongoRepositoryFactory mongoRepository, IStrapiApi strapiApi) : base(mongoRepository)
         {
             _mongoRepository = mongoRepository;
             _logsRepository = new LogsRepository(_mongoRepository);
             _strapiApi = strapiApi;
-            _weapons = _strapiApi.GetAllWeapons();
         }
 
         #region Mongo
@@ -190,11 +188,12 @@ namespace BusinessFacade.Repositories.Implementations
 
         private static List<WeaponStatModel> GetGuns(IReadOnlyCollection<Log> logs)
         {
+            var weapons = _strapiApi.GetAllWeapons();
             return !logs.Any()
                 ? new List<WeaponStatModel>()
                 : logs.Where(x=>x.Action==Actions.Kill).GroupBy(x => x.Gun).Select(r => new WeaponStatModel
                        {
-                           Weapon = _weapons.FirstOrDefault(x=>x.Id == (int)r.Key),
+                           Weapon = weapons.FirstOrDefault(x=>x.Id == (int)r.Key),
                            Kills = r.Count()
                        }).OrderByDescending(x=>x.Kills).ToList();
         }

@@ -131,7 +131,7 @@ namespace CsStat.Domain
             public const int ShowNullPlayers = 1;
             public const int CsServerPort = 27015;
             public const string MatchesPagePath = "matches";
-            public const string CsPath = @"D:\Games\CS_GO_DS\server";
+            public const string CsPath = @"D:\Games\CS_GO_DS\";
             public static string ArticlesPath => $"{AdminPath}/articles?_sort=createdAt:desc";
             public static string AchievementsPath => $"{AdminPath}/Achievements";
             public static string MapInfoPath => $"{AdminPath}/map-infos";

@@ -52,14 +52,16 @@ namespace ReadFile.ReadDemo
         private readonly IFileRepository<DemoFile> demoFileRepository;
         private readonly IBaseRepository demoRepository;
         private readonly IMapper mapper;
+        private static IProgress<string> _progress;
 
         public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository,
-            IMapper mapper)
+            IMapper mapper, IProgress<string> progress)
         {
             this.path = path;
             this.demoFileRepository = demoFileRepository;
             this.demoRepository = demoRepository;
             this.mapper = mapper;
+            _progress = progress;
         }
 
         #endregion
@@ -89,7 +91,7 @@ namespace ReadFile.ReadDemo
                 catch (Exception e)
                 {
                     isSuccessfully = false;
-                    Console.WriteLine(e);
+                    _progress.Report(e.Message);
                     error = e.ToString();
                 }
                 finally
@@ -153,8 +155,7 @@ namespace ReadFile.ReadDemo
             _parser.FreezetimeEnded += Parser_FreezetimeEnded;
             _parser.PlayerHurt += Parser_PlayerHurt;
 
-            Console.WriteLine(
-                $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
+            _progress.Report($"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
 
             var sw = new Stopwatch();
             sw.Start();
@@ -163,7 +164,7 @@ namespace ReadFile.ReadDemo
 
             MatchFinish();
 
-            Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
+            _progress.Report($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
         private static void Parser_PlayerHurt(object sender, PlayerHurtEventArgs e)
@@ -291,10 +292,10 @@ namespace ReadFile.ReadDemo
             demoRepository.Insert(demoLog);
 
             var time = TimeSpan.FromSeconds(demoLog.Duration);
-            Console.WriteLine($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
+            _progress.Report($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
 
-            Console.WriteLine($"{SuqadA}: {_squadAScore}");
-            Console.WriteLine($"{SuqadB}: {_squadBScore}");
+            _progress.Report($"{SuqadA}: {_squadAScore}");
+            _progress.Report($"{SuqadB}: {_squadBScore}");
         }
 
         private static List<DamageLog> GetDamage(IEnumerable<Damage> stat, long steamId, int roundNumber = 0)
@@ -459,8 +460,7 @@ namespace ReadFile.ReadDemo
 
             var duration = TimeSpan.FromSeconds(_currentRound.Duration);
 
-            Console.WriteLine(
-                $"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff}");
+            _progress.Report($"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff} | winning team: {winningTeam}");
 
             Console.ForegroundColor = foregroundColor;
         }

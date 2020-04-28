@@ -60,5 +60,15 @@ namespace CsStat.SystemFacade.Extensions
             value = value.Substring(1, value.Length - 1);
             return firstChar + value;
         }
+
+        public static int GetMinutes(this string str)
+        {
+            if (!str.Contains(":"))
+            {
+                return 0;
+            }
+            var digits = str.Split(':');
+            return digits[0].ParseOrDefault(0) * 60 + digits[1].ParseOrDefault(0);
+        }
     }
 }

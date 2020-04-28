@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using CsStat.SystemFacade.Extensions;
 using ServerTools.Enums;
 
 namespace ServerTools.Extensions
@@ -15,7 +16,7 @@ namespace ServerTools.Extensions
             switch (type)
             {
                 case LineTypes.Text:
-                    color = Color.White;
+                    color = Color.WhiteSmoke;
                     break;
                 case LineTypes.Warning:
                     color = Color.Orange;
@@ -26,8 +27,14 @@ namespace ServerTools.Extensions
                 case LineTypes.Success:
                     color = Color.Green;
                     break;
+                case LineTypes.CtWin:
+                    color = Color.Aqua;
+                    break;
+                case LineTypes.TerroristWin:
+                    color = Color.DarkOrange;
+                    break;
                 default:
-                    color = Color.White;
+                    color = Color.WhiteSmoke;
                     break;
             }
 
@@ -36,6 +43,11 @@ namespace ServerTools.Extensions
             textBox.SelectionColor = color;
             textBox.AppendText(DateTime.Now.ToString(CultureInfo.InvariantCulture) + " " + text + Environment.NewLine);
             textBox.SelectionColor = textBox.ForeColor;
+        }
+
+        public static string LastLine(this RichTextBox textBox)
+        {
+            return textBox.Text.Split('\n').Last(x => x.IsNotEmpty());
         }
     }
 }

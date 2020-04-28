@@ -37,5 +37,6 @@ namespace BusinessFacade.Repositories
             return _mongoRepository.GetRepository<T>()
                 .Collection.Find(new QueryBuilder<T>().EQ(x => x.Path, name)).FirstOrDefault();
         }
+
     }
 }

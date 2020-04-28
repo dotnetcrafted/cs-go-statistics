@@ -34,9 +34,9 @@ namespace ErrorLogger
             _errorLogRepository.Error(error);
         }
 
-        public void Error(Exception exception, string message)
+        public void Error(Exception exception, string caption)
         {
-            Error("", exception, message);
+            Error("", exception, caption);
         }
     }
 }
