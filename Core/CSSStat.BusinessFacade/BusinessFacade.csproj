@@ -77,6 +77,7 @@
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Repositories\Implementations\BaseRepository.cs" />
     <Compile Include="Repositories\Implementations\ErrorLogRepository.cs" />
+    <Compile Include="Repositories\Implementations\PeriodDayExpression.cs" />
     <Compile Include="Repositories\Implementations\PlayerRepository.cs" />
     <Compile Include="Repositories\Implementations\UsefulLinkRepository.cs" />
     <Compile Include="Repositories\Implementations\UserRepository.cs" />

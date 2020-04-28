@@ -34,5 +34,12 @@
             public const string HeadShot = "headShotIcon";
             public const string FlashBang = "flashBangIcon";
         }
+
+        public enum PeriodDay
+        {
+            All,
+            Afternoon,
+            Evening
+        }
     }
 }

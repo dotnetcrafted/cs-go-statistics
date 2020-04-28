@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using BusinessFacade;
 using BusinessFacade.Repositories;
 using CsStat.Domain;
@@ -107,6 +108,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 25920000, Location = OutputCacheLocation.Server, VaryByParam = "matchId")]
         public ActionResult GetMatch(string matchId)
         {
             if (matchId.IsNotEmpty())

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Form, DatePicker, Button, Row, Col
+    Form, DatePicker, Radio, Button, Row, Col
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import moment, { Moment } from 'moment';
@@ -9,19 +9,39 @@ import en_GB from 'antd/es/date-picker/locale/en_GB';
 const SERVER_DATE_FORMAT = 'MM/DD/YYYY';
 const USER_DATE_FORMAT = 'll';
 
+const RadioGroup = Radio.Group;
+
+const pariodsDay = [
+    { label: 'All day', value: 'All' },
+    { label: 'Afternoon', value: 'Afternoon' },
+    { label: 'Evening', value: 'Evening' },
+];
+
 class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
     readonly state = {
         dateFrom: moment(),
         dateTo: moment(),
-        dateToIsOpen: false
+        dateToIsOpen: false,
+        periodDay: 'All',
     };
-
+    
     render() {
         const { dateFrom, dateTo } = this.props;
         const { getFieldDecorator } = this.props.form;
 
         return (
             <Form layout="inline" onSubmit={this.handleSubmit} className="filter-form">
+                <Row>
+                    <Col span={24}>
+                        <Form.Item>
+                            <RadioGroup
+                                options={pariodsDay}
+                                value={this.state.periodDay}
+                                onChange={this.onPeriodDayChange}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
                 <Row>
                     <Col span={24}>
                         <Form.Item>
@@ -83,6 +103,12 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
             </Form>
         );
     }
+
+    private onPeriodDayChange = (e: any) => {
+        this.setState({
+            periodDay: e.target.value            
+        });
+    };
 
     private getDateObject = (date?: string): Moment => {
         if (date) {
@@ -159,7 +185,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
         if (dateFrom && dateTo) {
             const values: DateValues = {
                 dateFrom: dateFrom.format(SERVER_DATE_FORMAT),
-                dateTo: dateTo.format(SERVER_DATE_FORMAT)
+                dateTo: dateTo.format(SERVER_DATE_FORMAT),
+                periodDay: this.state.periodDay
             };
 
             this.props.onFormSubmit(values);
@@ -169,7 +196,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
     private onDayButtonClick = () => {
         const values: DateValues = {
             dateFrom: moment().format(SERVER_DATE_FORMAT),
-            dateTo: moment().format(SERVER_DATE_FORMAT)
+            dateTo: moment().format(SERVER_DATE_FORMAT),
+            periodDay: this.state.periodDay
         };
 
         this.props.onFormSubmit(values);
@@ -180,7 +208,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
             dateFrom: moment()
                 .startOf('isoWeek')
                 .format(SERVER_DATE_FORMAT),
-            dateTo: moment().format(SERVER_DATE_FORMAT)
+            dateTo: moment().format(SERVER_DATE_FORMAT),
+            periodDay: this.state.periodDay
         };
 
         this.props.onFormSubmit(values);
@@ -191,7 +220,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
             dateFrom: moment()
                 .startOf('month')
                 .format(SERVER_DATE_FORMAT),
-            dateTo: moment().format(SERVER_DATE_FORMAT)
+            dateTo: moment().format(SERVER_DATE_FORMAT),
+            periodDay: this.state.periodDay
         };
 
         this.props.onFormSubmit(values);
@@ -200,7 +230,8 @@ class FilterForm extends React.Component<IFilterFormProps, FilterFormState> {
     private onAllButtonClick = () => {
         const values: DateValues = {
             dateFrom: '',
-            dateTo: moment().format(SERVER_DATE_FORMAT)
+            dateTo: moment().format(SERVER_DATE_FORMAT),
+            periodDay: this.state.periodDay
         };
 
         this.props.onFormSubmit(values);
@@ -211,18 +242,21 @@ export type DateValues = {
     [index: string]: string;
     dateFrom: string;
     dateTo: string;
+    periodDay: string;
 };
 interface IFilterFormProps extends FormComponentProps {
     onFormSubmit: (message: DateValues) => void;
     dateFrom?: string;
     dateTo?: string;
     isLoading: boolean;
+    periodDay?: string;
 }
 
 type FilterFormState = {
     dateFrom?: Moment | null;
     dateTo?: Moment | null;
     dateToIsOpen: boolean;
+    periodDay?: string;
 };
 
 type Config = {

@@ -72,9 +72,9 @@ namespace BusinessFacade.Repositories.Implementations
 
         #endregion
 
-        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo)
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayers(string dateFrom, string dateTo, Constants.PeriodDay? periodDay = Constants.PeriodDay.All)
         {
-            var logs = GetLogs(dateFrom, dateTo);
+            var logs = GetLogs(dateFrom, dateTo, periodDay);
             var playersStats = new List<PlayerStatsModel>();
 
             if (!logs.Any())
@@ -180,10 +180,11 @@ namespace BusinessFacade.Repositories.Implementations
             return victimModel;
         }
 
-        private static List<Log> GetLogs(string from = "", string to = "")
+        private static List<Log> GetLogs(string from = "", string to = "", Constants.PeriodDay? periodDay = Constants.PeriodDay.All)
         {
+            var periodDayCondition = PeriodsDayCondition.Get(periodDay);
             return _logsRepository
-                .GetLogsForPeriod(from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1))
+                .GetLogsForPeriod(from.ToDate(DateTime.MinValue), to.ToDate(DateTime.Today).AddDays(1), periodDayCondition)
                 .ToList();
         }
 
@@ -196,7 +197,6 @@ namespace BusinessFacade.Repositories.Implementations
                            Weapon = _weapons.FirstOrDefault(x=>x.Id == (int)r.Key),
                            Kills = r.Count()
                        }).OrderByDescending(x=>x.Kills).ToList();
-
         }
 
         private static int GetExplodeBombs(IReadOnlyCollection<Log> playersLogs, IReadOnlyCollection<Log> logs)
@@ -219,10 +219,10 @@ namespace BusinessFacade.Repositories.Implementations
                 .Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.FirstKd));
 
             playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
-                .Skip(1).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
+                .Skip(1).Take(1).FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.SecondKd));
 
             playersStats.Where(x => x.KdRatio > 0).OrderByDescending(x => x.KdRatio).ThenByDescending(x => x.Kills)
-                .Skip(2).Take(1).First().Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
+                .Skip(2).Take(1).FirstOrDefault()?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.ThirdKd));
 
             playersStats.Where(x => x.Kills > 0).OrderByDescending(x => x.Kills).FirstOrDefault()?
                 .Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Killer));
