@@ -98,8 +98,8 @@
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 
         #{$this}__image {
-            transform: scale(1.01);
-            filter: contrast(1.1);
+            transform: scale(1);
+            filter: contrast(0.9);
         }
     }
 }
