@@ -1,6 +1,7 @@
 .match-stats {
     &__team {
         display: flex;
+        overflow-y: auto;
 
         & + & {
             margin-top: 20px;

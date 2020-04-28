@@ -19,7 +19,7 @@ export class MatchesController extends React.Component<any, MatchesControllerSta
             .then((res: Response) => res.json())
             .then((data) => {
                 this.setState({
-                    matches: data
+                    matches: data.matches
                 });
             })
             .catch((err) => {

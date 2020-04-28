@@ -1,8 +1,20 @@
 .matches {
-    padding: 30px 20px;
+    padding: 20px 20px;
+
+    @include desktop {
+        padding: 30px 30px;
+    }
 
     &__title {
-        margin: 0 0 20px;
+        margin: 0;
+
+        @include desktop {
+            margin: 0 0 10px;
+        }
+    }
+
+    &__grid {
+        margin: 0 -15px;
     }
 
     &__list {
@@ -13,7 +25,15 @@
     }
 
     &__li {
-        width: 25%;
+        width: 100%;
         padding: 15px;
+
+        @include tablet {
+            width: 100 / 3 + 0%;
+        }
+
+        @include desktop {
+            width: 25%;
+        }
     }
 }
