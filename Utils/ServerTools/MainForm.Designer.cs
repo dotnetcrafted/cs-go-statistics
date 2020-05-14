@@ -128,6 +128,7 @@
             this.txtDemoReader.Size = new System.Drawing.Size(875, 556);
             this.txtDemoReader.TabIndex = 9;
             this.txtDemoReader.Text = "";
+            this.txtDemoReader.TextChanged += new System.EventHandler(this.txtDemoReader_TextChanged);
             // 
             // tabLogReader
             // 
@@ -153,6 +154,7 @@
             this.txtLogReader.Size = new System.Drawing.Size(875, 556);
             this.txtLogReader.TabIndex = 9;
             this.txtLogReader.Text = "";
+            this.txtLogReader.TextChanged += new System.EventHandler(this.txtLogReader_TextChanged);
             // 
             // tabControl
             // 

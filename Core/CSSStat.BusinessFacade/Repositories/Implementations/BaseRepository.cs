@@ -37,7 +37,7 @@ namespace BusinessFacade.Repositories.Implementations
             return _mongoRepository.GetRepository<T>().Collection.Find(query.EQ(x => x.Id, id)).FirstOrDefault();
         }
 
-        public void UpdateById<T>(T entity) where T : Entity
+        public void Update<T>(T entity) where T : Entity
         {
             var mongoCollection = _mongoRepository.GetRepository<T>().Collection;
             var id = entity.Id;

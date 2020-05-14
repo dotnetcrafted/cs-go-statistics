@@ -9,6 +9,6 @@ namespace BusinessFacade.Repositories
         void InsertBatch<T>(IEnumerable<T> entities) where T : Entity;
         IEnumerable<T> GetAll<T>() where T : Entity;
         T GetOne<T>(string id) where T : Entity;
-        void UpdateById<T>(T entity) where T : Entity;
+        void Update<T>(T entity) where T : Entity;
     }
 }

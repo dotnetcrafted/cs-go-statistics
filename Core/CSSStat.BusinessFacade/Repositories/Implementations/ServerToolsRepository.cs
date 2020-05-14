@@ -9,7 +9,7 @@ namespace BusinessFacade.Repositories.Implementations
     {
         public void SaveSettings(ServerToolsSettings settings)
         {
-            UpdateById(settings);
+            Update(settings);
         }
 
         public ServerToolsSettings GetSettings()

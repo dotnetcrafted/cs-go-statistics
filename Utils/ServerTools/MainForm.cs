@@ -135,6 +135,7 @@ namespace ServerTools
             listPool.BindDataSource(_settings.MapPool);
             timePickerLunch.Text = _settings.RestartTime[0];
             timePickerEvening.Text = _settings.RestartTime[1];
+            dateChangeDay.Value = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays);
             txtStart.Text = _settings.StartServer;
             txtStop.Text = _settings.StopServer;
             txtUpdate.Text = _settings.UpdateServer;
@@ -151,8 +152,6 @@ namespace ServerTools
 
             progress.Report($"Read logs from \"{Settings.ConsoleLogsPath}\"");
 
-            var a = fileRepository.GetFiles();
-
             var watcher = new Reader(Settings.ConsoleLogsPath, parser, logRepository, fileRepository, progress);
 
             watcher.Start();
@@ -163,8 +162,7 @@ namespace ServerTools
             progress.Report("Start");
             progress.Report($"Reading demo files from \"{Settings.DemosFolderPath}\" folder");
 
-            var demoFileRepository =
-                new BaseFileRepository<DemoFile>(new MongoRepositoryFactory(new ConnectionStringFactory()));
+            var demoFileRepository = new DemoFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             var demoRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
 
             var demoReader = new DemoReader(Settings.DemosFolderPath, demoFileRepository, demoRepository,
@@ -428,6 +426,16 @@ namespace ServerTools
         private void timerChangeMap_Tick(object sender, EventArgs e)
         {
             ChangeMap();
+        }
+
+        private void txtLogReader_TextChanged(object sender, EventArgs e)
+        {
+            txtLogReader.ScrollToCaret();
+        }
+
+        private void txtDemoReader_TextChanged(object sender, EventArgs e)
+        {
+            txtDemoReader.ScrollToCaret();
         }
     }
 }

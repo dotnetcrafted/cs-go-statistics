@@ -17,7 +17,6 @@ namespace ReadFile.SingleFileReader
             var logRepository = new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
             var fileRepository = new LogFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory()));
 
-            var a = fileRepository.GetFiles();
             Console.WriteLine($"Read logs from \"{Settings.ConsoleLogsPath}\"");
             var progress = new Progress<string>(Console.WriteLine);
 

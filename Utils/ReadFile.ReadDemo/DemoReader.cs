@@ -49,12 +49,12 @@ namespace ReadFile.ReadDemo
         #region inint
 
         private readonly string path;
-        private readonly IFileRepository<DemoFile> demoFileRepository;
+        private readonly IDemoFileRepository demoFileRepository;
         private readonly IBaseRepository demoRepository;
         private readonly IMapper mapper;
         private static IProgress<string> _progress;
 
-        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository,
+        public DemoReader(string path, IDemoFileRepository demoFileRepository, IBaseRepository demoRepository,
             IMapper mapper, IProgress<string> progress)
         {
             this.path = path;
@@ -68,6 +68,7 @@ namespace ReadFile.ReadDemo
 
         protected override void ReadFile()
         {
+            _progress.Report($"{DateTime.Now} | Checking file");
             var allFiles = Directory.GetFiles(path, "*.dem");
             var newFiles = allFiles.Except(demoFileRepository.GetFiles().Select(x => x.Path)).ToArray();
 

@@ -85,7 +85,6 @@ namespace ReadFile.SingleFileReader
 
             var createdDate = File.GetCreationTime(path);
 
-            var files = logFileRepository.GetFiles();
             var logFile = logFileRepository.GetFileByName(path);
             if (logFile != null)
             {
@@ -93,19 +92,18 @@ namespace ReadFile.SingleFileReader
                 {
                     logFile.ReadBytes = 0;
                 }
-                _progress.Report($"Log path: {logFile.Path}");
                 ReadLines(logFile);
                 logFileRepository.UpdateFile(logFile);
             }
             else
             {
+                _progress.Report("new file");
                 logFile = new LogFile
                 {
                     Path = path,
                     Created = File.GetCreationTime(path),
                     ReadBytes = 0
                 };
-                _progress.Report($"New log path: {logFile.Path}");
                 ReadLines(logFile);
                 logFileRepository.AddFile(logFile);
             }
