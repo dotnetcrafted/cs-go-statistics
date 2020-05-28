@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
@@ -179,9 +180,9 @@ namespace ServerTools
 
                 if (task == 0)
                 {
-                    txtConsole.WriteLine("Server has been stopped", LineTypes.Warning);
                     btnStart.Enabled = true;
                     btnStop.Enabled = false;
+                    txtConsole.WriteLine("Server has been stopped", LineTypes.Warning);
                 }
             }
             catch (Exception ex)
@@ -377,16 +378,25 @@ namespace ServerTools
 
         private void timerRestart_Tick(object sender, EventArgs e)
         {
+            
             if (!_settings.AutoRestart)
             {
                 timerRestart.Start();
                 return;
             }
-
-            if (DateTime.Now.ToShortTimeString().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
-                || DateTime.Now.ToShortTimeString().GetMinutes() == _settings.RestartTime[1].GetMinutes())
+          
+            if (DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
+                || DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[1].GetMinutes())
             {
-                RestartServer();
+                txtConsole.WriteLine("Need restart server", LineTypes.Warning);
+                try
+                {
+                    RestartServer();
+                }
+                catch (Exception ex)
+                {
+                    txtConsole.WriteLine(ex.Message, LineTypes.Error);
+                }
             }
 
             timerRestart.Start();
@@ -394,6 +404,9 @@ namespace ServerTools
 
         private async void RestartServer()
         {
+            timerRestart.Stop();
+            txtConsole.Clear();
+            txtConsole.WriteLine("Restart server", LineTypes.Warning);
             var map = cmbMap.Text;
             var stop = await Task.Run(() => _serverCommands.StopServer(_progress));
 
@@ -436,6 +449,32 @@ namespace ServerTools
         private void txtDemoReader_TextChanged(object sender, EventArgs e)
         {
             txtDemoReader.ScrollToCaret();
+        }
+
+        private void tabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            txtConsole.Refresh();
+            txtDemoReader.Refresh();
+            txtLogReader.Refresh();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to close application and stop server?", "CS: GO Server Tools",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                btnStop.PerformClick();
+                Thread.Sleep(100);
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

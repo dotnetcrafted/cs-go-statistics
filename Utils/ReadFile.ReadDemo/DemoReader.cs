@@ -70,7 +70,13 @@ namespace ReadFile.ReadDemo
         {
             _progress.Report($"{DateTime.Now} | Checking file");
             var allFiles = Directory.GetFiles(path, "*.dem");
-            var newFiles = allFiles.Except(demoFileRepository.GetFiles().Select(x => x.Path)).ToArray();
+
+            var demoFiles = demoFileRepository.GetFiles().ToList();
+            var newFiles = allFiles.Except(demoFiles.Select(x => x.Path)).ToArray();
+            _progress.Report($"All Files: {allFiles.Length}");
+            _progress.Report($"New Files: {newFiles.Length}");
+            _progress.Report($"Demo Files: {demoFiles.Count}");
+            
 
             foreach (var file in newFiles)
             {
@@ -106,6 +112,7 @@ namespace ReadFile.ReadDemo
                         Runner = Environment.MachineName
                     });
                 }
+                _progress.Report($"Demo Files: {demoFileRepository.GetFiles().Count()}");
             }
         }
 

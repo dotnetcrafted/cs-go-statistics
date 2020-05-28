@@ -47,7 +47,9 @@ namespace ServerTools.Extensions
 
         public static string LastLine(this RichTextBox textBox)
         {
-            return textBox.Text.Split('\n').Last(x => x.IsNotEmpty());
+            return textBox.Text.IsNotEmpty() 
+                ? textBox.Text.Split('\n').Last(x => x.IsNotEmpty())
+                : "";
         }
     }
 }

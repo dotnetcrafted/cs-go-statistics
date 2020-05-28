@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CsStat.SystemFacade.Extensions
 {
@@ -7,6 +8,10 @@ namespace CsStat.SystemFacade.Extensions
         public static string ToShortFormat(this DateTime dateTime)
         {
             return dateTime.ToString("MM/dd/yyyy");
+        }
+        public static string ToShortTimeFormat(this DateTime dateTime)
+        {
+            return dateTime.ToString("t", CultureInfo.InvariantCulture);
         }
 
         public static DateTime AddDaysExcludeWeekends(this DateTime dateTime, int days)

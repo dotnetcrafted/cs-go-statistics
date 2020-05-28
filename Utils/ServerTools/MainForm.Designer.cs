@@ -168,6 +168,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(889, 588);
             this.tabControl.TabIndex = 0;
+            this.tabControl.TabIndexChanged += new System.EventHandler(this.tabControl_TabIndexChanged);
             // 
             // tabTools
             // 
@@ -728,12 +729,12 @@
             // 
             // timerRestart
             // 
-            this.timerRestart.Interval = 20000;
+            this.timerRestart.Interval = 55000;
             this.timerRestart.Tick += new System.EventHandler(this.timerRestart_Tick);
             // 
             // timerChangeMap
             // 
-            this.timerChangeMap.Interval = 20000;
+            this.timerChangeMap.Interval = 3600000;
             this.timerChangeMap.Tick += new System.EventHandler(this.timerChangeMap_Tick);
             // 
             // frmMain
@@ -745,6 +746,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "CS: GO Server Tools ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabDemoReader.ResumeLayout(false);
             this.tabLogReader.ResumeLayout(false);

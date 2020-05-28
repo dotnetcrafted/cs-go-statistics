@@ -213,31 +213,19 @@ namespace CsStat.LogApi
 
         private static Actions GetAction(string action)
         {
-            foreach (var attribute in _attributeList)
-            {
-                if (!action.Contains(attribute.Value)) continue;
-                var actionIndex = attribute.Key;
-                var actions = (Actions)actionIndex;
-                return actions;
-            }
-
-            return Actions.Unknown;
+            var key = _attributeList.FirstOrDefault(x => action.Contains(x.Value))?.Key;
+            
+            return key != null 
+                ? (Actions) key
+                : Actions.Unknown;
         }
 
         private static Weapons GetGun(string gun)
         {
             var attributeList = Weapons.Null.GetAttributeList();
 
-            var gunIndex = 0;
-
-            foreach (var attribute in attributeList)
-            {
-                if (gun.Contains(attribute.Value))
-                {
-                    gunIndex = attribute.Key;
-                }
-            }
-
+            var gunIndex = attributeList.FirstOrDefault(x=> string.Equals(gun.ToLower(), x.Value.ToLower(), StringComparison.Ordinal))?.Key ?? 0;
+            
             return (Weapons) gunIndex;
         }
 
