@@ -729,7 +729,7 @@
             // 
             // timerRestart
             // 
-            this.timerRestart.Interval = 55000;
+            this.timerRestart.Interval = 60000;
             this.timerRestart.Tick += new System.EventHandler(this.timerRestart_Tick);
             // 
             // timerChangeMap

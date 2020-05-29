@@ -53,16 +53,14 @@ namespace ServerTools
             _settings = _serverToolsRepository.GetSettings();
             _serverCommands = new ServerCommands(_settings);
             _progress = new Progress<string>(info => { txtConsole.WriteLine(info); });
-            timerRestart.Start();
-            timerChangeMap.Start();
             InitSettings();
-
             var maps = _strapiApi.GetAllMapInfos().Select(x => x.MapName).ToList();
             cmbMap.DataSource = maps;
             cmbMap.Text = _settings.CurrentMap;
             listAll.BindDataSource(maps.Except(listPool.ToList()).ToList());
-
-            btnStart.PerformClick();
+            RestartServer();
+            timerRestart.Start();
+            timerChangeMap.Start();
 
             var progressLogReader = new Progress<string>(info => { txtLogReader.WriteLine(info); });
 
@@ -356,17 +354,15 @@ namespace ServerTools
 
         private void timerRestart_Tick(object sender, EventArgs e)
         {
-            
             if (!_settings.AutoRestart)
             {
                 timerRestart.Start();
                 return;
             }
-          
+            txtConsole.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes:  {_settings.RestartTime[0].GetMinutes()}, {_settings.RestartTime[1].GetMinutes()}");
             if (DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
                 || DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[1].GetMinutes())
             {
-                txtConsole.WriteLine("Need restart server", LineTypes.Warning);
                 try
                 {
                     RestartServer();
@@ -438,11 +434,10 @@ namespace ServerTools
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you want to close application and stop server?", "CS: GO Server Tools",
+            if (MessageBox.Show("Do you want to close application?", "CS: GO Server Tools",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                btnStop.PerformClick();
-                Thread.Sleep(100);
+                return;
             }
             else
             {

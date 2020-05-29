@@ -17,7 +17,17 @@ namespace ServerTools
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            bool result;
+            var mutex = new System.Threading.Mutex(true, "CSGOServerTools", out result);
+
+            if (!result)
+            {
+                MessageBox.Show("Another instance is already running.");
+                return;
+            }
             Application.Run(new frmMain());
+            GC.KeepAlive(mutex);
+
         }
     }
 }
