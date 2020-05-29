@@ -69,5 +69,17 @@ namespace ServerTools
                 lblShow.Text = "Show";
             }
         }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSave.PerformClick();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                btnCancel.PerformClick();
+            }
+        }
     }
 }

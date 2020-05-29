@@ -1,1 +1,1 @@
-L 11/19/2019 - 13:01:02: ACCOLADE, FINAL: {chickenskilled},	anton.k<2>,	VALUE: 13.000000,	POS: 1,	SCORE: 18.571428
+L 05/29/2020 - 12:55:57: "Maksim.S<3><STEAM_1:1:196168001><TERRORIST>" [-2844 842 480] killed "DJoony<5><STEAM_1:1:33105260><CT>" [-2855 774 544] with "knife_t"

@@ -10,6 +10,7 @@ using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using CsStat.LogApi.Interfaces;
+using CsStat.SystemFacade.Extensions;
 using DataService;
 using ErrorLogger;
 
@@ -149,6 +150,7 @@ namespace CsStat.LogApi
                 return null;
             }
 
+            result.LogLine = logLine;
             return result;
         }
 
@@ -222,9 +224,9 @@ namespace CsStat.LogApi
 
         private static Weapons GetGun(string gun)
         {
-            var attributeList = Weapons.Null.GetAttributeList();
+            var attributeList = Weapons.Null.GetAttributeList().Where(x=>x.Value.IsNotEmpty());
 
-            var gunIndex = attributeList.FirstOrDefault(x=> string.Equals(gun.ToLower(), x.Value.ToLower(), StringComparison.Ordinal))?.Key ?? 0;
+            var gunIndex = attributeList.FirstOrDefault(x=> gun.ToLower().Contains(x.Value.ToLower()))?.Key ?? 0;
             
             return (Weapons) gunIndex;
         }
