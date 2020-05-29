@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain;
-using CsStat.Domain.Definitions;
-using CsStat.Domain.Entities;
-using CsStat.Domain.Entities.Demo;
 using CsStat.Domain.Entities.ServerTools;
 using CsStat.LogApi;
 using CsStat.StrapiApi;
@@ -66,22 +59,10 @@ namespace ServerTools
 
             var maps = _strapiApi.GetAllMapInfos().Select(x => x.MapName).ToList();
             cmbMap.DataSource = maps;
-            cmbMap.Text = "Map";
+            cmbMap.Text = _settings.CurrentMap;
             listAll.BindDataSource(maps.Except(listPool.ToList()).ToList());
 
-            var progressServer = new Progress<string>(info =>
-            {
-                var lineType = info.Contains("Server is down") ? LineTypes.Error : LineTypes.Text;
-                txtConsole.WriteLine(info, lineType);
-            });
-
-            var map = await Task.Run(() => InitServer(progressServer));
-
-            if (map.IsNotEmpty())
-            {
-                cmbMap.Text = map;
-                btnStart.Enabled = false;
-            }
+            btnStart.PerformClick();
 
             var progressLogReader = new Progress<string>(info => { txtLogReader.WriteLine(info); });
 
@@ -111,24 +92,7 @@ namespace ServerTools
 
             await Task.Run(() => Demo(progressDemoReader));
         }
-
-        private string InitServer(IProgress<string> progress)
-        {
-
-            var serverInfo = _serverQueries.GetServerInfo();
-
-            if (serverInfo.IsAlive)
-            {
-                progress.Report("Server is running");
-                progress.Report($"Map: {serverInfo.Map}");
-                progress.Report($"Players: {serverInfo.PlayersCount}");
-                return serverInfo.Map;
-            }
-
-            progress.Report("Server is down");
-            return string.Empty;
-        }
-
+        
         private void InitSettings()
         {
             chkAutoUpdate.Checked = _settings.AutoUpdate;
@@ -271,6 +235,20 @@ namespace ServerTools
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var saveForm = new frmSave
+            {
+                StartPosition = FormStartPosition.CenterParent, 
+                PasswordHash = _settings.AdminPassword
+            };
+
+
+            var dialogResult = saveForm.ShowDialog(this);
+
+            if (dialogResult != DialogResult.OK)
+            {
+                return;
+            }
+
             var times = new List<string> { timePickerLunch.Text, timePickerEvening.Text };
             _settings.AutoRestart = chkAutoRestart.Checked;
             _settings.AutoUpdate = chkAutoUpdate.Checked;
@@ -470,11 +448,6 @@ namespace ServerTools
             {
                 Close();
             }
-        }
-
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
         }
     }
 }

@@ -16,6 +16,7 @@ namespace CsStat.Domain.Entities.ServerTools
         public string UpdateServer { get; set; }
         public int PlayingDays { get; set; }
         public string CurrentMap { get; set; }
+        public string AdminPassword { get; set; }
 
         public ServerToolsSettings()
         {
