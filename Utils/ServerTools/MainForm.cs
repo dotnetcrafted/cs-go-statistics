@@ -359,7 +359,7 @@ namespace ServerTools
                 timerRestart.Start();
                 return;
             }
-            txtConsole.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes:  {_settings.RestartTime[0].GetMinutes()}, {_settings.RestartTime[1].GetMinutes()}");
+            //txtConsole.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes:  {_settings.RestartTime[0].GetMinutes()}, {_settings.RestartTime[1].GetMinutes()}");
             if (DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
                 || DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[1].GetMinutes())
             {

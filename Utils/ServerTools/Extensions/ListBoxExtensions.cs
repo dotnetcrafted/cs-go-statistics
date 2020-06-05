@@ -73,7 +73,7 @@ namespace ServerTools.Extensions
             var currentIndex = listBox.Items.IndexOf(current);
             var nextIndex = currentIndex + 1;
 
-            if (nextIndex > listBox.Items.Count)
+            if (nextIndex >= listBox.Items.Count)
             {
                 nextIndex = 0;
             }
