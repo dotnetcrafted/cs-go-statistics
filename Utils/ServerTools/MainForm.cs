@@ -350,6 +350,11 @@ namespace ServerTools
             {
                 btnUpdate.PerformClick();
             }
+
+            if (item.LastLine().Contains("CUtlLinkedList overflow"))
+            {
+                RestartServer();
+            }
         }
 
         private void timerRestart_Tick(object sender, EventArgs e)
@@ -359,10 +364,11 @@ namespace ServerTools
                 timerRestart.Start();
                 return;
             }
-            //txtConsole.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes:  {_settings.RestartTime[0].GetMinutes()}, {_settings.RestartTime[1].GetMinutes()}");
+            txtDebug.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes: Lunch: {_settings.RestartTime[0].GetMinutes()}, Evening: {_settings.RestartTime[1].GetMinutes()}");
             if (DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
                 || DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[1].GetMinutes())
             {
+                txtDebug.WriteLine("DebugInfo: Restart", LineTypes.Warning);
                 try
                 {
                     RestartServer();
@@ -394,7 +400,7 @@ namespace ServerTools
 
         private void ChangeMap()
         {
-            var changeDay = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends((int)numDays.Value).AddMinutes(-1);
+            var changeDay = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays).AddMinutes(-1);
 
             if (DateTime.Now < changeDay)
             {
@@ -406,7 +412,7 @@ namespace ServerTools
             _settings.StartDate = DateTime.Today.ToShortDateString();
             _settings.CurrentMap = cmbMap.Text;
             _serverToolsRepository.SaveSettings(_settings);
-            dateChangeDay.Value = changeDay;
+            dateChangeDay.Value = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays).AddMinutes(-1);
             timerChangeMap.Start();
         }
 

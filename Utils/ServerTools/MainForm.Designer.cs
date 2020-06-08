@@ -89,6 +89,8 @@
             this.timerStatus = new System.Windows.Forms.Timer(this.components);
             this.timerRestart = new System.Windows.Forms.Timer(this.components);
             this.timerChangeMap = new System.Windows.Forms.Timer(this.components);
+            this.tabDebug = new System.Windows.Forms.TabPage();
+            this.txtDebug = new System.Windows.Forms.RichTextBox();
             this.tabDemoReader.SuspendLayout();
             this.tabLogReader.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -102,6 +104,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabDebug.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabDemoReader
@@ -162,6 +165,7 @@
             this.tabControl.Controls.Add(this.tabLogReader);
             this.tabControl.Controls.Add(this.tabDemoReader);
             this.tabControl.Controls.Add(this.tabSettings);
+            this.tabControl.Controls.Add(this.tabDebug);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -734,8 +738,33 @@
             // 
             // timerChangeMap
             // 
-            this.timerChangeMap.Interval = 3600000;
+            this.timerChangeMap.Interval = 10000;
             this.timerChangeMap.Tick += new System.EventHandler(this.timerChangeMap_Tick);
+            // 
+            // tabDebug
+            // 
+            this.tabDebug.Controls.Add(this.txtDebug);
+            this.tabDebug.Location = new System.Drawing.Point(4, 22);
+            this.tabDebug.Name = "tabDebug";
+            this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDebug.Size = new System.Drawing.Size(881, 562);
+            this.tabDebug.TabIndex = 5;
+            this.tabDebug.Text = "DebugInfo";
+            this.tabDebug.UseVisualStyleBackColor = true;
+            // 
+            // txtDebug
+            // 
+            this.txtDebug.BackColor = System.Drawing.Color.Black;
+            this.txtDebug.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDebug.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDebug.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDebug.ForeColor = System.Drawing.Color.White;
+            this.txtDebug.Location = new System.Drawing.Point(3, 3);
+            this.txtDebug.Name = "txtDebug";
+            this.txtDebug.ReadOnly = true;
+            this.txtDebug.Size = new System.Drawing.Size(875, 556);
+            this.txtDebug.TabIndex = 9;
+            this.txtDebug.Text = "";
             // 
             // frmMain
             // 
@@ -766,6 +795,7 @@
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabDebug.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -831,6 +861,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Timer timerRestart;
         private System.Windows.Forms.Timer timerChangeMap;
+        private System.Windows.Forms.TabPage tabDebug;
+        private System.Windows.Forms.RichTextBox txtDebug;
     }
 }
 
