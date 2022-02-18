@@ -1,21 +1,23 @@
-import { RouterState } from 'connected-react-router';
+import { RouterState } from "connected-react-router";
 
 interface IAppState {
     isLoading: boolean;
     players: Player[];
     posts: Post[];
+    filteredPost: Post[];
+    tagsList: string[];
 }
 
 type RootState = {
     router?: RouterState;
     app: IAppState;
-}
+};
 
 type Player = {
     id: string;
-    steamId: string,
-    steamImage: string,
-    name: string,
+    steamId: string;
+    steamImage: string;
+    name: string;
     points: number;
     kills: number;
     deaths: number;
@@ -51,29 +53,43 @@ type Gun = {
 };
 
 type RelatedPlayer = {
-    steamId: string,
+    steamId: string;
     count: number;
 };
 
 type Post = {
-    id: string,
+    id: string;
     title: string;
     content: string;
     tags: Tag[];
     createdAt: string;
     updatedAt: string;
-}
+};
 
 type Tag = {
-    id: string,
     caption: string;
-}
+};
 
-const FETCH_PLAYERS_DATA = 'FETCH_PLAYERS_DATA';
-const FETCH_POSTS_DATA = 'FETCH_POSTS_DATA';
-const FECTH_MATCHES_DATA = 'FETCH_MATCHES_DATA';
-const START_REQUEST = 'START_REQUEST';
-const STOP_REQUEST = 'STOP_REQUEST';
+const FILTER_BY_TAG = "FILTER_BY_TAG";
+const REFRESH_POSTS = "REFRESH_POSTS";
+
+type FilterByTagAction = {
+    type: typeof FILTER_BY_TAG;
+    tag: string;
+    tagsArr: string[];
+    payload: Post[];
+};
+
+type ResfreshPostsAction = {
+    type: typeof REFRESH_POSTS;
+    payload: Post[];
+};
+
+const FETCH_PLAYERS_DATA = "FETCH_PLAYERS_DATA";
+const FETCH_POSTS_DATA = "FETCH_POSTS_DATA";
+const FECTH_MATCHES_DATA = "FETCH_MATCHES_DATA";
+const START_REQUEST = "START_REQUEST";
+const STOP_REQUEST = "STOP_REQUEST";
 
 type StartRequestAction = {
     type: typeof START_REQUEST;
@@ -107,9 +123,11 @@ type ActionTypes =
     | StartRequestAction
     | StopRequestAction
     | FetchPlayersAction
-    | FetchPostsAction;
- //   | FetchMatchesAction
- //   | FetchMatchesDetailsAction;
+    | FetchPostsAction
+    | FilterByTagAction
+    | ResfreshPostsAction;
+//   | FetchMatchesAction
+//   | FetchMatchesDetailsAction;
 
 export {
     RootState,
@@ -122,11 +140,15 @@ export {
     ActionTypes,
     RelatedPlayer,
     FetchPostsAction,
+    FilterByTagAction,
+    ResfreshPostsAction,
+    REFRESH_POSTS,
+    FILTER_BY_TAG,
+    FETCH_PLAYERS_DATA,
     //FetchMatchesAction,
     //FetchMatchesDetailsAction,
     START_REQUEST,
     STOP_REQUEST,
-    FETCH_PLAYERS_DATA,
     FETCH_POSTS_DATA,
-    FECTH_MATCHES_DATA,
+    FECTH_MATCHES_DATA
 };

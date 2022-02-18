@@ -1,0 +1,26 @@
+.filter {
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__item {
+        display: block;
+        padding: 0 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+        border: 1px solid #f1f1f1;
+        border-radius: 5px;
+        margin: 0 3px 3px 0;
+
+        &:hover {
+            background: #ffcbcb;
+        }
+
+        &.active {
+            background: #ffcbcb;
+        }
+    }
+}
