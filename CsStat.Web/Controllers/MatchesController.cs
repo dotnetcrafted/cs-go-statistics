@@ -92,7 +92,7 @@ namespace CsStat.Web.Controllers
                         Date = x.MatchDate,
                         AScore = x.TotalSquadAScore,
                         BScore = x.TotalSquadBScore,
-                        MapImage = GetMapImage(x.Map),
+                        //MapImage = GetMapImage(x.Map),
                         Duration = x.Duration
                     }),
                 Pagination = new Pagination 
@@ -114,7 +114,7 @@ namespace CsStat.Web.Controllers
             if (matchId.IsNotEmpty())
             {
                 var match = _demoRepository.GetMatch(matchId);
-                var images = _strapiApi.GetAllImages();
+                //var images = _strapiApi.GetAllImages();
 
                 if (match == null)
                     return Json("Match not found");
@@ -138,7 +138,7 @@ namespace CsStat.Web.Controllers
                 {
                     Id = match.Id,
                     Map = match.Map,
-                    MapImage = GetMapImage(match.Map),
+                    //MapImage = GetMapImage(match.Map),
                     Date = match.MatchDate,
                     AScore = match.TotalSquadAScore,
                     BScore = match.TotalSquadBScore,
@@ -151,7 +151,7 @@ namespace CsStat.Web.Controllers
                         Reason = (int) round.Reason,
                         ReasonTitle = round.ReasonTitle,
                         Duration = round.Duration,
-                        ReasonIconUrl = images.FirstOrDefault(x => x.CodeName == round.ReasonTitle)?.Image.FullUrl,
+                        //ReasonIconUrl = images.FirstOrDefault(x => x.CodeName == round.ReasonTitle)?.Image.FullUrl,
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills

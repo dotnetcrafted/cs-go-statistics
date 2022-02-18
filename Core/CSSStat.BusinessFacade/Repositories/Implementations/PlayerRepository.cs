@@ -121,11 +121,11 @@ namespace BusinessFacade.Repositories.Implementations
         private static PlayerStatsModel CountStats(List<Log> logs, Player player)
         {
             var gunLogs = logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).OrderBy(x=>x.Gun).ToList();
-            var guns = GetGuns(gunLogs);
-            var sniperRifle = guns?.Where(x => x.Weapon.Type.Type == WeaponTypes.SniperRifle);
-            var grenade = guns?.Where(x => x.Weapon.Id == (int)Weapons.He).Sum(x => x.Kills) ?? 0;
-            var knife = guns?.Where(x => x.Weapon.Id == (int)Weapons.Knife).Sum(x => x.Kills) ?? 0;
-            var molotov = guns?.Where(x => x.Weapon.Id == (int)Weapons.Molotov || x.Weapon.Id == (int)Weapons.Inferno || x.Weapon.Id == (int)Weapons.Inc).Sum(x => x.Kills) ?? 0;
+            //var guns = GetGuns(gunLogs);
+            //var sniperRifle = guns?.Where(x => x.Weapon.Type.Type == WeaponTypes.SniperRifle);
+            //var grenade = guns?.Where(x => x.Weapon.Id == (int)Weapons.He).Sum(x => x.Kills) ?? 0;
+            //var knife = guns?.Where(x => x.Weapon.Id == (int)Weapons.Knife).Sum(x => x.Kills) ?? 0;
+            //var molotov = guns?.Where(x => x.Weapon.Id == (int)Weapons.Molotov || x.Weapon.Id == (int)Weapons.Inferno || x.Weapon.Id == (int)Weapons.Inc).Sum(x => x.Kills) ?? 0;
             var explodeBombs = GetExplodeBombs(logs.Where(x => x.Action == Actions.Plant).ToList(), logs.Where(x => x.Action == Actions.TargetBombed).ToList());
             var defuse = logs.Count(x => x.Action == Actions.Defuse);
             var friendlyKills = logs.Count(x => x.Action == Actions.FriendlyKill && x.Player.SteamId == player.SteamId);
@@ -149,18 +149,18 @@ namespace BusinessFacade.Repositories.Implementations
                 TotalGames = totalGames,
                 HeadShotsCount = headShotCount,
                 HeadShotsPercent = kills == 0 ? 0 : (double)headShotCount/kills * 100,
-                Guns = guns,
+                //Guns = guns,
                 Defuse = defuse,
                 Explode = explodeBombs,
                 Points = kills + assists + (defuse + explodeBombs) * 2 - friendlyKills * 2 - deaths / 2,
-                SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
+                //SniperRifleKills = sniperRifle?.Select(x => x.Kills).Sum() ?? 0,
                 Victims = GetPlayers(victimList).OrderByDescending(x => x.Count).ToList(),
                 Killers = GetPlayers(killerList).OrderByDescending(x => x.Count).ToList(),
                 FriendKillers = GetPlayers(friendlyKillerList).OrderByDescending(x => x.Count).ToList(),
                 FriendVictims = GetPlayers(friendlyVictimList).OrderByDescending(x => x.Count).ToList(),
-                GrenadeKills = grenade,
-                MolotovKills = molotov,
-                KnifeKills = knife
+                //GrenadeKills = grenade,
+                //MolotovKills = molotov,
+                //KnifeKills = knife
 
             };
         }

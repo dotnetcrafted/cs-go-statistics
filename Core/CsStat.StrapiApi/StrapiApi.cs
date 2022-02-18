@@ -85,12 +85,7 @@ namespace CsStat.StrapiApi
             }
             catch (WebException ex)
             {
-                var errorResponse = ex.Response;
-                using (var responseStream = errorResponse.GetResponseStream())
-                {
-                    var reader = new StreamReader(responseStream, System.Text.Encoding.GetEncoding("utf-8"));
-                    return reader.ReadToEnd();
-                }
+                return string.Empty;
             }
         }
     }
