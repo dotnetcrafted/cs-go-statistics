@@ -11,7 +11,7 @@ namespace CsStat.Domain.Models
         public Image Image { get; set; }
         public Image Icon { get; set; }
         
-        [JsonProperty("WeaponType")]
+        [JsonProperty("Type")]
         public WeaponType Type { get; set; }
     }
     public class WeaponType
