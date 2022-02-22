@@ -32,7 +32,10 @@ namespace CsStat.Web.Controllers
             if (serverInfo.IsAlive)
             {
                 var mapInfo = _strapiApi.GetMapInfo(serverInfo.Map);
-                serverInfo.ImageUrl = mapInfo.Image.FullUrl;
+                if (mapInfo == null) 
+                    return Json(serverInfo);
+
+                serverInfo.ImageUrl = mapInfo.Image?.FullUrl;
                 serverInfo.Description = mapInfo.Description;
             }
             else

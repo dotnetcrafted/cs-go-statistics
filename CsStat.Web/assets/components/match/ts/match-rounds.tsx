@@ -16,7 +16,7 @@ export class MatchRounds extends React.Component<MatchDetailsRoundsProps, {}> {
     renderReasonIcon(reason: string): string | ReactNode {
         const reasonIcon = getIconByName(reason);
 
-        if (!reasonIcon) return reason;
+        if (!reasonIcon) return null;
 
         return <img className="match-rounds__icon" src={reasonIcon.image} alt={reason} title={reason} />;
     }

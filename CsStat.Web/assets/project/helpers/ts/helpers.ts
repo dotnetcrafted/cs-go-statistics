@@ -32,16 +32,57 @@ export const getPlayerById = (id: string): CmsPlayerModel | null => {
 
 export const getDuration = (duration: number): DurationModel => {
     if (typeof duration !== 'number') {
-        return ({ hours: 0, minutes: 0, seconds: 0})
+        return { hours: 0, minutes: 0, seconds: 0 };
     }
-    
-    const hours = Math.floor(duration / 60 / 60);
-    const minutes = Math.floor((duration - (hours * 60 * 60)) / 60);
-    const seconds = duration - (hours * 60 * 60 + minutes * 60)
 
-    return ({
+    const hours = Math.floor(duration / 60 / 60);
+    const minutes = Math.floor((duration - hours * 60 * 60) / 60);
+    const seconds = duration - (hours * 60 * 60 + minutes * 60);
+
+    return {
         hours,
         minutes,
         seconds
-    })
-}
+    };
+};
+
+const UNICODE_SPACE_CHAR = '\u00A0';
+
+// TODO: to think about float part like 00; how to solve it
+export const getTableValueByMask = (
+    value: (number | string)[],
+    mask: (number | string)[]
+): string => {
+    if (value.length !== mask.length) {
+        return value.join('');
+    }
+
+    const result = value.map((item, i) => {
+        const pattern = mask[i];
+
+        if (typeof pattern === 'string') return item;
+
+        if (typeof pattern === 'number') {
+            const patternLength = Math.abs(pattern) + (pattern < 0 ? 1 : 0);
+            const itemLength =
+                Math.abs(+item).toString().length + (pattern < 0 ? 1 : 0);
+
+            const diff = patternLength - itemLength;
+
+            let newItem =
+                diff > 0 ? `${UNICODE_SPACE_CHAR.repeat(diff)}${item}` : item;
+
+            if (pattern < 0 && item >= 0) {
+                const sign = item < 0 ? '-' : UNICODE_SPACE_CHAR;
+
+                newItem = sign + newItem;
+            }
+
+            return newItem;
+        }
+
+        return item;
+    });
+
+    return result.join('');
+};

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using AutoMapper;
 using CsStat.Web.Controllers;
@@ -15,6 +16,11 @@ namespace CsStat.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Mapper.Initialize(cfg => cfg.AddProfiles(typeof(HomeController)));
+        }
+
+        protected void Application_BeginRequest()
+        {
+            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
         }
     }
 }

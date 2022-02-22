@@ -63,6 +63,8 @@ namespace CsStat.Domain
         public static long FirstSteamId => GetSetting(nameof(FirstSteamId), Defaults.FirstSteamId);
         public static string CsServerIp => GetSetting(nameof(CsServerIp), Defaults.CsServerIp);
         public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
+        public static int MatchesLimit => GetSetting(nameof(MatchesLimit), Defaults.MatchesLimit);
+        public static int RoundsLimit => GetSetting(nameof(RoundsLimit), Defaults.RoundsLimit);
         
         public static string ToJson()
         {
@@ -126,11 +128,13 @@ namespace CsStat.Domain
             public const string PlayersDataSteamApiPath =@"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/";
             public const long FirstSteamId = 76561197960265728;
             public const string ApiKey = "C03F2D79CF2FE20B64A85531031F3983";
-            public const string AdminPath = "https://admin.csfuse8.site";
+            public const string AdminPath = "http://csstat.westeurope.cloudapp.azure.com:1337";
             public const string CsServerIp = "192.168.100.241";
             public const int ShowNullPlayers = 1;
             public const int CsServerPort = 27015;
-            public const string MatchesPagePath = "matches";
+            public const int MatchesLimit = 12;
+            public const int RoundsLimit = 5;
+            public const string MatchesPagePath = "/matches";
             public const string CsPath = @"D:\Games\CS_GO_DS\";
             public static string ArticlesPath => $"{AdminPath}/articles?_sort=createdAt:desc";
             public static string AchievementsPath => $"{AdminPath}/Achievements";
