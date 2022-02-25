@@ -17,7 +17,7 @@ namespace CsStat.LogApi
 {
     public class CsLogsApi : ICsLogsApi
     {
-        private static IEnumerable<EnumExtensions.AttributeModel> _attributeList;
+        private static IEnumerable<EnumExtensions.AttributeModel> _actions;
         private static IPlayerRepository _playerRepository;
         private static ILogger _logger;
         private static readonly string _dateTimeTemplate = "MM/dd/yyyy - HH:mm:ss";
@@ -26,7 +26,7 @@ namespace CsStat.LogApi
             var connectionString = new ConnectionStringFactory();
             var mongoRepository = new MongoRepositoryFactory(connectionString);
             var strapi = new StrapiApi.StrapiApi();
-            _attributeList = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
+            _actions = Actions.Unknown.GetAttributeList().Where(x => !string.IsNullOrEmpty(x.Value));
             _playerRepository = new PlayerRepository(mongoRepository, strapi);
             _logger = new Logger(mongoRepository);
         }
@@ -34,13 +34,8 @@ namespace CsStat.LogApi
         {
             var list = new List<Log>();
 
-            foreach (var logLine in logs)
+            foreach (var logLine in logs.Where(IsClearString))
             {
-                if (!IsClearString(logLine))
-                {
-                    continue;
-                }
-
                 try
                 {
                     var parsed = ParseLine(logLine);
@@ -57,7 +52,6 @@ namespace CsStat.LogApi
             }
 
             return list;
-
         }
 
         private static bool IsClearString(string logLine)
@@ -66,40 +60,38 @@ namespace CsStat.LogApi
                    && !logLine.Contains("GOTV") 
                    && !logLine.Contains("><BOT><")
                    && !logLine.Contains("chickenskilled")
-                   && _attributeList.Any(attribute => logLine.Contains(attribute.Value));
+                   && _actions.Any(attribute => logLine.Contains(attribute.Value));
         }
         private static Log ParseLine(string logLine)
         {
             var splitLine = logLine.Split('"');
 
             var action = string.Equals(splitLine[2].Trim(), "triggered")
-                ? GetAction(splitLine[3].Trim())
-                : GetAction(splitLine[2].Trim());
-
-            var result = new Log();
+                ? Actions.Unknown.GetEnumByAttribute(splitLine[3].Trim())
+                : Actions.Unknown.GetEnumByAttribute(splitLine[2].Trim());
 
             switch (action)
             {
                 case Actions.Other:
-                    result.Action = Actions.Other;
-                    break;
+                    return null;
 
                 case Actions.Kill:
-                    result = new Log
+                    var playerTeam = GetTeam(splitLine[1].Trim());
+                    var victimTeam = GetTeam(splitLine[3].Trim());
+                    return new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
                         Player = GetPlayer(splitLine[1]),
-                        PlayerTeam = GetTeam(splitLine[1].Trim()),
-                        Action = action,
+                        PlayerTeam = playerTeam,
+                        Action = playerTeam == victimTeam ? Actions.FriendlyKill : Actions.Kill,
                         Victim = GetPlayer(splitLine[3]),
-                        VictimTeam = GetTeam(splitLine[3].Trim()),
+                        VictimTeam = victimTeam,
                         IsHeadShot = logLine.Contains("headshot"),
-                        Gun = GetGun(splitLine[5].Trim())
+                        Gun = Weapons.Unknown.GetEnumByAttribute(splitLine[5].Trim())
                     };
 
-                    break;
                 case Actions.TargetBombed:
-                    result = new Log
+                   return new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
                         Player = null,
@@ -110,9 +102,9 @@ namespace CsStat.LogApi
                         IsHeadShot = false,
                         Gun = Weapons.Null
                     };
-                    break;
+
                 case Actions.KilledByBomb:
-                    result = new Log
+                    return new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
                         Player = null,
@@ -123,9 +115,9 @@ namespace CsStat.LogApi
                         IsHeadShot = false,
                         Gun = Weapons.Bomb
                     };
-                    break;
+
                 default:
-                    result = new Log
+                    return new Log
                     {
                         DateTime = GetDateTime(splitLine[0].Trim()),
                         Player = GetPlayer(splitLine[1]),
@@ -136,20 +128,7 @@ namespace CsStat.LogApi
                         IsHeadShot = false,
                         Gun = Weapons.Null
                     };
-                    break;
             }
-
-            if (result.Action==Actions.Kill && result.PlayerTeam == result.VictimTeam)
-            {
-                result.Action = Actions.FriendlyKill;
-            }
-            else if(result.Action == Actions.Other)
-
-            {
-                return null;
-            }
-
-            return result;
         }
 
         private static Player GetPlayer(string playerString)
@@ -163,12 +142,10 @@ namespace CsStat.LogApi
                 return player;
             }
 
-            var steamId = GetSteamId(playerString);
-
             player = new Player
             {
                 NickName = nickName,
-                SteamId = steamId,
+                SteamId = GetSteamId(playerString)
 
             };
 
@@ -210,37 +187,6 @@ namespace CsStat.LogApi
                     ? result
                     : DateTime.MinValue;
         }
-
-        private static Actions GetAction(string action)
-        {
-            foreach (var attribute in _attributeList)
-            {
-                if (!action.Contains(attribute.Value)) continue;
-                var actionIndex = attribute.Key;
-                var actions = (Actions)actionIndex;
-                return actions;
-            }
-
-            return Actions.Unknown;
-        }
-
-        private static Weapons GetGun(string gun)
-        {
-            var attributeList = Weapons.Null.GetAttributeList();
-
-            var gunIndex = 0;
-
-            foreach (var attribute in attributeList)
-            {
-                if (gun.Contains(attribute.Value))
-                {
-                    gunIndex = attribute.Key;
-                }
-            }
-
-            return (Weapons) gunIndex;
-        }
-
     }
 
 }
