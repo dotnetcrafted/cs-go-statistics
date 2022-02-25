@@ -111,7 +111,7 @@ namespace BusinessFacade.Repositories.Implementations
             catch (Exception e) { }
             
 
-            return playersStats;
+            return playersStats.Where(x=>x.KdRatio > 0);
         }
 
 
@@ -134,7 +134,7 @@ namespace BusinessFacade.Repositories.Implementations
         private static PlayerStatsModel CountStats(IReadOnlyCollection<Log> logs, Player player)
         {
             var gunLogs = logs.Where(x => x.Action == Actions.Kill && x.Player.SteamId == player.SteamId).OrderBy(x=>x.Gun).ToList();
-            var guns = GetGuns(gunLogs);
+            var guns = GetGuns(gunLogs).Where(x=>x.Weapon != null).ToList();
             var sniperRifle = guns?.Where(x => x.Weapon.Type.Type == WeaponTypes.SniperRifle);
             var grenade = guns?.Where(x => x.Weapon.Id == (int)Weapons.He).Sum(x => x.Kills) ?? 0;
             var knife = guns?.Where(x => x.Weapon.Id == (int)Weapons.Knife).Sum(x => x.Kills) ?? 0;
