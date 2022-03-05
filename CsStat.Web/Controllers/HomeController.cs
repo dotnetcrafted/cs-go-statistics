@@ -4,17 +4,15 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
-using BusinessFacade;
 using BusinessFacade.Repositories;
 using CsStat.Domain;
-using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
+using CsStat.SystemFacade;
+using CsStat.SystemFacade.DummyCache;
+using CsStat.SystemFacade.DummyCacheFactories;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
-using Microsoft.Ajax.Utilities;
-using MongoDB.Driver;
 using static BusinessFacade.Constants;
-using Newtonsoft.Json;
 
 
 namespace CsStat.Web.Controllers
@@ -23,11 +21,15 @@ namespace CsStat.Web.Controllers
     {
         private static IPlayerRepository _playerRepository;
         private static IStrapiApi _strapiApi;
+        private static ILogFileRepository _logFileRepository;
+        private readonly IDummyCacheManager _statDummyCacheManager;
 
-        public HomeController(IPlayerRepository playerRepository, IStrapiApi strapiApi)
+        public HomeController(IPlayerRepository playerRepository, IStrapiApi strapiApi, ILogFileRepository logFileRepository)
         {
             _playerRepository = playerRepository;
             _strapiApi = strapiApi;
+            _statDummyCacheManager = new DummyCacheManager(new StatDummyCacheFactory());
+            _logFileRepository = logFileRepository;
         }
         public ActionResult Index()
         {
@@ -62,8 +64,7 @@ namespace CsStat.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        //[OutputCache(Duration = 600, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "", PeriodDay? periodDay = null)
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
@@ -81,6 +82,7 @@ namespace CsStat.Web.Controllers
                 .ThenByDescending(x => x.TotalGames)
                 .ToList();
 
+            _statDummyCacheManager.AddDependency(BuildKey(dateFrom, dateFrom, periodDay));
 
             return Json
             (
@@ -93,10 +95,49 @@ namespace CsStat.Web.Controllers
             );
         }
 
+        public ActionResult ClearCache()
+        {
+            var prevReadBytes = Session[SystemFacade.Constants.Session.ReadBytes] is long ? (long)Session[SystemFacade.Constants.Session.ReadBytes] : 0;
+            var logFile = _logFileRepository.GetFileByName(Settings.ConsoleLogsPath);
+
+            if (logFile != null)
+            {
+                if (prevReadBytes != logFile.ReadBytes)
+                {
+                    _statDummyCacheManager.CacheCleanByDependency(SystemFacade.Constants.Cache.DependencyKeys.AllPlayers);
+                    Session[SystemFacade.Constants.Session.ReadBytes] = logFile.ReadBytes;
+                }
+            }
+
+            return Json("Ok");
+        }
+
         private static List<PlayerStatsViewModel> GetPlayersStat(string from = "", string to = "", PeriodDay? periodDay = null)
         {
             var players = _playerRepository.GetStatsForAllPlayers(from, to, periodDay).OrderByDescending(x=>x.KdRatio).ToList();
             return Mapper.Map<List<PlayerStatsViewModel>>(players);
+        }
+
+        private static string BuildKey(string dateFrom = "", string dateTo = "", PeriodDay? periodDay = null)
+        {
+            var key = $"{SystemFacade.Constants.Cache.DependencyKeys.AllPlayers}|";
+            
+            if (dateFrom.IsNotEmpty())
+            {
+                key += $"dateFrom:{dateFrom}|";
+            }
+
+            if (dateTo.IsNotEmpty())
+            {
+                key += $"dateTo:{dateTo}|";
+            }
+
+            if (periodDay != null)
+            {
+                key += $"periodDay:{periodDay}";
+            }
+
+            return key;
         }
     }
 }
