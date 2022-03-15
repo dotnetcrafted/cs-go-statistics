@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Domain.Entities;
@@ -11,24 +12,26 @@ using CsStat.SystemFacade;
 
 namespace ReadFile.SingleFileReader
 {
-    public class Reader
+    public class Reader : BaseWatcher
     {
         private readonly string path;
         private readonly ICsLogsApi parsers;
         private readonly IBaseRepository logRepository;
         private readonly ILogFileRepository logFileRepository;
+        private readonly IProgress<string> _progress;
 
         private Timer _timer;
         private static readonly long _timerInterval = Settings.TimerInterval;
         private static readonly object _locker = new object();
 
         public Reader(string path, ICsLogsApi parsers, IBaseRepository logRepository,
-            ILogFileRepository logFileRepository)
+            ILogFileRepository logFileRepository, IProgress<string> progress)
         {
             this.path = path;
             this.parsers = parsers;
             this.logRepository = logRepository;
             this.logFileRepository = logFileRepository;
+            _progress = progress;
         }
 
         public void Start()
@@ -60,7 +63,7 @@ namespace ReadFile.SingleFileReader
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    _progress.Report(e.Message);
                 }
             }
             finally
@@ -73,9 +76,9 @@ namespace ReadFile.SingleFileReader
             }
         }
 
-        private void ReadFile()
+        protected override void ReadFile()
         {
-            Console.WriteLine($"{DateTime.Now} | Checking file");
+            _progress.Report($"{DateTime.Now} | Checking file");
 
             if (!File.Exists(path))
                 return;
@@ -89,19 +92,18 @@ namespace ReadFile.SingleFileReader
                 {
                     logFile.ReadBytes = 0;
                 }
-
                 ReadLines(logFile);
                 logFileRepository.UpdateFile(logFile);
             }
             else
             {
+                _progress.Report("new file");
                 logFile = new LogFile
                 {
                     Path = path,
                     Created = File.GetCreationTime(path),
                     ReadBytes = 0
                 };
-
                 ReadLines(logFile);
                 logFileRepository.AddFile(logFile);
             }
@@ -118,6 +120,7 @@ namespace ReadFile.SingleFileReader
                     while (streamReader.Peek() >= 0)
                     {
                         var readLine = streamReader.ReadLine();
+                        
                         if (!string.IsNullOrEmpty(readLine))
                         {
                             lines.Add(readLine);
@@ -133,11 +136,11 @@ namespace ReadFile.SingleFileReader
                 var logs = parsers.ParseLogs(lines);
                 if (logs != null)
                 {
-                    Console.WriteLine($"{logs.Count} logs will be added");
+                    _progress.Report($"{logs.Count} logs will be added");
 
                     logRepository.InsertBatch(logs);
 
-                    Console.WriteLine($"Last read line is \"{lines.Last()}\"");
+                    _progress.Report($"Last read line is \"{lines.Last()}\"");
                 }
             }
         }

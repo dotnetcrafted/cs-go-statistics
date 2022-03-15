@@ -1,4 +1,4 @@
-﻿namespace CsStat.Web.Models
+﻿namespace ServerQueries.Models
 {
     public class ServerInfoModel
     {

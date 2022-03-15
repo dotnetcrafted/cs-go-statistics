@@ -10,6 +10,7 @@ using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using CsStat.LogApi.Interfaces;
+using CsStat.SystemFacade.Extensions;
 using DataService;
 using ErrorLogger;
 

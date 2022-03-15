@@ -1,9 +1,7 @@
 ﻿using System;
 using AutoMapper;
-using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CsStat.Domain;
-using CsStat.Domain.Entities.Demo;
 using DataService;
 using ReadFile.ReadDemo.Profiles;
 
@@ -18,11 +16,12 @@ namespace ReadFile.ReadDemo
         {
             Console.WriteLine("Start");
             Console.WriteLine($"Reading demo files from \"{Settings.DemosFolderPath}\" folder");
+            var progress = new Progress<string>(Console.WriteLine);
 
             var demoReader = new DemoReader(Settings.DemosFolderPath,
-                new BaseFileRepository<DemoFile>(new MongoRepositoryFactory(new ConnectionStringFactory())),
+                new DemoFileRepository(new MongoRepositoryFactory(new ConnectionStringFactory())), 
                 new BaseRepository(new MongoRepositoryFactory(new ConnectionStringFactory())),
-                Config.CreateMapper()
+                Config.CreateMapper(), progress
             );
 
             demoReader.Start(Settings.TimerInterval);
