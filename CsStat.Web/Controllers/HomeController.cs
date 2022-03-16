@@ -100,11 +100,7 @@ namespace CsStat.Web.Controllers
             _statDummyCacheManager.CacheCleanByDependency(SystemFacade.Constants.Cache.DependencyKeys.AllPlayers);
             return Json("Ok");
         }
-
-
-            return Json("Ok");
-        }
-
+        
         private static List<PlayerStatsViewModel> GetPlayersStat(string from = "", string to = "", PeriodDay? periodDay = null)
         {
             var players = _playerRepository.GetStatsForAllPlayers(from, to, periodDay).OrderByDescending(x=>x.KdRatio).ToList();
