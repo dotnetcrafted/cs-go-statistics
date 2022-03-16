@@ -422,7 +422,7 @@ namespace ServerTools
             if (MessageBox.Show("Do you want to close the application?", "CS: GO Server Tools",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                btnStop.PerformClick();
+                Task.Run(() => _serverCommands.StopServer(_progress));
                 e.Cancel = false;
             }
             else
