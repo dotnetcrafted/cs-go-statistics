@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoMapper;
@@ -19,7 +18,6 @@ using ErrorLogger;
 using ReadFile.ReadDemo;
 using ReadFile.ReadDemo.Profiles;
 using ReadFile.SingleFileReader;
-using ServerQueries;
 using ServerTools.Enums;
 using ServerTools.Extensions;
 
@@ -28,7 +26,6 @@ namespace ServerTools
     public partial class frmMain : Form
     {
         private IStrapiApi _strapiApi;
-        private IServerQueries _serverQueries;
         private IServerToolsRepository _serverToolsRepository;
         private ServerToolsSettings _settings;
         private static ILogger _logger;
@@ -38,11 +35,11 @@ namespace ServerTools
         private static MapperConfiguration Config =>
             new MapperConfiguration(cfg => { cfg.AddProfile<DemoProfile>(); });
 
+
         public frmMain()
         {
             InitializeComponent();
             _strapiApi = new StrapiApi();
-            _serverQueries = new ServerQueries.ServerQueries();
             var mongoRepositoryFactory = new MongoRepositoryFactory(new ConnectionStringFactory());
             _serverToolsRepository = new ServerToolsRepository(mongoRepositoryFactory);
             _logger = new Logger(mongoRepositoryFactory);
@@ -233,20 +230,6 @@ namespace ServerTools
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var saveForm = new frmSave
-            {
-                StartPosition = FormStartPosition.CenterParent, 
-                PasswordHash = _settings.AdminPassword
-            };
-
-
-            var dialogResult = saveForm.ShowDialog(this);
-
-            if (dialogResult != DialogResult.OK)
-            {
-                return;
-            }
-
             var times = new List<string> { timePickerLunch.Text, timePickerEvening.Text };
             _settings.AutoRestart = chkAutoRestart.Checked;
             _settings.AutoUpdate = chkAutoUpdate.Checked;
@@ -364,11 +347,10 @@ namespace ServerTools
                 timerRestart.Start();
                 return;
             }
-            txtDebug.WriteLine($"DebugInfo: ServerTime {DateTime.Now.ToShortTimeFormat().GetMinutes()}; RestartTimes: Lunch: {_settings.RestartTime[0].GetMinutes()}, Evening: {_settings.RestartTime[1].GetMinutes()}");
+            
             if (DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[0].GetMinutes()  
                 || DateTime.Now.ToShortTimeFormat().GetMinutes() == _settings.RestartTime[1].GetMinutes())
             {
-                txtDebug.WriteLine("DebugInfo: Restart", LineTypes.Warning);
                 try
                 {
                     RestartServer();
@@ -433,22 +415,30 @@ namespace ServerTools
 
         private void tabControl_TabIndexChanged(object sender, EventArgs e)
         {
-            txtConsole.Refresh();
-            txtDemoReader.Refresh();
-            txtLogReader.Refresh();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you want to close application?", "CS: GO Server Tools",
+            if (MessageBox.Show("Do you want to close the application?", "CS: GO Server Tools",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                return;
+                btnStop.PerformClick();
+                e.Cancel = false;
             }
             else
             {
-                Close();
+                e.Cancel = true;
             }
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtConsole.Refresh();
+            txtConsole.Update();
+            txtDemoReader.Refresh();
+            txtDemoReader.Update();
+            txtLogReader.Refresh();
+            txtLogReader.Update();
         }
     }
 }

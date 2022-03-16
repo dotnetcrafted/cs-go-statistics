@@ -9,6 +9,9 @@ using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade;
+using CsStat.SystemFacade.DummyCache;
+using CsStat.SystemFacade.DummyCacheFactories;
+using UpdateCacheService;
 
 namespace ReadFile.SingleFileReader
 {
@@ -24,6 +27,8 @@ namespace ReadFile.SingleFileReader
         private static readonly long _timerInterval = Settings.TimerInterval;
         private static readonly object _locker = new object();
 
+        private readonly IPlayersCacheService _cacheService;
+
         public Reader(string path, ICsLogsApi parsers, IBaseRepository logRepository,
             ILogFileRepository logFileRepository, IProgress<string> progress)
         {
@@ -32,6 +37,7 @@ namespace ReadFile.SingleFileReader
             this.logRepository = logRepository;
             this.logFileRepository = logFileRepository;
             _progress = progress;
+            _cacheService = new PlayersCacheService();
         }
 
         public void Start()
@@ -79,7 +85,6 @@ namespace ReadFile.SingleFileReader
         protected override void ReadFile()
         {
             _progress.Report($"{DateTime.Now} | Checking file");
-
             if (!File.Exists(path))
                 return;
 
@@ -126,7 +131,6 @@ namespace ReadFile.SingleFileReader
                             lines.Add(readLine);
                         }
                     }
-
                     logFile.ReadBytes = streamReader.BaseStream.Length;
                 }
             }
@@ -139,6 +143,7 @@ namespace ReadFile.SingleFileReader
                     _progress.Report($"{logs.Count} logs will be added");
 
                     logRepository.InsertBatch(logs);
+                    _cacheService.ClearPlayersCache();
 
                     _progress.Report($"Last read line is \"{lines.Last()}\"");
                 }

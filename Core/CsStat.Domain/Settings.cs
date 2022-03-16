@@ -65,6 +65,8 @@ namespace CsStat.Domain
         public static int CsServerPort => GetSetting(nameof(CsServerPort), Defaults.CsServerPort);
         public static int MatchesLimit => GetSetting(nameof(MatchesLimit), Defaults.MatchesLimit);
         public static int RoundsLimit => GetSetting(nameof(RoundsLimit), Defaults.RoundsLimit);
+        public static string ClearPlayerCacheEndpoint => GetSetting(nameof(ClearPlayerCacheEndpoint), Defaults.ClearPlayerCacheEndpoint);
+        public static string ClearPlayersCacheApi => GetSetting(nameof(ClearPlayersCacheApi), Defaults.ClearPlayersCacheApi);
         
         public static string ToJson()
         {
@@ -108,6 +110,7 @@ namespace CsStat.Domain
 
         private static class Defaults
         {
+            public static string Domain = "https://fuse8csgo.ru";
             public static string LogsPath = Path.Combine(Environment.CurrentDirectory, "logs");
             public static string ConsoleLogsPath = Path.Combine(Environment.CurrentDirectory, "console.log");
             public static string DemosFolderPath = Path.Combine(Environment.CurrentDirectory, "Demos");
@@ -122,6 +125,7 @@ namespace CsStat.Domain
             public const string MatchesDataApiPath = "api/matchesdata";
             public const string MatchDataApiPath = "api/matchdata";
             public const string WikiDataApiPath = "api/articles";
+            public const string ClearPlayersCacheApi = "api/cache/clearplayers";
             public const string ServerInfoDataApiPath = "api/bot/serverinfo";
             public const string WikiPagePath = "wiki";
             public const string DemoReaderPagePath = "demo-reader";
@@ -142,6 +146,8 @@ namespace CsStat.Domain
             public static string ImagesPath => $"{AdminPath}/images";
             public static string CmsAdminPath => $"{AdminPath}/shell";
             public static string WeaponsPath => $"{AdminPath}/weapons";
+            public static string ClearPlayerCacheEndpoint => $"{Domain}/{ClearPlayersCacheApi}";
+
         }
     }
 

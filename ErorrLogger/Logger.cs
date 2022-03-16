@@ -10,6 +10,8 @@ namespace ErrorLogger
     {
         void Error(string latestString, Exception exception, string message);
         void Error(Exception exception, string message);
+        void Error(string message);
+
     }
     public class Logger : ILogger
     {
@@ -25,7 +27,7 @@ namespace ErrorLogger
         {
             var error = new Error
             {
-                Exception = exception.Message,
+                Exception = exception?.Message,
                 LogString = latestString,
                 Message = message,
                 Time = $"{DateTime.Now:HH-mm:dd-MM-yyyy}"
@@ -37,6 +39,11 @@ namespace ErrorLogger
         public void Error(Exception exception, string caption)
         {
             Error("", exception, caption);
+        }
+
+        public void Error(string message)
+        {
+            Error("", null, message);
         }
     }
 }

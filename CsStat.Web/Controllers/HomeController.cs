@@ -64,7 +64,7 @@ namespace CsStat.Web.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Client, VaryByParam = "dateFrom;dateTo;periodDay")]
+        [OutputCache(Duration = int.MaxValue, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "", PeriodDay? periodDay = null)
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
@@ -97,17 +97,10 @@ namespace CsStat.Web.Controllers
 
         public ActionResult ClearCache()
         {
-            var prevReadBytes = Session[SystemFacade.Constants.Session.ReadBytes] is long ? (long)Session[SystemFacade.Constants.Session.ReadBytes] : 0;
-            var logFile = _logFileRepository.GetFileByName(Settings.ConsoleLogsPath);
+            _statDummyCacheManager.CacheCleanByDependency(SystemFacade.Constants.Cache.DependencyKeys.AllPlayers);
+            return Json("Ok");
+        }
 
-            if (logFile != null)
-            {
-                if (prevReadBytes != logFile.ReadBytes)
-                {
-                    _statDummyCacheManager.CacheCleanByDependency(SystemFacade.Constants.Cache.DependencyKeys.AllPlayers);
-                    Session[SystemFacade.Constants.Session.ReadBytes] = logFile.ReadBytes;
-                }
-            }
 
             return Json("Ok");
         }

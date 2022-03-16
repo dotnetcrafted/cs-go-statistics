@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using CsStat.Domain;
+using CsStat.Web.Controllers;
 
 namespace CsStat.Web
 {
@@ -99,6 +100,13 @@ namespace CsStat.Web
                 name: "getMatchData",
                 url: Settings.MatchDataApiPath,
                 defaults: new { controller = "Matches", action = "GetMatch", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "clearPlayersCache",
+                url: Settings.ClearPlayersCacheApi,
+                defaults: new { controller = "Home", action = "ClearCache" }
             );
 
             routes.MapRoute(

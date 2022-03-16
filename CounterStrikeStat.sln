@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerQueries", "Utils\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTools", "Utils\ServerTools\ServerTools.csproj", "{EC967DEA-A10F-4865-B5A3-0E6152159DFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateCacheService", "Utils\UpdateCacheService\UpdateCacheService.csproj", "{12EA1B9D-357C-469F-9AFE-40EE70C2083B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,12 @@ Global
 		{EC967DEA-A10F-4865-B5A3-0E6152159DFF}.OnlyWeb|Any CPU.Build.0 = Release|Any CPU
 		{EC967DEA-A10F-4865-B5A3-0E6152159DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC967DEA-A10F-4865-B5A3-0E6152159DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.OnlyWeb|Any CPU.ActiveCfg = Debug|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.OnlyWeb|Any CPU.Build.0 = Debug|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +156,7 @@ Global
 		{CBEB0D43-468F-4160-90E3-6AE272FDCF1A} = {2940D1CB-2EC9-4CD7-9DAC-66F68A47B2A6}
 		{F4FF265D-BA20-4284-9BD2-DACFCD06A7CA} = {B998A3BB-4A41-4496-B6EE-504A863EBBD2}
 		{EC967DEA-A10F-4865-B5A3-0E6152159DFF} = {B998A3BB-4A41-4496-B6EE-504A863EBBD2}
+		{12EA1B9D-357C-469F-9AFE-40EE70C2083B} = {B998A3BB-4A41-4496-B6EE-504A863EBBD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16C667A3-A12A-4CF8-9EB8-7E1F99081720}

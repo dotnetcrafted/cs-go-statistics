@@ -153,6 +153,10 @@
       <Project>{F4FF265D-BA20-4284-9BD2-DACFCD06A7CA}</Project>
       <Name>ServerQueries</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UpdateCacheService\UpdateCacheService.csproj">
+      <Project>{12EA1B9D-357C-469F-9AFE-40EE70C2083B}</Project>
+      <Name>UpdateCacheService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
