@@ -9,7 +9,7 @@ namespace BusinessFacade.Repositories.Implementations
         {
         }
 
-        public void Error(Error error)
+        public void Log(LoggerEntity error)
         {
             base.Insert(error);
         }

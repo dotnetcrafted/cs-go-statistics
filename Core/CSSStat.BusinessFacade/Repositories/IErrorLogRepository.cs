@@ -4,6 +4,6 @@ namespace BusinessFacade.Repositories
 {
     public interface IErrorLogRepository
     {
-        void Error(Error error);
+        void Log(LoggerEntity error);
     }
 }

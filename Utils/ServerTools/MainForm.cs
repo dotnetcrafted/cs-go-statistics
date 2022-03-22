@@ -20,6 +20,7 @@ using ReadFile.ReadDemo.Profiles;
 using ReadFile.SingleFileReader;
 using ServerTools.Enums;
 using ServerTools.Extensions;
+using UpdateCacheService;
 
 namespace ServerTools
 {
@@ -47,45 +48,70 @@ namespace ServerTools
 
         private async void frmMain_Load(object sender, EventArgs e)
         {
-            _settings = _serverToolsRepository.GetSettings();
-            _serverCommands = new ServerCommands(_settings);
-            _progress = new Progress<string>(info => { txtConsole.WriteLine(info); });
-            InitSettings();
-            var maps = _strapiApi.GetAllMapInfos().Select(x => x.MapName).ToList();
-            cmbMap.DataSource = maps;
-            cmbMap.Text = _settings.CurrentMap;
-            listAll.BindDataSource(maps.Except(listPool.ToList()).ToList());
-            RestartServer();
-            timerRestart.Start();
-            timerChangeMap.Start();
-
-            var progressLogReader = new Progress<string>(info => { txtLogReader.WriteLine(info); });
-
-            await Task.Run(() => LogReader(progressLogReader));
-
-            var progressDemoReader = new Progress<string>(info =>
+            try
             {
-                var lineType = LineTypes.Text;
+                _settings = _serverToolsRepository.GetSettings();
+                _serverCommands = new ServerCommands(_settings);
+                InitSettings();
+                _progress = new Progress<string>(info => { txtConsole.WriteLine(info); });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Init error");
+            }
 
-                if (info.Contains(Team.Terrorist.ToString()))
+            try
+            {
+                RestartServer();
+                timerRestart.Start();
+                timerChangeMap.Start();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Start server error");
+            }
+
+
+            try
+            {
+                var progressLogReader = new Progress<string>(info => { txtLogReader.WriteLine(info); });
+                await Task.Run(() => LogReader(progressLogReader));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Start log parser error");
+            }
+
+            try
+            {
+                var progressDemoReader = new Progress<string>(info =>
                 {
-                    lineType = LineTypes.TerroristWin;
-                }
+                    var lineType = LineTypes.Text;
 
-                if (info.Contains(Team.CounterTerrorist.ToString()))
-                {
-                    lineType = LineTypes.CtWin;
-                }
+                    if (info.Contains(Team.Terrorist.ToString()))
+                    {
+                        lineType = LineTypes.TerroristWin;
+                    }
 
-                if (info.ToLower().Contains("exception"))
-                {
-                    lineType = LineTypes.Error;
-                }
+                    if (info.Contains(Team.CounterTerrorist.ToString()))
+                    {
+                        lineType = LineTypes.CtWin;
+                    }
 
-                txtDemoReader.WriteLine(info, lineType);
-            });
+                    if (info.ToLower().Contains("exception"))
+                    {
+                        lineType = LineTypes.Error;
+                    }
 
-            await Task.Run(() => Demo(progressDemoReader));
+                    txtDemoReader.WriteLine(info, lineType);
+                });
+
+                await Task.Run(() => Demo(progressDemoReader));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Start demo parser error");
+            }
         }
         
         private void InitSettings()
@@ -100,6 +126,10 @@ namespace ServerTools
             txtStop.Text = _settings.StopServer;
             txtUpdate.Text = _settings.UpdateServer;
             numDays.Value = _settings.PlayingDays;
+            var maps = _strapiApi.GetAllMapInfos().Select(x => x.MapName).ToList();
+            cmbMap.DataSource = maps;
+            cmbMap.Text = _settings.CurrentMap;
+            listAll.BindDataSource(maps.Except(listPool.ToList()).ToList());
         }
 
         private void LogReader(IProgress<string> progress)
@@ -439,6 +469,10 @@ namespace ServerTools
             txtDemoReader.Update();
             txtLogReader.Refresh();
             txtLogReader.Update();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -11,6 +11,8 @@ using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade;
 using CsStat.SystemFacade.DummyCache;
 using CsStat.SystemFacade.DummyCacheFactories;
+using DataService;
+using ErrorLogger;
 using UpdateCacheService;
 
 namespace ReadFile.SingleFileReader
@@ -28,6 +30,7 @@ namespace ReadFile.SingleFileReader
         private static readonly object _locker = new object();
 
         private readonly IPlayersCacheService _cacheService;
+        private readonly ILogger _logger;
 
         public Reader(string path, ICsLogsApi parsers, IBaseRepository logRepository,
             ILogFileRepository logFileRepository, IProgress<string> progress)
@@ -38,6 +41,9 @@ namespace ReadFile.SingleFileReader
             this.logFileRepository = logFileRepository;
             _progress = progress;
             _cacheService = new PlayersCacheService();
+            var connectionString = new ConnectionStringFactory();
+            var mongoRepository = new MongoRepositoryFactory(connectionString);
+            _logger = new Logger(mongoRepository);
         }
 
         public void Start()
@@ -97,7 +103,16 @@ namespace ReadFile.SingleFileReader
                 {
                     logFile.ReadBytes = 0;
                 }
-                ReadLines(logFile);
+
+                try
+                {
+                    ReadLines(logFile);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Read file exception");
+                }
+
                 logFileRepository.UpdateFile(logFile);
             }
             else
@@ -109,12 +124,19 @@ namespace ReadFile.SingleFileReader
                     Created = File.GetCreationTime(path),
                     ReadBytes = 0
                 };
-                ReadLines(logFile);
+                try
+                {
+                    ReadLines(logFile);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Read file exception");
+                }
                 logFileRepository.AddFile(logFile);
             }
         }
 
-        private void ReadLines(LogFile logFile)
+        private async void ReadLines(LogFile logFile)
         {
             var lines = new List<string>();
             using (var fileStream = new FileStream(logFile.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -141,9 +163,10 @@ namespace ReadFile.SingleFileReader
                 if (logs != null)
                 {
                     _progress.Report($"{logs.Count} logs will be added");
-
+                    
                     logRepository.InsertBatch(logs);
-                    _cacheService.ClearPlayersCache();
+
+                    await _cacheService.ClearPlayersCache();
 
                     _progress.Report($"Last read line is \"{lines.Last()}\"");
                 }

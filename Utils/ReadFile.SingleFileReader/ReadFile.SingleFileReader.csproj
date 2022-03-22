@@ -87,6 +87,10 @@
       <Project>{487EA211-0EDA-4168-B0E8-045767475D40}</Project>
       <Name>CsStat.SystemFacade</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ErorrLogger\ErrorLogger.csproj">
+      <Project>{851ECE9E-DE3A-4AD6-B07F-8C450A08CD2D}</Project>
+      <Name>ErrorLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpdateCacheService\UpdateCacheService.csproj">
       <Project>{12EA1B9D-357C-469F-9AFE-40EE70C2083B}</Project>
       <Name>UpdateCacheService</Name>

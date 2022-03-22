@@ -1,26 +1,23 @@
-﻿using CsStat.SystemFacade.DummyCache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Net;
+using System.Threading.Tasks;
 using CsStat.Domain;
+using CsStat.Domain.Entities;
 
 namespace UpdateCacheService
 {
     public interface IPlayersCacheService
     {
-       void ClearPlayersCache();
+        Task ClearPlayersCache();
     }
     public class PlayersCacheService : BaseService, IPlayersCacheService
     {
-        public async void ClearPlayersCache()
-        { 
+        public async Task ClearPlayersCache()
+        {
             var request = await GetAsync(Settings.ClearPlayerCacheEndpoint);
-            
+
             if (request.Code != HttpStatusCode.OK)
             {
-                Logger.Error(request.Content);
+                Logger.Error($"Clear cache error. Request content: {request.Content}");
             }
         }
     }

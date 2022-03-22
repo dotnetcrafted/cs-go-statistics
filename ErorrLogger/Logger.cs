@@ -11,6 +11,7 @@ namespace ErrorLogger
         void Error(string latestString, Exception exception, string message);
         void Error(Exception exception, string message);
         void Error(string message);
+        void Info(string message);
 
     }
     public class Logger : ILogger
@@ -23,17 +24,10 @@ namespace ErrorLogger
             _mongoRepository = mongoRepository;
             _errorLogRepository = new ErrorLogRepository(_mongoRepository);
         }
+
         public void Error(string latestString, Exception exception, string message)
         {
-            var error = new Error
-            {
-                Exception = exception?.Message,
-                LogString = latestString,
-                Message = message,
-                Time = $"{DateTime.Now:HH-mm:dd-MM-yyyy}"
-            };
-
-            _errorLogRepository.Error(error);
+            Log(message, latestString, LogType.Error, exception);
         }
 
         public void Error(Exception exception, string caption)
@@ -44,6 +38,25 @@ namespace ErrorLogger
         public void Error(string message)
         {
             Error("", null, message);
+        }
+
+        public void Info(string message)
+        {
+            Log(message, "", LogType.Info, null);
+        }
+
+        private void Log(string message, string latestString, LogType type, Exception exception)
+        {
+            var error = new LoggerEntity
+            {
+                Exception = exception?.Message,
+                LogString = latestString,
+                Message = message,
+                Time = $"{DateTime.Now:HH-mm:dd-MM-yyyy}",
+                Type = type.ToString()
+            };
+
+            _errorLogRepository.Log(error);
         }
     }
 }
