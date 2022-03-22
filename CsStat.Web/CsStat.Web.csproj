@@ -160,6 +160,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapperConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HangoutBotController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />

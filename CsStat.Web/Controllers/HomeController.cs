@@ -64,7 +64,7 @@ namespace CsStat.Web.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = int.MaxValue, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
+        [OutputCache(Duration = Constants.OutputCache.Duration, Location = OutputCacheLocation.Server, VaryByParam = "dateFrom;dateTo;periodDay")]
         public ActionResult GetRepository(string dateFrom = "", string dateTo = "", PeriodDay? periodDay = null)
         {
             if (dateFrom.IsEmpty() && dateTo.IsEmpty())
