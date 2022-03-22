@@ -233,7 +233,7 @@ namespace CsStat.Web.Controllers
         private static string GetMapImage(string mapName)
         {
             return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
-                   ?? _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl
+                   ?? _strapiApi.GetImage(BusinessFacade.Constants.ImagesIds.DefaultImage)?.Image.FullUrl
                    ?? "";
         }
 
