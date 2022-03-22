@@ -157,20 +157,17 @@ namespace ReadFile.SingleFileReader
                 }
             }
 
-            if (lines.Count > 0)
-            {
-                var logs = parsers.ParseLogs(lines);
-                if (logs != null)
-                {
-                    _progress.Report($"{logs.Count} logs will be added");
-                    
-                    logRepository.InsertBatch(logs);
+            if (lines.Count <= 0) 
+                return;
 
-                    await _cacheService.ClearPlayersCache();
+            var logs = parsers.ParseLogs(lines);
+            if (!logs.Any()) 
+                return;
 
-                    _progress.Report($"Last read line is \"{lines.Last()}\"");
-                }
-            }
+            _progress.Report($"{logs.Count} logs will be added");
+            logRepository.InsertBatch(logs);
+            await _cacheService.ClearPlayersCache();
+            _progress.Report($"Last read line is \"{lines.Last()}\"");
         }
     }
 }
