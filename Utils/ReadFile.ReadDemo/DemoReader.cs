@@ -491,12 +491,13 @@ namespace ReadFile.ReadDemo
                 return;
 
             var killTime = GetRoundDuration();
+            var tick = _parser.CurrentTick - _rountTickTimeStart;
 
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon), _currentRoundNumber,
-                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects, e.AssistedFlash);
+                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects, e.AssistedFlash, tick);
 
                 if (e.Assister != null)
                 {
@@ -518,7 +519,7 @@ namespace ReadFile.ReadDemo
             {
                 var kill = new Kill(null, _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon),
-                    _currentRoundNumber, true, killTime, e.PenetratedObjects, e.AssistedFlash);
+                    _currentRoundNumber, true, killTime, e.PenetratedObjects, e.AssistedFlash, tick);
 
                 if (e.Assister != null)
                 {

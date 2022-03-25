@@ -8,6 +8,8 @@ namespace CsStat.SystemFacade.DummyCache
     {
         private static Cache Cache => HttpRuntime.Cache;
         private static TimeSpan SessionTimeout => TimeSpan.FromMinutes(HttpContext.Current.Session.Timeout);
+
+        public abstract string DependencyKey { get;}
         public abstract string BuildKey(string key);
 
         public virtual void AddDependency(string key)

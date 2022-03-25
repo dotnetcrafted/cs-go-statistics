@@ -2,8 +2,7 @@
 {
     public class StatDummyCache : BaseDummyCache
     {
-
-        private static string DependencyKey => "stat";
+        public override string DependencyKey => "stat";
 
         public override string BuildKey(string key)
         {

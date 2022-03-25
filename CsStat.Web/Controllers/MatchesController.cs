@@ -11,6 +11,8 @@ using CsStat.Domain.Models;
 using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
+using CsStat.SystemFacade.DummyCache;
+using CsStat.SystemFacade.DummyCacheFactories;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
@@ -25,7 +27,7 @@ namespace CsStat.Web.Controllers
         private static ISteamApi _steamApi;
         private static IStrapiApi _strapiApi;
         private static List<MapInfoModel> _mapInfos;
-        private static List<WeaponModel> _weapons;
+        private readonly IDummyCacheManager _matchDummyCacheManager;
 
         public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository,
             IStrapiApi strapiApi)
@@ -35,7 +37,7 @@ namespace CsStat.Web.Controllers
             _steamApi = new SteamApi();
             _strapiApi = strapiApi;
             _mapInfos = _strapiApi.GetAllMapInfos();
-            _weapons = strapiApi.GetAllWeapons();
+            _matchDummyCacheManager = new DummyCacheManager(new MatchDummyCacheFactory());
         }
 
         public ActionResult Index()
@@ -108,6 +110,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = Constants.OutputCache.DurationForMatch, Location = OutputCacheLocation.Server, VaryByParam = "matchId")]
         public ActionResult GetMatch(string matchId)
         {
             if (matchId.IsNotEmpty())
@@ -202,6 +205,7 @@ namespace CsStat.Web.Controllers
                     }).ToList()
                 };
 
+                _matchDummyCacheManager.AddDependency(matchId);
                 return Json(matchDetails);
             }
 

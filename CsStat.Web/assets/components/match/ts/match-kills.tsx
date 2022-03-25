@@ -116,7 +116,7 @@ export class MatchKills extends React.Component<any, {}> {
     renderTime(time: number): string {
         const minutes = Math.floor(time / 60);
         const formattedMinutes = minutes < 0 ? '0' : minutes;
-        const seconds = time - minutes * 60;
+        const seconds = Math.floor(time - minutes * 60);
         let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
         if (seconds === 0) {

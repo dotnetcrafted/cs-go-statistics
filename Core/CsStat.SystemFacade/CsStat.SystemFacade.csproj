@@ -62,9 +62,11 @@
     <Compile Include="Attributes\IncludePropertyToJsonAttribute.cs" />
     <Compile Include="Constants\Cache.cs" />
     <Compile Include="DummyCacheFactories\IDummyCacheFactory.cs" />
+    <Compile Include="DummyCacheFactories\MatchDummyCacheFactory.cs" />
     <Compile Include="DummyCacheFactories\StatDummyCacheFactory.cs" />
     <Compile Include="DummyCache\BaseDummyCache.cs" />
     <Compile Include="DummyCache\DummyCacheManager.cs" />
+    <Compile Include="DummyCache\MatchDummyCache.cs" />
     <Compile Include="DummyCache\StatDummyCache.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

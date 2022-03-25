@@ -14,7 +14,8 @@ namespace CsStat.Domain.Entities.Demo
         public string AssisterName { get; set; }
         public bool IsSuicide { get; set; }
         public int RoundNumber { get; set; }
-        public int Time { get; set; }
+        public float Time { get; set; }
+        public int Tick { get; set; }
         public int PenetratedObjects { get; set; }
         public bool IsPenetrated => PenetratedObjects != 0;
         public bool IsFlashed { get; set; }
