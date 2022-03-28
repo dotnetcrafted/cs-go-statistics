@@ -20,6 +20,7 @@ namespace CsStat.Domain
         [IncludePropertyToJson]
         public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
         public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
+        public static string BestPlayerApiPath => GetSetting(nameof(BestPlayerApiPath), Defaults.BestPlayerApiPath);
 
         public static string LogsPath => GetSetting(nameof(LogsPath), Defaults.LogsPath);
         public static string CsPath => GetSetting(nameof(LogsPath), Defaults.CsPath);
@@ -119,6 +120,7 @@ namespace CsStat.Domain
             public const int TakeLines = 50;
             public const string PlayersDataApiPath = "api/playersdata";
             public const string PlayerStatApiPath = "api/bot/playerstat";
+            public const string BestPlayerApiPath = "api/bot/bestplayerstat";
             public const string PlayersListApiPath = "api/bot/playerslist";
             public const string ServerInfoDataMockApiPath = "api/serverinfomock";
             public const string FullMatchesDataApiPath = "api/fullmatchesdata";

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
@@ -50,6 +51,17 @@ namespace CsStat.Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult GetTodayBestPlayer()
+        {
+            var data = _playerRepository.GetStatsForAllPlayers(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString());
+            return new JsonResult
+            {
+                Data = data.OrderByDescending(x => x.KdRatio).FirstOrDefault(),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
 
         private static PlayerStatsViewModel GetStatForOnePlayer(string playerName, string dateFrom, string dateTo)
         {

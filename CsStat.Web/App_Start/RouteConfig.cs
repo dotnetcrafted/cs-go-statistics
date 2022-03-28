@@ -109,6 +109,13 @@ namespace CsStat.Web
                 defaults: new { controller = "Home", action = "ClearCache" }
             );
 
+            routes.MapRoute
+            (
+                name: "bestplayerstat",
+                url: Settings.BestPlayerApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetTodayBestPlayer", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
