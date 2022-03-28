@@ -106,11 +106,11 @@ namespace TelegramBot
                 var text = HandlebarsEngine.ProcessTemplate(notification.Text, new
                 {
                     userName = playerStat.Player.NickName,
-                    kdStat = playerStat.KdRatio,
+                    kdStat = playerStat.KdRatio.ToString(CultureInfo.InvariantCulture).Replace(".", "\\."),
                     kills = playerStat.Kills,
                     assists = playerStat.Assists,
-                    headshot = playerStat.HeadShotsPercent,
-                    achivements = string.Join(",", playerStat.Achievements.Select(x => x.Name).ToArray())
+                    headshot = Math.Round(playerStat.HeadShotsPercent, 0),
+                    achivements = string.Join(", ", playerStat.Achievements.Select(x => x.Name).ToArray())
                 });
 
                 LogToConsole($"Message: {text} has been sent", LogTypes.Info);
