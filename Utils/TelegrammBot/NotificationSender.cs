@@ -98,24 +98,30 @@ namespace TelegramBot
                 var playerStat = await _playerStatService.GetBestPlayerStat();
                 var notification = notifications.FirstOrDefault();
                 
-                if (notification == null || notification.Text.IsEmpty() || playerStat == null)
+                if (notification == null || notification.Text.IsEmpty() || playerStat == null || !playerStat.Any())
                 {
                     return;
                 }
 
                 var text = HandlebarsEngine.ProcessTemplate(notification.Text, new
                 {
-                    userName = playerStat.Player.NickName,
-                    kdStat = playerStat.KdRatio.ToString(CultureInfo.InvariantCulture).Replace(".", "\\."),
-                    kills = playerStat.Kills,
-                    assists = playerStat.Assists,
-                    headshot = Math.Round(playerStat.HeadShotsPercent, 0),
-                    achivements = string.Join(", ", playerStat.Achievements.Select(x => x.Name).ToArray())
+                    firstUserName = playerStat.First().Player.NickName,
+                    firstKdStat = playerStat.First().KdRatio.ToString(CultureInfo.InvariantCulture).Replace(".", "\\."),
+                    firstKad = playerStat.First().Kad,
+                    firstHeadShot = Math.Round(playerStat.First().HeadShotsPercent, 0),
+                    secondUserName = playerStat.Skip(1).Take(1).First().Player.NickName,
+                    secondKdStat = playerStat.Skip(1).Take(1).First().KdRatio.ToString(CultureInfo.InvariantCulture).Replace(".", "\\."),
+                    secondKad = playerStat.Skip(1).Take(1).First().Kad,
+                    secondHeadShot = Math.Round(playerStat.Skip(1).Take(1).First().HeadShotsPercent, 0),
+                    thirdUserName = playerStat.Last().Player.NickName,
+                    thirdKdStat = playerStat.Last().KdRatio.ToString(CultureInfo.InvariantCulture).Replace(".", "\\."),
+                    thirdKad = playerStat.Last().Kad,
+                    thirdHeadShot = Math.Round(playerStat.Last().HeadShotsPercent, 0),
                 });
 
-                LogToConsole($"Message: {text} has been sent", LogTypes.Info);
-
                 await _botClient.SendMessage(text, ParseMode.MarkdownV2);
+
+                LogToConsole($"Message: {text} has been sent", LogTypes.Info);
             }
         }
 
