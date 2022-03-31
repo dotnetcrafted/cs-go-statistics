@@ -29,9 +29,9 @@ namespace TelegramBot
             await _client.SendTextMessageAsync(_chatId, text, mode);
         }
 
-        public async Task SendSticker(string stickerUrl)
+        public async Task SendSticker(string stickerId)
         {
-            await _client.SendStickerAsync(_chatId, "CAACAgIAAxkBAAEESfFiQHp4GZRCfXuSgvMWl9f1BY2dCwACMRYAAmOLRgysaJGvycCYeCME");
+            await _client.SendStickerAsync(_chatId, stickerId);
         }
 
         public async Task<User> GetInfo()

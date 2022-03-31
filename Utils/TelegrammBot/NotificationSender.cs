@@ -31,11 +31,6 @@ namespace TelegramBot
             var me = await _botClient.GetInfo();
             LogToConsole($"Bot {me.FirstName} has been initialized.", LogTypes.Info);
 
-            var stickers = await _notificationService.GetAllStickers();
-            foreach (var sticker in stickers)
-            {
-                await _botClient.SendSticker(sticker.StickerId);
-            }
             _timer = new Timer(Callback, null, 0, _timerInterval);
         }
 
