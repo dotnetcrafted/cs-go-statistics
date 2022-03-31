@@ -52,12 +52,12 @@ namespace CsStat.Web.Controllers
             };
         }
 
-        public JsonResult GetTodayBestPlayer()
+        public JsonResult GetTodayBestPlayers()
         {
             var data = _playerRepository.GetStatsForAllPlayers(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString());
             return new JsonResult
             {
-                Data = data.OrderByDescending(x => x.KdRatio).FirstOrDefault(),
+                Data = data.OrderByDescending(x => x.KdRatio).Take(3),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

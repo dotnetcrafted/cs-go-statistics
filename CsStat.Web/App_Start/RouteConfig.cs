@@ -113,7 +113,7 @@ namespace CsStat.Web
             (
                 name: "bestplayerstat",
                 url: Settings.BestPlayerApiPath,
-                defaults: new { controller = "HangoutBot", action = "GetTodayBestPlayer", id = UrlParameter.Optional }
+                defaults: new { controller = "HangoutBot", action = "GetTodayBestPlayers", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
