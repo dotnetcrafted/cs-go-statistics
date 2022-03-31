@@ -12,6 +12,7 @@ namespace TelegramBot.Models
         public List<Achievement> Achievements { get; set; }
         public double KdRatio { get; set; }
         public object Id { get; set; }
+        public string Kad => $"{Kills}/{Assists}/{Deaths}";
     }
 
     public class Player

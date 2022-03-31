@@ -8,17 +8,17 @@ namespace TelegramBot.Services
 {
     public interface IPlayerStatService
     {
-        public Task<PlayerStats> GetBestPlayerStat();
+        public Task<List<PlayerStats>> GetBestPlayerStat();
     }
 
     public class PlayerStatService : BaseRequestService, IPlayerStatService
     {
-        public async Task<PlayerStats> GetBestPlayerStat()
+        public async Task<List<PlayerStats>> GetBestPlayerStat()
         {
-            var statRequest = await GetAsync<PlayerStats>(Settings.BestPlayerApiUrl);
+            var statRequest = await GetAsync<List<PlayerStats>>(Settings.BestPlayerApiUrl);
 
             return statRequest.Code != HttpStatusCode.OK
-                ? new PlayerStats()
+                ? new List<PlayerStats>()
                 : statRequest.Content;
         }
     }
