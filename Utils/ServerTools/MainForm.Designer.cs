@@ -312,6 +312,7 @@
             this.dateChangeDay.Name = "dateChangeDay";
             this.dateChangeDay.Size = new System.Drawing.Size(82, 20);
             this.dateChangeDay.TabIndex = 40;
+            this.dateChangeDay.ValueChanged += new System.EventHandler(this.dateChangeDay_ValueChanged);
             // 
             // lblDown
             // 

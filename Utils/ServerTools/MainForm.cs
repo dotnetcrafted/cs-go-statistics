@@ -121,7 +121,7 @@ namespace ServerTools
             listPool.BindDataSource(_settings.MapPool);
             timePickerLunch.Text = _settings.RestartTime[0];
             timePickerEvening.Text = _settings.RestartTime[1];
-            dateChangeDay.Value = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays);
+            dateChangeDay.Value = _settings.ChangeDay.ToDate(DateTime.MinValue);
             txtStart.Text = _settings.StartServer;
             txtStop.Text = _settings.StopServer;
             txtUpdate.Text = _settings.UpdateServer;
@@ -269,6 +269,7 @@ namespace ServerTools
             _settings.StopServer = txtStop.Text;
             _settings.UpdateServer = txtUpdate.Text;
             _settings.PlayingDays = (int) numDays.Value;
+            _settings.ChangeDay = dateChangeDay.Value.ToShortDateString();
 
             try
             {
@@ -333,8 +334,9 @@ namespace ServerTools
         private void lblResetMapPool_Click(object sender, EventArgs e)
         {
             ClearList();
-            _settings.StartDate = DateTime.Today.ToShortDateString();
-            dateChangeDay.Value = DateTime.Today.AddDaysExcludeWeekends((int)numDays.Value);
+            var time = DateTime.Today.AddDaysExcludeWeekends((int)numDays.Value);
+            _settings.ChangeDay = time.ToShortDateString();
+            dateChangeDay.Value = time;
         }
 
         private void ClearList()
@@ -412,19 +414,17 @@ namespace ServerTools
 
         private void ChangeMap()
         {
-            var changeDay = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays).AddMinutes(-1);
-
-            if (DateTime.Now < changeDay)
+            if (!string.Equals(DateTime.Now.ToShortDateString(), _settings.ChangeDay, StringComparison.InvariantCultureIgnoreCase))
             {
                 return;
             }
 
             cmbMap.Text = listPool.NextItem(cmbMap.Text);
             RestartServer();
-            _settings.StartDate = DateTime.Today.ToShortDateString();
+            _settings.ChangeDay = DateTime.Today.AddDaysExcludeWeekends(_settings.PlayingDays).ToShortDateString();
             _settings.CurrentMap = cmbMap.Text;
             _serverToolsRepository.SaveSettings(_settings);
-            dateChangeDay.Value = _settings.StartDate.ToDate(DateTime.MinValue).AddDaysExcludeWeekends(_settings.PlayingDays).AddMinutes(-1);
+            dateChangeDay.Value = _settings.ChangeDay.ToDate(DateTime.MinValue);
             timerChangeMap.Start();
         }
 
@@ -473,6 +473,11 @@ namespace ServerTools
 
         private void button1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void dateChangeDay_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
