@@ -125,6 +125,8 @@
     <Compile Include="Models\ImageInfoModel.cs" />
     <Compile Include="Models\MapInfoModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
+    <Compile Include="Models\WeaponPlayerStat.cs" />
+    <Compile Include="Models\WeaponStat.cs" />
     <Compile Include="Models\VictimKillerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

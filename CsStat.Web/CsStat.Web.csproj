@@ -162,6 +162,7 @@
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\WeaponController.cs" />
     <Compile Include="Controllers\HangoutBotController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,11 +190,12 @@
     <Compile Include="Models\Matches\MatchDetailsSquadPlayer.cs" />
     <Compile Include="Models\Matches\MatchRound.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
+    <Compile Include="Models\PlayerWeaponViewModel.cs" />
     <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Models\UsefulLinksViewModel.cs" />
     <Compile Include="Models\SignInViewModel.cs" />
-    <Compile Include="Models\VictimViewModel.cs" />
+    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

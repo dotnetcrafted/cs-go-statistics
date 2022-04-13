@@ -49,6 +49,11 @@ namespace CsStat.Domain
         public static int FileReadNewLinesInterval =>GetSetting(nameof(FileReadNewLinesInterval), Defaults.FileReadNewLinesInterval);
         public static int TimerInterval => GetSetting(nameof(TimerInterval), Defaults.TimerInterval);
         public static int TakeLines => GetSetting(nameof(TakeLines), Defaults.TakeLines);
+        public static string PlayersDataApiPath => GetSetting(nameof(PlayersDataApiPath), Defaults.PlayersDataApiPath);
+        public static string PlayerStatApiPath => GetSetting(nameof(PlayerStatApiPath), Defaults.PlayerStatApiPath);
+        public static string WeaponsDataApiPath => GetSetting(nameof(WeaponsDataApiPath), Defaults.WeaponsDataApiPath);
+        public static string WikiDataApiPath => GetSetting(nameof(WikiDataApiPath), Defaults.WikiDataApiPath);
+        public static string ServerInfoDataApiPath => GetSetting(nameof(ServerInfoDataApiPath), Defaults.ServerInfoDataApiPath);
         public static string WikiPagePath => GetSetting(nameof(WikiPagePath), Defaults.WikiPagePath);
         public static string MatchesPagePath => GetSetting(nameof(MatchesPagePath), Defaults.MatchesPagePath);
         public static string DemoReaderPagePath => GetSetting(nameof(DemoReaderPagePath), Defaults.DemoReaderPagePath);
@@ -122,6 +127,7 @@ namespace CsStat.Domain
             public const string PlayerStatApiPath = "api/bot/playerstat";
             public const string BestPlayerApiPath = "api/bot/bestplayerstat";
             public const string PlayersListApiPath = "api/bot/playerslist";
+            public const string WeaponsDataApiPath = "api/weaponsdata";
             public const string ServerInfoDataMockApiPath = "api/serverinfomock";
             public const string FullMatchesDataApiPath = "api/fullmatchesdata";
             public const string MatchesDataApiPath = "api/matchesdata";

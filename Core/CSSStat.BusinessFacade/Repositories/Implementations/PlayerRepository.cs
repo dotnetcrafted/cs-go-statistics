@@ -287,5 +287,36 @@ namespace BusinessFacade.Repositories.Implementations
             playerStats = playersStats.Where(x => x.KnifeKills > 0).OrderByDescending(x => x.KnifeKills).FirstOrDefault();
             playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai).ChangeDescription(playerStats.KnifeKills));
         }
+
+        public List<WeaponStat> GetWeaponStat()
+        {
+            return GetLogs()
+                .Where(l => l.Action == Actions.Kill)
+                .Where(l => l.Gun != Guns.Null &&
+                            l.Gun != Guns.Unknown &&
+                            l.Gun != Guns.Bomb)
+                .GroupBy(gg => gg.Gun)
+                .Select(g => new WeaponStat
+                {
+                    Title = g.Key.GetDescription(),
+                    Headshots = g.Count(x => x.IsHeadShot),
+                    Kills = g.Count(),
+                    Players = g.GroupBy(pg => new
+                        {
+                            pg.Player.SteamId,
+                        })
+                        .Select(p => new WeaponPlayerStat
+                        {
+                            NickName = p.OrderByDescending(x => x.DateTime).First().Player.NickName,
+                            SteamId = p.Key.SteamId,
+                            Kills = p.Count(),
+                            Headshots = p.Count(z => z.IsHeadShot)
+                        })
+                        .OrderByDescending(z => z.Kills)
+                        .ToList()
+                })
+                .OrderBy(x => x.Title)
+                .ToList();
+        }
     }
 }
