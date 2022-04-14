@@ -159,9 +159,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CacheManagerController.cs" />
     <Compile Include="Controllers\WeaponController.cs" />
     <Compile Include="Controllers\HangoutBotController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
@@ -190,12 +190,15 @@
     <Compile Include="Models\Matches\MatchDetailsSquadPlayer.cs" />
     <Compile Include="Models\Matches\MatchRound.cs" />
     <Compile Include="Models\PlayerStatsViewModel.cs" />
-    <Compile Include="Models\PlayerWeaponViewModel.cs" />
-    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Models\SaloModel.cs" />
     <Compile Include="Models\UsefulLinksViewModel.cs" />
     <Compile Include="Models\SignInViewModel.cs" />
     <Compile Include="Models\PlayerViewModel.cs" />
+    <Compile Include="Models\WeaponsStatsViewModel.cs" />
+    <Compile Include="Profiles\AchievementsProfile.cs" />
+    <Compile Include="Profiles\PlayerStatProfile.cs" />
+    <Compile Include="Profiles\UsefulInfoProfile.cs" />
+    <Compile Include="Profiles\WeaponProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

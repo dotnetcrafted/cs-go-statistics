@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TelegramBot.Enums;
 
 namespace TelegramBot.Models
 {

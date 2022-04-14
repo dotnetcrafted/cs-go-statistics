@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using CsStat.Domain;
-using CsStat.Domain.Entities;
 
 namespace UpdateCacheService
 {

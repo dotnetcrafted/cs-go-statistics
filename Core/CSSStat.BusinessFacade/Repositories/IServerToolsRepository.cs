@@ -1,5 +1,4 @@
-﻿using CsStat.Domain;
-using CsStat.Domain.Entities.ServerTools;
+﻿using CsStat.Domain.Entities.ServerTools;
 
 namespace BusinessFacade.Repositories
 {

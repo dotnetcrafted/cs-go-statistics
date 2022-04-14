@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using BusinessFacade;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using DataService;

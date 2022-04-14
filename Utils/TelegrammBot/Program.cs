@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Telegram.Bot.Types.Enums;
-using TelegramBot.Extensions;
-using TelegramBot.Services;
 
 namespace TelegramBot
 {

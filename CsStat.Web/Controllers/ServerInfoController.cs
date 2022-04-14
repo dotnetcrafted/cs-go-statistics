@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using BusinessFacade;
-using CsStat.Domain;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
-using CsStat.Web.Models;
 using ServerQueries;
 using ServerQueries.Models;
-using ServerQueries.Source;
 
 namespace CsStat.Web.Controllers
 {

@@ -8,7 +8,6 @@ using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Domain.Entities.Demo;
 using CsStat.Domain.Models;
-using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.DummyCache;

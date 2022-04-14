@@ -64,10 +64,12 @@
     <Compile Include="DummyCacheFactories\IDummyCacheFactory.cs" />
     <Compile Include="DummyCacheFactories\MatchDummyCacheFactory.cs" />
     <Compile Include="DummyCacheFactories\StatDummyCacheFactory.cs" />
+    <Compile Include="DummyCacheFactories\WeaponsStatDummyCacheFactory.cs" />
     <Compile Include="DummyCache\BaseDummyCache.cs" />
     <Compile Include="DummyCache\DummyCacheManager.cs" />
     <Compile Include="DummyCache\MatchDummyCache.cs" />
     <Compile Include="DummyCache\StatDummyCache.cs" />
+    <Compile Include="DummyCache\WeaponStatDummyCache.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="BaseWatcher.cs" />

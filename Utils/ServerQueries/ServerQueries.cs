@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CsStat.Domain;
 using ServerQueries.Models;
 using ServerQueries.Source;

@@ -6,7 +6,6 @@ using CsStat.Domain.Definitions;
 using CsStat.Domain.Entities;
 using CsStat.Domain.Extensions;
 using CsStat.Domain.Models;
-using CsStat.LogApi;
 using CsStat.LogApi.Enums;
 using CsStat.StrapiApi;
 using CsStat.SystemFacade.Extensions;
@@ -67,6 +66,7 @@ namespace BusinessFacade.Repositories.Implementations
         {
            base.InsertBatch(players);
         }
+
 
         #endregion
 
@@ -288,34 +288,21 @@ namespace BusinessFacade.Repositories.Implementations
             playerStats?.Achievements.Add(achievements.FirstOrDefault(x => x.AchievementId == Constants.AchievementsIds.Samurai).ChangeDescription(playerStats.KnifeKills));
         }
 
-        public List<WeaponStat> GetWeaponStat()
+        public List<WeaponStatDto> GetWeaponStat(string from = "", string to = "")
         {
-            return GetLogs()
+            return GetLogs(from, to)
                 .Where(l => l.Action == Actions.Kill)
-                .Where(l => l.Gun != Guns.Null &&
-                            l.Gun != Guns.Unknown &&
-                            l.Gun != Guns.Bomb)
+                .Where(l => l.Gun != Weapons.Null &&
+                            l.Gun != Weapons.Unknown &&
+                            l.Gun != Weapons.Bomb)
                 .GroupBy(gg => gg.Gun)
-                .Select(g => new WeaponStat
+                .Select(g => new WeaponStatDto
                 {
-                    Title = g.Key.GetDescription(),
-                    Headshots = g.Count(x => x.IsHeadShot),
+                    Id = (int)g.Key,
+                    HeadShots = g.Count(x => x.IsHeadShot),
                     Kills = g.Count(),
-                    Players = g.GroupBy(pg => new
-                        {
-                            pg.Player.SteamId,
-                        })
-                        .Select(p => new WeaponPlayerStat
-                        {
-                            NickName = p.OrderByDescending(x => x.DateTime).First().Player.NickName,
-                            SteamId = p.Key.SteamId,
-                            Kills = p.Count(),
-                            Headshots = p.Count(z => z.IsHeadShot)
-                        })
-                        .OrderByDescending(z => z.Kills)
-                        .ToList()
+                    
                 })
-                .OrderBy(x => x.Title)
                 .ToList();
         }
     }

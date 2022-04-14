@@ -8,6 +8,7 @@ namespace CsStat.SystemFacade.Constants
         public struct DependencyKeys
         {
             public const string AllPlayers = "allPlayers";
+            public const string AllWeapons = "allWeapons";
         }
     }
 

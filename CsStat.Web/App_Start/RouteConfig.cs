@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using CsStat.Domain;
-using CsStat.Web.Controllers;
 
 namespace CsStat.Web
 {
@@ -111,9 +110,9 @@ namespace CsStat.Web
 
             routes.MapRoute
             (
-                name: "clearPlayersCache",
-                url: Settings.ClearPlayersCacheApi,
-                defaults: new { controller = "Home", action = "ClearCache" }
+                name: "clearCache",
+                url: Settings.ClearCacheApi,
+                defaults: new { controller = "CacheManager", action = "ClearCache" }
             );
 
             routes.MapRoute

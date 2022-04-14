@@ -7,7 +7,6 @@ using AutoMapper;
 using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.StrapiApi;
-using CsStat.SystemFacade;
 using CsStat.SystemFacade.DummyCache;
 using CsStat.SystemFacade.DummyCacheFactories;
 using CsStat.SystemFacade.Extensions;
@@ -21,7 +20,6 @@ namespace CsStat.Web.Controllers
     {
         private static IPlayerRepository _playerRepository;
         private static IStrapiApi _strapiApi;
-        private static ILogFileRepository _logFileRepository;
         private readonly IDummyCacheManager _statDummyCacheManager;
 
         public HomeController(IPlayerRepository playerRepository, IStrapiApi strapiApi, ILogFileRepository logFileRepository)
@@ -29,7 +27,6 @@ namespace CsStat.Web.Controllers
             _playerRepository = playerRepository;
             _strapiApi = strapiApi;
             _statDummyCacheManager = new DummyCacheManager(new StatDummyCacheFactory());
-            _logFileRepository = logFileRepository;
         }
         public ActionResult Index()
         {
@@ -82,7 +79,7 @@ namespace CsStat.Web.Controllers
                 .ThenByDescending(x => x.TotalGames)
                 .ToList();
 
-            _statDummyCacheManager.AddDependency(BuildKey(dateFrom, dateFrom, periodDay));
+            _statDummyCacheManager.AddDependency(BuildKey(dateFrom, dateTo, periodDay));
 
             return Json
             (
@@ -95,12 +92,6 @@ namespace CsStat.Web.Controllers
             );
         }
 
-        public ActionResult ClearCache()
-        {
-            _statDummyCacheManager.CacheCleanByDependency(SystemFacade.Constants.Cache.DependencyKeys.AllPlayers);
-            return Json("Ok");
-        }
-        
         private static List<PlayerStatsViewModel> GetPlayersStat(string from = "", string to = "", PeriodDay? periodDay = null)
         {
             var players = _playerRepository.GetStatsForAllPlayers(from, to, periodDay).OrderByDescending(x=>x.KdRatio).ToList();
