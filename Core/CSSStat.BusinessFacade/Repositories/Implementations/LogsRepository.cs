@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Enums;
 using DataService.Interfaces;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 

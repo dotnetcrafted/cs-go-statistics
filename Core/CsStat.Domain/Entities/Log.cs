@@ -15,5 +15,6 @@ namespace CsStat.Domain.Entities
         public Actions Action { get; set; }
         public bool IsHeadShot { get; set; }
         public Weapons Gun { get; set; }
+        public string LogLine { get; set; }
     }
 }

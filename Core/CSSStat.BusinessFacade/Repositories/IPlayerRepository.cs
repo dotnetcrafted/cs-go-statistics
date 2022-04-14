@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using BusinessFacade.Repositories.Implementations;
+﻿using System.Collections.Generic;
 using CsStat.Domain.Entities;
+using CsStat.Domain.Models;
 
 namespace BusinessFacade.Repositories
 {
@@ -14,5 +13,7 @@ namespace BusinessFacade.Repositories
         Player GetPlayerById(string id);
         string AddPlayer(Player player);
         void AddPlayers(List<Player> players);
+
+        List<WeaponStatDto> GetWeaponStat(string from="", string to="");
     }
 }

@@ -8,9 +8,10 @@ using BusinessFacade.Repositories;
 using CsStat.Domain;
 using CsStat.Domain.Entities.Demo;
 using CsStat.Domain.Models;
-using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
+using CsStat.SystemFacade.DummyCache;
+using CsStat.SystemFacade.DummyCacheFactories;
 using CsStat.SystemFacade.Extensions;
 using CsStat.Web.Models;
 using CsStat.Web.Models.Matches;
@@ -25,7 +26,7 @@ namespace CsStat.Web.Controllers
         private static ISteamApi _steamApi;
         private static IStrapiApi _strapiApi;
         private static List<MapInfoModel> _mapInfos;
-        private static List<WeaponModel> _weapons;
+        private readonly IDummyCacheManager _matchDummyCacheManager;
 
         public MatchesController(IPlayerRepository playerRepository, IDemoRepository demoRepository,
             IStrapiApi strapiApi)
@@ -35,7 +36,7 @@ namespace CsStat.Web.Controllers
             _steamApi = new SteamApi();
             _strapiApi = strapiApi;
             _mapInfos = _strapiApi.GetAllMapInfos();
-            _weapons = strapiApi.GetAllWeapons();
+            _matchDummyCacheManager = new DummyCacheManager(new MatchDummyCacheFactory());
         }
 
         public ActionResult Index()
@@ -108,7 +109,7 @@ namespace CsStat.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 25920000, Location = OutputCacheLocation.Server, VaryByParam = "matchId")]
+        [OutputCache(Duration = Constants.OutputCache.DurationForMatch, Location = OutputCacheLocation.Server, VaryByParam = "matchId")]
         public ActionResult GetMatch(string matchId)
         {
             if (matchId.IsNotEmpty())
@@ -151,7 +152,7 @@ namespace CsStat.Web.Controllers
                         Reason = (int) round.Reason,
                         ReasonTitle = round.ReasonTitle,
                         Duration = round.Duration,
-                        ReasonIconUrl = images.FirstOrDefault(x => x.CodeName == round.ReasonTitle)?.Image.FullUrl,
+                        ReasonIconUrl = images.FirstOrDefault(x => string.Equals(x.CodeName, round.ReasonTitle, StringComparison.InvariantCultureIgnoreCase))?.Image.FullUrl,
                         Kills = round.Squads
                             .SelectMany(squad => squad.Players
                                 .SelectMany(player => player.Kills
@@ -203,6 +204,7 @@ namespace CsStat.Web.Controllers
                     }).ToList()
                 };
 
+                _matchDummyCacheManager.AddDependency(matchId);
                 return Json(matchDetails);
             }
 
@@ -234,7 +236,7 @@ namespace CsStat.Web.Controllers
         private static string GetMapImage(string mapName)
         {
             return _mapInfos.FirstOrDefault(y => y.MapName == mapName)?.Image.FullUrl
-                   ?? _strapiApi.GetImage(Constants.ImagesIds.DefaultImage)?.Image.FullUrl
+                   ?? _strapiApi.GetImage(BusinessFacade.Constants.ImagesIds.DefaultImage)?.Image.FullUrl
                    ?? "";
         }
 

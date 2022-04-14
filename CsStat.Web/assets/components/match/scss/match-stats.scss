@@ -39,6 +39,7 @@
     }
 
     &__table {
+        font-family: Consolas, monospace;
         flex: 1;
 
         .ant-table-tbody > tr {
@@ -81,19 +82,19 @@
 
         .ant-table-tbody > tr > td,
         .ant-table-thead > tr > th {
-            padding: 4px;
+            padding: 4px 0;
             background-color: transparent;
         }
 
         .ant-table-thead > tr > th {
-            color: #AAAAAA;
+            color: #aaaaaa;
             border: transparent;
         }
 
         .ant-table-tbody > tr > td {
             color: white;
             font-weight: 500;
-            padding: 8px;
+            padding: 8px 0;
             border-color: black;
         }
     }

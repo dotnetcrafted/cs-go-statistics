@@ -1,14 +1,6 @@
 import React, { ReactNode } from 'react';
-import {
-    MatchSquadModel,
-    MatchPlayerModel,
-    MatchKillModel,
-} from 'models';
-import {
-    getWeaponById,
-    getIconByName,
-    getPlayerById
-} from 'project/helpers';
+import { MatchSquadModel, MatchPlayerModel, MatchKillModel } from 'models';
+import { getWeaponById, getIconByName, getPlayerById } from 'project/helpers';
 
 export class MatchKills extends React.Component<any, {}> {
     getPlayerById(id: string): MatchPlayerModel | null {
@@ -37,7 +29,11 @@ export class MatchKills extends React.Component<any, {}> {
 
         const playerCss = player.team === 'Terrorist' ? 't' : 'ct';
 
-        return <span className={`match-kills__player ${playerCss}`}>{cmsPlayer.nickName}</span>;
+        return (
+            <span className={`match-kills__player ${playerCss}`}>
+                {cmsPlayer.nickName}
+            </span>
+        );
     }
 
     renderAssister(kill: MatchKillModel): ReactNode | null {
@@ -54,14 +50,16 @@ export class MatchKills extends React.Component<any, {}> {
     renderWeapon(id: number): ReactNode | string {
         const weapon = getWeaponById(id);
 
-        if (!weapon) return 'unknown weapon';
+        if (!weapon) return 'weapon';
 
-        return <img
-            className="match-kills__weapon"
-            src={weapon.iconImage}
-            alt={weapon.name}
-            title={weapon.name}
-        />;
+        return (
+            <img
+                className="match-kills__weapon"
+                src={weapon.iconImage}
+                alt={weapon.name}
+                title={weapon.name}
+            />
+        );
     }
 
     renderPenetrationIcon(isPenetrated: boolean): ReactNode | string {
@@ -118,7 +116,7 @@ export class MatchKills extends React.Component<any, {}> {
     renderTime(time: number): string {
         const minutes = Math.floor(time / 60);
         const formattedMinutes = minutes < 0 ? '0' : minutes;
-        const seconds = time - (minutes * 60);
+        const seconds = Math.floor(time - minutes * 60);
         let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
         if (seconds === 0) {
@@ -136,28 +134,32 @@ export class MatchKills extends React.Component<any, {}> {
         return (
             <div className="match-kills">
                 <ul className="match-kills__list">
-                    {
-                        round.kills.map((kill: MatchKillModel, i: number) => {
-                            return (
-                                <li className="match-kills__li" key={`${round.id}-${i}`}>
-                                    <span className="match-kills__log">
-                                        {this.renderPlayer(kill.killer)}
-                                        {this.renderAssister(kill)}
-                                        &nbsp;
-                                        {!kill.isSuicide && this.renderWeapon(kill.weapon)}
-                                        {this.renderPenetrationIcon(kill.isPenetrated)}
-                                        {this.renderHeadshotIcon(kill.isHeadshot)}
-                                        {this.renderSuicideIcon(kill.isSuicide)}
-                                        &nbsp;
-                                        {this.renderPlayer(kill.victim)}
-                                    </span>
-                                    <span className="match-kills__time">
-                                        {this.renderTime(kill.time)}
-                                    </span>
-                                </li>
-                            );
-                        })
-                    }
+                    {round.kills.map((kill: MatchKillModel, i: number) => {
+                        return (
+                            <li
+                                className="match-kills__li"
+                                key={`${round.id}-${i}`}
+                            >
+                                <span className="match-kills__log">
+                                    {this.renderPlayer(kill.killer)}
+                                    {this.renderAssister(kill)}
+                                    &nbsp;
+                                    {!kill.isSuicide &&
+                                        this.renderWeapon(kill.weapon)}
+                                    {this.renderPenetrationIcon(
+                                        kill.isPenetrated
+                                    )}
+                                    {this.renderHeadshotIcon(kill.isHeadshot)}
+                                    {this.renderSuicideIcon(kill.isSuicide)}
+                                    &nbsp;
+                                    {this.renderPlayer(kill.victim)}
+                                </span>
+                                <span className="match-kills__time">
+                                    {this.renderTime(kill.time)}
+                                </span>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         );

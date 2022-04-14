@@ -4,13 +4,13 @@ using System.Web.Mvc;
 using BusinessFacade;
 using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
-using CsStat.LogApi;
 using CsStat.LogApi.Interfaces;
 using CsStat.StrapiApi;
 using DataService;
 using DataService.Interfaces;
 using ErrorLogger;
 using Ninject;
+using ServerQueries;
 using ServerQueries.Source;
 
 namespace CSStat.WebApp.Infrastructure
@@ -50,6 +50,8 @@ namespace CSStat.WebApp.Infrastructure
             _kernel.Bind<IUserRepository>().To<UserRepository>();
             _kernel.Bind<IStrapiApi>().To<StrapiApi>();
             _kernel.Bind<IQueryConnection>().To<QueryConnection>();
+            _kernel.Bind<ILogFileRepository>().To<LogFileRepository>();
+            _kernel.Bind<IServerQueries>().To<ServerQueries.ServerQueries>();
         }
     }
 }

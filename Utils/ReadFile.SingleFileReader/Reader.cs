@@ -8,27 +8,39 @@ using CsStat.Domain;
 using CsStat.Domain.Entities;
 using CsStat.LogApi.Interfaces;
 using CsStat.SystemFacade;
+using DataService;
+using ErrorLogger;
+using UpdateCacheService;
 
 namespace ReadFile.SingleFileReader
 {
-    public class Reader
+    public class Reader : BaseWatcher
     {
         private readonly string path;
         private readonly ICsLogsApi parsers;
         private readonly IBaseRepository logRepository;
         private readonly ILogFileRepository logFileRepository;
+        private readonly IProgress<string> _progress;
 
         private Timer _timer;
         private static readonly long _timerInterval = Settings.TimerInterval;
         private static readonly object _locker = new object();
 
+        private readonly IPlayersCacheService _cacheService;
+        private readonly ILogger _logger;
+
         public Reader(string path, ICsLogsApi parsers, IBaseRepository logRepository,
-            ILogFileRepository logFileRepository)
+            ILogFileRepository logFileRepository, IProgress<string> progress)
         {
             this.path = path;
             this.parsers = parsers;
             this.logRepository = logRepository;
             this.logFileRepository = logFileRepository;
+            _progress = progress;
+            _cacheService = new PlayersCacheService();
+            var connectionString = new ConnectionStringFactory();
+            var mongoRepository = new MongoRepositoryFactory(connectionString);
+            _logger = new Logger(mongoRepository);
         }
 
         public void Start()
@@ -60,7 +72,7 @@ namespace ReadFile.SingleFileReader
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    _progress.Report(e.Message);
                 }
             }
             finally
@@ -73,10 +85,9 @@ namespace ReadFile.SingleFileReader
             }
         }
 
-        private void ReadFile()
+        protected override void ReadFile()
         {
-            Console.WriteLine($"{DateTime.Now} | Checking file");
-
+            _progress.Report($"{DateTime.Now} | Checking file");
             if (!File.Exists(path))
                 return;
 
@@ -90,24 +101,39 @@ namespace ReadFile.SingleFileReader
                     logFile.ReadBytes = 0;
                 }
 
-                ReadLines(logFile);
+                try
+                {
+                    ReadLines(logFile);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Read file exception");
+                }
+
                 logFileRepository.UpdateFile(logFile);
             }
             else
             {
+                _progress.Report("new file");
                 logFile = new LogFile
                 {
                     Path = path,
                     Created = File.GetCreationTime(path),
                     ReadBytes = 0
                 };
-
-                ReadLines(logFile);
+                try
+                {
+                    ReadLines(logFile);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Read file exception");
+                }
                 logFileRepository.AddFile(logFile);
             }
         }
 
-        private void ReadLines(LogFile logFile)
+        private async void ReadLines(LogFile logFile)
         {
             var lines = new List<string>();
             using (var fileStream = new FileStream(logFile.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -118,28 +144,27 @@ namespace ReadFile.SingleFileReader
                     while (streamReader.Peek() >= 0)
                     {
                         var readLine = streamReader.ReadLine();
+                        
                         if (!string.IsNullOrEmpty(readLine))
                         {
                             lines.Add(readLine);
                         }
                     }
-
                     logFile.ReadBytes = streamReader.BaseStream.Length;
                 }
             }
 
-            if (lines.Count > 0)
-            {
-                var logs = parsers.ParseLogs(lines);
-                if (logs != null)
-                {
-                    Console.WriteLine($"{logs.Count} logs will be added");
+            if (lines.Count <= 0) 
+                return;
 
-                    logRepository.InsertBatch(logs);
+            var logs = parsers.ParseLogs(lines);
+            if (!logs.Any()) 
+                return;
 
-                    Console.WriteLine($"Last read line is \"{lines.Last()}\"");
-                }
-            }
+            _progress.Report($"{logs.Count} logs will be added");
+            logRepository.InsertBatch(logs);
+            await _cacheService.ClearPlayersCache();
+            _progress.Report($"Last read line is \"{lines.Last()}\"");
         }
     }
 }

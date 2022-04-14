@@ -58,12 +58,19 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Common\SourceQueryException.cs" />
+    <Compile Include="Models\ServerInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\InfoResponse.cs" />
     <Compile Include="Responses\IResponse.cs" />
+    <Compile Include="ServerQueries.cs" />
     <Compile Include="Source\IQueryConnection.cs" />
     <Compile Include="Source\QueryConnection.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\CsStat.Domain\CsStat.Domain.csproj">
+      <Project>{0FDBBBF8-D0EF-427A-84C7-C43D6F57F50F}</Project>
+      <Name>CsStat.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

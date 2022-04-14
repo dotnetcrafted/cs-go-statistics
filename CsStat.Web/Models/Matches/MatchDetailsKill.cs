@@ -11,7 +11,8 @@ namespace CsStat.Web.Models.Matches
         public Weapons Weapon { get; set; } // "USP-S"
         public bool IsHeadshot { get; set; }
         public bool IsSuicide { get; set; }
-        public int Time { get; set; }
+        public float Time { get; set; }
+        public int Tick { get; set; }
         public bool IsPenetrated { get; set; }
     }
 }

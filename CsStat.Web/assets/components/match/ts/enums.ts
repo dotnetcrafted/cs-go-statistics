@@ -19,42 +19,42 @@ export const columns: ColumnProps<MatchPlayerModel>[] = [
         title: 'K/A/D',
         dataIndex: 'kad',
         key: 'kad',
-        align: 'center',
-        width: '11%',
+        // align: "right",
+        width: '11%'
     },
     {
         title: 'KD Diff',
         dataIndex: 'kdDiff',
         key: 'kdDiff',
-        align: 'center',
-        width: '11%',
+        // align: "right",
+        width: '11%'
     },
     {
         title: 'KD',
         dataIndex: 'kd',
         key: 'kd',
-        align: 'center',
-        width: '11%',
+        // align: "right",
+        width: '11%'
     },
     {
         title: 'ADR',
         dataIndex: 'adr',
         key: 'adr',
-        align: 'center',
-        width: '11%',
+        // align: "right",
+        width: '11%'
     },
     {
         title: 'UD',
         dataIndex: 'ud',
         key: 'ud',
-        align: 'center',
-        width: '11%',
+        // align: "right",
+        width: '11%'
     },
     {
         title: 'Score',
         dataIndex: 'score',
         key: 'score',
-        align: 'center',
-        width: '11%',
-    },
+        // align: "right",
+        width: '11%'
+    }
 ];

@@ -68,8 +68,9 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ISteamApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IDemoFilesRepository.cs" />
     <Compile Include="Repositories\IErrorLogRepository.cs" />
-    <Compile Include="Repositories\BaseFileRepository.cs" />
+    <Compile Include="Repositories\Implementations\DemoFileRepository.cs" />
     <Compile Include="Repositories\Implementations\DemoRepository.cs" />
     <Compile Include="Repositories\ILogFileRepository.cs" />
     <Compile Include="Repositories\IDemoRepository.cs" />
@@ -79,10 +80,12 @@
     <Compile Include="Repositories\Implementations\ErrorLogRepository.cs" />
     <Compile Include="Repositories\Implementations\PeriodDayExpression.cs" />
     <Compile Include="Repositories\Implementations\PlayerRepository.cs" />
+    <Compile Include="Repositories\Implementations\ServerToolsRepository.cs" />
     <Compile Include="Repositories\Implementations\UsefulLinkRepository.cs" />
     <Compile Include="Repositories\Implementations\UserRepository.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
     <Compile Include="Repositories\Implementations\LogsRepository.cs" />
+    <Compile Include="Repositories\IServerToolsRepository.cs" />
     <Compile Include="Repositories\IUsefulLinkRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="SteamApi.cs" />

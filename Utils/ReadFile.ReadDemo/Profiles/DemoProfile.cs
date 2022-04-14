@@ -22,6 +22,7 @@ namespace ReadFile.ReadDemo.Profiles
                 .ForMember(dest => dest.Time, opts => opts.MapFrom(src => src.Time))
                 .ForMember(dest => dest.PenetratedObjects, opts => opts.MapFrom(src => src.PenetratedObjects))
                 .ForMember(dest => dest.IsFlashed, opts => opts.MapFrom(src => src.IsFlashed))
+                .ForMember(dest => dest.Tick, opts => opts.MapFrom(src => src.Tick))
                 ;
         }
     }

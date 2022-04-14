@@ -33,6 +33,13 @@ namespace CsStat.Web
                 defaults: new { controller = "HangoutBot", action = "GetPlayerList", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute
+            (
+                name: "weaponstat",
+                url: Settings.WeaponsDataApiPath,
+                defaults: new { controller = "Weapon", action = "GetWeaponsStat", id = UrlParameter.Optional }
+            );
+
             //don't remove: custom admin
             //routes.MapRoute
             //(
@@ -99,6 +106,20 @@ namespace CsStat.Web
                 name: "getMatchData",
                 url: Settings.MatchDataApiPath,
                 defaults: new { controller = "Matches", action = "GetMatch", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute
+            (
+                name: "clearCache",
+                url: Settings.ClearCacheApi,
+                defaults: new { controller = "CacheManager", action = "ClearCache" }
+            );
+
+            routes.MapRoute
+            (
+                name: "bestplayerstat",
+                url: Settings.BestPlayerApiPath,
+                defaults: new { controller = "HangoutBot", action = "GetTodayBestPlayers", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

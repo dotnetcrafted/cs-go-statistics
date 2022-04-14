@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CsStat.Domain;
-using CsStat.Domain.Entities.Demo;
+﻿using System.Collections.Generic;
 using CsStat.Web.Models.Matches;
 
 namespace CsStat.Web.Models

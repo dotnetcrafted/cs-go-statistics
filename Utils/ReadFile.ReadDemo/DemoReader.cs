@@ -49,25 +49,34 @@ namespace ReadFile.ReadDemo
         #region inint
 
         private readonly string path;
-        private readonly IFileRepository<DemoFile> demoFileRepository;
+        private readonly IDemoFileRepository demoFileRepository;
         private readonly IBaseRepository demoRepository;
         private readonly IMapper mapper;
+        private static IProgress<string> _progress;
 
-        public DemoReader(string path, IFileRepository<DemoFile> demoFileRepository, IBaseRepository demoRepository,
-            IMapper mapper)
+        public DemoReader(string path, IDemoFileRepository demoFileRepository, IBaseRepository demoRepository,
+            IMapper mapper, IProgress<string> progress)
         {
             this.path = path;
             this.demoFileRepository = demoFileRepository;
             this.demoRepository = demoRepository;
             this.mapper = mapper;
+            _progress = progress;
         }
 
         #endregion
 
         protected override void ReadFile()
         {
+            _progress.Report($"{DateTime.Now} | Checking file");
             var allFiles = Directory.GetFiles(path, "*.dem");
-            var newFiles = allFiles.Except(demoFileRepository.GetFiles().Select(x => x.Path)).ToArray();
+
+            var demoFiles = demoFileRepository.GetFiles().ToList();
+            var newFiles = allFiles.Except(demoFiles.Select(x => x.Path)).ToArray();
+            _progress.Report($"All Files: {allFiles.Length}");
+            _progress.Report($"New Files: {newFiles.Length}");
+            _progress.Report($"Demo Files: {demoFiles.Count}");
+            
 
             foreach (var file in newFiles)
             {
@@ -89,7 +98,7 @@ namespace ReadFile.ReadDemo
                 catch (Exception e)
                 {
                     isSuccessfully = false;
-                    Console.WriteLine(e);
+                    _progress.Report(e.Message);
                     error = e.ToString();
                 }
                 finally
@@ -103,6 +112,7 @@ namespace ReadFile.ReadDemo
                         Runner = Environment.MachineName
                     });
                 }
+                _progress.Report($"Demo Files: {demoFileRepository.GetFiles().Count()}");
             }
         }
 
@@ -153,8 +163,7 @@ namespace ReadFile.ReadDemo
             _parser.FreezetimeEnded += Parser_FreezetimeEnded;
             _parser.PlayerHurt += Parser_PlayerHurt;
 
-            Console.WriteLine(
-                $"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
+            _progress.Report($"Parse file: \"{_demoFileName}\" Size: {new FileInfo(file.Name).Length.ToSize(LongExtension.SizeUnits.MB)}Mb");
 
             var sw = new Stopwatch();
             sw.Start();
@@ -163,7 +172,7 @@ namespace ReadFile.ReadDemo
 
             MatchFinish();
 
-            Console.WriteLine($"It took: {sw.Elapsed:mm':'ss':'fff}");
+            _progress.Report($"It took: {sw.Elapsed:mm':'ss':'fff}");
         }
 
         private static void Parser_PlayerHurt(object sender, PlayerHurtEventArgs e)
@@ -291,10 +300,10 @@ namespace ReadFile.ReadDemo
             demoRepository.Insert(demoLog);
 
             var time = TimeSpan.FromSeconds(demoLog.Duration);
-            Console.WriteLine($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
+            _progress.Report($"Match duration: {time:hh\\:mm\\:ss\\:fff}");
 
-            Console.WriteLine($"{SuqadA}: {_squadAScore}");
-            Console.WriteLine($"{SuqadB}: {_squadBScore}");
+            _progress.Report($"{SuqadA}: {_squadAScore}");
+            _progress.Report($"{SuqadB}: {_squadBScore}");
         }
 
         private static List<DamageLog> GetDamage(IEnumerable<Damage> stat, long steamId, int roundNumber = 0)
@@ -459,8 +468,7 @@ namespace ReadFile.ReadDemo
 
             var duration = TimeSpan.FromSeconds(_currentRound.Duration);
 
-            Console.WriteLine(
-                $"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff}");
+            _progress.Report($"Round number: {_currentRound.RoundNumber,-2} | {squadScore} | reason: {_currentRound.Reason,-12} | duration: {duration:hh\\:mm\\:ss\\:fff} | winning team: {winningTeam}");
 
             Console.ForegroundColor = foregroundColor;
         }
@@ -483,12 +491,13 @@ namespace ReadFile.ReadDemo
                 return;
 
             var killTime = GetRoundDuration();
+            var tick = _parser.CurrentTick - _rountTickTimeStart;
 
             if (e.Killer != null && e.Killer.SteamID != 0 && e.Victim != null && e.Victim.SteamID != 0)
             {
                 var kill = new Kill(_results.Players[e.Killer.SteamID], _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon), _currentRoundNumber,
-                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects, e.AssistedFlash);
+                    e.Killer.SteamID == e.Victim.SteamID, killTime, e.PenetratedObjects, e.AssistedFlash, tick);
 
                 if (e.Assister != null)
                 {
@@ -510,7 +519,7 @@ namespace ReadFile.ReadDemo
             {
                 var kill = new Kill(null, _results.Players[e.Victim.SteamID],
                     e.Headshot, EquipmentMapper.Map(e.Weapon.Weapon),
-                    _currentRoundNumber, true, killTime, e.PenetratedObjects, e.AssistedFlash);
+                    _currentRoundNumber, true, killTime, e.PenetratedObjects, e.AssistedFlash, tick);
 
                 if (e.Assister != null)
                 {

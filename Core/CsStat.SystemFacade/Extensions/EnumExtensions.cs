@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using CsStat.SystemFacade.Attributes;
+using CsStat.SystemFacade.Extensions;
 
 namespace CSStat.CsLogsApi.Extensions
 {
@@ -57,6 +58,17 @@ namespace CSStat.CsLogsApi.Extensions
             }
 
             return result;
+        }
+
+        public static T GetEnumByAttribute<T>(this T e, string value) where T : IConvertible
+        {
+            if (!(e is Enum))
+                return default;
+
+            var attributes = e.GetAttributeList().Where(x=>x.Value.IsNotEmpty());
+            var key = attributes.FirstOrDefault(attribute => value.Contains(attribute.Value))?.Key ?? 0;
+
+            return (T)(object)key;
         }
 
         private static AttributeModel GetAttributeWithIndex( Enum e)

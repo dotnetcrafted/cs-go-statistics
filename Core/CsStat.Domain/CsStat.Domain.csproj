@@ -112,6 +112,7 @@
     <Compile Include="Entities\PlayerStats.cs" />
     <Compile Include="Definitions\ActionEnum.cs" />
     <Compile Include="Definitions\WeaponsEnum.cs" />
+    <Compile Include="Entities\ServerTools\ServerToolsSettings.cs" />
     <Compile Include="Entities\UsefulInfo.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extensions\AchieveModelExtensions.cs" />
@@ -124,6 +125,8 @@
     <Compile Include="Models\ImageInfoModel.cs" />
     <Compile Include="Models\MapInfoModel.cs" />
     <Compile Include="Models\SteamPlayer.cs" />
+    <Compile Include="Models\WeaponPlayerStat.cs" />
+    <Compile Include="Models\WeaponStatDto.cs" />
     <Compile Include="Models\VictimKillerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
@@ -145,5 +148,6 @@
   <ItemGroup>
     <Content Include="LICENSE.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
