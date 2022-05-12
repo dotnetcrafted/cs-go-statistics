@@ -97,6 +97,7 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
                         );
 
                         return {
+                            ...player,
                             id: player.id,
                             rank: cmsPlayer.rang,
                             name: cmsPlayer.nickName,
