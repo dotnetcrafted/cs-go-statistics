@@ -51,28 +51,25 @@ export class ServerInfo extends React.Component<any, ServerInfoState> {
     render(): ReactNode {
         const { data } = this.state;
 
-        if (!data) {
-            return null;
-        }
-
         return (
             <div className="server-info">
-                <div>
-                    {
-                        data.imageUrl &&
-                        <div className="server-info__map">
-                            <img src={data.imageUrl} alt="" />
-                        </div>
-                    }
-                    <div className="server-info__name">{data.map}</div>
-                    {
-                        data.isAlive &&
-                        <>
-                            <div className="server-info__players">{data.playersCount}</div>
-                        </>
-                    }
-                </div>
-
+                {data ? (
+                    <>
+                        {data.imageUrl && (
+                            <div className="server-info__map">
+                                <img src={data.imageUrl} alt="" />
+                            </div>
+                        )}
+                        <div className="server-info__name">{data.map}</div>
+                        {data.isAlive && (
+                            <>
+                                <div className="server-info__players">
+                                    {data.playersCount}
+                                </div>
+                            </>
+                        )}
+                    </>
+                ) : null}
             </div>
         );
     }
