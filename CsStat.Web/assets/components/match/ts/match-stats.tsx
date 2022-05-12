@@ -74,21 +74,25 @@ export const MatchStats: React.FC<MatchStatsProps> = ({ round }) => {
 
                         if (!cmsPlayer) return null;
 
-                        const maskedKad = getTableValueByMask(
-                            [
-                                player.kills,
-                                '/',
-                                player.assists,
-                                '/',
-                                player.deaths
-                            ],
-                            [
-                                digitPlaces.kills,
-                                '/',
-                                digitPlaces.assists,
-                                '/',
-                                digitPlaces.deaths
-                            ]
+                        const maskedKad = (
+                            <span>
+                                {getTableValueByMask(
+                                    [player.kills],
+                                    [-digitPlaces.kills]
+                                )}
+                                /
+                                {getTableValueByMask(
+                                    [player.assists],
+                                    [digitPlaces.assists],
+                                    true
+                                )}
+                                /
+                                {getTableValueByMask(
+                                    [player.deaths],
+                                    [digitPlaces.deaths],
+                                    true
+                                )}
+                            </span>
                         );
                         const splittedKd = player.kd.toFixed(2).split('.');
                         const maskedKd = getTableValueByMask(
