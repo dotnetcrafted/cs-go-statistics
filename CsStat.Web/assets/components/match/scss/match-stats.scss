@@ -102,8 +102,21 @@
             padding-left: 10px;
         }
     }
+
+    .lead-zero {
+        opacity: 0.15;
+    }
+    
+    .player-name {
+        min-width: 120px;
+    }
+    
+    .player-kad {
+        min-width: 100px;
+    }
+    
+    .player-stats {
+        min-width: 60px;
+    }
 }
 
-.lead-zero {
-    opacity: 0.15;
-}
