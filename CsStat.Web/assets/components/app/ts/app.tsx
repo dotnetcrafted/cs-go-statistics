@@ -10,6 +10,7 @@ import NotFoundPage from '../../pages/ts/not-found-page';
 import constants from '../../../general/ts/constants';
 import { Matches } from 'components/matches';
 import { Match } from 'components/match';
+import { Weapons } from 'components/weapons';
 
 const store = configureStore();
 
@@ -29,6 +30,9 @@ const App: SFC<AppProps> = (props) => (
                     </Route>
                     <Route exact path={constants.ROUTES.MATCH_DETAILS} >
                         <Match />
+                    </Route>
+                    <Route exact path={constants.ROUTES.WEAPONS} >
+                        <Weapons />
                     </Route>
                     <Route>
                         <NotFoundPage/>

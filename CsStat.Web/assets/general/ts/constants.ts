@@ -5,6 +5,7 @@ const ROUTES = {
     WIKI: '/wiki',
     MATCHES: '/matches',
     MATCH_DETAILS: '/matches/:id',
+    WEAPONS: '/weapons'
 };
 
 export default {

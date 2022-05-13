@@ -69,6 +69,12 @@ namespace CsStat.Web
             );
 
             routes.MapRoute(
+                name: "weapons",
+                url: Settings.WeaponsPagePath,
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "matches",
                 url: Settings.MatchesPagePath+"/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
