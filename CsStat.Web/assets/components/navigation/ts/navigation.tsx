@@ -16,9 +16,6 @@ class Navigation extends React.Component <NavigationProps> {
                 <Menu.Item key="/matches">
                     <Link to="/matches">Matches</Link>
                 </Menu.Item>
-                <Menu.Item key="/wiki">
-                    <Link to="/wiki">Wiki</Link>
-                </Menu.Item>
             </Menu>
         );
     }

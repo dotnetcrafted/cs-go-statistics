@@ -97,6 +97,13 @@ namespace TelegramBot
             {
                 var notifications = await _notificationService.GetAllAfterGameNotifications();
                 var playerStat = await _playerStatService.GetBestPlayerStat();
+
+                if (playerStat.Count < 3)
+                {
+                    await _botClient.SendMessage("Сегодня нас было слишком мало", ParseMode.MarkdownV2);
+                    return;
+                }
+                
                 var notification = notifications.FirstOrDefault();
                 
                 if (notification == null || notification.Text.IsEmpty() || playerStat == null || !playerStat.Any())

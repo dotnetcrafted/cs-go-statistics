@@ -5,6 +5,7 @@ import {
     CmsWeaponModel,
     DurationModel
 } from 'models';
+import React from 'react';
 
 export const getWeaponById = (id: number): CmsWeaponModel | null => {
     const weapons = app.state.weapons;
@@ -51,8 +52,9 @@ const UNICODE_SPACE_CHAR = '\u00A0';
 // TODO: to think about float part like 00; how to solve it
 export const getTableValueByMask = (
     value: (number | string)[],
-    mask: (number | string)[]
-): string => {
+    mask: (number | string)[],
+    addZero: boolean = false
+): React.ReactNode => {
     if (value.length !== mask.length) {
         return value.join('');
     }
@@ -69,13 +71,27 @@ export const getTableValueByMask = (
 
             const diff = patternLength - itemLength;
 
-            let newItem =
-                diff > 0 ? `${UNICODE_SPACE_CHAR.repeat(diff)}${item}` : item;
+            let newItem: React.ReactNode = item;
+
+            if (diff > 0) {
+                newItem = `${UNICODE_SPACE_CHAR.repeat(diff)}${item}`;
+
+                if (addZero) {
+                    newItem = (
+                        <span key={item}>
+                            <span className="lead-zero">
+                                {'0'.repeat(diff)}
+                            </span>
+                            <span>{item}</span>
+                        </span>
+                    );
+                }
+            }
 
             if (pattern < 0 && item >= 0) {
                 const sign = item < 0 ? '-' : UNICODE_SPACE_CHAR;
 
-                newItem = sign + newItem;
+                newItem = <span key={item}>{sign}{newItem}</span>;
             }
 
             return newItem;
@@ -84,5 +100,5 @@ export const getTableValueByMask = (
         return item;
     });
 
-    return result.join('');
+    return result;
 };
