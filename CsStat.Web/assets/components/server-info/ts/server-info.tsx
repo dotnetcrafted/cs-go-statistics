@@ -54,7 +54,7 @@ export class ServerInfo extends React.Component<any, ServerInfoState> {
         return (
             <div className="server-info">
                 {data ? (
-                    <>
+                    <div>
                         {data.imageUrl && (
                             <div className="server-info__map">
                                 <img src={data.imageUrl} alt="" />
@@ -62,13 +62,11 @@ export class ServerInfo extends React.Component<any, ServerInfoState> {
                         )}
                         <div className="server-info__name">{data.map}</div>
                         {data.isAlive && (
-                            <>
-                                <div className="server-info__players">
-                                    {data.playersCount}
-                                </div>
-                            </>
+                            <div className="server-info__players">
+                                {data.playersCount}
+                            </div>
                         )}
-                    </>
+                    </div>
                 ) : null}
             </div>
         );
