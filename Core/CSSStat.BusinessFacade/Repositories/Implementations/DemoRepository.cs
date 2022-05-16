@@ -44,6 +44,20 @@ namespace BusinessFacade.Repositories.Implementations
                 .FirstOrDefault();
         }
 
+        public IEnumerable<DemoLog> GetMatchesByPlayer(long steamId)
+        {
+            var query = new QueryBuilder<DemoLog>()
+                .Where(x => x.Rounds.Count > 0 && 
+                            x.Players.Count >= 2 && 
+                            x.Players.Any(z => z.SteamID == steamId && (z.Kills.Count != 0 || z.Deaths.Count != 0)));
+
+            return _mongoRepository.GetRepository<DemoLog>()
+                .Collection
+                .Find(query)
+                .OrderByDescending(x => x.MatchDate)
+                .Take(10);
+        }
+
         public IEnumerable<DemoLog> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo)
         {
             throw new NotImplementedException();

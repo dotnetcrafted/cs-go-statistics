@@ -112,6 +112,48 @@ namespace BusinessFacade.Repositories.Implementations
             return playersStats.Where(x=>x.KdRatio > 0);
         }
 
+        public IEnumerable<PlayerStatsModel> GetStatsForAllPlayersByMatches(string dateFrom, string dateTo, Constants.PeriodDay? periodDay = Constants.PeriodDay.All)
+        {
+            var logs = GetLogs(dateFrom, dateTo, periodDay);
+            var playersStats = new List<PlayerStatsModel>();
+
+            if (!logs.Any())
+                return playersStats;
+
+            var players = GetAllPlayers().ToList();
+
+            if (!players.Any())
+                return playersStats;
+
+            foreach (var player in players)
+            {
+                var playerLogs = logs.Where(x => x.Player?.SteamId == player.SteamId || x.Victim?.SteamId == player.SteamId || x.Action == Actions.TargetBombed).ToList();
+
+                if (!playerLogs.Any())
+                {
+                    continue;
+                }
+
+                try
+                {
+                    playersStats.Add(CountStats(playerLogs, player));
+                }
+                catch (Exception e)
+                {
+                }
+
+            }
+
+            try
+            {
+                SetAchievementsToPLayers(playersStats.OrderByDescending(x => x.KdRatio).ToList());
+            }
+            catch (Exception e) { }
+
+
+            return playersStats.Where(x => x.KdRatio > 0);
+        }
+
 
         public PlayerStatsModel GetStatsForPlayer(string playerName, string from ="", string to="")
         {

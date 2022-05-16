@@ -9,6 +9,7 @@ namespace BusinessFacade.Repositories
         IEnumerable<DemoLog> GetMatches();
         IEnumerable<DemoLog> GetAllLogs();
         DemoLog GetMatch(string matchId);
+        IEnumerable<DemoLog> GetMatchesByPlayer(long steamId);
         IEnumerable<DemoLog> GetLogsForPeriod(DateTime timeFrom, DateTime timeTo);
     }
 }

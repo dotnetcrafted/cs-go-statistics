@@ -7,6 +7,7 @@ using BusinessFacade.Repositories;
 using BusinessFacade.Repositories.Implementations;
 using CSStat.CsLogsApi.Extensions;
 using CsStat.Domain.Entities;
+using CsStat.Domain.Entities.Demo;
 using CsStat.LogApi.Enums;
 using CsStat.StrapiApi;
 using CsStat.Web.Helpers;
@@ -22,11 +23,11 @@ namespace CSStat.WebApp.Tests
 {
     public class MongoRepositoryFactoryTests
     {
-
         private readonly IMongoRepositoryFactory _mongoRepository;
         private readonly IConnectionStringFactory _connectionString;
         private readonly ILogsRepository _logRepository;
         private readonly IPlayerRepository _playerRepository;
+        private readonly IDemoRepository _demoRepository;
         private readonly IBaseRepository _baseRepository;
         private readonly IUsefulLinkRepository _usefulLinkRepository;
         private readonly IUserRepository _userRepository;
@@ -40,11 +41,13 @@ namespace CSStat.WebApp.Tests
             _strapiApi = new StrapiApi();
             _logRepository = new LogsRepository(_mongoRepository);
             _playerRepository = new PlayerRepository(_mongoRepository, _strapiApi);
+            _demoRepository = new DemoRepository(_mongoRepository);
             _baseRepository = new BaseRepository(_mongoRepository);
             _usefulLinkRepository = new UsefulLinkRepository(_mongoRepository);
             _userRepository = new UserRepository(_mongoRepository);
             _registrationService = new UserRegistrationService(_userRepository);
         }
+
         [Test]
         public void ReturnRepositoryOfType()
         {
@@ -242,7 +245,7 @@ namespace CSStat.WebApp.Tests
             Console.WriteLine(Environment.NewLine);
             //{ string.Join(" | ", log.Achievements?.Select(x => x.AchievementId.GetDescription()).ToList())}
             Console.WriteLine(
-                ($"PlayerName: {log.Player.NickName},Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
+                ($"PlayerName: {log.Player.NickName}(SteamID: {log.Player.SteamId}),Kills: {log.Kills},Deaths: {log.Deaths},Assists: {log.Assists}," +
                 $"Friendly Kills: {log.FriendlyKills},K/D ratio: {log.KdRatio},Total Games: {log.TotalGames},Kills Per Game: {log.KillsPerGame}," +
                 $"Points: {log.Points},Acheivements: " +
                 $"Death Per Game: {log.DeathPerGame},Favorite Gun: {gun},Head shot: {log.HeadShotsCount}%,Defused bombs: {log.Defuse},Explode Bombs: {log.Explode}").Replace(',', '\n'));
@@ -260,6 +263,33 @@ namespace CSStat.WebApp.Tests
                 ($"PlayerName: {log.Player.NickName},PlayerTeam: {log.PlayerTeam.GetDescription()},Action: {action},VictimName: {log.Victim?.NickName},VictimTeam: {log.VictimTeam.GetDescription()}," +
                 $"Gun: {log.Gun.GetDescription()},IsHeadshot: {log.IsHeadShot},DateTime: {log.DateTime.ToString(new CultureInfo("ru-RU", false).DateTimeFormat)}")
                     .Replace(',', '\n'));
+            Console.WriteLine(Environment.NewLine);
+        }
+
+        [Test]
+        public void GetPlayerStatByMatch()
+        {
+            var players = _playerRepository.GetAllPlayers();
+            long steamId = 0;
+            foreach (var player in players.Where(x => long.TryParse(x.SteamId, out steamId)))
+            {
+                var matches = _demoRepository.GetMatchesByPlayer(steamId);
+
+                foreach (var match in matches)
+                {
+                    PrintMatchDataForPlayer(match, steamId);
+                }
+            }
+        }
+
+        private static void PrintMatchDataForPlayer(DemoLog log, long steamId)
+        {
+            var player = log.Players.First(x => x.SteamID == steamId);
+
+            Console.WriteLine(
+                $"Match: {log.Id}, Date: {log.MatchDate:d}, Map: {log.Map}, Player: {player.Name}({player.SteamID}), Kills: {player.Kills.Count}, Deaths: {player.Deaths.Count}"
+            );
+
             Console.WriteLine(Environment.NewLine);
         }
     }
